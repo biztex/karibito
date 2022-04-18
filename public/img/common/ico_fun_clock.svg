@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.3" height="16.3" viewBox="0 0 16.3 16.3">
+  <g id="clock" transform="translate(0.15 0.15)">
+    <path id="路径_304" data-name="路径 304" d="M8,0a8,8,0,1,0,8,8A8.009,8.009,0,0,0,8,0ZM8,15a7,7,0,1,1,7-7,7.008,7.008,0,0,1-7,7Z" fill="#f8b52a" stroke="#f8b52a" stroke-width="0.3"/>
+    <path id="路径_305" data-name="路径 305" d="M208.669,83.118h-.875v4.556l2.753,2.753.619-.619-2.5-2.5Z" transform="translate(-199.997 -79.708)" fill="#f8b52a" stroke="#f8b52a" stroke-width="0.3"/>
+  </g>
+</svg>

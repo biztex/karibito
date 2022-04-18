@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="164" height="164" viewBox="0 0 164 164">
+  <defs>
+    <filter id="椭圆_42" x="0" y="0" width="164" height="164" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="组_412" data-name="组 412" transform="translate(-1748 -910)">
+    <g transform="matrix(1, 0, 0, 1, 1748, 910)" filter="url(#椭圆_42)">
+      <g id="椭圆_42-2" data-name="椭圆 42" transform="translate(12 10)" fill="#fff9eb" stroke="#fcaa00" stroke-width="1">
+        <circle cx="70" cy="70" r="70" stroke="none"/>
+        <circle cx="70" cy="70" r="69.5" fill="none"/>
+      </g>
+    </g>
+    <text id="投稿" transform="translate(1806.022 969.153)" fill="#fcaa00" font-size="22" font-family="YuGothicUI-Regular, Yu Gothic UI" letter-spacing="0.2em"><tspan x="0" y="0">投稿</tspan></text>
+    <g id="组_411" data-name="组 411" transform="translate(1835.941 469.312)">
+      <g id="组_410" data-name="组 410" transform="translate(-29.963 512.49)">
+        <path id="路径_598" data-name="路径 598" d="M17.257,530.022l-2.348-2.351a2.818,2.818,0,0,0-3.981,0L5.976,532.62V516.714a4.228,4.228,0,0,0-4.221-4.224h-27.5a4.228,4.228,0,0,0-4.221,4.224v39.6a4.227,4.227,0,0,0,4.221,4.221h27.5a4.227,4.227,0,0,0,4.221-4.221V545.142L17.257,534a2.818,2.818,0,0,0,0-3.981ZM.424,546.67l-4.236,1.978,1.975-4.231L8.671,533.908l2.322,2.325Zm2.738,9.643a1.41,1.41,0,0,1-1.407,1.407h-27.5a1.41,1.41,0,0,1-1.407-1.407v-39.6a1.411,1.411,0,0,1,1.407-1.41h27.5a1.411,1.411,0,0,1,1.407,1.41v18.723c-7.806,7.806-7.295,7.245-7.445,7.563L-8,550.963a1.412,1.412,0,0,0,.28,1.592,1.4,1.4,0,0,0,1.59.278l7.963-3.715c.292-.135.34-.221,1.329-1.2ZM13,534.253l-2.337-2.334,2.256-2.256,2.348,2.351Z" transform="translate(29.963 -512.49)" fill="#fcaa00"/>
+        <path id="路径_599" data-name="路径 599" d="M-25.99,519.136H-4.971a1.408,1.408,0,0,0,1.41-1.407,1.41,1.41,0,0,0-1.41-1.41H-25.99a1.409,1.409,0,0,0-1.407,1.41,1.407,1.407,0,0,0,1.407,1.407Z" transform="translate(33.496 -507.218)" fill="#fcaa00"/>
+        <path id="路径_600" data-name="路径 600" d="M-25.99,522.292H-9.475a1.408,1.408,0,0,0,1.41-1.407,1.407,1.407,0,0,0-1.41-1.407H-25.99a1.407,1.407,0,0,0-1.407,1.407,1.407,1.407,0,0,0,1.407,1.407Z" transform="translate(33.496 -502.868)" fill="#fcaa00"/>
+        <path id="路径_601" data-name="路径 601" d="M-13.977,522.636H-25.99a1.407,1.407,0,0,0-1.407,1.407,1.407,1.407,0,0,0,1.407,1.407h12.013a1.407,1.407,0,0,0,1.407-1.407A1.407,1.407,0,0,0-13.977,522.636Z" transform="translate(33.496 -498.52)" fill="#fcaa00"/>
+      </g>
+    </g>
+  </g>
+</svg>
