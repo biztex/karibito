@@ -7,7 +7,7 @@ Route::get('/', function () {
     return redirect('sample/');
 //    return view('welcome');
 });
-
+// サンプルのルートです
 Route::prefix('sample')->group(function (){
     Route::view('', 'sample.index');
     Route::view('add_category', 'sample.add_category');
