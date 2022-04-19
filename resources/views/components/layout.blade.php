@@ -35,10 +35,10 @@
 								<li><a href="#" class="nav01">ご利用ガイド</a></li>
 								<li><a href="#" class="nav02">いいね一覧</a></li>
 								<li><a href="#" class="nav03">やりとり</a></li>
-								<li><a href="#" class="nav04">MYページ</a></li>
+								<li><a href="/sample/mypage" class="nav04">MYページ</a></li>
 							</ul>
 							<ul class="navUl02 sp">
-								<li><a href="#" class="nav04">MYページ</a></li>
+								<li><a href="/sample/mypage" class="nav04">MYページ</a></li>
 								<li><a href="#" class="nav03">やりとり</a></li>
 								<li><a href="#" class="nav02">いいね一覧</a></li>
 							</ul>
