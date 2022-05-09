@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GoogleLoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,8 +33,9 @@ Route::get('/', function () {
 });
 
 // google login
-Route::get('/auth/redirect', [GoogleLoginController::class, 'getGoogleAuth']);
+Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
 Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+
 
 Route::prefix('sample')->group(function (){
     Route::view('', 'sample.index');
