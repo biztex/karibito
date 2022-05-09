@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,10 +42,12 @@ Route::get('/', function () {
 // update:編集(put)
 // destroy:削除(delete)
 
-Route::get('/add_category',[HomeController::class, 'addCategory']);
+Route::get('',[HomeController::class, 'index']);
+
+Route::get('add_category', [CategoryController::class, 'add']);
 
 Route::prefix('sample')->group(function (){
-    Route::view('', 'sample.index');
+    // Route::view('', 'sample.index');
     // Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
     Route::view('draft', 'sample.draft');

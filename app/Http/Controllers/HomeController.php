@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * カテゴリー追加依頼表示する
+     * トップ画面を表示する
      * 
      * @return view
      */
-    public function addCategory()
+    public function index()
     {
-        return view('sample.add_category');
+        return view('sample.index');
     }
 }
