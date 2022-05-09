@@ -32,6 +32,7 @@ Route::get('/', function () {
 //    return view('welcome');
 });
 
+
 // google login
 Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
 Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
