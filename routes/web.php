@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GoogleLoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -31,7 +32,12 @@ Route::get('/', function () {
 //    return view('welcome');
 });
 
-//test 
+
+// google login
+Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
+Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+
+
 Route::prefix('sample')->group(function (){
     Route::view('', 'sample.index');
     Route::view('add_category', 'sample.add_category');
