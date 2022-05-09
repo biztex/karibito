@@ -31,10 +31,19 @@ Route::get('/', function () {
 //    return view('welcome');
 });
 
-//test 
+// index:一覧画面(get)
+// create:登録画面(get)
+// store:登録(post)
+// show:詳細画面(get)
+// edit:編集画面(get)
+// update:編集(put)
+// destroy:削除(delete)
+
+Route::get('/add_category',[HomeController::class, 'addCategory']);
+
 Route::prefix('sample')->group(function (){
     Route::view('', 'sample.index');
-    Route::view('add_category', 'sample.add_category');
+    // Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
     Route::view('draft', 'sample.draft');
     Route::view('estimate', 'sample.estimate');
