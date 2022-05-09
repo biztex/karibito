@@ -11,7 +11,7 @@ class CategoryController extends Controller
      * 
      * @return view
      */
-    public function add()
+    public function createCategory()
     {
         return view('sample.add_category');
     }
