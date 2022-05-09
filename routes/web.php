@@ -31,6 +31,10 @@ Route::get('/', function () {
 //    return view('welcome');
 });
 
+// google login
+Route::get('/auth/redirect', [GoogleLoginController::class, 'getGoogleAuth']);
+Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+
 Route::prefix('sample')->group(function (){
     Route::view('', 'sample.index');
     Route::view('add_category', 'sample.add_category');
