@@ -11,20 +11,20 @@ return new class extends Migration
      *
      * @return void
      */
-  
-  
+
+
     public function up()
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('first_name')->nullable(false);
-            $table->string('last_name')->nullable(false);
-            $table->tinyInteger('gender')->nullable(false)->comment('1.男性、2.女性');
-            $table->integer('prefecture')->nullable(false);
-            $table->date('birthday')->nullable(false);
-            $table->string('zip')->nullable(false);
-            $table->string('address')->nullable(false);
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->tinyInteger('gender')->comment('1.男性、2.女性');
+            $table->integer('prefecture');
+            $table->date('birthday')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('address')->nullable();
             $table->text('introduction')->nullable();
             $table->string('icon')->nullable();
             $table->string('cover')->nullable();
