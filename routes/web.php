@@ -2,7 +2,26 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EstimateController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\MypageController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PointController;
+use App\Http\Controllers\SecretController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\NotationController;
+use App\Http\Controllers\PrivacyController;
+use App\Http\Controllers\PublicationController;
+
+
 use App\Http\Controllers\GoogleLoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +50,62 @@ Route::get('/', function () {
     return redirect('sample/');
 //    return view('welcome');
 });
+
+
+
+
+// index:一覧画面(get)
+// create:登録画面(get)
+// store:登録(post)
+// show:詳細画面(get)
+// edit:編集画面(get)
+// update:編集(put)
+// destroy:削除(delete)
+
+Route::get('',[HomeController::class, 'index']);
+
+Route::get('add_category', [CategoryController::class, 'createCategory']);
+
+Route::get('contact', [ContactController::class, 'contact']);
+Route::get('draft', [ContactController::class, 'indexDraft']);
+
+Route::get('estimate', [EstimateController::class, 'index']);
+
+Route::get('evaluation', [EvaluationController::class, 'index']);
+
+Route::get('faq_answer', [FaqController::class, 'indexAnswer']);
+Route::get('faq_detail', [FaqController::class, 'indexDetail']);
+Route::get('faq_post', [FaqController::class, 'createPost']);
+Route::get('faq', [FaqController::class, 'index']);
+
+Route::get('favorite', [MypageController::class, 'indexFavorite']);
+Route::get('friends', [MypageController::class, 'indexFriends']);
+Route::get('member', [MypageController::class, 'showMember']);
+Route::get('mypage', [MypageController::class, 'showMypage']);
+Route::get('past', [MypageController::class, 'indexPast']);
+
+Route::get('news_detail',[NewsController::class,'showDetail']);
+Route::get('news',[NewsController::class,'indexNews']);
+
+Route::get('payment_history',[PaymentController::class,'index']);
+
+Route::get('point_history',[PointController::class,'index']);
+
+Route::get('secret01',[SecretController::class,'showSecret01']);
+Route::get('secret02',[SecretController::class,'showSecret02']);
+Route::get('secret03',[SecretController::class,'showSecret03']);
+Route::get('secret04',[SecretController::class,'showSecret04']);
+Route::get('secret05',[SecretController::class,'showSecret05']);
+Route::get('secret06',[SecretController::class,'showSecret06']);
+
+Route::get('service_detail',[ServiceController::class,'showService']);
+Route::get('service',[ServiceController::class,'indexService']);
+
+Route::get('notation',[NotationController::class,'show']);
+
+Route::get('privacy',[PrivacyController::class,'show']);
+
+Route::get('publication',[PublicationController::class,'index']);
 
 
 // google login
