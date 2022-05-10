@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
@@ -17,6 +18,9 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\NotationController;
 use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\PublicationController;
+
+
+use App\Http\Controllers\GoogleLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +41,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -46,6 +50,7 @@ Route::get('/', function () {
     return redirect('sample/');
 //    return view('welcome');
 });
+
 
 
 
@@ -103,6 +108,9 @@ Route::get('privacy',[PrivacyController::class,'show']);
 Route::get('publication',[PublicationController::class,'index']);
 
 
+// google login
+Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
+Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
 
 
 Route::prefix('sample')->group(function (){
