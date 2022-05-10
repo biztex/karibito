@@ -1329,7 +1329,7 @@
 
 
 /*fancybox*/
-.fancybox-overlay{background-color: rgba(0,0,0,.5);}
+#mypage .fancybox-overlay{background-color: rgba(0,0,0,.5);}
 .fancybox-inner {
 	max-width: 640px!important;
     /*overflow: visible !important;*/

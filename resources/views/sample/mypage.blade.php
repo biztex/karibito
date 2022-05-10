@@ -1,5 +1,6 @@
 <x-layout>
 <article>
+	<body id="mypage">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="/sample">ホーム</a>　>　<span>マイページ</span>
@@ -404,5 +405,6 @@
 				</div>
 			</div>
 		</div><!-- /#contents -->
-	</article>
+	</body>
+</article>
 </x-layout>
