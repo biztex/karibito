@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\Web\MypageController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\MypageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PointController;
@@ -81,7 +82,8 @@ Route::get('faq', [FaqController::class, 'index']);
 Route::get('favorite', [MypageController::class, 'indexFavorite']);
 Route::get('friends', [MypageController::class, 'indexFriends']);
 Route::get('member', [MypageController::class, 'showMember']);
-Route::get('mypage', [MypageController::class, 'showMypage']);
+Route::get('mypage', [MypageController::class, 'showMypage'])->name('showMypage');
+Route::post('mypage',[MypageController::class,'storeProfile'])->name('storeProfile');
 Route::get('past', [MypageController::class, 'indexPast']);
 
 Route::get('news_detail',[NewsController::class,'showDetail']);

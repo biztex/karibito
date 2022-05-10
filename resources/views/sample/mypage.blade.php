@@ -36,7 +36,8 @@
 				<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
 			</div>
 			<div id="fancybox_person" class="fancyboxWrap">
-				<form>
+				<form method="POST" action="{{ route('storeProfile') }}">
+					@csrf
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
 						<div class="mypageCover">
@@ -57,54 +58,57 @@
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>姓<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="first_name"></dd>
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>名<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="last_name"></dd>
 							</dl>
 							<dl>
 								<dt>性別</dt>
 								<dd>
-									<select>
-										<option selected="" disabled="">選択してください</option>
-										<option>男</option>
-										<option>女</option>
+									<select name="gender">
+										<option selected="" disabled="gender">選択してください</option>
+										<option value="1">男</option>
+										<option value="2">女</option>
 									</select>
 								</dd>
 							</dl>
 							<dl>
 								<dt>生年月日<span>(年代のみ公開されます)</span></dt>
 								<dd>
-									<select class="year">
+									<select class="year" name="year">
 										<option selected="" disabled="">年</option>
-										<option>2021</option>
-										<option>2022</option>
+										@for ($i = 1900; $i < 2023; $i++ )
+											<option valur="{{$i}}">{{$i}}</option>
+										@endfor
 									</select>
-									<select class="month">
+									<select class="month" name="month">
 										<option selected="" disabled="">月</option>
-										<option>12</option>
-										<option>01</option>
+										@for ($i = 1; $i < 13; $i++ )
+											<option valur="{{$i}}">{{$i}}</option>
+										@endfor
 									</select>
-									<select class="day">
+									<select class="day" name="day">
 										<option selected="" disabled="">日</option>
-										<option>18</option>
-										<option>19</option>
+										@for ($i = 1; $i < 32; $i++ )
+											<option valur="{{$i}}">{{$i}}</option>
+										@endfor
 									</select>
 								</dd>
 							</dl>
 							<dl>
 								<dt>住所<span>(都道府県のみ表示されます)</span></dt>
 								<dd>
-									<p class="addrNumber"><input class="short" type="text" name=""></p>
+									<p class="addrNumber"><input class="short" type="text" name="zip"></p>
 									<div class="addrSelect">
-										<select class="short">
+										<select class="short" name="prefecture">
 											<option selected="" disabled="">選択してください</option>
-											<option>xx県</option>
-											<option>xx県</option>
+											<option value="1">xx県</option>
+											<option value="2">xx県</option>
 										</select>
 									</div>
-									<p><input type="text" name="" placeholder="市区町村"></p>
+									<p><input type="text" name="address" placeholder="市区町村"></p>
 								</dd>
 							</dl>
 							<div class="specialtyBox">
@@ -136,13 +140,13 @@
 							</div>
 							<dl>
 								<dt>自己紹介</dt>
-								<dd><textarea></textarea></dd>
+								<dd><textarea name="introduction"></textarea></dd>
 							</dl>
 						</div>
 					</div>
 					<div class="fancyPersonBtn">
 						<a href="#" class="fancyPersonCancel">キャンセル</a>
-						<a href="#" class="fancyPersonSign">登録する</a>
+						<button type="submit" class="fancyPersonSign">登録する</button>
 					</div>
 				</form>
 			</div>
@@ -255,7 +259,7 @@
 					</div>
 					<div class="fancyPersonBtn">
 						<a href="#" class="fancyPersonCancel">キャンセル</a>
-						<a href="#" class="fancyPersonSign">登録する</a>
+						<button type="submit" class="fancyPersonSign">登録する</button>
 					</div>
 				</form>
 			</div>
