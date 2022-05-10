@@ -10,6 +10,14 @@ class UserProfile extends Model
     use HasFactory;
 
 
+    const GENDER_MAN = 1;
+    const GENDER_WOMAN = 2;
+
+    const GENDER = [
+        self::GENDER_MAN => '男性',
+        self::GENDER_WOMAN => '女性',
+    ];
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -28,11 +36,5 @@ class UserProfile extends Model
         return $this->belongsTo(Prefecture::class);
     }
 
-    const GENDER_MAN = 1;
-    const GENDER_WOMAN = 2;
 
-    const GENDER = [
-        self::GENDER_MAN => '男性',
-        self::GENDER_WOMAN => '女性',
-    ];
 }
