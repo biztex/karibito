@@ -12,10 +12,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\FaqController;
-<<<<<<< Updated upstream
-=======
-use App\Http\Controllers\MypageController;
->>>>>>> Stashed changes
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PointController;
@@ -67,11 +63,10 @@ Route::get('/', function () {
     Route::post('create_user', [UserProfileController::class, 'storeUser'])->name('storeUser');
     Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
     
+    // プロフィール編集
+    Route::get('mypage', [UserProfileController::class, 'showMypage'])->name('showMypage');
+    Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
 
-<<<<<<< Updated upstream
-=======
-// }
->>>>>>> Stashed changes
 
 // index:一覧画面(get)
 // create:登録画面(get)
@@ -100,13 +95,6 @@ Route::get('faq', [FaqController::class, 'index']);
 Route::get('favorite', [MypageController::class, 'indexFavorite']);
 Route::get('friends', [MypageController::class, 'indexFriends']);
 Route::get('member', [MypageController::class, 'showMember']);
-<<<<<<< Updated upstream
-Route::get('mypage', [MypageController::class, 'showMypage'])->name('showMypage');
-Route::post('mypage',[MypageController::class,'storeProfile'])->name('storeProfile');
-=======
-Route::get('mypage', [UserProfileController::class, 'showMypage'])->name('showMypage');
-Route::post('mypage', [UserProfileController::class, 'storeProfile'])->name('storeProfile');
->>>>>>> Stashed changes
 Route::get('past', [MypageController::class, 'indexPast']);
 
 Route::get('news_detail',[NewsController::class,'showDetail']);

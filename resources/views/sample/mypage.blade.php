@@ -36,8 +36,9 @@
 				<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
 			</div>
 			<div id="fancybox_person" class="fancyboxWrap">
-				<form method="POST" action="{{ route('storeProfile') }}">
-					@csrf
+<!-- -------------------------------------------------------------- -->
+				<form method="POST" action="{{ route('updateProfile') }}">
+				@csrf @method('put')
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
 						<div class="mypageCover">
@@ -50,27 +51,27 @@
 						<div class="fancyPersonTable">	
 							<dl class="">
 								<dt>ニックネーム</dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="name" value="{{$user_profile->name}}"></dd>
 							</dl>
 							<dl class="">
 								<dt>メールアドレス</dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="email" value="{{$user_profile->email}}"></dd>
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>姓<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name="first_name"></dd>
+								<dd><input type="text" name="first_name" value="{{$user_profile->first_name}}"></dd>
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>名<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name="last_name"></dd>
+								<dd><input type="text" name="last_name" value="{{$user_profile->last_name}}"></dd>
 							</dl>
 							<dl>
 								<dt>性別</dt>
 								<dd>
 									<select name="gender">
-										<option selected="" disabled="gender">選択してください</option>
-										<option value="1">男</option>
-										<option value="2">女</option>
+										<option disabled>選択してください</option>
+										<option value="1" @if($user_profile->gender == 1) selected @endif>男</option>
+										<option value="2" @if($user_profile->gender == 2) selected @endif>女</option>
 									</select>
 								</dd>
 							</dl>
@@ -80,19 +81,19 @@
 									<select class="year" name="year">
 										<option selected="" disabled="">年</option>
 										@for ($i = 1900; $i < 2023; $i++ )
-											<option valur="{{$i}}">{{$i}}</option>
+											<option value="{{$i}}" @if(date("Y",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
 									<select class="month" name="month">
 										<option selected="" disabled="">月</option>
 										@for ($i = 1; $i < 13; $i++ )
-											<option valur="{{$i}}">{{$i}}</option>
+											<option value="{{$i}}" @if(date("n",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
-									<select class="day" name="day">
+									<select class="day" name="day" type="day">
 										<option selected="" disabled="">日</option>
 										@for ($i = 1; $i < 32; $i++ )
-											<option valur="{{$i}}">{{$i}}</option>
+											<option value="{{$i}}" @if(date("j",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
 								</dd>
@@ -100,15 +101,16 @@
 							<dl>
 								<dt>住所<span>(都道府県のみ表示されます)</span></dt>
 								<dd>
-									<p class="addrNumber"><input class="short" type="text" name="zip"></p>
+									<p class="addrNumber"><input class="short" type="text" name="zip" value="{{$user_profile->zip}}"></p>
 									<div class="addrSelect">
 										<select class="short" name="prefecture">
-											<option selected="" disabled="">選択してください</option>
-											<option value="1">xx県</option>
-											<option value="2">xx県</option>
+										    <option selected="" disabled="">選択してください</option>
+											@foreach($prefectures as $prefecture)
+												<option value="{{$prefecture->id}}" @if($prefecture->id == $user_profile->prefecture_id) selected @endif>{{$prefecture->name}}</option>
+											@endforeach
 										</select>
 									</div>
-									<p><input type="text" name="address" placeholder="市区町村"></p>
+									<p><input type="text" name="address" placeholder="市区町村" value="{{$user_profile->address}}"></p>
 								</dd>
 							</dl>
 							<div class="specialtyBox">
@@ -140,7 +142,7 @@
 							</div>
 							<dl>
 								<dt>自己紹介</dt>
-								<dd><textarea name="introduction"></textarea></dd>
+								<dd><textarea name="introduction">{{$user_profile->introduction}}</textarea></dd>
 							</dl>
 						</div>
 					</div>
@@ -149,6 +151,8 @@
 						<button type="submit" class="fancyPersonSign">登録する</button>
 					</div>
 				</form>
+<!-- -------------------------------------------------------------- -->
+
 			</div>
 			<div id="fancybox_resume" class="fancyboxWrap">
 				<form>
@@ -275,9 +279,9 @@
 							<dl class="mypageDl01">
 								<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
 								<dd>
-									<p class="mypageP01">クリエイター名 <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
+									<p class="mypageP01">{{$user_profile->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
-									<p class="mypageP03">(女性/ 20代/ 東京都) <span>所持ポイント：0000pt</span></p>
+									<p class="mypageP03">({{$gender}} / {{$age}} / {{$user_prefecture}}) <span>所持ポイント：0000pt</span></p>
 									<p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
 									<p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
@@ -287,7 +291,7 @@
 							</dl>
 							<div class="mypageIntro">
 								<p class="mypageHd01">自己紹介</p>
-								<p class="mypageIntroTxt">自己紹介が入ります…</p>
+								<p class="mypageIntroTxt">{!! nl2br(e($user_profile->introduction)) !!}</p>
 							</div>
 							<div class="mypageProud">
 								<p class="mypageHd01">得意分野</p>

@@ -64,15 +64,8 @@ class PrefectureSeeder extends Seeder
             ['id' => 46, 'name' => '鹿児島県'],
             ['id' => 47, 'name' => '沖縄県'],
             ['id' => 48, 'name' => '海外'],
-<<<<<<< Updated upstream
-        ];
-    DB::table('prefectures')->insert($params);
-    }
-=======
-
         ];
         DB::table('prefectures')->insert($params);
     }
     
->>>>>>> Stashed changes
 }

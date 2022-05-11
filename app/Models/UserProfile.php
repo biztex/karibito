@@ -12,27 +12,6 @@ class UserProfile extends Model
     
     protected $guarded = [ 'id' ];
 
-<<<<<<< Updated upstream
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'user_id',
-        'first_name',
-        'last_name',
-        'gender',
-        'prefecture',
-        'birthday',
-        'zip',
-        'address',
-        'introduction',
-        'icon',
-        'cover'
-    ];
-=======
-
     const GENDER_MAN = 1;
     const GENDER_WOMAN = 2;
 
@@ -51,7 +30,4 @@ class UserProfile extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
-
-
->>>>>>> Stashed changes
 }

@@ -26,7 +26,7 @@ class UserProfileController extends Controller
     public function storeUser(Request $request)
     {
 
-        $user_id = 5; //Auth::user()->id();
+        $user_id = 1; //Auth::user()->id();
 
         $user = User::find($user_id);
         $user->fill([ 'name' => $request->name ]);
@@ -60,7 +60,48 @@ class UserProfileController extends Controller
      */
     public function showMypage()
     {
-        return view('sample.mypage');
+        $user_id = 1; //Auth::user()->id();
+
+        $user_profile = UserProfile::where('user_id',$user_id)
+                        ->leftjoin('users','users.id','=','user_profiles.user_id')
+                        ->select(['user_profiles.*','users.email as email','users.name as name'])
+                        ->first();
+                        session()->put('user_profile_id',$user_profile->id);
+        
+        $prefectures = Prefecture::all();
+        $user_prefecture = Prefecture::where('id',$user_profile->prefecture_id)->first()->name;
+
+        if($user_profile->gender == 1){
+            $gender = '男性';
+        }else{
+            $gender = '女性';
+        };
+
+        $now = date('Ymd');
+        $birthday = str_replace("-","",$user_profile->birthday);
+        $now_age = floor(($now - $birthday) / 10000);
+        if($now_age < 0 || $now_age > 150 || empty($now_age)){
+            $age = '不明';
+        }elseif($now_age < 20){
+            $age = '10代';
+        }elseif($now_age < 30){
+            $age = '20代';
+        }elseif($now_age < 40){
+            $age = '30代';
+        }elseif($now_age < 50){
+            $age = '40代';
+        }elseif($now_age < 60){
+            $age = '50代';
+        }elseif($now_age < 70){
+            $age = '60代';
+        }elseif($now_age > 69){
+            $age = '70代以上';
+        }else{
+            $age = '不明';
+        }
+
+
+        return view('sample.mypage',compact('user_profile','prefectures','user_prefecture','gender','age'));
     }
     
     /**
@@ -68,18 +109,26 @@ class UserProfileController extends Controller
      * 
      * @return view
      */
-    public function storeProfile(Request $request)
+    public function updateProfile(Request $request)
     {
         $birthday = $request->year.'-'.$request->month.'-'.$request->day;
         $user_id = 1;
-        
-                $profile = new UserProfile();
-                $profile->fill([
+        $user_profile_id = session()->get('user_profile_id');
+
+                $user = User::find($user_id);
+                $user->fill([
+                    'name' => $request->name,
+                    'email' => $request->email
+                ]);
+                $user->save();
+
+                $user_profile = UserProfile::find($user_profile_id);
+                $user_profile->fill([
                     'user_id' => $user_id,
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
                     'gender' => $request->gender,
-                    'prefecture' => $request->prefecture,
+                    'prefecture_id' => $request->prefecture,
                     'birthday' => $birthday,
                     'zip' => $request->zip,
                     'address' => $request->address,
@@ -87,7 +136,7 @@ class UserProfileController extends Controller
                     // 'icon' => $request->icon,
                     // 'cover' => $request->cover
                 ]);
-                $profile->save();
+                $user_profile->save();
 
         return redirect()->route('showMypage');
     }

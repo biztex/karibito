@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('first_name')->nullable(false);
             $table->string('last_name')->nullable(false);
             $table->tinyInteger('gender')->nullable(false)->comment('1.男性、2.女性');
-            $table->integer('prefecture')->nullable(false);
+            $table->integer('prefecture_id')->nullable(false);
             $table->date('birthday')->nullable(false);
             $table->string('zip')->nullable(false);
             $table->string('address')->nullable(false);
