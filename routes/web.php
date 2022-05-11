@@ -119,7 +119,7 @@ Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback
 
 // facebook login
 Route::get('login/facebook', [LoginController::class, 'getFacebookAuth']);
-Route::get('login/callback', [LoginController::class, 'authFacebookCallback']);
+Route::get('login/facebook/callback', [LoginController::class, 'authFacebookCallback']);
 
 
 Route::prefix('sample')->group(function (){

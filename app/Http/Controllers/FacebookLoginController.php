@@ -22,5 +22,4 @@ class FacebookLoginController extends Controller
 
         dd($user); // Facebookから取得した情報を表示
     }
-
 }

@@ -28,9 +28,4 @@ class GoogleLoginController extends Controller
         Auth::login($user, true);
         return redirect('/sample');
     }
-
-    public function getFacebookAuth()
-    {
-        return view('auth.login_fb');
-    }
 }
