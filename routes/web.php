@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\Mypage\UserProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PointController;
@@ -53,6 +54,10 @@ Route::get('/', function () {
 
 
 
+    // プロフィール
+    Route::post('profile/create', [UserProfileController::class, 'create'])->name('createProfile');
+    Route::get('profile', [UserProfileController::class, 'index'])->name('indexProfile');
+// }
 
 // index:一覧画面(get)
 // create:登録画面(get)
