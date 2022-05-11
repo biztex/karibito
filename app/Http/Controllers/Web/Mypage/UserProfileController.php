@@ -133,9 +133,16 @@ class UserProfileController extends Controller
                     'zip' => $request->zip,
                     'address' => $request->address,
                     'introduction' => $request->introduction,
-                    // 'icon' => $request->icon,
-                    // 'cover' => $request->cover
                 ]);
+
+                if(isset($request->cover)){
+                    $cover = $request->file('cover')->store('covers','public');
+                        $user_profile->cover=str_replace('public/','',$cover);
+                }
+                if(isset($request->icon)){
+                    $icon = $request->file('icon')->store('icons','public');
+                        $user_profile->icon=str_replace('public/','',$icon);
+                }
                 $user_profile->save();
 
         return redirect()->route('showMypage');

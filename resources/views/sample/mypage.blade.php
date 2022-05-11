@@ -36,17 +36,24 @@
 				<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
 			</div>
 			<div id="fancybox_person" class="fancyboxWrap">
-<!-- -------------------------------------------------------------- -->
-				<form method="POST" action="{{ route('updateProfile') }}">
+<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
+				<form method="POST" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
 				@csrf @method('put')
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
-						<div class="mypageCover">
-							<a href="#"><img src="/img/mypage/icon_camera01.svg" alt=""></a>
+						<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->icon) }})no-repeat center center;">
+							<!-- <a href="#"><img src="/img/mypage/icon_camera01.svg" alt=""></a> -->
+								<input type="file" name="cover"><img src="/img/mypage/icon_camera01.svg" alt="">
+							<!--  -->
+
 						</div>
 						<div class="fancyPersonPic">
-							<p class="img"><img src="/img/mypage/pic_head.png" alt=""></p>
-							<a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a>
+							<!-- <p class="img"><img src="/img/mypage/pic_head.png" alt=""></p> -->
+							<!-- <a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a> -->
+								<p class="img"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></p>
+								<input type="file" name="icon"><img src="/img/mypage/icon_camera02.svg" alt="">
+							<!--  -->
+
 						</div>
 						<div class="fancyPersonTable">	
 							<dl class="">
@@ -151,7 +158,7 @@
 						<button type="submit" class="fancyPersonSign">登録する</button>
 					</div>
 				</form>
-<!-- -------------------------------------------------------------- -->
+<!--　プロフィール編集モーダルここまで -------------------------------------------------------------- -->
 
 			</div>
 			<div id="fancybox_resume" class="fancyboxWrap">
@@ -273,11 +280,16 @@
 				<div id="main">
 					<div class="mypageWrap">
 						<div class="mypageSec01">
-							<div class="mypageCover">
-								<a href="#"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></a>
+							<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->cover) }})no-repeat center center;">
+								<!-- <a href="#"><img src="{{asset('/storage/'.$user_profile->cover) }}" alt="カバー写真を追加"></a> -->
+									<a href="#"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></a>
+                                <!--  -->
+
 							</div>
 							<dl class="mypageDl01">
-								<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+								<!-- <dt><img src="/img/mypage/pic_head.png" alt=""></dt> -->
+								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></dt>
+								<!--  -->
 								<dd>
 									<p class="mypageP01">{{$user_profile->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
