@@ -8,7 +8,11 @@ use Database\Seeders\PrefectureSeeder;
 
 class DatabaseSeeder extends Seeder
 {
+<<<<<<< Updated upstream
 
+=======
+    /** 実行したいSeederをここに登録 */
+>>>>>>> Stashed changes
     private const SEEDERS = [
         PrefectureSeeder::class,
     ];
@@ -22,8 +26,14 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
 
+<<<<<<< Updated upstream
         foreach(self::SEEDERS as $seeder) {
             $this->call($seeder);
         };
+=======
+        // foreach(self::SEEDERS as $seeder) {
+        //     $this->call($seeder);
+        // }
+>>>>>>> Stashed changes
     }
 }
