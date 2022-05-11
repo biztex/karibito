@@ -46,12 +46,12 @@
                 version          : 'v13.0'
               });
             };
-
-            FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
           </script>
           <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+          <script>            FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+            console.log(response);
+        });</script>
     </head>
     {{-- <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
