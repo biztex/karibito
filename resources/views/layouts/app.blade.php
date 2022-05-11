@@ -106,7 +106,7 @@
                 console.log('Successful login for: ' + response.name);
                 // document.getElementById('status').innerHTML =
                 //   'Thanks for logging in, ' + response.name + '!';
-                window.location.href='https://karibito.4sis.site'
+                window.location.href='https://karibito.4sis.site/dashboard'
               });
             }
           
