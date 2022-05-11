@@ -7,12 +7,6 @@
             </a>
         </x-slot>
 
-
-<form action="{{ route('logout') }}" method="post">
-  @csrf
-  <input type="submit" value="ログアウト">
-</form>
-
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 

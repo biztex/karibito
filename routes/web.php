@@ -121,9 +121,6 @@ Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback
 Route::get('login/facebook', [LoginController::class, 'getFacebookAuth']);
 Route::get('login/facebook/callback', [LoginController::class, 'authFacebookCallback']);
 
-// かりのログアウト
-Route::get('/logout', 'Auth\LoginController@logout');
-
 
 Route::prefix('sample')->group(function (){
     Route::view('', 'sample.index');

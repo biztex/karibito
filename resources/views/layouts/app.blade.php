@@ -66,6 +66,9 @@
 
 
         <script>
+            FB.logout(function(response) {
+                // Person is now logged out
+            });
 
             function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
               console.log('statusChangeCallback');
