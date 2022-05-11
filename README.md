@@ -1,8 +1,11 @@
 ## コーディング規約
 
 命名規則
+
 変数名　スネーク（$user_id）
+
 モデル名　アッパーキャメル（UserProfile）
+
 コントローラー名　アッパーキャメル（UserProfileController）
 
 
