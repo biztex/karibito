@@ -66,15 +66,16 @@
 
 
         <script>
-            FB.logout(function(response) {
-                // Person is now logged out
-            });
+
 
             function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
               console.log('statusChangeCallback');
               console.log(response);                   // The current login status of the person.
               if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-                testAPI();  
+                FB.logout(function(response) {
+                // Person is now logged out
+            });
+                // testAPI();  
               } else {                                 // Not logged into your webpage or we are unable to tell.
                 document.getElementById('status').innerHTML = 'Please log ' +
                   'into this webpage.';
