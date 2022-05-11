@@ -46,6 +46,10 @@
                 version          : 'v13.0'
               });
             };
+
+            FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
           </script>
           <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     </head>
