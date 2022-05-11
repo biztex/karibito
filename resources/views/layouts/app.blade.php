@@ -18,50 +18,10 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         {{-- facebook --}}
-        {{-- <script>
-            window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '317549723867802',
-                cookie     : true,
-                xfbml      : true,
-                version    : '{api-version}'
-            });
-            FB.AppEvents.logPageView();
-            };
-
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-        </script> --}}
-
-
-    </head>
-    {{-- <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body> --}}
-    <body>
         <script>
             window.fbAsyncInit = function() {
             FB.init({
-                appId      : '317549723867802',
+                appId      : '563484035495913',
                 cookie     : true,
                 xfbml      : true,
                 version    : 'v13.0'
@@ -72,7 +32,7 @@
                     console.log(response);
                 });
             };
-        
+
             (function(d, s, id){
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) {return;}
@@ -80,7 +40,7 @@
                 js.src = "https://connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-        
+
             function statusChangeCallback(response) {
                         console.log('statusChangeCallback');
                         console.log(response);
@@ -102,9 +62,27 @@
                               'into this app.';
                         }
                     }
-                    async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"
-
         </script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
-    </body>
+
+    </head>
+    {{-- <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <!-- Page Heading -->
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body> --}}
+
 </html>
