@@ -117,6 +117,9 @@ Route::get('publication',[PublicationController::class,'index']);
 Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
 Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
 
+// facebook login
+Route::get('/login2', [GoogleLoginController::class, 'getFacebookAuth']);
+
 
 Route::prefix('sample')->group(function (){
     Route::view('', 'sample.index');
