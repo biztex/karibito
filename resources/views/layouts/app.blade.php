@@ -39,7 +39,6 @@
         </script> --}}
 
 
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     </head>
     {{-- <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -103,6 +102,9 @@
                               'into this app.';
                         }
                     }
+                    async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"
+
         </script>
+
     </body>
 </html>
