@@ -22,6 +22,9 @@ use App\Http\Controllers\PublicationController;
 
 
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\FacebookLoginController;
+use App\Http\Controllers\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -118,8 +121,8 @@ Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
 Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
 
 // facebook login
-Route::get('login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
-Route::get('login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
+Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
+Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
 
 
 Route::prefix('sample')->group(function (){
