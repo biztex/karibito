@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\Socialite;
 use Socialite;
-use App\Http\Controllers\User;
+// use App\Http\Controllers\User;
+use App\Models\User;
+
 
 class FacebookLoginController extends Controller
 {
@@ -25,20 +27,19 @@ class FacebookLoginController extends Controller
         // dd($user); // Facebookから取得した情報を表示
 
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
-        $userModel = User::where('facebook_id', $user->id)->first();
-        if (!$userModel) {
-            $userModel = new User([
+        $user_model = User::where('facebook_id', $user->id)->first();
+        if (!$user_model) {
+            $user_model = new User([
                 'name' => $user->name,
                 'email' => $user->email,
                 'facebook_id' => $user->id
             ]);
 
-            $userModel->save();
+            $user_model->save();
         }
         // ログインする
-        Auth::login($userModel);
+        Auth::login($user_model);
         // /homeにリダイレクト
-        return Redirect::route('home');
         return redirect('/mypage');
 
     }
