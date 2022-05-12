@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\MypageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PointController;
@@ -67,6 +68,10 @@ Route::get('/', function () {
     Route::get('mypage', [UserProfileController::class, 'showMypage'])->name('showMypage');
     Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
 
+    // プロフィール
+    Route::post('profile/create', [UserProfileController::class, 'create'])->name('createProfile');
+    Route::get('profile', [UserProfileController::class, 'index'])->name('indexProfile');
+// }
 
 // index:一覧画面(get)
 // create:登録画面(get)
@@ -124,6 +129,9 @@ Route::get('publication',[PublicationController::class,'index']);
 // google login
 Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
 Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+
+// facebook login
+Route::get('/login2', [GoogleLoginController::class, 'getFacebookAuth']);
 
 
 Route::prefix('sample')->group(function (){

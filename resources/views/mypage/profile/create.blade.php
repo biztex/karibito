@@ -34,7 +34,6 @@
                                             </select>
                                         </dd>
                                     </dl>
-
                                     <dl>
                                         <dt>都道府県</dt>
                                         <dd>
