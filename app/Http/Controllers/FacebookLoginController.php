@@ -8,6 +8,7 @@ class FacebookLoginController extends Controller
 {
     public function getFacebookAuth()
     {
+        dd($user); // Facebookから取得した情報を表示
         return Socialite::driver('facebook')->redirect();
     }
 
@@ -19,7 +20,9 @@ class FacebookLoginController extends Controller
     public function authFacebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
-
         dd($user); // Facebookから取得した情報を表示
+
+        return redirect('/home');
+
     }
 }
