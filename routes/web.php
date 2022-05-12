@@ -23,7 +23,6 @@ use App\Http\Controllers\PublicationController;
 
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\FacebookLoginController;
-use App\Http\Controllers\Socialite;
 
 
 /*
