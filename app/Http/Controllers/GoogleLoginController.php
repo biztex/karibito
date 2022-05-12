@@ -13,8 +13,7 @@ class GoogleLoginController extends Controller
 {
     public function getGoogleAuth()
     {
-        return Socialite::driver('google')
-            ->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function authGoogleCallback()
@@ -28,10 +27,5 @@ class GoogleLoginController extends Controller
         ]);
         Auth::login($user, true);
         return redirect('/sample');
-    }
-
-    public function getFacebookAuth()
-    {
-        return view('auth.login_fb');
     }
 }

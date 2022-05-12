@@ -60,7 +60,8 @@
                 </a>
             </div>
         </div>
-        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+        <a href="/login/facebook">フェイスブックログイン</a>
+
         {{-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button> --}}
     </x-auth-card>
 </x-guest-layout>
