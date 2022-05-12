@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Socialite;
 // use App\Http\Controllers\User;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class FacebookLoginController extends Controller
