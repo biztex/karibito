@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserProfile extends Model
 {
     use HasFactory;
-
+    
+    protected $guarded = [ 'id' ];
 
     const GENDER_MAN = 1;
     const GENDER_WOMAN = 2;
@@ -18,13 +20,6 @@ class UserProfile extends Model
         self::GENDER_WOMAN => '女性',
     ];
 
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'prefecture',
-        'user_id',
-        'gender',
-    ];
 
     public function user()
     {
@@ -35,6 +30,5 @@ class UserProfile extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
-
 
 }

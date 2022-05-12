@@ -36,75 +36,88 @@
 				<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
 			</div>
 			<div id="fancybox_person" class="fancyboxWrap">
-				<form>
+<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
+				<form method="POST" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
+				@csrf @method('put')
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
-						<div class="mypageCover">
-							<a href="#"><img src="/img/mypage/icon_camera01.svg" alt=""></a>
+						<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->icon) }})no-repeat center center;">
+							<!-- <a href="#"><img src="/img/mypage/icon_camera01.svg" alt=""></a> -->
+								<input type="file" name="cover"><img src="/img/mypage/icon_camera01.svg" alt="">
+							<!--  -->
+
 						</div>
 						<div class="fancyPersonPic">
-							<p class="img"><img src="/img/mypage/pic_head.png" alt=""></p>
-							<a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a>
+							<!-- <p class="img"><img src="/img/mypage/pic_head.png" alt=""></p> -->
+							<!-- <a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a> -->
+								<p class="img"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></p>
+								<input type="file" name="icon"><img src="/img/mypage/icon_camera02.svg" alt="">
+							<!--  -->
+
 						</div>
 						<div class="fancyPersonTable">	
 							<dl class="">
 								<dt>ニックネーム</dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="name" value="{{$user_profile->name}}"></dd>
 							</dl>
 							<dl class="">
 								<dt>メールアドレス</dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="email" value="{{$user_profile->email}}"></dd>
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>姓<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="first_name" value="{{$user_profile->first_name}}"></dd>
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>名<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name=""></dd>
+								<dd><input type="text" name="last_name" value="{{$user_profile->last_name}}"></dd>
 							</dl>
 							<dl>
 								<dt>性別</dt>
 								<dd>
-									<select>
-										<option selected="" disabled="">選択してください</option>
-										<option>男</option>
-										<option>女</option>
+									<select name="gender">
+										<option disabled>選択してください</option>
+										<option value="1" @if($user_profile->gender == 1) selected @endif>男</option>
+										<option value="2" @if($user_profile->gender == 2) selected @endif>女</option>
 									</select>
 								</dd>
 							</dl>
 							<dl>
 								<dt>生年月日<span>(年代のみ公開されます)</span></dt>
 								<dd>
-									<select class="year">
+									<select class="year" name="year">
 										<option selected="" disabled="">年</option>
-										<option>2021</option>
-										<option>2022</option>
+										@for ($i = 1900; $i < 2023; $i++ )
+											<option value="{{$i}}" @if(date("Y",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
+										@endfor
 									</select>
-									<select class="month">
+									<select class="month" name="month">
 										<option selected="" disabled="">月</option>
-										<option>12</option>
-										<option>01</option>
+										@for ($i = 1; $i < 13; $i++ )
+											<option value="{{$i}}" @if(date("n",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
+										@endfor
 									</select>
-									<select class="day">
+									<select class="day" name="day" type="day">
 										<option selected="" disabled="">日</option>
-										<option>18</option>
-										<option>19</option>
+										@for ($i = 1; $i < 32; $i++ )
+											<option value="{{$i}}" @if(date("j",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
+										@endfor
 									</select>
 								</dd>
 							</dl>
 							<dl>
 								<dt>住所<span>(都道府県のみ表示されます)</span></dt>
 								<dd>
-									<p class="addrNumber"><input class="short" type="text" name=""></p>
+									<p class="addrNumber"><input class="short" type="text" name="zip" value="{{$user_profile->zip}}"></p>
 									<div class="addrSelect">
-										<select class="short">
-											<option selected="" disabled="">選択してください</option>
-											<option>xx県</option>
-											<option>xx県</option>
+										<select class="short" name="prefecture">
+										    <option selected="" disabled="">選択してください</option>
+											@foreach($prefectures as $prefecture)
+												<option value="{{$prefecture->id}}" @if($prefecture->id == $user_profile->prefecture_id) selected @endif>{{$prefecture->name}}</option>
+											@endforeach
 										</select>
 									</div>
-									<p><input type="text" name="" placeholder="市区町村"></p>
+									<p><input type="text" name="address" placeholder="市区町村" value="{{$user_profile->address}}"></p>
 								</dd>
 							</dl>
 							<div class="specialtyBox">
@@ -136,15 +149,17 @@
 							</div>
 							<dl>
 								<dt>自己紹介</dt>
-								<dd><textarea></textarea></dd>
+								<dd><textarea name="introduction">{{$user_profile->introduction}}</textarea></dd>
 							</dl>
 						</div>
 					</div>
 					<div class="fancyPersonBtn">
 						<a href="#" class="fancyPersonCancel">キャンセル</a>
-						<a href="#" class="fancyPersonSign">登録する</a>
+						<button type="submit" class="fancyPersonSign">登録する</button>
 					</div>
 				</form>
+<!--　プロフィール編集モーダルここまで -------------------------------------------------------------- -->
+
 			</div>
 			<div id="fancybox_resume" class="fancyboxWrap">
 				<form>
@@ -255,7 +270,7 @@
 					</div>
 					<div class="fancyPersonBtn">
 						<a href="#" class="fancyPersonCancel">キャンセル</a>
-						<a href="#" class="fancyPersonSign">登録する</a>
+						<button type="submit" class="fancyPersonSign">登録する</button>
 					</div>
 				</form>
 			</div>
@@ -265,15 +280,20 @@
 				<div id="main">
 					<div class="mypageWrap">
 						<div class="mypageSec01">
-							<div class="mypageCover">
-								<a href="#"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></a>
+							<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->cover) }})no-repeat center center;">
+								<!-- <a href="#"><img src="{{asset('/storage/'.$user_profile->cover) }}" alt="カバー写真を追加"></a> -->
+									<a href="#"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></a>
+                                <!--  -->
+
 							</div>
 							<dl class="mypageDl01">
-								<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+								<!-- <dt><img src="/img/mypage/pic_head.png" alt=""></dt> -->
+								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></dt>
+								<!--  -->
 								<dd>
-									<p class="mypageP01">クリエイター名 <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
+									<p class="mypageP01">{{$user_profile->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
-									<p class="mypageP03">(女性/ 20代/ 東京都) <span>所持ポイント：0000pt</span></p>
+									<p class="mypageP03">({{$gender}} / {{$age}} / {{$user_prefecture}}) <span>所持ポイント：0000pt</span></p>
 									<p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
 									<p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
@@ -283,7 +303,7 @@
 							</dl>
 							<div class="mypageIntro">
 								<p class="mypageHd01">自己紹介</p>
-								<p class="mypageIntroTxt">自己紹介が入ります…</p>
+								<p class="mypageIntroTxt">{!! nl2br(e($user_profile->introduction)) !!}</p>
 							</div>
 							<div class="mypageProud">
 								<p class="mypageHd01">得意分野</p>

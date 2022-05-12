@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Web\Mypage\UserProfileController;
+
+use App\Http\Controllers\Web\MypageController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -9,7 +13,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\MypageController;
-use App\Http\Controllers\Mypage\UserProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PointController;
@@ -53,6 +56,17 @@ Route::get('/', function () {
 });
 
 
+    // ログイン
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
+    // 会員登録
+    Route::get('create_user', [UserProfileController::class, 'createUser'])->name('createUser');
+    Route::post('create_user', [UserProfileController::class, 'storeUser'])->name('storeUser');
+    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
+    
+    // プロフィール編集
+    Route::get('mypage', [UserProfileController::class, 'showMypage'])->name('showMypage');
+    Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
 
     // プロフィール
     Route::post('profile/create', [UserProfileController::class, 'create'])->name('createProfile');
@@ -86,7 +100,6 @@ Route::get('faq', [FaqController::class, 'index']);
 Route::get('favorite', [MypageController::class, 'indexFavorite']);
 Route::get('friends', [MypageController::class, 'indexFriends']);
 Route::get('member', [MypageController::class, 'showMember']);
-Route::get('mypage', [MypageController::class, 'showMypage']);
 Route::get('past', [MypageController::class, 'indexPast']);
 
 Route::get('news_detail',[NewsController::class,'showDetail']);
