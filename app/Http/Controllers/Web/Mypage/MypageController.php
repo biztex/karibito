@@ -36,15 +36,7 @@ class MypageController extends Controller
         return view('sample.member');
     }
 
-    /**
-     * マイページ画面を表示する
-     * 
-     * @return view
-     */
-    public function showMypage()
-    {
-        return view('sample.mypage');
-    }
+    
 
     /**
      * 過去取引一覧画面を表示する

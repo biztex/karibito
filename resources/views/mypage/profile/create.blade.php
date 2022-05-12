@@ -9,7 +9,7 @@
                     <div class="card border-white">
                         <h2 class="mt-5 text-center h2 text-secondary">プロフィール登録</h2>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('createProfile') }}" enctype="multipart/form-data" name="form1">
+                            <form method="POST" action="{{ route('createUser') }}" enctype="multipart/form-data" name="form1">
                                 @csrf
                                 <div class="fancyPersonTable">
                                     <dl class="">
@@ -31,6 +31,17 @@
                                                 <option selected="" disabled="">選択してください</option>
                                                 <option value="1">男</option>
                                                 <option value="2">女</option>
+                                            </select>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>都道府県</dt>
+                                        <dd>
+                                            <select name="prefecture">
+                                                <option selected="" disabled="">選択してください</option>
+                                                @foreach ( $prefectures as $prefecture )
+                                                    <option value="{{$prefecture->id}}">{{$prefecture->name}}</option>
+                                                @endforeach
                                             </select>
                                         </dd>
                                     </dl>
