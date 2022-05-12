@@ -23,7 +23,7 @@ class FacebookLoginController extends Controller
         $user = Socialite::driver('facebook')->user();
         // dd($user); // Facebookから取得した情報を表示
 
-        return redirect('/home');
+        return redirect('/mypage');
 
     }
 }
