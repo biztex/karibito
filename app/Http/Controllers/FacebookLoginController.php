@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\Socialite;
 use Socialite;
+use App\Http\Controllers\User;
 
 class FacebookLoginController extends Controller
 {
