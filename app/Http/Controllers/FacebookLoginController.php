@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Socialite;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 
 class FacebookLoginController extends Controller
@@ -38,8 +38,9 @@ class FacebookLoginController extends Controller
         }
         // ログインする
         Auth::login($user_model);
-        // /homeにリダイレクト
-        return redirect('/mypage');
+        dd($user);
+        // /基本情報登録画面にリダイレクト
+        return redirect('create_user');
 
     }
 }

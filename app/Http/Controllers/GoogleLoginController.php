@@ -20,7 +20,6 @@ class GoogleLoginController extends Controller
     public function authGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-        
         // $user_model = User::firstOrCreate([
         //     'name' => $user->name,
         //     'email' => $user->email
@@ -40,7 +39,7 @@ class GoogleLoginController extends Controller
 
         dd($user);
         Auth::login($user_model, true);
-        return redirect('profile/create');
+        return redirect('create_user');
     }
 }
     // public function authFacebookCallback()
