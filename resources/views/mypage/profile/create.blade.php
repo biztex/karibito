@@ -9,7 +9,7 @@
                     <div class="card border-white">
                         <h2 class="mt-5 text-center h2 text-secondary">プロフィール登録</h2>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('createUser') }}" enctype="multipart/form-data" name="form1">
+                            <form method="POST" action="{{ route('user_profile.store') }}" enctype="multipart/form-data" name="form1">
                                 @csrf
                                 <div class="fancyPersonTable">
                                     <dl class="">

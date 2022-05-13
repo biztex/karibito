@@ -16,8 +16,8 @@
 <link rel="stylesheet" type="text/css" href="/css/slick.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
-<link rel="stylesheet" href="css/jquery.fancybox.css">
-<link rel="stylesheet" type="text/css" href="style.css" media="all">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" type="/text/css" href="style.css" media="all">
 </head>
 <body>
 <div id="wrapper">
@@ -40,10 +40,10 @@
 								<li><a href="#" class="nav01">ご利用ガイド</a></li>
 								<li><a href="#" class="nav02">いいね一覧</a></li>
 								<li><a href="#" class="nav03">やりとり</a></li>
-								<li><a href="/sample/mypage" class="nav04">MYページ</a></li>
+								<li><a href="/mypage" class="nav04">MYページ</a></li>
 							</ul>
 							<ul class="navUl02 sp">
-								<li><a href="/sample/mypage" class="nav04">MYページ</a></li>
+								<li><a href="/user_profile/1" class="nav04">MYページ</a></li>
 								<li><a href="#" class="nav03">やりとり</a></li>
 								<li><a href="#" class="nav02">いいね一覧</a></li>
 							</ul>
