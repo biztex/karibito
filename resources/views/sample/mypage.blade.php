@@ -37,24 +37,83 @@
 			</div>
 			<div id="fancybox_person" class="fancyboxWrap">
 <!-- プロフィール編集モーダル -------------------------------------------------------------- -->
-				<form method="POST" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
-				@csrf @method('put')
+				<form method="POST" action="{{ route('user_profile.update',Auth::id()) }}" enctype="multipart/form-data">
+				@csrf @method('PUT')
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
-						<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->icon) }})no-repeat center center;">
+						@if(!empty($user_profile->cover))
+						<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->cover) }})no-repeat center center;">
+						@else
+						<div class="mypageCover">
+						@endif
+
 							<!-- <a href="#"><img src="/img/mypage/icon_camera01.svg" alt=""></a> -->
 								<input type="file" name="cover"><img src="/img/mypage/icon_camera01.svg" alt="">
 							<!--  -->
 
 						</div>
-						<div class="fancyPersonPic">
+
+
+						<!-- <div class="fancyPersonPic"> -->
 							<!-- <p class="img"><img src="/img/mypage/pic_head.png" alt=""></p> -->
 							<!-- <a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a> -->
-								<p class="img"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></p>
-								<input type="file" name="icon"><img src="/img/mypage/icon_camera02.svg" alt="">
+								<!-- <p class="img"><img id="preview" alt=""  src="/img/mypage/pic_head.png"></p> -->
+								<!-- <input type="file" name="icon" accept="image/*" onchange="previewIcon(this);"><img src="/img/mypage/icon_camera02.svg" alt=""> -->
 							<!--  -->
+							
+							<!-- <script>
+							function previewIcon(obj)
+							{
+								var fileReader = new FileReader();
+								fileReader.onload = (function() {
+									document.getElementById('preview').src = fileReader.result;
+								});
+								fileReader.readAsDataURL(obj.files[0]);
+							}
+							</script> -->
+													<!-- </div> -->
 
-						</div>
+
+
+
+
+
+
+<div class="fancyPersonPic">
+		<p class="img">
+			@if(empty($user_profile->icon))
+			    <img id="preview" alt=""  src="/img/mypage/pic_head.png">
+			@else
+			    <img id="preview" alt=""  src="{{asset('/storage/'.$user_profile->icon) }}">
+			@endif
+		</p>
+
+		<input type="file" name="icon" id="myicon" accept="image/*"><img src="/img/mypage/icon_camera02.svg" alt="">
+</div>
+<script>
+	$(function(){
+		$('#myicon').change(function (){
+			var file = $(this).prop('files')[0];
+            var reader = new FileReader();
+
+			reader.onload = function(){
+				$('#preview').attr('src',reader.result).css('display','inline');
+			}
+			reader.readAsDataURL(file);
+		});
+	});
+
+</script>
+
+
+
+
+
+
+
+
+
+
 						<div class="fancyPersonTable">	
 							<dl class="">
 								<dt>ニックネーム</dt>
@@ -280,16 +339,23 @@
 				<div id="main">
 					<div class="mypageWrap">
 						<div class="mypageSec01">
-							<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->cover) }})no-repeat center center;">
-								<!-- <a href="#"><img src="{{asset('/storage/'.$user_profile->cover) }}" alt="カバー写真を追加"></a> -->
-									<a href="#"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></a>
-                                <!--  -->
+							@if(!empty($user_profile->cover))
+								<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->cover) }})no-repeat center center;">
+							@else
+								<div class="mypageCover">
+							@endif
+									<!-- <a href="#"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></a> -->
+
+									<label for="file" ><input type="file" name="file" style="display:none;"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
+								
 
 							</div>
 							<dl class="mypageDl01">
-								<!-- <dt><img src="/img/mypage/pic_head.png" alt=""></dt> -->
+								@if(empty($user_profile->icon))
+								    <dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+								@else
 								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></dt>
-								<!--  -->
+								@endif
 								<dd>
 									<p class="mypageP01">{{$user_profile->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
