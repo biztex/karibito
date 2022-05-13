@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-use App\Http\Requests\Mypage\CreateRequest;
 
 
 use App\Models\User;
@@ -14,18 +12,37 @@ use App\Models\Prefecture;
 
 class UserProfileController extends Controller
 {
-    
-    // 会員登録画面表示
-    public function createUser()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $prefectures = Prefecture::all();
-        // dd($prefectures);
         return view('mypage.profile.create',compact('prefectures'));
     }
-     // 会員登録
-    public function storeUser(Request $request)
-    {
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $prefectures = Prefecture::all();
+        return view('mypage.profile.create',compact('prefectures'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
         $user_id = 1; //Auth::user()->id();
 
         $user = User::find($user_id);
@@ -38,31 +55,34 @@ class UserProfileController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'gender' => $request->gender,
-            'prefecture' => $request->prefecture
+            'prefecture_id' => $request->prefecture
         ]);
         $user_profile->save();
+        $id = $user_id;
 
-        return redirect()->route('showComplete');
+        return redirect()->route('showComplete',compact('id'));
     }
-    // 会員登録
-    public function showComplete()
+
+    public function showComplete($id)
     {
         $user_name = session()->get('user_name');
+        $id = $id;
 
-        return view('mypage.profile.created',compact('user_name'));
+        return view('mypage.profile.created',compact('user_name','id'));
 
     }
 
     /**
-     * マイページ画面を表示する
-     * 
-     * @return view
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function showMypage()
+    public function show($id)
     {
-        $user_id = 1; //Auth::user()->id();
-
-        $user_profile = UserProfile::where('user_id',$user_id)
+        // $user_id = $id; //Auth::user()->id();
+        $id = $id;
+        $user_profile = UserProfile::where('user_id',$id)
                         ->leftjoin('users','users.id','=','user_profiles.user_id')
                         ->select(['user_profiles.*','users.email as email','users.name as name'])
                         ->first();
@@ -77,8 +97,8 @@ class UserProfileController extends Controller
             $gender = '女性';
         };
 
-        $now = date('Ymd');
-        $birthday = str_replace("-","",$user_profile->birthday);
+        $now = (int)date('Ymd');
+        $birthday = (int)str_replace("-","",$user_profile->birthday);
         $now_age = floor(($now - $birthday) / 10000);
         if($now_age < 0 || $now_age > 150 || empty($now_age)){
             $age = '不明';
@@ -101,18 +121,32 @@ class UserProfileController extends Controller
         }
 
 
-        return view('sample.mypage',compact('user_profile','prefectures','user_prefecture','gender','age'));
+        return view('sample.mypage',compact('id','user_profile','prefectures','user_prefecture','gender','age'));
     }
-    
+
     /**
-     * プロフィールを編集する
-     * 
-     * @return view
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function updateProfile(Request $request)
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request,$id)
     {
         $birthday = $request->year.'-'.$request->month.'-'.$request->day;
-        $user_id = 1;
+        $user_id = $id;
+        $id = $id;
         $user_profile_id = session()->get('user_profile_id');
 
                 $user = User::find($user_id);
@@ -145,7 +179,17 @@ class UserProfileController extends Controller
                 }
                 $user_profile->save();
 
-        return redirect()->route('showMypage');
+        return redirect()->route('user_profile.show',$id);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

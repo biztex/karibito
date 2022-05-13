@@ -9,6 +9,7 @@
                 <div class="card border-white">
                         <h2 class="mt-5 text-center h2 text-secondary">プロフィール登録完了</h2>
                         <p>{{ $user_name }}様登録ありがとうございます</p>
+                        <a href="/user_profile/{{$id}}">My Page</a>
                 </div>
             </div>
         </div>
