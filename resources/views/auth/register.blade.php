@@ -12,6 +12,15 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <div class="form-group row mt-2">
+                <div class="col-md-8 offset-md-4">
+                    <a href="/register/google" class="btn btn-secondary" role="button">
+                        グーグルでログインする
+                    </a>
+                </div>
+            </div>
+            <a href="/login/facebook">フェイスブックでログインする</a>
+
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')" />

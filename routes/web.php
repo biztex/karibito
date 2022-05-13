@@ -12,7 +12,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\MypageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PointController;
@@ -65,7 +64,7 @@ Route::get('/', function () {
     Route::get('create_user', [UserProfileController::class, 'createUser'])->name('createUser');
     Route::post('create_user', [UserProfileController::class, 'storeUser'])->name('storeUser');
     Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
-    
+
     // プロフィール編集
     Route::get('mypage', [UserProfileController::class, 'showMypage'])->name('showMypage');
     Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
@@ -129,8 +128,14 @@ Route::get('publication',[PublicationController::class,'index']);
 
 
 // google login
+Route::get('/register/google', [GoogleLoginController::class, 'getGoogleAuth']);
+Route::get('/register/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+
+// Route::get('/register/profile', [GoogleLoginController::class, 'authGoogleCallback']);
+
+
 Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
-Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
 
 // facebook login
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);

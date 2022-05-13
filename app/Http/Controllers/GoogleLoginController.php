@@ -16,16 +16,53 @@ class GoogleLoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+
     public function authGoogleCallback()
     {
-        $googleUser = Socialite::driver('google')->stateless()->user();
-        $user = User::firstOrCreate([
-            'email' => $googleUser->email
-        ], [
-            'email_verified_at' => now(),
-            'google_id' => $googleUser->getId()
-        ]);
-        Auth::login($user, true);
-        return redirect('/sample');
+        $user = Socialite::driver('google')->user();
+        
+        // $user_model = User::firstOrCreate([
+        //     'name' => $user->name,
+        //     'email' => $user->email
+        // ], [
+        //     'email_verified_at' => now(),
+        //     'google_id' => $user->getId()
+        // ]);
+        $user_model = User::where('google_id', $user->id)->first();
+        if (!$user_model) {
+            $user_model = new User([
+                // 'name' => $user->name,
+                'email' => $user->email,
+                'google_id' => $user->id
+            ]);
+
+        $user_model->save();
+
+        dd($user);
+        Auth::login($user_model, true);
+        return redirect('profile/create');
     }
+}
+    // public function authFacebookCallback()
+    // {
+    //     $user = Socialite::driver('facebook')->user();
+    //     // dd($user); // Facebookから取得した情報を表示
+
+    //     // すでにFacebook登録済みじゃなかったらユーザーを登録する
+    //     $user_model = User::where('facebook_id', $user->id)->first();
+    //     if (!$user_model) {
+    //         $user_model = new User([
+    //             'name' => $user->name,
+    //             'email' => $user->email,
+    //             'facebook_id' => $user->id
+    //         ]);
+
+    //         $user_model->save();
+    //     }
+    //     // ログインする
+    //     Auth::login($user_model);
+    //     // /homeにリダイレクト
+    //     return redirect('/mypage');
+
+    // }
 }
