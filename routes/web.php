@@ -65,6 +65,20 @@ require __DIR__.'/auth.php';
 
     Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
 
+
+    // 会員登録
+    Route::get('create_user', [UserProfileController::class, 'createUser'])->name('createUser');
+    Route::post('create_user', [UserProfileController::class, 'storeUser'])->name('storeUser');
+    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
+
+    // プロフィール編集
+    Route::get('mypage', [UserProfileController::class, 'showMypage'])->name('showMypage');
+    Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
+
+    // プロフィール
+    Route::post('profile/create', [UserProfileController::class, 'create'])->name('createProfile');
+    Route::get('profile', [UserProfileController::class, 'index'])->name('indexProfile');
+// }
     
     Route::resource('user_profile',UserProfileController::class);
     Route::get('user_profile/complete/{id}', [UserProfileController::class, 'showComplete'])->name('showComplete');
@@ -125,8 +139,14 @@ Route::get('publication',[PublicationController::class,'index']);
 
 
 // google login
+Route::get('/register/google', [GoogleLoginController::class, 'getGoogleAuth']);
+Route::get('/register/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+
+// Route::get('/register/profile', [GoogleLoginController::class, 'authGoogleCallback']);
+
+
 Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
-Route::get('/login/callback', [GoogleLoginController::class, 'authGoogleCallback']);
+Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
 
 // facebook login
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
