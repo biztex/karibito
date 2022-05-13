@@ -1108,7 +1108,7 @@
 	background-size: cover;
 	height: 230px;
 }
-.mypageCover a{
+.mypageCover label{
 	position: absolute;
 	right: 40px;
 	top: 20px;
@@ -1420,6 +1420,10 @@
 	width: 140px;
 	height: 140px;
 	margin: -50px auto 15px;
+}
+.fancyPersonPic p.img {
+	height: 140px;
+	width: 140px;
 }
 .fancyPersonPic .img{
 	border-radius: 50%;
