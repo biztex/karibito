@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Mypage\UserProfileController;
-
-use App\Http\Controllers\Web\MypageController;
+use App\Http\Controllers\Web\Mypage\MypageController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -36,9 +35,9 @@ use App\Http\Controllers\GoogleLoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -49,20 +48,25 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/', function () {
-    return redirect('sample/');
-//    return view('welcome');
-});
+// Route::get('/', function () {
+//     return redirect('sample/');
+// //    return view('welcome');
+// });
 
 
-    // ログイン
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+// Route::middleware(['auth','signed'])->group(function () {
+// Route::middleware('auth')->group(function () {
+
 
     // 会員登録・プロフィール登録
     Route::get('user_profile', [UserProfileController::class, 'index']);
+
+    Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
+
+    
     Route::resource('user_profile',UserProfileController::class);
     Route::get('user_profile/complete/{id}', [UserProfileController::class, 'showComplete'])->name('showComplete');
-
+// });
 
 
 // index:一覧画面(get)

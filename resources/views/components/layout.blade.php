@@ -26,31 +26,41 @@
 			<div id="headerLinks">
 				<div class="inner">
 					<div class="item">
-						<h1 id="headerLogo"><a href="index.html"><img src="/img/common/logo.svg" alt="LOGO"></a></h1>
+						<h1 id="headerLogo"><a href="/"><img src="/img/common/logo.svg" alt="LOGO"></a></h1>
 						<div class="search"><input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value=""></div>
 					</div> 
 					<div class="item">
 						<div class="btnMenu"><span></span><span></span><span></span></div> 
 						<nav id="gNavi">
+						    @if(Auth::check())
 							<ul class="navUl01">
 								<li><a href="#">投稿する</a></li>
 								<li><a href="#" class="redBtn">リクエストする</a></li>
 							</ul>
+							@endif
+
 							<ul class="navUl02 pc">
 								<li><a href="#" class="nav01">ご利用ガイド</a></li>
+							@if(Auth::check())
 								<li><a href="#" class="nav02">いいね一覧</a></li>
 								<li><a href="#" class="nav03">やりとり</a></li>
-								<li><a href="/mypage" class="nav04">MYページ</a></li>
+								<li><a href="{{route('mypage')}}" class="nav04">MYページ</a></li>
+							@endif
 							</ul>
+							
+							@if(Auth::check())
 							<ul class="navUl02 sp">
-								<li><a href="/user_profile/1" class="nav04">MYページ</a></li>
+								<li><a href="{{route('mypage')}}" class="nav04">MYページ</a></li>
 								<li><a href="#" class="nav03">やりとり</a></li>
 								<li><a href="#" class="nav02">いいね一覧</a></li>
 							</ul>
+							@endif
+
 							<ul class="navUl03">
 								<li><a href="#"><img src="/img/common/img_guide01.png" srcset="/img/common/img_guide01.png 1x, /img/common/img_guide01@2x.png 2x" alt=""></a></li>
 								<li><a href="#"><img src="/img/common/img_guide02.png" srcset="/img/common/img_guide02.png 1x, /img/common/img_guide02@2x.png 2x" alt=""></a></li>
 							</ul>
+
 							<ul class="navUl04">
 								<li><a href="#"><img src="/img/common/btn_app.svg" alt=""></a></li>
 								<li><a href="#"><img src="/img/common/btn_google.svg" alt=""></a></li>
@@ -58,8 +68,16 @@
 						</nav><!-- /#gNavi -->
 						<div class="overlay"></div>
 						<div class="fun">
-							<a href="#" class="log">ログイン</a>
-							<a href="#" class="sign">新規登録</a>
+							@if(!Auth::check())
+							<a href="{{route('login')}}" class="log">ログイン</a>
+							<a href="{{route('register')}}" class="sign">新規登録</a>
+							@elseif(Auth::check())
+				            <form method="POST" name="logout" action="{{ route('logout') }}">
+								@csrf
+							    <a href="javascript:logout.submit()" class="log">ログアウト</a>
+                            </form>
+							@endif
+
 						</div>
 					</div> 
 				</div>
