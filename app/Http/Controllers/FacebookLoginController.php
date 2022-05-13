@@ -38,7 +38,6 @@ class FacebookLoginController extends Controller
         }
         // ログインする
         Auth::login($user_model);
-        dd($user);
         // /基本情報登録画面にリダイレクト
         return redirect('create_user');
 
