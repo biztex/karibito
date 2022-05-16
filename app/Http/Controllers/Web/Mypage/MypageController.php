@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserProfileRequest;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\Prefecture;
+
 
 class MypageController extends Controller
 {
@@ -22,10 +22,15 @@ class MypageController extends Controller
      */
     public function show()
     {
+        
         $user_profile = UserProfile::where('user_id',Auth::id())
                         ->leftjoin('users','users.id','=','user_profiles.user_id')
                         ->select(['user_profiles.*','users.email as email','users.name as name'])
                         ->first();
+
+                        if(empty($user_profile)){
+                            return redirect()->action([UserProfileController::class, 'create']);
+                        };
                         session()->put('user_profile_id',$user_profile->id);
         
         $prefectures = Prefecture::all();
@@ -61,7 +66,7 @@ class MypageController extends Controller
         }
 
 
-        return view('sample.mypage',compact('user_profile','prefectures','user_prefecture','gender','age'));
+        return view('mypage.profile.mypage',compact('user_profile','prefectures','user_prefecture','gender','age'));
     }
 
     /**
