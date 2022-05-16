@@ -72,7 +72,6 @@ require __DIR__.'/auth.php';
     Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
 
     // プロフィール編集
-    Route::get('mypage', [UserProfileController::class, 'showMypage'])->name('showMypage');
     Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
 
     // プロフィール

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Mypage\UserProfileController;
+namespace App\Http\Requests\UserProfile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required | max:128',
+            'first_name' => 'required | max:128',
+            'last_name' => 'required | max:128',
+            'gender' => 'required',
+            'prefecture' => 'required',
         ];
     }
 }
