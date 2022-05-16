@@ -67,5 +67,4 @@ class PrefectureSeeder extends Seeder
         ];
         DB::table('prefectures')->insert($params);
     }
-    
 }
