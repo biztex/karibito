@@ -78,7 +78,7 @@ require __DIR__.'/auth.php';
     Route::post('profile/create', [UserProfileController::class, 'create'])->name('createProfile');
     Route::get('profile', [UserProfileController::class, 'index'])->name('indexProfile');
 // }
-    
+
     Route::resource('user_profile',UserProfileController::class);
     Route::get('user_profile/complete/{id}', [UserProfileController::class, 'showComplete'])->name('showComplete');
 // });
@@ -140,8 +140,6 @@ Route::get('publication',[PublicationController::class,'index']);
 // google login
 Route::get('/register/google', [GoogleLoginController::class, 'getGoogleAuth']);
 Route::get('/register/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
-
-// Route::get('/register/profile', [GoogleLoginController::class, 'authGoogleCallback']);
 
 
 Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
