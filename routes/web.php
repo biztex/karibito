@@ -26,6 +26,8 @@ use App\Http\Controllers\PublicationController;
 
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\FacebookLoginController;
+use App\Http\Controllers\Auth\FacebookRegisterController;
+
 
 
 /*
@@ -152,6 +154,9 @@ Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleC
 // facebook login
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
+// facebookにメアドがない場合
+Route::get('/register/facebook/form', [FacebookRegisterController::class, 'form'])->middleware('exists.session.facebookid')->name('register.facebook.form');
+Route::post('register/facebook', [FacebookRegisterController::class, 'register'])->name('register.facebook.store');
 
 
 Route::prefix('sample')->group(function (){

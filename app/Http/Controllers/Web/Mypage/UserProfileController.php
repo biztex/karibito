@@ -35,7 +35,7 @@ class UserProfileController extends Controller
     public function create()
     {
         if(!empty(UserProfile::all()->where('user_id',Auth::id())->first())){
-            
+
             return redirect()->action([MypageController::class,'show']);
         }
         $prefectures = Prefecture::all();
@@ -50,9 +50,8 @@ class UserProfileController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        
+
         $user_id = Auth::id();
-        // dd($user_id);
 
         $user = User::find($user_id);
         $user->fill([ 'name' => $request->name ])->save();

@@ -15,6 +15,9 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        @if(!empty($error_msg))
+        {{  $error_msg  }}
+        @endif
 
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
