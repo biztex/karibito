@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->unique();
+            $table->foreignId('user_id')->unique()->constrained();
             $table->string('first_name');
             $table->string('last_name');
             $table->tinyInteger('gender')->comment('1.男性、2.女性');
