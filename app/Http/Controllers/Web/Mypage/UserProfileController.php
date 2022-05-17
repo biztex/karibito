@@ -48,7 +48,7 @@ class UserProfileController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $user_id = Auth::id();
         // dd($user_id);
 
@@ -95,7 +95,7 @@ class UserProfileController extends Controller
     //                     ->select(['user_profiles.*','users.email as email','users.name as name'])
     //                     ->first();
     //                     session()->put('user_profile_id',$user_profile->id);
-        
+
     //     $prefectures = Prefecture::all();
     //     $user_prefecture = Prefecture::where('id',$user_profile->prefecture_id)->first()->name;
 

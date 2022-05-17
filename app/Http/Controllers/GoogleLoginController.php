@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -19,18 +20,26 @@ class GoogleLoginController extends Controller
 
     public function authGoogleCallback()
     {
-        $user = Socialite::driver('google')->stateless()->user();
-        $user_model = User::where('google_id', $user->id)->first();
-        if (!$user_model) {
-                $user_model = new User([
-                    'email' => $user->email,
-                    'google_id' => $user->id
+        $google_user = Socialite::driver('google')->stateless()->user();
+        $user = User::where('email', $google_user->email)->first();
+        if ($user){
+            $user->google_id = $google_user->id;
+            $user->save();
+        } else {
+            $user = User::where('google_id', $google_user->id)->first();
+            if (!$user) {
+                $user = new User([
+                    'email' => $google_user->email,
+                    'google_id' => $google_user->id,
+                    'email_verified_at' => Carbon::now()
                 ]);
-            $user_model->save();
+                $user->save();
+                Auth::login($user, true);
+                return redirect()->route('user_profile.create');
+            } else {
+                Auth::login($user);
+                return redirect()->route('mypage.showMypage');
             }
-
-        Auth::login($user_model, true);
-        return redirect()->route('user_profile.create');
+        }
     }
-
 }

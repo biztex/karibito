@@ -149,6 +149,8 @@ Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleC
 // facebook login
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
+// facebookにメアドがない場合
+Route::get('/register/facebook/form', [FacebokRegisterController::class, 'form'])->middleware(exists.session.facebookid)->name('register.facebook.form');
 
 
 Route::prefix('sample')->group(function (){
