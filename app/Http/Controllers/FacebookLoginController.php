@@ -24,7 +24,6 @@ class FacebookLoginController extends Controller
     public function authFacebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
-        // dd($user); // Facebookから取得した情報を表示
 
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user_model = User::where('facebook_id', $user->id)->first();

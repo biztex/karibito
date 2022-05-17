@@ -23,14 +23,12 @@ class GoogleLoginController extends Controller
         $google_user = Socialite::driver('google')->stateless()->user();
         $user = User::where('google_id', $google_user->id)->first();
         // $user = User::where('email', $google_user->email)->first();
-        // dd($user);
         if ($user){
             Auth::login($user);
             return redirect()->route('mypage.showMypage');
         } else {
             // $user = User::where('google_id', $google_user->id)->first();
             $duplicate_email_user = User::where('email', $google_user->email)->first();
-            dd($duplicate_email_user);
             if($duplicate_email_user) {
                 // if(is_null($duplicate_email_user->email_verified_at)) {
                 //     $duplicate_email_user->email_verified_at = Carbon::now();

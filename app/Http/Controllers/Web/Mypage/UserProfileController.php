@@ -52,7 +52,6 @@ class UserProfileController extends Controller
     {
 
         $user_id = Auth::id();
-        // dd($user_id);
 
         $user = User::find($user_id);
         $user->fill([ 'name' => $request->name ])->save();
