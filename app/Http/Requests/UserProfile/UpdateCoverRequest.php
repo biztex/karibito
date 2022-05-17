@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Mypage\UserProfileController;
+namespace App\Http\Requests\UserProfile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateCoverRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'file' => ''
         ];
     }
 }
