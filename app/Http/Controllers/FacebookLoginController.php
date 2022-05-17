@@ -35,17 +35,15 @@ class FacebookLoginController extends Controller
                 'email_verified_at' => Carbon::now(),
                 'facebook_id' => $user->id
             ]);
-        }
-            if(!$user->email){
-                return redirect()
-                            ->route('register.facebook.form')
-                            ->with([
-                                'name' => $user->name,
-                                'email' => $user->email,
-                                'email_verified_at' => Carbon::now(),
-                                'facebook_id' => $user->id
-                            ]);
-                    }
+        if(!$user->email){
+            return redirect()
+                        ->route('register.facebook.form')
+                        ->with([
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'facebook_id' => $user->id
+                        ]);
+                }
 
             $user_model->save();
             // ログインする
