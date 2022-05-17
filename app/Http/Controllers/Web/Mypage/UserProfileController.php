@@ -116,7 +116,7 @@ class UserProfileController extends Controller
                 $user = User::find($id);
                 $user->fill([
                     'name' => $request->name,
-                    'email' => $request->email
+                    // 'email' => $request->email
                 ]);
                 $user->save();
 

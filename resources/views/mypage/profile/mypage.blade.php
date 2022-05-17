@@ -35,84 +35,44 @@
 				<p class="fancyRegisterUpload"><a href="#">身分証明書をアップロード</a></p>
 				<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
 			</div>
-			<div id="fancybox_person" class="fancyboxWrap">
+
 <!-- プロフィール編集モーダル -------------------------------------------------------------- -->
+			<div id="fancybox_person" class="fancyboxWrap">
 				<form method="POST" action="{{ route('user_profile.update',Auth::id()) }}" enctype="multipart/form-data">
 				@csrf @method('PUT')
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
-						@if(!empty($user_profile->cover))
-						<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->cover) }})no-repeat center center;">
-						@else
-						<div class="mypageCover">
-						@endif
 
-							<!-- <a href="#"><img src="/img/mypage/icon_camera01.svg" alt=""></a> -->
-								<input type="file" name="cover"><img src="/img/mypage/icon_camera01.svg" alt="">
-							<!--  -->
-
+						<div class="mypageCover mypageCoverUpdate">
+							@if(empty($user_profile->cover))
+								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png">
+							@else
+								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="width: 100%;height: 230px;object-fit: cover;">
+							@endif
+								<input type="file" name="cover" accept="image/*" style="display:none;">
+								<a href="#"><img clsaa="center_cam" src="/img/mypage/icon_camera01.svg" alt="" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"></a>
 						</div>
 
 
-						<!-- <div class="fancyPersonPic"> -->
-							<!-- <p class="img"><img src="/img/mypage/pic_head.png" alt=""></p> -->
-							<!-- <a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a> -->
-								<!-- <p class="img"><img id="preview" alt=""  src="/img/mypage/pic_head.png"></p> -->
-								<!-- <input type="file" name="icon" accept="image/*" onchange="previewIcon(this);"><img src="/img/mypage/icon_camera02.svg" alt=""> -->
-							<!--  -->
-							
-							<!-- <script>
-							function previewIcon(obj)
-							{
-								var fileReader = new FileReader();
-								fileReader.onload = (function() {
-									document.getElementById('preview').src = fileReader.result;
-								});
-								fileReader.readAsDataURL(obj.files[0]);
-							}
-							</script> -->
-													<!-- </div> -->
+							<div class="fancyPersonPic">
+									<p class="img">
+										@if(empty($user_profile->icon))
+											<img id="preview_icon" alt=""  src="/img/mypage/pic_head.png" style="width: 140px;height: 140px;object-fit: cover;">
+										@else
+											<img id="preview_icon" alt=""  src="{{asset('/storage/'.$user_profile->icon) }}" style="width: 140px;height: 140px;object-fit: cover;">
+										@endif
+									
+										<input type="file" name="icon" accept="image/*" style="display:none;">
+										<a href="#"><img clsaa="center_cam" src="/img/mypage/icon_camera01.svg" alt="" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"></a>
+									</p>
+							</div>
 
-
-
-
-
-
-
-<div class="fancyPersonPic">
-		<p class="img">
-			@if(empty($user_profile->icon))
-			    <img id="preview" alt=""  src="/img/mypage/pic_head.png">
-			@else
-			    <img id="preview" alt=""  src="{{asset('/storage/'.$user_profile->icon) }}">
-			@endif
-		</p>
-
-		<input type="file" name="icon" id="myicon" accept="image/*"><img src="/img/mypage/icon_camera02.svg" alt="">
-</div>
-<script>
-	$(function(){
-		$('#myicon').change(function (){
-			var file = $(this).prop('files')[0];
-            var reader = new FileReader();
-
-			reader.onload = function(){
-				$('#preview').attr('src',reader.result).css('display','inline');
-			}
-			reader.readAsDataURL(file);
-		});
-	});
-
-</script>
-
-
-
-
-
-
-
-
-
+								@error('icon')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+								@error('cover')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
 						<div class="fancyPersonTable">	
 							<dl class="">
@@ -122,25 +82,21 @@
                                 @enderror
 								<dd><input type="text" name="name" class="@error('name') is-invalid @enderror" value="{{old('name',$user_profile->name)}}"></dd>
 							</dl>
-							<dl class="">
-								<dt>メールアドレス</dt>
-								@error('email')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-								<dd><input type="text" name="email" class="@error('email') is-invalid @enderror" value="{{old('email',$user_profile->email)}}"></dd>
-							</dl>
+								<dl>
+								
+								</dl>
 							<dl class=" inlineFlex">
 								<dt>姓<span>(本名は非公開です)</span></dt>
-								@error('first_name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+									@if($errors->has('first_name') || $errors->has('last_name'))
+                                    	<div class="alert alert-danger" style="padding-bottom:0;">姓名は必ず指定してください。</div>
+                                	@endif
 								<dd><input type="text" name="first_name" class="@error('first_name') is-invalid @enderror" value="{{old('first_name',$user_profile->first_name)}}"></dd>
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>名<span>(本名は非公開です)</span></dt>
-								@error('last_name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+									@if($errors->has('first_name') || $errors->has('last_name'))
+                                    	<div class="alert alert-danger" style="padding-bottom:0;"><br></div>
+                                	@endif
 								<dd><input type="text" name="last_name" class="@error('last_name') is-invalid @enderror" value="{{old('last_name',$user_profile->last_name)}}"></dd>
 							</dl>
 							<dl>
@@ -162,26 +118,26 @@
 									<select class="year" name="year">
 										<option selected="" disabled="">年</option>
 										@for ($i = 1900; $i < 2023; $i++ )
-											<option value="{{$i}}" @if(date("Y",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
+											<option value="{{$i}}" @if($i == old('year', date("Y",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
 									<select class="month" name="month">
 										<option selected="" disabled="">月</option>
 										@for ($i = 1; $i < 13; $i++ )
-											<option value="{{$i}}" @if(date("n",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
+											<option value="{{$i}}" @if($i == old('month', date("n",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
 									<select class="day" name="day" type="day">
 										<option selected="" disabled="">日</option>
 										@for ($i = 1; $i < 32; $i++ )
-											<option value="{{$i}}" @if(date("j",strtotime($user_profile->birthday)) == $i) selected @endif>{{$i}}</option>
+											<option value="{{$i}}" @if($i == old('day', date("j",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
 								</dd>
 							</dl>
 							<dl>
 								<dt>住所<span>(都道府県のみ表示されます)</span></dt>
-								    @error('prefecture')
+								    @error('zip')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
 								<dd>
@@ -194,6 +150,9 @@
 											@endforeach
 										</select>
 									</div>
+									@error('address')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 									<p><input type="text" name="address" placeholder="市区町村" value="{{old('address',$user_profile->address)}}"></p>
 								</dd>
 							</dl>
@@ -357,22 +316,26 @@
 				<div id="main">
 					<div class="mypageWrap">
 						<div class="mypageSec01">
+						<div class="mypageCover">
 							@if(!empty($user_profile->cover))
-								<div class="mypageCover" style="background: url({{asset('/storage/'.$user_profile->cover) }})no-repeat center center;">
+								<img src="{{asset('/storage/'.$user_profile->cover) }}" style="width: 100%;height: 100%;object-fit: cover;">
 							@else
-								<div class="mypageCover">
+								<img src="/img/mypage/img_rainbow.png" style="width: 100%;height: 100%;object-fit: cover;">
 							@endif
-									<!-- <a href="#"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></a> -->
 
-									<label for="file" ><input type="file" name="file" style="display:none;"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
-								
-
+							<form method="POST" action="{{ route('cover.update') }}" enctype="multipart/form-data">
+								@csrf @method('PUT')
+									<input type="file" name="file" style="display:none;">
+									<label for="file" class="update_cover"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
+									<input type="submit" name="submit_cover" style="display:none;">
+							</form>
+	
 							</div>
 							<dl class="mypageDl01">
 								@if(empty($user_profile->icon))
 								    <dt><img src="/img/mypage/pic_head.png" alt=""></dt>
 								@else
-								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></dt>
+								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 140px;height: 140px;object-fit: cover;"></dt>
 								@endif
 								<dd>
 									<p class="mypageP01">{{$user_profile->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
@@ -509,6 +472,64 @@
 				</div>
 			</div>
 		</div><!-- /#contents -->
+	
 	</body>
 </article>
 </x-layout>
+<script>
+	$(function(){
+
+		// コメント編集でバリデーションエラーの際、モーダルを最初から表示する
+		if (@json($errors->any())) {
+                $('.fancybox').trigger('click');
+            }
+	
+
+				$(".update_cover").on('click', function(){
+					$("input[name='file']").click();
+					
+					$("input[name='file']").on('change',function(){
+						var file = $(this).prop('files')[0];
+					$("input[name='submit_cover']").click();
+						
+					});
+				});
+
+
+
+				$(".fancyPersonPic p").on('click', function(){
+					$("input[name='icon']").on('click', function(e){
+						e.stopPropagation();
+					});
+					$("input[name='icon']").click();
+					$("input[name='icon']").on('change',function(e){
+									
+						var reader = new FileReader();
+						
+						reader.onload = function (e) {
+							$("#preview_icon").attr('src', e.target.result);
+						}
+						reader.readAsDataURL(e.target.files[0]);   
+					});
+				});
+
+
+				$(".mypageCoverUpdate").on('click', function(){
+					$("input[name='cover']").on('click', function(e){
+						e.stopPropagation();
+					});
+					$("input[name='cover']").click();
+					$("input[name='cover']").on('change',function(e){
+									
+						var reader = new FileReader();
+						
+						reader.onload = function (e) {
+							$("#preview_cover").attr('src', e.target.result);
+						}
+						reader.readAsDataURL(e.target.files[0]);   
+						
+					});
+				});
+			});
+
+</script>

@@ -1104,9 +1104,13 @@
 .mypageCover{
 	margin: 0 -20px;
 	position: relative;
-	background: url(../img/mypage/img_rainbow.png)no-repeat center center;
-	background-size: cover;
+	/* background: url(../img/mypage/img_rainbow.png)no-repeat center center;
+	background-size: cover;  */
 	height: 230px;
+}
+#preview_cover{
+	height:160px;
+	object-fit: cover;
 }
 .mypageCover label{
 	position: absolute;
@@ -1528,6 +1532,7 @@
 	justify-content: flex-end;
 	padding: 15px 20px;
 }
+.fancyPersonBtn button,
 .fancyPersonBtn a,
 .fancyPersonBtn input{
 	margin-left: 15px;
@@ -1541,6 +1546,7 @@
 	padding: 0 12px;
 	background-color: #fff;
 }
+.fancyPersonBtn button.fancyPersonSign,
 .fancyPersonBtn a.fancyPersonSign,
 .fancyPersonBtn input.fancyPersonSign{
 	border: 0;
@@ -1577,9 +1583,10 @@
 	.mypageCover{
 		margin: 0 -15px;
 		position: relative;
-		background: url(../img/mypage/img_rainbow.png)no-repeat center center;
-		background-size: cover;
+		/* background: url(../img/mypage/img_rainbow.png)no-repeat center center;
+		background-size: cover; */
 		height: 160px;
+		object-fit: cover;
 	}
 	.mypageCover a{
 		position: absolute;
@@ -3526,4 +3533,7 @@ select.faqSelect{
 		font-weight: bold;
 	}
 	.secretUl li + li{margin-top: 10px}
+}
+.alert.alert-danger {
+	color:red;
 }

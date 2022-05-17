@@ -318,5 +318,3 @@ var common = (function(){
 	
 });
 
-
-
