@@ -25,7 +25,7 @@ class GoogleLoginController extends Controller
         // $user = User::where('email', $google_user->email)->first();
         if ($user){
             Auth::login($user);
-            return redirect()->route('mypage.showMypage');
+            return redirect()->route('user_profile.create');
         } else {
             // $user = User::where('google_id', $google_user->id)->first();
             $duplicate_email_user = User::where('email', $google_user->email)->first();
