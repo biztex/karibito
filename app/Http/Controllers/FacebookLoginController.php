@@ -51,7 +51,7 @@ class FacebookLoginController extends Controller
             return redirect()->route('user_profile.create');
         } else{
             Auth::login($user_model);
-            return redirect()->route('showMypage');
+            return redirect()->route('user_profile.create');
         }
     }
 }
