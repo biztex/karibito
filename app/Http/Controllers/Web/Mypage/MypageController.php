@@ -22,7 +22,6 @@ class MypageController extends Controller
      */
     public function show()
     {
-        
         $user_profile = UserProfile::where('user_id',Auth::id())
                         ->leftjoin('users','users.id','=','user_profiles.user_id')
                         ->select(['user_profiles.*','users.email as email','users.name as name'])

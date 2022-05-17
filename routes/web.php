@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Mypage\UserProfileController;
 use App\Http\Controllers\Web\Mypage\MypageController;
+use App\Http\Controllers\Web\Mypage\CoverController;
+
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -73,6 +75,8 @@ require __DIR__.'/auth.php';
 
     // プロフィール編集
     Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
+    Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
+
 
     // プロフィール
     Route::post('profile/create', [UserProfileController::class, 'create'])->name('createProfile');
