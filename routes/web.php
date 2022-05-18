@@ -177,4 +177,5 @@ Route::prefix('sample')->group(function (){
     Route::view('secret06', 'sample.secret06');
     Route::view('service_detail', 'sample.service_detail');
     Route::view('service', 'sample.service');
+    Route::view('login', 'sample.login');
 });
