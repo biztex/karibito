@@ -33,21 +33,16 @@ class PasswordResetLinkController extends Controller
         $request->validate([
             'email' => ['required', 'email'],
         ]);
-
-        $user = User::where('email', $request->email)->first();
-        if(is_null($user)){
-            $error_msg = "このメールアドレスに一致するユーザーを見つけることが出来ませんでした。";
-            return view('auth.forgot-password', compact('error_msg'));
-        }
-        if((!$user->facebook_id == null || !$user->google_id == null) && $user->password == null){
-            $error_msg = "このメールアドレスに一致するユーザーを見つけることが出来ませんでした。";
-            return view('auth.forgot-password', compact('error_msg'));
-        }
-        // $user = User::all();
-        // $e = User::where('email', $user)->first();
+        // // $user = User::where('email', $request->email);
+        // $user = $request->email;
+        // // $user = User::all();
+        // // $e = User::where('email', $user)->first();
         // $user_model = User::where('email', $user)->get();
 
-        // $email = $user->email;
+        // dd($user_model);
+        // // $email = $user->email;
+
+
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
