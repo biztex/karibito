@@ -17,7 +17,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        \Log::error('エラーのテストです');
         return view('auth.login');
     }
 
