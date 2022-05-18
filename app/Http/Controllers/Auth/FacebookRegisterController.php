@@ -18,27 +18,27 @@ class FacebookRegisterController extends Controller
      */
     public function register(Request $request)
     {
-        $facebookIdValidate = \Validator::make($request->all(), [
-            'facebook_id' => ['required', 'string', 'max:255'],
-        ]);
+        // $facebookIdValidate = \Validator::make($request->all(), [
+        //     'facebook_id' => ['required', 'string', 'max:255'],
+        // ]);
 
-        if ($facebookIdValidate->fails()) {
-            return redirect('/login')->with('flash_alert', '予期せぬエラーが発生しました');
-        }
+        // if ($facebookIdValidate->fails()) {
+        //     return redirect('/login')->with('flash_alert', '予期せぬエラーが発生しました');
+        // }
 
-        $this->validator($request->all())->validate();
+        // $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        // event(new Registered($user = $this->create($request->all())));
 
-        $this->guard()->login($user);
+        // $this->guard()->login($user);
 
-        if ($response = $this->registered($request, $user)) {
-            return $response;
-        }
+        // if ($response = $this->registered($request, $user)) {
+        //     return $response;
+        // }
 
-        return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());
+        // return $request->wantsJson()
+        //             ? new JsonResponse([], 201)
+        //             : redirect($this->redirectPath());
     }
 
 
