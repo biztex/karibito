@@ -60,34 +60,20 @@ require __DIR__.'/auth.php';
 // });
 
 
-// Route::middleware(['auth','signed'])->group(function () {
-// Route::middleware('auth')->group(function () {
-
+Route::middleware(['auth', 'verified'])->group(function () {
 
     // 会員登録・プロフィール登録
     Route::get('user_profile', [UserProfileController::class, 'index']);
+    Route::resource('user_profile',UserProfileController::class);
+    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
 
     Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
-
-
-    // 会員登録
-    Route::get('create_user', [UserProfileController::class, 'createUser'])->name('createUser');
-    Route::post('create_user', [UserProfileController::class, 'storeUser'])->name('storeUser');
-    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
 
     // プロフィール編集
     Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
 
-
-    // プロフィール
-    Route::post('profile/create', [UserProfileController::class, 'create'])->name('createProfile');
-    Route::get('profile', [UserProfileController::class, 'index'])->name('indexProfile');
-// }
-
-    Route::resource('user_profile',UserProfileController::class);
-    Route::get('user_profile/complete/{id}', [UserProfileController::class, 'showComplete'])->name('showComplete');
-// });
+    });
 
 
 // index:一覧画面(get)
