@@ -30,9 +30,9 @@ class GoogleLoginController extends Controller
             // $user = User::where('google_id', $google_user->id)->first();
             $duplicate_email_user = User::where('email', $google_user->email)->first();
             if($duplicate_email_user) {
-                // if(is_null($duplicate_email_user->email_verified_at)) {
-                //     $duplicate_email_user->email_verified_at = Carbon::now();
-                // }
+                if(is_null($duplicate_email_user->email_verified_at)) {
+                    $duplicate_email_user->email_verified_at = Carbon::now();
+                }
 
                 $duplicate_email_user->google_id = $google_user->id;
                 $duplicate_email_user->save();
@@ -40,10 +40,10 @@ class GoogleLoginController extends Controller
                 $user = User::create([
                     'email' => $google_user->email,
                     'google_id' => $google_user->id,
-                    // 'email_verified_at' => Carbon::now()
+                    'email_verified_at' => Carbon::now()
                 ]);
             }
-                    Auth::login($duplicate_email_user);
+                    Auth::login($user);
                     return redirect()->route('user_profile.create');
                 // Auth::login($user, true);
             }
