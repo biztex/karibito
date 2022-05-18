@@ -1109,7 +1109,7 @@
 	height: 230px;
 }
 #preview_cover{
-	height:160px;
+	height:100%;
 	object-fit: cover;
 }
 .mypageCover label{

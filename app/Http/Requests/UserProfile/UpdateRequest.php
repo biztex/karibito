@@ -25,17 +25,15 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required | max:128',
-            // 'email' => 'required | email | unique:users,email,'.\Auth::user()->email.',email',
             'first_name' => 'required | max:128',
             'last_name' => 'required | max:128',
             'gender' => 'required',
             'prefecture' => 'required',
-            'zip' => 'required',
+            'zip' => 'required | numeric | digits:7',
             'address' => 'required | max:128',
             'introduction' => 'max:2000',
             'icon' => 'max:1024',
             'cover' => 'max:1024'
-            
         ];
     }
 }
