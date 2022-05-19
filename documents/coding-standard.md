@@ -2,18 +2,15 @@
 
 ## 全体の基本規約
 
-- tools.mdに従い、プルリク作成前（またはコミット前）にlarastanとphpcsfixerの実行
-- 引数や戻り値はPHPDocで記載
-- 変数名、関数名はローワーキャメルケース
 - 定数の配列定義時、定数は複数形にする
 - ファサードはuseではなく\Authなど「\」をつけて使う
-- \Authはファサードじゃなくてauth()ヘルパ使用（その他のファサードもヘルパ関数があればそっちを優先して使用）
+- \Authはファサードを使用
 - データベースアクセス時はEloquentを使用（原則SQLは書かない）
 - 仕様が不明確なため、開発中盤まではテーブル変更時migrationファイル直上書きで更新（直書き換えじゃなくなるタイミングでアナウンスします）
 
 ## 命名規則
 - クラス名  アッパーキャメル（UserProfile）
-- 関数名    ローワーキャメル（createProfile）
+- 関数名    ローワーキャメル（createProfile）動詞を前にする
 - 変数名    スネーク（$user_id）
 
 
@@ -25,8 +22,7 @@
 
 ## JavaScriptに関して
 
-- JSはVue.jsで記述
-- 部分的にvueを使用する（bladeに組み込む）
+- JSはjQueryで記述
 - 複数インスタンス構成（使用するbladeでnewする）（例えばheader.bladeにheader用インスタンスがあったりする）
 - コンポーネント作成は/resources/js/components/コンポーネント名.vueで作成（resources/js/app.jsに登録してビルドnpm run dev）
 - v-modelを使う場合は各フォームパーツにv-modelを追加してください（textarea.blade.php参考）
@@ -57,7 +53,7 @@
 - FormRequestクラス名の命名規則は、コントローラークラス名ディレクトリ配下にメソッド名＋Requestで作成
   - 例）App\Http\Requests\HogeController\StoreRequest.php
 - 「Modelについて」にも記載の通り、そのアクションで複数代入する値をsubstitutableメソッドにonlyで定義する
-- バリデーションルールは「|」区切りではなく配列で記述
+- バリデーションルールは「|」区切りで記述
 - バリデーションのカスタムメッセージや項目名の日本語化はlang/ja/validation.phpに記述（カラム名が被る場合はFormRequestクラスのメソッドに記載）
 - laravelで用意されているルールでカバーできないバリデーションルールはRuleクラスに記述
 - バリデーションの実装はrequired,nullable,string,integer,date,image,max:などの必須・型・MAXサイズのチェックを行う（＋各項目ごとに必要なバリデーションを実装）
@@ -66,16 +62,17 @@
 ```
 // 入力例
 return [
-    'name'          => ['required', 'string', 'max:255'],
-    'name_kana'     => ['required', 'string', 'max:255', new Katakana],
-    'age_group'     => ['required'],
-    'tel'           => ['required', 'numeric'],
-    'post_code'     => ['required', 'string', 'max:255', 'regex:/^\d{7}$/'],
-    'prefecture_id' => ['required', 'integer', 'exists:m_prefectures,id'],
-    'address1'      => ['required', 'string', 'max:255'],
-    'address2'      => ['required', 'string', 'max:255'],
-    'building'      => ['nullable', 'string', 'max:255'],
-];
+          'name' => 'required | max:128',
+          'first_name' => 'required | max:128',
+          'last_name' => 'required | max:128',
+          'gender' => 'required',
+          'prefecture' => 'required',
+          'zip' => 'required | numeric | digits:7',
+          'address' => 'required | max:128',
+          'introduction' => 'max:2000',
+          'icon' => 'max:1024',
+          'cover' => 'max:1024'
+      ];
 ```
 
 ## ルーティングについて
@@ -127,6 +124,9 @@ Route::get('user/posts', [UserPostController::class, 'index'])->name('user.posts
   - 通過できる条件をクラス名にする（「終了済みでない」という条件なら「not.finished」のような感じ）
   - ミドルウェア名登録はミドルウェアクラス名をカンマ区切りにしたもの
 - 「認可」処理はPolicyかGateに記述
+
+<!-- ## viewについて
+ - ディレクトリーの命名規則 -->
 
 ### bladeテンプレートについて
 

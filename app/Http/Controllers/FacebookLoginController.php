@@ -23,33 +23,35 @@ class FacebookLoginController extends Controller
      */
     public function authFacebookCallback()
     {
-        $facebook_user = Socialite::driver('facebook')->user();
-        dd($facebook_user);
+        // TODO 汎用的な変数名に変更する
+        // コメントを書く
+        // メソッドで小さく区切る、クラス内で呼び出して使用する
+        $sns_user = Socialite::driver('facebook')->user();
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
-        $user = User::where('facebook_id', $facebook_user->id)->first();
+        $user = User::where('facebook_id', $sns_user->id)->first();
 
         if ($user){
             Auth::login($user);
             return redirect()->route('user_profile.create');
         } else {
-            $duplicate_email_user = User::where('email', $facebook_user->email)->first();
+            $duplicate_email_user = User::where('email', $sns_user->email)->first();
 
             if($duplicate_email_user) {
                 if(is_null($duplicate_email_user->email_verified_at)) {
                     $duplicate_email_user->email_verified_at = Carbon::now();
                 }
-                $duplicate_email_user->facebook_id = $facebook_user->id;
+                $duplicate_email_user->facebook_id = $sns_user->id;
                 $duplicate_email_user->save();
 
-            } else if(is_null($facebook_user->email)){
+            } else if(is_null($sns_user->email)){
                 return redirect('/login')->with('error_msg', 'フェイスブックにメールアドレスが登録されていませんでした。フェイスブックでメールアドレスを登録するか、メールアドレスで新規登録してください。');
 
             } else {
                 $user = User::create([
-                    'name' => $facebook_user->name,
-                    'email' => $facebook_user->email,
+                    'name' => $sns_user->name,
+                    'email' => $sns_user->email,
                     'email_verified_at' => Carbon::now(),
-                    'facebook_id' => $facebook_user->id
+                    'facebook_id' => $sns_user->id
                 ]);
             }
             // ログインする
