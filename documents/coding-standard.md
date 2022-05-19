@@ -79,8 +79,9 @@ return [
 ```
 
 ## ルーティングについて
+ - 認証に関するルートはauth.phpに記述
 
-ルート記述方法はLaravel8で名前空間を使用する
+ルート記述方法はLaravel9で名前空間を使用する
 
 ```
 use App\Http\Controllers\HomeController;
@@ -97,6 +98,8 @@ use App\Http\Controllers\User\PostController as UserPostController;
 Route::get('admin/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
 Route::get('user/posts', [UserPostController::class, 'index'])->name('user.posts.index');
 ```
+
+単語ごとに.でつなぐ(user.create)
 
 ## 通知について
 
