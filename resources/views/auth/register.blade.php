@@ -23,14 +23,14 @@
 
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                {{-- <x-label for="email" :value="__('Email')" /> --}}
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                {{-- <x-label for="password" :value="__('Password')" /> --}}
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -40,7 +40,7 @@
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                {{-- <x-label for="password_confirmation" :value="__('Confirm Password')" /> --}}
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
