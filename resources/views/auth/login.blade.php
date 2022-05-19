@@ -1,8 +1,7 @@
 <x-layout>
 <article>
-	<div id="wrapper">
-
-	<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
+	<body id="login">
+		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		<!-- <div class="hide">
 			<div id="fancybox_register" class="fancyboxWrap">
 				<p class="fancyboxHd">身分証明証の登録</p>
@@ -262,9 +261,10 @@
 						<h2 class="subPagesHd">ログイン</h2>
 						
 						<ul class="loginSns">
-							<li><a href="#" target="_blank"><img src="/img/login/login_facebook.svg" alt="Facebookでログイン"></a></li>
-							<li><a href="#" target="_blank"><img src="/img/login/login_google.svg" alt="Googleでログイン"></a></li>
+							<li><a href="/login/facebook" target="_blank"><img src="/img/login/login_facebook.svg" alt="Facebookでログイン"></a></li>
+							<li><a href="/login/google" target="_blank"><img src="/img/login/login_google.svg" alt="Googleでログイン"></a></li>
 						</ul>
+						  <!--確認中 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>  -->
 						<div class="contactBox">
 							<p class="loginHd"><span>または</span></p>
 							
@@ -298,8 +298,6 @@
 
 			</div><!--inner-->
 		</div><!-- /#contents -->
-
-	</div><!-- /#wrapper -->
-</body>
+	</body>
 </article>
 </x-layout>

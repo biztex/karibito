@@ -26,7 +26,7 @@
             <div id="headerLinks">
                 <div class="inner">
                     <div class="item">
-                        <h1 id="headerLogo"><a href="index.html"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
+                        <h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
                         <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p>
                         <div class="searchBox">
                             <select class="searchSelect">
@@ -46,7 +46,7 @@
                             <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
                         </p>
                         <div class="btnMenu"><span></span><span></span><span></span></div> 
-                        <nav id="gNavi">
+                        <nav id="gNavi" @if(!Auth::check()) style="padding-top:50px"@endif>
                             <ul class="navUl02 pc">
                                 <li><a href="#" class="nav01">サポート</a></li> 
                                 <li class="navLink">
@@ -108,6 +108,7 @@
                                 </li>
                             </ul>
                             <div class="sp">
+								@if(Auth::check())
                                 <dl class="navMypageDl">
                                     <dt><img src="/img/common/nav_head.png" alt=""></dt>
                                     <dd>クリエイター名</dd>
@@ -119,7 +120,15 @@
                                     <a href="#">お気に入り</a>
                                     <a href="#" class="blueBtn">投稿する</a>
                                 </div>
-                                <div class="navMypageUl">
+								@endif
+                                <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
+								@if(!Auth::check())
+								
+									
+										<a href="{{route('login')}}" class="log">ログイン</a>
+										<a href="{{route('register')}}" class="sign">新規登録</a>
+								
+								@endif
                                     <a href="#">ご利用ガイド</a>
                                     <a href="#">カリビトQ&A</a>
                                     <a href="#">プライバシーポリシー</a>
@@ -135,12 +144,12 @@
                             </div>
                         </nav><!-- /#gNavi -->
                         <div class="overlay"></div>
-                        <!-- <div class="fun">
+                        <div class="fun">
                             @if(!Auth::check())
                                 <a href="{{route('login')}}" class="log">ログイン</a>
                                 <a href="{{route('register')}}" class="sign">新規登録</a>
                             @endif
-                        </div> -->
+                        </div>
                     </div> 
                 </div>
                 <div class="searchWrapSp">
@@ -1054,9 +1063,11 @@
                                 </div>
                             </div>
                         </div>
+						@if(Auth::check()) 
                         <div class="right">
                             <a href="#">投稿する</a>
                         </div>
+						@endif
                     </div>
                 </div>
             </div>
