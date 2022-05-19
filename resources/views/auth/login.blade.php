@@ -295,7 +295,6 @@
 						</div>
 					</div>
 				</div><!-- /#main -->
-
 			</div><!--inner-->
 		</div><!-- /#contents -->
 	</body>
