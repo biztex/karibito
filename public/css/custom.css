@@ -1,0 +1,130 @@
+@charset "utf-8";
+/*
+ * custom.css
+ * 
+ */
+
+.detailStyle .recommendList .list .item{max-width: 212px}
+
+.fancyPersonBtn button{
+	margin-left: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 35px;
+	border-radius: 3px;
+	font-size: 1.4rem;
+	border: 1px solid #CCCCCC;
+	padding: 0 12px;
+	background-color: #fff;
+}
+.fancyPersonBtn button.fancyPersonSign{
+	border: 0;
+	background-color: #158ACC;
+	color: #fff;
+	font-weight: bold;
+}
+.fancyPersonPic p.img {
+	height: 140px;
+	width: 140px;
+}
+.mypageCover{
+	margin: 0 -20px;
+	position: relative;
+	height: 230px;
+}
+.mypageCover label{
+	position: absolute;
+	right: 40px;
+	top: 20px;
+	z-index: 2;
+}
+
+#preview_cover{
+	height:100%;
+	object-fit: cover;
+}
+@media screen and (max-width: 767px) {
+    .mypageCover{
+		margin: 0 -15px;
+		position: relative;
+		height: 160px;
+		object-fit: cover;
+	}
+}
+
+.alert.alert-danger {
+	color:red;
+}
+
+.contactBox .labelCategory input[type='password'],
+.contactBox .labelCategory input[type='email'] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    height: 45px;
+    padding: 0 14px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 860px){
+	.navHeadSp {
+		padding: 0;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 1px solid #ddd;
+		overflow: hidden;
+		margin-right: 35px;
+		display: none;
+	}
+	#header .fun {
+    	padding-right: 0px;
+		display: none;
+	}
+}
+.active .sp {
+ 	display: block;
+}
+
+@media screen and (max-width: 1080px){
+	#header .fun a {
+		padding: 0 10px;
+		width: auto;
+		white-space: nowrap;
+	}
+}
+#header .navMypageUl a .log {
+	display:inline-block;
+	width: 80px;
+	text-align: center;
+	margin-left:10px;
+	background:#9CC948;
+	border-radius:4px;
+	line-height: 40px;
+	color:#fff;
+	font-size:1.3rem;
+	font-weight: bold;
+	padding: 0 10px;
+	width: auto;
+	white-space: nowrap;
+}
+
+#header .navMypageUl .sign{
+	display:inline-block;
+	width: 80px;
+	text-align: center;
+	margin-left:10px;
+	background:#45B2E6;
+	border-radius:4px;
+	line-height: 40px;
+	color:#fff;
+	font-size:1.3rem;
+	font-weight: bold;
+	padding: 0 10px;
+	width: auto;
+	white-space: nowrap;}

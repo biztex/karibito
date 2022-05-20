@@ -63,6 +63,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'exists.session.facebookid' => \App\Http\Middleware\ExistsSessionFacebookId::class,
+        'null.user.profile' => \App\Http\Middleware\NullUserProfile::class,
+        'exsist.user.profile' => \App\Http\Middleware\ExistUserProfile::class,
 
     ];
 }

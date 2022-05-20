@@ -80,7 +80,7 @@
 								@error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-								<dd><input type="text" name="name" class="@error('name') is-invalid @enderror" value="{{old('name',$user_profile->name)}}"></dd>
+								<dd><input type="text" name="name" class="@error('name') is-invalid @enderror" value="{{old('name',$user_profile->user->name)}}"></dd>
 							</dl>
 								<dl>
 								
@@ -338,9 +338,9 @@
 								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 140px;height: 140px;object-fit: cover;"></dt>
 								@endif
 								<dd>
-									<p class="mypageP01">{{$user_profile->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
+									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
-									<p class="mypageP03">({{$gender}} / {{$age}} / {{$user_prefecture}}) <span>所持ポイント：0000pt</span></p>
+									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <span>所持ポイント：0000pt</span></p>
 									<p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
 									<p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
