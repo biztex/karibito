@@ -8,7 +8,7 @@
             <div class="col-lg-10">
                 <div class="card border-white">
                         <h2 class="mt-5 text-center h2 text-secondary">プロフィール登録完了</h2>
-                        <p>{{ $user_name }}様登録ありがとうございます</p>
+                        <p>{{ $user->user->name }}様登録ありがとうございます</p>
                         <a href="/mypage">My Page</a>
                 </div>
             </div>
