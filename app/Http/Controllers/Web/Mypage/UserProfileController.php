@@ -15,8 +15,21 @@ use App\Models\Prefecture;
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
 
+use App\Services\UserProfileService;
+
 class UserProfileController extends Controller
 {
+
+    private $user_profile_service;
+
+    public function __construct(UserProfileService $user_profile_service)
+    {
+        $this->user_profile_service = $user_profile_service;
+
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +37,6 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        return redirect()->route('user_profile.create');
     }
 
     /**
@@ -34,10 +46,6 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        if(!empty(UserProfile::all()->where('user_id',Auth::id())->first())){
-
-            return redirect()->action([MypageController::class,'show']);
-        }
         $prefectures = Prefecture::all();
         return view('mypage.profile.create',compact('prefectures'));
     }
@@ -50,33 +58,18 @@ class UserProfileController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $this->user_profile_service->updateUser($request->all());
 
-        $user_id = Auth::id();
+        $this->user_profile_service->storeUserProfile($request->all());
 
-        $user = User::find($user_id);
-        $user->fill([ 'name' => $request->name ])->save();
-            session()->put('user_name',$request->name);
-
-        $user_profile = UserProfile::create([
-            'user_id' => $user_id,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'prefecture_id' => $request->prefecture
-        ]);
-        $user_profile->save();
-        $id = $user_id;
-
-        return redirect()->route('showComplete',compact('id'));
+        return redirect()->route('complete.show');
     }
 
     public function showComplete()
     {
-        $user_name = session()->get('user_name');
-        // $id = $id;
+        $user = UserProfile::with('user')->firstWhere('user_id',Auth::id());
 
-        return view('mypage.profile.created',compact('user_name'));
-
+        return view('mypage.profile.created',compact('user'));
     }
 
     /**
@@ -107,21 +100,16 @@ class UserProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request,$id)
+    public function update(UpdateRequest $request)
     {
         $birthday = $request->year.'-'.$request->month.'-'.$request->day;
-        $user_profile_id = session()->get('user_profile_id');
 
-                $user = User::find($id);
-                $user->fill([
-                    'name' => $request->name,
-                    // 'email' => $request->email
-                ]);
-                $user->save();
+                $user = User::find(Auth::id());
+                $user->fill(['name' => $request->name ])->save();
 
-                $user_profile = UserProfile::find($user_profile_id);
+                $user_profile = UserProfile::firstWhere('user_id',Auth::id());
                 $user_profile->fill([
-                    'user_id' => $id,
+                    'user_id' => Auth::id(),
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
                     'gender' => $request->gender,
@@ -133,13 +121,12 @@ class UserProfileController extends Controller
                 ]);
 
                 if(isset($request->cover)){
-                    $cover = $request->file('cover')->store('covers','public');
-                        $user_profile->cover=str_replace('public/','',$cover);
+                    $user_profile->cover = $request->file('cover')->store('covers','public');
                 }
                 if(isset($request->icon)){
-                    $icon = $request->file('icon')->store('icons','public');
-                        $user_profile->icon=str_replace('public/','',$icon);
+                    $user_profile->icon = $request->file('icon')->store('icons','public');
                 }
+
                 $user_profile->save();
 
         return redirect()->action([MypageController::class, 'show']);
