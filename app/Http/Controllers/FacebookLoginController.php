@@ -27,6 +27,10 @@ class FacebookLoginController extends Controller
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
         $sns_user = Socialite::driver('facebook')->user();
+
+        if(is-null($sns_user->email)){
+            return back()->with('error_msg', 'フェイスブックにメールアドレスが登録されていませんでした。フェイスブックでメールアドレスを登録するか、メールアドレスで新規登録してください。');
+        }
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user = User::where('facebook_id', $sns_user->id)->first();
 
@@ -42,9 +46,6 @@ class FacebookLoginController extends Controller
                 }
                 $duplicate_email_user->facebook_id = $sns_user->id;
                 $duplicate_email_user->save();
-
-            } else if(is_null($sns_user->email)){
-                return redirect('/login')->with('error_msg', 'フェイスブックにメールアドレスが登録されていませんでした。フェイスブックでメールアドレスを登録するか、メールアドレスで新規登録してください。');
 
             } else {
                 $user = User::create([
