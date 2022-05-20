@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'exists.session.facebookid' => \App\Http\Middleware\ExistsSessionFacebookId::class,
         'null.user.profile' => \App\Http\Middleware\NullUserProfile::class,
         'exsist.user.profile' => \App\Http\Middleware\ExistUserProfile::class,
+
     ];
 }

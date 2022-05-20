@@ -24,7 +24,7 @@ class UpdateCoverRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => ''
+            'file' => 'max:20000 | image'
         ];
     }
 }

@@ -23,34 +23,40 @@ class FacebookLoginController extends Controller
      */
     public function authFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->user();
-
+        // TODO 汎用的な変数名に変更する
+        // コメントを書く
+        // メソッドで小さく区切る、クラス内で呼び出して使用する
+        $sns_user = Socialite::driver('facebook')->user();
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
-        $user_model = User::where('facebook_id', $user->id)->first();
-        if (!$user_model) {
-            $user_model = new User([
-                'name' => $user->name,
-                'email' => $user->email,
-                'email_verified_at' => Carbon::now(),
-                'facebook_id' => $user->id
-            ]);
-        if(!$user->email){
-            return redirect()
-                        ->route('register.facebook.form')
-                        ->with([
-                            'name' => $user->name,
-                            'email' => $user->email,
-                            'facebook_id' => $user->id
-                        ]);
-                }
+        $user = User::where('facebook_id', $sns_user->id)->first();
 
-            $user_model->save();
-            // ログインする
-            Auth::login($user_model);
-            // /基本情報登録画面にリダイレクト
+        if ($user){
+            Auth::login($user);
             return redirect()->route('user_profile.create');
-        } else{
-            Auth::login($user_model);
+        } else {
+            $duplicate_email_user = User::where('email', $sns_user->email)->first();
+
+            if($duplicate_email_user) {
+                if(is_null($duplicate_email_user->email_verified_at)) {
+                    $duplicate_email_user->email_verified_at = Carbon::now();
+                }
+                $duplicate_email_user->facebook_id = $sns_user->id;
+                $duplicate_email_user->save();
+
+            } else if(is_null($sns_user->email)){
+                return redirect('/login')->with('error_msg', 'フェイスブックにメールアドレスが登録されていませんでした。フェイスブックでメールアドレスを登録するか、メールアドレスで新規登録してください。');
+
+            } else {
+                $user = User::create([
+                    'name' => $sns_user->name,
+                    'email' => $sns_user->email,
+                    'email_verified_at' => Carbon::now(),
+                    'facebook_id' => $sns_user->id
+                ]);
+            }
+            // ログインする
+            Auth::login($user);
+            // /基本情報登録画面にリダイレクト
             return redirect()->route('user_profile.create');
         }
     }
