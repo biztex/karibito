@@ -17,30 +17,15 @@ class MypageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        $user_profile = UserProfile::where('user_id',Auth::id())
-                        ->leftjoin('users','users.id','=','user_profiles.user_id')
-                        ->select(['user_profiles.*','users.email as email','users.name as name'])
-                        ->first();
-
-                        if(empty($user_profile)){
-                            return redirect()->action([UserProfileController::class, 'create']);
-                        };
-                        session()->put('user_profile_id',$user_profile->id);
+        $user_profile = UserProfile::with(['user','prefecture'])->first();                   
         
         $prefectures = Prefecture::all();
-        $user_prefecture = Prefecture::where('id',$user_profile->prefecture_id)->first()->name;
 
-        if($user_profile->gender == 1){
-            $gender = '男性';
-        }else{
-            $gender = '女性';
-        };
-
+        // libraryに
         $now = (int)date('Ymd');
         $birthday = (int)str_replace("-","",$user_profile->birthday);
         $now_age = floor(($now - $birthday) / 10000);
@@ -65,7 +50,7 @@ class MypageController extends Controller
         }
 
 
-        return view('mypage.profile.mypage',compact('user_profile','prefectures','user_prefecture','gender','age'));
+        return view('mypage.profile.mypage',compact('user_profile','prefectures','age'));
     }
 
     /**

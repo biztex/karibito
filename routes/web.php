@@ -41,12 +41,6 @@ use App\Http\Controllers\Auth\FacebookRegisterController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -54,26 +48,22 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-// Route::get('/', function () {
-//     return redirect('sample/');
-// //    return view('welcome');
-// });
-
-
 Route::middleware(['auth', 'verified'])->group(function () {
 
     // 会員登録・プロフィール登録
-    Route::get('user_profile', [UserProfileController::class, 'index']);
-    Route::resource('user_profile',UserProfileController::class);
-    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('showComplete');
-
-    Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
-
-    // プロフィール編集
-    Route::put('mypage', [UserProfileController::class, 'updateProfile'])->name('updateProfile');
-    Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
-
+    Route::middleware('exsist.user.profile')->group(function () {
+        Route::resource('user_profile',UserProfileController::class,['only' => ['create','store']]);
+        Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
     });
+
+    // マイページ・プロフィール編集
+    Route::middleware('null.user.profile')->group(function () {
+        Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
+        Route::resource('user_profile',UserProfileController::class,['only' => ['update']]);
+        Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
+    });
+
+});
 
 
 // index:一覧画面(get)
