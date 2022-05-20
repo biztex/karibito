@@ -58,9 +58,15 @@ class UserProfileController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $this->user_profile_service->updateUser($request->all());
+        DB::beginTransaction();
+        try {
+            $this->user_profile_service->updateUser($request->all());
 
-        $this->user_profile_service->storeUserProfile($request->all());
+            $this->user_profile_service->storeUserProfile($request->all());
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
 
         return redirect()->route('complete.show');
     }
@@ -104,6 +110,8 @@ class UserProfileController extends Controller
     {
         $birthday = $request->year.'-'.$request->month.'-'.$request->day;
 
+        DB::beginTransaction();
+        try {
                 $user = User::find(Auth::id());
                 $user->fill(['name' => $request->name ])->save();
 
@@ -128,6 +136,10 @@ class UserProfileController extends Controller
                 }
 
                 $user_profile->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
 
         return redirect()->action([MypageController::class, 'show']);
     }
