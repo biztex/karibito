@@ -281,6 +281,8 @@
 									<p class="stepTxt">完了</p>
 								</li>
 							</ul>
+							<form method="POST" action="{{ route('register') }}">
+            				@csrf
 							<ul class="loginSns">
 								<li><a href="/login/facebook" target="_blank"><img src="img/login/login_facebook.svg"
 											alt="Facebookでログイン"></a></li>
@@ -289,19 +291,17 @@
 							</ul>
 							<div class="contactBox">
 								<p class="loginHd"><span>または</span></p>
-								<form action="{{ route('register') }}" method="post">
-									@csrf
 
 									<div class="labelCategory">
 										<p>メールアドレス（半角英数字128文字以内）</p>
 										@error('email')
 										<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
-										<p><input type="email" name="email" placeholder="例） email@karibito.jp"></p>
+										<p><input type="email" name="email" placeholder="例） email@karibito.jp" value="{{old('email')}}"></p>
 									</div>
 									<div class="labelCategory">
 										<p>メールアドレス（再確認）</p>
-										<p><input type="email" name="email_confirmation" placeholder="例） email@karibito.jp"></p>
+										<p><input type="email" name="email_confirmation" placeholder="例） email@karibito.jp"value="{{old('email_confirmation')}}"></p>
 									</div>
 									<div class="labelCategory">
 										<p>パスワード（半角英数字 8文字 〜 100文字）</p>
@@ -314,11 +314,16 @@
 										<p>パスワード（再確認）</p>
 										<p><input type="password" name="password_confirmation" placeholder=""></p>
 									</div>
+
 									<div class="labelCategory">
+										@error('terms')
+										<div class="alert alert-danger" style="text-align: center;">{{ $message }}</div>
+										@enderror
 										<div class="checkBox">
-											<label><input type="checkbox" name="">利用規約とプライバシーポリシーに同意する</label>
+											<label><input type="checkbox" name="terms">利用規約とプライバシーポリシーに同意する</label>
 										</div>
 									</div>
+				
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit" value="送信"></li>
 										<!-- <li><input type="submit" class="submit" value="ログイン"></li> -->

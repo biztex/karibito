@@ -302,11 +302,8 @@
 								</div>
 								<div class="labelCategory">
 									<div class="radioBox">
-										@error('gender')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-										<label><input type="radio" value="1" name="gender" @if(1 == old('gender')) checked @endif>男性</label>
-										<label><input type="radio" value="2" name="gender" @if(2 == old('gender')) checked @endif>女性</label>
+										<label><input type="radio" value="1" name="gender" @if(1 == old('gender')) selected @endif>男性</label>
+										<label><input type="radio" value="2" name="gender" @if(2 == old('gender')) selected @endif>女性</label>
 									</div>
 								</div>
 								<div class="labelCategory">

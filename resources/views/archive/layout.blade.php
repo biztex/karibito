@@ -13,13 +13,12 @@
 <meta name="description" content="ディスクリプション">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
  
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/slick.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
 <link rel="stylesheet" href="/css/jquery.fancybox.css">
-<link rel="stylesheet" type="/text/css" href="style.css" media="all">
-<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" media="all">
-
+<link rel="stylesheet" type="text/css" href="/style.css" media="all">
 </head>
 <body>
 <div id="wrapper">
@@ -50,7 +49,6 @@
                         <nav id="gNavi" @if(!Auth::check()) style="padding-top:50px"@endif>
                             <ul class="navUl02 pc">
                                 <li><a href="#" class="nav01">サポート</a></li> 
-                                @if(Auth::check())
                                 <li class="navLink">
                                     <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>1</span></a>
                                     <div class="navBox">
@@ -92,11 +90,8 @@
                                 </li>
                                 <li><a href="#" class="nav03">やりとり</a></li>
                                 <li><a href="#" class="nav02">お気に入り</a></li>
-                                @endif
                                 <li class="navLink">
-                                    @if(Auth::check())
                                     <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
-                                    @endif
                                     <div class="navBox navMypageBox">
                                         <dl class="navMypageDl">
                                             <dt><img src="/img/common/nav_head.png" alt=""></dt>
@@ -129,6 +124,7 @@
                                 <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
 								@if(!Auth::check())
 								
+									
 										<a href="{{route('login')}}" class="log">ログイン</a>
 										<a href="{{route('register')}}" class="sign">新規登録</a>
 								
@@ -1236,5 +1232,7 @@
 <script type="text/javascript" src="/js/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="/js/slick.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript">
+
 </body>
 </html>
