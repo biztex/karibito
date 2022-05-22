@@ -44,13 +44,17 @@
                     </div> 
                     <div class="item">
                         <p class="navHeadSp">
-                            <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
+                            @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
+                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
+                                @else
+                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></a>
+                            @endif
                         </p>
                         <div class="btnMenu"><span></span><span></span><span></span></div> 
                         <nav id="gNavi" @if(!Auth::check()) style="padding-top:50px"@endif>
                             <ul class="navUl02 pc">
                                 <li><a href="#" class="nav01">サポート</a></li> 
-                                @if(Auth::check())
+                                @auth
                                 <li class="navLink">
                                     <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>1</span></a>
                                     <div class="navBox">
@@ -92,67 +96,72 @@
                                 </li>
                                 <li><a href="#" class="nav03">やりとり</a></li>
                                 <li><a href="#" class="nav02">お気に入り</a></li>
-                                @endif
                                 <li class="navLink">
-                                    @if(Auth::check())
-                                    <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
-                                    @endif
+                                        @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
+                                            <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
+                                            @else
+                                            <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></a>
+                                        @endif
                                     <div class="navBox navMypageBox">
                                         <dl class="navMypageDl">
-                                            <dt><img src="/img/common/nav_head.png" alt=""></dt>
-                                            <dd>クリエイター名</dd>
+                                            @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
+                                                <dt><img src="/img/common/nav_head.png" alt=""></dt>
+                                                @else
+                                                <dt><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></dt>
+                                            @endif
+                                            <dd>{{\Auth::user()->name}}</dd>
                                         </dl>
                                         <div class="navMypageUl">
-                                            <a href="#">マイページ</a>
+                                            <a href="mypage">マイページ</a>
                                             <a href="#">掲載内容一覧</a>
-                                            <a href="#">プロフィール編集</a>
+                                            <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
                                             <a href="#">設定</a>
                                         </div>
-                                        <p class="navMypageUlLink"><a href="#">ログアウト</a></p>
+                                        <p class="navMypageUlLink"><a href="logout">ログアウト</a></p>
                                     </div>
                                 </li>
+                            @endauth
                             </ul>
                             <div class="sp">
-								@if(Auth::check())
-                                <dl class="navMypageDl">
-                                    <dt><img src="/img/common/nav_head.png" alt=""></dt>
-                                    <dd>クリエイター名</dd>
-                                </dl>
-                                <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p>
-                                <div class="navMypageUl">
-                                    <a href="#">マイページ</a>
-                                    <a href="#">掲載内容一覧</a>
-                                    <a href="#">お気に入り</a>
-                                    <a href="#" class="blueBtn">投稿する</a>
-                                </div>
-								@endif
+								@auth
+                                    <dl class="navMypageDl">
+                                        @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
+                                            <dt><img src="/img/common/nav_head.png" alt=""></dt>
+                                            @else
+                                            <dt><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></dt>
+                                        @endif
+                                        <dd>{{\Auth::user()->name}}</dd>
+                                    </dl>
+                                    <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p>
+                                    <div class="navMypageUl">
+                                        <a href="mypage">マイページ</a>
+                                        <a href="#">掲載内容一覧</a>
+                                        <a href="#">お気に入り</a>
+                                        <a href="#" class="blueBtn">投稿する</a>
+                                    </div>
+								@endauth
                                 <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
-								@if(!Auth::check())
-								
+								    @guest
 										<a href="{{route('login')}}" class="log">ログイン</a>
 										<a href="{{route('register')}}" class="sign">新規登録</a>
-								
-								@endif
+								    @endguest
                                     <a href="#">ご利用ガイド</a>
                                     <a href="#">カリビトQ&A</a>
                                     <a href="#">プライバシーポリシー</a>
                                     <a href="#">設定</a>
                                     <a href="#">お問い合わせ</a>
                                 </div>
-                                @if(Auth::check())
-                                <form method="POST" name="logout" action="{{ route('logout') }}">
-                                    @csrf
-                                    <p class="navMypageUlLink"><a href="javascript:logout.submit()">ログアウト</a></p>
-                                </form>
-                                @endif
+                                @auth
+                                    <p class="navMypageUlLink"><a href="logout">ログアウト</a></p>
+                                @endauth
                             </div>
                         </nav><!-- /#gNavi -->
                         <div class="overlay"></div>
                         <div class="fun">
-                            @if(!Auth::check())
+                            @guest
                                 <a href="{{route('login')}}" class="log">ログイン</a>
                                 <a href="{{route('register')}}" class="sign">新規登録</a>
-                            @endif
+                            @endguest
                         </div>
                     </div> 
                 </div>

@@ -101,6 +101,27 @@ var common = (function(){
   $(window).scroll(function(){
 	scrollTop = $(window).scrollTop();
   });
+  var windowTop = 0;
+$(window).scroll(function() {
+   var scrolls = $(this).scrollTop();
+
+   if(scrolls <= 0) {
+      // $("#header").stop().fadeIn(200).removeClass("showFixed");
+      $("#header").removeClass("showFixed");
+   } else {
+      if(scrolls >= windowTop) {
+         windowTop = scrolls;
+        // $("#header").stop().fadeOut(200).removeClass("showFixed");
+        $("#header").removeClass("showFixed");
+
+      } else {
+         windowTop = scrolls;
+        // $("#header").stop().fadeIn(200).addClass("showFixed");
+        $("#header").addClass("showFixed");
+      }
+   }
+
+});
 	//スマホグローバルナビ 
 	// $(".btnMenu").click(function(){
 	// 	$("header nav").animate({ height: 'toggle', opacity: 'toggle' }, 'first');
@@ -113,6 +134,44 @@ var common = (function(){
 	// 		}
 	// 	},500);
 	// });
+
+
+
+	$(".searchBtnSp").click(function(){
+		$('.searchWrapSp').toggleClass('active');
+	}); 
+
+	$(".serviceLink .span").click(function(){
+		$(this).prev().toggleClass('active');
+	}); 
+
+	$("#gNavi .navLink").hover(function(){
+		$(this).find('.navBox').addClass('active');
+	},function(){
+		$(this).find('.navBox').removeClass('active');
+	}); 
+
+	// $(".navLinkA").click(function(){
+	// 	$(this).next().toggleClass('active');
+	// 	return false;
+	// }); 
+
+	$(".searchBtnSp").click(function(){
+		$('.searchWrapSp').stop().fadeIn(200);
+	});
+	$(".searchClose").click(function(){
+		$('.searchWrapSp').stop().fadeOut(200);
+	});
+	$(".searchItemUl .span").click(function(){
+		$(this).toggleClass('active');
+		$(this).next().slideToggle('active');
+	});
+
+	// $("#hiddenFile").click(function(){
+	// 	$('.searchWrapSp').toggleClass('active');
+	// }); 
+
+
 	$(".btnMenu,.overlay").click(function(){
 		if($(".btnMenu").hasClass('active')){
 			$(".btnMenu").removeClass('active');
@@ -162,6 +221,7 @@ var common = (function(){
 							 breakpoint: 768,
 							 settings: {
 								arrows: false,
+								// centerMode:true,
 							 }
 						}]
 					});
@@ -299,10 +359,11 @@ var common = (function(){
 	$('.imgBox').each(function(){
 	  $(this).css({backgroundImage: 'url('+$(this).data('img')+')'});
 	});
-
-	$(".specialtyBtn").click(function(){
-		$(this).before($(this).prev().clone());
-	}); 
+	$('.specialtyItem').each(function(){
+		$(this).find(".specialtyBtn").click(function(){
+			$(this).before($(this).prev().clone());
+		}); 
+	});
 
 	$('.fancybox').fancybox({
 		helpers: {
@@ -318,3 +379,15 @@ var common = (function(){
 	
 });
 
+
+
+function ophiddenFile(){
+	var dd = $('#hiddenFile').val().split('\\');
+	$('#showSrc').val(dd[dd.length - 1]);
+	if(dd == ''){
+		$('#showButton').removeClass('active');
+	}else{
+		$('#showButton').addClass('active');
+	}
+
+}

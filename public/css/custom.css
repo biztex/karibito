@@ -179,11 +179,11 @@
 		width: 150px;
 	}
 }
-.registerImg {
-    margin-bottom: 0px;
-}
 @media screen and (max-width: 320px){
 	.stepUl li + li .stepDot:before {
 		width: 120px;
 	}
+}
+.fancybox-overlay {
+    background-color: rgba(0,0,0,.5) !important;
 }

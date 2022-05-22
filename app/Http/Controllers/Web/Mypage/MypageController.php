@@ -21,7 +21,7 @@ class MypageController extends Controller
      */
     public function show()
     {
-        $user_profile = UserProfile::with(['user','prefecture'])->first();                   
+        $user_profile = UserProfile::with(['user','prefecture'])->firstWhere('user_id',Auth::id());                   
         
         $prefectures = Prefecture::all();
 
