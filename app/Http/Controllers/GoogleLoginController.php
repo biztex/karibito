@@ -42,7 +42,7 @@ class GoogleLoginController extends Controller
             $img = @file_get_contents($sns_user->avatar);
             $fileName = null;
             if ($img !== false) {
-                $fileName = 'public/icon/' . 'google' . '_' . uniqid() . '.jpg'; //publicがいるかどうか
+                $fileName = 'icon/' . 'google' . '_' . uniqid() . '.jpg'; //publicがいるかどうか
                 \Storage::put($fileName, $img, 'public');
             }
             $user = User::create([
@@ -51,7 +51,7 @@ class GoogleLoginController extends Controller
                 'email_verified_at' => Carbon::now()
             ]);
             dd($fileName);
-            $user->UserProfile->create([
+            $user->user_profiles->create([
                 'icon' => $fileName,
             ]);
         }
