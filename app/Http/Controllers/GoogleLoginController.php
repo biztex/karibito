@@ -45,8 +45,9 @@ class GoogleLoginController extends Controller
                     'email_verified_at' => Carbon::now()
                 ]);
                 $user = UserProfile::create([
-                    'icon' => $sns_user->avator
+                    'icon' => $sns_user->avator,
                 ]);
+                dd($user);
             }
                     Auth::login($user);
                     return redirect()->route('user_profile.create');
