@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\Mypage\MypageController;
-use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +58,7 @@ class UserProfileController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        DB::transaction(function () use ($request) {
+        \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUser($request->all());
             $this->user_profile_service->storeUserProfile($request->all());
         });
@@ -106,8 +105,7 @@ class UserProfileController extends Controller
     {
         $birthday = $request->year.'-'.$request->month.'-'.$request->day;
 
-        DB::beginTransaction();
-        try {
+        \DB::transaction(function () use ($request) {
                 $user = User::find(Auth::id());
                 $user->fill(['name' => $request->name ])->save();
 
@@ -132,10 +130,7 @@ class UserProfileController extends Controller
                 }
 
                 $user_profile->save();
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-        }
+        });
 
         return redirect()->action([MypageController::class, 'show']);
     }
