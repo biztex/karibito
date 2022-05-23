@@ -22,7 +22,7 @@ class GoogleLoginController extends Controller
     public function authGoogleCallback()
     {
         $sns_user = Socialite::driver('google')->stateless()->user();
-        dd($sns_user);
+        // dd($sns_user);
         $user = User::where('google_id', $sns_user->id)->first();
         // $user = User::where('email', $google_user->email)->first();
         if ($user){
@@ -45,9 +45,9 @@ class GoogleLoginController extends Controller
                     'email_verified_at' => Carbon::now()
                 ]);
                 $user = UserProfile::create([
-                    'icon' => $sns_user->avator,
+                    'icon' => $sns_user->avatar,
                 ]);
-                // dd($user);
+                dd($user);
             }
                     Auth::login($user);
                     return redirect()->route('user_profile.create');
