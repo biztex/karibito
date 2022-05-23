@@ -78,6 +78,12 @@
     	padding-right: 0px;
 		display: none;
 	}
+	#gNavi .navLinks li {
+		margin: 0 20px;
+		-ms-writing-mode     : tb-rl;
+		-webkit-writing-mode : vertical-rl;
+		writing-mode         : vertical-rl;
+	}
 }
 .active .sp {
  	display: block;
@@ -165,10 +171,6 @@
 		height: 160px;
 		object-fit: cover;
 	}
-	/* #gNavi {
-		padding: 70px 15px;
-		max-width: 260px;
-	} */
 	.btnMenu.active span {
 		background-color: #ffffff;
 	}

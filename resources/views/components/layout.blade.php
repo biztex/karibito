@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
 <link rel="stylesheet" href="/css/jquery.fancybox.css">
-<link rel="stylesheet" type="/text/css" href="style.css" media="all">
+<link rel="stylesheet" type="/text/css" href="/style.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" media="all">
 
 </head>
@@ -1218,7 +1218,7 @@
     		<div class="bottom">
     			<div class="inner">
     				<div class="serviceLinks">
-    					<a href="#">運営会社</a>
+    					<a href="company">運営会社</a>
     					<a href="#">採用情報</a>
     					<a href="#">約款特定</a>
     					<a href="#">商取引法に基づく表示</a>
