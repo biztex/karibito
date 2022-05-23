@@ -24,35 +24,41 @@ class GoogleLoginController extends Controller
         $sns_user = Socialite::driver('google')->stateless()->user();
         // dd($sns_user);
         $user = User::where('google_id', $sns_user->id)->first();
-        // $user = User::where('email', $google_user->email)->first();
-        if ($user){
+
+        if ($user){ //idが同じユーザーがいる場合
             Auth::login($user);
             return redirect()->route('user_profile.create');
-        } else {
-            // $user = User::where('google_id', $google_user->id)->first();
+        } else {  //idが同じユーザーがいない場合
             $duplicate_email_user = User::where('email', $sns_user->email)->first();
-            if($duplicate_email_user) {
+            if($duplicate_email_user) { //メアドが重複しているユーザーがいる場合
                 if(is_null($duplicate_email_user->email_verified_at)) {
                     $duplicate_email_user->email_verified_at = Carbon::now();
                 }
 
                 $duplicate_email_user->google_id = $sns_user->id;
                 $duplicate_email_user->save();
-            } else {
-                $user = User::create([
-                    'email' => $sns_user->email,
-                    'google_id' => $sns_user->id,
-                    'email_verified_at' => Carbon::now()
-                ]);
-                $user = UserProfile::create([
-                    'icon' => $sns_user->avatar,
-                ]);
+            } else { //メアドが重複しているユーザーがいない場合
+                // 画像の保存、画像URLが取得できなかった時の対策でile_get_contentsの前に@をつけている
+            $img = @file_get_contents($sns_user->avatar);
+            $fileName = null;
+            if ($img !== false) {
+                $fileName = 'public/icon/' . 'google' . '_' . uniqid() . '.jpg';
+                \Storage::put($fileName, $img, 'public');
             }
+            $user = User::create([
+                'email' => $sns_user->email,
+                'google_id' => $sns_user->id,
+                'email_verified_at' => Carbon::now()
+            ]);
             dd($user);
+            $user = UserProfile::create([
+                // 'icon' => $sns_user->avatar,
+                'icon' => $fileName,
+            ]);
+        }
                     Auth::login($user);
                     return redirect()->route('user_profile.create');
                 // Auth::login($user, true);
             }
         }
-
 }
