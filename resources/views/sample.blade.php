@@ -286,24 +286,24 @@
                                         @enderror
 									<p><input type="text" name="name" placeholder="" class="@error('name') is-invalid @enderror" value="{{ old('name') }}"></p>
 								</div>
+								<div class="labelCategory inlineFlex">
+									<p>姓</p>
 									@if($errors->has('first_name') || $errors->has('last_name'))
                                     	<div class="alert alert-danger" style="padding-bottom:0;">姓名は必ず指定してください。</div>
                                 	@endif
-								<div class="labelCategory inlineFlex">
-									<p>姓</p>
 									<p><input type="text" name="first_name" placeholder="" class="@error('first_name') is-invalid @enderror" value="{{ old('first_name') }}"></p>
 								</div>
 								<div class="labelCategory inlineFlex">
 									<p>名</p>
+									@if($errors->has('first_name') || $errors->has('last_name'))
+                                    	<div class="alert alert-danger" style="padding-bottom:0;"><br></div>
+                                	@endif
 									<p><input type="text" name="last_name" placeholder="" class="@error('last_name') is-invalid @enderror" value="{{ old('last_name') }}"></p>
 								</div>
 								<div class="labelCategory">
 									<div class="radioBox">
-										@error('gender')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-										<label><input type="radio" value="1" name="gender" @if(1 == old('gender')) checked @endif>男性</label>
-										<label><input type="radio" value="2" name="gender" @if(2 == old('gender')) checked @endif>女性</label>
+										<label><input type="radio" value="1" name="gender" @if(1 == old('gender')) selected @endif>男性</label>
+										<label><input type="radio" value="2" name="gender" @if(2 == old('gender')) selected @endif>女性</label>
 									</div>
 								</div>
 								<div class="labelCategory">

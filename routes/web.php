@@ -41,6 +41,15 @@ use App\Http\Controllers\Auth\FacebookRegisterController;
 |
 */
 
+Route::get('sample',function(){
+    return view('sample');
+});
+
+Route::get('sam',function(){
+    return view('sam');
+});
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -53,7 +62,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 会員登録・プロフィール登録
     Route::middleware('exsist.user.profile')->group(function () {
         Route::resource('user_profile',UserProfileController::class,['only' => ['create','store']]);
-        Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
     });
 
     // マイページ・プロフィール編集
@@ -62,8 +70,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('user_profile',UserProfileController::class,['only' => ['update']]);
         Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
     });
+    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
+
 
 });
+
 
 
 // index:一覧画面(get)
