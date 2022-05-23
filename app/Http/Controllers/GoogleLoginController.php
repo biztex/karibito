@@ -26,6 +26,7 @@ class GoogleLoginController extends Controller
         $user = User::where('google_id', $sns_user->id)->first();
 
         if ($user){ //idが同じユーザーがいる場合
+            dd($user);
             Auth::login($user);
             return redirect()->route('user_profile.create');
         } else {  //idが同じユーザーがいない場合
