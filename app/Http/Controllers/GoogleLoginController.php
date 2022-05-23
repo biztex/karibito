@@ -47,8 +47,8 @@ class GoogleLoginController extends Controller
                 $user = UserProfile::create([
                     'icon' => $sns_user->avatar,
                 ]);
-                dd($user);
             }
+            dd($user);
                     Auth::login($user);
                     return redirect()->route('user_profile.create');
                 // Auth::login($user, true);
