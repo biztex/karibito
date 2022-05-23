@@ -50,6 +50,7 @@ class GoogleLoginController extends Controller
                 'google_id' => $sns_user->id,
                 'email_verified_at' => Carbon::now()
             ]);
+            dd($fileName);
             $user->UserProfile->create([
                 'icon' => $fileName,
             ]);
