@@ -165,10 +165,10 @@
 		height: 160px;
 		object-fit: cover;
 	}
-	#gNavi {
+	/* #gNavi {
 		padding: 70px 15px;
 		max-width: 260px;
-	}
+	} */
 	.btnMenu.active span {
 		background-color: #ffffff;
 	}
@@ -186,4 +186,35 @@
 }
 .fancybox-overlay {
     background-color: rgba(0,0,0,.5) !important;
+}
+.navMypageDl dt {
+    border: none;
+}
+@media screen and (max-width: 768px){
+	.navMypageUl a.blueBtn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 4px;
+		height: 30px;
+		color: #fff;
+		font-weight: bold;
+		background: #158ACC;
+		margin: 10px 0;
+	}
+	.gnavEdit a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 12px;
+		height: 30px;
+		border: 1px solid #B6BFC2;
+		border-radius: 4px;
+		margin: 15px 0;
+	}
+	.navMypageUl + .navMypageUl {
+		border-top: 1px solid #ddd;
+		padding-top: 15px;
+		margin-top: 20px;
+	}
 }

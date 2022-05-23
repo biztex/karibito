@@ -100,14 +100,14 @@
                                         @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
                                             <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
                                             @else
-                                            <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></a>
+                                            <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
                                         @endif
                                     <div class="navBox navMypageBox">
                                         <dl class="navMypageDl">
                                             @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
                                                 <dt><img src="/img/common/nav_head.png" alt=""></dt>
                                                 @else
-                                                <dt><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></dt>
+                                                <dt><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></dt>
                                             @endif
                                             <dd>{{\Auth::user()->name}}</dd>
                                         </dl>
@@ -128,7 +128,7 @@
                                         @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
                                             <dt><img src="/img/common/nav_head.png" alt=""></dt>
                                             @else
-                                            <dt><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></dt>
+                                            <dt><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></dt>
                                         @endif
                                         <dd>{{\Auth::user()->name}}</dd>
                                     </dl>
