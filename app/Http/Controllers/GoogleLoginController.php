@@ -42,11 +42,11 @@ class GoogleLoginController extends Controller
                 $user = User::create([
                     'email' => $sns_user->email,
                     'google_id' => $sns_user->id,
-                    'email_verified_at' => Carbon::now(),
+                    'email_verified_at' => Carbon::now()
+                ]);
+                $user = UserProfile::create([
                     'icon' => $sns_user->avator
                 ]);
-                // $user = UserProfile::create([
-                // ]);
             }
                     Auth::login($user);
                     return redirect()->route('user_profile.create');
