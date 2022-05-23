@@ -75,6 +75,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
+// プライバシーポリシーと運営会社
+Route::view('/privacy'  , 'privacy');
+Route::view('/company', 'company');
 
 
 // index:一覧画面(get)
@@ -125,7 +128,6 @@ Route::get('service',[ServiceController::class,'indexService']);
 
 Route::get('notation',[NotationController::class,'show']);
 
-Route::get('privacy',[PrivacyController::class,'show']);
 
 Route::get('publication',[PublicationController::class,'index']);
 

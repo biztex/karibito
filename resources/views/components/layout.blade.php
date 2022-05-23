@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
 <link rel="stylesheet" href="/css/jquery.fancybox.css">
-<link rel="stylesheet" type="/text/css" href="style.css" media="all">
+<link rel="stylesheet" type="/text/css" href="/style.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" media="all">
 
 </head>
@@ -147,7 +147,7 @@
 								    @endguest
                                     <a href="#">ご利用ガイド</a>
                                     <a href="#">カリビトQ&A</a>
-                                    <a href="#">プライバシーポリシー</a>
+                                    <a href="privacy">プライバシーポリシー</a>
                                     <a href="#">設定</a>
                                     <a href="#">お問い合わせ</a>
                                 </div>
@@ -1206,7 +1206,7 @@
     					<p class="level1 toggleBtn">カリビトについて</p>
     					<ul class="level2 toggleBox">
     						<li><a href="#">法人のご利用について</a></li>
-    						<li><a href="#">プライバシーポリシー</a></li>
+    						<li><a href="privacy">プライバシーポリシー</a></li>
     						<li><a href="#">利用規約</a></li>
     						<li><a href="#">ゲスト規約</a></li>
     						<li><a href="#">ホスト規約</a></li>
@@ -1218,7 +1218,7 @@
     		<div class="bottom">
     			<div class="inner">
     				<div class="serviceLinks">
-    					<a href="#">運営会社</a>
+    					<a href="company">運営会社</a>
     					<a href="#">採用情報</a>
     					<a href="#">約款特定</a>
     					<a href="#">商取引法に基づく表示</a>
