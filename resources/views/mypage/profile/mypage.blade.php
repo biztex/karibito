@@ -36,7 +36,7 @@
 				<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
 			</div>
 
-<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
+		<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
 			<div id="fancybox_person" class="fancyboxWrap">
 				<form method="POST" action="{{ route('user_profile.update',Auth::id()) }}" enctype="multipart/form-data">
 				@csrf @method('PUT')
@@ -49,23 +49,26 @@
 							@else
 								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="width: 100%;height: 230px;object-fit: cover;">
 							@endif
-								<input type="file" name="cover" accept="image/*" style="display:none;">
+								<input type="file" name="cover" class="cover2" accept="image/*" style="display:none;">
 								<a href="#"><img clsaa="center_cam" src="/img/mypage/icon_camera01.svg" alt="" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"></a>
 						</div>
 
-
 							<div class="fancyPersonPic">
-									<p class="img">
-										@if(empty($user_profile->icon))
-											<img id="preview_icon" alt=""  src="/img/mypage/pic_head.png" style="width: 140px;height: 140px;object-fit: cover;">
-										@else
-											<img id="preview_icon" alt=""  src="{{asset('/storage/'.$user_profile->icon) }}" style="width: 140px;height: 140px;object-fit: cover;">
-										@endif
-									
-										<input type="file" name="icon" accept="image/*" style="display:none;">
-										<a href="#"><img clsaa="center_cam" src="/img/mypage/icon_camera01.svg" alt="" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"></a>
-									</p>
+								<p class="img">
+									@if(empty($user_profile->icon))
+										<img id="preview_icon" alt=""  src="/img/mypage/pic_head.png" style="width: 140px;height: 140px;object-fit: cover;">
+									@else
+										<img id="preview_icon" alt=""  src="{{asset('/storage/'.$user_profile->icon) }}" style="width: 140px;height: 140px;object-fit: cover;">
+									@endif
+									<input type="file" name="icon" accept="image/*" style="display:none;">
+									<a href="#"><img clsaa="center_cam" src="/img/mypage/icon_camera01.svg" alt="" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"></a>
+								</p>
 							</div>
+
+							<div class="fancyImgBtn">
+								<a href="{{route('cover.delete')}}">カバーを削除する</a>
+								<a href="{{route('icon.delete')}}">アイコンを削除する</a>
+							</div> 
 
 								@error('icon')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -194,9 +197,9 @@
 						<button type="submit" class="fancyPersonSign">登録する</button>
 					</div>
 				</form>
-<!--　プロフィール編集モーダルここまで -------------------------------------------------------------- -->
-
 			</div>
+		<!--　/プロフィール編集モーダル -------------------------------------------------------------- -->
+
 			<div id="fancybox_resume" class="fancyboxWrap">
 				<form>
 					<p class="fancyboxHd">履歴書の作成</p>
@@ -325,7 +328,7 @@
 
 							<form method="POST" action="{{ route('cover.update') }}" enctype="multipart/form-data">
 								@csrf @method('PUT')
-									<input type="file" name="file" style="display:none;">
+									<input type="file" name="cover" class="cover1" style="display:none;">
 									<label for="file" class="update_cover"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
 									<input type="submit" name="submit_cover" style="display:none;">
 							</form>
@@ -484,52 +487,44 @@
                 $('.fancybox').trigger('click');
             }
 	
-
-				$(".update_cover").on('click', function(){
-					$("input[name='file']").click();
-					
-					$("input[name='file']").on('change',function(){
-						var file = $(this).prop('files')[0];
-					$("input[name='submit_cover']").click();
-						
-					});
-				});
-
-
-
-				$(".fancyPersonPic p").on('click', function(){
-					$("input[name='icon']").on('click', function(e){
-						e.stopPropagation();
-					});
-					$("input[name='icon']").click();
-					$("input[name='icon']").on('change',function(e){
-									
-						var reader = new FileReader();
-						
-						reader.onload = function (e) {
-							$("#preview_icon").attr('src', e.target.result);
-						}
-						reader.readAsDataURL(e.target.files[0]);   
-					});
-				});
-
-
-				$(".mypageCoverUpdate").on('click', function(){
-					$("input[name='cover']").on('click', function(e){
-						e.stopPropagation();
-					});
-					$("input[name='cover']").click();
-					$("input[name='cover']").on('change',function(e){
-									
-						var reader = new FileReader();
-						
-						reader.onload = function (e) {
-							$("#preview_cover").attr('src', e.target.result);
-						}
-						reader.readAsDataURL(e.target.files[0]);   
-						
-					});
-				});
+		// マイページ画面からカバー変更
+		$(".update_cover").on('click', function(){
+			$("input[class='cover1']").click();
+			$("input[class='cover1']").on('change',function(){
+				var file = $(this).prop('files')[0];
+				$("input[name='submit_cover']").click();
 			});
+		});
 
+		// プロフィール編集画面からアイコン変更
+		$(".fancyPersonPic p").on('click', function(){
+			$("input[name='icon']").on('click', function(e){
+				e.stopPropagation();
+			});
+			$("input[name='icon']").click();
+			$("input[name='icon']").on('change',function(e){
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$("#preview_icon").attr('src', e.target.result);
+				}
+				reader.readAsDataURL(e.target.files[0]);   
+			});
+		});
+
+		// プロフィール編集画面からアイコン変更
+		$(".mypageCoverUpdate").on('click', function(){
+			$("input[class='cover2']").on('click', function(e){
+				e.stopPropagation();
+			});
+			$("input[class='cover2']").click();
+			$("input[class='cover2']").on('change',function(e){
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$("#preview_cover").attr('src', e.target.result);
+				}
+				reader.readAsDataURL(e.target.files[0]);   
+			});
+		});
+		
+	});
 </script>
