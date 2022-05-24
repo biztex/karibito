@@ -1,11 +1,3 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="card-title">利用規約</h1>
-                    <p class="card-text">
-                        利用規約
 この利用規約（以下，「本規約」といいます。）は，かりびと事業（以下，「当事業」といいます。）がこのウェブサイト上で提供するサービス「かりびと」（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
 
 
@@ -238,10 +230,3 @@
 
 １．本規約の解釈にあたっては，日本法を準拠法とします。
 ２．本サービスに関して紛争が生じた場合には，当事業の所在地を管轄する裁判所を専属的合意管轄とします。
-                        {{-- {!! nl2br(e(file_get_contents('./text/terms-of-service.txt'))) !!} --}}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

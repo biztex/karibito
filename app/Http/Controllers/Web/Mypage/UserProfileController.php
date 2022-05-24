@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\Mypage\MypageController;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\UserProfile;
@@ -71,7 +70,7 @@ class UserProfileController extends Controller
      */
     public function showComplete()
     {
-        $user = UserProfile::with('user')->firstWhere('user_id',Auth::id());
+        $user = UserProfile::with('user')->firstWhere('user_id',\Auth::id());
 
         return view('mypage.profile.created',compact('user'));
     }
@@ -115,7 +114,7 @@ class UserProfileController extends Controller
 
         });
 
-        return redirect()->action([MypageController::class, 'show']);
+        return redirect()->route('mypage');
     }
 
     /**

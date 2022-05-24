@@ -1,101 +1,322 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="card-title">プライバシーポリシー</h1>
-                    <p class="card-text">
-                        かりびと事業（以下，「当事業」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。
+<x-layout>
+	<article>
+		<body id="privacy">
+			<div id="breadcrumb">
+				<div class="inner">
+					<a href="/">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
+				</div>
+			</div><!-- /.breadcrumb -->
+			<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+			<div class="hide">
+				<div id="fancybox_register" class="fancyboxWrap">
+					<p class="fancyboxHd">身分証明証の登録</p>
+					<div class="fancyboxCont">
+						<div class="fancyRegisterItem">
+							<p class="txt">「身分証明書を登録する」とは、<br>信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに身分証明書提出済マークが表示されます。</p>
+						</div>
+						<div class="fancyRegisterItem">
+							<p class="notice">注意事項</p>
+							<p class="txt">カリビトアプリのプロフィールで、住所・氏名・生年月日はしっかり記載していますか?<br>身分証明書との一致が確認できないと本人確認はできないのでご注意ください!<br>登録いただいた３営業日以内にご返信します。</p>
+						</div>
+						<div class="fancyRegisterItem">
+							<p class="txt">提出可能な本人確認書類は、下記となっております。</p>
+							<p class="txt">【個人の場合】<br>運転免許証・健康保険証 / 被保険者証・旅券 / <br>パスポート・住民票・住民基本台帳カード・外国人証明書</p>
+							<p class="txt">【法人の場合】<br>履歴事項全部証明書　(※3 ヵ月以内のものに限ります)</p>
+						</div>
+						<div class="fancyRegisterItem">
+							<p class="txt">【カリビトアプリ登録情報】<br>都道府県:〇〇〇〇〇〇<br>住所:〇〇〇〇〇〇<br>氏名:〇〇〇〇〇〇<br>生年月日:〇〇〇〇〇〇</p>
+						</div>
+						<div class="fancyRegisterItem">
+							<p class="txt">安心安全のため、本人確認承認後はご住所 / 本名/ 生年月日のご変更ができなくなっておりますので、本人確認承認後にご住所 / 本名 / 生年月日をご変更されたい場合は、カリビト事務局へ、お問い合わせください</p>
+						</div>
+					</div>
+					<p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集はこちら</a></p>
+					<p class="fancyRegisterUpload"><a href="#">身分証明書をアップロード</a></p>
+					<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
+				</div>
+				<div id="fancybox_person" class="fancyboxWrap">
+					<form>
+						<p class="fancyboxHd">プロフィールを編集</p>
+						<div class="fancyboxCont">
+							<div class="mypageCover">
+								<a href="#"><img src="img/mypage/icon_camera01.svg" alt=""></a>
+							</div>
+							<div class="fancyPersonPic">
+								<p class="img"><img src="img/mypage/pic_head.png" alt=""></p>
+								<a href="#"><img src="img/mypage/icon_camera02.svg" alt=""></a>
+							</div>
+							<div class="fancyPersonTable">
+								<dl class="">
+									<dt>ニックネーム</dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl class="">
+									<dt>メールアドレス</dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl class=" inlineFlex">
+									<dt>姓<span>(本名は非公開です)</span></dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl class=" inlineFlex">
+									<dt>名<span>(本名は非公開です)</span></dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl>
+									<dt>性別</dt>
+									<dd>
+										<select>
+											<option selected="" disabled="">選択してください</option>
+											<option>男</option>
+											<option>女</option>
+										</select>
+									</dd>
+								</dl>
+								<dl>
+									<dt>生年月日<span>(年代のみ公開されます)</span></dt>
+									<dd>
+										<select class="year">
+											<option selected="" disabled="">年</option>
+											<option>2021</option>
+											<option>2022</option>
+										</select>
+										<select class="month">
+											<option selected="" disabled="">月</option>
+											<option>12</option>
+											<option>01</option>
+										</select>
+										<select class="day">
+											<option selected="" disabled="">日</option>
+											<option>18</option>
+											<option>19</option>
+										</select>
+									</dd>
+								</dl>
+								<dl>
+									<dt>住所<span>(都道府県のみ表示されます)</span></dt>
+									<dd>
+										<p class="addrNumber"><input class="short" type="text" name=""></p>
+										<div class="addrSelect">
+											<select class="short">
+												<option selected="" disabled="">選択してください</option>
+												<option>xx県</option>
+												<option>xx県</option>
+											</select>
+										</div>
+										<p><input type="text" name="" placeholder="市区町村"></p>
+									</dd>
+								</dl>
+								<div class="specialtyBox">
+									<div class="specialtyItem">
+										<div class="clone">
+											<dl>
+												<dt>得意分野</dt>
+												<dd>
+													<select class="short">
+														<option selected="" disabled="">選択してください</option>
+														<option>家の掃除</option>
+														<option>料理代行</option>
+														<option>パソコン修理</option>
+														<option>高齢者のお世話</option>
+														<option>写真撮影代行</option>
+														<option>ロゴデザイン</option>
+													</select>
+												</dd>
+											</dl>
+											<dl>
+												<dt>得意分野詳細</dt>
+												<dd>
+													<input type="text" name="">
+												</dd>
+											</dl>
+										</div>
+										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
+									</div>
+								</div>
+								<dl>
+									<dt>自己紹介</dt>
+									<dd><textarea></textarea></dd>
+								</dl>
+							</div>
+						</div>
+						<div class="fancyPersonBtn">
+							<a href="#" class="fancyPersonCancel">キャンセル</a>
+							<a href="#" class="fancyPersonSign">登録する</a>
+						</div>
+					</form>
+				</div>
+				<div id="fancybox_resume" class="fancyboxWrap">
+					<form>
+						<p class="fancyboxHd">履歴書の作成</p>
+						<div class="fancyboxCont">
+							<div class="fancyPersonTable">
+								<dl class=" inlineFlex">
+									<dt>姓</dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl class=" inlineFlex">
+									<dt>名</dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl class=" inlineFlex">
+									<dt>セイ</dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl class=" inlineFlex">
+									<dt>メイ</dt>
+									<dd><input type="text" name=""></dd>
+								</dl>
+								<dl>
+									<dt>生年月日</dt>
+									<dd>
+										<select class="year">
+											<option selected="" disabled="">年</option>
+											<option>2021</option>
+											<option>2022</option>
+										</select>
+										<select class="month">
+											<option selected="" disabled="">月</option>
+											<option>12</option>
+											<option>01</option>
+										</select>
+										<select class="day">
+											<option selected="" disabled="">日</option>
+											<option>18</option>
+											<option>19</option>
+										</select>
+									</dd>
+								</dl>
+								<dl>
+									<dt>住所</dt>
+									<dd>
+										<p class="addrNumber"><input class="short" type="text" name=""></p>
+										<div class="addrSelect">
+											<select class="short">
+												<option selected="" disabled="">選択してください</option>
+												<option>xx県</option>
+												<option>xx県</option>
+											</select>
+										</div>
+										<p><input type="text" name="" placeholder="市区町村"></p>
+									</dd>
+								</dl>
+								<dl>
+									<dt>電話番号</dt>
+									<dd><input type="text" name="" placeholder=""></dd>
+								</dl>
+								<dl>
+									<dt>メールアドレス</dt>
+									<dd><input type="text" name="" placeholder=""></dd>
+								</dl>
+								<div class="specialtyBox">
+									<div class="specialtyItem">
+										<div class="clone">
+											<dl>
+												<dt>学歴・経歴</dt>
+												<dd>
+													<p class="addrSelect"><input type="text" name="" placeholder=""></p>
+													<select class="short">
+														<option selected="" disabled="">年</option>
+														<option>2021</option>
+														<option>2022</option>
+													</select>
+												</dd>
+											</dl>
+										</div>
+										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">学歴・経歴を追加</span></p>
+									</div>
+									<div class="specialtyItem">
+										<div class="clone">
+											<dl>
+												<dt>免許・資格</dt>
+												<dd>
+													<p class="addrSelect"><input type="text" name="" placeholder=""></p>
+													<select class="short">
+														<option selected="" disabled="">年</option>
+														<option>2021</option>
+														<option>2022</option>
+													</select>
+												</dd>
+											</dl>
+										</div>
+										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">免許・資格</span></p>
+									</div>
+								</div>
+								<dl>
+									<dt>志望動機</dt>
+									<dd><textarea></textarea></dd>
+								</dl>
+								<dl>
+									<dt>趣味・特技・PRポイント</dt>
+									<dd><textarea></textarea></dd>
+								</dl>
+							</div>
+						</div>
+						<div class="fancyPersonBtn">
+							<a href="#" class="fancyPersonCancel">キャンセル</a>
+							<a href="#" class="fancyPersonSign">登録する</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="contents" class="oneColumnPage">
+				<div class="inner">
+					<div id="main">
+						<div class="subPagesWrap">
+							<h2 class="subPagesHd">個人情報の取り扱いについて</h2>
+							<div class="privacyTop">
+								<p>株式会社　アクティブフィーリング以下「当社」といいます。）は、お客様の個人情報に関する法令を遵守し、以下に示すポリシーに従い、適切な取扱い及び保護に努めます。</p>
+							</div>
+							<div class="privacyItem">
+								<h3>収集、利用目的</h3>
+								<p>当社では、お客様から、商品購入、プレゼントや懸賞への応募、アンケートの回答、メルマガの登録のなどの際に、ご提供頂いた個人情報を下記目的の範囲内で利用させて頂きます。<br><br>※お客様から個人情報を収集する場合は、利用目的をお知らせし、お客様からの同意を頂きご登録頂いております。</p>
+								<ul>
+									<li>・商品・サービスの提供の為。</li>
+									<li>・情報提供の為</li>
+									<li>・お客様へより良い商品・サービスを提供する為の統計、分析資料とする為。</li>
+									<li>・その他、サービスや運営上必要な連絡の為。</li>
+								</ul>
+							</div>
+							<div class="privacyItem">
+								<h3>安全管理</h3>
+								<p>当社では、お預かりした個人情報を適切に取り扱い・安全な管理を行います。安全対策を講じ、不正アクセス、紛失、改ざん及び漏洩などの防止に努めます。</p>
+							</div>
+							<div class="privacyItem">
+								<h3>開示、提供</h3>
+								<p>原則的には、お客様の個人情報を第三者に開示致しませんが、下記の場合は、法律に基づき開示する事があります。</p>
+								<ul>
+									<li>・お客様から事前に同意を得ている場合。</li>
+									<li>・商品の配送等、お客様が希望されるサービスを行う為、当社が業務委託先に必要な範囲で開示、提供が必要と判断した場合。</li>
+									<li>・決済会社での本人確認、請求先確認及び与信調査のため決済会社に個人情報を開示することがございます。</li>
+									<li>・警察署、裁判所等、公的機関より開示の申し出があった場合。</li>
+									<li>・当社の権利、財産を保護する為に必要であると判断した場合。</li>
+								</ul>
+							</div>
+							<div class="privacyItem">
+								<h3>開示、訂正、削除</h3>
+								<p>お客様が、ご自身の個人情報に関する開示、訂正、削除を希望される場合には、合理的な範囲で速やかに対応させて頂きます。</p>
+							</div>
+							<div class="privacyItem">
+								<h3>Cookie（クッキー）について</h3>
+								<p>Cookieは、ウェブサイトからお客様のブラウザに送ることのできるテキスト・データで、Cookieを受け取ることを了承頂いた場合に、Cookieはお客様のご使用になられたコンピューターのハードディスクドライブ内に記憶されます。<br>お客様が本ウェブサイトを再度訪問されたときなどは、必ずCookieを有効に設定してください。なお、Cookieはお客様個人を識別するものではありません。Cookieを無効に設定されると、本ウェブサイトにおけるサービスが正常にご利用できませんので、予めご了承ください。</p>
+							</div>
+							<div class="privacyItem">
+								<h3>SSLについて</h3>
+								<p>本ウェブサイトでは会員登録の際など、個人情報が送受信されるページにおいて、SSL（Secure Socket Layer）による暗号化通信を使用し、お客様の個人情報を外部の第三者に通信傍受されても解析できないようにするための対策を行っております。</p>
+							</div>
+							<div class="privacyItem">
+								<h3>ログについて</h3>
+								<p>お客様が本ウェブサイトをアクセスされたことについて、その操作の情報をアクセスログという形で記録しています。<br>このログは個人を特定できる情報を含むものではありませんが、今後のサイトの利便性向上の為や、万が一問題が発生した際の原因追求、利用状況に関する統計・分析処理などに使用する為に採取をしており、それ以外の目的には使用致しません。</p>
+							</div>
+							<div class="privacyItem">
+								<h3>その他</h3>
+								<p>今後、当社は、プライバシーポリシーを一部又は全部を改定する事があります。重要な改定がある場合には、Webサイトにおいてお知らせいたします。</p>
+							</div>
+						</div>
+					</div><!-- /#main -->
 
-第1条（個人情報）
-
-「個人情報」とは，個人情報保護法にいう「個人情報」を指すものとし，生存する個人に関する情報であって，当該情報に含まれる氏名，生年月日，住所，電話番号，連絡先その他の記述等により特定の個人を識別できる情報及び容貌，指紋，声紋にかかるデータ，及び健康保険証の保険者番号などの当該情報単体から特定の個人を識別できる情報（個人識別情報）を指します。
-
-
-第2条（個人情報の収集方法）
-
-当事業は，ユーザーが利用登録をする際に氏名，生年月日，住所，電話番号，メールアドレス，銀行口座番号，クレジットカード番号，運転免許証番号などの個人情報をお尋ねすることがあります。また，ユーザーと提携先などとの間でなされたユーザーの個人情報を含む取引記録や決済に関する情報を，当事業の提携先（情報提供元，広告主，広告配信先などを含みます。以下，｢提携先｣といいます。）などから収集することがあります。
-
-
-第3条（個人情報を収集・利用する目的）
-
-当事業が個人情報を収集・利用する目的は，以下のとおりです。
-
-1.当事業サービスの提供・運営のため
-2.ユーザーからの当事業サービスに関する契約のお申込み，退会，ご登録情報変更などのお問い合わせに回答するため（本人確認を行うことを含む）
-3.ユーザーが利用中のサービスの新機能，更新情報，キャンペーン等及び当事業が提供する他のサービスの案内のメールを送付するため
-4.メンテナンス，重要なお知らせなど必要に応じたご連絡のため
-5.新サービス，新商品，機能改善等ユーザーに有用と思われる情報の告知，広告，宣伝，ダイレクトメールの送付等，当事業を含むサービスに関する各種ご案内のため
-6.当事業が実施するアンケートへのご協力のお願いのため
-7.ご登録いただいた個人情報を元に，法律で定められた個人として特定できない範囲において統計情報として集計し，お客様に有用なサービス開発の参考資料および，サービスの運営を行うため
-8.メンテナンス，重要なお知らせなど必要に応じたご連絡のため
-9.利用規約に違反したユーザーや，不正・不当な目的でサービスを利用しようとするユーザーの特定をし，ご利用をお断りするため
-10.ユーザーにご自身の登録情報の閲覧や変更，削除，ご利用状況の閲覧を行っていただくため
-11.有料サービスにおいて，ユーザーに利用料金を請求するため
-12.上記の利用目的に付随する目的
-
-第4条（利用目的の変更）
-
-1.当事業は，利用目的が変更前と関連性を有すると合理的に認められる場合に限り，個人情報の利用目的を変更するものとします。
-2.利用目的の変更を行った場合には，変更後の目的について，当事業所定の方法により，ユーザーに通知し，または本ウェブサイト上に公表するものとします。
-
-
-第5条（個人情報の第三者提供）
-
-当事業は，次に掲げる場合を除いて，あらかじめユーザーの同意を得ることなく，第三者に個人情報を提供することはありません。ただし，個人情報保護法その他の法令で認められる場合を除きます。
-
-1.人の生命，身体または財産の保護のために必要がある場合であって，本人の同意を得ることが困難であるとき
-2.公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって，本人の同意を得ることが困難であるとき
-3.国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって，本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき
-4.予め次の事項を告知あるいは公表し，かつ当事業が個人情報保護委員会に届出をしたとき
-5.利用目的に第三者への提供を含むこと
-6.第三者に提供されるデータの項目
-7.第三者への提供の手段または方法
-8.本人の求めに応じて個人情報の第三者への提供を停止すること
-9.本人の求めを受け付ける方法
-10.前項の定めにかかわらず，次に掲げる場合には，当該情報の提供先は第三者に該当しないものとします。
-11.当事業が利用目的の達成に必要な範囲内において個人情報の取扱いの全部または一部を委託する場合
-12.合併その他の事由による事業の承継に伴って個人情報が提供される場合
-13.個人情報を特定の者との間で共同して利用する場合であって，その旨並びに共同して利用される個人情報の項目，共同して利用する者の範囲，利用する者の利用目的および当該個人情報の管理について責任を有する者の氏名または名称について，あらかじめ本人に通知し，または本人が容易に知り得る状態に置いた場合
-
-
-第6条（個人情報の開示）
-
-1.当事業は，本人から個人情報の開示を求められたときは，本人に対し，遅滞なくこれを開示します。ただし，開示することにより次のいずれかに該当する場合は，その全部または一部を開示しないこともあり，開示しない決定をした場合には，その旨を遅滞なく通知します。なお，個人情報の開示に際しては，1件あたり1，000円の手数料を申し受けます。
-①本人または第三者の生命，身体，財産その他の権利利益を害するおそれがある場合
-②当事業の業務の適正な実施に著しい支障を及ぼすおそれがある場合
-③その他法令に違反することとなる場合
-2.前項の定めにかかわらず，履歴情報および特性情報などの個人情報以外の情報については，原則として開示いたしません。
-
-
-第7条（個人情報の訂正および削除）
-
-1.ユーザーは，当事業の保有する自己の個人情報が誤った情報である場合には，当事業が定める手続きにより，当事業に対して個人情報の訂正，追加または削除（以下，「訂正等」といいます。）を請求することができます。
-2.当事業は，ユーザーから前項の請求を受けてその請求に応じる必要があると判断した場合には，遅滞なく，当該個人情報の訂正等を行うものとします。
-3.当事業は，前項の規定に基づき訂正等を行った場合，または訂正等を行わない旨の決定をしたときは遅滞なく，これをユーザーに通知します。
-
-
-第8条（個人情報の利用停止等）
-
-1.当事業は，本人から，個人情報が，利用目的の範囲を超えて取り扱われているという理由，または不正の手段により取得されたものであるという理由により，その利用の停止または消去（以下，「利用停止等」といいます。）を求められた場合には，遅滞なく必要な調査を行います。
-2.前項の調査結果に基づき，その請求に応じる必要があると判断した場合には，遅滞なく，当該個人情報の利用停止等を行います。
-3.当事業は，前項の規定に基づき利用停止等を行った場合，または利用停止等を行わない旨の決定をしたときは，遅滞なく，これをユーザーに通知します。
-4.前2項にかかわらず，利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって，ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は，この代替策を講じるものとします。
-
-
-第9条（プライバシーポリシーの変更）
-
-1.本ポリシーの内容は，法令その他本ポリシーに別段の定めのある事項を除いてユーザーに通知することなく，変更することができるものとします。
-2.当事業が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。
-
-
-第10条（お問い合わせ窓口）
-本ポリシーに関するお問い合わせは，下記の窓口までお願いいたします。
-Eメールアドレス：info@karibito.cloud
-                        {{-- {!! nl2br(e(file_get_contents('./text/terms-of-service.txt'))) !!} --}}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+				</div><!--inner-->
+			</div><!-- /#contents -->
+		</body>
+	</article>
+</x-layout>
