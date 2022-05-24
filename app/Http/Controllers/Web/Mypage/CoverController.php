@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserProfile\UpdateCoverRequest;
-use Illuminate\Support\Facades\Auth;
-use App\Models\UserProfile;
-
 use App\Services\UserProfileService;
+use App\Models\UserProfile;
 
 
 class CoverController extends Controller
@@ -25,13 +23,13 @@ class CoverController extends Controller
     public function update(UpdateCoverRequest $request) 
     {
         $this->user_profile_service->updateUserProfileImage($request,'cover');
-        return redirect()->action([MypageController::class, 'show']);
+        return redirect()->route('mypage');
     }
 
 
     public function delete() 
     {
         $this->user_profile_service->deleteUserProfileImage('cover');
-        return redirect()->action([MypageController::class, 'show']);
+        return redirect()->route('mypage');
     }
 }

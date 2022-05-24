@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserProfile;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserProfile\StoreRequest;
 
 class UserProfileService
@@ -14,7 +13,7 @@ class UserProfileService
      */
     public function updateUser($params)
     {
-        $user = User::find(Auth::id());
+        $user = User::find(\Auth::id());
         $user->fill([ 'name' => $params['name'] ])->save();
         return $user;
     }
@@ -25,7 +24,7 @@ class UserProfileService
     public function storeUserProfile($params)
     {
         $user_profile = UserProfile::create([
-            'user_id' => Auth::id(),
+            'user_id' => \Auth::id(),
             'first_name' => $params['first_name'],
             'last_name' => $params['last_name'],
             'gender' => $params['gender'],
@@ -40,7 +39,7 @@ class UserProfileService
     public function updateUserProfile($request)
     {
         $birthday = $request->year.'-'.$request->month.'-'.$request->day;
-        $user_profile = UserProfile::firstWhere('user_id',Auth::id());
+        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
         $user_profile->fill([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -60,7 +59,7 @@ class UserProfileService
      */
     public function updateUserProfileImage($request,$value)
     {
-        $user_profile = UserProfile::firstWhere('user_id',Auth::id());
+        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
         $old = $user_profile->$value;
 
         if(isset($request->$value)){
@@ -78,7 +77,7 @@ class UserProfileService
      */
     public function deleteUserProfileImage($value)
     {
-        $user_profile = UserProfile::firstWhere('user_id',Auth::id());
+        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
         $old = $user_profile->$value;
         $user_profile->$value = null;
 

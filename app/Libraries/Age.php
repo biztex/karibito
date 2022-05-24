@@ -3,7 +3,10 @@ namespace App\Libraries;
 
 class Age
 {
-   public static function group($birthday) 
+    /**
+     * $birthday : 2020-01-01 → 20200101
+     */
+    public static function group(int $birthday) :string
     { 
         $now = (int)date('Ymd');
         $now_age = floor(($now - $birthday) / 10000);
