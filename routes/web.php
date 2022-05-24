@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Mypage\UserProfileController;
 use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
+use App\Http\Controllers\Web\Mypage\IconController;
 
 
 use App\Http\Controllers\HomeController;
@@ -69,6 +70,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
         Route::resource('user_profile',UserProfileController::class,['only' => ['update']]);
         Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
+        Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
+        Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');        
     });
     Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
 

@@ -66,6 +66,9 @@ class UserProfileController extends Controller
         return redirect()->route('complete.show');
     }
 
+     /**
+     * 基本情報登録完了画面
+     */
     public function showComplete()
     {
         $user = UserProfile::with('user')->firstWhere('user_id',Auth::id());
@@ -103,33 +106,13 @@ class UserProfileController extends Controller
      */
     public function update(UpdateRequest $request)
     {
-        $birthday = $request->year.'-'.$request->month.'-'.$request->day;
-
         \DB::transaction(function () use ($request) {
-                $user = User::find(Auth::id());
-                $user->fill(['name' => $request->name ])->save();
 
-                $user_profile = UserProfile::firstWhere('user_id',Auth::id());
-                $user_profile->fill([
-                    'user_id' => Auth::id(),
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
-                    'gender' => $request->gender,
-                    'prefecture_id' => $request->prefecture,
-                    'birthday' => $birthday,
-                    'zip' => $request->zip,
-                    'address' => $request->address,
-                    'introduction' => $request->introduction,
-                ]);
+            $this->user_profile_service->updateUser($request->all());
+            $this->user_profile_service->updateUserProfile($request);
+            $this->user_profile_service->updateUserProfileImage($request,'cover');
+            $this->user_profile_service->updateUserProfileImage($request,'icon');
 
-                if(isset($request->cover)){
-                    $user_profile->cover = $request->file('cover')->store('covers','public');
-                }
-                if(isset($request->icon)){
-                    $user_profile->icon = $request->file('icon')->store('icons','public');
-                }
-
-                $user_profile->save();
         });
 
         return redirect()->action([MypageController::class, 'show']);

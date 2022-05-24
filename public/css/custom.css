@@ -220,3 +220,24 @@
 		margin-top: 20px;
 	}
 }
+#gNavi .navUl02 li a.nav_mypage {
+    border: none;
+}
+
+.fancyImgBtn {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+.fancyImgBtn a {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    border-radius: 3px;
+    font-size: 1.1rem;
+    border: 1px solid #CCCCCC;
+    padding: 0 5px;
+    background-color: #fff;
+}
