@@ -49,7 +49,7 @@
 
 						<div class="mypageCover mypageCoverUpdate">
 							@if(empty($user_profile->cover))
-								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png">
+								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png" style="width: 100%;height: 230px;object-fit: cover;">
 							@else
 								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="width: 100%;height: 230px;object-fit: cover;">
 							@endif
