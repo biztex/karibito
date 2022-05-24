@@ -291,8 +291,8 @@
     					<p class="level1 toggleBtn">カリビトについて</p>
     					<ul class="level2 toggleBox">
     						<li><a href="#">法人のご利用について</a></li>
-    						<li><a href="privacy">プライバシーポリシー</a></li>
-    						<li><a href="#">利用規約</a></li>
+    						<li><a href="privacy-policy">プライバシーポリシー</a></li>
+    						<li><a href="terms-of-service">利用規約</a></li>
     						<li><a href="#">ゲスト規約</a></li>
     						<li><a href="#">ホスト規約</a></li>
     						<li><a href="#">スマートフォンアプリ</a></li>

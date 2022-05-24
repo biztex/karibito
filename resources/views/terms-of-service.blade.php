@@ -1,12 +1,12 @@
 <x-layout>
 	<article>
-		<body id="privacy">
-			<div id="breadcrumb">
-				<div class="inner">
-					<a href="index.html">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
-				</div>
-			</div><!-- /.breadcrumb -->
-			<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+
+        <div id="breadcrumb">
+            <div class="inner">
+                <a href="/">ホーム</a>　>　<span>利用規約</span>
+            </div>
+        </div><!-- /.breadcrumb -->
+        <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 			<div class="hide">
 				<div id="fancybox_register" class="fancyboxWrap">
 					<p class="fancyboxHd">身分証明証の登録</p>
@@ -259,64 +259,20 @@
 					</form>
 				</div>
 			</div>
-			<div id="contents" class="oneColumnPage">
-				<div class="inner">
-					<div id="main">
-						<div class="subPagesWrap">
-							<h2 class="subPagesHd">個人情報の取り扱いについて</h2>
-							<div class="privacyTop">
-								<p>株式会社　アクティブフィーリング以下「当社」といいます。）は、お客様の個人情報に関する法令を遵守し、以下に示すポリシーに従い、適切な取扱い及び保護に努めます。</p>
-							</div>
-							<div class="privacyItem">
-								<h3>収集、利用目的</h3>
-								<p>当社では、お客様から、商品購入、プレゼントや懸賞への応募、アンケートの回答、メルマガの登録のなどの際に、ご提供頂いた個人情報を下記目的の範囲内で利用させて頂きます。<br><br>※お客様から個人情報を収集する場合は、利用目的をお知らせし、お客様からの同意を頂きご登録頂いております。</p>
-								<ul>
-									<li>・商品・サービスの提供の為。</li>
-									<li>・情報提供の為</li>
-									<li>・お客様へより良い商品・サービスを提供する為の統計、分析資料とする為。</li>
-									<li>・その他、サービスや運営上必要な連絡の為。</li>
-								</ul>
-							</div>
-							<div class="privacyItem">
-								<h3>安全管理</h3>
-								<p>当社では、お預かりした個人情報を適切に取り扱い・安全な管理を行います。安全対策を講じ、不正アクセス、紛失、改ざん及び漏洩などの防止に努めます。</p>
-							</div>
-							<div class="privacyItem">
-								<h3>開示、提供</h3>
-								<p>原則的には、お客様の個人情報を第三者に開示致しませんが、下記の場合は、法律に基づき開示する事があります。</p>
-								<ul>
-									<li>・お客様から事前に同意を得ている場合。</li>
-									<li>・商品の配送等、お客様が希望されるサービスを行う為、当社が業務委託先に必要な範囲で開示、提供が必要と判断した場合。</li>
-									<li>・決済会社での本人確認、請求先確認及び与信調査のため決済会社に個人情報を開示することがございます。</li>
-									<li>・警察署、裁判所等、公的機関より開示の申し出があった場合。</li>
-									<li>・当社の権利、財産を保護する為に必要であると判断した場合。</li>
-								</ul>
-							</div>
-							<div class="privacyItem">
-								<h3>開示、訂正、削除</h3>
-								<p>お客様が、ご自身の個人情報に関する開示、訂正、削除を希望される場合には、合理的な範囲で速やかに対応させて頂きます。</p>
-							</div>
-							<div class="privacyItem">
-								<h3>Cookie（クッキー）について</h3>
-								<p>Cookieは、ウェブサイトからお客様のブラウザに送ることのできるテキスト・データで、Cookieを受け取ることを了承頂いた場合に、Cookieはお客様のご使用になられたコンピューターのハードディスクドライブ内に記憶されます。<br>お客様が本ウェブサイトを再度訪問されたときなどは、必ずCookieを有効に設定してください。なお、Cookieはお客様個人を識別するものではありません。Cookieを無効に設定されると、本ウェブサイトにおけるサービスが正常にご利用できませんので、予めご了承ください。</p>
-							</div>
-							<div class="privacyItem">
-								<h3>SSLについて</h3>
-								<p>本ウェブサイトでは会員登録の際など、個人情報が送受信されるページにおいて、SSL（Secure Socket Layer）による暗号化通信を使用し、お客様の個人情報を外部の第三者に通信傍受されても解析できないようにするための対策を行っております。</p>
-							</div>
-							<div class="privacyItem">
-								<h3>ログについて</h3>
-								<p>お客様が本ウェブサイトをアクセスされたことについて、その操作の情報をアクセスログという形で記録しています。<br>このログは個人を特定できる情報を含むものではありませんが、今後のサイトの利便性向上の為や、万が一問題が発生した際の原因追求、利用状況に関する統計・分析処理などに使用する為に採取をしており、それ以外の目的には使用致しません。</p>
-							</div>
-							<div class="privacyItem">
-								<h3>その他</h3>
-								<p>今後、当社は、プライバシーポリシーを一部又は全部を改定する事があります。重要な改定がある場合には、Webサイトにおいてお知らせいたします。</p>
-							</div>
-						</div>
-					</div><!-- /#main -->
 
-				</div><!--inner-->
-			</div><!-- /#contents -->
-		</body>
-	</article>
+        <div id="contents" class="oneColumnPage">
+            <div class="inner">
+                <div id="main">
+                    <div class="subPagesWrap">
+                        <h2 class="subPagesHd">利用規約</h2>
+
+                        <p class="card-text">
+                            {{!! nl2br(e(file_get_contents('./text/terms-of-service.txt'))) !!}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</article>
 </x-layout>
