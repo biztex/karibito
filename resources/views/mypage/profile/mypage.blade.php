@@ -3,11 +3,15 @@
 	<body id="mypage">
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="/sample">ホーム</a>　>　<span>マイページ</span>
+				<a href="/">ホーム</a>　>　<span>マイページ</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
-		<div class="unregisteredP">△身分証明書の登録が必要です。 <a href="#fancybox_register" class="fancybox">登録する</a></div>
+		<div class="unregisteredP hide">
+			<div> </div>
+			<div>△身分証明書の登録が必要です。 <a href="#fancybox_register" class="fancybox">登録する</a></div>
+			<div class="pop_close">×</div>
+		</div>
 		<div class="hide">
 			<div id="fancybox_register" class="fancyboxWrap">
 				<p class="fancyboxHd">身分証明証の登録</p>
@@ -45,7 +49,7 @@
 
 						<div class="mypageCover mypageCoverUpdate">
 							@if(empty($user_profile->cover))
-								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png">
+								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png" style="width: 100%;height: 230px;object-fit: cover;">
 							@else
 								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="width: 100%;height: 230px;object-fit: cover;">
 							@endif
@@ -525,6 +529,11 @@
 				reader.readAsDataURL(e.target.files[0]);   
 			});
 		});
+
+		// 身分証登録ポップアップ閉じるボタン
+		$('.pop_close').on('click',function(){
+			$('.unregisteredP').addClass('hide');
+		})
 		
 	});
 </script>
