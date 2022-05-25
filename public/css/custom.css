@@ -4,6 +4,24 @@
  * 
  */
 
+ /* layout.css 287あたり、
+		@media screen and (max-width: 860px) {　
+									　 ↓
+		@media screen and (max-width: 767px) {
+										変更する必要あり。
+		
+		@media screen and (max-width: 767px) {
+		#gNavi .navUl02.pc{display: none}
+		#gNavi .navUl02.sp{display: block;}
+		.btnMenu{ display:block; }
+		#gNavi{ ~~~~~~ 
+
+	page.css 4095あたり、
+		@media screen and (max-width: 860px) {　
+									　 ↓
+		@media screen and (max-width: 767px) {
+										変更する必要あり。
+			.navHeadSp { ~~~ } */
 .detailStyle .recommendList .list .item{max-width: 212px}
 
 .fancyPersonBtn button{
@@ -62,22 +80,7 @@
     margin-top: 5px;
 }
 
-@media screen and (max-width: 860px){
-	.navHeadSp {
-		padding: 0;
-		width: 30px;
-		height: 30px;
-		border-radius: 50%;
-		overflow: hidden;
-		border: 1px solid #ddd;
-		overflow: hidden;
-		margin-right: 35px;
-		display: none;
-	}
-	#header .fun {
-    	padding-right: 0px;
-		display: none;
-	}
+@media screen and (max-width: 767px){
 	#gNavi .navLinks li {
 		margin: 0 20px;
 		-ms-writing-mode     : tb-rl;
@@ -165,6 +168,10 @@
 	align-items: center;
 }
 @media screen and (max-width: 767px){
+	#header .fun {
+    	padding-right: 0px;
+		display: none;
+	}
 	.mypageCover{
 		margin: 0 -15px;
 		position: relative;
@@ -263,4 +270,64 @@
 }
 .mypageCover label {
     right: 20px;
+}
+.checkBox label a {
+	color: #158ACC;
+}
+@media screen and (min-width: 767px){
+	.btnMenu {
+		display: none;
+	}
+}
+@media screen and (max-width: 860px){
+	#gNavi .navUl02 li>a {
+		display:block;
+		padding:28px 0 0;
+		width:60px;
+		background-position:center top;
+		background-repeat: no-repeat;
+		text-align: center;
+		font-size:1.2rem;
+	}
+	#gNavi .navUl02 li a {
+		font-size: 8px;
+		position: relative;
+	}
+	.searchBox {
+		margin-left: 20px;
+	}
+}
+@media screen and (max-width: 320px){
+	.searchWrapSp .searchBox {
+		max-width: 280px;
+	}
+	select.searchSelect {
+		width: 90px;
+		height: 35px;
+		padding: 0 20px 0 10px;
+		font-size: 10px;
+		font-weight: bold;
+		border: 1px solid #ddd;
+		border-radius: 5px 0 0 5px;
+		background: url(../img/mypage/select.svg)no-repeat right 10px center #fff;
+		background-size: auto;
+	}
+	#header .search {
+		height:35px;
+		width: 175px;
+	}
+	#header .search input[type=text] {
+		font-size: 10px;
+		width:145px;
+	}
+	#header .search input.btn {
+		background-size: 14px;
+	}
+	.searchClose {
+		align-items: center;
+	}
+	.searchClose img {
+		width: 12px;
+		padding-top: 3.5px;
+	}
 }

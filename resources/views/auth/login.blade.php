@@ -275,14 +275,14 @@
 									@error('email')
 										<div class="alert alert-danger">{{ $message }}</div>
                             		@enderror
-									<p><input type="email" name="email" placeholder="例） email@karibito.jp" value="{{old('email')}}"></p>
+									<p><input type="email" name="email" placeholder="例） email@karibito.jp" value="{{old('email')}}" required></p>
 								</div>
 								<div class="labelCategory">
 									<p>パスワード（半角英数字 8文字 〜 100文字）</p>
 									@error('password')
 										<div class="alert alert-danger">{{ $message }}</div>
                             		@enderror
-									<p><input type="password" name="password" placeholder=""></p>
+									<p><input type="password" name="password" placeholder="" required></p>
 								</div>
 								<ul class="loginFormBtn">
 									<li><input type="submit" class="submit" value="ログイン"></li>
