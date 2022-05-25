@@ -1,21 +1,22 @@
 <x-layout>
 	<article>
-		<body id="register">
-			<!-- <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+
+        <div id="breadcrumb">
+            <div class="inner">
+                <a href="/">ホーム</a>　>　<span>利用規約</span>
+            </div>
+        </div><!-- /.breadcrumb -->
+        <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 			<div class="hide">
 				<div id="fancybox_register" class="fancyboxWrap">
 					<p class="fancyboxHd">身分証明証の登録</p>
 					<div class="fancyboxCont">
 						<div class="fancyRegisterItem">
-							<p class="txt">
-								「身分証明書を登録する」とは、<br>信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに身分証明書提出済マークが表示されます。
-							</p>
+							<p class="txt">「身分証明書を登録する」とは、<br>信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに身分証明書提出済マークが表示されます。</p>
 						</div>
 						<div class="fancyRegisterItem">
 							<p class="notice">注意事項</p>
-							<p class="txt">
-								カリビトアプリのプロフィールで、住所・氏名・生年月日はしっかり記載していますか?<br>身分証明書との一致が確認できないと本人確認はできないのでご注意ください!<br>登録いただいた３営業日以内にご返信します。
-							</p>
+							<p class="txt">カリビトアプリのプロフィールで、住所・氏名・生年月日はしっかり記載していますか?<br>身分証明書との一致が確認できないと本人確認はできないのでご注意ください!<br>登録いただいた３営業日以内にご返信します。</p>
 						</div>
 						<div class="fancyRegisterItem">
 							<p class="txt">提出可能な本人確認書類は、下記となっております。</p>
@@ -26,8 +27,7 @@
 							<p class="txt">【カリビトアプリ登録情報】<br>都道府県:〇〇〇〇〇〇<br>住所:〇〇〇〇〇〇<br>氏名:〇〇〇〇〇〇<br>生年月日:〇〇〇〇〇〇</p>
 						</div>
 						<div class="fancyRegisterItem">
-							<p class="txt">安心安全のため、本人確認承認後はご住所 / 本名/ 生年月日のご変更ができなくなっておりますので、本人確認承認後にご住所 / 本名 /
-								生年月日をご変更されたい場合は、カリビト事務局へ、お問い合わせください</p>
+							<p class="txt">安心安全のため、本人確認承認後はご住所 / 本名/ 生年月日のご変更ができなくなっておりますので、本人確認承認後にご住所 / 本名 / 生年月日をご変更されたい場合は、カリビト事務局へ、お問い合わせください</p>
 						</div>
 					</div>
 					<p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集はこちら</a></p>
@@ -130,8 +130,7 @@
 												</dd>
 											</dl>
 										</div>
-										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg"
-													alt="">得意分野を追加</span></p>
+										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
 									</div>
 								</div>
 								<dl>
@@ -224,8 +223,7 @@
 												</dd>
 											</dl>
 										</div>
-										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg"
-													alt="">学歴・経歴を追加</span></p>
+										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">学歴・経歴を追加</span></p>
 									</div>
 									<div class="specialtyItem">
 										<div class="clone">
@@ -241,8 +239,7 @@
 												</dd>
 											</dl>
 										</div>
-										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg"
-													alt="">免許・資格</span></p>
+										<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">免許・資格</span></p>
 									</div>
 								</div>
 								<dl>
@@ -261,80 +258,21 @@
 						</div>
 					</form>
 				</div>
-			</div> -->
-			<div id="contents" class="oneColumnPage02">
-				<div class="inner">
-					<div id="main">
-						<div class="loginWrap">
-							<h2 class="subPagesHd">会員登録</h2>
-							<ul class="stepUl">
-								<li class="is_active">
-									<p class="stepDot"></p>
-									<p class="stepTxt">ログイン</p>
-								</li>
-								<li>
-									<p class="stepDot"></p>
-									<p class="stepTxt">基本情報</p>
-								</li>
-								<li>
-									<p class="stepDot"></p>
-									<p class="stepTxt">完了</p>
-								</li>
-							</ul>
-							<form method="POST" action="{{ route('register') }}">
-            				@csrf
-							<ul class="loginSns">
-								<li><a href="/login/facebook" target="_blank"><img src="img/login/login_facebook.svg"
-											alt="Facebookでログイン"></a></li>
-								<li><a href="/register/google" target="_blank"><img src="img/login/login_google.svg"
-											alt="Googleでログイン"></a></li>
-							</ul>
-							<div class="contactBox">
-								<p class="loginHd"><span>または</span></p>
+			</div>
 
-									<div class="labelCategory">
-										<p>メールアドレス（半角英数字128文字以内）</p>
-										@error('email')
-										<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
-										<p><input type="email" name="email" placeholder="例） email@karibito.jp" value="{{old('email')}}"></p>
-									</div>
-									<div class="labelCategory">
-										<p>メールアドレス（再確認）</p>
-										<p><input type="email" name="email_confirmation" placeholder="例） email@karibito.jp"value="{{old('email_confirmation')}}"></p>
-									</div>
-									<div class="labelCategory">
-										<p>パスワード（半角英数字 8文字 〜 100文字）</p>
-										@error('password')
-										<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
-										<p><input type="password" name="password" placeholder=""></p>
-									</div>
-									<div class="labelCategory">
-										<p>パスワード（再確認）</p>
-										<p><input type="password" name="password_confirmation" placeholder=""></p>
-									</div>
+        <div id="contents" class="oneColumnPage">
+            <div class="inner">
+                <div id="main">
+                    <div class="subPagesWrap">
+                        <h2 class="subPagesHd">利用規約</h2>
 
-									<div class="labelCategory">
-										@error('terms')
-										<div class="alert alert-danger" style="text-align: center;">{{ $message }}</div>
-										@enderror
-										<div class="checkBox">
-											<label><input type="checkbox" name="terms">利用規約とプライバシーポリシーに同意する</label>
-										</div>
-									</div>
-				
-									<ul class="loginFormBtn">
-										<li><input type="submit" class="submit" value="送信"></li>
-										<!-- <li><input type="submit" class="submit" value="ログイン"></li> -->
-									</ul>
-								</form>
-							</div>
-						</div>
-					</div><!-- /#main -->
-				</div>
-				<!--inner-->
-			</div><!-- /#contents -->
-		</body>
-	</article>
+                        <p class="card-text">
+                            {{!! nl2br(e(file_get_contents('./text/terms-of-service.txt'))) !!}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</article>
 </x-layout>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Mypage\UserProfileController;
 use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
+use App\Http\Controllers\Web\Mypage\IconController;
 
 
 use App\Http\Controllers\HomeController;
@@ -41,6 +42,15 @@ use App\Http\Controllers\Auth\FacebookRegisterController;
 |
 */
 
+Route::get('sample',function(){
+    return view('sample');
+});
+
+Route::get('sam',function(){
+    return view('sam');
+});
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -53,7 +63,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 会員登録・プロフィール登録
     Route::middleware('exsist.user.profile')->group(function () {
         Route::resource('user_profile',UserProfileController::class,['only' => ['create','store']]);
-        Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
     });
 
     // マイページ・プロフィール編集
@@ -61,9 +70,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
         Route::resource('user_profile',UserProfileController::class,['only' => ['update']]);
         Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
+        Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
+        Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');        
     });
+    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
+
 
 });
+
+// プライバシーポリシーと運営会社
+Route::view('/privacy-policy'  , 'privacy-policy');
+Route::view('/company', 'company');
+Route::view('/terms-of-service','terms-of-service');
 
 
 // index:一覧画面(get)
@@ -114,7 +132,6 @@ Route::get('service',[ServiceController::class,'indexService']);
 
 Route::get('notation',[NotationController::class,'show']);
 
-Route::get('privacy',[PrivacyController::class,'show']);
 
 Route::get('publication',[PublicationController::class,'index']);
 

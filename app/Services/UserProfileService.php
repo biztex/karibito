@@ -3,30 +3,23 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserProfile;
-
 use App\Http\Requests\UserProfile\StoreRequest;
 
-
-/**
- * ユーザー情報のサービスクラス
- * @package App\Services
- */
 class UserProfileService
 {
 
+    /**
+     * ニックネーム変更
+     */
     public function updateUser($params)
     {
         $user = User::find(\Auth::id());
         $user->fill([ 'name' => $params['name'] ])->save();
-
         return $user;
     }
 
-
-
     /**
-     * 全ユーザー情報取得
-     * @return Collection 全ユーザー情報
+     * ユーサープロフィール基本情報登録
      */
     public function storeUserProfile($params)
     {
@@ -38,6 +31,59 @@ class UserProfileService
             'prefecture_id' => $params['prefecture']
         ]);
         return $user_profile->save();
-    
+    }
+
+    /**
+     * ユーサープロフィール編集
+     */
+    public function updateUserProfile($request)
+    {
+        $birthday = $request->year.'-'.$request->month.'-'.$request->day;
+        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
+        $user_profile->fill([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'prefecture_id' => $request->prefecture,
+            'birthday' => $birthday,
+            'zip' => $request->zip,
+            'address' => $request->address,
+            'introduction' => $request->introduction,
+        ]);
+        return $user_profile->save();
+    }
+
+    /**
+     * ユーサープロフィール
+     * カバー・アイコン画像変更・登録
+     */
+    public function updateUserProfileImage($request,$value)
+    {
+        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
+        $old = $user_profile->$value;
+
+        if(isset($request->$value)){
+            $user_profile->$value = $request->file($value)->store($value.'s','public');
+
+            if(!is_null($old)){
+                \Storage::delete('public/'.$old);
+            }
+        }
+        return $user_profile->save();
+    }
+
+    /**
+     * カバー・アイコン画像削除
+     */
+    public function deleteUserProfileImage($value)
+    {
+        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
+        $old = $user_profile->$value;
+        $user_profile->$value = null;
+
+        if(!is_null($old)){
+            \Storage::delete('public/'.$old);
+        }
+        return $user_profile->save();
     }
 }

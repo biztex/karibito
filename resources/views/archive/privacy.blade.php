@@ -1,11 +1,12 @@
-
 <x-layout>
 <article>
-
-<body id="">
-
-		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
-		<!-- <div class="hide">
+		<div id="breadcrumb">
+			<div class="inner">
+				<a href="index.html">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
+			</div>
+		</div><!-- /.breadcrumb -->
+		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="hide">
 			<div id="fancybox_register" class="fancyboxWrap">
 				<p class="fancyboxHd">身分証明証の登録</p>
 				<div class="fancyboxCont">
@@ -37,13 +38,13 @@
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
 						<div class="mypageCover">
-							<a href="#"><img src="img/mypage/icon_camera01.svg" alt=""></a>
+							<a href="#"><img src="/img/mypage/icon_camera01.svg" alt=""></a>
 						</div>
 						<div class="fancyPersonPic">
-							<p class="img"><img src="img/mypage/pic_head.png" alt=""></p>
-							<a href="#"><img src="img/mypage/icon_camera02.svg" alt=""></a>
+							<p class="img"><img src="/img/mypage/pic_head.png" alt=""></p>
+							<a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a>
 						</div>
-						<div class="fancyPersonTable">
+						<div class="fancyPersonTable">	
 							<dl class="">
 								<dt>ニックネーム</dt>
 								<dd><input type="text" name=""></dd>
@@ -128,7 +129,7 @@
 											</dd>
 										</dl>
 									</div>
-									<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
+									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
 								</div>
 							</div>
 							<dl>
@@ -221,7 +222,7 @@
 											</dd>
 										</dl>
 									</div>
-									<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">学歴・経歴を追加</span></p>
+									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">学歴・経歴を追加</span></p>
 								</div>
 								<div class="specialtyItem">
 									<div class="clone">
@@ -237,7 +238,7 @@
 											</dd>
 										</dl>
 									</div>
-									<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">免許・資格</span></p>
+									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">免許・資格</span></p>
 								</div>
 							</div>
 							<dl>
@@ -256,84 +257,64 @@
 					</div>
 				</form>
 			</div>
-		</div> -->
-		<div id="contents" class="oneColumnPage02">
+		</div>
+		<div id="contents" class="oneColumnPage">
 			<div class="inner">
 				<div id="main">
-					<div class="loginWrap">
-						<h2 class="subPagesHd">会員登録</h2>
-						<ul class="stepUl">
-							<li class="is_active">
-								<p class="stepDot"></p>
-								<p class="stepTxt">ログイン</p>
-							</li>
-							<li class="is_active">
-								<p class="stepDot"></p>
-								<p class="stepTxt">基本情報</p>
-							</li>
-							<li>
-								<p class="stepDot"></p>
-								<p class="stepTxt">完了</p>
-							</li>
-						</ul>
-						<div class="contactBox">
-							<form action="{{ route('user_profile.store') }}" method="post" enctype="multipart/form-data" name="form1">
-								@csrf
-								<div class="labelCategory">
-									<p>ニックネーム（00字以内）</p>
-										@error('name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-									<p><input type="text" name="name" placeholder="" class="@error('name') is-invalid @enderror" value="{{ old('name') }}"></p>
-								</div>
-									@if($errors->has('first_name') || $errors->has('last_name'))
-                                    	<div class="alert alert-danger" style="padding-bottom:0;">姓名は必ず指定してください。</div>
-                                	@endif
-								<div class="labelCategory inlineFlex">
-									<p>姓</p>
-									<p><input type="text" name="first_name" placeholder="" class="@error('first_name') is-invalid @enderror" value="{{ old('first_name') }}"></p>
-								</div>
-								<div class="labelCategory inlineFlex">
-									<p>名</p>
-									<p><input type="text" name="last_name" placeholder="" class="@error('last_name') is-invalid @enderror" value="{{ old('last_name') }}"></p>
-								</div>
-								<div class="labelCategory">
-									<div class="radioBox">
-										@error('gender')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-										<label><input type="radio" value="1" name="gender" @if(1 == old('gender')) checked @endif>男性</label>
-										<label><input type="radio" value="2" name="gender" @if(2 == old('gender')) checked @endif>女性</label>
-									</div>
-								</div>
-								<div class="labelCategory">
-									<p>都道府県</p>
-										@error('prefecture')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-										<div>
-											<select name="prefecture" class="@error('prefecture') is-invalid @enderror">
-                                                <option selected="" disabled="">選択してください</option>
-                                                @foreach ( $prefectures as $prefecture )
-                                                    <option value="{{$prefecture->id}}"  @if($prefecture->id == old('prefecture')) selected @endif>{{$prefecture->name}}</option>
-                                                @endforeach
-                                            </select>
-										</div>
-								</div>
-								<ul class="loginFormBtn">
-									<li><input type="submit" class="submit" value="次へ"></li>
-							</form>
-
-									<li><input type="submit" class="submit gray" value="戻る"></li>
-								</ul>
+					<div class="subPagesWrap">
+						<h2 class="subPagesHd">個人情報の取り扱いについて</h2>
+						<div class="privacyTop">
+							<p>株式会社　アクティブフィーリング以下「当社」といいます。）は、お客様の個人情報に関する法令を遵守し、以下に示すポリシーに従い、適切な取扱い及び保護に努めます。</p>
+						</div>
+						<div class="privacyItem">
+							<h3>収集、利用目的</h3>
+							<p>当社では、お客様から、商品購入、プレゼントや懸賞への応募、アンケートの回答、メルマガの登録のなどの際に、ご提供頂いた個人情報を下記目的の範囲内で利用させて頂きます。<br><br>※お客様から個人情報を収集する場合は、利用目的をお知らせし、お客様からの同意を頂きご登録頂いております。</p>
+							<ul>
+								<li>・商品・サービスの提供の為。</li>
+								<li>・情報提供の為</li>
+								<li>・お客様へより良い商品・サービスを提供する為の統計、分析資料とする為。</li>
+								<li>・その他、サービスや運営上必要な連絡の為。</li>
+							</ul>
+						</div>
+						<div class="privacyItem">
+							<h3>安全管理</h3>
+							<p>当社では、お預かりした個人情報を適切に取り扱い・安全な管理を行います。安全対策を講じ、不正アクセス、紛失、改ざん及び漏洩などの防止に努めます。</p>
+						</div>
+						<div class="privacyItem">
+							<h3>開示、提供</h3>
+							<p>原則的には、お客様の個人情報を第三者に開示致しませんが、下記の場合は、法律に基づき開示する事があります。</p>
+							<ul>
+								<li>・お客様から事前に同意を得ている場合。</li>
+								<li>・商品の配送等、お客様が希望されるサービスを行う為、当社が業務委託先に必要な範囲で開示、提供が必要と判断した場合。</li>
+								<li>・決済会社での本人確認、請求先確認及び与信調査のため決済会社に個人情報を開示することがございます。</li>
+								<li>・警察署、裁判所等、公的機関より開示の申し出があった場合。</li>
+								<li>・当社の権利、財産を保護する為に必要であると判断した場合。</li>
+							</ul>
+						</div>
+						<div class="privacyItem">
+							<h3>開示、訂正、削除</h3>
+							<p>お客様が、ご自身の個人情報に関する開示、訂正、削除を希望される場合には、合理的な範囲で速やかに対応させて頂きます。</p>
+						</div>
+						<div class="privacyItem">
+							<h3>Cookie（クッキー）について</h3>
+							<p>Cookieは、ウェブサイトからお客様のブラウザに送ることのできるテキスト・データで、Cookieを受け取ることを了承頂いた場合に、Cookieはお客様のご使用になられたコンピューターのハードディスクドライブ内に記憶されます。<br>お客様が本ウェブサイトを再度訪問されたときなどは、必ずCookieを有効に設定してください。なお、Cookieはお客様個人を識別するものではありません。Cookieを無効に設定されると、本ウェブサイトにおけるサービスが正常にご利用できませんので、予めご了承ください。</p>
+						</div>
+						<div class="privacyItem">
+							<h3>SSLについて</h3>
+							<p>本ウェブサイトでは会員登録の際など、個人情報が送受信されるページにおいて、SSL（Secure Socket Layer）による暗号化通信を使用し、お客様の個人情報を外部の第三者に通信傍受されても解析できないようにするための対策を行っております。</p>
+						</div>
+						<div class="privacyItem">
+							<h3>ログについて</h3>
+							<p>お客様が本ウェブサイトをアクセスされたことについて、その操作の情報をアクセスログという形で記録しています。<br>このログは個人を特定できる情報を含むものではありませんが、今後のサイトの利便性向上の為や、万が一問題が発生した際の原因追求、利用状況に関する統計・分析処理などに使用する為に採取をしており、それ以外の目的には使用致しません。</p>
+						</div>
+						<div class="privacyItem">
+							<h3>その他</h3>
+							<p>今後、当社は、プライバシーポリシーを一部又は全部を改定する事があります。重要な改定がある場合には、Webサイトにおいてお知らせいたします。</p>
 						</div>
 					</div>
 				</div><!-- /#main -->
-
+				
 			</div><!--inner-->
 		</div><!-- /#contents -->
-
-
-</body>
-</article>
+	</article>
 </x-layout>
