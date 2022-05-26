@@ -69,7 +69,7 @@ class FacebookLoginController extends Controller
                 $img = @file_get_contents($sns_user->avatar);
                     $file_name = null;
                     if ($img !== false) {
-                        $file_name = 'icons/' . 'google' . '_' . uniqid() . '.jpg';
+                        $file_name = 'icons/' . 'facebook' . '_' . uniqid() . '.jpg';
                         \Storage::put('public/' . $file_name, $img, 'public');
                         UserProfile::create([
                             'user_id' => $user->id,
