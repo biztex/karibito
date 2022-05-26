@@ -45,7 +45,7 @@ class FacebookLoginController extends Controller
             return redirect()->route('user_profile.create');
         } else {
             if(session()->get('via_oauth') === 'login') {
-                return redirect()->route('register')->with('まだアカウントが作成されていません。会員登録画面からログインしてください。');
+                return redirect()->route('login')->with('flash_alert','ログイン情報が登録されていません。');
             }
             $duplicate_email_user = User::where('email', $sns_user->email)->first();
 

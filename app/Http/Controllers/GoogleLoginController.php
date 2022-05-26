@@ -33,7 +33,7 @@ class GoogleLoginController extends Controller
             return redirect()->route('user_profile.create');
         } else {  //idが同じユーザーがいない場合
             if(session()->get('via_oauth') === 'login') {
-                return redirect()->route('register')->with('flash_alert', 'ログイン情報が登録されていません。');
+                return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
             }
             $duplicate_email_user = User::where('email', $sns_user->email)->first();
             if($duplicate_email_user) { //メアドが重複しているユーザーがいる場合
