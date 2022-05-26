@@ -265,6 +265,12 @@
 					<div class="loginWrap">
 						<h2 class="subPagesHd">ログイン</h2>
 
+						@if (session('flash_alert'))
+							<div class="alert alert-danger mb05" style="z-index: 9999;">
+								{{ session('flash_alert') }}
+							</div>
+						@endif
+
 						<ul class="loginSns">
 							<li><a href="/login/facebook" target="_blank"><img src="/img/login/login_facebook.svg" alt="Facebookでログイン"></a></li>
 							<li><a href="/login/google" target="_blank"><img src="/img/login/login_google.svg" alt="Googleでログイン"></a></li>
