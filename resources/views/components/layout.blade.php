@@ -5,7 +5,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="format-detection" content="telephone=no">
-<meta name=”robots” content=”noindex”/>
+<!-- <meta name=”robots” content=”noindex”/> -->
 
 
 <title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
@@ -139,7 +139,7 @@
                                     </dl>
                                     <!-- <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p> -->
                                     <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
-                                    <div class="navMypageUl">
+                                    <div class="navMypageUl link01">
                                         <!-- <a href="{{ route('mypage') }}">マイページ</a> -->
                                         <a href="#">掲載内容一覧</a>
                                         <a href="#">お気に入り</a>
