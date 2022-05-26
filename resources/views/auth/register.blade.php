@@ -282,15 +282,20 @@
 								</li>
 							</ul>
 							<form method="POST" action="{{ route('register') }}">
-            				@csrf
-							<ul class="loginSns">
-								<li><a href="/login/facebook" target="_blank"><img src="img/login/login_facebook.svg"
-											alt="Facebookでログイン"></a></li>
-								<li><a href="/register/google" target="_blank"><img src="img/login/login_google.svg"
+								@csrf
+								@if (session('flash_alert'))
+									<div class="alert alert-danger mb05" style="z-index: 9999;">
+										{{ session('flash_alert') }}
+									</div>
+								@endif
+								<ul class="loginSns">
+									<li><a href="/register/facebook" target="_blank"><img src="img/login/login_facebook.svg"
+										alt="Facebookでログイン"></a></li>
+										<li><a href="/register/google" target="_blank"><img src="img/login/login_google.svg"
 											alt="Googleでログイン"></a></li>
-							</ul>
-							<div class="contactBox">
-								<p class="loginHd"><span>または</span></p>
+										</ul>
+								<div class="contactBox">
+									<p class="loginHd"><span>または</span></p>
 
 									<div class="labelCategory">
 										<p>メールアドレス（半角英数字128文字以内）</p>

@@ -136,20 +136,17 @@ Route::get('notation',[NotationController::class,'show']);
 Route::get('publication',[PublicationController::class,'index']);
 
 
+
+
 // google login
 Route::get('/register/google', [GoogleLoginController::class, 'getGoogleAuth']);
-Route::get('/register/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
-
-
 Route::get('/login/google', [GoogleLoginController::class, 'getGoogleAuth']);
 Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleCallback']);
 
 // facebook login
+Route::get('/register/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
-// facebookにメアドがない場合
-// Route::get('/register/facebook/form', [FacebookRegisterController::class, 'form'])->middleware('exists.session.facebookid')->name('register.facebook.form');
-// Route::post('register/facebook', [FacebookRegisterController::class, 'register'])->name('register.facebook.store');
 
 
 Route::prefix('sample')->group(function (){

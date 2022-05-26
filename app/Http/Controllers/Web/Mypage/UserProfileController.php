@@ -62,26 +62,7 @@ class UserProfileController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $driver_name = '';
-        if(\Auth::user()->google_id){
-            $driver_name = self::DRIVER_GOOGLE;
-            $sns_user = Socialite::driver($driver_name)->userFromToken(\Auth::user()->google_token);
 
-        }elseif(\Auth::user()->facebook_id){
-            $driver_name = self::DRIVER_FACEBOOK;
-            $sns_user = Socialite::driver($driver_name)->userFromToken(\Auth::user()->facebook_token);
-        }
-
-        if(!$driver_name == ''){
-            // 画像の保存、画像URLが取得できなかった時の対策でfile_get_contentsの前に@をつけている
-            $img = @file_get_contents($sns_user->avatar);
-            $fileName = null;
-            if ($img !== false) {
-                $fileName = 'icons/' . $driver_name . '_' . uniqid() . '.jpg';
-                \Storage::put('public/' . $fileName, $img, 'public');
-                $request->merge(['icon' => $fileName]);
-            }
-        }
 
         \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUser($request->all());

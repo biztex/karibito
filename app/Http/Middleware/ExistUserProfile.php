@@ -19,7 +19,7 @@ class ExistUserProfile
      */
     public function handle(Request $request, Closure $next)
     {
-        if(UserProfile::where('user_id',Auth::id())->exists()){
+        if(UserProfile::where('first_name', '')->exists()){
             return redirect()->route('mypage');
         }
         return $next($request);
