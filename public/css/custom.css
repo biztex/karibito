@@ -332,3 +332,17 @@
 		padding-top: 3.5px;
 	}
 }
+#register_confirm .navHeadSp{
+	display: none;
+}
+#register_confirm .navMypageDl,
+#register_confirm .gnavEdit,
+#register_confirm .link01{
+	display: none;
+}
+
+#register_confirm .navUl02 .nav02,
+#register_confirm .navUl02 .nav03,
+#register_confirm .navUl02 .navLink{
+	display: none;
+}

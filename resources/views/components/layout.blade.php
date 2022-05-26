@@ -139,7 +139,7 @@
                                     </dl>
                                     <!-- <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p> -->
                                     <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
-                                    <div class="navMypageUl">
+                                    <div class="navMypageUl link01">
                                         <!-- <a href="{{ route('mypage') }}">マイページ</a> -->
                                         <a href="#">掲載内容一覧</a>
                                         <a href="#">お気に入り</a>
