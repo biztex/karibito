@@ -343,3 +343,14 @@
 		</body>
 	</article>
 </x-layout>
+<script>
+	$(function(){
+		// 利用規約/プライバシーポリシー リンク別ウィンドウで開く
+		$(document).ready(function(){
+			$('.checkBox a').click(function(){
+			window.open(this.href,'');
+			return false;
+			});
+		});
+	});
+</script>
