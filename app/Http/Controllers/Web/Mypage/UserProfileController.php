@@ -81,15 +81,13 @@ class UserProfileController extends Controller
                 \Storage::put('public/' . $fileName, $img, 'public');
                 $request->merge(['icon' => $fileName]);
             }
-            // dd($request->all());
         }
-        // $request->merge(['icon', $sns_user->avatar]);
 
         \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUser($request->all());
             $this->user_profile_service->storeUserProfile($request->all());
         });
-        
+
         return redirect()->route('complete.show');
     }
 
