@@ -21,17 +21,17 @@ class UserProfileService
     /**
      * ユーサープロフィール基本情報登録
      */
-    public function storeUserProfile($params)
+    public function storeUserProfile(array $params):UserProfile
     {
-        $user_profile = UserProfile::create([
-            'user_id' => \Auth::id(),
-            'first_name' => $params['first_name'],
-            'last_name' => $params['last_name'],
-            'gender' => $params['gender'],
-            'prefecture_id' => $params['prefecture'],
-            'icon' => $params['icon'] ?? null
-        ]);
-        return $user_profile->save();
+        $user_profile = UserProfile::updateOrCreate(
+            ['user_id' => \Auth::id()],
+            [
+                'first_name' => $params['first_name'],
+                'last_name' => $params['last_name'],
+                'gender' => $params['gender'],
+                'prefecture_id' => $params['prefecture'],
+            ],  );
+        return $user_profile;
     }
 
     /**
