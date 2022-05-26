@@ -346,3 +346,30 @@
 #register_confirm .navUl02 .navLink{
 	display: none;
 }
+.flash_msg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+	font-size: 14px;
+	color: #664d03;
+    background-color: #fff3cd;
+    border: solid 1px #ffecb5;
+}
+
+.flash_close {
+	color: #664d03;
+	font-weight: 100;
+	font-size: 21px;
+	margin-right: 21px;
+
+}
+.flash_close:hover {
+	cursor: pointer;
+}
+
+@media screen and (max-width: 767px){
+	.flash_msg {
+		font-size: 10px;
+	}
+}

@@ -112,6 +112,7 @@ class UserProfileController extends Controller
             $this->user_profile_service->updateUserProfileImage($request,'cover');
             $this->user_profile_service->updateUserProfileImage($request,'icon');
 
+            \Session::put('flash_msg','プロフィールを編集しました！');
         });
 
         return redirect()->route('mypage');
