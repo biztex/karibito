@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('facebook_id')->nullable()->unique()->after('remember_token');
-            $table->string("google_id")->nullable()->unique()->after('facebook_id');
+            $table->string('facebook_token')->nullable()->unique()->after('facebook_id');
+            $table->string("google_id")->nullable()->unique()->after('facebook_token');
             $table->string("google_token")->nullable()->unique()->after('google_id');
             $table->string('password')->nullable()->change();
         });
@@ -29,8 +30,10 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('google_id');
             $table->dropColumn('facebook_id');
+            $table->dropColumn('facebook_token');
+            $table->dropColumn('google_id');
+            $table->dropColumn('google_token');
             $table->string('password')->nullable(false)->change();
         });
     }

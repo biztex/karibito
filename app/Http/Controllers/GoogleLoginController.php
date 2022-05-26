@@ -22,6 +22,8 @@ class GoogleLoginController extends Controller
     public function authGoogleCallback()
     {
         $sns_user = Socialite::driver('google')->stateless()->user();
+        dd($sns_user);
+
         $user = User::where('google_id', $sns_user->id)->first();
         // echo url()->previous();
         // if(url()->previous() = '')
@@ -38,7 +40,6 @@ class GoogleLoginController extends Controller
                 $duplicate_email_user->google_id = $sns_user->id;
                 $duplicate_email_user->save();
             } else { //メアドが重複しているユーザーがいない場合
-
             $user = User::create([
                 'email' => $sns_user->email,
                 'google_id' => $sns_user->id,

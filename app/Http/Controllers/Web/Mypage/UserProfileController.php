@@ -66,12 +66,12 @@ class UserProfileController extends Controller
         if(\Auth::user()->google_id){
             $driver_name = self::DRIVER_GOOGLE;
             $sns_user = Socialite::driver($driver_name)->userFromToken(\Auth::user()->google_token);
-            // dd($user);
-            // $sns_user = Socialite::driver($driver_name)->toke()->user();
+
         }elseif(\Auth::user()->facebook_id){
             $driver_name = self::DRIVER_FACEBOOK;
             $sns_user = Socialite::driver($driver_name)->userFromToken(\Auth::user()->facebook_token);
         }
+
         if(!$driver_name == ''){
             // 画像の保存、画像URLが取得できなかった時の対策でfile_get_contentsの前に@をつけている
             $img = @file_get_contents($sns_user->avatar);

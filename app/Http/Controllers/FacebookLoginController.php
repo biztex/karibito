@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,7 @@ class FacebookLoginController extends Controller
         // TODO 汎用的な変数名に変更する
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
-        $sns_user = Socialite::driver('facebook')->user();
-        dd($sns_user);
+        $sns_user = Socialite::driver('facebook')->stateless()->user();
 
         if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
             return back()->with('error_msg', 'フェイスブックにメールアドレスが登録されていませんでした。フェイスブックでメールアドレスを登録するか、メールアドレスで新規登録してください。');
@@ -53,7 +53,8 @@ class FacebookLoginController extends Controller
                     'name' => $sns_user->name,
                     'email' => $sns_user->email,
                     'email_verified_at' => Carbon::now(),
-                    'facebook_id' => $sns_user->id
+                    'facebook_id' => $sns_user->id,
+                    'facebook_token' => $sns_user->token
                 ]);
             }
             // ログインする
