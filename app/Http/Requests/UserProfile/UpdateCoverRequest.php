@@ -24,7 +24,7 @@ class UpdateCoverRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'max:20000 | image'
+            'file' => 'nullable | max:20480 | file | mimes:png,jpg'
         ];
     }
 }

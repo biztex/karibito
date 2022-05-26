@@ -284,7 +284,7 @@
 		width: auto;
 	}
 }
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 767px) {
 	#gNavi .navUl02.pc{display: none}
 	#gNavi .navUl02.sp{display: block;}
 	.btnMenu{ display:block; }

@@ -24,11 +24,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | max:128',
-            'first_name' => 'required | max:128',
-            'last_name' => 'required | max:128',
-            'gender' => 'required',
-            'prefecture' => 'required',
+            'name' => 'required | max:24 | string',
+            'first_name' => 'required | max:24 | string',
+            'last_name' => 'required | max:24 | string',
+            'gender' => 'required | integer',
+            'prefecture' => 'required | integer',
         ];
     }
 }

@@ -123,19 +123,19 @@
 								<dt>生年月日<span>(年代のみ公開されます)</span></dt>
 								<dd>
 									<select class="year" name="year">
-										<option selected="" disabled="">年</option>
+										<option value="">年</option>
 										@for ($i = 1900; $i < 2023; $i++ )
 											<option value="{{$i}}" @if($i == old('year', date("Y",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
 									<select class="month" name="month">
-										<option selected="" disabled="">月</option>
+										<option value="">月</option>
 										@for ($i = 1; $i < 13; $i++ )
 											<option value="{{$i}}" @if($i == old('month', date("n",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 										@endfor
 									</select>
 									<select class="day" name="day" type="day">
-										<option selected="" disabled="">日</option>
+										<option value="">日</option>
 										@for ($i = 1; $i < 32; $i++ )
 											<option value="{{$i}}" @if($i == old('day', date("j",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 										@endfor
@@ -151,7 +151,7 @@
 									<p class="addrNumber"><input class="short" type="text" name="zip" value="{{old('zip',$user_profile->zip)}}"></p>
 									<div class="addrSelect">
 										<select class="short" name="prefecture">
-										    <option selected="" disabled="">選択してください</option>
+										    <option value="">選択してください</option>
 											@foreach($prefectures as $prefecture)
 												<option value="{{$prefecture->id}}" @if($prefecture->id == (int)old('prefecture',$user_profile->prefecture_id)) selected @endif>{{$prefecture->name}}</option>
 											@endforeach
@@ -163,7 +163,7 @@
 									<p><input type="text" name="address" placeholder="市区町村" value="{{old('address',$user_profile->address)}}"></p>
 								</dd>
 							</dl>
-							<div class="specialtyBox">
+							<!-- <div class="specialtyBox">
 								<div class="specialtyItem">
 									<div class="clone">
 										<dl>
@@ -189,7 +189,7 @@
 									</div>
 									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
 								</div>
-							</div>
+							</div> -->
 							<dl>
 								<dt>自己紹介</dt>
 								<dd><textarea name="introduction">{{old('introduction',$user_profile->introduction)}}</textarea></dd>
