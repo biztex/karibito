@@ -29,6 +29,7 @@ class FacebookLoginController extends Controller
      */
     public function authFacebookCallback()
     {
+        dd('aaa');
         // TODO 汎用的な変数名に変更する
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
@@ -39,6 +40,7 @@ class FacebookLoginController extends Controller
         }
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user = User::where('facebook_id', $sns_user->id)->first();
+
 
         if ($user){
             Auth::login($user);
