@@ -39,6 +39,7 @@ class FacebookLoginController extends Controller
         }
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user = User::where('facebook_id', $sns_user->id)->first();
+        dd($user);
 
 
         if ($user){
