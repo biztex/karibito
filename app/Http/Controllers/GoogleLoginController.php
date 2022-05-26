@@ -15,13 +15,14 @@ class GoogleLoginController extends Controller
 {
     public function getGoogleAuth()
     {
+        $uraal = url()->previous('');
         return Socialite::driver('google')->redirect();
     }
-
 
     public function authGoogleCallback()
     {
         $sns_user = Socialite::driver('google')->stateless()->user();
+        dd($uraal);
 
         $user = User::where('google_id', $sns_user->id)->first();
         // echo url()->previous();

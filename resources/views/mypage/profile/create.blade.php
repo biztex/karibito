@@ -286,6 +286,8 @@
                                         @enderror
 									<p><input type="text" name="name" placeholder="" class="@error('name') is-invalid @enderror" value="{{ old('name') }}"></p>
 								</div>
+
+
 									@if($errors->has('first_name') || $errors->has('last_name'))
                                     	<div class="alert alert-danger" style="padding-bottom:0;">姓名は必ず指定してください。</div>
                                 	@endif
