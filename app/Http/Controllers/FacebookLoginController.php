@@ -29,11 +29,11 @@ class FacebookLoginController extends Controller
      */
     public function authFacebookCallback()
     {
-        dd('aaa');
         // TODO 汎用的な変数名に変更する
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
         $sns_user = Socialite::driver('facebook')->stateless()->user();
+        dd($sns_user);
 
         if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
             return back()->with('flash_alert', 'フェイスブックにメールアドレスが登録されていませんでした。フェイスブックでメールアドレスを登録するか、メールアドレスで新規登録してください。');
