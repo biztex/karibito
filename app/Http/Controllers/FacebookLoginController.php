@@ -36,7 +36,7 @@ class FacebookLoginController extends Controller
         dd($sns_user);
 
         if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
-            return back()->with('flash_alert', 'フェイスブックにメールアドレスが登録されていませんでした。フェイスブックでメールアドレスを登録するか、メールアドレスで新規登録してください。');
+            return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
         }
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user = User::where('facebook_id', $sns_user->id)->first();
