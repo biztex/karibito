@@ -5,14 +5,16 @@
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="format-detection" content="telephone=no">
-<meta name=”robots” content=”noindex”/>
+<!-- <meta name=”robots” content=”noindex”/> -->
 
 
-<title>知識・スキル・経験を商品化マッチングプラットフォーム！</title>
+<title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
 <meta name="keywords" content="キーワード">
-<meta name="description" content="ディスクリプション">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
+<!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
  
+<link rel="shortcut icon" href="/favicon.ico">
+
 <link rel="stylesheet" type="text/css" href="/css/slick.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
@@ -27,7 +29,7 @@
             <div id="headerLinks">
                 <div class="inner">
                     <div class="item">
-                        <h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
+                        <h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO" style="min-width:93px;"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
                         <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p>
                         <div class="searchBox">
                             <select class="searchSelect">
@@ -43,15 +45,18 @@
                         </div>
                     </div> 
                     <div class="item">
-                        <p class="navHeadSp">
-                            @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
-                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
-                                @else
-                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></a>
-                            @endif
-                        </p>
+                        @auth
+                            <p class="navHeadSp">
+                            
+                                @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
+                                    <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="/img/mypage/pic_head.png" alt=""></a>
+                                    @else
+                                    <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></a>
+                                @endif
+                            </p>
+                        @endauth
                         <div class="btnMenu"><span></span><span></span><span></span></div> 
-                        <nav id="gNavi" @if(!Auth::check()) style="padding-top:50px"@endif>
+                        <nav id="gNavi">
                             <ul class="navUl02 pc">
                                 <li><a href="#" class="nav01">サポート</a></li> 
                                 @auth
@@ -98,7 +103,7 @@
                                 <li><a href="#" class="nav02">お気に入り</a></li>
                                 <li class="navLink">
                                         @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
-                                            <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
+                                            <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/common/nav_head.png" alt=""></a>
                                             @else
                                             <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
                                         @endif
@@ -112,12 +117,12 @@
                                             <dd>{{\Auth::user()->name}}</dd>
                                         </dl>
                                         <div class="navMypageUl">
-                                            <a href="mypage">マイページ</a>
+                                            <a href="{{ route('mypage') }}">マイページ</a>
                                             <a href="#">掲載内容一覧</a>
-                                            <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
+                                            <!-- <a href="#fancybox_person" class="fancybox">プロフィール編集</a> -->
                                             <a href="#">設定</a>
                                         </div>
-                                        <p class="navMypageUlLink"><a href="logout">ログアウト</a></p>
+                                        <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
                                     </div>
                                 </li>
                             @endauth
@@ -126,15 +131,16 @@
 								@auth
                                     <dl class="navMypageDl">
                                         @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
-                                            <dt><img src="/img/common/nav_head.png" alt=""></dt>
+                                            <dt><img src="/img/mypage/pic_head.png" alt=""></dt>
                                             @else
                                             <dt><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></dt>
                                         @endif
                                         <dd>{{\Auth::user()->name}}</dd>
                                     </dl>
-                                    <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p>
-                                    <div class="navMypageUl">
-                                        <a href="mypage">マイページ</a>
+                                    <!-- <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p> -->
+                                    <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
+                                    <div class="navMypageUl link01">
+                                        <!-- <a href="{{ route('mypage') }}">マイページ</a> -->
                                         <a href="#">掲載内容一覧</a>
                                         <a href="#">お気に入り</a>
                                         <a href="#" class="blueBtn">投稿する</a>
@@ -147,12 +153,12 @@
 								    @endguest
                                     <a href="#">ご利用ガイド</a>
                                     <a href="#">カリビトQ&A</a>
-                                    <a href="privacy">プライバシーポリシー</a>
+                                    <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
                                     <a href="#">設定</a>
                                     <a href="#">お問い合わせ</a>
                                 </div>
                                 @auth
-                                    <p class="navMypageUlLink"><a href="logout">ログアウト</a></p>
+                                    <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
                                 @endauth
                             </div>
                         </nav><!-- /#gNavi -->
@@ -1206,8 +1212,8 @@
     					<p class="level1 toggleBtn">カリビトについて</p>
     					<ul class="level2 toggleBox">
     						<li><a href="#">法人のご利用について</a></li>
-    						<li><a href="privacy-policy">プライバシーポリシー</a></li>
-    						<li><a href="terms-of-service">利用規約</a></li>
+    						<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
+    						<li><a href="{{  route('terms-of-service') }}">利用規約</a></li>
     						<li><a href="#">ゲスト規約</a></li>
     						<li><a href="#">ホスト規約</a></li>
     						<li><a href="#">スマートフォンアプリ</a></li>
@@ -1218,7 +1224,7 @@
     		<div class="bottom">
     			<div class="inner">
     				<div class="serviceLinks">
-    					<a href="company">運営会社</a>
+    					<a href="{{ route('company') }}">運営会社</a>
     					<a href="#">採用情報</a>
     					<a href="#">約款特定</a>
     					<a href="#">商取引法に基づく表示</a>
@@ -1231,7 +1237,7 @@
 						<a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a>
 						<a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a>
 					</div>
-    				<p id="copyright">©2021 karibito, Inc.</p>
+    				<p id="copyright">©{{ now()->year }} karibito, Inc.</p>
     			</div>
     		</div> 
         </div><!-- /#footer -->

@@ -4092,7 +4092,7 @@ select.searchSelect{
 .navHeadSp{
 	display: none;
 }
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 767px) {
 	.navHeadSp {
 	    padding: 0;
 	    width: 30px;

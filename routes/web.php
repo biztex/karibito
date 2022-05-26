@@ -79,9 +79,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // プライバシーポリシーと運営会社
-Route::view('/privacy-policy'  , 'privacy-policy');
-Route::view('/company', 'company');
-Route::view('/terms-of-service','terms-of-service');
+Route::view('/privacy-policy'  , 'privacy-policy')->name('privacy-policy');
+Route::view('/company', 'company')->name('company');
+Route::view('/terms-of-service','terms-of-service')->name('terms-of-service');
 
 
 // index:一覧画面(get)

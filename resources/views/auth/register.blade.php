@@ -297,22 +297,22 @@
 										@error('email')
 										<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
-										<p><input type="email" name="email" placeholder="例） email@karibito.jp" value="{{old('email')}}"></p>
+										<p><input type="email" name="email" placeholder="例） email@karibito.jp" value="{{old('email')}}" required></p>
 									</div>
 									<div class="labelCategory">
 										<p>メールアドレス（再確認）</p>
-										<p><input type="email" name="email_confirmation" placeholder="例） email@karibito.jp"value="{{old('email_confirmation')}}"></p>
+										<p><input type="email" name="email_confirmation" placeholder="例） email@karibito.jp"value="{{old('email_confirmation')}}" required></p>
 									</div>
 									<div class="labelCategory">
 										<p>パスワード（半角英数字 8文字 〜 100文字）</p>
 										@error('password')
 										<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
-										<p><input type="password" name="password" placeholder=""></p>
+										<p><input type="password" name="password" placeholder="" required></p>
 									</div>
 									<div class="labelCategory">
 										<p>パスワード（再確認）</p>
-										<p><input type="password" name="password_confirmation" placeholder=""></p>
+										<p><input type="password" name="password_confirmation" placeholder="" required></p>
 									</div>
 
 									<div class="labelCategory">
@@ -320,15 +320,19 @@
 										<div class="alert alert-danger" style="text-align: center;">{{ $message }}</div>
 										@enderror
 										<div class="checkBox">
-											<label><input type="checkbox" name="terms">利用規約とプライバシーポリシーに同意する</label>
+											<label><input type="checkbox" name="terms" value="checked" @if(old('terms') == 'checked') checked @endif required>
+												<a href="{{ route('terms-of-service') }}">利用規約</a>と<a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>に同意する
+											</label>
 										</div>
 									</div>
 				
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit" value="送信"></li>
-										<!-- <li><input type="submit" class="submit" value="ログイン"></li> -->
 									</ul>
 								</form>
+								<div class="loginBottom">
+									<p class="loginBottomRegister"><a href="{{route('login')}}">ログインはこちらから</a></p>
+								</div>
 							</div>
 						</div>
 					</div><!-- /#main -->

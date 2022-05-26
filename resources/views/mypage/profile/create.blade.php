@@ -280,11 +280,11 @@
 							<form action="{{ route('user_profile.store') }}" method="post" enctype="multipart/form-data" name="form1">
 								@csrf
 								<div class="labelCategory">
-									<p>ニックネーム（00字以内）</p>
+									<p>ニックネーム（24字以内）</p>
 										@error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-									<p><input type="text" name="name" placeholder="" class="@error('name') is-invalid @enderror" value="{{ old('name') }}"></p>
+									<p><input type="text" name="name" placeholder="" class="@error('name') is-invalid @enderror" value="{{ old('name') }}" required></p>
 								</div>
 
 
@@ -293,18 +293,18 @@
                                 	@endif
 								<div class="labelCategory inlineFlex">
 									<p>姓</p>
-									<p><input type="text" name="first_name" placeholder="" class="@error('first_name') is-invalid @enderror" value="{{ old('first_name') }}"></p>
+									<p><input type="text" name="first_name" placeholder="" class="@error('first_name') is-invalid @enderror" value="{{ old('first_name') }}" required></p>
 								</div>
 								<div class="labelCategory inlineFlex">
 									<p>名</p>
-									<p><input type="text" name="last_name" placeholder="" class="@error('last_name') is-invalid @enderror" value="{{ old('last_name') }}"></p>
+									<p><input type="text" name="last_name" placeholder="" class="@error('last_name') is-invalid @enderror" value="{{ old('last_name') }}" required></p>
 								</div>
 								<div class="labelCategory">
 									<div class="radioBox">
 										@error('gender')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-										<label><input type="radio" value="1" name="gender" @if(1 == old('gender')) checked @endif>男性</label>
+										<label><input type="radio" value="1" name="gender" @if(1 == old('gender')) checked @endif required>男性</label>
 										<label><input type="radio" value="2" name="gender" @if(2 == old('gender')) checked @endif>女性</label>
 									</div>
 								</div>
@@ -314,8 +314,8 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
 										<div>
-											<select name="prefecture" class="@error('prefecture') is-invalid @enderror">
-                                                <option selected="" disabled="">選択してください</option>
+											<select name="prefecture" class="@error('prefecture') is-invalid @enderror" required>
+                                                <option value="">選択してください</option>
                                                 @foreach ( $prefectures as $prefecture )
                                                     <option value="{{$prefecture->id}}"  @if($prefecture->id == old('prefecture')) selected @endif>{{$prefecture->name}}</option>
                                                 @endforeach
@@ -323,11 +323,9 @@
 										</div>
 								</div>
 								<ul class="loginFormBtn">
-									<li><input type="submit" class="submit" value="次へ"></li>
-							</form>
-
-									<li><input type="submit" class="submit gray" value="戻る"></li>
+									<li><input type="submit" class="submit" value="登録"></li>
 								</ul>
+							</form>
 						</div>
 					</div>
 				</div><!-- /#main -->

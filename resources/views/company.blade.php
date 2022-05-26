@@ -5,14 +5,16 @@
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="format-detection" content="telephone=no">
-<meta name=”robots” content=”noindex”/>
+<!-- <meta name=”robots” content=”noindex”/> -->
 
 
-<title>知識・スキル・経験を商品化マッチングプラットフォーム！</title>
+<title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
 <meta name="keywords" content="キーワード">
-<meta name="description" content="ディスクリプション">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
+<!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
  
+<link rel="shortcut icon" href="/favicon.ico">
+
 <link rel="stylesheet" type="text/css" href="/css/slick.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
@@ -28,7 +30,7 @@
                 <div class="inner">
                     <div class="item">
                         <h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
-                        <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p>
+                        <p class="searchBtnSp sp"><!-- <img src="/img/common/ico_sea.svg" alt=""> --></p>
                     </div> 
 
 					<div class="item">
@@ -291,8 +293,8 @@
     					<p class="level1 toggleBtn">カリビトについて</p>
     					<ul class="level2 toggleBox">
     						<li><a href="#">法人のご利用について</a></li>
-    						<li><a href="privacy-policy">プライバシーポリシー</a></li>
-    						<li><a href="terms-of-service">利用規約</a></li>
+    						<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
+    						<li><a href="{{ route('terms-of-service') }}">利用規約</a></li>
     						<li><a href="#">ゲスト規約</a></li>
     						<li><a href="#">ホスト規約</a></li>
     						<li><a href="#">スマートフォンアプリ</a></li>
@@ -303,7 +305,7 @@
     		<div class="bottom">
     			<div class="inner">
     				<div class="serviceLinks">
-    					<a href="#">運営会社</a>
+    					<a href="{{ route('company') }}">運営会社</a>
     					<a href="#">採用情報</a>
     					<a href="#">約款特定</a>
     					<a href="#">商取引法に基づく表示</a>
@@ -316,7 +318,7 @@
 						<a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a>
 						<a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a>
 					</div>
-    				<p id="copyright">©2021 karibito, Inc.</p>
+    				<p id="copyright">©{{ now()->year }} karibito, Inc.</p>
     			</div>
     		</div> 
         </div><!-- /#footer -->
