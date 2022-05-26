@@ -28,7 +28,8 @@ class UserProfileService
             'first_name' => $params['first_name'],
             'last_name' => $params['last_name'],
             'gender' => $params['gender'],
-            'prefecture_id' => $params['prefecture']
+            'prefecture_id' => $params['prefecture'],
+            'icon' => $params['icon'] ?? null
         ]);
         return $user_profile->save();
     }

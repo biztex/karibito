@@ -22,9 +22,9 @@ class GoogleLoginController extends Controller
     public function authGoogleCallback()
     {
         $sns_user = Socialite::driver('google')->stateless()->user();
-        // dd($sns_user);
         $user = User::where('google_id', $sns_user->id)->first();
-
+        // echo url()->previous();
+        // if(url()->previous() = '')
         if ($user){ //idが同じユーザーがいる場合
             Auth::login($user);
             return redirect()->route('user_profile.create');
@@ -38,21 +38,12 @@ class GoogleLoginController extends Controller
                 $duplicate_email_user->google_id = $sns_user->id;
                 $duplicate_email_user->save();
             } else { //メアドが重複しているユーザーがいない場合
-                // 画像の保存、画像URLが取得できなかった時の対策でile_get_contentsの前に@をつけている
-            $img = @file_get_contents($sns_user->avatar);
-            $fileName = null;
-            if ($img !== false) {
-                $fileName = 'icon/' . 'google' . '_' . uniqid() . '.jpg'; //publicがいるかどうか
-                \Storage::put($fileName, $img, 'public');
-            }
+
             $user = User::create([
                 'email' => $sns_user->email,
                 'google_id' => $sns_user->id,
+                'google_token' => $sns_user->token,
                 'email_verified_at' => Carbon::now()
-            ]);
-            // dd($fileName);
-            $user->user_profiles->create([
-                'icon' => $fileName,
             ]);
         }
                     Auth::login($user);

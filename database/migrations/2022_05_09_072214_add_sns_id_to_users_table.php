@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('facebook_id')->nullable()->unique()->after('remember_token');
             $table->string("google_id")->nullable()->unique()->after('facebook_id');
+            $table->string("google_token")->nullable()->unique()->after('google_id');
             $table->string('password')->nullable()->change();
         });
     }
