@@ -9,23 +9,23 @@
 
 
 <title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
-<meta name="keywords" content="キーワード">
+<meta name="keywords" content="カリビト,知識,スキル,経験,マッチング,プラットフォーム">  
 <meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
 
-<meta property="og:url" content="https://stg-karibito.4sis.site/">
+<meta property="og:url" content="{{ config('app.url') }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="【仮】知識・スキル・経験を商品化マッチングプラットフォーム！">
-<meta property="og:description" content="ディスクリプション">
+<meta property="og:title" content="【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！ ">
+<meta property="og:description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <meta property="og:site_name" content="カリビト">
 <meta property="og:image" content="{{ asset('OGP.jpg') }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<meta name="twitter:title" content="【仮】知識・スキル・経験を商品化マッチングプラットフォーム！">
-<meta name="twitter:description" content="ディスクリプション">
+<meta name="twitter:title" content="【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！ ">
+<meta name="twitter:description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <meta name="twitter:image" content="{{ asset('OGP.jpg') }}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 
 
 <link rel="shortcut icon" href="/favicon.ico">
