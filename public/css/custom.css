@@ -351,17 +351,22 @@
 	display: none;
 }
 #create .gnavEdit,
-#create .link01,
-#create .navMypageDl img,
-#create .navMypageDl,
-#create .navMypageUl{
+#create .link01
+{
 	display: none;
 }
-.navMypageUlLink {
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-size: 14px;
+@media screen and (min-width: 767px){
+	.navMypageUlLink {
+		border: none;
+		padding: 0;
+		margin: 0;
+		font-size: 14px;
+	}
+	#create .navMypageUl,
+#create .navMypageDl
+{
+		display:none;
+	}
 }
 
 .flash_msg {
