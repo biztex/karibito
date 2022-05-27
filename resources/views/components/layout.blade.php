@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head prefix=”og: http://ogp.me/ns#”>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -18,13 +18,13 @@
 <meta property="og:title" content="【仮】知識・スキル・経験を商品化マッチングプラットフォーム！">
 <meta property="og:description" content="ディスクリプション">
 <meta property="og:site_name" content="カリビト">
-<meta property="og:image" content="https://stg-karibito.4sis.site/public/img/top/img_main_sp.png">
+<meta property="og:image" content="{{ asset('OGP.jpg') }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:title" content="【仮】知識・スキル・経験を商品化マッチングプラットフォーム！">
 <meta name="twitter:description" content="ディスクリプション">
-<meta name="twitter:image" content="画像絶対パス">
+<meta name="twitter:image" content="{{ asset('OGP.jpg') }}">
 <meta name="twitter:card" content="summary">
 
 
