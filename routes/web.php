@@ -61,7 +61,7 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'verified'])->group(function () {
 
     // 会員登録・プロフィール登録
-    Route::middleware('exsist.user.profile')->group(function () {
+    Route::middleware('exist.user.profile')->group(function () {
         Route::resource('user_profile',UserProfileController::class,['only' => ['create','store']]);
     });
 

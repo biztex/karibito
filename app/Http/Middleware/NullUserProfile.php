@@ -22,7 +22,7 @@ class NullUserProfile
         if(UserProfile::where([
             ['user_id', '=', Auth::id()],
             ['first_name', '=', null],
-        ])){
+        ])->exists()){
             return redirect()->route('user_profile.create');
         };
         return $next($request);
