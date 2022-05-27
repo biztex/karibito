@@ -24,7 +24,9 @@
 										変更する必要あり。
 			.navHeadSp { ~~~ } */
 .detailStyle .recommendList .list .item{max-width: 212px}
-
+.fancyPersonTable select {
+	color: black;
+}
 .fancyPersonBtn button{
 	margin-left: 15px;
 	display: flex;

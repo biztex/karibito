@@ -550,6 +550,7 @@
 		// フラッシュメッセージ閉じるボタン
 		$('.flash_close').on('click',function(){
 			$('.flash_msg').fadeOut(400);
+			@json(\Session::put('flash_msg',null));
 		})
 				
 	});
