@@ -16,6 +16,17 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        // 年、月、日の入力からdate型の誕生日を作成
+        $birthday = $this->year . '-' . $this->month . '-' . $this->day;
+
+        $this->merge([
+            'birthday' => $birthday,
+        ]);
+    }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,9 +39,7 @@ class UpdateRequest extends FormRequest
             'first_name' => 'required | max:24 | string',
             'last_name' => 'required | max:24 | string',
             'gender' => 'required | integer | in:1,2',
-            'year' => 'required | integer',
-            'month' => 'required | integer',
-            'day' => 'required | integer',
+            'birthday' => 'required | date',
             'prefecture' => 'required | integer | exists:prefectures,id',
             'zip' => 'required | numeric | digits:7',
             'address' => 'required | max:255',
