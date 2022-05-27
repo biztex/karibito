@@ -282,15 +282,15 @@
 								</li>
 							</ul>
 							<form method="POST" action="{{ route('register') }}">
-            				@csrf
-							<ul class="loginSns">
-								<li><a href="/login/facebook" target="_blank"><img src="img/login/login_facebook.svg"
-											alt="Facebookでログイン"></a></li>
-								<li><a href="/register/google" target="_blank"><img src="img/login/login_google.svg"
+								@csrf
+								<ul class="loginSns">
+									<li><a href="/register/facebook" target="_blank"><img src="img/login/login_facebook.svg"
+										alt="Facebookでログイン"></a></li>
+										<li><a href="/register/google" target="_blank"><img src="img/login/login_google.svg"
 											alt="Googleでログイン"></a></li>
-							</ul>
-							<div class="contactBox">
-								<p class="loginHd"><span>または</span></p>
+										</ul>
+								<div class="contactBox">
+									<p class="loginHd"><span>または</span></p>
 
 									<div class="labelCategory">
 										<p>メールアドレス（半角英数字128文字以内）</p>
@@ -325,7 +325,7 @@
 											</label>
 										</div>
 									</div>
-				
+
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit" value="送信"></li>
 									</ul>
@@ -336,7 +336,6 @@
 							</div>
 						</div>
 					</div><!-- /#main -->
-
 				</div>
 				<!--inner-->
 			</div><!-- /#contents -->

@@ -2,6 +2,11 @@
 <article>
 	<body id="login">
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
+		{{-- フェイスブックのメアドがない場合にエラーを表示 --}}
+		@if($errors->has('error_msg'))
+			<div class="error-txt">{{ $errors->first('error_msg') }}</div>
+		@endif
+            {{-- {{ $error_msg}}; --}}
 		<!-- <div class="hide">
 			<div id="fancybox_register" class="fancyboxWrap">
 				<p class="fancyboxHd">身分証明証の登録</p>
@@ -259,15 +264,21 @@
 				<div id="main">
 					<div class="loginWrap">
 						<h2 class="subPagesHd">ログイン</h2>
-						
+
+						@if (session('flash_alert'))
+							<div class="alert alert-danger mb05" style="z-index: 9999;">
+								{{ session('flash_alert') }}
+							</div>
+						@endif
+
 						<ul class="loginSns">
 							<li><a href="/login/facebook" target="_blank"><img src="/img/login/login_facebook.svg" alt="Facebookでログイン"></a></li>
 							<li><a href="/login/google" target="_blank"><img src="/img/login/login_google.svg" alt="Googleでログイン"></a></li>
 						</ul>
-						  <!--確認中 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>  -->
+						<!--確認中 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>  -->
 						<div class="contactBox">
 							<p class="loginHd"><span>または</span></p>
-							
+
 							<form method="POST" action="{{ route('login') }}">
             				@csrf
 								<div class="labelCategory">

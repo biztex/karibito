@@ -298,9 +298,6 @@
 				</div>
 				<!--inner-->
 			</div><!-- /#contents -->
-	
-		
-
 </body>
 </article>
 </x-layout>
