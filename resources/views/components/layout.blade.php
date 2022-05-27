@@ -117,14 +117,13 @@
                                             <dd>{{\Auth::user()->name}}</dd>
                                         </dl>
                                         <div class="navMypageUl">
-                                            @if((\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->first_name))
                                             <a href="{{ route('mypage') }}">マイページ</a>
                                             <a href="#">掲載内容一覧</a>
                                             <!-- <a href="#fancybox_person" class="fancybox">プロフィール編集</a> -->
                                             <a href="#">設定</a>
-                                            @endif
                                         </div>
                                         <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
+                                        @endif
                                     </div>
                                 </li>
                             @endauth
