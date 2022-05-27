@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -9,9 +9,24 @@
 
 
 <title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
-<meta name="keywords" content="キーワード">
+<meta name="keywords" content="カリビト,知識,スキル,経験,マッチング,プラットフォーム">  
 <meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
+
+<meta property="og:url" content="{{ config('app.url') }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！ ">
+<meta property="og:description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
+<meta property="og:site_name" content="カリビト">
+<meta property="og:image" content="{{ asset('OGP.jpg') }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:title" content="【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！ ">
+<meta name="twitter:description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
+<meta name="twitter:image" content="{{ asset('OGP.jpg') }}">
+<meta name="twitter:card" content="summary_large_image">
+
 
 <link rel="shortcut icon" href="/favicon.ico">
 
