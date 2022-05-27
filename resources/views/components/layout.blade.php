@@ -116,12 +116,14 @@
                                             @endif
                                             <dd>{{\Auth::user()->name}}</dd>
                                         </dl>
-                                        <div class="navMypageUl">
-                                            <a href="{{ route('mypage') }}">マイページ</a>
-                                            <a href="#">掲載内容一覧</a>
-                                            <!-- <a href="#fancybox_person" class="fancybox">プロフィール編集</a> -->
-                                            <a href="#">設定</a>
-                                        </div>
+                                        @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
+                                            <div class="navMypageUl">
+                                                <a href="{{ route('mypage') }}">マイページ</a>
+                                                <a href="#">掲載内容一覧</a>
+                                                <!-- <a href="#fancybox_person" class="fancybox">プロフィール編集</a> -->
+                                                <a href="#">設定</a>
+                                            </div>
+                                        @endif
                                         <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
                                     </div>
                                 </li>
