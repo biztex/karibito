@@ -41,6 +41,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function userProfile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
     /**
      * Override Send the email verification notification.
      *

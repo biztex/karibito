@@ -266,7 +266,7 @@
 					<div id="main">
 						<div class="loginWrap">
 							<h2 class="registerHd registerHd_confirm">パスワード再設定</h2>
-                            
+
                             <p>{{session('status')}}</p>
 
 							<style>
@@ -275,7 +275,6 @@
 										font-size: 2.4rem;
 									}
 								}
-
 								.registerHd_confirm {
 									margin-top: 40px;
 								}

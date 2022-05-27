@@ -28,8 +28,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('google_id');
             $table->dropColumn('facebook_id');
+            $table->dropColumn('google_id');
             $table->string('password')->nullable(false)->change();
         });
     }

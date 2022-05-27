@@ -22,7 +22,7 @@ class MypageController extends Controller
      */
     public function show()
     {
-        $user_profile = UserProfile::with(['user','prefecture'])->firstWhere('user_id',Auth::id());                   
+        $user_profile = UserProfile::with(['user','prefecture'])->firstWhere('user_id',Auth::id());
         $prefectures = Prefecture::all();
 
         $birthday = (int)str_replace("-","",$user_profile->birthday);

@@ -13,6 +13,8 @@ use App\Models\Prefecture;
 
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
+use Laravel\Socialite\Facades\Socialite;
+
 
 use App\Services\UserProfileService;
 
@@ -57,15 +59,17 @@ class UserProfileController extends Controller
      */
     public function store(StoreRequest $request)
     {
+
+
         \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUser($request->all());
             $this->user_profile_service->storeUserProfile($request->all());
         });
-        
+
         return redirect()->route('complete.show');
     }
 
-     /**
+    /**
      * 基本情報登録完了画面
      */
     public function showComplete()

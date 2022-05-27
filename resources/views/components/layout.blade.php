@@ -12,7 +12,7 @@
 <meta name="keywords" content="キーワード">
 <meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
- 
+
 <link rel="shortcut icon" href="/favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="/css/slick.css" media="all">
@@ -43,11 +43,11 @@
                                 <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="">
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="item">
                         @auth
                             <p class="navHeadSp">
-                            
+
                                 @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
                                     <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="/img/mypage/pic_head.png" alt=""></a>
                                     @else
@@ -55,10 +55,10 @@
                                 @endif
                             </p>
                         @endauth
-                        <div class="btnMenu"><span></span><span></span><span></span></div> 
+                        <div class="btnMenu"><span></span><span></span><span></span></div>
                         <nav id="gNavi">
                             <ul class="navUl02 pc">
-                                <li><a href="#" class="nav01">サポート</a></li> 
+                                <li><a href="#" class="nav01">サポート</a></li>
                                 @auth
                                 <li class="navLink">
                                     <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>1</span></a>
@@ -147,10 +147,10 @@
                                     </div>
 								@endauth
                                 <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
-								    @guest
+                                    @guest
 										<a href="{{route('login')}}" class="log">ログイン</a>
 										<a href="{{route('register')}}" class="sign">新規登録</a>
-								    @endguest
+                                    @endguest
                                     <a href="#">ご利用ガイド</a>
                                     <a href="#">カリビトQ&A</a>
                                     <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
@@ -169,7 +169,7 @@
                                 <a href="{{route('register')}}" class="sign">新規登録</a>
                             @endguest
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="searchWrapSp">
                     <div class="searchWrapTop">
@@ -1082,7 +1082,7 @@
                                 </div>
                             </div>
                         </div>
-						@if(Auth::check()) 
+						@if(Auth::check())
                         <div class="right">
                             <a href="#">投稿する</a>
                         </div>
@@ -1207,7 +1207,7 @@
     						<li><a href="#">初めての方へ</a></li>
     						<li><a href="#">ゲストの方へ</a></li>
     						<li><a href="#">ホストの方へ</a></li>
-    						<li><a href="#">ワークを掲載するには</a></li> 
+    						<li><a href="#">ワークを掲載するには</a></li>
     					</ul>
     				</div>
     				<div class="item toggleWrap">
@@ -1241,7 +1241,7 @@
 					</div>
     				<p id="copyright">©{{ now()->year }} karibito, Inc.</p>
     			</div>
-    		</div> 
+    		</div>
         </div><!-- /#footer -->
 	</footer>
 </div><!-- /#wrapper -->
