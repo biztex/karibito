@@ -71,9 +71,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('user_profile',UserProfileController::class,['only' => ['update']]);
         Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
         Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
-        Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');        
+        Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete'); 
+        Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
     });
-    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
 
 
 });
