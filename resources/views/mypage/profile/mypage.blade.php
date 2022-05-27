@@ -130,6 +130,9 @@
 							</dl>
 							<dl>
 								<dt>生年月日<span>(年代のみ公開されます)</span></dt>
+									@error('birthday')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 								<dd>
 									<select class="year" name="year">
 										<option value="">年</option>
