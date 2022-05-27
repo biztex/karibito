@@ -270,7 +270,7 @@
 							<ul class="stepUl">
 								<li class="is_active">
 									<p class="stepDot"></p>
-									<p class="stepTxt">ログイン</p>
+									<p class="stepTxt">仮登録</p>
 								</li>
 								<li>
 									<p class="stepDot"></p>
@@ -285,9 +285,9 @@
 								@csrf
 								<ul class="loginSns">
 									<li><a href="/register/facebook" target="_blank"><img src="img/login/login_facebook.svg"
-										alt="Facebookでログイン"></a></li>
+										alt="Facebookで登録する"></a></li>
 										<li><a href="/register/google" target="_blank"><img src="img/login/login_google.svg"
-											alt="Googleでログイン"></a></li>
+											alt="Googleで登録する"></a></li>
 										</ul>
 								<div class="contactBox">
 									<p class="loginHd"><span>または</span></p>
