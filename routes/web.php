@@ -72,8 +72,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
         Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
         Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');
+        Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
     });
-    Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
 
 
 });
@@ -92,7 +92,7 @@ Route::view('/terms-of-service','terms-of-service')->name('terms-of-service');
 // update:編集(put)
 // destroy:削除(delete)
 
-Route::get('',[HomeController::class, 'index']);
+Route::get('',[HomeController::class, 'index'])->name('home');
 
 Route::get('add_category', [CategoryController::class, 'createCategory']);
 

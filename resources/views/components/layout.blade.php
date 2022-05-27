@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -9,9 +9,24 @@
 
 
 <title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
-<meta name="keywords" content="キーワード">
+<meta name="keywords" content="カリビト,知識,スキル,経験,マッチング,プラットフォーム">  
 <meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
+
+<meta property="og:url" content="{{ config('app.url') }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！ ">
+<meta property="og:description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
+<meta property="og:site_name" content="カリビト">
+<meta property="og:image" content="{{ asset('OGP.jpg') }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:title" content="【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！ ">
+<meta name="twitter:description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
+<meta name="twitter:image" content="{{ asset('OGP.jpg') }}">
+<meta name="twitter:card" content="summary_large_image">
+
 
 <link rel="shortcut icon" href="/favicon.ico">
 
@@ -51,7 +66,7 @@
                                 @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
                                     <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="/img/mypage/pic_head.png" alt=""></a>
                                     @else
-                                    <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt=""></a>
+                                    <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 30px;height: 30px;object-fit: cover;"></a>
                                 @endif
                             </p>
                         @endauth
@@ -1143,39 +1158,41 @@
                     </div>
                 </div>
             </div>
-            <div class="spFixed">
-                <div class="spFixedItem">
-                    <a href="index.html" class="spFixedLink">
-                        <p class="linkIcon"><img src="/img/common/icon_spfixed01.svg" alt=""></p>
-                        <p class="linkTxt">ホーム</p>
-                    </a>
+            @auth
+                <div class="spFixed">
+                    <div class="spFixedItem">
+                        <a href="{{ route('home') }}}}" class="spFixedLink">
+                            <p class="linkIcon"><img src="/img/common/icon_spfixed01.svg" alt=""></p>
+                            <p class="linkTxt">ホーム</p>
+                        </a>
+                    </div>
+                    <div class="spFixedItem">
+                        <a href="#" class="spFixedLink">
+                            <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
+                            <p class="linkTxt">投稿</p>
+                        </a>
+                    </div>
+                    <div class="spFixedItem">
+                        <a href="#" class="spFixedLink">
+                            <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>
+                            <p class="linkTxt">やりとり</p>
+                        </a>
+                    </div>
+                    <div class="spFixedItem">
+                        <a href="#" class="spFixedLink">
+                            <span class="newSpan">1</span>
+                            <p class="linkIcon"><img src="/img/common/ico_message.svg" alt=""></p>
+                            <p class="linkTxt">お知らせ</p>
+                        </a>
+                    </div>
+                    <div class="spFixedItem">
+                        <a href="#" class="spFixedLink">
+                            <p class="linkIcon"><img src="/img/common/icon_spfixed05.svg" alt=""></p>
+                            <p class="linkTxt">マイページ</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="spFixedItem">
-                    <a href="#" class="spFixedLink">
-                        <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
-                        <p class="linkTxt">投稿</p>
-                    </a>
-                </div>
-                <div class="spFixedItem">
-                    <a href="#" class="spFixedLink">
-                        <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>
-                        <p class="linkTxt">やりとり</p>
-                    </a>
-                </div>
-                <div class="spFixedItem">
-                    <a href="#" class="spFixedLink">
-                        <span class="newSpan">1</span>
-                        <p class="linkIcon"><img src="/img/common/ico_message.svg" alt=""></p>
-                        <p class="linkTxt">お知らせ</p>
-                    </a>
-                </div>
-                <div class="spFixedItem">
-                    <a href="#" class="spFixedLink">
-                        <p class="linkIcon"><img src="/img/common/icon_spfixed05.svg" alt=""></p>
-                        <p class="linkTxt">マイページ</p>
-                    </a>
-                </div>
-            </div>
+            @endauth
         </div><!-- /#header -->
     </header>
 {{$slot}}
@@ -1215,7 +1232,7 @@
     					<ul class="level2 toggleBox">
     						<li><a href="#">法人のご利用について</a></li>
     						<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
-    						<li><a href="{{  route('terms-of-service') }}">利用規約</a></li>
+    						<li><a href="{{ route('terms-of-service') }}">利用規約</a></li>
     						<li><a href="#">ゲスト規約</a></li>
     						<li><a href="#">ホスト規約</a></li>
     						<li><a href="#">スマートフォンアプリ</a></li>

@@ -23,6 +23,7 @@ class CoverController extends Controller
     public function update(UpdateCoverRequest $request) 
     {
         $this->user_profile_service->updateUserProfileImage($request,'cover');
+        \Session::put('flash_msg','カバーを変更しました！');
         return redirect()->route('mypage');
     }
 
@@ -30,6 +31,7 @@ class CoverController extends Controller
     public function delete() 
     {
         $this->user_profile_service->deleteUserProfileImage('cover');
+        \Session::put('flash_msg','カバーを削除しました！');
         return redirect()->route('mypage');
     }
 }

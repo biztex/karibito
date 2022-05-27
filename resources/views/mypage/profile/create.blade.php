@@ -2,7 +2,7 @@
 <x-layout>
 <article>
 
-<body id="">
+<body id="create">
 
 		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<!-- <div class="hide">

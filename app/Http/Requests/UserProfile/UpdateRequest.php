@@ -16,6 +16,17 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        // 年、月、日の入力からdate型の誕生日を作成
+        $birthday = $this->year . '-' . $this->month . '-' . $this->day;
+
+        $this->merge([
+            'birthday' => $birthday,
+        ]);
+    }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,16 +38,14 @@ class UpdateRequest extends FormRequest
             'name' => 'required | max:24 |string',
             'first_name' => 'required | max:24 | string',
             'last_name' => 'required | max:24 | string',
-            'gender' => 'required | integer',
-            'year' => 'required | integer',
-            'month' => 'required | integer',
-            'day' => 'required | integer',
-            'prefecture' => 'required | integer',
+            'gender' => 'required | integer | in:1,2',
+            'birthday' => 'required | date',
+            'prefecture' => 'required | integer | exists:prefectures,id',
             'zip' => 'required | numeric | digits:7',
             'address' => 'required | max:255',
             'introduction' => 'nullable | max:3000 | string',
-            'icon' => 'nullable | max:20480 | file | mimes:png,jpg',
-            'cover' => 'nullable | max:20480 | file | mimes:png,jpg'
+            'icon' => 'nullable | max:20480 | file | image | mimes:png,jpg',
+            'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg'
         ];
     }
 }
