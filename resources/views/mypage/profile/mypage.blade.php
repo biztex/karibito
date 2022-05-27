@@ -7,7 +7,7 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
-		<div class="unregisteredP ">
+		<div class="unregisteredP hide">
 			<div> </div>
 			<div>△身分証明書の登録が必要です。 <a href="#fancybox_register" class="fancybox">登録する</a></div>
 			<div class="pop_close">×</div>
