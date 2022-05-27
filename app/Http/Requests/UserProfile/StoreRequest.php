@@ -27,8 +27,8 @@ class StoreRequest extends FormRequest
             'name' => 'required | max:24 | string',
             'first_name' => 'required | max:24 | string',
             'last_name' => 'required | max:24 | string',
-            'gender' => 'required | integer',
-            'prefecture' => 'required | integer',
+            'gender' => 'required | integer | in:1,2',
+            'prefecture' => 'required | integer | exists:prefectures,id',
         ];
     }
 }
