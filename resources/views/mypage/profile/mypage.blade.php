@@ -58,9 +58,9 @@
 
 						<div class="mypageCover mypageCoverUpdate">
 							@if(empty($user_profile->cover))
-								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png" style="width: 100%;height: 230px;object-fit: cover;">
+								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png" style="">
 							@else
-								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="width: 100%;height: 230px;object-fit: cover;">
+								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="">
 							@endif
 								<input type="file" name="cover" class="cover2" accept="image/*" style="display:none;">
 								<a href="#"><img clsaa="center_cam" src="/img/mypage/icon_camera01.svg" alt="" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"></a>
@@ -342,7 +342,7 @@
 							<form method="POST" action="{{ route('cover.update') }}" enctype="multipart/form-data">
 								@csrf @method('PUT')
 									<input type="file" name="cover" class="cover1" style="display:none;">
-									<label for="file" class="update_cover"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
+									<label for="file" class="update_cover"><img class="add_cover" src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
 									<input type="submit" name="submit_cover" style="display:none;">
 							</form>
 	
