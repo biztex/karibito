@@ -92,7 +92,7 @@ Route::view('/terms-of-service','terms-of-service')->name('terms-of-service');
 // update:編集(put)
 // destroy:削除(delete)
 
-Route::get('',[HomeController::class, 'index']);
+Route::get('',[HomeController::class, 'index'])->name('home');
 
 Route::get('add_category', [CategoryController::class, 'createCategory']);
 

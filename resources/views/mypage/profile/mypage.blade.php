@@ -7,11 +7,20 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
-		<div class="unregisteredP hide">
+		<div class="unregisteredP ">
 			<div> </div>
 			<div>△身分証明書の登録が必要です。 <a href="#fancybox_register" class="fancybox">登録する</a></div>
 			<div class="pop_close">×</div>
 		</div>
+
+		@if(Session::has('flash_msg'))
+			<div class="flash_msg">
+				<div> </div>
+				<div>{{ \Session::get('flash_msg') }}</div>
+				<div class="flash_close">×</div>
+			</div>
+		@endif
+
 		<div class="hide">
 			<div id="fancybox_register" class="fancyboxWrap">
 				<p class="fancyboxHd">身分証明証の登録</p>
@@ -49,9 +58,9 @@
 
 						<div class="mypageCover mypageCoverUpdate">
 							@if(empty($user_profile->cover))
-								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png" style="width: 100%;height: 230px;object-fit: cover;">
+								<img id="preview_cover" alt="" src="/img/mypage/img_rainbow.png" style="">
 							@else
-								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="width: 100%;height: 230px;object-fit: cover;">
+								<img id="preview_cover" alt="" src="{{asset('/storage/'.$user_profile->cover) }}" style="">
 							@endif
 								<input type="file" name="cover" class="cover2" accept="image/*" style="display:none;">
 								<a href="#"><img clsaa="center_cam" src="/img/mypage/icon_camera01.svg" alt="" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"></a>
@@ -333,7 +342,7 @@
 							<form method="POST" action="{{ route('cover.update') }}" enctype="multipart/form-data">
 								@csrf @method('PUT')
 									<input type="file" name="cover" class="cover1" style="display:none;">
-									<label for="file" class="update_cover"><img src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
+									<label for="file" class="update_cover"><img class="add_cover" src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
 									<input type="submit" name="submit_cover" style="display:none;">
 							</form>
 	
@@ -532,8 +541,13 @@
 
 		// 身分証登録ポップアップ閉じるボタン
 		$('.pop_close').on('click',function(){
-			$('.unregisteredP').addClass('hide');
+			$('.unregisteredP').fadeOut(400);
 		})
-		
+
+		// フラッシュメッセージ閉じるボタン
+		$('.flash_close').on('click',function(){
+			$('.flash_msg').fadeOut(400);
+		})
+				
 	});
 </script>

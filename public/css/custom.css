@@ -60,8 +60,17 @@
 }
 
 #preview_cover{
-	height:100%;
+	width: 100%;
+	height: 230px;
 	object-fit: cover;
+}
+@media screen and (max-width: 767px){
+	#preview_cover{
+		height: 160px;
+	}
+	.add_cover {
+		height: 25px;
+	}
 }
 
 .alert.alert-danger {
@@ -332,17 +341,72 @@
 		padding-top: 3.5px;
 	}
 }
-#register_confirm .navHeadSp{
-	display: none;
-}
+#register_confirm .navHeadSp,
 #register_confirm .navMypageDl,
 #register_confirm .gnavEdit,
-#register_confirm .link01{
-	display: none;
-}
-
+#register_confirm .link01,
 #register_confirm .navUl02 .nav02,
 #register_confirm .navUl02 .nav03,
 #register_confirm .navUl02 .navLink{
 	display: none;
+}
+#create .gnavEdit,
+#create .link01,
+#create .navMypageDl img,
+#create .navMypageDl,
+#create .navMypageUl{
+	display: none;
+}
+.navMypageUlLink {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.flash_msg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+	font-size: 14px;
+	color: #664d03;
+    background-color: #fff3cd;
+    border: solid 1px #ffecb5;
+}
+
+.flash_close {
+	color: #664d03;
+	font-weight: 100;
+	font-size: 21px;
+	margin-right: 21px;
+
+}
+.flash_close:hover {
+	cursor: pointer;
+}
+
+@media screen and (max-width: 767px){
+	.flash_msg {
+		font-size: 10px;
+	}
+}
+@media screen and (max-width: 767px){
+	.navHeadSp {
+		border: none;
+	}
+}
+
+@media screen and (max-width: 767px){
+	.spFixed {
+		position: fixed !important;
+		bottom: 0 !important;
+		left: 0 !important;
+		z-index: 99;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		background: #fff;
+		padding: 0 15px;
+	}
 }

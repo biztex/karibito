@@ -21,7 +21,7 @@ class IconController extends Controller
     public function delete() {
 
         $this->user_profile_service->deleteUserProfileImage('icon');
-
+        \Session::put('flash_msg','アイコンを削除しました！');
         return redirect()->route('mypage');
     }
 }
