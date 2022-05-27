@@ -21,9 +21,6 @@ use App\Services\UserProfileService;
 class UserProfileController extends Controller
 {
 
-    const DRIVER_GOOGLE = 'google';
-    const DRIVER_FACEBOOK = 'facebook';
-
     private $user_profile_service;
 
     public function __construct(UserProfileService $user_profile_service)

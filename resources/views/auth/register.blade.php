@@ -325,7 +325,7 @@
 											</label>
 										</div>
 									</div>
-				
+
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit" value="送信"></li>
 									</ul>

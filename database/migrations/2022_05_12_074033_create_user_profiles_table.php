@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('first_name')->nullable()->comment('姓');
             $table->string('last_name')->nullable()->comment('名');
             $table->tinyInteger('gender')->nullable()->comment('1.男性、2.女性');
-            $table->foreignId('prefecture_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('prefecture_id')->nullable()->constrained()->nullOnDelete();
             $table->date('birthday')->nullable()->comment('生年月日');
             $table->string('zip')->nullable()->comment('郵便番号');
             $table->string('address')->nullable()->comment('住所');
