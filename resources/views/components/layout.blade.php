@@ -123,7 +123,6 @@
                                             <a href="#">設定</a>
                                         </div>
                                         <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
-                                        @endif
                                     </div>
                                 </li>
                             @endauth
