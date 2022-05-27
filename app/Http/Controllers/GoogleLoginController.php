@@ -32,9 +32,6 @@ class GoogleLoginController extends Controller
             Auth::login($user);
             return redirect()->route('user_profile.create');
         } else {  //idが同じユーザーがいない場合
-            if(session()->get('via_oauth') === 'login') {
-                return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
-            }
             $duplicate_email_user = User::where('email', $sns_user->email)->first();
             if($duplicate_email_user) { //メアドが重複しているユーザーがいる場合
                 if(is_null($duplicate_email_user->email_verified_at)) {
@@ -44,6 +41,9 @@ class GoogleLoginController extends Controller
                 $duplicate_email_user->google_id = $sns_user->id;
                 $duplicate_email_user->save();
             } else { //メアドが重複しているユーザーがいない場合
+                if(session()->get('via_oauth') === 'login') {
+                    return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
+                }
                 $user = \DB::transaction(function () use ($sns_user) {
                     $user = User::create([
                         'email' => $sns_user->email,

@@ -45,9 +45,6 @@ class FacebookLoginController extends Controller
             Auth::login($user);
             return redirect()->route('user_profile.create');
         } else {
-            if(session()->get('via_oauth') === 'login') {
-                return redirect()->route('login')->with('flash_alert','ログイン情報が登録されていません。');
-            }
             $duplicate_email_user = User::where('email', $sns_user->email)->first();
 
             if($duplicate_email_user) {
@@ -58,6 +55,9 @@ class FacebookLoginController extends Controller
                 $duplicate_email_user->save();
 
             } else {
+                if(session()->get('via_oauth') === 'login') {
+                    return redirect()->route('login')->with('flash_alert','ログイン情報が登録されていません。');
+                }
                 $user = \DB::transaction(function () use ($sns_user) {
                 $user = User::create([
                     'name' => $sns_user->name,
