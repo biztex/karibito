@@ -350,6 +350,19 @@
 #register_confirm .navUl02 .navLink{
 	display: none;
 }
+#create .gnavEdit,
+#create .link01,
+#create .navMypageDl img,
+#create .navMypageDl,
+#create .navMypageUl{
+	display: none;
+}
+.navMypageUlLink {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
 
 .flash_msg {
     display: flex;
