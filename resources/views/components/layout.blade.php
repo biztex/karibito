@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+<head prefix=”og: http://ogp.me/ns#”>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -12,6 +12,21 @@
 <meta name="keywords" content="キーワード">
 <meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
+
+<meta property="og:url" content="https://stg-karibito.4sis.site/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="【仮】知識・スキル・経験を商品化マッチングプラットフォーム！">
+<meta property="og:description" content="ディスクリプション">
+<meta property="og:site_name" content="カリビト">
+<meta property="og:image" content="https://stg-karibito.4sis.site/public/img/top/img_main_sp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:title" content="【仮】知識・スキル・経験を商品化マッチングプラットフォーム！">
+<meta name="twitter:description" content="ディスクリプション">
+<meta name="twitter:image" content="画像絶対パス">
+<meta name="twitter:card" content="summary">
+
 
 <link rel="shortcut icon" href="/favicon.ico">
 
