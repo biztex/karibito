@@ -260,7 +260,7 @@
 						<ul class="stepUl">
 							<li class="is_active">
 								<p class="stepDot"></p>
-								<p class="stepTxt">ログイン</p>
+								<p class="stepTxt">仮登録</p>
 							</li>
 							<li class="is_active">
 								<p class="stepDot"></p>
