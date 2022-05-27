@@ -35,8 +35,8 @@ class UpdateRequest extends FormRequest
             'zip' => 'required | numeric | digits:7',
             'address' => 'required | max:255',
             'introduction' => 'nullable | max:3000 | string',
-            'icon' => 'nullable | max:20480 | file | mimes:png,jpg',
-            'cover' => 'nullable | max:20480 | file | mimes:png,jpg'
+            'icon' => 'nullable | max:20480 | file | image | mimes:png,jpg',
+            'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg'
         ];
     }
 }
