@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Rules\AlphaRule;
 
 class RegisteredUserController extends Controller
 {
@@ -34,8 +35,8 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => ['required','confirmed', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required','confirmed', 'string', 'email', 'max:128', 'unique:users'],
+            'password' => ['required', 'confirmed','between:8,100', Rules\Password::defaults(), new AlphaRule],
             'terms' => 'required',
         ]);
 
@@ -48,7 +49,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
-        // return redirect()->route('user_profile.create');
+        // return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('verification.notice');
     }
 }
