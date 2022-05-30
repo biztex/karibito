@@ -31,7 +31,7 @@ class EmailVerificationNotificationController extends Controller
 
         } elseif($now - $verifyemail_send_at < 60) {
             // 最終送信日時より60秒経過していなかったらエラー
-            \Session::put('error_msg','しばらく再試行はお待ちください。'); 
+            \Session::put('error_msg','時間をおいてから再度お試しください。'); 
             return redirect()->route('verification.notice');
 
         } else {
