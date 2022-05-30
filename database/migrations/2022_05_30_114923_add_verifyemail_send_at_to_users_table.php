@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('verifyemail_send_at')->after('email');
+            $table->timestamp('verifyemail_send_at')->nullable()->after('email');
         });
     }
 
