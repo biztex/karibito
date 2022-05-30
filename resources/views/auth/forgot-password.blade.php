@@ -297,7 +297,7 @@
 									</div>
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit" value="パスワード再設定リンクを送信"></li>
-										<li><a href="javascript:history.back()" class="submit gray">戻る</a>
+										<li><a href="{{ route('login') }}" class="submit gray">戻る</a>
 									</ul>
 								</form>
 							</div>
