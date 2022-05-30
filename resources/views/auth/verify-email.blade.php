@@ -284,11 +284,16 @@
 									}
 								}
 							</style>
+
+									@if(isset($error))
+                                        <div class="alert alert-danger" style="text-align: center;margin-bottom:10px;">{{ $error }}</div>
+                                    @enderror
 							<p class="registerImg">次に進む前に、確認リンクのメールをチェックしてください。<br>メールが届かなかった場合、</p>
                             <form action="{{ route('verification.send') }}" method="POST">
                                 @csrf
                                 <input class="input_a" type="submit" value="ここをクリックしてメールを再送信してください。">
                             </form>
+									
 							<ul class="loginFormBtn">
 								<li><a href="/">トップページへ戻る</a></li>
 							</ul>
