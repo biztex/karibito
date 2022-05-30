@@ -1,16 +1,10 @@
-
 <x-layout>
     <article>
-        <div class="container my-5 py-5">
-            <div class="row justify-content-center my-5 py-5">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">404エラー</div>
-                        <div class="card-body">
-                            <p class="card-text text-center">対象のページはありません
-                            </p>
-                        </div>
-                    </div>
+        <div class="error_page">
+            <div class="error-card">
+                <div class="error-header">404エラー</div>
+                <div class="error-body">
+                    <p style="">対象のページはありません</p>
                 </div>
             </div>
         </div>   
