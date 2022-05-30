@@ -65,7 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'exists.session.facebookid' => \App\Http\Middleware\ExistsSessionFacebookId::class,
         'null.user.profile' => \App\Http\Middleware\NullUserProfile::class,
-        'exsist.user.profile' => \App\Http\Middleware\ExistUserProfile::class,
+        'exist.user.profile' => \App\Http\Middleware\ExistUserProfile::class,
 
     ];
 }
