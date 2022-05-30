@@ -19,10 +19,9 @@ class NullUserProfile
      */
     public function handle(Request $request, Closure $next)
     {
-        if(UserProfile::where([
-            ['user_id', '=', Auth::id()],
-            ['first_name', '=', null],
-        ])->exists()){
+        $user = UserProfile::firstWhere('user_id',Auth::id());
+
+        if(empty($user->first_name)){
             return redirect()->route('user_profile.create');
         };
         return $next($request);
