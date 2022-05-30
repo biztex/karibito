@@ -417,3 +417,62 @@
 		padding: 0 15px;
 	}
 }
+.error_page {
+	margin: 100px auto;
+	width: 50vw;
+	height: 50vh;
+}
+.error-card{
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+.error-header {
+	border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+    padding: 12px 20px;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.error-body {
+	flex: 1 1 auto;
+    min-height: 1px;
+    padding: 20px;
+	text-align: center;
+}
+.error-title {
+	font-size:24px;
+	text-align: start;
+	border-bottom: solid 1px #CCCCCC;
+}
+.error-body p{
+	text-align: start;
+}
+.error_small{
+	font-size:11px;
+	text-align: start;
+}
+@media screen and (max-width: 767px){
+	.error_page {
+		margin: 30px 0;
+		padding: 0 10px;
+		width: 100vw;
+		height: 40vh;
+	}
+	.error-title {
+		font-size:20px;
+	}
+	.error-body p{
+		font-size: 14px;
+	}
+	.error_small{
+		font-size:8px !important; 
+	}
+
+}
