@@ -47,7 +47,7 @@ Route::get('sample',function(){
 });
 
 Route::get('sam',function(){
-    return view('sample');
+    return view('sam');
 });
 
 
