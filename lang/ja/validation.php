@@ -142,6 +142,15 @@ return [
         ],
         'terms' => [
             'required' => ':attributeに同意してください。'
+        ],
+        'email' => [
+            'unique'   => 'この:attributeは既に登録されています。',
+        ],
+        'first_name' => [
+            'max'      => ':attributeはそれぞれ、:max文字以下で指定してください。',
+        ],
+        'last_name' => [
+            'max'      => ':attributeはそれぞれ、:max文字以下で指定してください。',
         ]
     ],
 
@@ -164,8 +173,8 @@ return [
         'prefecture' => '都道府県',
         'icon' => 'アイコン画像',
         'cover' => 'カバー画像',
-        'first_name' => '姓',
-        'last_name' => '名',
+        'first_name' => '姓名',
+        'last_name' => '姓名',
         'birthday' => '生年月日',
         'zip' => '郵便番号',
         'address' => '住所',

@@ -31,11 +31,13 @@ class EmailVerificationNotificationController extends Controller
 
         } elseif($now - $verifyemail_send_at < 60) {
             // 最終送信日時より60秒経過していなかったらエラー
+            \Session::put('send_msg',null);
             \Session::put('error_msg','時間をおいてから再度お試しください。'); 
             return redirect()->route('verification.notice');
 
         } else {
             \Session::put('error_msg',null);
+            \Session::put('send_msg','メールを送信しました。'); 
             // 最終送信日時を更新して認証メール送信
             $user->fill([ 'verifyemail_send_at' => Carbon::now() ])->save();
             $request->user()->sendEmailVerificationNotification();

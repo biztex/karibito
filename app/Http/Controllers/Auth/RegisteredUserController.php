@@ -52,6 +52,8 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
+        \Session::put('send_msg','メールを送信しました。'); 
+        
         return redirect()->route('verification.notice');
     }
 }

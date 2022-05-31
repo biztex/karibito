@@ -51,7 +51,7 @@
 
 		<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
 			<div id="fancybox_person" class="fancyboxWrap">
-				<form method="POST" action="{{ route('user_profile.update',Auth::id()) }}" enctype="multipart/form-data">
+				<form method="POST" action="{{ route('user_profile.update') }}" enctype="multipart/form-data">
 				@csrf @method('PUT')
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">
@@ -101,18 +101,21 @@
 								<dl>
 								
 								</dl>
+								<dl style="margin-bottom:0px">
+									@if($errors->has('first_name'))
+										<div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('first_name')}}</div>
+									@elseif($errors->has('last_name'))
+										<div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('last_name')}}</div>
+									@else
+										<!--  -->
+									@endif
+								</dl>
 							<dl class=" inlineFlex">
 								<dt>姓<span>(本名は非公開です)</span></dt>
-									@if($errors->has('first_name') || $errors->has('last_name'))
-                                    	<div class="alert alert-danger" style="padding-bottom:0;">姓名は必ず指定してください。</div>
-                                	@endif
 								<dd><input type="text" name="first_name" class="@error('first_name') is-invalid @enderror" value="{{old('first_name',$user_profile->first_name)}}"></dd>
 							</dl>
 							<dl class=" inlineFlex">
 								<dt>名<span>(本名は非公開です)</span></dt>
-									@if($errors->has('first_name') || $errors->has('last_name'))
-                                    	<div class="alert alert-danger" style="padding-bottom:0;"><br></div>
-                                	@endif
 								<dd><input type="text" name="last_name" class="@error('last_name') is-invalid @enderror" value="{{old('last_name',$user_profile->last_name)}}"></dd>
 							</dl>
 							<dl>
@@ -203,6 +206,9 @@
 								</div>
 							</div> -->
 							<dl>
+									@error('introduction')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 								<dt>自己紹介</dt>
 								<dd><textarea name="introduction">{{old('introduction',$user_profile->introduction)}}</textarea></dd>
 							</dl>
