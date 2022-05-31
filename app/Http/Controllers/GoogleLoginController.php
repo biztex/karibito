@@ -40,6 +40,8 @@ class GoogleLoginController extends Controller
 
                 $duplicate_email_user->google_id = $sns_user->id;
                 $duplicate_email_user->save();
+                Auth::login($duplicate_email_user);
+                return redirect()->route('user_profile.create');
             } else { //メアドが重複しているユーザーがいない場合
                 if(session()->get('via_oauth') === 'login') {
                     return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
