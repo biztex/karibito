@@ -51,7 +51,7 @@
 
 		<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
 			<div id="fancybox_person" class="fancyboxWrap">
-				<form method="POST" action="{{ route('user_profile.update',Auth::id()) }}" enctype="multipart/form-data">
+				<form method="POST" action="{{ route('user_profile.update') }}" enctype="multipart/form-data">
 				@csrf @method('PUT')
 					<p class="fancyboxHd">プロフィールを編集</p>
 					<div class="fancyboxCont">

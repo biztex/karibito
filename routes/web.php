@@ -68,7 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // マイページ・プロフィール編集
     Route::middleware('null.user.profile')->group(function () {
         Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
-        Route::resource('user_profile',UserProfileController::class,['only' => ['update']]);
+        Route::put('user_profile',[UserProfileController::class,'update'])->name('user_profile.update');
         Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
         Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
         Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');
