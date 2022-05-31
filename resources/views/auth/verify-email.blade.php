@@ -287,7 +287,11 @@
 
 									@if(isset($error))
                                         <div class="alert alert-danger" style="text-align: center;margin-bottom:10px;">{{ $error }}</div>
-                                    @enderror
+                                    @endif
+									
+									@if(isset($send_msg))
+                                        <div style="text-align: center;margin-bottom:10px;">{{ $send_msg }}</div>
+                                    @endif
 							<p class="registerImg">次に進む前に、確認リンクのメールをチェックしてください。<br>メールが届かなかった場合、</p>
                             <form action="{{ route('verification.send') }}" method="POST">
                                 @csrf

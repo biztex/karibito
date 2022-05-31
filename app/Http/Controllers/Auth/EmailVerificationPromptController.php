@@ -17,9 +17,10 @@ class EmailVerificationPromptController extends Controller
     public function __invoke(Request $request)
     {
         $error = \Session::get('error_msg');
+        $send_msg = \Session::get('send_msg');
         return $request->user()->hasVerifiedEmail()
                     // ? redirect()->intended(RouteServiceProvider::HOME)
                     ? redirect()->route('user_profile.create')
-                    : view('auth.verify-email',compact('error'));
+                    : view('auth.verify-email',compact('error','send_msg'));
     }
 }

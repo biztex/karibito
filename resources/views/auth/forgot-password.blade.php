@@ -267,7 +267,7 @@
 						<div class="loginWrap">
 							<h2 class="registerHd registerHd_confirm">パスワード再設定</h2>
 
-                            <p>{{session('status')}}</p>
+                            <p style="text-align: center;margin-bottom:10px;">{{session('status')}}</p>
 
 							<style>
 								@media screen and (min-width: 767px) {

@@ -287,9 +287,12 @@
 									<p><input type="text" name="name" placeholder="" class="@error('name') is-invalid @enderror" value="{{ old('name') }}" required></p>
 								</div>
 
-
-									@if($errors->has('first_name') || $errors->has('last_name'))
-										<div class="alert alert-danger" style="padding-bottom:0;">姓名は必ず指定してください。</div>
+									@if($errors->has('first_name'))
+										<div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('first_name')}}</div>
+									@elseif($errors->has('last_name'))
+										<div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('last_name')}}</div>
+									@else
+										<!--  -->
 									@endif
 								<div class="labelCategory inlineFlex">
 									<p>姓</p>
