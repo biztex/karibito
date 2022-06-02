@@ -40,7 +40,7 @@
 								<li><a href="#company01" class="scroll">カリビト理念</a></li>
 								<li><a href="#company02" class="scroll">カリビトの歴史</a></li>
 								<li><a href="#company03" class="scroll">代表挨拶</a></li>
-								<li><a href="#company04" class="scroll">お問い合わせ</a></li>
+								<!-- <li><a href="#company04" class="scroll">お問い合わせ</a></li> -->
 							</ul>
 						</nav>
 					</div>
@@ -199,59 +199,13 @@
 							</tbody></table>
 						</div>
 					</div>
-					<div class="part contact" id="company04">
+					<!-- <div class="part contact" id="company04">
 						<h2 class="mypageHd02"><span><img class="ico" src="/img/company/ico_tel.svg">お問い合わせ</span></h2>
 						<p class="email"><a href="">メールでのお問い合わせ</a></p>
 						<div class="btnTeams">
 							<a href="#" class="blue">お問い合わせフォーム</a>
 						</div>
-					</div> 
-				</div>
-			</div>
-
-			<div class="aboutFeatures">
-				<div class="inner">
-					<h2 class="hdM">カリビトの特徴</h2>
-					<div class="slider">
-						<div><div class="item hlg01">
-							<h3 class="tit">カリビトチャット</h3>
-							<p class="ico ico_feat01"></p>
-							<p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">検索機能</h3>
-							<p class="ico ico_feat02"></p>
-							<p>あなたの見たい情報を簡単に探せる<br>ために検索機能があります。<br>条件を入力するだけで簡単です。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">シェア機能</h3>
-							<p class="ico ico_feat03"></p>
-							<p>いいなと思った仕事をSNSを使って<br>シェアすることができます。<br>仲の良いメンバーに知らせる時に便利。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">お気に入り機能</h3>
-							<p class="ico ico_feat04"></p>
-							<p>気になる仕事や人材を<br>お気に入り登録をする事で<br>分からなくなることがありません。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">カリビトチャット</h3>
-							<p class="ico ico_feat01"></p>
-							<p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
-						</div></div>
-					</div>
-				</div>
-			</div>
-			<div class="downloadWrap">
-				<div class="inner">
-					<div class="img"><img src="img/common/img_download.png" srcset="img/common/img_download.png 1x, img/common/img_download@2x.png 2x" alt=""><a href="#" target="_blank" class="logo sp"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a></div>
-					<div class="info">
-						<h2 class="tit">さあ、はじめよう！<span class="foucs">今すぐ無料ダウンロード！</span></h2>
-						<div class="links">
-							<a href="#" target="_blank" class="logo pc"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a>
-							<a href="#" target="_blank"><img src="img/common/btn_app.svg" alt="App Store"></a>
-							<a href="#" target="_blank"><img src="img/common/btn_google.svg" alt="Google"></a>
-						</div>
-					</div>
+					</div>  -->
 				</div>
 			</div>
 		</div><!-- /#contents -->
@@ -259,70 +213,73 @@
 	</div><!-- /#wrapper -->
 
 	<footer>
-    	<div id="footer">
-    		<div class="inner clearfix">
-				<div class="sns pc">
-					<a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>
-					<a href="#" target="_blank"><img src="/img/common/ico_twitter.png" alt="Twitter"></a>
-					<a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a>
-					<a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a>
-				</div>
-    			<div class="footLinks">
-    				<div class="item toggleWrap">
-    					<p class="level1 toggleBtn">ワークを探す</p>
-    					<ul class="level2 toggleBox">
-    						<li><a href="#">エリアから探す</a></li>
-    						<li><a href="#">カテゴリから探す</a></li>
-    						<li><a href="#">日程から探す</a></li>
-    						<li><a href="#">金額から探す</a></li>
-    						<li><a href="#">〇〇〇〇から探す</a></li>
-    						<li><a href="#">〇〇〇〇から探す</a></li>
-    						<li><a href="#">〇〇〇〇から探す</a></li>
-    					</ul>
-    				</div>
-    				<div class="item toggleWrap">
-    					<p class="level1 toggleBtn">ご利用ガイド</p>
-    					<ul class="level2 toggleBox">
-    						<li><a href="#">初めての方へ</a></li>
-    						<li><a href="#">ゲストの方へ</a></li>
-    						<li><a href="#">ホストの方へ</a></li>
-    						<li><a href="#">ワークを掲載するには</a></li> 
-    					</ul>
-    				</div>
-    				<div class="item toggleWrap">
-    					<p class="level1 toggleBtn">カリビトについて</p>
-    					<ul class="level2 toggleBox">
-    						<li><a href="#">法人のご利用について</a></li>
-    						<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
-    						<li><a href="{{ route('terms-of-service') }}">利用規約</a></li>
-    						<li><a href="#">ゲスト規約</a></li>
-    						<li><a href="#">ホスト規約</a></li>
-    						<li><a href="#">スマートフォンアプリ</a></li>
-    					</ul>
-    				</div>
-    			</div>
-    		</div>
-    		<div class="bottom">
-    			<div class="inner">
-    				<div class="serviceLinks">
-    					<a href="{{ route('company') }}">運営会社</a>
-    					<a href="#">採用情報</a>
-    					<a href="#">約款特定</a>
-    					<a href="#">商取引法に基づく表示</a>
-    					<a href="#">よくある質問</a>
-    					<a href="#">お問い合わせ</a>
-    				</div>
-    				<div class="sns sp">
-						<a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>
-						<a href="#" target="_blank"><img src="/img/common/ico_twitter.png" alt="Twitter"></a>
-						<a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a>
-						<a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a>
-					</div>
-    				<p id="copyright">©{{ now()->year }} karibito, Inc.</p>
-    			</div>
-    		</div> 
+        <div id="footer">
+            <!-- <div class="aboutFeatures">
+                <div class="inner">
+                    <h2 class="hdM">カリビトの特徴</h2>
+                    <div class="slider">
+                        <div><div class="item hlg01">
+                            <h3 class="tit">カリビトチャット</h3>
+                            <p class="ico ico_feat01"></p>
+                            <p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">検索機能</h3>
+                            <p class="ico ico_feat02"></p>
+                            <p>あなたの見たい情報を簡単に探せる<br>ために検索機能があります。<br>条件を入力するだけで簡単です。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">シェア機能</h3>
+                            <p class="ico ico_feat03"></p>
+                            <p>いいなと思った仕事をSNSを使って<br>シェアすることができます。<br>仲の良いメンバーに知らせる時に便利。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">お気に入り機能</h3>
+                            <p class="ico ico_feat04"></p>
+                            <p>気になる仕事や人材を<br>お気に入り登録をする事で<br>分からなくなることがありません。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">カリビトチャット</h3>
+                            <p class="ico ico_feat01"></p>
+                            <p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
+                        </div></div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="downloadWrap">
+                <div class="inner">
+                    <div class="img"><img src="img/common/img_download.png" srcset="img/common/img_download.png 1x, img/common/img_download@2x.png 2x" alt=""><a href="#" target="_blank" class="logo sp"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a></div>
+                    <div class="info">
+                        <h2 class="tit">さあ、はじめよう！<span class="foucs">今すぐ無料ダウンロード！</span></h2>
+                        <div class="links">
+                            <a href="#" target="_blank" class="logo pc"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a>
+                            <a href="#" target="_blank"><img src="img/common/btn_app.svg" alt="App Store"></a>
+                            <a href="#" target="_blank"><img src="img/common/btn_google.svg" alt="Google"></a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="bottom">
+                <div class="inner">
+                    <div class="serviceLinks">
+                        <a href="{{ route('company') }}">運営会社</a>
+                        <!-- <a href="#">採用情報</a>
+                        <a href="#">約款特定</a>
+                        <a href="#">商取引法に基づく表示</a>
+                        <a href="#">よくある質問</a>
+                        <a href="#">お問い合わせ</a> -->
+                    </div>
+                    <!-- <div class="sns sp">
+                        <a href="#" target="_blank"><img src="img/common/ico_facebook.png" alt="Facebook"></a>
+                        <a href="#" target="_blank"><img src="img/common/ico_twitter.png" alt="Twitter"></a>
+                        <a href="#" target="_blank"><img src="img/common/ico_instragram.png" alt="Instragram"></a>
+                        <a href="#" target="_blank"><img src="img/common/ico_line.png" alt="LINE"></a>
+                    </div> -->
+                    <p id="copyright">©{{ now()->year }} karibito, Inc.</p>
+                </div>
+            </div>
         </div><!-- /#footer -->
-	</footer>
+    </footer>
 </div><!-- /#wrapper -->
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery.matchHeight-min.js"></script>

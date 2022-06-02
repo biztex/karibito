@@ -23,6 +23,38 @@
 		@media screen and (max-width: 767px) {
 										変更する必要あり。
 			.navHeadSp { ~~~ } */
+
+/* コメントアウトしている間のみヘッダーフッター調整 */
+	/* ヘッダー */
+	#wrapper {
+		padding-top: 81px; 
+	}
+	/* フッター */
+	@media screen and (max-width: 767px){
+		#footer .bottom {
+			padding: 15px 0;
+			border-top: 0;
+		}
+		#footer {
+			padding: 0;
+			position: fixed !important;
+			bottom: 50px !important;
+			width: 100vw;
+		}
+		#footer .serviceLinks {
+			display: block;
+			margin-bottom: 0;
+		}
+		#footer .bottom .inner {
+			display: flex;
+		}
+	}
+	#footer .bottom {
+		padding: 40px 0;
+	}
+/* コメントアウトしている間のみヘッダーフッター調整 */
+
+
 .detailStyle .recommendList .list .item{max-width: 212px}
 .fancyPersonTable select {
 	color: black;
