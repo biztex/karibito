@@ -364,20 +364,20 @@
 								@endif
 								<dd>
 									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
-									<p class="mypageP02">最終ログイン：8時間前</p>
-									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <span>所持ポイント：0000pt</span></p>
-									<p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
+									<!-- <p class="mypageP02">最終ログイン：8時間前</p> -->
+									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
+									<!-- <p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
 									<p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
 										<div class="evaluate three"></div><a href="#">(3.0)</a>
-									</div>
+									</div> -->
 								</dd>
 							</dl>
 							<div class="mypageIntro">
 								<p class="mypageHd01">自己紹介</p>
 								<p class="mypageIntroTxt">{!! nl2br(e($user_profile->introduction)) !!}</p>
 							</div>
-							<div class="mypageProud">
+							<!-- <div class="mypageProud">
 								<p class="mypageHd01">得意分野</p>
 								<ul class="mypageProudUl">
 									<li>家の掃除</li>
@@ -387,10 +387,10 @@
 									<li>写真撮影代行</li>
 									<li>ロゴデザイン</li>
 								</ul>
-							</div>
+							</div> -->
 						</div>
-						<div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div>
-						<div class="mypageSec02">
+						<!-- <div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div> -->
+						<!-- <div class="mypageSec02">
 							<p class="mypageHd02">お知らせ</p>
 							<ul class="mypageUl02">
 								<li>
@@ -438,64 +438,20 @@
 									</a>
 								</li>
 							</ul>
-						</div>
-						<div class="mypageSec03">
+						</div> -->
+						<!-- <div class="mypageSec03">
 							<p class="mypageHd02">出品サービス<a href="#" class="more">出品サービスを編集する</a></p>
 							<div class="box">
 								<p class="title">出品サービス</p>
 								<p class="txt">カリビトは、知識・スキル・経験を売り買いできるオンラインマーケットです。<br>あなたの ”得意” や ”経験” を必要としている人がきっといます。<br>カリビトで出品してみませんか？</p>
 								<p class="link "><a href="#" class="more">追加する</a></p>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu/>
 			</div><!--inner-->
-			<div class="aboutFeatures">
-				<div class="inner">
-					<h2 class="hdM">カリビトの特徴</h2>
-					<div class="slider">
-						<div><div class="item hlg01">
-							<h3 class="tit">カリビトチャット</h3>
-							<p class="ico ico_feat01"></p>
-							<p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">検索機能</h3>
-							<p class="ico ico_feat02"></p>
-							<p>あなたの見たい情報を簡単に探せる<br>ために検索機能があります。<br>条件を入力するだけで簡単です。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">シェア機能</h3>
-							<p class="ico ico_feat03"></p>
-							<p>いいなと思った仕事をSNSを使って<br>シェアすることができます。<br>仲の良いメンバーに知らせる時に便利。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">お気に入り機能</h3>
-							<p class="ico ico_feat04"></p>
-							<p>気になる仕事や人材を<br>お気に入り登録をする事で<br>分からなくなることがありません。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">カリビトチャット</h3>
-							<p class="ico ico_feat01"></p>
-							<p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
-						</div></div>
-					</div>
-				</div>
-			</div>
-			<div class="downloadWrap">
-				<div class="inner">
-					<div class="img"><img src="/img/common/img_download.png" srcset="/img/common/img_download.png 1x, /img/common/img_download@2x.png 2x" alt=""><a href="#" target="_blank" class="logo sp"><img src="/img/common/ico_sns_logo.svg" alt="LOGO"></a></div>
-					<div class="info">
-						<h2 class="tit">さあ、はじめよう！<span class="foucs">今すぐ無料ダウンロード！</span></h2>
-						<div class="links">
-							<a href="#" target="_blank" class="logo pc"><img src="/img/common/ico_sns_logo.svg" alt="LOGO"></a>
-							<a href="#" target="_blank"><img src="/img/common/btn_app.svg" alt="App Store"></a>
-							<a href="#" target="_blank"><img src="/img/common/btn_google.svg" alt="Google"></a>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		</div><!-- /#contents -->
 	
 	</body>

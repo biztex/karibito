@@ -45,9 +45,9 @@
                 <div class="inner">
                     <div class="item">
                         <h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO" style="min-width:93px;"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
-                        <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p>
+                        <!-- <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p> -->
                         <div class="searchBox">
-                            <select class="searchSelect">
+                            <!-- <select class="searchSelect">
                                 <option>サービス</option>
                                 <option>家電</option>
                                 <option>リクエストを探す</option>
@@ -56,7 +56,7 @@
                             </select>
                             <div class="search">
                                 <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="item">
@@ -73,9 +73,9 @@
                         <div class="btnMenu"><span></span><span></span><span></span></div>
                         <nav id="gNavi">
                             <ul class="navUl02 pc">
-                                <li><a href="#" class="nav01">サポート</a></li>
+                                <!-- <li><a href="#" class="nav01">サポート</a></li> -->
                                 @auth
-                                <li class="navLink">
+                                <!-- <li class="navLink">
                                     <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>1</span></a>
                                     <div class="navBox">
                                         <p class="navMessageHd">メッセージ</p>
@@ -108,14 +108,14 @@
                                                 </dl>
                                             </a>
                                         </div>
-                                        <!-- <div class="navMessageUl">
+                                        <div class="navMessageUl">
                                             <p class="noMessage">現在、メッセージの通知はありません。</p>
-                                        </div> -->
+                                        </div>
                                         <p class="navMessageLink"><a href="#">すべて見る</a></p>
                                     </div>
                                 </li>
                                 <li><a href="#" class="nav03">やりとり</a></li>
-                                <li><a href="#" class="nav02">お気に入り</a></li>
+                                <li><a href="#" class="nav02">お気に入り</a></li> -->
                                 <li class="navLink">
                                         @if(empty(\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon))
                                             <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/pic_head.png" alt=""></a>
@@ -134,9 +134,9 @@
                                         @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
                                             <div class="navMypageUl">
                                                 <a href="{{ route('mypage') }}">マイページ</a>
-                                                <a href="#">掲載内容一覧</a>
+                                                <!-- <a href="#">掲載内容一覧</a> -->
                                                 <!-- <a href="#fancybox_person" class="fancybox">プロフィール編集</a> -->
-                                                <a href="#">設定</a>
+                                                <!-- <a href="#">設定</a> -->
                                             </div>
                                         @endif
                                         <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
@@ -158,9 +158,9 @@
                                     <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                     <div class="navMypageUl link01">
                                         <!-- <a href="{{ route('mypage') }}">マイページ</a> -->
-                                        <a href="#">掲載内容一覧</a>
-                                        <a href="#">お気に入り</a>
-                                        <a href="#" class="blueBtn">投稿する</a>
+                                        <!-- <a href="#">掲載内容一覧</a> -->
+                                        <!-- <a href="#">お気に入り</a> -->
+                                        <!-- <a href="#" class="blueBtn">投稿する</a> -->
                                     </div>
 								@endauth
                                 <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
@@ -168,11 +168,11 @@
 										<a href="{{route('login')}}" class="log">ログイン</a>
 										<a href="{{route('register')}}" class="sign">新規登録</a>
                                     @endguest
-                                    <a href="#">ご利用ガイド</a>
-                                    <a href="#">カリビトQ&A</a>
+                                    <!-- <a href="#">ご利用ガイド</a> -->
+                                    <!-- <a href="#">カリビトQ&A</a> -->
                                     <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
-                                    <a href="#">設定</a>
-                                    <a href="#">お問い合わせ</a>
+                                    <!-- <a href="#">設定</a> -->
+                                    <!-- <a href="#">お問い合わせ</a> -->
                                 </div>
                                 @auth
                                     <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
@@ -389,7 +389,7 @@
                     </div>
                 </div>
             </div><!-- /.headLinks -->
-            <div class="findWrap pc">
+            <!-- <div class="findWrap pc">
                 <div class="inner">
                     <div class="flexBox">
                         <div class="left">
@@ -1106,8 +1106,8 @@
 						@endif
                     </div>
                 </div>
-            </div>
-            <div class="serviceLink pc">
+            </div> -->
+            <!-- <div class="serviceLink pc">
                 <div class="inner">
                     <div class="cont">
                         <div class="box">
@@ -1157,7 +1157,7 @@
                         <div class="span"><img src="/img/common/icon_slink.svg" alt=""></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             @auth
                 <div class="spFixed">
                     <div class="spFixedItem">
@@ -1166,7 +1166,7 @@
                             <p class="linkTxt">ホーム</p>
                         </a>
                     </div>
-                    <div class="spFixedItem">
+                    <!-- <div class="spFixedItem">
                         <a href="#" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
                             <p class="linkTxt">投稿</p>
@@ -1184,9 +1184,9 @@
                             <p class="linkIcon"><img src="/img/common/ico_message.svg" alt=""></p>
                             <p class="linkTxt">お知らせ</p>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="spFixedItem">
-                        <a href="#" class="spFixedLink">
+                        <a href="{{ route('mypage') }}" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/icon_spfixed05.svg" alt=""></p>
                             <p class="linkTxt">マイページ</p>
                         </a>
@@ -1196,71 +1196,74 @@
         </div><!-- /#header -->
     </header>
 {{$slot}}
-<footer>
-    	<div id="footer">
-    		<div class="inner clearfix">
-				<div class="sns pc">
-					<a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>
-					<a href="#" target="_blank"><img src="/img/common/ico_twitter.png" alt="Twitter"></a>
-					<a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a>
-					<a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a>
-				</div>
-    			<div class="footLinks">
-    				<div class="item toggleWrap">
-    					<p class="level1 toggleBtn">ワークを探す</p>
-    					<ul class="level2 toggleBox">
-    						<li><a href="#">エリアから探す</a></li>
-    						<li><a href="#">カテゴリから探す</a></li>
-    						<li><a href="#">日程から探す</a></li>
-    						<li><a href="#">金額から探す</a></li>
-    						<li><a href="#">〇〇〇〇から探す</a></li>
-    						<li><a href="#">〇〇〇〇から探す</a></li>
-    						<li><a href="#">〇〇〇〇から探す</a></li>
-    					</ul>
-    				</div>
-    				<div class="item toggleWrap">
-    					<p class="level1 toggleBtn">ご利用ガイド</p>
-    					<ul class="level2 toggleBox">
-    						<li><a href="#">初めての方へ</a></li>
-    						<li><a href="#">ゲストの方へ</a></li>
-    						<li><a href="#">ホストの方へ</a></li>
-    						<li><a href="#">ワークを掲載するには</a></li>
-    					</ul>
-    				</div>
-    				<div class="item toggleWrap">
-    					<p class="level1 toggleBtn">カリビトについて</p>
-    					<ul class="level2 toggleBox">
-    						<li><a href="#">法人のご利用について</a></li>
-    						<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
-    						<li><a href="{{ route('terms-of-service') }}">利用規約</a></li>
-    						<li><a href="#">ゲスト規約</a></li>
-    						<li><a href="#">ホスト規約</a></li>
-    						<li><a href="#">スマートフォンアプリ</a></li>
-    					</ul>
-    				</div>
-    			</div>
-    		</div>
-    		<div class="bottom">
-    			<div class="inner">
-    				<div class="serviceLinks">
-    					<a href="{{ route('company') }}">運営会社</a>
-    					<a href="#">採用情報</a>
-    					<a href="#">約款特定</a>
-    					<a href="#">商取引法に基づく表示</a>
-    					<a href="#">よくある質問</a>
-    					<a href="#">お問い合わせ</a>
-    				</div>
-    				<div class="sns sp">
-						<a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>
-						<a href="#" target="_blank"><img src="/img/common/ico_twitter.png" alt="Twitter"></a>
-						<a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a>
-						<a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a>
-					</div>
-    				<p id="copyright">©{{ now()->year }} karibito, Inc.</p>
-    			</div>
-    		</div>
+    <footer>
+        <div id="footer">
+            <!-- <div class="aboutFeatures">
+                <div class="inner">
+                    <h2 class="hdM">カリビトの特徴</h2>
+                    <div class="slider">
+                        <div><div class="item hlg01">
+                            <h3 class="tit">カリビトチャット</h3>
+                            <p class="ico ico_feat01"></p>
+                            <p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">検索機能</h3>
+                            <p class="ico ico_feat02"></p>
+                            <p>あなたの見たい情報を簡単に探せる<br>ために検索機能があります。<br>条件を入力するだけで簡単です。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">シェア機能</h3>
+                            <p class="ico ico_feat03"></p>
+                            <p>いいなと思った仕事をSNSを使って<br>シェアすることができます。<br>仲の良いメンバーに知らせる時に便利。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">お気に入り機能</h3>
+                            <p class="ico ico_feat04"></p>
+                            <p>気になる仕事や人材を<br>お気に入り登録をする事で<br>分からなくなることがありません。</p>
+                        </div></div>
+                        <div><div class="item hlg01">
+                            <h3 class="tit">カリビトチャット</h3>
+                            <p class="ico ico_feat01"></p>
+                            <p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
+                        </div></div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="downloadWrap">
+                <div class="inner">
+                    <div class="img"><img src="img/common/img_download.png" srcset="img/common/img_download.png 1x, img/common/img_download@2x.png 2x" alt=""><a href="#" target="_blank" class="logo sp"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a></div>
+                    <div class="info">
+                        <h2 class="tit">さあ、はじめよう！<span class="foucs">今すぐ無料ダウンロード！</span></h2>
+                        <div class="links">
+                            <a href="#" target="_blank" class="logo pc"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a>
+                            <a href="#" target="_blank"><img src="img/common/btn_app.svg" alt="App Store"></a>
+                            <a href="#" target="_blank"><img src="img/common/btn_google.svg" alt="Google"></a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="bottom">
+                <div class="inner">
+                    <div class="serviceLinks">
+                        <a href="{{ route('company') }}">運営会社</a>
+                        <!-- <a href="#">採用情報</a>
+                        <a href="#">約款特定</a>
+                        <a href="#">商取引法に基づく表示</a>
+                        <a href="#">よくある質問</a>
+                        <a href="#">お問い合わせ</a> -->
+                    </div>
+                    <!-- <div class="sns sp">
+                        <a href="#" target="_blank"><img src="img/common/ico_facebook.png" alt="Facebook"></a>
+                        <a href="#" target="_blank"><img src="img/common/ico_twitter.png" alt="Twitter"></a>
+                        <a href="#" target="_blank"><img src="img/common/ico_instragram.png" alt="Instragram"></a>
+                        <a href="#" target="_blank"><img src="img/common/ico_line.png" alt="LINE"></a>
+                    </div> -->
+                    <p id="copyright">©{{ now()->year }} karibito, Inc.</p>
+                </div>
+            </div>
         </div><!-- /#footer -->
-	</footer>
+    </footer>
 </div><!-- /#wrapper -->
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery.matchHeight-min.js"></script>
