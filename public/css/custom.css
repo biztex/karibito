@@ -37,7 +37,6 @@
 		}
 		#footer {
 			padding: 0;
-			position: fixed !important;
 			bottom: 50px !important;
 			width: 100vw;
 		}

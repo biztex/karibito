@@ -46,8 +46,8 @@ Route::get('sample',function(){
     return view('sample');
 });
 
-Route::get('sam',function(){
-    return view('sam');
+Route::get('post',function(){
+    return view('post');
 });
 
 
