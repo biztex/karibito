@@ -46,9 +46,16 @@ Route::get('sample',function(){
     return view('sample');
 });
 
-Route::get('post',function(){
-    return view('post');
-});
+
+
+// 画面組込中
+Route::view('/post'  , 'post.post')->name('post');
+Route::view('service_preview','post.service_preview')->name('service_preview');
+Route::view('service_provide','post.service_provide')->name('service_provide');
+Route::view('service_detail','post.service_detail')->name('service_detail');
+
+
+
 
 
 Route::get('/dashboard', function () {

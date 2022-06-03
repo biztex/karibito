@@ -36,7 +36,8 @@
 			border-top: 0;
 		}
 		#footer {
-			padding: 0;
+			margin-top:10px;
+			padding: 0 0 50px;
 			bottom: 50px !important;
 			width: 100vw;
 		}
@@ -49,7 +50,7 @@
 		}
 	}
 	#footer .bottom {
-		padding: 40px 0;
+		padding: 20px 0;
 	}
 /* コメントアウトしている間のみヘッダーフッター調整 */
 

@@ -157,10 +157,10 @@
                                     <!-- <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p> -->
                                     <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                     <div class="navMypageUl link01">
-                                        <!-- <a href="{{ route('mypage') }}">マイページ</a> -->
+                                        <a href="{{ route('mypage') }}">マイページ</a>
                                         <!-- <a href="#">掲載内容一覧</a> -->
                                         <!-- <a href="#">お気に入り</a> -->
-                                        <!-- <a href="#" class="blueBtn">投稿する</a> -->
+                                        <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
                                     </div>
 								@endauth
                                 <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
@@ -1101,7 +1101,7 @@
                         </div>
 						@if(Auth::check())
                         <div class="right">
-                            <a href="#">投稿する</a>
+                            <a href="{{ route('post') }}">投稿する</a>
                         </div>
 						@endif
                     </div>
@@ -1166,13 +1166,13 @@
                             <p class="linkTxt">ホーム</p>
                         </a>
                     </div>
-                    <!-- <div class="spFixedItem">
-                        <a href="#" class="spFixedLink">
+                    <div class="spFixedItem">
+                        <a href="{{ route('post') }}" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
                             <p class="linkTxt">投稿</p>
                         </a>
                     </div>
-                    <div class="spFixedItem">
+                    <!-- <div class="spFixedItem">
                         <a href="#" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>
                             <p class="linkTxt">やりとり</p>
