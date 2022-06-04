@@ -574,8 +574,8 @@
 
 	var _content = [];
 	var moreload = {
-		_default:5,//初始化显示5条信息
-		_loading:3, //每次显示3条更多内容
+		_default:5, // 初期化により5つのメッセージが表示されます
+		_loading:3, // 一度にさらに3つのアイテムを表示する
 		init:function(){
 			var lis = $(".clientEvaluate .ftBox li");
 			$(".clientEvaluate ul").html("");

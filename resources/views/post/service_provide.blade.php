@@ -10,7 +10,7 @@
 		<div id="contents">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					<h2 class="subPagesHd">サービスを提供する<a href="" class="more checkGuide">カリビト安心ガイドをご確認ください</a></h2>
+					<h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
 					<form class="contactForm">
 						<p class="th">カテゴリ<span class="must">必須</span></p>
 						<div class="td">
@@ -172,9 +172,9 @@
 							</select>
 						</div>
 						<div class="functeBtns">
-							<a href="#" class="full">プレビュー画面を見る</a>
-							<a href="#" class="full green">サービス提供を開始</a>
-							<a href="#" class="full green_o">プレビュー画面を見る</a>
+							<a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
+							<a href="{{ route('service_thanks') }}" class="full green">サービス提供を開始</a>
+							<a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
 						</div>
 					</form>
 				</div>

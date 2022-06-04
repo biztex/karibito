@@ -26,11 +26,11 @@
 
 /* コメントアウトしている間のみヘッダーフッター調整 */
 	/* ヘッダー */
-	#wrapper {
+	/* #wrapper {
 		padding-top: 81px; 
-	}
+	} */
 	/* フッター */
-	@media screen and (max-width: 767px){
+	/* @media screen and (max-width: 767px){
 		#footer .bottom {
 			padding: 15px 0;
 			border-top: 0;
@@ -51,10 +51,12 @@
 	}
 	#footer .bottom {
 		padding: 20px 0;
-	}
+	} */
 /* コメントアウトしている間のみヘッダーフッター調整 */
 
-
+#mypage .sidePerson {
+	display: none;
+}
 .detailStyle .recommendList .list .item{max-width: 212px}
 .fancyPersonTable select {
 	color: black;

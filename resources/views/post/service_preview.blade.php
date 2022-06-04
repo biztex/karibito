@@ -2,10 +2,10 @@
 	<article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<a href="service.html">サービスを探す</a>　>　<a href="#">デザイン</a>　>　<a href="#">その他デザイン</a>　>　<span>似顔絵イラスト描きます</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('service') }}">サービスを探す</a>　>　<a href="#">デザイン</a>　>　<a href="#">その他デザイン</a>　>　<span>似顔絵イラスト描きます</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="detailStyle">
 			<div class="inner02 ">
 				<div class="clearfix">
@@ -103,7 +103,7 @@
 							<p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
 						</div>
 						<div class="functeBtns">
-							<a href="" class="orange_o">編集画面に戻る</a>
+							<a href="javascript:history.back();" class="orange_o">編集画面に戻る</a>
 						</div>
 					</div>
 					<div class="box seller">
@@ -126,8 +126,8 @@
 
 	var _content = [];
 	var moreload = {
-		_default:5,//初始化显示5条信息
-		_loading:3, //每次显示3条更多内容
+		_default:5, // 初期化により5つのメッセージが表示されます
+		_loading:3, // 一度にさらに3つのアイテムを表示する
 		init:function(){
 			var lis = $(".clientEvaluate .ftBox li");
 			$(".clientEvaluate ul").html("");

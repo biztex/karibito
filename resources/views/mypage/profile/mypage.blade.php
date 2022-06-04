@@ -3,10 +3,10 @@
 	<body id="mypage">
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="/">ホーム</a>　>　<span>マイページ</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>マイページ</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div class="unregisteredP hide">
 			<div> </div>
 			<div>△身分証明書の登録が必要です。 <a href="#fancybox_register" class="fancybox">登録する</a></div>
@@ -178,7 +178,7 @@
 									<p><input type="text" name="address" placeholder="市区町村" value="{{old('address',$user_profile->address)}}"></p>
 								</dd>
 							</dl>
-							<!-- <div class="specialtyBox">
+							<div class="specialtyBox">
 								<div class="specialtyItem">
 									<div class="clone">
 										<dl>
@@ -204,7 +204,7 @@
 									</div>
 									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
 								</div>
-							</div> -->
+							</div>
 							<dl>
 									@error('introduction')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -364,20 +364,20 @@
 								@endif
 								<dd>
 									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
-									<!-- <p class="mypageP02">最終ログイン：8時間前</p> -->
+									<p class="mypageP02">最終ログイン：8時間前</p>
 									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
-									<!-- <p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
+									<p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
 									<p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
 										<div class="evaluate three"></div><a href="#">(3.0)</a>
-									</div> -->
+									</div>
 								</dd>
 							</dl>
 							<div class="mypageIntro">
 								<p class="mypageHd01">自己紹介</p>
 								<p class="mypageIntroTxt">{!! nl2br(e($user_profile->introduction)) !!}</p>
 							</div>
-							<!-- <div class="mypageProud">
+							<div class="mypageProud">
 								<p class="mypageHd01">得意分野</p>
 								<ul class="mypageProudUl">
 									<li>家の掃除</li>
@@ -387,10 +387,10 @@
 									<li>写真撮影代行</li>
 									<li>ロゴデザイン</li>
 								</ul>
-							</div> -->
+							</div>
 						</div>
-						<!-- <div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div> -->
-						<!-- <div class="mypageSec02">
+						<div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div>
+						<div class="mypageSec02">
 							<p class="mypageHd02">お知らせ</p>
 							<ul class="mypageUl02">
 								<li>
@@ -438,15 +438,15 @@
 									</a>
 								</li>
 							</ul>
-						</div> -->
-						<!-- <div class="mypageSec03">
+						</div>
+						 <div class="mypageSec03">
 							<p class="mypageHd02">出品サービス<a href="#" class="more">出品サービスを編集する</a></p>
 							<div class="box">
 								<p class="title">出品サービス</p>
 								<p class="txt">カリビトは、知識・スキル・経験を売り買いできるオンラインマーケットです。<br>あなたの ”得意” や ”経験” を必要としている人がきっといます。<br>カリビトで出品してみませんか？</p>
 								<p class="link "><a href="#" class="more">追加する</a></p>
 							</div>
-						</div> -->
+						</div>
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu/>
