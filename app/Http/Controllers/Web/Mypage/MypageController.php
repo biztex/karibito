@@ -23,12 +23,11 @@ class MypageController extends Controller
     public function show()
     {
         $user_profile = UserProfile::with(['user','prefecture'])->firstWhere('user_id',Auth::id());
-        $prefectures = Prefecture::all();
 
         $birthday = (int)str_replace("-","",$user_profile->birthday);
         $age = Age::group($birthday);
 
-        return view('mypage.profile.mypage',compact('user_profile','prefectures','age'));
+        return view('mypage.profile.mypage',compact('age'));
     }
 
     /**

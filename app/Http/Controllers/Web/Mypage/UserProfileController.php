@@ -110,6 +110,7 @@ class UserProfileController extends Controller
      */
     public function update(UpdateRequest $request)
     {
+        $previous = url()->previous();
         \DB::transaction(function () use ($request) {
 
             $this->user_profile_service->updateUser($request->all());
@@ -120,7 +121,7 @@ class UserProfileController extends Controller
             \Session::put('flash_msg','プロフィールを編集しました！');
         });
 
-        return redirect()->route('mypage');
+        return redirect($previous);
     }
 
     /**

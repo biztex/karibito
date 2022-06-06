@@ -26,18 +26,18 @@
 
 /* コメントアウトしている間のみヘッダーフッター調整 */
 	/* ヘッダー */
-	#wrapper {
+	/* #wrapper {
 		padding-top: 81px; 
-	}
+	} */
 	/* フッター */
-	@media screen and (max-width: 767px){
+	/* @media screen and (max-width: 767px){
 		#footer .bottom {
 			padding: 15px 0;
 			border-top: 0;
 		}
 		#footer {
-			padding: 0;
-			position: fixed !important;
+			margin-top:10px;
+			padding: 0 0 50px;
 			bottom: 50px !important;
 			width: 100vw;
 		}
@@ -50,11 +50,14 @@
 		}
 	}
 	#footer .bottom {
-		padding: 40px 0;
-	}
+		padding: 20px 0;
+	} */
 /* コメントアウトしている間のみヘッダーフッター調整 */
 
-
+#mypage .sidePerson {
+	display: none;
+}
+#mypage 
 .detailStyle .recommendList .list .item{max-width: 212px}
 .fancyPersonTable select {
 	color: black;
@@ -508,3 +511,9 @@
 	}
 
 }
+
+ #mypage #side div:nth-of-type(2) ul li:nth-of-type(1) a {
+    color: #333333;
+    background-color: #FCAA00;
+    pointer-events: none;
+ }
