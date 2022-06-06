@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_profiles', function (Blueprint $table) {
-            $table->string('identification_path')->nullable()->after('deleted_at');
+            $table->string('identification_path')->nullable()->after('cover');
             $table->boolean('is_identify_approval')->nullable()->after('identification_path');
         });
     }
