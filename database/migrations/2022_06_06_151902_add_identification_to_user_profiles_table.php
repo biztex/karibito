@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('user_profiles', function (Blueprint $table) {
             $table->string('identification_path')->nullable()->after('cover')->comment('身分証明証のパス');
-            $table->boolean('is_identify_approval')->nullable()->after('identification_path')->comment('身分証明証の承認フラグ');
+            $table->boolean('is_identify_approval')->after('identification_path')->default(0)->comment('身分証明証の承認フラグ');
         });
     }
 
