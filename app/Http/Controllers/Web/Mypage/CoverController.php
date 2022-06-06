@@ -30,8 +30,11 @@ class CoverController extends Controller
 
     public function delete() 
     {
+        $previous = url()->previous();
+
         $this->user_profile_service->deleteUserProfileImage('cover');
         \Session::put('flash_msg','カバーを削除しました！');
-        return redirect()->route('mypage');
+        
+        return redirect($previous);
     }
 }

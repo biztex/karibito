@@ -2,22 +2,20 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>下書き一覧</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載内容</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
-
-		<x-parts.flash-msg/>
-
+		
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="subPagesWrap">
-						<h2 class="subPagesHd">下書き一覧</h2>
+						<h2 class="subPagesHd">掲載内容</h2>
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">
-								<li><a href="#tab_box01" class="is_active">提供の下書き</a></li>
-								<li><a href="#tab_box02">依頼の下書き</a></li>
+								<li><a href="#tab_box01" class="is_active">取引中</a></li>
+								<li><a href="#tab_box02">契約終了</a></li>
 							</ul>
 							<div class="tabBox is_active" id="tab_box01">
 								<ul class="favoriteUl01">

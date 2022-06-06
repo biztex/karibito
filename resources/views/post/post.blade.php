@@ -2,10 +2,10 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<span>サービスを提供する</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<div id="contents">
 			<div class="cancelWrap">
@@ -15,7 +15,7 @@
 						<a href="{{ route('service_provide') }}" class="fun camera">サービスを提供する</a>
 						<a href="{{ route('service_request') }}" class="fun note">サービスをリクエストする</a>
 						<div class="common">
-							<a href="#">下書きを見る</a>
+							<a href="{{ route('draft') }}">下書きを見る</a>
 							<a href="#" class="st2">ブログを投稿する</a>
 							<a href="#" class="st2">ポートフォリオを投稿する</a>
 						</div>

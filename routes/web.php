@@ -57,6 +57,7 @@ Route::view('service_request','post.service_request')->name('service_request');
 Route::view('service_thanks','post.service_thanks')->name('service_thanks');
 Route::view('service','post.service')->name('service');
 Route::view('draft','post.draft')->name('draft');
+Route::view('publication','post.publication')->name('publication');
 Route::view('request','post.request_list')->name('request');
 Route::view('request_detail','post.request_detail')->name('request_detail');
 
@@ -72,6 +73,12 @@ Route::view('secret06','secret.secret06')->name('secret06');
 Route::view('support','support.support')->name('support');
 Route::view('support_detail','support.support_detail')->name('support_detail');
 Route::view('guide','support.guide')->name('guide');
+
+Route::view('member','user.member')->name('member');
+Route::view('member_config','user.member_config')->name('member_config');
+Route::view('member_config_pass','user.member_config_pass')->name('member_config_pass');
+Route::view('member_config_email','user.member_config_email')->name('member_config_email');
+
 
 
 
@@ -123,7 +130,6 @@ Route::get('',[HomeController::class, 'index'])->name('home');
 Route::get('add_category', [CategoryController::class, 'createCategory']);
 
 Route::get('contact', [ContactController::class, 'contact']);
-// Route::get('draft', [ContactController::class, 'indexDraft']);
 
 Route::get('estimate', [EstimateController::class, 'index']);
 
@@ -136,7 +142,6 @@ Route::get('faq', [FaqController::class, 'index']);
 
 Route::get('favorite', [MypageController::class, 'indexFavorite']);
 Route::get('friends', [MypageController::class, 'indexFriends']);
-Route::get('member', [MypageController::class, 'showMember']);
 Route::get('past', [MypageController::class, 'indexPast']);
 
 Route::get('news_detail',[NewsController::class,'showDetail']);
@@ -149,7 +154,6 @@ Route::get('point_history',[PointController::class,'index']);
 Route::get('notation',[NotationController::class,'show']);
 
 
-Route::get('publication',[PublicationController::class,'index']);
 
 
 
@@ -168,7 +172,6 @@ Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFac
 Route::prefix('sample')->group(function (){
     Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
-    // Route::view('draft', 'sample.draft');
     Route::view('estimate', 'sample.estimate');
     Route::view('evaluation', 'sample.evaluation');
     Route::view('faq_answer', 'sample.faq_answer');
@@ -177,7 +180,6 @@ Route::prefix('sample')->group(function (){
     Route::view('faq', 'sample.faq');
     Route::view('favorite', 'sample.favorite');
     Route::view('friends', 'sample.friends');
-    Route::view('member', 'sample.member');
     Route::view('news_detail', 'sample.news_detail');
     Route::view('news', 'sample.news');
     Route::view('notation', 'sample.notation');
@@ -185,5 +187,4 @@ Route::prefix('sample')->group(function (){
     Route::view('payment_history', 'sample.payment_history');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
-    Route::view('publication', 'sample.publication');
 });

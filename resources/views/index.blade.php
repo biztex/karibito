@@ -6472,9 +6472,9 @@
 								</ul>
 								<h2>ガイド</h2>
 								<ul class="links">
-									<li><a href="#">ご利用ガイド</a></li>
+									<li><a href="{{ route('support') }}">ご利用ガイド</a></li>
 									<li><a href="#">よくある質問</a></li>
-									<li><a href="#">プライバシーポリシー</a></li>
+									<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
 									<li><a href="#">おとい合わせ</a></li>
 								</ul>
 							</aside><!-- /#side -->  

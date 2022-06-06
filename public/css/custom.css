@@ -57,6 +57,7 @@
 #mypage .sidePerson {
 	display: none;
 }
+#mypage 
 .detailStyle .recommendList .list .item{max-width: 212px}
 .fancyPersonTable select {
 	color: black;
@@ -510,3 +511,9 @@
 	}
 
 }
+
+ #mypage #side div:nth-of-type(2) ul li:nth-of-type(1) a {
+    color: #333333;
+    background-color: #FCAA00;
+    pointer-events: none;
+ }
