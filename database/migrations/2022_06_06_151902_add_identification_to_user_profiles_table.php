@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_profiles', function (Blueprint $table) {
-            $table->string('identification')->nullable()->after('deleted_at');
-            $table->boolean('is_identify')->nullable()->after('identification');
+            $table->string('identification_path')->nullable()->after('deleted_at');
+            $table->boolean('is_identify_approval')->nullable()->after('identification_path');
         });
     }
 
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('user_profiles', function (Blueprint $table) {
-            $table->dropColumn('identification');
+            $table->dropColumn('identification_path');
             $table->dropColumn('is_identify');
         });
     }
