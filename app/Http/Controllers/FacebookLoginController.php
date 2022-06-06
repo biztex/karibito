@@ -77,13 +77,13 @@ class FacebookLoginController extends Controller
                             'icon' => $file_name
                         ]);
                     }
+                    return $user;
                 });
-                return $user;
+                // ログインする
+                Auth::login($user);
+                // /基本情報登録画面にリダイレクト
+                return redirect()->route('user_profile.create');
             }
-            // ログインする
-            Auth::login($user);
-            // /基本情報登録画面にリダイレクト
-            return redirect()->route('user_profile.create');
         }
     }
 }
