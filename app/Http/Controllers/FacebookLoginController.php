@@ -31,7 +31,7 @@ class FacebookLoginController extends Controller
     {
                 // 各SNSから当該ユーザー情報を取得
                 try {
-                    $sns_user = Socialite::driver('google')->stateless()->user();
+                    $sns_user = Socialite::driver('facebook')->stateless()->user();
                 } catch(\Exception $e) {
                     return redirect('/login')->with('flash_alert', '予期せぬエラーが発生しました');
                 }
