@@ -65,14 +65,14 @@ class FacebookLoginController extends Controller
                     return redirect()->route('login')->with('flash_alert','ログイン情報が登録されていません。');
                 }
                 $user = \DB::transaction(function () use ($sns_user) {
-                $user = User::create([
-                    'name' => $sns_user->name,
-                    'email' => $sns_user->email,
-                    'email_verified_at' => Carbon::now(),
-                    'facebook_id' => $sns_user->id,
-                    // 'facebook_token' => $sns_user->token
-                ]);
-                $img = @file_get_contents($sns_user->avatar);
+                    $user = User::create([
+                        'name' => $sns_user->name,
+                        'email' => $sns_user->email,
+                        'email_verified_at' => Carbon::now(),
+                        'facebook_id' => $sns_user->id,
+                        // 'facebook_token' => $sns_user->token
+                    ]);
+                    $img = @file_get_contents($sns_user->avatar);
                     $file_name = null;
                     if ($img !== false) {
                         $file_name = 'icons/' . 'facebook' . '_' . uniqid() . '.jpg';
