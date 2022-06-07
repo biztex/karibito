@@ -29,7 +29,9 @@ class GoogleLoginController extends Controller
         try {
             $sns_user = Socialite::driver('google')->stateless()->user();
         } catch(\Exception $e) {
-            return redirect('/login')->with('flash_alert', '予期せぬエラーが発生しました');
+            dd($e->getMessage());
+
+            return redirect('/register')->with('flash_alert', '予期せぬエラーが発生しました');
         }
 
         // $sns_user = Socialite::driver('google')->stateless()->user();
