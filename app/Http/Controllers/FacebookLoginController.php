@@ -29,23 +29,21 @@ class FacebookLoginController extends Controller
      */
     public function authFacebookCallback()
     {
-                // 各SNSから当該ユーザー情報を取得
-                try {
-                    $sns_user = Socialite::driver('facebook')->stateless()->user();
-                } catch(\Exception $e) {
-                    return redirect('/register')->with('flash_alert', '予期せぬエラーが発生しました');
-                }
+        // 各SNSから当該ユーザー情報を取得
+        try {
+            $sns_user = Socialite::driver('facebook')->stateless()->user();
+        } catch(\Exception $e) {
+            return redirect()->route('register')->with('flash_alert', '予期せぬエラーが発生しました');
+        }
 
         // TODO 汎用的な変数名に変更する
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
-        $sns_user = Socialite::driver('facebook')->stateless()->user();
         // if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
-            //     return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
-            // }
-            // すでにFacebook登録済みじゃなかったらユーザーを登録する
-            $user = User::where('facebook_id', $sns_user->id)->first();
-            // dd($user);
+        //     return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
+        // }
+        // すでにFacebook登録済みじゃなかったらユーザーを登録する
+        $user = User::where('facebook_id', $sns_user->id)->first();
 
 
         if ($user){
