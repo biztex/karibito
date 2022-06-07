@@ -283,6 +283,11 @@
 							</ul>
 							<form method="POST" action="{{ route('register') }}">
 								@csrf
+								@if (session('flash_alert'))
+									<div class="alert alert-danger mb05" style="z-index: 9999;">
+										{{ session('flash_alert') }}
+									</div>
+								@endif
 								<ul class="loginSns">
 									<li><a href="/register/facebook" target="_blank"><img src="img/login/login_facebook.svg"
 										alt="Facebookで登録する"></a></li>
