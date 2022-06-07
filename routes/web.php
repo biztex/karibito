@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\Mypage\UserProfileController;
 use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
+use App\Http\Controllers\Web\Mypage\WithdrawController;
 
 
 use App\Http\Controllers\HomeController;
@@ -62,12 +63,7 @@ Route::view('request','post.request_list')->name('request');
 Route::view('request_detail','post.request_detail')->name('request_detail');
 
 
-Route::view('secret01','secret.secret01')->name('secret01');
-Route::view('secret02','secret.secret02')->name('secret02');
-Route::view('secret03','secret.secret03')->name('secret03');
-Route::view('secret04','secret.secret04')->name('secret04');
-Route::view('secret05','secret.secret05')->name('secret05');
-Route::view('secret06','secret.secret06')->name('secret06');
+
 
 
 Route::view('support','support.support')->name('support');
@@ -108,6 +104,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
     });
 
+    // 退会フォーム表示
+    Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');
+    Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
 });
 
@@ -115,6 +114,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::view('/privacy-policy'  , 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service','terms-of-service')->name('terms-of-service');
+
+// 秘訣
+Route::view('secret01','secret.secret01')->name('secret01');
+Route::view('secret02','secret.secret02')->name('secret02');
+Route::view('secret03','secret.secret03')->name('secret03');
+Route::view('secret04','secret.secret04')->name('secret04');
+Route::view('secret05','secret.secret05')->name('secret05');
+Route::view('secret06','secret.secret06')->name('secret06');
+
+
+
+
 
 
 // index:一覧画面(get)
@@ -167,6 +178,7 @@ Route::get('/login/google/callback', [GoogleLoginController::class, 'authGoogleC
 Route::get('/register/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
+
 
 
 Route::prefix('sample')->group(function (){
