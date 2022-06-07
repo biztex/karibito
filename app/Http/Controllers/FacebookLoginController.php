@@ -33,8 +33,7 @@ class FacebookLoginController extends Controller
                 try {
                     $sns_user = Socialite::driver('facebook')->stateless()->user();
                 } catch(\Exception $e) {
-                    dd($e->getMessage());
-                    return redirect('/login')->with('flash_alert', '予期せぬエラーが発生しました');
+                    return redirect('/register')->with('flash_alert', '予期せぬエラーが発生しました');
                 }
 
         // TODO 汎用的な変数名に変更する
