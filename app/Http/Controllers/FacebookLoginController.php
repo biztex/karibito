@@ -29,16 +29,21 @@ class FacebookLoginController extends Controller
      */
     public function authFacebookCallback()
     {
+        // 各SNSから当該ユーザー情報を取得
+        try {
+            $sns_user = Socialite::driver('facebook')->stateless()->user();
+        } catch(\Exception $e) {
+            return redirect()->route('register')->with('flash_alert', '予期せぬエラーが発生しました');
+        }
+
         // TODO 汎用的な変数名に変更する
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
-        $sns_user = Socialite::driver('facebook')->stateless()->user();
         // if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
-            //     return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
-            // }
-            // すでにFacebook登録済みじゃなかったらユーザーを登録する
-            $user = User::where('facebook_id', $sns_user->id)->first();
-            // dd($user);
+        //     return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
+        // }
+        // すでにFacebook登録済みじゃなかったらユーザーを登録する
+        $user = User::where('facebook_id', $sns_user->id)->first();
 
 
         if ($user){
@@ -60,14 +65,14 @@ class FacebookLoginController extends Controller
                     return redirect()->route('login')->with('flash_alert','ログイン情報が登録されていません。');
                 }
                 $user = \DB::transaction(function () use ($sns_user) {
-                $user = User::create([
-                    'name' => $sns_user->name,
-                    'email' => $sns_user->email,
-                    'email_verified_at' => Carbon::now(),
-                    'facebook_id' => $sns_user->id,
-                    // 'facebook_token' => $sns_user->token
-                ]);
-                $img = @file_get_contents($sns_user->avatar);
+                    $user = User::create([
+                        'name' => $sns_user->name,
+                        'email' => $sns_user->email,
+                        'email_verified_at' => Carbon::now(),
+                        'facebook_id' => $sns_user->id,
+                        // 'facebook_token' => $sns_user->token
+                    ]);
+                    $img = @file_get_contents($sns_user->avatar);
                     $file_name = null;
                     if ($img !== false) {
                         $file_name = 'icons/' . 'facebook' . '_' . uniqid() . '.jpg';
@@ -77,13 +82,13 @@ class FacebookLoginController extends Controller
                             'icon' => $file_name
                         ]);
                     }
+                    return $user;
                 });
-                return $user;
+                // ログインする
+                Auth::login($user);
+                // /基本情報登録画面にリダイレクト
+                return redirect()->route('user_profile.create');
             }
-            // ログインする
-            Auth::login($user);
-            // /基本情報登録画面にリダイレクト
-            return redirect()->route('user_profile.create');
         }
     }
 }

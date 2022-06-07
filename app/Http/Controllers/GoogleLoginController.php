@@ -25,7 +25,14 @@ class GoogleLoginController extends Controller
 
     public function authGoogleCallback()
     {
-        $sns_user = Socialite::driver('google')->stateless()->user();
+        // 各SNSから当該ユーザー情報を取得
+        try {
+            $sns_user = Socialite::driver('google')->stateless()->user();
+        } catch(\Exception $e) {
+            return redirect()->route('register')->with('flash_alert', '予期せぬエラーが発生しました');
+        }
+
+        // $sns_user = Socialite::driver('google')->stateless()->user();
         $user = User::where('google_id', $sns_user->id)->first();
 
         if($user){ //idが同じユーザーがいる場合
