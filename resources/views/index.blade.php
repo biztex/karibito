@@ -1,5 +1,6 @@
 
 <x-layout>
+<x-parts.flash-msg/>
 	<article>
 		<div id="mainVisual">
 			<div class="main">

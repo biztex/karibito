@@ -27,7 +27,7 @@
                     <li><a href="#" class="">クーポン</a></li>
                     <li><a href="#" class="">DM</a></li>
                     <li><a href="{{ route('member') }}" class="">会員情報</a></li>
-                    <li><a href="{{ route('withdraw') }}" class="">退会</a></li>
+                    <li><a href="{{ route('showWithdrawForm') }}" class="">退会</a></li>
                 </ul>
             </div>
             <div class="sideItem">

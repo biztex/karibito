@@ -81,16 +81,16 @@
                                             @if(empty($user_profile->icon))
                                                 <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/pic_head.png" alt=""></a>
                                                 @else
-                                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
+                                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
                                             @endif
                                         <div class="navBox navMypageBox">
                                             <dl class="navMypageDl">
                                                 @if(empty($user_profile->icon))
                                                     <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/pic_head.png" alt=""></a></dt>
                                                     @else
-                                                    <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.\App\Models\UserProfile::firstWhere('user_id',\Auth::id())->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
+                                                    <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                                 @endif
-                                                <dd>{{$user_profile->user->name}}</dd>
+                                                    <dd>{{\Auth::user()->name}}</dd>
                                             </dl>
                                             @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
                                                 <div class="navMypageUl">
@@ -113,7 +113,7 @@
                                                 @else
                                                 <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                             @endif
-                                            <dd>{{ $user_profile->user->name }}</dd>
+                                            <dd>{{ \Auth::user()->name }}</dd>
                                         </dl>
                                         <!-- <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p> -->
                                         <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
