@@ -109,6 +109,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
 
+    // 秘訣
+    Route::view('secret01','secret.secret01')->name('secret01');
+    Route::view('secret02','secret.secret02')->name('secret02');
+    Route::view('secret03','secret.secret03')->name('secret03');
+    Route::view('secret04','secret.secret04')->name('secret04');
+    Route::view('secret05','secret.secret05')->name('secret05');
+    Route::view('secret06','secret.secret06')->name('secret06');
+    
 });
 
 // プライバシーポリシーと運営会社

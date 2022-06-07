@@ -1,6 +1,7 @@
 <x-app>
     <div>
         <aside id="side" class="pc">
+
             <div class="sidePerson">
                 <div class="sidePersonPic">
                     @if(!empty($user_profile->icon))
@@ -9,10 +10,11 @@
                         <p class="img"><img src="/img/mypage/pic_head.png" alt=""></p>
                     @endif
                 </div>
-                <p class="sidePersonName">{{ $user_profile->user->name }}</p>
+                <p class="sidePersonName">{{ \Auth::user()->name }}</p>
                 <p class="sidePersonEdit"><a href="#fancybox_person" class="fancybox">
                         <img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
             </div>
+            
             <div class="sideItem">
                 <ul class="sideUl01">
                     <li><a href="{{ route('mypage') }}" class="">マイページ</a></li>

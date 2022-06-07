@@ -3,7 +3,7 @@
 		<body id="privacy">
 			<div id="breadcrumb">
 				<div class="inner">
-					<a href="/">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
+					<a href="{{ route('home') }}">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
 				</div>
 			</div><!-- /.breadcrumb -->
 			<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
