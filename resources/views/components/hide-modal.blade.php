@@ -31,6 +31,7 @@
 			</div>
 
 		<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
+		@if(!empty($user_profile))
 			<div id="fancybox_person" class="fancyboxWrap" style="display:none;">
 				<form method="POST" action="{{ route('user_profile.update') }}" enctype="multipart/form-data">
 				@csrf @method('PUT')
@@ -77,7 +78,7 @@
 								@error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-								<dd><input type="text" name="name" class="@error('name') is-invalid @enderror" value="{{old('name',$user_profile->user->name)}}"></dd>
+								<dd><input type="text" name="name" class="@error('name') is-invalid @enderror" value="{{old('name',\Auth::user()->name)}}"></dd>
 							</dl>
 								<dl>
 								
@@ -201,7 +202,7 @@
 					</div>
 				</form>
 			</div>
-
+		@endif
 
 		<!--　履歴書作成モーダル -------------------------------------------------------------- -->
 			<div id="fancybox_resume" class="fancyboxWrap">
