@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\Mypage\UserProfileController;
 use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
+use App\Http\Controllers\Web\Mypage\WithdrawController;
 
 
 use App\Http\Controllers\HomeController;
@@ -46,9 +47,37 @@ Route::get('sample',function(){
     return view('sample');
 });
 
-Route::get('sam',function(){
-    return view('sam');
-});
+
+
+// 画面組込中
+Route::view('/post'  , 'post.post')->name('post');
+Route::view('service_preview','post.service_preview')->name('service_preview');
+Route::view('service_provide','post.service_provide')->name('service_provide');
+Route::view('service_detail','post.service_detail')->name('service_detail');
+Route::view('service_request','post.service_request')->name('service_request');
+Route::view('service_thanks','post.service_thanks')->name('service_thanks');
+Route::view('service','post.service')->name('service');
+Route::view('draft','post.draft')->name('draft');
+Route::view('publication','post.publication')->name('publication');
+Route::view('request','post.request_list')->name('request');
+Route::view('request_detail','post.request_detail')->name('request_detail');
+
+
+
+
+
+Route::view('support','support.support')->name('support');
+Route::view('support_detail','support.support_detail')->name('support_detail');
+Route::view('guide','support.guide')->name('guide');
+
+Route::view('member','user.member')->name('member');
+Route::view('member_config','user.member_config')->name('member_config');
+Route::view('member_config_pass','user.member_config_pass')->name('member_config_pass');
+Route::view('member_config_email','user.member_config_email')->name('member_config_email');
+
+
+
+
 
 
 Route::get('/dashboard', function () {
@@ -75,13 +104,36 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
     });
 
+    // 退会フォーム表示
+    Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');
+    Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
+    // 秘訣
+    Route::view('secret01','secret.secret01')->name('secret01');
+    Route::view('secret02','secret.secret02')->name('secret02');
+    Route::view('secret03','secret.secret03')->name('secret03');
+    Route::view('secret04','secret.secret04')->name('secret04');
+    Route::view('secret05','secret.secret05')->name('secret05');
+    Route::view('secret06','secret.secret06')->name('secret06');
+    
 });
 
 // プライバシーポリシーと運営会社
 Route::view('/privacy-policy'  , 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service','terms-of-service')->name('terms-of-service');
+
+// 秘訣
+Route::view('secret01','secret.secret01')->name('secret01');
+Route::view('secret02','secret.secret02')->name('secret02');
+Route::view('secret03','secret.secret03')->name('secret03');
+Route::view('secret04','secret.secret04')->name('secret04');
+Route::view('secret05','secret.secret05')->name('secret05');
+Route::view('secret06','secret.secret06')->name('secret06');
+
+
+
+
 
 
 // index:一覧画面(get)
@@ -97,7 +149,6 @@ Route::get('',[HomeController::class, 'index'])->name('home');
 Route::get('add_category', [CategoryController::class, 'createCategory']);
 
 Route::get('contact', [ContactController::class, 'contact']);
-Route::get('draft', [ContactController::class, 'indexDraft']);
 
 Route::get('estimate', [EstimateController::class, 'index']);
 
@@ -110,7 +161,6 @@ Route::get('faq', [FaqController::class, 'index']);
 
 Route::get('favorite', [MypageController::class, 'indexFavorite']);
 Route::get('friends', [MypageController::class, 'indexFriends']);
-Route::get('member', [MypageController::class, 'showMember']);
 Route::get('past', [MypageController::class, 'indexPast']);
 
 Route::get('news_detail',[NewsController::class,'showDetail']);
@@ -120,20 +170,9 @@ Route::get('payment_history',[PaymentController::class,'index']);
 
 Route::get('point_history',[PointController::class,'index']);
 
-Route::get('secret01',[SecretController::class,'showSecret01']);
-Route::get('secret02',[SecretController::class,'showSecret02']);
-Route::get('secret03',[SecretController::class,'showSecret03']);
-Route::get('secret04',[SecretController::class,'showSecret04']);
-Route::get('secret05',[SecretController::class,'showSecret05']);
-Route::get('secret06',[SecretController::class,'showSecret06']);
-
-Route::get('service_detail',[ServiceController::class,'showService']);
-Route::get('service',[ServiceController::class,'indexService']);
-
 Route::get('notation',[NotationController::class,'show']);
 
 
-Route::get('publication',[PublicationController::class,'index']);
 
 
 
@@ -149,11 +188,10 @@ Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth'
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
 
 
+
 Route::prefix('sample')->group(function (){
-    Route::view('', 'sample.index');
     Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
-    Route::view('draft', 'sample.draft');
     Route::view('estimate', 'sample.estimate');
     Route::view('evaluation', 'sample.evaluation');
     Route::view('faq_answer', 'sample.faq_answer');
@@ -162,8 +200,6 @@ Route::prefix('sample')->group(function (){
     Route::view('faq', 'sample.faq');
     Route::view('favorite', 'sample.favorite');
     Route::view('friends', 'sample.friends');
-    Route::view('member', 'sample.member');
-    Route::view('mypage', 'sample.mypage');
     Route::view('news_detail', 'sample.news_detail');
     Route::view('news', 'sample.news');
     Route::view('notation', 'sample.notation');
@@ -171,15 +207,4 @@ Route::prefix('sample')->group(function (){
     Route::view('payment_history', 'sample.payment_history');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
-    Route::view('privacy', 'sample.privacy');
-    Route::view('publication', 'sample.publication');
-    Route::view('secret01', 'sample.secret01');
-    Route::view('secret02', 'sample.secret02');
-    Route::view('secret03', 'sample.secret03');
-    Route::view('secret04', 'sample.secret04');
-    Route::view('secret05', 'sample.secret05');
-    Route::view('secret06', 'sample.secret06');
-    Route::view('service_detail', 'sample.service_detail');
-    Route::view('service', 'sample.service');
-    Route::view('login', 'sample.login');
 });

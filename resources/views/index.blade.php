@@ -1,5 +1,6 @@
 
 <x-layout>
+<x-parts.flash-msg/>
 	<article>
 		<div id="mainVisual">
 			<div class="main">
@@ -64,7 +65,7 @@
 								<div class="beginGuide">
 									<h2 class="hdM">初めての方へ</h2>
 									<ul>
-										<li><a href="#"><img src="/img/common/img_guide01.png" srcset="/img/common/img_guide01.png 1x, /img/common/img_guide01@2x.png 2x" alt=""></a></li>
+										<li><a href="{{ route('guide') }}"><img src="/img/common/img_guide01.png" srcset="/img/common/img_guide01.png 1x, /img/common/img_guide01@2x.png 2x" alt=""></a></li>
 										<li><a href="#"><img src="/img/common/img_guide02.png" srcset="/img/common/img_guide02.png 1x, /img/common/img_guide02@2x.png 2x" alt=""></a></li>
 									</ul>
 								</div>
@@ -3261,9 +3262,9 @@
 								</ul>
 								<h2>ガイド</h2>
 								<ul class="links">
-									<li><a href="#">ご利用ガイド</a></li>
+									<li><a href="{{ route('support') }}">ご利用ガイド</a></li>
 									<li><a href="#">よくある質問</a></li>
-									<li><a href="#">プライバシーポリシー</a></li>
+									<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
 									<li><a href="#">おとい合わせ</a></li>
 								</ul>
 							</aside><!-- /#side -->  
@@ -3275,7 +3276,7 @@
 								<div class="beginGuide">
 									<h2 class="hdM">2初めての方へ</h2>
 									<ul>
-										<li><a href="#"><img src="/img/common/img_guide01.png" srcset="/img/common/img_guide01.png 1x, /img/common/img_guide01@2x.png 2x" alt=""></a></li>
+										<li><a href=""><img src="/img/common/img_guide01.png" srcset="/img/common/img_guide01.png 1x, /img/common/img_guide01@2x.png 2x" alt=""></a></li>
 										<li><a href="#"><img src="/img/common/img_guide02.png" srcset="/img/common/img_guide02.png 1x, /img/common/img_guide02@2x.png 2x" alt=""></a></li>
 									</ul>
 								</div>
@@ -6472,9 +6473,9 @@
 								</ul>
 								<h2>ガイド</h2>
 								<ul class="links">
-									<li><a href="#">ご利用ガイド</a></li>
+									<li><a href="{{ route('support') }}">ご利用ガイド</a></li>
 									<li><a href="#">よくある質問</a></li>
-									<li><a href="#">プライバシーポリシー</a></li>
+									<li><a href="{{ route('privacy-policy') }}">プライバシーポリシー</a></li>
 									<li><a href="#">おとい合わせ</a></li>
 								</ul>
 							</aside><!-- /#side -->  
