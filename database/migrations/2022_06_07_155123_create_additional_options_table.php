@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->string('name')->comment('オプション名')->nullable();
             $table->integer('price')->comment('金額')->nullable();
-            $table->boolean('is_public')->comment('');
+            $table->boolean('is_public')->comment('1.公開 2.非公開');
             $table->softDeletes();
             $table->timestamps();
         });
