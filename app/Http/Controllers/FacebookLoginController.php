@@ -39,9 +39,9 @@ class FacebookLoginController extends Controller
         // TODO 汎用的な変数名に変更する
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
-        // if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
-        //     return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
-        // }
+        if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
+            return redirect()->route('register')->with('flash_alert', 'ログイン情報が登録されていません。');
+        }
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user = User::where('facebook_id', $sns_user->id)->first();
 
