@@ -21,14 +21,8 @@ class IdentificationController extends Controller
 
     public function update(UpdateIdentificationRequest $request)
     {
-       $previous = url()->previous();
-       \DB::transaction(function () use ($request) {
+           $this->user_profile_service->updateIdentification($request);
 
-           $this->user_profile_service->updateIdentification($request,'identification_path');
-
-           \Session::put('flash_msg','身分証明証を提出しました！');
-       });
-
-       return redirect($previous);
+        return back()->with('flash_msg','身分証明証を提出しました！');
     }
 }

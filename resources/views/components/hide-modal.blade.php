@@ -40,7 +40,7 @@
 				<form action="{{ route('identification') }}" method="POST" name="upload" enctype="multipart/form-data">
 					@csrf
 					<label>
-						<input type="file" name="identification_path" style="display:none;">
+						<input type="file" name="identification_path" style="display:none;"  accept=".png,.jpg">
 						<p class="fancyRegisterUpload">身分証明書をアップロード</p>
 					</label>
 					

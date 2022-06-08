@@ -13,7 +13,7 @@ class UserProfileService
      */
     public function updateUser($params)
     {
-        $user = User::find(\Auth::id());
+        $user = \Auth::user();
         $user->fill([ 'name' => $params['name'] ])->save();
         return $user;
     }
@@ -40,7 +40,8 @@ class UserProfileService
     public function updateUserProfile($request)
     {
         $birthday = $request->year.'-'.$request->month.'-'.$request->day;
-        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
+        $user_profile = \Auth::user()->userProfile;
+
         $user_profile->fill([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -57,10 +58,10 @@ class UserProfileService
     /**
      * 身分証明証提出
      */
-    public function updateIdentification($request,$value)
+    public function updateIdentification($request)
     {
-        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
-        $user_profile->$value = $request->file($value)->store($value.'s','public');
+        $user_profile = \Auth::user()->userProfile;
+        $user_profile->identification_path = $request->file('identification_path')->store('identification_paths','public');
 
         return $user_profile->save();
     }
@@ -73,7 +74,8 @@ class UserProfileService
      */
     public function updateUserProfileImage($request,$value)
     {
-        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
+        $user_profile = \Auth::user()->userProfile;
+
         $old = $user_profile->$value;
 
         if(isset($request->$value)){
@@ -91,7 +93,8 @@ class UserProfileService
      */
     public function deleteUserProfileImage($value)
     {
-        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
+        $user_profile = \Auth::user()->userProfile;
+
         $old = $user_profile->$value;
         $user_profile->$value = null;
 
