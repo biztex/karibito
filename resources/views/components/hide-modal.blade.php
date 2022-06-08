@@ -1,11 +1,21 @@
 <x-app>		
 
-	<div class="hide">
 
-		<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
+	<div class="hide">
+		<!-- 身分証明証提出モーダル -------------------------------------------------------------- -->
 			<div id="fancybox_register" class="fancyboxWrap">
+			<div style="display:flex;justify-content:space-between">
+				<a href="#" class="fancyPersonCancel" style="padding-left:10px; font-size:20px;">×</a>
 				<p class="fancyboxHd">身分証明証の登録</p>
+				<div></div>
+			</div>
+					
 				<div class="fancyboxCont">
+
+						@error('identification_path')
+							<div class="alert alert-danger" style="margin:10px auto; font-size:14px;text-align:center;">{{ $message }}</div>
+						@enderror
+
 					<div class="fancyRegisterItem">
 						<p class="txt">「身分証明書を登録する」とは、<br>信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに身分証明書提出済マークが表示されます。</p>
 					</div>
@@ -26,8 +36,16 @@
 					</div>
 				</div>
 				<p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集はこちら</a></p>
-				<p class="fancyRegisterUpload"><a href="#">身分証明書をアップロード</a></p>
-				<p class="fancyRegisterSubmit"><a href="#">提出する</a></p>
+
+				<form action="{{ route('identification') }}" method="POST" name="upload" enctype="multipart/form-data">
+					@csrf
+					<label>
+						<input type="file" name="identification_path" style="display:none;">
+						<p class="fancyRegisterUpload">身分証明書をアップロード</p>
+					</label>
+					
+					<p class="fancyRegisterSubmit"><a href="#" onclick="document.upload.submit()">提出する</a></p>
+				</form>
 			</div>
 
 		<!-- プロフィール編集モーダル -------------------------------------------------------------- -->

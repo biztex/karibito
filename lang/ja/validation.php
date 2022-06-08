@@ -151,7 +151,11 @@ return [
         ],
         'last_name' => [
             'max'      => ':attributeはそれぞれ、:max文字以下で指定してください。',
+        ],
+        'identification_path' => [
+            'required' => ':attributeが選択されていません。'
         ]
+
     ],
 
     /*
@@ -180,6 +184,7 @@ return [
         'address' => '住所',
         'introduction' => '自己紹介',
         'terms' => '利用規約とプライバシーポリシー',
+        'identification_path' => '身分証明証'
     ],
 
 ];

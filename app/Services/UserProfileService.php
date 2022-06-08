@@ -55,6 +55,19 @@ class UserProfileService
     }
 
     /**
+     * 身分証明証提出
+     */
+    public function updateIdentification($request,$value)
+    {
+        $user_profile = UserProfile::firstWhere('user_id',\Auth::id());
+        $user_profile->$value = $request->file($value)->store($value.'s','public');
+
+        return $user_profile->save();
+    }
+
+
+
+    /**
      * ユーサープロフィール
      * カバー・アイコン画像変更・登録
      */

@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
+use App\Http\Controllers\Web\Mypage\IdentificationController;
 
 
 use App\Http\Controllers\HomeController;
@@ -102,6 +103,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
         Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
+
+        Route::get('identification',[IdentificationController::class, 'index']);
+        Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
     });
 
     // 退会フォーム表示

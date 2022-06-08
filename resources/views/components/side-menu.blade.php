@@ -10,7 +10,7 @@
                     @endif
                 </div>
                 <p class="sidePersonName">{{ $user_profile->user->name }}</p>
-                <p class="sidePersonEdit"><a href="#fancybox_person" class="fancybox">
+                <p class="sidePersonEdit"><a href="#fancybox_person" class="fancybox fancybox_profile">
                         <img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
             </div>
             <div class="sideItem">
@@ -59,10 +59,20 @@
 <script>
 	$(function(){
 
-		// コメント編集でバリデーションエラーの際、モーダルを最初から表示する
-		if (@json($errors->any())) {
+		// バリデーションエラーの際、モーダルを最初から表示する
+        if (@json($errors->has('identification_path'))){
+                $('.fancybox_register').trigger('click');
+                $('html').addClass('fancybox-margin');
+                $('html').addClass('fancybox-lock');
+                $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
+        }
+
+		else if (@json($errors->any())) {
 					$('.fancybox').trigger('click');
+                    $('html').addClass('fancybox-margin fancybox-lock');
+                    $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
 		}
 
+        
 	})
 </script>
