@@ -45,6 +45,11 @@ $(function(){
 			});
 		});
 
-			
-            
+		// モーダル キャンセルボタン
+		$('.fancyPersonCancel').click(function(){
+			$('.fancybox-overlay').fadeOut();
+			$('html').removeClass('fancybox-margin');
+			$('html').removeClass('fancybox-lock');
+		})
+
 });

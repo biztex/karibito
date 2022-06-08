@@ -517,3 +517,28 @@
     background-color: #FCAA00;
     pointer-events: none;
  }
+
+ .fancyRegisterUpload {
+	display: block;
+	border-radius: 4px;
+	font-size: 1.4rem;
+	font-weight: bold;
+	padding: 8px 10px;
+	margin: 0 20px 10px;
+	text-align: center;
+	color: #158ACC;
+	border: 1px solid;
+}
+@media screen and (max-width: 767px) {
+	.fancyRegisterUpload {
+		display: block;
+		border-radius: 4px;
+		font-size: 1.4rem;
+		font-weight: bold;
+		padding: 8px 10px;
+		margin: 0 15px 10px;
+		text-align: center;
+		color: #158ACC;
+		border: 1px solid;
+	}
+}
