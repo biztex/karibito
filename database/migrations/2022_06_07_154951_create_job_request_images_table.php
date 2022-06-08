@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('job_request_images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('job_request_id')->constrained()->cascadeOnDelete();
+            $table->string('path')->comment('写真のパス');
             $table->timestamps();
         });
     }

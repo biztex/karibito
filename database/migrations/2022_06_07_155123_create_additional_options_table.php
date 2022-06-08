@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('additional_options', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->string('name')->comment('オプション名')->nullable();
+            $table->integer('price')->comment('金額')->nullable();
+            $table->boolean('is_public')->comment('');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
