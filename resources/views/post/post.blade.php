@@ -5,14 +5,14 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<div id="contents">
 			<div class="cancelWrap">
 				<div class="inner inner05">
 					<h2 class="subPagesHd">投稿</h2>
 					<div class="postLinks mb50">
-						<a href="{{ route('service_provide') }}" class="fun camera">サービスを提供する</a>
+						<a href="{{ route('product.create') }}" class="fun camera">サービスを提供する</a>
 						<a href="{{ route('service_request') }}" class="fun note">サービスをリクエストする</a>
 						<div class="common">
 							<a href="{{ route('draft') }}">下書きを見る</a>

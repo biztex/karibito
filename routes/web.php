@@ -8,7 +8,7 @@ use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
-
+use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -108,6 +108,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');
     Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
+    // 商品登録
+    Route::resource('product',ProductController::class);
+    Route::get('post', [ProductController::class, 'index'])->name('post');
+    // Route::get('product/create', [ProductController::class, 'create'])->name('product.create');
+
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
     Route::view('secret02','secret.secret02')->name('secret02');
@@ -115,7 +120,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret04','secret.secret04')->name('secret04');
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
-    
+
 });
 
 // プライバシーポリシーと運営会社
