@@ -69,7 +69,7 @@
 							<div class="fancyPersonPic">
 								<p class="img">
 									@if(empty($user_profile->icon))
-										<img id="preview_icon" alt=""  src="/img/mypage/pic_head.png" style="width: 140px;height: 140px;object-fit: cover;">
+										<img id="preview_icon" alt=""  src="/img/mypage/no_image.jpg" style="width: 140px;height: 140px;object-fit: cover;">
 									@else
 										<img id="preview_icon" alt=""  src="{{asset('/storage/'.$user_profile->icon) }}" style="width: 140px;height: 140px;object-fit: cover;">
 									@endif

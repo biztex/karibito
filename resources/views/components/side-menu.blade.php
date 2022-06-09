@@ -7,7 +7,7 @@
                     @if(!empty($user_profile->icon))
                         <p class="img"><img style="width: 120px;height: 120px;object-fit: cover;" src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></p>
                     @else
-                        <p class="img"><img src="/img/mypage/pic_head.png" alt=""></p>
+                        <p class="img"><img src="/img/mypage/no_image.jpg" alt=""></p>
                     @endif
                 </div>
 

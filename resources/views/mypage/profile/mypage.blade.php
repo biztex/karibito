@@ -39,7 +39,7 @@
 							</div>
 							<dl class="mypageDl01">
 								@if(empty($user_profile->icon))
-								    <dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+								    <dt><img src="/img/mypage/no_image.jpg" alt=""></dt>
 								@else
 								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 140px;height: 140px;object-fit: cover;"></dt>
 								@endif
