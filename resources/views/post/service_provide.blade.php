@@ -11,16 +11,34 @@
 			<div class="cancelWrap">
 				<div class="inner inner05">
 					<h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
-					<form action="{{ route('user_profile.store') }}" method="post" class="contactForm">
+					<form method="post" class="contactForm">
 						@csrf
 						<p class="th">カテゴリ<span class="must">必須</span></p>
 						<div class="td">
 							<select>
 								<option>選択してください</option>
-								<option>item01</option>
-								<option>item02</option>
+								@foreach ($categories as $catgory)
+								<option value="{{$category->id}}" name="category">item01</option>
+									
+								@endforeach
+								<option value="2" name="category">item02</option>
 							</select>
+							{{-- <select>
+								<option>選択してください</option>
+								@foreach ($categories as $catgory)
+									
+								@endforeach
+								<option value="1" name="category">item01</option>
+								<option value="2" name="category">item02</option>
+							</select> --}}
 						</div>
+
+
+						<option value="">選択してください</option>
+									@foreach ( $prefectures as $prefecture )
+										<option value="{{$prefecture->id}}"  @if($prefecture->id == old('prefecture')) selected @endif>{{$prefecture->name}}</option>
+									@endforeach
+						
 						<p class="th">商品名<span class="must">必須</span></p>
 						<div class="td">
 							@error('title')
@@ -106,7 +124,7 @@
 								<div class="enter"><textarea class="@error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="入力してください"></textarea></div>
 								<div class="selects">
 									<select>
-										<option  value="0" name="price" @if(0 == old('price')) checked @endif required>500円</option>
+										<option value="0" name="price" @if(0 == old('price')) checked @endif required>500円</option>
 										<option value="1" name="price" @if(1 == old('price')) checked @endif required>1000円</option>
 										<option value="2" name="price" @if(2 == old('price')) checked @endif required>1500円</option>
 									</select>
@@ -211,7 +229,12 @@
 						</div>
 						<div class="functeBtns">
 							<a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-							<a href="{{ route('product.store') }}" class="full green">サービス提供を開始</a>
+							{{-- <a href="{{ route('service_thanks') }}" class="full green">サービス提供を開始</a> --}}
+							<ul class="loginFormBtn">
+								<button type="submit" name="is_draft" class="full green" value="1">サービス提供を開始</button>
+								{{-- <input type="hidden" name="is_draft" value="1"> --}}
+								{{-- <li><input type="submit" name="is_draft" class="full green" value="1">サービス提供を開始</li> --}}
+							</ul>form
 							<a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
 						</div>
 					</form>

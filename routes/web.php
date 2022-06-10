@@ -111,7 +111,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 商品登録
     Route::resource('product',ProductController::class);
     Route::get('post', [ProductController::class, 'index'])->name('post');
-    // Route::get('product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
 
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
