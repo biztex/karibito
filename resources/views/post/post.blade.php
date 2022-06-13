@@ -22,13 +22,14 @@
 					</div>
 					<p class="casesOffer"><span>提供中のサービス</span></p>
 					<ul class="favoriteUl01">
+                        @foreach($products as $product)
 						<li>
 							<div class="cont01">
 								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
 								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
+									<div class="breadcrumb"><a href="#" tabindex="0">{{$product->category_id}}</a> ＞ <span>その他デザイン</span></div>
 									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
+										<p class="price"><font>似顔絵イラスト描きます</font><br>{{$product->price}}</p>
 									</div>
 									<div class="single">
 										<span>単発リクエスト</span>
@@ -38,150 +39,151 @@
 								</div>
 							</div>
 						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cont01">
-								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-								<div class="info">
-									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>
-									<div class="draw">
-										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>
-									</div>
-									<div class="single">
-										<span>単発リクエスト</span>
-										<a href="#" tabindex="0">対面</a>
-									</div>
-									<p class="link"><a href="#">詳細見る</a></p>
-								</div>
-							</div>
-						</li>
+                        @endforeach
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
+{{--						<li>--}}
+{{--							<div class="cont01">--}}
+{{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
+{{--								<div class="info">--}}
+{{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
+{{--									<div class="draw">--}}
+{{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
+{{--									</div>--}}
+{{--									<div class="single">--}}
+{{--										<span>単発リクエスト</span>--}}
+{{--										<a href="#" tabindex="0">対面</a>--}}
+{{--									</div>--}}
+{{--									<p class="link"><a href="#">詳細見る</a></p>--}}
+{{--								</div>--}}
+{{--							</div>--}}
+{{--						</li>--}}
 					</ul>
 				</div><!--inner-->
 			</div>

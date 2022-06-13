@@ -11,4 +11,15 @@ class Product extends Model
 
     protected $guarded = [ 'id' ];
 
+    // additonalOptionsモデルとのリレーション
+    public function additionalOptions()
+    {
+        return $this->hasMany(AdditionalOption::class, 'product_id');
+    }
+
+    // productQuestionモデルとのリレーション
+    public function productQuestion()
+    {
+        return $this->hasMany(ProductQuestion::class, 'product_id');
+    }
 }
