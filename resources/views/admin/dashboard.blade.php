@@ -1,0 +1,24 @@
+<x-admin.app>
+    <div class="container my-5">
+    <x-admin.flash_msg/>
+       
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex">
+                <p class="mb-0 mr-4"><span class="font-weight-bold">管理者</span>：{{ Auth::guard('admin')->user()->name }}</p>
+                <p class="mb-0 mr-4"><span class="font-weight-bold">Email</span>：{{ Auth::guard('admin')->user()->email }}</p>
+                <p class="mb-0 mr-4"><span class="font-weight-bold">Password</span>：<a href="{{ route('admin.password.request') }}">変更する</a></p>
+            </li>
+    </ul>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.users.index') }}" class="text-secondary">user list</a></p></li>
+        <!-- @if(Auth::guard('admin')->user()->role == 1) 
+            <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.index') }}" class="text-secondary">admin list</a></p></li>
+        @endif
+        <li class="list-group-item">###</li>
+        <li class="list-group-item">###</li>
+        <li class="list-group-item">###</li> -->
+    </ul>
+
+    </div>
+</x-admin.app>
