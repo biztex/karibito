@@ -23,6 +23,14 @@ class UserProfile extends Model
         self::GENDER_WOMAN => '女性',
     ];
 
+    const IS_IDENTIFY = 1;
+    const NOT_IDENTIFY = 0;
+    const IDENTIFY = [
+        self::IS_IDENTIFY =>'認証済',
+        self::NOT_IDENTIFY =>'未',
+    ];
+
+
 
     public function user()
     {

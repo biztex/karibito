@@ -32,6 +32,10 @@ use App\Http\Controllers\FacebookLoginController;
 use App\Http\Controllers\Auth\FacebookRegisterController;
 
 
+// 管理者用
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -211,4 +215,27 @@ Route::prefix('sample')->group(function (){
     Route::view('payment_history', 'sample.payment_history');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
+}); 
+
+
+
+// --管理者画面-----------------------------------------------------------------------------
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    require __DIR__.'/admin.php';
+
+    Route::middleware('auth:admin')->group(function () {
+
+        // --最高管理者のみ-----------------------------------------------------------------
+        Route::middleware('admin.role')->group(function () {
+            Route::resource('/', AdminController::class,['only' => ['index']]);
+        });
+
+        Route::get('/dashboard', [AdminHomeController::class,'index'])->name('dashboard');
+        Route::resource('/users',UserController::class,['only' => ['index','show']]);
+        Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
+        Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
+    });
+
+
 });
