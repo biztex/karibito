@@ -18,7 +18,7 @@
                         <p class="meta">
                         @if(!empty($user->identification_path))
                             <p><a href="" class="text-dark" data-toggle="modal" data-target="#exampleModalCenter">本人確認証</a>
-                            @if($user->is_identify_approval == 1)
+                            @if($user->is_identify == 1)
                                 <span class="badge badge-pill badge-primary">承認済</span>
                             @else
                                 <span class="badge badge-pill badge-secondary">未承認</span>
@@ -76,7 +76,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
 
-                    @if($user->is_identify_approval == 0)
+                    @if($user->is_identify == 0)
                         <form action="{{ route('admin.approve', $user->user_id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-primary btn-sm">承認する</button>

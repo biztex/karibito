@@ -18,11 +18,11 @@
                 <tr>
                 <a href="{{ route('admin.users.show',$user->user_id) }}"><th scope="row">{{ $user->user_id }}</th></a>
                 <td>{{ $user->first_name.' '.$user->last_name }}</td>
-                <td>{{ App\Models\UserProfile::IDENTIFY[$user->is_identify_approval] }}</td>
+                <td>{{ App\Models\UserProfile::IDENTIFY[$user->is_identify] }}</td>
 
                 @if(is_null($user->identification_path))
                     <td><button type="button" class="btn btn-sm" disabled>-</button></td>
-                @elseif($user->is_identify_approval == 0)
+                @elseif($user->is_identify == 0)
                     <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{ $user->user_id }}">身分証明証</button></td>
                 @else
                     <td><button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{ $user->user_id }}">身分証明証</button></td>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                                @if($user->is_identify_approval == 0)
+                                @if($user->is_identify == 0)
                                     <form action="{{ route('admin.approve', $user->user_id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-primary btn-sm">承認する</button>
