@@ -184,7 +184,16 @@ return [
         'address' => '住所',
         'introduction' => '自己紹介',
         'terms' => '利用規約とプライバシーポリシー',
-        'identification_path' => '身分証明証'
+        'identification_path' => '身分証明証',
+        'category_id' => 'カテゴリ',
+        'prefecture_id' => 'エリア',
+        'title' => '商品名',
+        'content' => '商品の詳細',
+        'price' => '金額',
+        'application_deadline' => '応募期限',
+        'required_date' => '納品希望日',
+        'is_online' => '仕事体系',
+        'is_call' => '電話相談の受付'  
     ],
 
 ];
