@@ -28,7 +28,7 @@ class Product extends Model
         self::OFF_CALL => 'なし',
     ];
 
-    const ONE_OF_SALE = 1;
+    const ONE_OF_SALE = 0;
     const UNLIMITED_ON_SALE = 99;
 
     const NUMBER_OF_SALE = [
