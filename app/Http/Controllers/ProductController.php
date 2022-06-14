@@ -83,9 +83,10 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $all_products = Product::all();
         $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
         $age = Age::group($birthday);
-        return view('post.service_detail', compact('product', 'age'));
+        return view('post.service_detail', compact('product', 'age', 'all_products'));
     }
 
     /**
