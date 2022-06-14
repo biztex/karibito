@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('job_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained('m_product_child_categories')->cascadeOnDelete()->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('category_id')->constrained('m_product_child_categories')->nullable();
             $table->foreignId('prefecture_id')->constrained()->cascadeOnDelete()->nullable();
             $table->string('title')->comment('タイトル')->nullable();
             $table->text('content')->comment('詳細')->nullable();
