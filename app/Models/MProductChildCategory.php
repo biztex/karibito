@@ -14,6 +14,6 @@ class MProductChildCategory extends Model
     // ProductChildCategoriesモデルとのリレーション
     public function mProductCategory()
     {
-        return $this->belongsTo(ProductCategory::class, 'parent_category_id');
+        return $this->belongsTo(MProductCategory::class, 'parent_category_id');
     }
 }
