@@ -4,7 +4,7 @@
             <div class="inner">
                 <a href="index.html">ホーム</a>　>　<a href="service.html">サービスを探す</a>　>　<a
                     href="#">{{$product->mProductChildCategory->mProductCategory->name}}</a>　>　<a
-                    href="#">{{$product->mProductChildCategory->name}}</a>　>　<span>{{$product->name}}</span>
+                    href="#">{{$product->mProductChildCategory->name}}</a>　>　<span>{{$product->title}}</span>
             </div>
         </div><!-- /.breadcrumb -->
         <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -26,7 +26,7 @@
                                 <span
                                     class="data">販売数：{{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}</span>
                             </div>
-                            <h2><span>{{$product->name}}</span></h2>
+                            <h2><span>{{$product->title}}</span></h2>
                         </div>
                         <div class="slider">
                             <div class="big">
