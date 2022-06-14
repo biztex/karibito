@@ -16,4 +16,10 @@ class Prefecture extends Model
     {
         return $this->hasMany(UserProfile::class, 'prefecture_id', 'id');
     }
+
+    // JobRequestモデルとのリレーション
+    public function jobRequest()
+    {
+        return $this->hasMany(JobRequest::class, 'prefecture_id', 'id');
+    }
 }

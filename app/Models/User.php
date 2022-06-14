@@ -46,6 +46,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(UserProfile::class);
     }
+
+    public function jobRequest()
+    {
+        return $this->hasMany(JobRequest::class, 'user_id', 'id');
+    }
+
     /**
      * Override Send the email verification notification.
      *
