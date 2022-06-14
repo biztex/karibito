@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Libraries\Age;
 use App\Models\AdditionalOption;
 use App\Models\AddtionalOptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\MProductCategory;
 use App\Http\Requests\ProductRequest;
 
 
@@ -32,9 +33,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = ProductCategory::all();
+        $categories = MProductCategory::all();
         return view('post.service_provide', compact('categories'));
-//        return redirect()->route('product.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class ProductController extends Controller
             'is_public' => $request->is_public
         ]);
 
-        $product->productQuestion()->create([
+        $product->productQuestions()->create([
             'title' => $request->question_title,
             'answer' => $request->answer
         ]);
@@ -82,7 +82,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
+        $age = Age::group($birthday);
+        return view('post.service_detail', compact('product', 'age'));
     }
 
     /**
@@ -93,7 +96,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

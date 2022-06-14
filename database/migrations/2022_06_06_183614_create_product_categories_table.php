@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_categories', function (Blueprint $table) {
+        Schema::create('m_product_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('カテゴリー名');
             $table->softDeletes();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_categories');
+        Schema::dropIfExists('m_product_categories');
     }
 };

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductChildCategorySeeder extends Seeder
+class MProductChildCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -177,6 +177,6 @@ class ProductChildCategorySeeder extends Seeder
             ['parent_category_id' => 21, 'name' => '料理人(ケータリング)'],
             ['parent_category_id' => 21, 'name' => '人材派遣'],
         ];
-        \DB::table('product_child_categories')->insert($params);
+        \DB::table('m_product_child_categories')->insert($params);
     }
 }

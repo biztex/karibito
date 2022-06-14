@@ -20,9 +20,9 @@
                                 <option value="">選択してください</option>
                                 @foreach ($categories as $category)
                                     <optgroup label="{{$category->name}}">
-                                        @foreach ($category->productChildCategories as $child_category)
+                                        @foreach ($category->mProductChildCategory as $child_category)
                                             <option value="{{$child_category->id}}">
-                                                    {{$child_category->name}}</option>
+                                                {{$child_category->name}}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach
@@ -162,7 +162,8 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="enter">
-                                <textarea type="text" name="question_title" class="@error('question_title') is-invalid @enderror"
+                                <textarea type="text" name="question_title"
+                                          class="@error('question_title') is-invalid @enderror"
                                           value="{{ old('question_title') }}" placeholder="質問のタイトル入力してください"></textarea>
                                 <p class="taR">400</p>
                             </div>
@@ -261,7 +262,7 @@
                                 {{-- <button type="submit" name="is_draft" class="full green" value="1">サービス提供を開始</button> --}}
                                 {{-- <input type="hidden" name="is_draft" value="1"> --}}
                                 <li><input type="submit" name="is_draft" class="full green" value="1"
-                                           >サービス提供を開始
+                                    >サービス提供を開始
                                 </li>
                             </ul>
                             <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
