@@ -19,7 +19,7 @@ class FacebookLoginController extends Controller
         } else {
             session()->flash('via_oauth', 'register');
         }
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->reRequest()->redirect();
     }
 
     /**
@@ -36,12 +36,14 @@ class FacebookLoginController extends Controller
             return redirect()->route('register')->with('flash_alert', '予期せぬエラーが発生しました');
         }
 
+        // Facebookの場合、メールアドレスが取れない場合はエラーにする
+        if(is_null($sns_user->email)){
+            return redirect()->route('register')->with('flash_alert', 'Facebookアカウントからメールアドレスが取得できませんでした。Facebookでメールアドレスが登録されているか、あるいはアクセス許可されているかご確認の上、再度お試しください。');
+        }
+
         // TODO 汎用的な変数名に変更する
         // コメントを書く
         // メソッドで小さく区切る、クラス内で呼び出して使用する
-        // if(is_null($sns_user->email)){ //未確認、開発環境で確認できなかった
-        //     return redirect()->route('login')->with('flash_alert', 'ログイン情報が登録されていません。');
-        // }
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user = User::where('facebook_id', $sns_user->id)->first();
 
