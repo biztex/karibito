@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserProfileRequest;
 use App\Libraries\Age;
 use Illuminate\Support\Facades\Auth;
 

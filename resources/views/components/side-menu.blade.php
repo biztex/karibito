@@ -7,11 +7,13 @@
                     @if(!empty($user_profile->icon))
                         <p class="img"><img style="width: 120px;height: 120px;object-fit: cover;" src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></p>
                     @else
-                        <p class="img"><img src="/img/mypage/pic_head.png" alt=""></p>
+                        <p class="img"><img src="/img/mypage/no_image.jpg" alt=""></p>
                     @endif
                 </div>
+
                 <p class="sidePersonName">{{ \Auth::user()->name }}</p>
                 <p class="sidePersonEdit"><a href="#fancybox_person" class="fancybox">
+
                         <img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
             </div>
             
@@ -61,10 +63,20 @@
 <script>
 	$(function(){
 
-		// コメント編集でバリデーションエラーの際、モーダルを最初から表示する
-		if (@json($errors->any())) {
+		// バリデーションエラーの際、モーダルを最初から表示する
+        if (@json($errors->has('identification_path'))){
+                $('.fancybox_register').trigger('click');
+                $('html').addClass('fancybox-margin');
+                $('html').addClass('fancybox-lock');
+                $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
+        }
+
+		else if (@json($errors->any())) {
 					$('.fancybox').trigger('click');
+                    $('html').addClass('fancybox-margin fancybox-lock');
+                    $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
 		}
 
+        
 	})
 </script>

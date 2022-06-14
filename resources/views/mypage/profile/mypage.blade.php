@@ -7,14 +7,16 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
-		<div class="unregisteredP hide">
-			<div> </div>
-			<div>△身分証明書の登録が必要です。 <a href="#fancybox_register" class="fancybox">登録する</a></div>
-			<div class="pop_close">×</div>
-		</div>
+		
+		@if(empty($user_profile->identification_path))
+			<div class="unregisteredP">
+				<div> </div>
+				<div>△身分証明書の登録が必要です。 <a href="#fancybox_register"  class="fancybox fancybox_register">登録する</a></div>
+				<div class="pop_close">×</div>
+			</div>
+		@endif
 
 		<x-parts.flash-msg/>
-		
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
@@ -37,12 +39,12 @@
 							</div>
 							<dl class="mypageDl01">
 								@if(empty($user_profile->icon))
-								    <dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+								    <dt><img src="/img/mypage/no_image.jpg" alt=""></dt>
 								@else
 								     <dt><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 140px;height: 140px;object-fit: cover;"></dt>
 								@endif
 								<dd>
-									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
+									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox fancybox_profile"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
 									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
 									<p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>

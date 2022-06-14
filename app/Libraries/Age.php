@@ -6,6 +6,17 @@ class Age
     /**
      * $birthday : 2020-01-01 → 20200101
      */
+    public static function nowAge(int $birthday) :string
+    { 
+        $now = (int)date('Ymd');
+        $now_age = floor(($now - $birthday) / 10000);
+
+        return $now_age; 
+    }
+
+    /**
+     * $birthday : 2020-01-01 → 20200101
+     */
     public static function group(int $birthday) :string
     { 
         $now = (int)date('Ymd');

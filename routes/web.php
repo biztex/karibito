@@ -9,6 +9,7 @@ use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Web\Mypage\IdentificationController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -30,6 +31,11 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\FacebookLoginController;
 use App\Http\Controllers\Auth\FacebookRegisterController;
 
+
+// 管理者用
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +99,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
         Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
+
+        Route::get('identification',[IdentificationController::class, 'index']);
+        Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
     });
 
     // 退会フォーム表示
@@ -197,4 +206,27 @@ Route::prefix('sample')->group(function () {
     Route::view('payment_history', 'sample.payment_history');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
+});
+
+
+
+// --管理者画面-----------------------------------------------------------------------------
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    require __DIR__.'/admin.php';
+
+    Route::middleware('auth:admin')->group(function () {
+
+        // --最高管理者のみ-----------------------------------------------------------------
+        Route::middleware('admin.role')->group(function () {
+            Route::resource('/', AdminController::class,['only' => ['index']]);
+        });
+
+        Route::get('/dashboard', [AdminHomeController::class,'index'])->name('dashboard');
+        Route::resource('/users',UserController::class,['only' => ['index','show']]);
+        Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
+        Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
+    });
+
+
 });

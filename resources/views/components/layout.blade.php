@@ -25,7 +25,7 @@
                                 <p class="navHeadSp">
 
                                     @if(empty($user_profile->icon))
-                                        <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="/img/mypage/pic_head.png" alt=""></a>
+                                        <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="/img/mypage/no_image.jpg" alt=""></a>
                                         @else
                                         <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 30px;height: 30px;object-fit: cover;"></a>
                                     @endif
@@ -79,14 +79,14 @@
                                     <li><a href="#" class="nav02">お気に入り</a></li>
                                     <li class="navLink">
                                             @if(empty($user_profile->icon))
-                                                <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/pic_head.png" alt=""></a>
+                                                <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
                                                 @else
                                                 <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
                                             @endif
                                         <div class="navBox navMypageBox">
                                             <dl class="navMypageDl">
                                                 @if(empty($user_profile->icon))
-                                                    <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/pic_head.png" alt=""></a></dt>
+                                                    <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
                                                     @else
                                                     <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                                 @endif
@@ -109,7 +109,7 @@
                                     @auth
                                         <dl class="navMypageDl">
                                             @if(empty($user_profile->icon))
-                                                <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/pic_head.png" alt=""></a></dt>
+                                                <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
                                                 @else
                                                 <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                             @endif
