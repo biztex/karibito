@@ -26,14 +26,14 @@ class StoreRequest extends FormRequest
         
         return [
         'category_id' => 'required | integer | exists:m_product_child_categories,id',
-        'prefecture_id' => 'nullable | integer | exists:prefectures,id',
+        'prefecture_id' => 'nullable | integer | between:1,47',
         'title' => 'required | string | max:30',
         'content' => 'required | string | min:30 | max:3000 ',
         'price' => 'required | integer | min:500 | max:9990000',
-        'application_deadline' => 'required | date',
-        'required_date' => 'nullable | date',
-        'is_online' => 'required | integer | in:0,1',
-        'is_call' => 'required | integer | in:0,1',           
+        'application_deadline' => 'required | date | after_or_equal:tomorrow',
+        'required_date' => 'nullable | date | after_or_equal:application_deadline',
+        'is_online' => 'required | integer | boolean',
+        'is_call' => 'required | integer | boolean',           
         ];
     }
 }

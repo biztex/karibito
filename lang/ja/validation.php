@@ -154,6 +154,13 @@ return [
         ],
         'identification_path' => [
             'required' => ':attributeが選択されていません。'
+        ],
+        'price' => [
+            'min' => ':attributeには、:min円以上で指定してください。',
+            'max' => ':attributeには、:min円以下で指定してください。',
+        ],
+        'application_deadline' => [
+            'after_or_equal' => ':attributeには、明日以降の日付を指定してください。',
         ]
 
     ],
