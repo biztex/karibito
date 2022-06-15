@@ -34,7 +34,7 @@ class JobRequestController extends Controller
      */
     public function create()
     {
-        return view('post.request_create');
+        return view('job_request.create');
     }
 
     /**

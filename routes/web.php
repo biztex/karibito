@@ -126,7 +126,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // リクエスト
-    Route::resource('request',JobRequestController::class,['only' => ['create','store']]);
+    Route::resource('job_request',JobRequestController::class,['only' => ['create','store']]);
     
 });
 
