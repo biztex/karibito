@@ -26,16 +26,16 @@ class JobRequestService
         return $job_request;
     }
 
-    public function updateJobRequest(array $params, $jobRequest):JobRequest
+    public function updateJobRequest(array $params, $job_request):JobRequest
     {
         $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
 
             foreach($columns as $column){
-                $jobRequest->$column = $params[$column];
+                $job_request->$column = $params[$column];
             }
-            $jobRequest->is_draft = JobRequest::NOT_DRAFT;
-            $jobRequest->status = JobRequest::STATUS_PUBLISH;
-            $jobRequest->save();
-        return $jobRequest;
+            $job_request->is_draft = JobRequest::NOT_DRAFT;
+            $job_request->status = JobRequest::STATUS_PUBLISH;
+            $job_request->save();
+        return $job_request;
     }
 }

@@ -2,7 +2,7 @@
 	<article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>  >  <a href="#">掲載一覧</a>  >  <span>{{ $jobRequest->title }}</span>
+				<a href="{{ route('home') }}">ホーム</a>  >  <a href="#">掲載一覧</a>  >  <span>{{ $job_request->title }}</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -14,17 +14,17 @@
 					<div class="title">
 						<div class="fun">
 							<div class="single">
-								<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$jobRequest->is_online] }}</a>
+								<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$job_request->is_online] }}</a>
 							</div>
 							<!-- <a href="#" class="favorite">お気に入り(11)</a> -->
 						</div>
 						<div class="datas">
-							<span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$jobRequest->is_call] }}</span>
+							<span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$job_request->is_call] }}</span>
 							<!-- <span class="data">閲覧：1000</span> -->
-							<span class="data">エリア：@if(!is_null($jobRequest->prefecture_id)){{ App\Models\Prefecture::find($jobRequest->prefecture_id)->name }} @endif</span>
+							<span class="data">エリア：@if(!is_null($job_request->prefecture_id)){{ App\Models\Prefecture::find($job_request->prefecture_id)->name }} @endif</span>
 							<!-- <span class="data">販売数：無制限</span> -->
 						</div>
-						<h2><span>{{ $jobRequest->title }}</span></h2>
+						<h2><span>{{ $job_request->title }}</span></h2>
 					</div>
 					<!-- <div class="slider">
 						<div class="big">
@@ -46,13 +46,13 @@
 					</div> -->
 					<div class="content">
 						<h2 class="hdM">サービス内容</h2>
-						<p style="overflow-wrap: break-word;">{!! nl2br(e($jobRequest->content)) !!}</p>
+						<p style="overflow-wrap: break-word;">{!! nl2br(e($job_request->content)) !!}</p>
 					</div>
 					
 				</div>
 				<aside id="side" class="pc">
 					<div class="box reservate">
-						<h3>{{ number_format($jobRequest->price) }}円</h3>
+						<h3>{{ number_format($job_request->price) }}円</h3>
 						<p class="status">予約状況</p>
 						<p class="date">5日</p>
 						<div class="calendar"><div id="datepicker"></div></div>
@@ -64,7 +64,7 @@
 						</div>
 						@if($user->id === Auth::id() )
 						<div class="functeBtns">
-							<a href="{{ route('job_request.edit', $jobRequest->id ) }}" class="orange_o">編集</a>
+							<a href="{{ route('job_request.edit', $job_request->id ) }}" class="orange_o">編集</a>
 						</div>
 						@endif
 					</div>

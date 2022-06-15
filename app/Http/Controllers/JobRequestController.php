@@ -55,40 +55,40 @@ class JobRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobRequest  $jobRequest
+     * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function show(JobRequest $jobRequest)
+    public function show(JobRequest $job_request)
     {
-        $user = User::find($jobRequest->user_id);
+        $user = User::find($job_request->user_id);
 
         $birthday = (int)str_replace("-","",$user->userProfile->birthday);
         $age = Age::group($birthday);
 
-        return view('job_request.show',compact('jobRequest','user','age'));
+        return view('job_request.show',compact('job_request','user','age'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobRequest  $jobRequest
+     * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobRequest $jobRequest)
+    public function edit(JobRequest $job_request)
     {
-        return view('job_request.edit',compact('jobRequest'));
+        return view('job_request.edit',compact('job_request'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobRequest  $jobRequest
+     * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, JobRequest $jobRequest)
+    public function update(StoreRequest $request, JobRequest $job_request)
     {
-        $this->job_request_service->updateJobRequest($request->all(), $jobRequest);
+        $this->job_request_service->updateJobRequest($request->all(), $job_request);
 
         return redirect()->route('service_thanks');
     }
@@ -96,10 +96,10 @@ class JobRequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobRequest  $jobRequest
+     * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobRequest $jobRequest)
+    public function destroy(JobRequest $job_request)
     {
         //
     }
