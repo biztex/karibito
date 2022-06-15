@@ -2,7 +2,7 @@
 	<article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>  >  <a href="#">掲載一覧</a>  >  <span>{{ $jobRequest->title }}</span>
+				<a href="{{ route('home') }}">ホーム</a>  >  <a href="#">掲載一覧</a>@if(!is_null($jobRequest->title))  >  <span>{{ $jobRequest->title }}</spa> @endif
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -14,12 +14,12 @@
 					<div class="title">
 						<div class="fun">
 							<div class="single">
-								<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$jobRequest->is_online] }}</a>
+								<a href="#" tabindex="0">@if(!is_null($jobRequest->is_online)) {{ App\Models\JobRequest::IS_ONLINE[$jobRequest->is_online] }} @endif</a>
 							</div>
 							<!-- <a href="#" class="favorite">お気に入り(11)</a> -->
 						</div>
 						<div class="datas">
-							<span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$jobRequest->is_call] }}</span>
+							<span class="data">電話相談の受付：@if(!is_null($jobRequest->is_call)){{ App\Models\JobRequest::IS_CALL[$jobRequest->is_call] }} @endif</span>
 							<!-- <span class="data">閲覧：1000</span> -->
 							<span class="data">エリア：@if(!is_null($jobRequest->prefecture_id)){{ App\Models\Prefecture::find($jobRequest->prefecture_id)->name }} @endif</span>
 							<!-- <span class="data">販売数：無制限</span> -->
@@ -46,13 +46,13 @@
 					</div> -->
 					<div class="content">
 						<h2 class="hdM">サービス内容</h2>
-						<p style="overflow-wrap: break-word;">{!! nl2br(e($jobRequest->content)) !!}</p>
+						<p style="overflow-wrap: break-word;">@if(!is_null($jobRequest->content)) {!! nl2br(e($jobRequest->content)) !!} @endif</p>
 					</div>
 					
 				</div>
 				<aside id="side" class="pc">
 					<div class="box reservate">
-						<h3>{{ number_format($jobRequest->price) }}円</h3>
+						<h3>@if(!is_null($jobRequest->price)) {{ number_format($jobRequest->price) }} @endif円</h3>
 						<p class="status">予約状況</p>
 						<p class="date">5日</p>
 						<div class="calendar"><div id="datepicker"></div></div>

@@ -26,16 +26,22 @@ class JobRequestService
         return $job_request;
     }
 
-    public function updateJobRequest(array $params, $jobRequest):JobRequest
+    /**
+     * 新規リクエスト下書き保存
+     */
+    public function storeDraftJobRequest(array $params):JobRequest
     {
         $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
 
+            $job_request = new JobRequest;
+            $job_request->user_id = \Auth::id();
             foreach($columns as $column){
-                $jobRequest->$column = $params[$column];
+                $job_request->$column = $params[$column];
             }
-            $jobRequest->is_draft = JobRequest::NOT_DRAFT;
-            $jobRequest->status = JobRequest::STATUS_PUBLISH;
-            $jobRequest->save();
-        return $jobRequest;
+            $job_request->is_draft = JobRequest::IS_DRAFT;
+            $job_request->status = JobRequest::STATUS_PRIVATE;
+            $job_request->save();
+    
+        return $job_request;
     }
 }
