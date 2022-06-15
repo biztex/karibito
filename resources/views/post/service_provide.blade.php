@@ -359,7 +359,7 @@
                                     <ul class="loginFormBtn">
                                         {{-- <button type="submit" name="is_draft" class="full green" value="1">サービス提供を開始</button> --}}
                                         {{-- <input type="hidden" name="is_draft" value="1"> --}}
-                                        <li><input type="submit" name="is_draft" class="full green" value="1"
+                                        <li><input type="submit" name="is_draft" class="full green" value="0"
                                             >サービス提供を開始
                                         </li>
                                     </ul>
