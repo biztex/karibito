@@ -19,8 +19,8 @@ class JobRequestService
             foreach($columns as $column){
                 $job_request->$column = $params[$column];
             }
-            $job_request->is_draft = 1;
-            $job_request->status = 1;
+            $job_request->is_draft = JobRequest::NOT_DRAFT;
+            $job_request->status = JobRequest::STATUS_PUBLISH;
             $job_request->save();
     
         return $job_request;
