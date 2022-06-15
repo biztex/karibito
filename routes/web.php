@@ -10,6 +10,9 @@ use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
+use App\Http\Controllers\JobRequestController;
+
+
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -65,16 +68,26 @@ Route::view('draft', 'post.draft')->name('draft');
 Route::view('publication', 'post.publication')->name('publication');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
+Route::view('/post'  , 'post.post')->name('post');
+Route::view('service_preview','post.service_preview')->name('service_preview');
+Route::view('service_provide','post.service_provide')->name('service_provide');
+Route::view('service_detail','post.service_detail')->name('service_detail');
+Route::view('service_request','post.service_request')->name('service_request');
+Route::view('service_thanks','post.service_thanks')->name('service_thanks');
+Route::view('service','post.service')->name('service');
+Route::view('draft','post.draft')->name('draft');
+Route::view('publication','post.publication')->name('publication');
+Route::view('request','post.request_list')->name('request');
 
 
-Route::view('support', 'support.support')->name('support');
-Route::view('support_detail', 'support.support_detail')->name('support_detail');
-Route::view('guide', 'support.guide')->name('guide');
+Route::view('support','support.support')->name('support');
+Route::view('support_detail','support.support_detail')->name('support_detail');
+Route::view('guide','support.guide')->name('guide');
 
-Route::view('member', 'user.member')->name('member');
-Route::view('member_config', 'user.member_config')->name('member_config');
-Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
-Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
+Route::view('member','user.member')->name('member');
+Route::view('member_config','user.member_config')->name('member_config');
+Route::view('member_config_pass','user.member_config_pass')->name('member_config_pass');
+Route::view('member_config_email','user.member_config_email')->name('member_config_email');
 
 
 Route::get('/dashboard', function () {
@@ -99,7 +112,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
         Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
-
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
     });
@@ -115,14 +127,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('product/show/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 
-
     // 秘訣
-    Route::view('secret01', 'secret.secret01')->name('secret01');
-    Route::view('secret02', 'secret.secret02')->name('secret02');
-    Route::view('secret03', 'secret.secret03')->name('secret03');
-    Route::view('secret04', 'secret.secret04')->name('secret04');
-    Route::view('secret05', 'secret.secret05')->name('secret05');
-    Route::view('secret06', 'secret.secret06')->name('secret06');
+    Route::view('secret01','secret.secret01')->name('secret01');
+    Route::view('secret02','secret.secret02')->name('secret02');
+    Route::view('secret03','secret.secret03')->name('secret03');
+    Route::view('secret04','secret.secret04')->name('secret04');
+    Route::view('secret05','secret.secret05')->name('secret05');
+    Route::view('secret06','secret.secret06')->name('secret06');
+
+
+    // リクエスト
+    Route::resource('job_request',JobRequestController::class,['only' => ['create','store','show']]);
 
 });
 
@@ -131,13 +146,15 @@ Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 
-// 秘訣
-Route::view('secret01', 'secret.secret01')->name('secret01');
-Route::view('secret02', 'secret.secret02')->name('secret02');
-Route::view('secret03', 'secret.secret03')->name('secret03');
-Route::view('secret04', 'secret.secret04')->name('secret04');
-Route::view('secret05', 'secret.secret05')->name('secret05');
-Route::view('secret06', 'secret.secret06')->name('secret06');
+
+// 動詞	URI	アクション	ルート名
+// GET	/photos	index	photos.index
+// GET	/photos/create	create	photos.create
+// POST	/photos	store	photos.store
+// GET	/photos/{photo}	show	photos.show
+// GET	/photos/{photo}/edit	edit	photos.edit
+// PUT/PATCH	/photos/{photo}	update	photos.update
+// DELETE	/photos/{photo}	destroy	photos.destroy
 
 
 // index:一覧画面(get)

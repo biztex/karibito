@@ -9,7 +9,7 @@ class MProductCategory extends Model
 {
     use HasFactory;
 
-    // ProductChildCategoriesモデルとのリレーション
+    // MProductChildCategoriesモデルとのリレーション
     public function mProductChildCategory()
     {
         return $this->hasMany(MProductChildCategory::class, 'parent_category_id');
