@@ -17,11 +17,11 @@ class JobRequest extends Model
         self::STATUS_PRIVATE => '非公開',
     ];
 
-    const IS_DRAFT = 0;
-    const NOT_DRAFT = 1;
+    const NOT_DRAFT = 0;
+    const IS_DRAFT = 1;
     const DRAFT_STATUS = [
-        self::IS_DRAFT => '下書き',
         self::NOT_DRAFT => '下書きでない',
+        self::IS_DRAFT => '下書き',
     ];
 
 
