@@ -65,7 +65,7 @@ class JobRequestController extends Controller
         $birthday = (int)str_replace("-","",$user->userProfile->birthday);
         $age = Age::group($birthday);
 
-        return view('job_request.show',compact('jobRequest','user','age'));
+        return view('job_request.show',compact('job_request','user','age'));
     }
 
     /**
@@ -76,7 +76,7 @@ class JobRequestController extends Controller
      */
     public function edit(JobRequest $job_request)
     {
-        return view('job_request.edit',compact('jobRequest'));
+        return view('job_request.edit',compact('job_request'));
     }
 
     /**
