@@ -65,10 +65,10 @@
                             <select name="is_online">
                                 <option value="">選択してください</option>
                                 <option value="0" @if(0 == old('is_online')) checked @endif required>
-                                    対面
+                                    非対面
                                 </option>
                                 <option value="1" @if(1 == old('is_online')) checked @endif required>
-                                    非対面
+                                    対面
                                 </option>
                             </select>
                         </div>
@@ -100,10 +100,10 @@
                             <select name="is_call">
                                 <option value="">選択してください</option>
                                 <option value="0" @if(0 == old('is_call')) checked @endif required>
-                                    電話を受け付ける
+                                    電話を受け付けない
                                 </option>
                                 <option value="1" @if(1 == old('is_call')) checked @endif required>
-                                    電話を受け付けない
+                                    電話を受け付ける
                                 </option>
                             </select>
                         </div>
