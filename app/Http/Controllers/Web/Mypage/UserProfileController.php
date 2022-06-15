@@ -76,7 +76,7 @@ class UserProfileController extends Controller
     public function showComplete()
     {
         $user = UserProfile::with('user')->firstWhere('user_id',\Auth::id());
-
+//        $user->
         return view('mypage.profile.created',compact('user'));
     }
 

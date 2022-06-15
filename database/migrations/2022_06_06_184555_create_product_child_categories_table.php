@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('m_product_child_categories', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('parent_category_id')->comment('親カテゴリー')->nullable();
             $table->string('name')->comment('カテゴリー名');
             $table->softDeletes();
             $table->timestamps();

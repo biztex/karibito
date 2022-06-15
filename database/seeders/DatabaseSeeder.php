@@ -2,18 +2,20 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductCategory;
+use App\Models\ProductChildCategory;
+use Database\Seeders\PrefectureSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Database\Seeders\PrefectureSeeder;
 
 class DatabaseSeeder extends Seeder
 {
 
     /** 実行したいSeederをここに登録 */
     private const SEEDERS = [
-        // PrefectureSeeder::class,
+        PrefectureSeeder::class,
         MProductCategorySeeder::class,
-        MProductChildCategorySeeder::class,
+        MProductChildCategorySeeder::class
     ];
 
     /**
