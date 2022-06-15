@@ -23,7 +23,7 @@
 								@foreach ($categories as $category)
                                     <optgroup label="{{$category->name}}">
                                         @foreach ($category->mProductChildCategory as $child_category)
-                                            <option value="{{$child_category->id}}" @if( old('category_id' , $jobRequest->category_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
+                                            <option value="{{$child_category->id}}" @if( old('category_id' , $job_request->category_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach
@@ -34,35 +34,35 @@
 						<p class="th">商品名<span class="must">必須</span></p>
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="text" name="title" value="{{ old('title', $jobRequest->title ) }}">
+							<input type="text" name="title" value="{{ old('title', $job_request->title ) }}">
 						</div>
 
 
 						<p class="th">商品の詳細<span class="must">必須</span></p>
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<textarea type="text" name="content">{{ old('content', $jobRequest->content ) }}</textarea>
+							<textarea type="text" name="content">{{ old('content', $job_request->content ) }}</textarea>
 						</div>
 
 
 						<p class="th">予算<span class="must">必須</span></p>
 							@error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<p class="budget"><input type="text" name="price" value="{{ old('price', $jobRequest->price ) }}"></p>
+							<p class="budget"><input type="text" name="price" value="{{ old('price', $job_request->price ) }}"></p>
 						</div>
 					
 
 						<p class="th">応募期限<span class="must">必須</span></p>
 							@error('application_deadline')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="date" name="application_deadline" value="{{ old('application_deadline', $jobRequest->application_deadline) }}">
+							<input type="date" name="application_deadline" value="{{ old('application_deadline', $job_request->application_deadline) }}">
 						</div>
 
 
 						<p class="th">納期希望日</p>
 							@error('required_date')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="date" name="required_date" value="{{ old('required_date', $jobRequest->required_date ) }}">
+							<input type="date" name="required_date" value="{{ old('required_date', $job_request->required_date ) }}">
 						</div>
 						
 							<div class="warnNotes" style="margin-bottom:5px;">
@@ -73,8 +73,8 @@
 						<div class="td">
 							<select name="is_online">
 								<option value=" ">選択してください</option>
-								<option value="0" @if(!is_null(old('is_online',$jobRequest->is_online)) && old('is_online',$jobRequest->is_online) == 0) selected @endif>対面</option>
-								<option value="1" @if(old('is_online', $jobRequest->is_online) == 1) selected @endif>非対面</option>
+								<option value="0" @if(!is_null(old('is_online',$job_request->is_online)) && old('is_online',$job_request->is_online) == 0) selected @endif>対面</option>
+								<option value="1" @if(old('is_online', $job_request->is_online) == 1) selected @endif>非対面</option>
 							</select>
 						</div>
 
@@ -85,7 +85,7 @@
 							<select name="prefecture_id">
 								<option value="">選択してください</option>
 								@foreach($prefectures as $prefecture)
-								<option value="{{ $prefecture->id }}" @if( old('prefecture_id', $jobRequest->prefecture_id) == $prefecture->id ) selected @endif>{{ $prefecture->name }}</option>
+								<option value="{{ $prefecture->id }}" @if( old('prefecture_id', $job_request->prefecture_id) == $prefecture->id ) selected @endif>{{ $prefecture->name }}</option>
 								@endforeach
 							</select>
 						</div>
@@ -96,16 +96,16 @@
 						<div class="td">
 							<select name="is_call">
 								<option value="">選択してください</option>
-								<option value="0" @if(!is_null(old('is_call', $jobRequest->is_call )) && old('is_call', $jobRequest->is_call ) == 0) selected @endif>電話を受け付けない</option>
-								<option value="1" @if(old('is_call', $jobRequest->is_call ) == 1) selected @endif>電話を受け付ける</option>
+								<option value="0" @if(!is_null(old('is_call', $job_request->is_call )) && old('is_call', $job_request->is_call ) == 0) selected @endif>電話を受け付けない</option>
+								<option value="1" @if(old('is_call', $job_request->is_call ) == 1) selected @endif>電話を受け付ける</option>
 							</select>
 						</div>
 
 
 						<div class="functeBtns">
 							<a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.update',$jobRequest->id) }}" value="サービス提供を開始">
-							<input type="submit" class="full green_o" formaction="{{ route('job_request.updateDraft', $jobRequest->id) }}" value="下書きとして保存">
+							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.update',$job_request->id) }}" value="サービス提供を開始">
+							<input type="submit" class="full green_o" formaction="{{ route('job_request.updateDraft', $job_request->id) }}" value="下書きとして保存">
 						</div>
 					</form>
 				</div>
