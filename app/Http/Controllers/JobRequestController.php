@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobRequest;
+use App\Models\User;
+use App\Libraries\Age;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
 use App\Http\Requests\JobRequestController\StoreRequest;
@@ -58,7 +60,12 @@ class JobRequestController extends Controller
      */
     public function show(JobRequest $jobRequest)
     {
-        //
+        $user = User::find($jobRequest->user_id);
+
+        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
+        $age = Age::group($birthday);
+
+        return view('job_request.show',compact('jobRequest','user','age'));
     }
 
     /**
