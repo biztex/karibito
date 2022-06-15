@@ -24,6 +24,20 @@ class JobRequest extends Model
         self::NOT_DRAFT => '下書きでない',
     ];
 
+    const CALL_POSSIBLE = 0;
+    const CALL_INPOSSIBLE = 1;
+    const IS_CALL = [
+        self::CALL_POSSIBLE => 'あり',
+        self::CALL_INPOSSIBLE => 'なし',
+    ];
+
+    const ONLINE = 0;
+    const OFFLINE = 1;
+    const IS_ONLINE = [
+        self::ONLINE => '非対面',
+        self::OFFLINE => '対面',
+    ];
+
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +54,12 @@ class JobRequest extends Model
 
     // Userモデルとのリレーション
     public function user()
+    {
+        return $this->belongsTo(JobRequest::class);
+    }
+
+    // Prefectureモデルとのリレーション
+    public function prefecture()
     {
         return $this->belongsTo(JobRequest::class);
     }
