@@ -24,8 +24,15 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'max:24',
-            'content' => 'max:500'
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'nullable | integer | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'is_online' => 'required | integer | boolean',
+            'number_of_day' => 'required | integer',
+            'is_call' => 'required | integer | boolean',
+            'number_of_sale' => ' required | integer',
         ];
     }
 }
