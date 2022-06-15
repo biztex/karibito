@@ -23,8 +23,7 @@
                                 <span class="data">電話相談の受付：{{App\Models\Product::IS_CALL[$product->is_call]}}</span>
                                 <span class="data">閲覧：1000</span>
                                 <span class="data">エリア：{{$product->productPrefecture->name}}</span>
-                                <span
-                                    class="data">販売数：{{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}</span>
+                                <span class="data">販売数：{{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}</span>
                             </div>
                             <h2><span>{{$product->title}}</span></h2>
                         </div>
@@ -73,7 +72,7 @@
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
-                                @foreach($product->additionalOptions as $option)
+                                @foreach($product->additionalOption as $option)
                                     <li><span class="add">＋ {{$option->name}}</span><span
                                             class="price">￥{{$option->price}}</span></li>
                                 @endforeach
@@ -86,7 +85,7 @@
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
-                                @foreach($product->productQuestions as $question)
+                                @foreach($product->productQuestion as $question)
                                     <li>
                                         <p class="quest toggleBtn"><span>{{$question->title}}</span><span class="more">回答を見る</span>
                                         </p>

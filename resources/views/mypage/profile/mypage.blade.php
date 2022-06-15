@@ -7,7 +7,7 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
-		
+
 		@if(empty($user_profile->identification_path))
 			<div class="unregisteredP">
 				<div> </div>
@@ -35,7 +35,7 @@
 									<label for="file" class="update_cover"><img class="add_cover" src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
 									<input type="submit" name="submit_cover" style="display:none;">
 							</form>
-	
+
 							</div>
 							<dl class="mypageDl01">
 								@if(empty($user_profile->icon))
@@ -53,7 +53,7 @@
 										<div class="evaluate three"></div><a href="#">(3.0)</a>
 									</div>
 								</dd>
-							</dl>
+						</dl>
 							<div class="mypageIntro">
 								<p class="mypageHd01">自己紹介</p>
 								<p class="mypageIntroTxt">{!! nl2br(e($user_profile->introduction)) !!}</p>
@@ -132,7 +132,7 @@
 				</div><!-- /#main -->
 				<x-side-menu/>
 			</div><!--inner-->
-			
+
 		</div><!-- /#contents -->
 		<x-hide-modal/>
 	</body>

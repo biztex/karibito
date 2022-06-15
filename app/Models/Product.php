@@ -32,18 +32,18 @@ class Product extends Model
     const UNLIMITED_ON_SALE = 99;
 
     const NUMBER_OF_SALE = [
-        self::ONE_OF_SALE => '一人様限定',
+        self::ONE_OF_SALE => '1人様限定',
         self::UNLIMITED_ON_SALE => '無制限',
     ];
 
     // AdditionalOptionモデルとのリレーション
-    public function additionalOptions()
+    public function additionalOption()
     {
         return $this->hasMany(AdditionalOption::class, 'product_id');
     }
 
     // ProductQuestionモデルとのリレーション
-    public function productQuestions()
+    public function productQuestion()
     {
         return $this->hasMany(ProductQuestion::class, 'product_id');
     }
