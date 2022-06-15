@@ -145,8 +145,3 @@ Route::get('user/posts', [UserPostController::class, 'index'])->name('user.posts
 - datetime型のカラム名のサフィックスには_at
 - date型のカラム名のサフィックスには_on
 
-### パンくずリストについて
-
-- diglactic/laravel-breadcrumbsを使用
-- パンくずリスト名とルート名は原則同じにする
-
