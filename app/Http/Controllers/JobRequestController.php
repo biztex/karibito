@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobRequest;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
 use App\Http\Requests\JobRequestController\StoreRequest;
@@ -52,10 +53,10 @@ class JobRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\JobRequest  $jobRequest
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(JobRequest $jobRequest)
     {
         //
     }
@@ -63,10 +64,10 @@ class JobRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\JobRequest  $jobRequest
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(JobRequest $jobRequest)
     {
         //
     }
@@ -75,10 +76,10 @@ class JobRequestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\JobRequest  $jobRequest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, JobRequest $jobRequest)
     {
         //
     }
@@ -86,10 +87,10 @@ class JobRequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\JobRequest  $jobRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(JobRequest $jobRequest)
     {
         //
     }
