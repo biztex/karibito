@@ -60,66 +60,92 @@ class ProductController extends Controller
             'status' => $request->status
         ]);
 
-        $product->additionalOptions()->create([
-            'price' => $request->option_price,
-            'name' => $request->option_name,
-            'is_public' => $request->is_public
-        ]);
+        for ($i = 0; $i < 3; $i++) {
+            if (!is_null($request->option_name[$i])) {
+                $product->additionalOption()->create([
+                    'price' => $request->option_price[$i],
+                    'name' => $request->option_name[$i],
+                    'is_public' => $request->option_is_public[$i]
+                ]);
+            }
+        }
 
-        $product->productQuestions()->create([
-            'title' => $request->question_title,
-            'answer' => $request->answer
-        ]);
-
-        return redirect()->route('service_thanks');
+        for ($i = 0; $i < 3; $i++) {
+            if (!is_null($request->question_title[$i])) {
+                $product->productQuestion()->create([
+                    'title' => $request->question_title[$i],
+                    'answer' => $request->answer[$i]
+                ]);
+            }
+        }
+            return redirect()->route('service_thanks');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $product = Product::find($id);
-        $all_products = Product::all();
-        $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
-        $age = Age::group($birthday);
-        return view('post.service_detail', compact('product', 'age', 'all_products'));
-    }
+        /**
+         * Display the specified resource.
+         *
+         * @param int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function show($id)
+        {
+            $product = Product::find($id);
+            $all_products = Product::all();
+            $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
+            $age = Age::group($birthday);
+            return view('post.service_detail', compact('product', 'age', 'all_products'));
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function edit($id)
+        {
+            $product = Product::find($id);
+            $categories = MProductCategory::all();
+            return view('post.service_edit', compact('categories', 'product'));
+        }
 
-    }
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param \Illuminate\Http\Request $request
+         * @param int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function update(Request $request, $id)
+        {
+            $product->fill([
+                'category_id' => $request->category_id,
+                'prefecture_id' => $request->prefecture,
+                'title' => $request->title,
+                'content' => $request->content,
+                'price' => $request->price,
+                'is_online' => $request->is_online,
+                'number_of_day' => $request->number_of_day,
+                'is_call' => $request->is_call,
+                'number_of_sale' => $request->number_of_sale,
+                'is_draft' => $request->is_draft,
+                'status' => $request->status,
+            ]);
+            return $product->save();
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function destroy($id)
+        {
+            //
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-}
