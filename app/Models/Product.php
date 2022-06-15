@@ -12,20 +12,20 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    const ONLINE = 0;
-    const OFFLINE = 1;
+    const OFFLINE = 0;
+    const ONLINE = 1;
 
     const IS_ONLINE = [
-        self::ONLINE => '対面',
         self::OFFLINE => '非対面',
+        self::ONLINE => '対面',
     ];
 
-    const ON_CALL = 0;
-    const OFF_CALL = 1;
+    const OFF_CALL = 0;
+    const ON_CALL = 1;
 
     const IS_CALL = [
-        self::ON_CALL => 'あり',
         self::OFF_CALL => 'なし',
+        self::ON_CALL => 'あり',
     ];
 
     const ONE_OF_SALE = 0;
@@ -35,6 +35,14 @@ class Product extends Model
         self::ONE_OF_SALE => '1人様限定',
         self::UNLIMITED_ON_SALE => '無制限',
     ];
+
+    const NOT_DRAFT = 0;
+    const IS_DRAFT = 1;
+    const DRAFT_STATUS = [
+        self::NOT_DRAFT => '下書きでない',
+        self::IS_DRAFT => '下書き',
+    ];
+
 
     // AdditionalOptionモデルとのリレーション
     public function additionalOption()

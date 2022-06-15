@@ -355,14 +355,7 @@
                                 </div>
                                 <div class="functeBtns">
                                     <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-                                    {{-- <a href="{{ route('service_thanks') }}" class="full green">サービス提供を開始</a> --}}
-                                    <ul class="loginFormBtn">
-                                        {{-- <button type="submit" name="is_draft" class="full green" value="1">サービス提供を開始</button> --}}
-                                        {{-- <input type="hidden" name="is_draft" value="1"> --}}
-                                        <li><input type="submit" name="is_draft" class="full green" value="0"
-                                            >サービス提供を開始
-                                        </li>
-                                    </ul>
+                                    <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
                                     <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
                                 </div>
                     </form>

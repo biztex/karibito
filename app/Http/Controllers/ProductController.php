@@ -56,9 +56,10 @@ class ProductController extends Controller
             'number_of_day' => $request->number_of_day,
             'is_call' => $request->is_call,
             'number_of_sale' => $request->number_of_sale,
-            'is_draft' => $request->is_draft,
-            'status' => $request->status
+            'status' => $request->status,
+            'is_draft' => Product::NOT_DRAFT
         ]);
+
 
         for ($i = 0; $i < 3; $i++) {
             if (!is_null($request->option_name[$i])) {
