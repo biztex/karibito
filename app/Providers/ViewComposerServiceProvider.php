@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Models\UserProfile;
 use App\Models\Prefecture;
+use App\Models\MProductCategory;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -27,8 +28,9 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         \View::composer('*', function($view) {
-            $view->with('user_profile', UserProfile::with(['user','prefecture'])->firstWhere('user_id',\Auth::id()))
-                 ->with('prefectures' , Prefecture::all());
+            $view->with('user_profile', UserProfile::firstWhere('user_id',\Auth::id()))
+                 ->with('prefectures' , Prefecture::all())
+                 ->with('categories'  , MProductCategory::all());
         });
     }
 }

@@ -16,4 +16,10 @@ class MProductChildCategory extends Model
     {
         return $this->belongsTo(MProductCategory::class, 'parent_category_id');
     }
+
+    // JobRequestモデルとのリレーション
+    public function jobRequest()
+    {
+        return $this->hasMany(JobRequest::class, 'category_id');
+    }
 }
