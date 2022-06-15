@@ -14,7 +14,7 @@
                     <h2 class="subPagesHd">投稿</h2>
                     <div class="postLinks mb50">
                         <a href="{{ route('product.create') }}" class="fun camera">サービスを提供する</a>
-                        <a href="{{ route('service_request') }}" class="fun note">サービスをリクエストする</a>
+                        <a href="{{ route('job_request.create') }}" class="fun note">サービスをリクエストする</a>
                         <div class="common">
                             <a href="{{ route('draft') }}">下書きを見る</a>
                             <a href="#" class="st2">ブログを投稿する</a>

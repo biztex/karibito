@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('required_date')->comment('納期希望日')->nullable();
             $table->boolean('is_online')->comment('0.オンライン 1.オフライン')->nullable();
             $table->boolean('is_call')->comment('0.電話受付可 1.電話受付不可')->nullable();
-            $table->boolean('is_draft')->comment('0.下書き 1.下書きではない');
+            $table->boolean('is_draft')->comment('1.下書きではない 0.下書き');
             $table->tinyInteger('status')->comment('1.公開 2.非公開');
             $table->softDeletes();
             $table->timestamps();

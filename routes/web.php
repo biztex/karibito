@@ -9,7 +9,14 @@ use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\JobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
+
+
+
+
+
+
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -67,6 +74,7 @@ Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
 
 
+
 Route::view('support', 'support.support')->name('support');
 Route::view('support_detail', 'support.support_detail')->name('support_detail');
 Route::view('guide', 'support.guide')->name('guide');
@@ -117,12 +125,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // 秘訣
-    Route::view('secret01', 'secret.secret01')->name('secret01');
-    Route::view('secret02', 'secret.secret02')->name('secret02');
-    Route::view('secret03', 'secret.secret03')->name('secret03');
-    Route::view('secret04', 'secret.secret04')->name('secret04');
-    Route::view('secret05', 'secret.secret05')->name('secret05');
-    Route::view('secret06', 'secret.secret06')->name('secret06');
+    Route::view('secret01','secret.secret01')->name('secret01');
+    Route::view('secret02','secret.secret02')->name('secret02');
+    Route::view('secret03','secret.secret03')->name('secret03');
+    Route::view('secret04','secret.secret04')->name('secret04');
+    Route::view('secret05','secret.secret05')->name('secret05');
+    Route::view('secret06','secret.secret06')->name('secret06');
+
+
+    // リクエスト
+    Route::resource('job_request',JobRequestController::class,['only' => ['create','store','show']]);
 
 });
 
@@ -131,13 +143,16 @@ Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 
-// 秘訣
-Route::view('secret01', 'secret.secret01')->name('secret01');
-Route::view('secret02', 'secret.secret02')->name('secret02');
-Route::view('secret03', 'secret.secret03')->name('secret03');
-Route::view('secret04', 'secret.secret04')->name('secret04');
-Route::view('secret05', 'secret.secret05')->name('secret05');
-Route::view('secret06', 'secret.secret06')->name('secret06');
+
+// 動詞	URI	アクション	ルート名
+// GET	/photos	index	photos.index
+// GET	/photos/create	create	photos.create
+// POST	/photos	store	photos.store
+// GET	/photos/{photo}	show	photos.show
+// GET	/photos/{photo}/edit	edit	photos.edit
+// PUT/PATCH	/photos/{photo}	update	photos.update
+// DELETE	/photos/{photo}	destroy	photos.destroy
+
 
 
 // index:一覧画面(get)
