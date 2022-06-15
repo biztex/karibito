@@ -65,10 +65,10 @@
                             <select name="is_online">
                                 <option value="">選択してください</option>
                                 <option value="0" @if(0 == old('is_online')) checked @endif required>
-                                    対面
+                                    非対面
                                 </option>
                                 <option value="1" @if(1 == old('is_online')) checked @endif required>
-                                    非対面
+                                    対面
                                 </option>
                             </select>
                         </div>
@@ -100,10 +100,10 @@
                             <select name="is_call">
                                 <option value="">選択してください</option>
                                 <option value="0" @if(0 == old('is_call')) checked @endif required>
-                                    電話を受け付ける
+                                    電話を受け付けない
                                 </option>
                                 <option value="1" @if(1 == old('is_call')) checked @endif required>
-                                    電話を受け付けない
+                                    電話を受け付ける
                                 </option>
                             </select>
                         </div>
@@ -355,14 +355,7 @@
                                 </div>
                                 <div class="functeBtns">
                                     <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-                                    {{-- <a href="{{ route('service_thanks') }}" class="full green">サービス提供を開始</a> --}}
-                                    <ul class="loginFormBtn">
-                                        {{-- <button type="submit" name="is_draft" class="full green" value="1">サービス提供を開始</button> --}}
-                                        {{-- <input type="hidden" name="is_draft" value="1"> --}}
-                                        <li><input type="submit" name="is_draft" class="full green" value="1"
-                                            >サービス提供を開始
-                                        </li>
-                                    </ul>
+                                    <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
                                     <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
                                 </div>
                     </form>

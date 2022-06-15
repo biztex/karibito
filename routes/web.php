@@ -13,8 +13,6 @@ use App\Http\Controllers\Web\Mypage\IdentificationController;
 
 use App\Http\Controllers\JobRequestController;
 
-
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
@@ -103,7 +101,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
         Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
-
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
     });
@@ -118,7 +115,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
     Route::get('product/show/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-
 
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
