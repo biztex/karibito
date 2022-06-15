@@ -6,6 +6,7 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
+		<x-parts.flash-msg/>
 		<div id="contents" class="detailStyle">
 			<div class="inner02 ">
 				<div class="clearfix">
@@ -63,7 +64,7 @@
 						</div>
 						@if($user->id === Auth::id() )
 						<div class="functeBtns">
-							<a href="#" class="orange_o">編集</a>
+							<a href="{{ route('job_request.edit', $jobRequest->id ) }}" class="orange_o">編集</a>
 						</div>
 						@endif
 					</div>

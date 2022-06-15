@@ -76,7 +76,7 @@ class JobRequestController extends Controller
      */
     public function edit(JobRequest $jobRequest)
     {
-        //
+        return view('job_request.edit',compact('jobRequest'));
     }
 
     /**
@@ -86,9 +86,11 @@ class JobRequestController extends Controller
      * @param  \App\Models\JobRequest  $jobRequest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobRequest $jobRequest)
+    public function update(StoreRequest $request, JobRequest $jobRequest)
     {
-        //
+        $this->job_request_service->updateJobRequest($request->all(), $jobRequest);
+
+        return redirect()->route('service_thanks');
     }
 
     /**
