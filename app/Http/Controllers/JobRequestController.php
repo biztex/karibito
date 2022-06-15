@@ -114,7 +114,21 @@ class JobRequestController extends Controller
     {
         $jobRequest = $this->job_request_service->storeDraftJobRequest($request->all());
 
-        return redirect()->route('job_request.show',$jobRequest->id);
+        return redirect()->route('job_request.show',$jobRequest->id)->with('flash_msg','下書きに保存しました！');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\JobRequest  $jobRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDraft(Request $request, JobRequest $jobRequest)
+    {
+        $this->job_request_service->updateDraftJobRequest($request->all(), $jobRequest);
+
+        return redirect()->route('job_request.show',$jobRequest->id)->with('flash_msg','下書きに保存しました！');
     }
 
 }
