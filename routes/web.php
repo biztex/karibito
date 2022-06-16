@@ -115,6 +115,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
     Route::get('product/show/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+
 
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
@@ -126,7 +128,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // リクエスト
-    Route::resource('job_request',JobRequestController::class,['only' => ['create','store','show']]);
+    Route::resource('job_request',JobRequestController::class,['only' => ['create','store','show','edit','update']]);
+    Route::post('job_request/draft',[JobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
+
 });
 
 // プライバシーポリシーと運営会社

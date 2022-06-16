@@ -57,7 +57,7 @@
                         @error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_online">
-                                <option value=" ">選択してください</option>
+                                <option value="">選択してください</option>
                                 <option value="1" @if(old('is_online') == 1) selected @endif>対面</option>
                                 <option value="0" @if(!is_null(old('is_online')) && old('is_online') == 0) selected @endif>非対面</option>
                             </select>
@@ -106,9 +106,11 @@
                                 <div class="enter"><textarea class="@error('option_name') is-invalid @enderror" value="{{ 'option_name' }}" name="option_name[]" placeholder="入力してください"></textarea></div>
                                     <div class="selects">
                                         <select name="option_price[]" value="">
-                                            <option value="0" @if(0 == old('option_price')) checked @endif required>500円</option>
-                                            <option value="1" @if(1 == old('option_price')) checked @endif required>1000円</option>
-                                            <option value="2" @if(2 == old('option_price')) checked @endif required>1500円</option>
+                                            @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                <option value="{{ $key }}" @if(old('option_price') == $key) selected @endif>
+                                                    {{ $value }}円
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <select name="option_is_public[]">
                                             <option value="0" @if(0 == old('option_is_public')) checked @endif required>非公開</option>
@@ -120,9 +122,11 @@
                                     <div class="enter"><textarea class="@error('option_name') is-invalid @enderror" value="{{ 'option_name' }}" name="option_name[]" placeholder="入力してください"></textarea></div>
                                     <div class="selects">
                                         <select name="option_price[]" value="">
-                                            <option value="0" @if(0 == old('option_price')) checked @endif required>500円</option>
-                                            <option value="1" @if(1 == old('option_price')) checked @endif required>1000円</option>
-                                            <option value="2" @if(2 == old('option_price')) checked @endif required>1500円</option>
+                                            @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                <option value="{{ $key }}" @if(old('option_price') == $key) selected @endif>
+                                                    {{ $value }}円
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <select name="option_is_public[]">
                                             <option value="0" @if(0 == old('option_is_public')) checked @endif required>非公開</option>
@@ -134,9 +138,11 @@
                                     <div class="enter"><textarea class="@error('option_name') is-invalid @enderror" value="{{ 'option_name' }}" name="option_name[]" placeholder="入力してください"></textarea></div>
                                     <div class="selects">
                                         <select name="option_price[]" value="">
-                                            <option value="0" @if(0 == old('option_price')) checked @endif required>500円</option>
-                                            <option value="1" @if(1 == old('option_price')) checked @endif required>1000円</option>
-                                            <option value="2" @if(2 == old('option_price')) checked @endif required>1500円</option>
+                                            @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                <option value="{{ $key }}" @if(old('option_price') == $key) selected @endif>
+                                                    {{ $value }}円
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <select name="option_is_public[]">
                                             <option value="0" @if(0 == old('option_is_public')) checked @endif required>非公開</option>
@@ -297,8 +303,7 @@
                                 </div>
                                 <div class="functeBtns">
                                     <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-                                    <input type="submit" class="full green" style="color:white;"
-                                           formaction="{{ route('product.store') }}" value="サービス提供を開始">
+                                    <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
                                     <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
                                 </div>
                     </form>

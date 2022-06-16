@@ -44,8 +44,8 @@ class ProductController extends Controller
     {
         $product = Product::create([
             'user_id' => \Auth::id(),
-            'category_id' => $request->child_category_id,
-            'prefecture_id' => $request->prefecture,
+            'category_id' => $request->category_id,
+            'prefecture_id' => $request->prefecture_id,
             'title' => $request->title,
             'content' => $request->input('content'),
             'price' => $request->price,
@@ -56,7 +56,6 @@ class ProductController extends Controller
             'status' => $request->status,
             'is_draft' => Product::NOT_DRAFT
         ]);
-
 
         for ($i = 0; $i < 3; $i++) {
             if (!is_null($request->option_name[$i])) {
@@ -106,7 +105,7 @@ class ProductController extends Controller
         {
             $product = Product::find($id);
             $categories = MProductCategory::all();
-            return view('post.service_edit', compact('categories', 'product'));
+            return view('product.edit', compact('categories', 'product'));
         }
 
         /**
@@ -116,23 +115,24 @@ class ProductController extends Controller
          * @param int $id
          * @return \Illuminate\Http\Response
          */
-        public
-        function update(Request $request, $id)
+        public function update(Request $request, $id)
         {
+            $product = Product::find($id);
             $product->fill([
                 'category_id' => $request->category_id,
                 'prefecture_id' => $request->prefecture,
                 'title' => $request->title,
-                'content' => $request->content,
+                'content' => $request->input('content'),
                 'price' => $request->price,
                 'is_online' => $request->is_online,
                 'number_of_day' => $request->number_of_day,
                 'is_call' => $request->is_call,
                 'number_of_sale' => $request->number_of_sale,
-                'is_draft' => $request->is_draft,
                 'status' => $request->status,
+                'is_draft' => Product::NOT_DRAFT
             ]);
-            return $product->save();
+            $product->save();
+            return redirect()->route('service_thanks');
         }
 
         /**

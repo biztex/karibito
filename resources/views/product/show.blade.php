@@ -73,8 +73,9 @@
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
                                 @foreach($product->additionalOption as $option)
-                                    <li><span class="add">＋ {{$option->name}}</span><span
-                                            class="price">￥{{$option->price}}</span></li>
+                                    <li><span class="add">＋ {{$option->name}}</span>
+                                        <span class="price">￥@if(!is_null($option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$option->price]}}@endif</span>
+                                    </li>
                                 @endforeach
                                 {{--							<li><span class="add">＋ ヒアリング完了後、翌日初稿提出</span><span class="price">￥10,000</span></li>--}}
                                 {{--							<li><span class="add">＋ イラストデザイン初稿提案数１案追加</span><span class="price">￥10,000</span></li>--}}
