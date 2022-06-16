@@ -3,8 +3,8 @@
         <div id="breadcrumb">
             <div class="inner">
                 <a href="index.html">ホーム</a>　>　<a href="service.html">サービスを探す</a>　>　<a
-                    href="#">{{$product->mProductChildCategory->mProductCategory->name}}</a>　>　<a
-                    href="#">{{$product->mProductChildCategory->name}}</a>　>　<span>{{$product->title}}</span>
+                    href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a>　>　<a
+                    href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　<span>{{$product->title}}</span>
             </div>
         </div><!-- /.breadcrumb -->
         <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -289,7 +289,7 @@
                                         <button class="favorite">お気に入り</button>
                                     </a>
                                     <div class="info">
-                                        <div class="breadcrumb"><a href="#">{{$all_product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{$all_product->mProductChildCategory->name}}</span></div>
+                                        <div class="breadcrumb"><a href="#">@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->mProductCategory->name}} @endif</a>&emsp;＞&emsp;<span>@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->name}}@endif</span></div>
                                         <div class="draw">
                                             <p class="ico"><img src="img/service/ico_color.png" alt=""></p>
                                             <p class="price"><font>{{$all_product->title}}</font><br>{{$all_product->price}}円</p>

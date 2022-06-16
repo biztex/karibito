@@ -29,7 +29,7 @@
                                     <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
                                     <div class="info">
                                         <div class="breadcrumb"><a href="#"
-                                                                   tabindex="0">{{$product->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$product->mProductChildCategory->name}}</span>
+                                                                   tabindex="0">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ <span>@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}}@endif</span>
                                         </div>
                                         <div class="draw">
                                             <p class="price"><font>{{$product->title}}</font><br>{{$product->price}}</p>

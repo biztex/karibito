@@ -144,11 +144,37 @@
                                         </option>
                                     </select>
                                     <select name="option_is_public[]">
-                                        <option value="0" @if(0 == old('is_public')) checked
-                                                @endif required>公開
+                                        <option value="0" @if(0 == old('option_is_public')) checked
+                                                @endif required>非公開
                                         </option>
                                         <option value="1" @if(1 == old('is_public')) checked
-                                                @endif required>不公開
+                                                @endif required>公開
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="paid">
+                                <div class="enter"><textarea class="@error('option_name') is-invalid @enderror"
+                                                             value="{{ old('option_name') }}" name="option_name[]"
+                                                             placeholder="入力してください"></textarea></div>
+                                <div class="selects">
+                                    <select name="option_price[]" value="">
+                                        <option value="0" @if(0 == old('option_price')) checked @endif required>
+                                            500円
+                                        </option>
+                                        <option value="1" @if(1 == old('option_price')) checked @endif required>
+                                            1000円
+                                        </option>
+                                        <option value="2" @if(2 == old('option_price')) checked @endif required>
+                                            1500円
+                                        </option>
+                                    </select>
+                                    <select name="option_is_public[]">
+                                        <option value="0" @if(0 == old('option_is_public')) checked
+                                                @endif required>非公開
+                                        </option>
+                                        <option value="1" @if(1 == old('option_is_public')) checked
+                                                @endif required>公開
                                         </option>
                                     </select>
                                 </div>
@@ -171,36 +197,10 @@
                                     </select>
                                     <select name="option_is_public[]">
                                         <option value="0" @if(0 == old('is_public')) checked
-                                                @endif required>公開
+                                                @endif required>非公開
                                         </option>
                                         <option value="1" @if(1 == old('is_public')) checked
-                                                @endif required>不公開
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="paid">
-                                <div class="enter"><textarea class="@error('option_name') is-invalid @enderror"
-                                                             value="{{ old('option_name') }}" name="option_name[]"
-                                                             placeholder="入力してください"></textarea></div>
-                                <div class="selects">
-                                    <select name="option_price[]" value="">
-                                        <option value="0" @if(0 == old('option_price')) checked @endif required>
-                                            500円
-                                        </option>
-                                        <option value="1" @if(1 == old('option_price')) checked @endif required>
-                                            1000円
-                                        </option>
-                                        <option value="2" @if(2 == old('option_price')) checked @endif required>
-                                            1500円
-                                        </option>
-                                    </select>
-                                    <select name="option_is_public[]">
-                                        <option value="0" @if(0 == old('is_public')) checked
                                                 @endif required>公開
-                                        </option>
-                                        <option value="1" @if(1 == old('is_public')) checked
-                                                @endif required>不公開
                                         </option>
                                     </select>
                                 </div>

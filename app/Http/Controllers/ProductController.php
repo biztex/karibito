@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductController\ProductRequest;
+use App\Http\Requests\ProductController\StoreRequest;
 use App\Libraries\Age;
-use App\Models\AdditionalOption;
 use App\Models\AddtionalOptions;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-use App\Models\Product;
 use App\Models\MProductCategory;
-use App\Http\Requests\ProductRequest;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 
 class ProductController extends Controller
@@ -33,8 +31,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = MProductCategory::all();
-        return view('post.service_provide', compact('categories'));
+        return view('product.create');
     }
 
     /**
@@ -43,7 +40,7 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(StoreRequest $request)
     {
         $product = Product::create([
             'user_id' => \Auth::id(),
@@ -95,7 +92,7 @@ class ProductController extends Controller
             $all_products = Product::all();
             $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
             $age = Age::group($birthday);
-            return view('post.service_detail', compact('product', 'age', 'all_products'));
+            return view('product.show', compact('product', 'age', 'all_products'));
         }
 
         /**
