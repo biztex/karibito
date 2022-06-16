@@ -129,6 +129,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('job_request/draft',[JobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
     Route::put('job_request/{job_request}/draft',[JobRequestController::class,'updateDraft'])->name('job_request.updateDraft');
 
+
 });
 
 // プライバシーポリシーと運営会社

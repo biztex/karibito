@@ -61,6 +61,7 @@ class JobRequestService
         return $job_request;
     }
 
+
     /**
      * 編集画面よりジョブリクエスト下書き保存
      */
