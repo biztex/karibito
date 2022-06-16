@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
     /** 実行したいSeederをここに登録 */
     private const SEEDERS = [
         PrefectureSeeder::class,
+        MProductCategorySeeder::class,
+        MProductChildCategorySeeder::class
     ];
 
     /**
