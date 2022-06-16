@@ -7,7 +7,7 @@
 			<div class="error-txt">{{ $errors->first('error_msg') }}</div>
 		@endif
             {{-- {{ $error_msg}}; --}}
-			
+
 		<div id="contents" class="oneColumnPage02">
 			<div class="inner">
 				<div id="main">
@@ -46,6 +46,12 @@
 								</div>
 								<ul class="loginFormBtn">
 									<li><input type="submit" class="submit" value="ログイン"></li>
+                                    @if(config('app.env') === 'local')
+                                        {{-- ローカル環境専用 --}}
+                                        <li>
+                                            <a href="{{ route('developerLogin') }}">開発者ログイン(ローカル環境のみ)</a>
+                                        </li>
+                                    @endif
 								</ul>
 							</form>
 							<div class="loginBottom">

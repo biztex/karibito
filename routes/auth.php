@@ -32,6 +32,15 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.update');
+
+    // ローカル環境専用
+    if (config('app.env') === 'local') {
+        // 開発用自動ログイン
+        Route::get('developerLogin', function () {
+            \Auth::loginUsingId(1);
+            return redirect()->route('mypage');
+        })->name('developerLogin');
+    }
 });
 
 Route::middleware('auth')->group(function () {
