@@ -41,8 +41,8 @@ class UpdateRequest extends FormRequest
             'gender' => 'required | integer | in:1,2',
             'birthday' => 'required | date',
             'prefecture' => 'required | integer | exists:prefectures,id',
-            'zip' => 'required | numeric | digits:7',
-            'address' => 'required | max:255',
+            'zip' => 'nullable | numeric | digits:7',
+            'address' => 'nullable | max:255',
             'introduction' => 'nullable | max:3000 | string',
             'icon' => 'nullable | max:20480 | file | image | mimes:png,jpg',
             'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg'
