@@ -82,6 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         static::deleted(function ($user) {
             $user->userProfile()->delete(); // プロフィール削除
+            $user->jobRequest()->delete(); // ジョブリクエスト削除
         });
     }
 }

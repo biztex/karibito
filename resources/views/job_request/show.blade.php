@@ -66,6 +66,12 @@
 						<div class="functeBtns">
 							<a href="{{ route('job_request.edit', $job_request->id ) }}" class="orange_o">編集</a>
 						</div>
+						<form method="post" action="{{ route('job_request.destroy', $job_request->id ) }}">
+							@csrf @method('delete')
+						<div class="functeBtns">
+							<input type="submit" class="orange_o" value="削除">
+						</div>
+						</form>
 						@endif
 					</div>
 					<div class="box seller">

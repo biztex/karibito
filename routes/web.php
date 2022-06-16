@@ -125,7 +125,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // リクエスト
-    Route::resource('job_request',JobRequestController::class,['only' => ['create','store','show','edit','update']]);
+    Route::resource('job_request',JobRequestController::class,['except' => ['index']]);
     Route::post('job_request/draft',[JobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
     Route::post('job_request/preview',[JobRequestController::class,'preview'])->name('job_request.preview');
     Route::post('job_request/store/preview',[JobRequestController::class,'storePreview'])->name('job_request.store.preview');
