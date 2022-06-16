@@ -21,7 +21,7 @@ class MypageController extends Controller
      */
     public function show()
     {
-        $user_profile = UserProfile::with(['user', 'prefecture'])->firstWhere('user_id', Auth::id());
+        $user_profile = UserProfile::firstWhere('user_id',Auth::id());
 
         $birthday = (int)str_replace("-", "", $user_profile->birthday);
         $age = Age::group($birthday);
