@@ -26,6 +26,7 @@ class JobRequestService
         return $job_request;
     }
 
+
     /**
      * リクエスト編集
      */
@@ -60,4 +61,5 @@ class JobRequestService
     
         return $job_request;
     }
+
 }
