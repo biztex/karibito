@@ -102,7 +102,13 @@ class JobRequestController extends Controller
      */
     public function destroy(JobRequest $job_request)
     {
-        //
+        \DB::transaction(function () use ($job_request) {
+            
+            $job_request->delete(); // データ論理削除
+            \Session::put('flash_msg','リクエストを削除しました');
+            
+        });
+        return redirect()->route('mypage');
     }
 
     /**
