@@ -103,4 +103,18 @@ class JobRequestController extends Controller
     {
         //
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeDraft(Request $request)
+    {
+        $job_request = $this->job_request_service->storeDraftJobRequest($request->all());
+
+        return redirect()->route('job_request.show',$job_request->id);
+    }
+
 }
