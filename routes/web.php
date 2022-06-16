@@ -9,7 +9,7 @@ use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\JobRequestController;
+use App\Http\Controllers\Web\JobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
 use App\Http\Controllers\HomeController;
@@ -127,6 +127,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // リクエスト
     Route::resource('job_request',JobRequestController::class,['only' => ['create','store','show','edit','update']]);
     Route::post('job_request/draft',[JobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
+    Route::post('job_request/preview',[JobRequestController::class,'preview'])->name('job_request.preview');
+    Route::post('job_request/store/preview',[JobRequestController::class,'storePreview'])->name('job_request.store.preview');
     Route::put('job_request/{job_request}/draft',[JobRequestController::class,'updateDraft'])->name('job_request.updateDraft');
 
 
