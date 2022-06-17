@@ -9,7 +9,7 @@ use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Web\Mypage\JobRequestController;
+use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
 use App\Http\Controllers\HomeController;
@@ -125,17 +125,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // 提供・リクエスト一覧
-    Route::get('publication',[JobRequestController::class,'index'])->name('publication');
+    Route::get('publication',[MypageJobRequestController::class,'index'])->name('publication');
 
     // リクエスト
     Route::get('job_request',function(){ return redirect()->route('publication');});
-    Route::resource('job_request',JobRequestController::class, ['except' => ['index']]);
-    Route::post('job_request/draft',[JobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
-    Route::post('job_request/preview',[JobRequestController::class,'preview'])->name('job_request.preview');
-    Route::put('job_request/edit/{job_request}/preview',[JobRequestController::class,'editPreview'])->name('job_request.edit.preview');
-    Route::put('job_request/{job_request}/preview',[JobRequestController::class,'updatePreview'])->name('job_request.update.preview');
-    Route::post('job_request/store/preview',[JobRequestController::class,'storePreview'])->name('job_request.store.preview');
-    Route::put('job_request/{job_request}/draft',[JobRequestController::class,'updateDraft'])->name('job_request.updateDraft');
+    Route::resource('job_request',MypageJobRequestController::class, ['except' => ['index']]);
+    Route::post('job_request/draft',[MypageJobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
+    Route::post('job_request/preview',[MypageJobRequestController::class,'preview'])->name('job_request.preview');
+    Route::put('job_request/edit/{job_request}/preview',[MypageJobRequestController::class,'editPreview'])->name('job_request.edit.preview');
+    Route::put('job_request/{job_request}/preview',[MypageJobRequestController::class,'updatePreview'])->name('job_request.update.preview');
+    Route::post('job_request/store/preview',[MypageJobRequestController::class,'storePreview'])->name('job_request.store.preview');
+    Route::put('job_request/{job_request}/draft',[MypageJobRequestController::class,'updateDraft'])->name('job_request.updateDraft');
 
 
 });
