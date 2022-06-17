@@ -41,7 +41,7 @@
 						<p class="th">商品の詳細<span class="must">必須</span></p>
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<textarea type="text" name="content">{{ old('content', $job_request->content ) }}</textarea>
+							<textarea type="text" name="content">{{ old('content', $job_request->content) }}</textarea>
 						</div>
 
 
