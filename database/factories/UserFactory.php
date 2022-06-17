@@ -12,7 +12,7 @@ class UserFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
+     * 使い方：User::factory()->create()
      * @return array<string, mixed>
      */
     public function definition()
@@ -20,15 +20,16 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
+            'verifyemail_send_at' => now(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$s.7YK6I7yLqgpuEcMlKAyeQzBEAkyjNn.SyD0yFBv/V2FDX5zOqAW', // 12345678
             'remember_token' => Str::random(10),
         ];
     }
 
     /**
      * Indicate that the model's email address should be unverified.
-     *
+     * 使い方：User::factory()->unverified()->create()
      * @return static
      */
     public function unverified()

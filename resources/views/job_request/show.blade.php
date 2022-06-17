@@ -64,14 +64,20 @@
 						</div>
 						@if($user->id === Auth::id() )
 						<div class="functeBtns">
-							<a href="{{ route('job_request.edit', $job_request->id ) }}" class="orange_o">編集</a>
+							<a href="{{ route('job_request.edit', $job_request->id ) }}" class="full orange">編集</a>
 						</div>
+						<form method="post" action="{{ route('job_request.destroy', $job_request->id ) }}">
+							@csrf @method('delete')
+							<div class="functeBtns">
+								<input type="submit" class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
+							</div>
+						</form>
 						@endif
 					</div>
 					<div class="box seller">
 						<h3>スキル出品者</h3>
 								@if(empty($user->userProfile->icon))
-									<a href="#" class="head"><img src="//img/mypage/no_image.jpg" alt=""></a>
+									<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 								@else
 									<a href="#" class="head"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></a>
 								@endif

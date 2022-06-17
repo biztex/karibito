@@ -1823,7 +1823,7 @@
 	.fancyboxCont{
 	    -webkit-overflow-scrolling: touch;
 		overflow: auto;
-		max-height: calc(100vh - 40px - 45px - 55px);
+		max-height: calc(100vh - 40px - 45px - 160px);
 		padding: 0 15px;
 	}
 	#fancybox_register .fancyboxCont{

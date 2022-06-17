@@ -105,7 +105,8 @@
 						<div class="functeBtns">
 							<a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
 							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.update',$job_request->id) }}" value="サービス提供を開始">
-							<a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
+							<input type="submit" class="full green_o" formaction="{{ route('job_request.updateDraft', $job_request->id) }}" value="下書きとして保存">
+
 						</div>
 					</form>
 				</div>
