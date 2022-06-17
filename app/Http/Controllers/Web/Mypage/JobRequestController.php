@@ -30,13 +30,13 @@ class JobRequestController extends Controller
     {
         // 下書き・非公開除いて表示
         $my_publish_products = Product::where('user_id',\Auth::id())
-                                      ->where('status',1)
-                                      ->where('is_draft',0)
+                                      ->where('status',Product::STATUS_PUBLISH)
+                                      ->where('is_draft',Product::NOT_DRAFT)
                                       ->get();
 
         $my_publish_job_requests = JobRequest::where('user_id',\Auth::id())
-                                             ->where('status',1)
-                                             ->where('is_draft',0)
+                                             ->where('status',JobRequest::STATUS_PUBLISH)
+                                             ->where('is_draft',JobRequest::NOT_DRAFT)
                                              ->get();
 
         return view('post.publication', compact('my_publish_products','my_publish_job_requests'));
