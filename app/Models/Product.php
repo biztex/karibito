@@ -29,11 +29,11 @@ class Product extends Model
     ];
 
     const ONE_OF_SALE = 0;
-    const UNLIMITED_ON_SALE = 99;
+    const UNLIMITED_OF_SALE = 99;
 
     const NUMBER_OF_SALE = [
         self::ONE_OF_SALE => '1人様限定',
-        self::UNLIMITED_ON_SALE => '無制限',
+        self::UNLIMITED_OF_SALE => '無制限',
     ];
 
     const NOT_DRAFT = 0;
