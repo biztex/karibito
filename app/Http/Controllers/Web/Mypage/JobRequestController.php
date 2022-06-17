@@ -23,6 +23,22 @@ class JobRequestController extends Controller
         $this->job_request_service = $job_request_service;
     }
 
+
+    public function draft()
+    {
+        // 下書きのみ表示
+        $products = Product::where('user_id',\Auth::id())
+                                      ->where('is_draft',Product::IS_DRAFT)
+                                      ->orderBy('updated_at','desc')
+                                      ->paginate(10);
+
+        $job_requests = JobRequest::where('user_id',\Auth::id())
+                                             ->where('is_draft',JobRequest::IS_DRAFT)
+                                             ->orderBy('updated_at','desc')
+                                             ->paginate(10);
+
+        return view('post.draft', compact('products','job_requests'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,17 +47,19 @@ class JobRequestController extends Controller
     public function index()
     {
         // 下書き・非公開除いて表示
-        $my_publish_products = Product::where('user_id',\Auth::id())
+        $products = Product::where('user_id',\Auth::id())
                                       ->where('status',Product::STATUS_PUBLISH)
                                       ->where('is_draft',Product::NOT_DRAFT)
-                                      ->get();
+                                      ->orderBy('updated_at','desc')
+                                      ->paginate(10);
 
-        $my_publish_job_requests = JobRequest::where('user_id',\Auth::id())
+        $job_requests = JobRequest::where('user_id',\Auth::id())
                                              ->where('status',JobRequest::STATUS_PUBLISH)
                                              ->where('is_draft',JobRequest::NOT_DRAFT)
-                                             ->get();
+                                             ->orderBy('updated_at','desc')
+                                             ->paginate(10);
 
-        return view('post.publication', compact('my_publish_products','my_publish_job_requests'));
+        return view('post.publication', compact('products','job_requests'));
     }
 
     /**
@@ -135,7 +153,7 @@ class JobRequestController extends Controller
     {
         $job_request = $this->job_request_service->storeDraftJobRequest($request->all());
 
-        return redirect()->route('job_request.show',$job_request->id)->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
 
     /**
@@ -149,7 +167,7 @@ class JobRequestController extends Controller
     {
         $this->job_request_service->updateDraftJobRequest($request->all(), $job_request);
 
-        return redirect()->route('job_request.show',$job_request->id)->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
 
     /**

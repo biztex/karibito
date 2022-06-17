@@ -62,7 +62,7 @@ Route::view('service_detail', 'post.service_detail')->name('service_detail');
 Route::view('service_request', 'post.service_request')->name('service_request');
 Route::view('service_thanks', 'post.service_thanks')->name('service_thanks');
 Route::view('service', 'post.service')->name('service');
-Route::view('draft', 'post.draft')->name('draft');
+// Route::view('draft', 'post.draft')->name('draft');
 // Route::view('publication', 'post.publication')->name('publication');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
@@ -128,6 +128,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 提供・リクエスト一覧
     Route::get('publication',[MypageJobRequestController::class,'index'])->name('publication');
+    // 提供・リクエスト 下書き一覧
+    Route::get('draft',[MypageJobRequestController::class,'draft'])->name('draft');
 
     // リクエスト
     Route::get('job_request',function(){ return redirect()->route('publication');});

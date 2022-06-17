@@ -2,7 +2,7 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載内容</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -20,53 +20,55 @@
 							<!---------------- 提供 ------------------>
 							<div class="tabBox is_active" id="tab_box01">
 								<ul class="favoriteUl01">
-									@if(!empty($my_publish_products))
-									@foreach($my_publish_products as $product)
+									@if(!empty($products))
+									@foreach($products as $val)
 									<li>
 										<div class="cont01">
 											<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
 											<div class="info">
-												<div class="breadcrumb"><a href="#" tabindex="0">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
 												<div class="draw">
-													<p class="price"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+													<p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
 													<span>単発リクエスト</span>
-													<a href="#" tabindex="0">{{ App\Models\Product::IS_ONLINE[$product->is_online] }}</a>
+													<a href="#" tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</a>
 												</div>
-												<p class="link"><a href="{{ route('product.show',$product->id) }}">詳細見る</a></p>
+												<p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
 											</div>
 										</div>
 									</li>
 									@endforeach
 									@endif
 								</ul>
+								{{ $products->links() }}
 							</div>
 
 							<!---------------- リクエスト ------------------>
 							<div class="tabBox" id="tab_box02">
 								<ul class="favoriteUl01">
-									@if(!empty($my_publish_products))
-									@foreach($my_publish_job_requests as $job_request)
+									@if(!empty($job_requests))
+									@foreach($job_requests as $val)
 									<li>
 										<div class="cont01">
 											<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
 											<div class="info">
-												<div class="breadcrumb"><a href="#" tabindex="0">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
+												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
 												<div class="draw">
-													<p class="price"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
+													<p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
 													<span>単発リクエスト</span>
-													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$job_request->is_online] }}</a>
+													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 												</div>
-												<p class="link"><a href="{{ route('job_request.show',$job_request->id) }}">詳細見る</a></p>
+												<p class="link"><a href="{{ route('job_request.show',$jval->id) }}">詳細見る</a></p>
 											</div>
 										</div>
 									</li>
 									@endforeach
 									@endif
 								</ul>
+								{{ $job_requests->links() }}
 							</div>
 						</div>
 					</div>
