@@ -24,11 +24,11 @@ class DraftRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required_without_all:title,content,price | integer | exists:m_product_child_categories,id',
+            'category_id' => 'required_without_all:title,content,price | nullable | integer | exists:m_product_child_categories,id',
             'prefecture_id' => 'nullable | integer | between:1,47',
-            'title' => 'string | max:30',
-            'content' => 'string | min:30 | max:3000 ',
-            'price' => 'integer | min:500 | max:9990000',
+            'title' => 'nullable | string | max:30',
+            'content' => 'nullable | string | max:3000 ',
+            'price' => 'nullable | integer | min:500 | max:9990000',
             'application_deadline' => 'nullable | date | after_or_equal:tomorrow',
             'required_date' => 'nullable | date | after_or_equal:application_deadline',
             'is_online' => 'nullable | integer | boolean',
