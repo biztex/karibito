@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Libraries\Age;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
+use App\Http\Requests\JobRequestController\DraftRequest;
+use App\Http\Requests\JobRequestController\PreviewRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
 
 
@@ -129,7 +131,7 @@ class JobRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeDraft(Request $request)
+    public function storeDraft(DraftRequest $request)
     {
         $job_request = $this->job_request_service->storeDraftJobRequest($request->all());
 
@@ -143,7 +145,7 @@ class JobRequestController extends Controller
      * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function updateDraft(Request $request, JobRequest $job_request)
+    public function updateDraft(DraftRequest $request, JobRequest $job_request)
     {
         $this->job_request_service->updateDraftJobRequest($request->all(), $job_request);
 
@@ -156,7 +158,7 @@ class JobRequestController extends Controller
      * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function preview(Request $request)
+    public function preview(PreviewRequest $request)
     {
         $user = \Auth::user();
 
@@ -199,7 +201,7 @@ class JobRequestController extends Controller
     /**
      * 既存リクエスト、編集からプレビュー表示
      */
-    public function editPreview(Request $request, JobRequest $job_request)
+    public function editPreview(PreviewRequest $request, JobRequest $job_request)
     {
         $user = \Auth::user();
 
