@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
@@ -30,7 +31,6 @@ use App\Http\Controllers\PublicationController;
 
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\FacebookLoginController;
-use App\Http\Controllers\Auth\FacebookRegisterController;
 
 
 // 管理者用
@@ -114,6 +114,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
     Route::get('product/show/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+
 
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
@@ -144,6 +146,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
+
+// 秘訣
+Route::view('secret01','secret.secret01')->name('secret01');
+Route::view('secret02','secret.secret02')->name('secret02');
+Route::view('secret03','secret.secret03')->name('secret03');
+Route::view('secret04','secret.secret04')->name('secret04');
+Route::view('secret05','secret.secret05')->name('secret05');
+Route::view('secret06','secret.secret06')->name('secret06');
+
 
 
 // 動詞	URI	アクション	ルート名
