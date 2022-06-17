@@ -37,7 +37,6 @@
 													<p class="price"><font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<span>単発リクエスト</span>
 													@if(!empty($val->is_online))
 														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 													@endif
@@ -70,7 +69,6 @@
 													<p class="price"><font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<span>単発リクエスト</span>
 													@if(!empty($val->is_online))
 														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 													@endif

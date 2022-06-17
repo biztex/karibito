@@ -55,7 +55,7 @@ Route::get('sample', function () {
 
 
 // 画面組込中
-Route::view('/post', 'post.post')->name('post');
+// Route::view('/post', 'post.post')->name('post');
 Route::view('service_preview', 'post.service_preview')->name('service_preview');
 Route::view('service_provide', 'post.service_provide')->name('service_provide');
 Route::view('service_detail', 'post.service_detail')->name('service_detail');
@@ -148,14 +148,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
-
-// 秘訣
-Route::view('secret01','secret.secret01')->name('secret01');
-Route::view('secret02','secret.secret02')->name('secret02');
-Route::view('secret03','secret.secret03')->name('secret03');
-Route::view('secret04','secret.secret04')->name('secret04');
-Route::view('secret05','secret.secret05')->name('secret05');
-Route::view('secret06','secret.secret06')->name('secret06');
 
 
 
