@@ -12,7 +12,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Web\JobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
-use App\Http\Controllers\JobRequestController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -32,7 +31,6 @@ use App\Http\Controllers\PublicationController;
 
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\FacebookLoginController;
-use App\Http\Controllers\Auth\FacebookRegisterController;
 
 
 // 管理者用
