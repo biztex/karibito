@@ -27,6 +27,7 @@ class AdditionalOption extends Model
 
     const NOT_PUBLIC = 0;
     const IS_PUBLIC = 1;
+
     const PUBLIC_STATUS = [
         self::NOT_PUBLIC => '非公開',
         self::IS_PUBLIC => '公開',

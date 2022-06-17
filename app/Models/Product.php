@@ -16,8 +16,8 @@ class Product extends Model
     const ONLINE = 1;
 
     const IS_ONLINE = [
-        self::OFFLINE => '非対面',
-        self::ONLINE => '対面',
+        self::OFFLINE => '対面',
+        self::ONLINE => '非対面',
     ];
 
     const OFF_CALL = 0;

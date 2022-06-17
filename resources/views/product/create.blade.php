@@ -58,8 +58,8 @@
                         <div class="td">
                             <select name="is_online">
                                 <option value="">選択してください</option>
-                                <option value="1" @if(old('is_online') == 1) selected @endif>対面</option>
-                                <option value="0" @if(!is_null(old('is_online')) && old('is_online') == 0) selected @endif>非対面</option>
+                                <option value="1" @if(old('is_online') == 1) selected @endif>非対面</option>
+                                <option value="0" @if(!is_null(old('is_online')) && old('is_online') == 0) selected @endif>対面</option>
                             </select>
                         </div>
 
@@ -85,8 +85,8 @@
                         <div class="td">
                             <select name="is_call">
                                 <option value="">選択してください</option>
-                                <option value="0" @if(!is_null(old('is_call')) && old('is_call') == 0) selected @endif>電話を受け付ける</option>
-                                <option value="1" @if(old('is_call') == 1) selected @endif>電話を受け付けない</option>
+                                <option value="0" @if(!is_null(old('is_call')) && old('is_call') == 0) selected @endif>電話を受け付けない</option>
+                                <option value="1" @if(old('is_call') == 1) selected @endif>電話を受け付ける</option>
                             </select>
                         </div>
 

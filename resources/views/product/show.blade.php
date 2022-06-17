@@ -15,15 +15,15 @@
                         <div class="title">
                             <div class="fun">
                                 <div class="single">
-                                    <a href="#" tabindex="0">{{App\Models\Product::IS_ONLINE[$product->is_online]}}</a>
+                                    <a href="#" tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</a>
                                 </div>
                                 <a href="#" class="favorite">お気に入り(11)</a>
                             </div>
                             <div class="datas">
-                                <span class="data">電話相談の受付：{{App\Models\Product::IS_CALL[$product->is_call]}}</span>
-                                <span class="data">閲覧：1000</span>
-                                <span class="data">エリア：{{$product->productPrefecture->name}}</span>
-                                <span class="data">販売数：{{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}</span>
+                                <span class="data">電話相談の受付：@if(!is_null($product->is_call)) {{ App\Models\Product::IS_CALL[$product->is_call] }} @endif</span>
+{{--                                <span class="data">閲覧：1000</span>--}}
+                                <span class="data">エリア：@if(!is_null($product->prefecture_id)) {{ App\Models\Prefecture::find($product->prefecture_id)->name }} @endif</span>
+                                <span class="data">販売数：@if(!is_null($product->number_of_sale)){{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}@endif</span>
                             </div>
                             <h2><span>{{$product->title}}</span></h2>
                         </div>

@@ -16,12 +16,11 @@
                         <p class="th">カテゴリ<span class="must">必須</span></p>
                         <div class="td">
                             <select name="category_id">
-                                <option value="{{$product->category_id}}">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}}@endif</option>
                                 <option value="">選択してください</option>
                                 @foreach ($categories as $category)
                                     <optgroup label="{{$category->name}}">
                                         @foreach ($category->mProductChildCategory as $child_category)
-                                            <option value="{{$child_category->id}}">{{$child_category->name}}</option>
+                                            <option value="{{$child_category->id}}" @if( old('category_id' , $product->category_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach
@@ -55,10 +54,9 @@
                             @error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_online">
-                                <option value="{{old('is_online', $product->is_online)}}">{{App\Models\Product::IS_ONLINE[$product->is_online]}}</option>
                                 <option value="">選択してください</option>
-                                <option value="0" @if(0 == old('is_online')) checked @endif required>対面</option>
-                                <option value="1" @if(1 == old('is_online')) checked @endif required>非対面</option>
+                                <option value="0" @if(!is_null(old('is_online',$product->is_online)) && old('is_online',$product->is_online) == 0) selected @endif>対面</option>
+                                <option value="1" @if(old('is_online', $product->is_online) == 1) selected @endif>非対面</option>
                             </select>
                         </div>
 
@@ -66,10 +64,9 @@
                             @error('prefecture')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="prefecture" class="@error('prefecture') is-invalid @enderror">
-                                <option value="{{old('prefecture', $product->productPrefecture->id)}}">{{old('prefecture', $product->productPrefecture->name)}}</option>
                                 <option value="">選択してください</option>
                                 @foreach ( $prefectures as $prefecture )
-                                    <option value="{{$prefecture->id}}" @if($prefecture->id == old('prefecture')) selected @endif>{{$prefecture->name}}</option>
+                                    <option value="{{ $prefecture->id }}" @if( old('prefecture_id', $product->prefecture_id) == $prefecture->id ) selected @endif>{{ $prefecture->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -84,10 +81,9 @@
                             @error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_call">
-                                <option value="{{old('is_call', $product->is_call)}}">{{App\Models\Product::IS_CALL[$product->is_call]}}</option>
                                 <option value="">選択してください</option>
-                                <option value="0" @if(0 == old('is_call')) checked @endif required>電話を受け付ける</option>
-                                <option value="1" @if(1 == old('is_call')) checked @endif required>電話を受け付けない</option>
+                                <option value="0" @if(!is_null(old('is_call', $product->is_call )) && old('is_call', $product->is_call ) == 0) selected @endif>電話を受け付けない</option>
+                                <option value="1" @if(old('is_call', $product->is_call ) == 1) selected @endif>電話を受け付ける</option>
                             </select>
                         </div>
 
@@ -95,58 +91,75 @@
                             @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="number_of_sale">
-                                <option value="{{old('number_of_sale', $product->number_of_sale)}}">{{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}</option>
                                 <option value="">選択してください</option>
-                                <option value="0" @if(0 == old('number_of_sale')) checked @endif required>１人様限定</option>
-                                <option value="99" @if(99 == old('number_of_sale')) checked @endif required>無制限</option>
+                                <option value="0" @if(!is_null(old('number_of_sale', $product->number_of_sale )) && old('number_of_sale', $product->number_of_sale ) == 0) selected @endif>1人様限定</option>
+                                <option value="1" @if(old('number_of_sale', $product->number_of_sale ) == 1) selected @endif>無制限</option>
                             </select>
                         </div>
 
                         <p class="th">有料オプション1</p>
                             @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                                    @foreach($product->additionalOption as $option)
-                            <div class="paid">
-                                <div class="enter">
-                                        <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $option->title) }}" name="option_name" placeholder="入力してください">{{ old('option_name', $option->name)}}</textarea>
+                            @foreach($product->additionalOption as $option)
+                                <div class="paid">
+                                    <div class="enter">
+                                        <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $option->title) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name', $option->name)}}</textarea>
+                                    </div>
+                                    <div class="selects">
+                                        <select name="option_price[]" value="">
+{{--                                            <option value="{{old('option_price', $option->price)}}" selected>{{App\Models\AdditionalOption::OPTION_PRICE[$option->price]}}円</option>--}}
+                                            @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                <option value="{{ $key }}" @if(old('option_price', $option->price) == $key) selected @endif>
+                                                    {{ $value }}円
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <select name="option_is_public[]">
+                                            <option value="{{old('option_is_public', $option->is_public)}}">{{App\Models\AdditionalOption::PUBLIC_STATUS[$option->is_public]}}</option>
+                                            <option value="0" @if(0 == old('option_is_public')) checked @endif required>非公開</option>
+                                            <option value="1" @if(1 == old('option_is_public')) checked @endif required>公開</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="selects">
-                                    <select name="option_price" value="">
-                                        <option value="{{old('option_price', $option->price)}}" selected>{{App\Models\AdditionalOption::OPTION_PRICE[$option->price]}}円</option>
-                                        @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                            <option value="{{ $key }}" @if(old('option_price') == $key) @endif>
-                                                {{ $value }}円
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <select name="option_is_public">
-                                        <option value="{{old('option_is_public', $option->is_public)}}">{{App\Models\AdditionalOption::PUBLIC_STATUS[$option->is_public]}}</option>
-                                        <option value="0" @if(0 == old('option_is_public')) checked @endif required>非公開</option>
-                                        <option value="1" @if(1 == old('option_is_public')) checked @endif required>公開</option>
-                                    </select>
-                                </div>
-                            </div>
                                 @endforeach
                             <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</a></p>
                         </div>
 
-                        @foreach($product->productQuestion as $question)
-                            <p class="th">質問のタイトル1</p>
-                                @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                        @for($i = 0; $i < 3; $i++)
+{{--                        {{dd($product->productQuestion[$i]->title)}}--}}
+                        <p class="th">質問のタイトル1</p>
+                        @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                <textarea type="text" name="question_title" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $question->title) }}" placeholder="質問のタイトル入力してください">{{ old('question_title', $question->title) }}</textarea>
+                                    <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $product->productQuestion[$i]?->title ?? '' )}}" placeholder="質問のタイトル入力してください">{{ old('question_title', $product->productQuestion[$i]?->title ?? '' )}}</textarea>
                                     <p class="taR">400</p>
                                 </div>
                             </div>
                             <p class="th">質問の回答1</p>
-                                @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                <textarea type="text" name="answer" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $question->answer) }}" placeholder="質問の回答入力してください">{{ old('answer', $question->answer) }}</textarea>
+                                    <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $product->productQuestion[$i]?->answer ?? '' )}}" placeholder="質問の回答入力してください">{{ old('answer', $product->productQuestion[$i]?->answer ?? '' )}}</textarea>
                                     <p class="taR">400</p>
                                 </div>
-                        @endforeach
+                        @endfor
+{{--                        @foreach($product->productQuestion as $question)--}}
+{{--                            <p class="th">質問のタイトル1</p>--}}
+{{--                                @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
+{{--                            <div class="td">--}}
+{{--                                <div class="enter">--}}
+{{--                                <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $question->title) }}" placeholder="質問のタイトル入力してください">{{ old('question_title', $question->title) }}</textarea>--}}
+{{--                                    <p class="taR">400</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <p class="th">質問の回答1</p>--}}
+{{--                                @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
+{{--                            <div class="td">--}}
+{{--                                <div class="enter">--}}
+{{--                                <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $question->answer) }}" placeholder="質問の回答入力してください">{{ old('answer', $question->answer) }}</textarea>--}}
+{{--                                    <p class="taR">400</p>--}}
+{{--                                </div>--}}
+{{--                        @endforeach--}}
                                 <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
                             </div>
 
@@ -216,14 +229,9 @@
                                 @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <select name="status">
-                                    @if(1 == old('status', $product->status))
-                                        <option value="{{old('status', $product->status)}}">公開</option>
-                                    @elseif(2 == old('status', $product->status))
-                                        <option value="2" name="status" @if(2 == old('status')) checked @endif required>非公開</option>
-                                    @endif
                                     <option>選択してください</option>
-                                    <option value="1" name="status" @if(1 == old('status')) checked @endif required>公開</option>
-                                    <option value="2" name="status" @if(2 == old('status')) checked @endif required>非公開</option>
+                                    <option value="1" @if(!is_null(old('is_call', $product->status )) && old('status', $product->status ) == 1) selected @endif>公開</option>
+                                    <option value="2" @if(old('status', $product->status ) == 2) selected @endif>非公開</option>
                                 </select>
                             </div>
                             <div class="functeBtns">
