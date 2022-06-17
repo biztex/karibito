@@ -88,12 +88,11 @@ class ProductController extends Controller
     public
     function show(Product $product)
     {
-//        $product = Product::find($id);
         $all_products = Product::all();
         $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
         $age = Age::group($birthday);
+        return view('product.show', compact('product', 'age', 'all_products'));
 //        return view('product.show', compact('product', 'age', 'all_products'));
-        return view('product.show', ["product" => $product], compact('age', 'all_products'));
     }
 
     /**
@@ -105,9 +104,8 @@ class ProductController extends Controller
     public
     function edit(Product $product)
     {
-//        $product = Product::find($id);
         $categories = MProductCategory::all();
-        return view('product.edit', ["product" => $product], compact('categories'));
+        return view('product.edit', compact("product", 'categories'));
     }
 
     /**
@@ -117,9 +115,9 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $product = Product::find($id);
+//        $product = Product::find($id);
         $product->fill([
             'category_id' => $request->category_id,
             'prefecture_id' => $request->prefecture,

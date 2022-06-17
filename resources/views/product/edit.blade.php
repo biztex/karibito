@@ -103,7 +103,7 @@
                             @foreach($product->additionalOptions as $additional_option)
                                 <div class="paid">
                                     <div class="enter">
-                                        <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $additional_option->title) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name', $option->name)}}</textarea>
+                                        <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $additional_option->title) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name', $additional_option->name)}}</textarea>
                                     </div>
                                     <div class="selects">
                                         <select name="option_price[]" value="">
