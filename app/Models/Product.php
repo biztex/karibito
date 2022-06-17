@@ -12,6 +12,14 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+    const STATUS_PUBLISH = 1;
+    const STATUS_PRIVATE = 2;
+
+    const SALES_STATUS = [
+        self::STATUS_PUBLISH => '公開',
+        self::STATUS_PRIVATE => '非公開',
+    ];
+    
     const OFFLINE = 0;
     const ONLINE = 1;
 
