@@ -10,6 +10,7 @@ use App\Libraries\Age;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
 use App\Http\Requests\JobRequestController\StoreRequest;
+use App\Http\Requests\JobRequestController\PreviewRequest;
 
 
 class JobRequestController extends Controller
@@ -156,7 +157,7 @@ class JobRequestController extends Controller
      * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function preview(Request $request)
+    public function preview(PreviewRequest $request)
     {
         $user = \Auth::user();
 
@@ -199,7 +200,7 @@ class JobRequestController extends Controller
     /**
      * 既存リクエスト、編集からプレビュー表示
      */
-    public function editPreview(Request $request, JobRequest $job_request)
+    public function editPreview(PreviewRequest $request, JobRequest $job_request)
     {
         $user = \Auth::user();
 
