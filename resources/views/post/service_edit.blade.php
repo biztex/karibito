@@ -140,7 +140,7 @@
                             @enderror
                             <div class="paid">
                                 <div class="enter">
-                                    @foreach($product->additionalOption as $option)
+                                    @foreach($product->additionalOptions as $option)
                                         <textarea class="@error('option_name') is-invalid @enderror"
                                                   value="{{ old('option_name', $option->title) }}" name="option_name"
                                                   placeholder="入力してください">{{ old('option_name', $option->name)}}</textarea>
@@ -174,7 +174,7 @@
                             <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</a>
                             </p>
                         </div>
-                        @foreach($product->productQuestion as $question)
+                        @foreach($product->productQuestions as $question)
                             <p class="th">質問のタイトル1</p>
                             <div class="td">
                                 @error('question_title')

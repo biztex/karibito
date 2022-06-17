@@ -19,7 +19,7 @@ class Product extends Model
         self::STATUS_PUBLISH => '公開',
         self::STATUS_PRIVATE => '非公開',
     ];
-    
+
     const OFFLINE = 0;
     const ONLINE = 1;
 
@@ -61,13 +61,13 @@ class Product extends Model
 
 
     // AdditionalOptionモデルとのリレーション
-    public function additionalOption()
+    public function additionalOptions()
     {
         return $this->hasMany(AdditionalOption::class, 'product_id');
     }
 
     // ProductQuestionモデルとのリレーション
-    public function productQuestion()
+    public function productQuestions()
     {
         return $this->hasMany(ProductQuestion::class, 'product_id');
     }

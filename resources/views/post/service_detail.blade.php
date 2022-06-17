@@ -72,7 +72,7 @@
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
-                                @foreach($product->additionalOption as $option)
+                                @foreach($product->additionalOptions as $option)
                                     <li><span class="add">＋ {{$option->name}}</span><span
                                             class="price">￥{{$option->price}}</span></li>
                                 @endforeach
@@ -85,7 +85,7 @@
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
-                                @foreach($product->productQuestion as $question)
+                                @foreach($product->productQuestions as $question)
                                     <li>
                                         <p class="quest toggleBtn"><span>{{$question->title}}</span><span class="more">回答を見る</span>
                                         </p>
