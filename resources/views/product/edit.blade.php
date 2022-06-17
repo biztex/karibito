@@ -93,7 +93,7 @@
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>
                                 <option value="0" @if(!is_null(old('number_of_sale', $product->number_of_sale )) && old('number_of_sale', $product->number_of_sale ) == 0) selected @endif>1人様限定</option>
-                                <option value="1" @if(old('number_of_sale', $product->number_of_sale ) == 1) selected @endif>無制限</option>
+                                <option value="99" @if(old('number_of_sale', $product->number_of_sale ) == 99) selected @endif>無制限</option>
                             </select>
                         </div>
 
@@ -115,9 +115,8 @@
                                             @endforeach
                                         </select>
                                         <select name="option_is_public[]">
-                                            <option value="{{old('option_is_public', $option->is_public)}}">{{App\Models\AdditionalOption::PUBLIC_STATUS[$option->is_public]}}</option>
-                                            <option value="0" @if(0 == old('option_is_public')) checked @endif required>非公開</option>
-                                            <option value="1" @if(1 == old('option_is_public')) checked @endif required>公開</option>
+                                            <option value="0" @if(!is_null(old('option_is_public', $product->option_is_public )) && old('option_is_public', $product->option_is_public ) == 0) selected @endif required>非公開</option>
+                                            <option value="1" @if(old('option_is_public', $option->is_public) == 1) selected @endif required>公開</option>
                                         </select>
                                     </div>
                                 </div>
@@ -126,7 +125,6 @@
                         </div>
 
                         @for($i = 0; $i < 3; $i++)
-{{--                        {{dd($product->productQuestion[$i]->title)}}--}}
                         <p class="th">質問のタイトル1</p>
                         @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
