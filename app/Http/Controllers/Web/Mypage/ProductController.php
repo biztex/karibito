@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Mypage;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Libraries\Age;
 use App\Models\AdditionalOption;
-use App\Models\AddtionalOptions;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-use App\Models\Product;
 use App\Models\MProductCategory;
-use App\Http\Requests\ProductRequest;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 
 class ProductController extends Controller
