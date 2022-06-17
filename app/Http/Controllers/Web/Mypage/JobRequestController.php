@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobRequest;
+use App\Models\Product;
 use App\Models\User;
 use App\Libraries\Age;
 use Illuminate\Http\Request;
@@ -27,7 +28,18 @@ class JobRequestController extends Controller
      */
     public function index()
     {
-        //
+        // 下書き・非公開除いて表示
+        $my_publish_products = Product::where('user_id',\Auth::id())
+                                      ->where('status',1)
+                                      ->where('is_draft',0)
+                                      ->get();
+
+        $my_publish_job_requests = JobRequest::where('user_id',\Auth::id())
+                                             ->where('status',1)
+                                             ->where('is_draft',0)
+                                             ->get();
+
+        return view('post.publication', compact('my_publish_products','my_publish_job_requests'));
     }
 
     /**
@@ -179,6 +191,49 @@ class JobRequestController extends Controller
 
         // バリデーション通れば通常通り登録
         $this->job_request_service->storeJobRequest($request->all());
+
+        return redirect()->route('service_thanks');
+    }
+
+
+    /**
+     * 既存リクエスト、編集からプレビュー表示
+     */
+    public function editPreview(Request $request, JobRequest $job_request)
+    {
+        $user = \Auth::user();
+
+        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
+        $age = Age::group($birthday);
+
+        return view('job_request.preview',compact('request','user','age','job_request'));
+    }
+
+
+    /**
+     * プレビュー画面から投稿
+     */
+    public function updatePreview(Request $request, JobRequest $job_request)
+    {
+        $validate = \Validator::make($request->all(), [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'nullable | integer | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'application_deadline' => 'required | date | after_or_equal:tomorrow',
+            'required_date' => 'nullable | date | after_or_equal:application_deadline',
+            'is_online' => 'required | integer | boolean',
+            'is_call' => 'required | integer | boolean',    
+        ]);
+
+        // バリデーション引っかかれば入力画面に戻す
+        if ($validate->fails()) {
+            return redirect()->route("job_request.create")->withInput()->withErrors($validate->messages());
+        }
+
+        // バリデーション通れば通常通り登録
+        $this->job_request_service->updateJobRequest($request->all(), $job_request);
 
         return redirect()->route('service_thanks');
     }

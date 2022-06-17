@@ -7,8 +7,13 @@
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="detailStyle">
-			<form class="contactForm" method="post" action="{{ route('job_request.store.preview') }}">
-			@csrf
+			@if(empty($job_request))
+					<form class="contactForm" method="post" action="{{ route('job_request.store.preview') }}">
+					@csrf
+				@else
+					<form class="contactForm" method="post" action="{{ route('job_request.update.preview',$job_request->id) }}">
+					@csrf @method('put')
+			@endif
 			<input type="hidden" value="@if(!is_null($request->category_id)){{ $request->category_id }}@endif" name="category_id">
 			<input type="hidden" value="@if(!is_null($request->application_deadline)){{ $request->application_deadline }}@endif" name="application_deadline">
 			<input type="hidden" value="@if(!is_null($request->required_date)){{ $request->required_date }}@endif" name="required_date">
@@ -117,7 +122,7 @@
 					<div class="box seller">
 						<h3>スキル出品者</h3>
 								@if(empty($user->userProfile->icon))
-									<a href="#" class="head"><img src="//img/mypage/no_image.jpg" alt=""></a>
+									<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 								@else
 									<a href="#" class="head"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></a>
 								@endif

@@ -77,7 +77,7 @@
 					<div class="box seller">
 						<h3>スキル出品者</h3>
 								@if(empty($user->userProfile->icon))
-									<a href="#" class="head"><img src="//img/mypage/no_image.jpg" alt=""></a>
+									<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 								@else
 									<a href="#" class="head"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></a>
 								@endif
