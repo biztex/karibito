@@ -58,8 +58,8 @@
                         <div class="td">
                             <select name="is_online">
                                 <option value="">選択してください</option>
-                                <option value="0" @if(!is_null(old('is_online')) && old('is_online') == App\Models\Product::OFFLINE) selected @endif>対面</option>
-                                <option value="1" @if(old('is_online') == App\Models\Product::ONLINE) selected @endif>非対面</option>
+                                <option value="{{App\Models\Product::OFFLINE}}" @if(!is_null(old('is_online')) && old('is_online') == App\Models\Product::OFFLINE) selected @endif>対面</option>
+                                <option value="{{App\Models\Product::ONLINE}}" @if(old('is_online') == App\Models\Product::ONLINE) selected @endif>非対面</option>
                             </select>
                         </div>
 
@@ -85,8 +85,8 @@
                         <div class="td">
                             <select name="is_call">
                                 <option value="">選択してください</option>
-                                <option value="0" @if(!is_null(old('is_call')) && old('is_call') == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
-                                <option value="1" @if(old('is_call') == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
+                                <option value="{{App\Models\Product::OFF_CALL}}" @if(!is_null(old('is_call')) && old('is_call') == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
+                                <option value="{{App\Models\Product::ON_CALL}}" @if(old('is_call') == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
                             </select>
                         </div>
 
@@ -94,8 +94,8 @@
                             @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="number_of_sale">
-                                <option value="0" @if(!is_null(old('number_of_sale')) && old('number_of_sale') == App\Models\Product::ONE_OF_SALE) checked @endif required>１人様限定</option>
-                                <option value="99" @if(old('number_of_sale') == App\Models\Product::UNLIMITED_OF_SALE) checked @endif required>無制限</option>
+                                <option value="{{App\Models\Product::ONE_OF_SALE}}" @if(!is_null(old('number_of_sale')) && old('number_of_sale') == App\Models\Product::ONE_OF_SALE) checked @endif required>１人様限定</option>
+                                <option value="{{App\Models\Product::UNLIMITED_OF_SALE}}" @if(old('number_of_sale') == App\Models\Product::UNLIMITED_OF_SALE) checked @endif required>無制限</option>
                             </select>
                         </div>
 
@@ -113,8 +113,8 @@
                                             @endforeach
                                         </select>
                                         <select name="option_is_public[]">
-                                            <option value="0" @if(old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) checked @endif required>非公開</option>
-                                            <option value="1" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) checked @endif required>公開</option>
+                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) checked @endif required>非公開</option>
+                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) checked @endif required>公開</option>
                                         </select>
                                     </div>
                                 </div>
@@ -129,8 +129,8 @@
                                             @endforeach
                                         </select>
                                         <select name="option_is_public[]">
-                                            <option value="0" @if(old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) checked @endif required>非公開</option>
-                                            <option value="1" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) checked @endif required>公開</option>
+                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) checked @endif required>非公開</option>
+                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) checked @endif required>公開</option>
                                         </select>
                                     </div>
                                 </div>
@@ -145,8 +145,8 @@
                                             @endforeach
                                         </select>
                                         <select name="option_is_public[]">
-                                            <option value="0" @if(old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) checked @endif required>非公開</option>
-                                            <option value="1" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) checked @endif required>公開</option>
+                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) checked @endif required>非公開</option>
+                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) checked @endif required>公開</option>
                                         </select>
                                     </div>
                                 </div>
@@ -293,12 +293,8 @@
                                     @enderror
                                     <select name="status">
                                         <option>選択してください</option>
-                                        <option value="1" name="status" @if(1 == old('status')) checked @endif required>
-                                            公開
-                                        </option>
-                                        <option value="2" name="status" @if(2 == old('status')) checked @endif required>
-                                            非公開
-                                        </option>
+                                        <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(old('status') == App\Models\Product::NOT_PUBLIC) checked @endif required>非公開</option>
+                                        <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status') == App\Models\Product::IS_PUBLIC) checked @endif required>公開</option>
                                     </select>
                                 </div>
                                 <div class="functeBtns">

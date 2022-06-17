@@ -55,8 +55,8 @@
                         <div class="td">
                             <select name="is_online">
                                 <option value="">選択してください</option>
-                                <option value="0" @if(!is_null(old('is_online',$product->is_online)) && old('is_online',$product->is_online) == App\Models\Product::OFFLINE) selected @endif>対面</option>
-                                <option value="1" @if(old('is_online', $product->is_online) == App\Models\Product::ONLINE) selected @endif>非対面</option>
+                                <option value="{{App\Models\Product::OFFLINE}}" @if(!is_null(old('is_online',$product->is_online)) && old('is_online',$product->is_online) == App\Models\Product::OFFLINE) selected @endif>対面</option>
+                                <option value="{{App\Models\Product::ONLINE}}" @if(old('is_online', $product->is_online) == App\Models\Product::ONLINE) selected @endif>非対面</option>
                             </select>
                         </div>
 
@@ -82,8 +82,8 @@
                         <div class="td">
                             <select name="is_call">
                                 <option value="">選択してください</option>
-                                <option value="0" @if(!is_null(old('is_call', $product->is_call )) && old('is_call', $product->is_call ) == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
-                                <option value="1" @if(old('is_call', $product->is_call ) == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
+                                <option value="{{App\Models\Product::OFF_CALL}}" @if(!is_null(old('is_call', $product->is_call )) && old('is_call', $product->is_call ) == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
+                                <option value="{{App\Models\Product::ON_CALL}}" @if(old('is_call', $product->is_call ) == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
                             </select>
                         </div>
 
@@ -92,8 +92,8 @@
                         <div class="td">
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>
-                                <option value="0" @if(!is_null(old('number_of_sale', $product->number_of_sale )) && old('number_of_sale', $product->number_of_sale ) == App\Models\Product::ONE_OF_SALE) selected @endif>1人様限定</option>
-                                <option value="99" @if(old('number_of_sale', $product->number_of_sale ) == App\Models\Product::UNLIMITED_OF_SALE) selected @endif>無制限</option>
+                                <option value="{{App\Models\Product::ONE_OF_SALE}}" @if(!is_null(old('number_of_sale', $product->number_of_sale )) && old('number_of_sale', $product->number_of_sale ) == App\Models\Product::ONE_OF_SALE) selected @endif>1人様限定</option>
+                                <option value="{{App\Models\Product::UNLIMITED_OF_SALE}}" @if(old('number_of_sale', $product->number_of_sale ) == App\Models\Product::UNLIMITED_OF_SALE) selected @endif>無制限</option>
                             </select>
                         </div>
 
@@ -114,8 +114,8 @@
                                             @endforeach
                                         </select>
                                         <select name="option_is_public[]">
-                                            <option value="0" @if(!is_null(old('option_is_public', $option->is_public )) && old('option_is_public', $option->is_public ) == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                            <option value="1" @if(old('option_is_public', $option->is_public) == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
+                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public', $option->is_public )) && old('option_is_public', $option->is_public ) == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
+                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public', $option->is_public) == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
                                         </select>
                                     </div>
                                 </div>
@@ -227,8 +227,8 @@
                             <div class="td">
                                 <select name="status">
                                     <option>選択してください</option>
-                                    <option value="1" @if(!is_null(old('is_call', $product->status )) && old('status', $product->status ) == 1) selected @endif>公開</option>
-                                    <option value="2" @if(old('status', $product->status ) == 2) selected @endif>非公開</option>
+                                    <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(old('status',$product->status) == App\Models\Product::NOT_PUBLIC)) selected @endif required>非公開</option>
+                                    <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status', $product->status) == App\Models\Product::IS_PUBLIC)) selected @endif required>公開</option>
                                 </select>
                             </div>
                             <div class="functeBtns">
