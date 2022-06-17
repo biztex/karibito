@@ -258,6 +258,7 @@
                             <div class="functeBtns">
                                 @if($product->productUser->user_id = Auth::id())
                                     <a href="{{ route('product.edit',  ["product" => $product->id]) }}" class="orange full">編集する</a>
+                                    <a href="{{ route('product.destroy',  ["product" => $product->id]) }}" class="orange full">削除する</a>
                                 @else
                                     <a href="" class="orange full">交渉画面へ進む</a>
                                 @endif
