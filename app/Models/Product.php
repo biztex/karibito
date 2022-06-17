@@ -24,8 +24,8 @@ class Product extends Model
     const ONLINE = 1;
 
     const IS_ONLINE = [
-        self::OFFLINE => '非対面',
-        self::ONLINE => '対面',
+        self::OFFLINE => '対面',
+        self::ONLINE => '非対面',
     ];
 
     const OFF_CALL = 0;
@@ -37,11 +37,11 @@ class Product extends Model
     ];
 
     const ONE_OF_SALE = 0;
-    const UNLIMITED_ON_SALE = 99;
+    const UNLIMITED_OF_SALE = 99;
 
     const NUMBER_OF_SALE = [
         self::ONE_OF_SALE => '1人様限定',
-        self::UNLIMITED_ON_SALE => '無制限',
+        self::UNLIMITED_OF_SALE => '無制限',
     ];
 
     const NOT_DRAFT = 0;
@@ -49,6 +49,14 @@ class Product extends Model
     const DRAFT_STATUS = [
         self::NOT_DRAFT => '下書きでない',
         self::IS_DRAFT => '下書き',
+    ];
+
+    const NOT_PUBLIC = 1;
+    const IS_PUBLIC = 2;
+
+    const PUBLIC_STATUS = [
+        self::NOT_PUBLIC => '非公開',
+        self::IS_PUBLIC => '公開',
     ];
 
 

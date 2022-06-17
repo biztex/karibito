@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Libraries\Age;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
+use App\Http\Requests\JobRequestController\DraftRequest;
+use App\Http\Requests\JobRequestController\PreviewRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
 
 
@@ -21,6 +23,22 @@ class JobRequestController extends Controller
         $this->job_request_service = $job_request_service;
     }
 
+
+    public function draft()
+    {
+        // 下書きのみ表示
+        $products = Product::where('user_id',\Auth::id())
+                                      ->where('is_draft',Product::IS_DRAFT)
+                                      ->orderBy('updated_at','desc')
+                                      ->paginate(10);
+
+        $job_requests = JobRequest::where('user_id',\Auth::id())
+                                             ->where('is_draft',JobRequest::IS_DRAFT)
+                                             ->orderBy('updated_at','desc')
+                                             ->paginate(10);
+
+        return view('post.draft', compact('products','job_requests'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,17 +47,19 @@ class JobRequestController extends Controller
     public function index()
     {
         // 下書き・非公開除いて表示
-        $my_publish_products = Product::where('user_id',\Auth::id())
+        $products = Product::where('user_id',\Auth::id())
                                       ->where('status',Product::STATUS_PUBLISH)
                                       ->where('is_draft',Product::NOT_DRAFT)
-                                      ->get();
+                                      ->orderBy('updated_at','desc')
+                                      ->paginate(10);
 
-        $my_publish_job_requests = JobRequest::where('user_id',\Auth::id())
+        $job_requests = JobRequest::where('user_id',\Auth::id())
                                              ->where('status',JobRequest::STATUS_PUBLISH)
                                              ->where('is_draft',JobRequest::NOT_DRAFT)
-                                             ->get();
+                                             ->orderBy('updated_at','desc')
+                                             ->paginate(10);
 
-        return view('post.publication', compact('my_publish_products','my_publish_job_requests'));
+        return view('post.publication', compact('products','job_requests'));
     }
 
     /**
@@ -129,11 +149,11 @@ class JobRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeDraft(Request $request)
+    public function storeDraft(DraftRequest $request)
     {
         $job_request = $this->job_request_service->storeDraftJobRequest($request->all());
 
-        return redirect()->route('job_request.show',$job_request->id)->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
 
     /**
@@ -143,11 +163,11 @@ class JobRequestController extends Controller
      * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function updateDraft(Request $request, JobRequest $job_request)
+    public function updateDraft(DraftRequest $request, JobRequest $job_request)
     {
         $this->job_request_service->updateDraftJobRequest($request->all(), $job_request);
 
-        return redirect()->route('job_request.show',$job_request->id)->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
 
     /**
@@ -156,7 +176,7 @@ class JobRequestController extends Controller
      * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
-    public function preview(Request $request)
+    public function preview(PreviewRequest $request)
     {
         $user = \Auth::user();
 
@@ -199,7 +219,7 @@ class JobRequestController extends Controller
     /**
      * 既存リクエスト、編集からプレビュー表示
      */
-    public function editPreview(Request $request, JobRequest $job_request)
+    public function editPreview(PreviewRequest $request, JobRequest $job_request)
     {
         $user = \Auth::user();
 

@@ -28,17 +28,18 @@
                                 <div class="cont01">
                                     <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
                                     <div class="info">
-                                        <div class="breadcrumb"><a href="#"
-                                                                   tabindex="0">{{$product->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$product->mProductChildCategory->name}}</span>
+                                        <div class="breadcrumb">
+                                            <a href="#" tabindex="0">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
+                                            <span>@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}}@endif</span>
                                         </div>
                                         <div class="draw">
-                                            <p class="price"><font>{{$product->title}}</font><br>{{$product->price}}</p>
+                                            <p class="price"><font>{{$product->title}}</font><br>{{$product->price}}円</p>
                                         </div>
                                         <div class="single">
                                             <span>単発リクエスト</span>
-                                            @if($product->is_online = 0)
+                                            @if($product->is_online == 0)
                                                 <a href="#" tabindex="0">対面</a>
-                                            @elseif($product->is_online = 1)
+                                            @elseif($product->is_online == 1)
                                                 <a href="#" tabindex="1">非対面</a>
                                             @endif
                                         </div>

@@ -4,29 +4,34 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\FacebookLoginController;
-use App\Http\Controllers\Auth\FacebookRegisterController;
 use App\Http\Controllers\Auth\GoogleLoginController;
-use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Web\Mypage\UserProfileController;
+use App\Http\Controllers\Web\Mypage\MypageController;
+use App\Http\Controllers\Web\Mypage\CoverController;
+use App\Http\Controllers\Web\Mypage\IconController;
+use App\Http\Controllers\Web\Mypage\WithdrawController;
+use App\Http\Controllers\Web\Mypage\ProductController;
+use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
+use App\Http\Controllers\Web\Mypage\IdentificationController;
+
+
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\SecretController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\Web\Mypage\CoverController;
-use App\Http\Controllers\Web\Mypage\IconController;
-use App\Http\Controllers\Web\Mypage\IdentificationController;
-use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
-use App\Http\Controllers\Web\Mypage\MypageController;
-use App\Http\Controllers\Web\Mypage\ProductController;
-use App\Http\Controllers\Web\Mypage\UserProfileController;
-use App\Http\Controllers\Web\Mypage\WithdrawController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PrivacyController;
+use App\Http\Controllers\PublicationController;
 
 
 // 管理者用
@@ -55,7 +60,7 @@ Route::view('service_detail', 'post.service_detail')->name('service_detail');
 Route::view('service_request', 'post.service_request')->name('service_request');
 Route::view('service_thanks', 'post.service_thanks')->name('service_thanks');
 Route::view('service', 'post.service')->name('service');
-Route::view('draft', 'post.draft')->name('draft');
+// Route::view('draft', 'post.draft')->name('draft');
 // Route::view('publication', 'post.publication')->name('publication');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
@@ -105,8 +110,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('product', ProductController::class);
     Route::get('post', [ProductController::class, 'index'])->name('post');
     Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
-    Route::get('product/show/{id}', [ProductController::class, 'show'])->name('product.show');
-    Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::get('product/show/{product}', [ProductController::class, 'show'])->name('product.show');
+    Route::get('product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
+
 
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
@@ -119,6 +126,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 提供・リクエスト一覧
     Route::get('publication',[MypageJobRequestController::class,'index'])->name('publication');
+    // 提供・リクエスト 下書き一覧
+    Route::get('draft',[MypageJobRequestController::class,'draft'])->name('draft');
 
     // リクエスト
     Route::get('job_request',function(){ return redirect()->route('publication');});
@@ -137,6 +146,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
+
+// 秘訣
+Route::view('secret01','secret.secret01')->name('secret01');
+Route::view('secret02','secret.secret02')->name('secret02');
+Route::view('secret03','secret.secret03')->name('secret03');
+Route::view('secret04','secret.secret04')->name('secret04');
+Route::view('secret05','secret.secret05')->name('secret05');
+Route::view('secret06','secret.secret06')->name('secret06');
+
 
 
 // 動詞	URI	アクション	ルート名
