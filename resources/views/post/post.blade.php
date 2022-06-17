@@ -43,7 +43,8 @@
                                                 <a href="#" tabindex="1">非対面</a>
                                             @endif
                                         </div>
-                                        <p class="link"><a href="{{ route('product.show', ["id" => $product->id]) }}">詳細見る</a>
+{{--                                        <p class="link"><a href="{{ route('product.show', ["id" => $product->id]) }}">詳細見る</a>--}}
+                                            <p class="link"><a href="{{ route('product.show', ["product" => $product->id]) }}">詳細見る</a>
                                         </p>
                                     </div>
                                 </div>
