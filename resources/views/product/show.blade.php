@@ -72,7 +72,7 @@
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
-                                @foreach($product->additionalOption as $option)
+                                @foreach($product->additionalOptions as $option)
                                     <li><span class="add">＋ {{$option->name}}</span>
                                         <span class="price">￥@if(!is_null($option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$option->price]}}@endif</span>
                                     </li>
@@ -86,7 +86,7 @@
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
-                                @foreach($product->productQuestion as $question)
+                                @foreach($product->productQuestions as $question)
                                     <li>
                                         <p class="quest toggleBtn"><span>{{$question->title}}</span><span class="more">回答を見る</span>
                                         </p>
@@ -257,7 +257,7 @@
                             </div>
                             <div class="functeBtns">
                                 @if($product->productUser->user_id = Auth::id())
-                                    <a href="{{ route('product.edit', ["id" => $product->id]) }}" class="orange full">編集する</a>
+                                    <a href="{{ route('product.edit',  ["product" => $product->id]) }}" class="orange full">編集する</a>
                                 @else
                                     <a href="" class="orange full">交渉画面へ進む</a>
                                 @endif
