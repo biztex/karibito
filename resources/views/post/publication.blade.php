@@ -15,7 +15,7 @@
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">
 								<li><a href="#tab_box01" class="is_active">提供</a></li>
-								<li><a href="#tab_box02">リクエスト</a></li>
+								<li><a href="#tab_box02" id="box02">リクエスト</a></li>
 							</ul>
 							<!---------------- 提供 ------------------>
 							<div class="tabBox is_active" id="tab_box01">
