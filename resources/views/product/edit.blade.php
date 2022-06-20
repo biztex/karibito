@@ -100,22 +100,22 @@
                         <p class="th">有料オプション1</p>
                             @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            @foreach($product->additionalOption as $option)
+                            @foreach($product->additionalOptions as $additional_option)
                                 <div class="paid">
                                     <div class="enter">
-                                        <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $option->title) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name', $option->name)}}</textarea>
+                                        <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $additional_option->title) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name', $additional_option->name)}}</textarea>
                                     </div>
                                     <div class="selects">
                                         <select name="option_price[]" value="">
                                             @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                                <option value="{{ $key }}" @if(old('option_price', $option->price) == $key) selected @endif>
+                                                <option value="{{ $key }}" @if(old('option_price', $additional_option->price) == $key) selected @endif>
                                                     {{ $value }}円
                                                 </option>
                                             @endforeach
                                         </select>
                                         <select name="option_is_public[]">
-                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public', $option->is_public )) && old('option_is_public', $option->is_public ) == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public', $option->is_public) == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
+                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public', $additional_option->is_public )) && old('option_is_public', $additional_option->is_public ) == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
+                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public', $additional_option->is_public) == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
                                         </select>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                         @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                    <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $product->productQuestion[$i]?->title ?? '' )}}" placeholder="質問のタイトル入力してください">{{ old('question_title', $product->productQuestion[$i]?->title ?? '' )}}</textarea>
+                                    <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $product->productQuestions[$i]?->title ?? '' )}}" placeholder="質問のタイトル入力してください">{{ old('question_title', $product->productQuestion[$i]?->title ?? '' )}}</textarea>
                                     <p class="taR">400</p>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                             @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                    <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $product->productQuestion[$i]?->answer ?? '' )}}" placeholder="質問の回答入力してください">{{ old('answer', $product->productQuestion[$i]?->answer ?? '' )}}</textarea>
+                                    <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $product->productQuestions[$i]?->answer ?? '' )}}" placeholder="質問の回答入力してください">{{ old('answer', $product->productQuestion[$i]?->answer ?? '' )}}</textarea>
                                     <p class="taR">400</p>
                                 </div>
                         @endfor
@@ -233,7 +233,7 @@
                             </div>
                             <div class="functeBtns">
                                 <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $product->id) }}" value="サービス提供を開始">
+                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', ["product" => $product->id]) }}" value="サービス提供を開始">
                                 <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
                             </div>
                     </form>

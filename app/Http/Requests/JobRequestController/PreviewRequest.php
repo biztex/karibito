@@ -25,14 +25,14 @@ class PreviewRequest extends FormRequest
     {
         return [
             'category_id' => 'nullable | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'nullable | integer | between:1,47',
+            'prefecture_id' => 'nullable | between:1,47',
             'title' => 'nullable | string | max:30',
             'content' => 'nullable | string | min:30 | max:3000 ',
             'price' => 'nullable | integer | min:500 | max:9990000',
             'application_deadline' => 'nullable | date | after_or_equal:tomorrow',
             'required_date' => 'nullable | date | after_or_equal:application_deadline',
-            'is_online' => 'nullable | integer | boolean',
-            'is_call' => 'nullable | integer | boolean',           
+            'is_online' => 'nullable | boolean',
+            'is_call' => 'nullable | boolean',           
             ];
     }
 }

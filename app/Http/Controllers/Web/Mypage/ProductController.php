@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Mypage;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Libraries\Age;
 use App\Models\AdditionalOption;
@@ -58,7 +60,7 @@ class ProductController extends Controller
 
         for ($i = 0; $i < 3; $i++) {
             if (!is_null($request->option_name[$i])) {
-                $product->additionalOption()->create([
+                $product->additionalOptions()->create([
                     'name' => $request->option_name[$i],
                     'price' => $request->option_price[$i],
                     'is_public' => $request->option_is_public[$i]
@@ -68,7 +70,7 @@ class ProductController extends Controller
 
         for ($i = 0; $i < 3; $i++) {
             if (!is_null($request->question_title[$i])) {
-                $product->productQuestion()->create([
+                $product->productQuestions()->create([
                     'title' => $request->question_title[$i],
                     'answer' => $request->answer[$i]
                 ]);
@@ -84,13 +86,13 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public
-    function show($id)
+    function show(Product $product)
     {
-        $product = Product::find($id);
         $all_products = Product::all();
         $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
         $age = Age::group($birthday);
         return view('product.show', compact('product', 'age', 'all_products'));
+//        return view('product.show', compact('product', 'age', 'all_products'));
     }
 
     /**
@@ -100,11 +102,10 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public
-    function edit($id)
+    function edit(Product $product)
     {
-        $product = Product::find($id);
         $categories = MProductCategory::all();
-        return view('product.edit', compact('categories', 'product'));
+        return view('product.edit', compact("product", 'categories'));
     }
 
     /**
@@ -114,9 +115,9 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $product = Product::find($id);
+//        $product = Product::find($id);
         $product->fill([
             'category_id' => $request->category_id,
             'prefecture_id' => $request->prefecture,
@@ -131,11 +132,11 @@ class ProductController extends Controller
             'is_draft' => Product::NOT_DRAFT
         ]);
 
-        $product->additionalOption()->delete();
+        $product->additionalOptions()->delete();
 
         if ($request->option_name) {
             foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                $product->additionalOption()->create([
+                $product->additionalOptions()->create([
                     'name' => $option,
                     'price' => $request->option_price[$index],
                     'is_public' => $request->option_is_public[$index]
@@ -143,11 +144,11 @@ class ProductController extends Controller
             }
         }
 
-        $product->productQuestion()->delete();
+        $product->productQuestions()->delete();
 
         if ($request->question_title) {
             foreach ($request->question_title as $index =>$title){
-                $product->productQuestion()->create([
+                $product->productQuestions()->create([
                         'title' => $request->question_title[$index],
                         'answer' => $request->answer[$index]
                     ]);
