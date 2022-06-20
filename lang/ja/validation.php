@@ -161,6 +161,16 @@ return [
         ],
         'application_deadline' => [
             'after_or_equal' => ':attributeには、明日以降の日付を指定してください。',
+        ],
+        'prefecture_id' => [
+            'required_if' => '対面の場合、エリアも指定してください。',
+            'between' => '項目の中から選択してください。'
+        ],
+        'is_online' => [
+            'boolean' => '対面か非対面を指定してください'
+        ],
+        'is_call' => [
+            'boolean' => '電話を受け付けるか受け付けないを指定してください。'
         ]
 
     ],
