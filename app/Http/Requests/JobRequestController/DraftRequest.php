@@ -24,6 +24,7 @@ class DraftRequest extends FormRequest
     public function rules()
     {
         return [
+
             'category_id' => 'required_without_all:title,content,price, | nullable | integer | exists:m_product_child_categories,id',
             'prefecture_id' => 'nullable | between:1,47',
             'title' => 'nullable | string | max:30',
@@ -39,7 +40,7 @@ class DraftRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_id.required_without_all' => 'カテゴリ / 商品名 / 商品の詳細 / 予算の中で1個以上の項目を必ず入力してください。',
+            'category_id.required_without_all' => 'カテゴリ / 商品名 / 商品の詳細 の中で1個以上の項目を必ず入力してください。',
         ];
     }
 }

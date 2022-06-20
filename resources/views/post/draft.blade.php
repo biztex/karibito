@@ -17,7 +17,7 @@
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">
 								<li><a href="#tab_box01" class="is_active">提供の下書き</a></li>
-								<li><a href="#tab_box02">依頼の下書き</a></li>
+								<li><a href="#tab_box02" id="box02">依頼の下書き</a></li>
 							</ul>
 							<!---------------- 提供 ------------------>
 							<div class="tabBox is_active" id="tab_box01">
@@ -37,7 +37,6 @@
 													<p class="price"><font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<span>単発リクエスト</span>
 													@if(!empty($val->is_online))
 														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 													@endif
@@ -70,7 +69,6 @@
 													<p class="price"><font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<span>単発リクエスト</span>
 													@if(!empty($val->is_online))
 														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 													@endif
@@ -82,7 +80,7 @@
 									@endforeach
 									@endif
 								</ul>
-								{{ $job_requests->links() }}
+								{{ $job_requests->fragment('job-request')->links() }}
 							</div>
 
 						</div>
