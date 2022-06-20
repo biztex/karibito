@@ -66,7 +66,7 @@
 									@endforeach
 									@endif
 								</ul>
-								{{ $job_requests->fragment('job-request')->links('vendor.pagination.job-request') }}
+								{{ $job_requests->fragment('job-request')->links() }}
 							</div>
 						</div>
 					</div>
