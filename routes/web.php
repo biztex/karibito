@@ -114,6 +114,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::get('product/destroy/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+//    Route::get('product/optionDestroy/{product}/{option_id}', [ProductController::class, 'optionDestroy'])->name('product.option.destroy');
+//    Route::post('product/questionDestroy/{product}', [ProductController::class, 'questionDestroy'])->name('product.question.destroy');
 
 
     // 秘訣
