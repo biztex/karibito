@@ -46,7 +46,7 @@
 								</div>
 								<ul class="loginFormBtn">
 									<li><input type="submit" class="submit" value="ログイン"></li>
-                                    @if(config('app.env') === 'local')
+                                    @if(in_array(config('app.env'), ['local', 'development']))
                                         {{-- ローカル環境専用 --}}
                                         <li>
                                             <a href="{{ route('developerLogin') }}">開発者ログイン(ローカル環境のみ)</a>
