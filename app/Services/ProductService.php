@@ -15,6 +15,7 @@ class ProductService
     public function storeImage($request, $id)
     {
         $paths = $request->file('path');
+        dd($paths);
         if (isset($paths)) {
             foreach ($paths as $path) {
                 $product_image = new ProductImage;
@@ -34,6 +35,7 @@ class ProductService
     {
         // 登録済の画像を配列で取得
         $old_images = ProductImage::where('product_id',$id)->get();
+        // dd($old_images);
         $a = $request->image_status;
         $b = json_decode($a,true);
 
@@ -44,27 +46,27 @@ class ProductService
                 if(isset($b[$i]) && $b[$i] == "delete"){
                     // 削除されたら何もしない
                 }elseif(isset($b[$i]) && $b[$i] == "insert"){
-                    // 挿入されたらリクエストを挿入
-                    $new_images[] = $request->path[$i];
+                    // 挿入されたらリクエストをDBに登録
+                    // $new_images[] = $request->path[$i];
+                    $product_image = new ProductImage;
+                    $product_image->path = $request->path[$i]->store('product_paths', 'public');
+                    $product_image->product_id = $id;
+                    $product_image->save();
+
                 }elseif(isset($old_images[$i])){
-                    // 変更なければ元のpathを登録しなおす
+                    // 変更なければ元のpathをDBに登録しなおす
                     $new_images[] = $old_images[$i];
+                    $product_image = new ProductImage;
+                    $product_image->path = $old_images[$i]->path;
+                    $product_image->product_id = $id;
+                    $product_image->save();
                 }
             }
 
-            // DBに新しくすべて登録
-            foreach ($new_images as $val) {
-                $product_image = new ProductImage;
-                $product_image->path = $val->store('product_paths', 'public');
-                $product_image->product_id = $id;
-                $product_image->save();
-            }
-
-            // 登録済のものをすべて削除
+            // 登録済のものをDBからすべて削除
             if (isset($old_images)){
                 foreach($old_images as $val){
                     $val->delete();
-                    \Storage::delete('public/'.$val);
                 }
             }
 

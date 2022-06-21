@@ -29,10 +29,12 @@
                         </div>
                         <div class="slider">
                             <div class="big">
-                                <div class="item"><img src="img/service/img_slider_small01.jpg"
-                                                       srcset="img/service/img_slider_small01.jpg 1x, img/service/img_slider_small01.jpg 2x"
-                                                       alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_small02.jpg"
+                                @foreach($product->productImage as $val)
+                                    <div class="item"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:cover;"></div>
+                                @endforeach
+                                                       <!-- srcset="img/service/img_slider_small01.jpg 1x, img/service/img_slider_small01.jpg 2x"
+                                                       alt=""></div> -->
+                                <!-- <div class="item"><img src="img/service/img_slider_small02.jpg"
                                                        srcset="img/service/img_slider_small02.jpg 1x, img/service/img_slider_small02.jpg 2x"
                                                        alt=""></div>
                                 <div class="item"><img src="img/service/img_slider_big.jpg"
@@ -46,20 +48,23 @@
                                                        alt=""></div>
                                 <div class="item"><img src="img/service/img_slider_big.jpg"
                                                        srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x"
-                                                       alt=""></div>
+                                                       alt=""></div> -->
                             </div>
                             <div class="small">
-                                <div class="item"><img src="img/service/img_slider_small01.jpg" alt=""></div>
+                                @foreach($product->productImage as $val)
+                                    <div class="item"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:cover;"></div>
+                                @endforeach
+                                <!-- <div class="item"><img src="img/service/img_slider_small01.jpg" alt=""></div>
                                 <div class="item"><img src="img/service/img_slider_small02.jpg" alt=""></div>
                                 <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
                                 <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
                                 <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
+                                <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div> -->
                             </div>
                         </div>
                         <div class="content">
                             <h2 class="hdM">サービス内容</h2>
-                            {{$product->content}}
+						    <p style="overflow-wrap: break-word;">@if(!is_null($product->content)) {!! nl2br(e($product->content)) !!} @endif</p>
                         </div>
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
@@ -244,14 +249,15 @@
                         </div>
                         <div class="box seller">
                             <h3>スキル出品者</h3>
-                            <a href="#" class="head"><img
-                                    src={{asset('/storage/'.$product->productUser->userProfile->icon) }} alt=""></a>
-                            <p class="login">最終ログイン：8時間前</p>
-                            <p class="introd"><a href="#"
-                                                 class="name">{{$product->productUser->name}}</a><br>({{App\Models\UserProfile::GENDER[$product->productUser->userProfile->gender]}}
-                                / {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>
-                            <div class="evaluate three"></div>
-                            @if($product->productUser->userProfile->is_identify = 1)
+                                @if(empty($user->userProfile->icon))
+									<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+								@else
+                                    <a href="#" class="head"><img src={{asset('/storage/'.$user->userProfile->icon) }} alt=""></a>
+                                @endif
+                            <!-- <p class="login">最終ログイン：8時間前</p> -->
+                            <p class="introd"><a href="#" class="name">{{$user->name}}</a><br>({{App\Models\UserProfile::GENDER[$user->userProfile->gender]}} / {{$age}}/ {{$user->userProfile->prefecture->name}})</p>
+                            <!-- <div class="evaluate three"></div> -->
+                            @if($user->userProfile->is_identify = 1)
                                 <p class="check"><a href="#">本人確認済み</a></p>
                             @endif
                         </div>
