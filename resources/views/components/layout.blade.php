@@ -121,7 +121,7 @@
                                             <a href="{{ route('mypage') }}">マイページ</a>
                                             <a href="#">掲載内容一覧</a>
                                             <a href="#">お気に入り</a>
-                                            <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
+                                            <a href="{{ route('product.index') }}" class="blueBtn">投稿する</a>
                                         </div>
                                     @endauth
                                     <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
@@ -1062,7 +1062,7 @@
                             </div>
                             @if(Auth::check())
                             <div class="right">
-                                <a href="{{ route('post') }}">投稿する</a>
+                                <a href="{{ route('product.index') }}">投稿する</a>
                             </div>
                             @endif
                         </div>
@@ -1128,7 +1128,7 @@
                             </a>
                         </div>
                         <div class="spFixedItem">
-                            <a href="{{ route('post') }}" class="spFixedLink">
+                            <a href="{{ route('product.index') }}" class="spFixedLink">
                                 <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
                                 <p class="linkTxt">投稿</p>
                             </a>

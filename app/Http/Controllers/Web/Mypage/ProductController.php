@@ -171,6 +171,6 @@ class ProductController extends Controller
             \Session::put('flash_msg','リクエストを削除しました');
 
         });
-        return redirect()->route('post');
+        return redirect()->route('mypage');
     }
 }
