@@ -128,6 +128,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = MProductCategory::all();
+
+
+
         return view('product.edit', compact('product', 'categories'));
     }
 
@@ -140,7 +143,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-//        $product = Product::find($id);
+
         $product->fill([
             'category_id' => $request->category_id,
             'prefecture_id' => $request->prefecture,
@@ -179,6 +182,9 @@ class ProductController extends Controller
             }
 
         $product->save();
+
+        $this->product_service->updateImage($request,$product->id);
+
         return redirect()->route('service_thanks');
     }
 
