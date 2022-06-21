@@ -21,183 +21,78 @@
                             <a href="#" class="st2">ポートフォリオを投稿する</a>
                         </div>
                     </div>
+
                     <p class="casesOffer"><span>提供中のサービス</span></p>
                     <ul class="favoriteUl01">
-                        @foreach($products as $product)
-                            <li>
-                                <div class="cont01">
-                                    <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-                                    <div class="info">
-                                        <div class="breadcrumb">
-                                            <a href="#" tabindex="0">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
-                                            <span>@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}}@endif</span>
-                                        </div>
-                                        <div class="draw">
-                                            <p class="price"><font>{{$product->title}}</font><br>{{$product->price}}円</p>
-                                        </div>
-                                        <div class="single">
-                                            <span>単発リクエスト</span>
-                                            @if($product->is_online == 0)
-                                                <a href="#" tabindex="0">対面</a>
-                                            @elseif($product->is_online == 1)
-                                                <a href="#" tabindex="1">非対面</a>
-                                            @endif
-                                        </div>
-{{--                                        <p class="link"><a href="{{ route('product.show', ["id" => $product->id]) }}">詳細見る</a>--}}
-                                            <p class="link"><a href="{{ route('product.show', ["product" => $product->id]) }}">詳細見る</a>
+                        @foreach($products as $val)
+                        <li>
+                            <div class="cont01">
+                                <!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
+                                @if(isset($val->productImage[0]))
+                                <p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+                                @else
+                                <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+                                @endif
+                                <div class="info">
+                                    <div class="breadcrumb">
+                                        <a href="#" tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
+                                        <span>@if(!is_null($val->category_id)){{$val->mProductChildCategory->name}}@endif</span>
+                                    </div>
+                                    <div class="draw">
+                                        <p class="price">
+                                            <font>{{$val->title}}</font><br>{{$val->price}}円
                                         </p>
                                     </div>
+                                    <div class="single">
+                                        <a href="#" tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</a>
+                                    </div>
                                 </div>
-                            </li>
-                        @endforeach
+                                <p class="link"><a href="{{ route('product.show', $val->id) }}">詳細見る</a></p>
 
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
-                        {{--						<li>--}}
-                        {{--							<div class="cont01">--}}
-                        {{--								<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>--}}
-                        {{--								<div class="info">--}}
-                        {{--									<div class="breadcrumb"><a href="#" tabindex="0">デザイン</a> ＞ <span>その他デザイン</span></div>--}}
-                        {{--									<div class="draw">--}}
-                        {{--										<p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-                        {{--									</div>--}}
-                        {{--									<div class="single">--}}
-                        {{--										<span>単発リクエスト</span>--}}
-                        {{--										<a href="#" tabindex="0">対面</a>--}}
-                        {{--									</div>--}}
-                        {{--									<p class="link"><a href="#">詳細見る</a></p>--}}
-                        {{--								</div>--}}
-                        {{--							</div>--}}
-                        {{--						</li>--}}
+                            </div>
+                        </li>
+                        @endforeach
+                        <a href="{{ route('publication') }}" class="more">提供中のサービスをもっと見る</a>
                     </ul>
-                </div><!--inner-->
+                    <p class="casesOffer" style="margin-top:50px;"><span>掲載中のリクエスト</span></p>
+                    <ul class="favoriteUl01">
+                        @foreach($job_requests as $val)
+                        <li>
+                            <div class="cont01">
+                                <!-- リクエスト画像ないためクライアントに要確認 -->
+                                <!-- <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p> -->
+                                <div class="info">
+                                    <div class="breadcrumb">
+                                        <a href="#" tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
+                                        <span>@if(!is_null($val->category_id)){{$val->mProductChildCategory->name}}@endif</span>
+                                    </div>
+                                    <div class="draw">
+                                        <p class="price">
+                                            <font>{{$val->title}}</font><br>{{$val->price}}円
+                                        </p>
+                                    </div>
+                                    <div class="single">
+                                        <a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+                                    </div>
+                                </div>
+                                <p class="link"><a href="{{ route('job_request.show', $val->id) }}">詳細見る</a></p>
+
+                            </div>
+                        </li>
+                        @endforeach
+                        <a href="{{ route('publication').'#job-request' }}" class="more">掲載中のリクエストをもっと見る</a>
+                    </ul>
+                </div>
+                <!--inner-->
             </div>
         </div><!-- /#contents -->
     </article>
 </x-layout>
+<script>
+    // product画像 localStrageリセット
+    $(function() {
+        for (let i = 0; i < 10; i++) {
+            localStorage.removeItem("pic" + i);
+        }
+    });
+</script>

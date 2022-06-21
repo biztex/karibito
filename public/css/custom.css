@@ -542,3 +542,17 @@
 		border: 1px solid;
 	}
 }
+.mypagePortfolioUl03 .fun div{
+	display:inline-block;
+	margin:0 4px;
+	padding:0 3px;
+	border:1px solid #ccc;
+	line-height: 24px;
+	border-radius:4px;
+	color:#545454;
+	font-size:1.3rem;
+}
+.mypagePortfolioUl03 .fun div:hover{
+	cursor: pointer;
+	
+}

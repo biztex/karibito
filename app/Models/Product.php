@@ -73,6 +73,12 @@ class Product extends Model
         return $this->hasMany(ProductQuestion::class, 'product_id');
     }
 
+    // ProductImageモデルとのリレーション
+    public function productImage()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
     // MProductChildCategoryモデルとのリレーション
     public function mProductChildCategory()
     {

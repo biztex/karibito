@@ -12,7 +12,7 @@
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a>
                     </h2>
-                    <form method="post" class="contactForm" action="{{ route('product.store') }}">
+                    <form method="post" class="contactForm">
                         @csrf
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                             </div>
-                            <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</a></p>
+                            <p class="specialtyBtn"><a href="#"><img src="/img/mypage/icon_add.svg" alt="">得意分野を追加</a></p>
 
                         <p class="th">質問のタイトル1</p>
                         <div class="td">
@@ -228,70 +228,34 @@
                                           value="{{ old('answer[]') }}" placeholder="質問の回答入力してください"></textarea>
                                         <p class="taR">400</p>
                                     </div>
-                                    <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a>
+                                    <p class="specialtyBtn"><a href="#"><img src="/img/mypage/icon_add.svg" alt="">よくある質問を追加</a>
                                     </p>
                                 </div>
+
                                 <p class="th">画像投稿<span class="must">必須</span></p>
                                 <div class="td">
                                     <div class="warnNotes">
-                                        <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
+                                        <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font>
+                                        </p>
                                         <p>
                                             カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。
                                         </p>
                                     </div>
+                                  
                                     <ul class="mypagePortfolioUl03 mt40">
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide01.jpg" alt=""></div>
-                                            <div class="fun">
-                                                <a href="#" class="del">削除</a>
-                                                <a href="#" class="edit">編集</a>
+                                        @for($i = 0; $i < 10; $i++) <li >
+                                            <div id="product_pic{{$i}}" class="img">
+                                                <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple>
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/mypage/img_portfolio01.jpg" alt=""></div>
                                             <div class="fun">
-                                                <a href="#" class="del">削除</a>
-                                                <a href="#" class="edit">編集</a>
+                                                <div class="del" id="storage_delete{{$i}}">削除</div>
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide02.jpg" alt=""></div>
-                                            <div class="fun">
-                                                <a href="#" class="del">削除</a>
-                                                <a href="#" class="edit">編集</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                            <div class="fun">
-                                                <a href="#" class="del">削除</a>
-                                                <a href="#" class="edit">編集</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                            <div class="fun">
-                                                <a href="#" class="del">削除</a>
-                                                <a href="#" class="edit">編集</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                        </li>
-                                        <li>
-                                            <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                        </li>
+                                            </li>
+                                        @endfor
                                     </ul>
                                 </div>
+
                                 <p class="th">公開設定<span class="must">必須</span></p>
                                 <div class="td">
                                     @error('status')
@@ -305,7 +269,7 @@
                                 </div>
                                 <div class="functeBtns">
                                     <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-                                    <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
+                                    <input type="submit" class="full green" style="color:white;" formenctype="multipart/form-data" formaction="{{ route('product.store') }}" value="サービス提供を開始">
                                     <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
                                 </div>
                     </form>
