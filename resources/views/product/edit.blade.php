@@ -101,7 +101,6 @@
                             @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             @foreach($product->additionalOptions as $additional_option)
-{{--                                {{dd($additional_option->id)}}--}}
                                 <div class="paid">
                                     <div class="enter">
                                         <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $additional_option->title) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name', $additional_option->name)}}</textarea>
@@ -119,13 +118,9 @@
                                             <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public', $additional_option->is_public) == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
                                         </select>
                                     </div>
-                                    <div>
-                                        <a  class="fs25 ml05" href="{{ route('product.option.destroy', ["product" => $product->id, "option_id" => $additional_option->id]) }}">×</a>
-{{--                                        {{dd($additional_option->id)}}--}}
-                                    </div>
                                 </div>
-                                @endforeach
-                            <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</a></p>
+                            @endforeach
+                            <p class="specialtyBtn add"><a href="#"><img src="img/mypage/icon_add.svg" alt="" class="add">得意分野を追加</a></p>
                         </div>
 
 

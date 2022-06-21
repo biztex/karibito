@@ -58,5 +58,4 @@ $(function () {
 	if (hash == "#job-request") {
 		$('#box02').trigger('click');
 	}
-
 });
