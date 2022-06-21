@@ -35,19 +35,17 @@ class ProductService
     {
         // 登録済の画像を配列で取得
         $old_images = ProductImage::where('product_id',$id)->get();
-        // dd($old_images);
         $a = $request->image_status;
         $b = json_decode($a,true);
 
-        $requests = $request->file('path');
-        // 画像リクエストがあれば実行
+        // 追加・変更・削除があれば実行
         if (isset($b)) {
             for($i=0; $i<10; $i++){
                 if(isset($b[$i]) && $b[$i] == "delete"){
                     // 削除されたら何もしない
+                    
                 }elseif(isset($b[$i]) && $b[$i] == "insert"){
                     // 挿入されたらリクエストをDBに登録
-                    // $new_images[] = $request->path[$i];
                     $product_image = new ProductImage;
                     $product_image->path = $request->path[$i]->store('product_paths', 'public');
                     $product_image->product_id = $id;
@@ -71,7 +69,6 @@ class ProductService
             }
 
             return $product_image;
-
         }
     }
 }
