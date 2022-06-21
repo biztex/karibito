@@ -24,7 +24,12 @@
 									@foreach($products as $val)
 									<li>
 										<div class="cont01">
-											<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+											<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
+											@if(isset($val->productImage[0]))
+											<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+											@else
+											<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+											@endif
 											<div class="info">
 												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
 												<div class="draw">
@@ -33,8 +38,8 @@
 												<div class="single">
 													<a href="#" tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</a>
 												</div>
-												<p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
 											</div>
+											<p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
 										</div>
 									</li>
 									@endforeach
@@ -50,7 +55,7 @@
 									@foreach($job_requests as $val)
 									<li>
 										<div class="cont01">
-											<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+											<!-- <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p> -->
 											<div class="info">
 												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
 												<div class="draw">
@@ -59,8 +64,8 @@
 												<div class="single">
 													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 												</div>
-												<p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
 											</div>
+											<p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
 										</div>
 									</li>
 									@endforeach

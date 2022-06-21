@@ -7,7 +7,7 @@
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
-		<x-parts.flash-msg/>
+		<x-parts.flash-msg />
 
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
@@ -26,30 +26,38 @@
 									@foreach($products as $val)
 									<li>
 										<div class="cont01">
-											<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+											<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
+											@if(isset($val->productImage[0]))
+											<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+											@else
+											<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+											@endif
 											<div class="info">
 												@if(!empty($val->category_id))
-													<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
+												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
 												@else
-													<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
+												<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
 												@endif
 												<div class="draw">
-													<p class="price"><font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円</p>
+													<p class="price">
+														<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
+													</p>
 												</div>
 												<div class="single">
 													@if(!empty($val->is_online))
-														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 													@endif
 												</div>
-												<p class="link"><a href="#">編集する</a></p>
 											</div>
+											<p class="link"><a href="#">編集する</a></p>
+
 										</div>
 									</li>
 									@endforeach
 									@endif
 								</ul>
 								{{ $products->links() }}
-							</div>
+							</div><!-- 提供-->
 
 							<!---------------- リクエスト ------------------>
 							<div class="tabBox" id="tab_box02">
@@ -58,37 +66,40 @@
 									@foreach($job_requests as $val)
 									<li>
 										<div class="cont01">
-											<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+											<!-- <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p> -->
 											<div class="info">
 												@if(!empty($val->category_id))
-													<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
+												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
 												@else
-													<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
+												<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
 												@endif
 												<div class="draw">
-													<p class="price"><font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円</p>
+													<p class="price">
+														<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
+													</p>
 												</div>
 												<div class="single">
 													@if(!empty($val->is_online))
-														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
 													@endif
 												</div>
-												<p class="link"><a href="{{ route('job_request.edit',$val->id) }}">編集する</a></p>
 											</div>
+											<p class="link"><a href="{{ route('job_request.edit',$val->id) }}">編集する</a></p>
 										</div>
 									</li>
 									@endforeach
 									@endif
 								</ul>
 								{{ $job_requests->fragment('job-request')->links() }}
-							</div>
+							</div><!-- リクエスト-->
 
 						</div>
 					</div>
 				</div><!-- /#main -->
-				<x-side-menu/>
-			</div><!--inner-->
+				<x-side-menu />
+			</div>
+			<!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
+		<x-hide-modal />
 	</article>
 </x-layout>
