@@ -201,3 +201,11 @@
         </div><!-- /#contents -->
     </article>
 </x-layout>
+<script>
+	// product画像 localStrageリセット
+    $(function(){
+        for (let i = 0; i < 10; i++){
+            localStorage.removeItem("pic"+i);
+        }
+    });
+</script>
