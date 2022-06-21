@@ -119,24 +119,28 @@
                                         </select>
                                     </div>
                                 </div>
-                                @endforeach
-                            <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</a></p>
+                            @endforeach
+                            <p class="specialtyBtn add"><a href="#"><img src="img/mypage/icon_add.svg" alt="" class="add">得意分野を追加</a></p>
                         </div>
+
 
                         @for($i = 0; $i < 3; $i++)
                         <p class="th">質問のタイトル1</p>
                         @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                    <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $product->productQuestions[$i]?->title ?? '' )}}" placeholder="質問のタイトル入力してください">{{ old('question_title', $product->productQuestion[$i]?->title ?? '' )}}</textarea>
+                                    <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $product->productQuestions[$i]?->title ?? '' )}}" placeholder="質問のタイトル入力してください">{{ old('question_title', $product->productQuestions[$i]?->title ?? '' )}}</textarea>
                                     <p class="taR">400</p>
+                                    <div>
+{{--                                        <a  class="fs25 flR" href="{{ route('product.question.destroy', ["product" => $product->id, "question_id" => $product->productQuestions[$i]->id]) }}">×</a>--}}
+                                    </div>
                                 </div>
                             </div>
                             <p class="th">質問の回答1</p>
                             @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                    <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $product->productQuestions[$i]?->answer ?? '' )}}" placeholder="質問の回答入力してください">{{ old('answer', $product->productQuestion[$i]?->answer ?? '' )}}</textarea>
+                                    <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $product->productQuestions[$i]?->answer ?? '' )}}" placeholder="質問の回答入力してください">{{ old('answer', $product->productQuestions[$i]?->answer ?? '' )}}</textarea>
                                     <p class="taR">400</p>
                                 </div>
                         @endfor

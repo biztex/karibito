@@ -110,8 +110,7 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function show(Product $product)
+    public function show(Product $product)
     {
         $all_products = Product::all();
         $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
@@ -126,11 +125,10 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function edit(Product $product)
+    public function edit(Product $product)
     {
         $categories = MProductCategory::all();
-        return view('product.edit', compact("product", 'categories'));
+        return view('product.edit', compact('product', 'categories'));
     }
 
     /**
@@ -187,12 +185,17 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public
-    function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        \DB::transaction(function () use ($product) {
+
+            $product->delete(); // データ論理削除
+            \Session::put('flash_msg','リクエストを削除しました');
+
+        });
+        return redirect()->route('mypage');
     }
 }

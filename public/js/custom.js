@@ -59,7 +59,6 @@ $(function () {
 		$('#box02').trigger('click');
 	}
 
-		
 	// 提供登録画像プレビュー / sessionStorageに画像一時保存
 	for (let i = 0; i < 10; i++) {
 		$("#product_pic"+i).on('click', function () {

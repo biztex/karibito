@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>  >  <a href="#">掲載一覧</a>@if(!is_null($job_request->title))  >  <span>{{ $job_request->title }}</spa> @endif
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		<x-parts.flash-msg/>
 		<div id="contents" class="detailStyle">
 			<div class="inner02 ">
@@ -48,7 +48,7 @@
 						<h2 class="hdM">サービス内容</h2>
 						<p style="overflow-wrap: break-word;">@if(!is_null($job_request->content)) {!! nl2br(e($job_request->content)) !!} @endif</p>
 					</div>
-					
+
 				</div>
 				<aside id="side" class="pc">
 					<div class="box reservate">

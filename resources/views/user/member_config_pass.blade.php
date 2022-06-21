@@ -1,6 +1,6 @@
 <x-layout>
 	<article>
-		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">

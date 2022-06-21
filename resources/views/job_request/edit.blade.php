@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスをリクエストする</span>
 			</div>
 		</div>
-		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<div id="contents">
 			<div class="cancelWrap">
@@ -27,10 +27,10 @@
                                         @endforeach
                                     </optgroup>
                                 @endforeach
-							</select>				
+							</select>
 						</div>
 
-							
+
 						<p class="th">商品名<span class="must">必須</span></p>
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
@@ -50,7 +50,7 @@
 						<div class="td">
 							<p class="budget"><input type="text" name="price" value="{{ old('price', $job_request->price ) }}"></p>
 						</div>
-					
+
 
 						<p class="th">応募期限<span class="must">必須</span></p>
 							@error('application_deadline')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -64,7 +64,7 @@
 						<div class="td">
 							<input type="date" name="required_date" value="{{ old('required_date', $job_request->required_date ) }}">
 						</div>
-						
+
 							<div class="warnNotes" style="margin-bottom:5px;">
 								<p>【対面】：直接会って提供する内容を相手に行います。<br>【非対面】：互いが直接会わずに提供する内容を相手に行います。</p>
 							</div>

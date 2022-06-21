@@ -108,11 +108,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 商品登録
     Route::resource('product', ProductController::class);
-    Route::get('post', [ProductController::class, 'index'])->name('post');
-    Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
-    Route::get('product/show/{product}', [ProductController::class, 'show'])->name('product.show');
-    Route::get('product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::post('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
+//    Route::get('post', [ProductController::class, 'index'])->name('post');
+//    Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
+//    Route::get('product/show/{product}', [ProductController::class, 'show'])->name('product.show');
+//    Route::get('product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
+//    Route::post('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
+//    Route::get('product/destroy/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 
 
     // 秘訣
