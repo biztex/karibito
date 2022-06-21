@@ -157,34 +157,6 @@ class ProductController extends Controller
         return redirect()->route('service_thanks');
     }
 
-//    public function optionDestroy(Product $product, AdditionalOption $option_id){
-//        $categories = MProductCategory::all();
-////        dd($option_id);
-//        \DB::transaction(function () use ($product, $option_id) {
-////dd($option_id);
-//            AdditionalOption::where('id', $option_id->id)->delete();
-////            $product->additionalOptions()->delete($option_id); // データ論理削除
-//            \Session::put('flash_msg','追加オプションを削除しました');
-//
-//        });
-//        return redirect()->route('product.edit', compact('product', 'categories'));
-////        return view('product.edit', compact("product", 'categories'));
-//    }
-//
-//    public function questionDestroy(Product $product, productQuestions $question_id){
-//        $categories = MProductCategory::all();
-//
-//        \DB::transaction(function () use ($product, $question_id) {
-////dd($option_id->id);
-//            AdditionalOption::where('id', $question_id->id)->delete();
-////            $product->additionalOptions()->delete($option_id); // データ論理削除
-//            \Session::put('flash_msg','よくある質問を削除しました');
-//
-//        });
-////        return redirect()->route('product.edit');
-//        return view('product.edit', compact("product", 'categories'));
-//    }
-
     /**
      * Remove the specified resource from storage.
      *
