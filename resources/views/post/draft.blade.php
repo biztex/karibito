@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>下書き一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<x-parts.flash-msg/>
 

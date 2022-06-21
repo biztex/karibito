@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('service') }}">サービスを探す</a>　>　<a href="#">デザイン</a>　>　<a href="#">その他デザイン</a>　>　<span>似顔絵イラスト描きます</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="detailStyle">
 			<div class="inner02 ">
 				<div class="clearfix">
@@ -35,7 +35,7 @@
 						@for($i = 0; $i < 10; $i++)
 							<div class="item"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="img/service/img_slider_small.jpg" alt=""></div>
 						@endfor
-						</div>						
+						</div>
 					</div>
 					<div class="content">
 						<h2 class="hdM">サービス内容</h2>
