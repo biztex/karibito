@@ -244,11 +244,9 @@
                     <aside id="side" class="pc">
                         <div class="box reservate">
                             <h3>{{$product->price}}円</h3>
-                            <p class="status">予約状況</p>
+                            <p class="status">所用期間</p>
                             <p class="date">{{$product->number_of_day}}日</p>
-                            <div class="calendar">
-                                <div id="datepicker"></div>
-                            </div>
+{{--                            <div class="calendar"><div id="datepicker"></div></div>--}}
                         </div>
                         <div>
                             <div class="peace">

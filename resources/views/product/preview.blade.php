@@ -24,13 +24,13 @@
                                         <div class="title">
                                             <div class="fun">
                                                 <div class="single">
-                                                    <a href="#" tabindex="0">@if(!is_null($request->is_online)) {{ App\Models\ProductRequest::IS_ONLINE[$request->is_online] }} @endif</a>
+                                                    <a href="#" tabindex="0">@if(!is_null($request->is_online)) {{ App\Models\Product::IS_ONLINE[$request->is_online] }} @endif</a>
                                                     <input type="hidden" value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif" name="is_online">
                                                 </div>
                                                 <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
                                             </div>
                                             <div class="datas">
-                                                <span class="data">電話相談の受付：@if(!is_null($request->is_call)){{ App\Models\ProductRequest::IS_CALL[$request->is_call] }} @endif</span>
+                                                <span class="data">電話相談の受付：@if(!is_null($request->is_call)){{ App\Models\Product::IS_CALL[$request->is_call] }} @endif</span>
                                                 <input type="hidden" value="@if(!is_null($request->is_call)){{ $request->is_call }}@endif" name="is_call">
                                                 <!-- <span class="data">閲覧：1000</span> -->
                                                 <span class="data">エリア：@if(!is_null($request->prefecture_id)){{ App\Models\Prefecture::find($request->prefecture_id)->name }} @endif</span>
@@ -103,9 +103,10 @@
                                         <div class="box reservate">
                                             <h3>@if(!is_null($request->price)) {{ number_format($request->price) }} @endif円</h3>
                                             <input type="hidden" value="@if(!is_null($request->price)){{ $request->price }}@endif" name="price">
-                                            <p class="status">予約状況</p>
-                                            <p class="date">5日</p>
-                                            <div class="calendar"><div id="datepicker"></div></div>
+                                            <p class="status">所用期間</p>
+                                            <p class="date">@if(!is_null($request->number_of_day)) {{ number_format($request->number_of_day) }} @endif日</p>
+                                            <input type="hidden" value="@if(!is_null($request->number_of_day)){{ $request->number_of_day }}@endif" name="number_of_day">
+{{--                                            <div class="calendar"><div id="datepicker"></div></div>--}}
                                         </div>
                                         <div>
                                             <div class="peace">

@@ -173,8 +173,8 @@ class ProductController extends Controller
 
     public function preview(PreviewRequest $request)
     {
-        $user = \Auth::user();
 
+        $user = \Auth::user();
         $birthday = (int)str_replace("-","",$user->userProfile->birthday);
         $age = Age::group($birthday);
 
