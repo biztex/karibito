@@ -34,7 +34,7 @@ Route::middleware('guest')->group(function () {
                 ->name('password.update');
 
     // ローカル環境専用
-    if (config('app.env') === 'local') {
+    if (in_array(config('app.env'), ['local', 'development'])) {
         // 開発用自動ログイン
         Route::get('developerLogin', function () {
             \Auth::loginUsingId(1);
