@@ -11,4 +11,9 @@ class ProductImage extends Model
 
     protected $guarded = [ 'id' ];
 
+    // Productモデルとのリレーション
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
