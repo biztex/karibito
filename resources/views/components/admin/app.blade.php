@@ -31,7 +31,7 @@
 				<div class="navbar-nav">
 				<a class="nav-item nav-link active" href="{{ route('admin.dashboard') }}">Home <span class="sr-only">(current)</span></a>
 				<a class="nav-item nav-link active" href="{{ route('admin.users.index') }}">Users</a>
-				@if(\Auth::guard('admin')->user()->role == 1)<a class="nav-item nav-link" href="{{ route('admin.index') }}">Admin</a>@endif
+				<!-- @if(\Auth::guard('admin')->user()->role == 1)<a class="nav-item nav-link" href="{{ route('admin.index') }}">Admin</a>@endif -->
 				<a class="nav-item nav-link" href="{{ route('admin.logout') }}">LOGOUT</a>
 				</div>
 			</div>
