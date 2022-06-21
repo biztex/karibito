@@ -10,10 +10,20 @@ use App\Models\AdditionalOption;
 use App\Models\MProductCategory;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\ProductService;
 
 
 class ProductController extends Controller
 {
+
+    private $product_service;
+
+    public function __construct(ProductService $product_service)
+    {
+        $this->product_service = $product_service;
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -76,6 +86,9 @@ class ProductController extends Controller
                 ]);
             }
         }
+
+        $this->product_service->storeImage($request,$product->id);
+
         return redirect()->route('service_thanks');
     }
 
