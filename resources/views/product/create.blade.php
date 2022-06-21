@@ -298,7 +298,7 @@
                                     </select>
                                 </div>
                                 <div class="functeBtns">
-                                    <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
+                                    <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
                                     <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
                                     <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
                                 </div>

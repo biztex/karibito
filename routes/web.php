@@ -13,7 +13,7 @@ use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
 use App\Http\Controllers\Web\Mypage\IconController;
 use App\Http\Controllers\Web\Mypage\WithdrawController;
-use App\Http\Controllers\Web\Mypage\ProductController;
+use App\Http\Controllers\Web\Mypage\ProductController as MypageProductController;
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
@@ -107,12 +107,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
     // 商品登録
-    Route::resource('product', ProductController::class);
-    Route::get('post', [ProductController::class, 'index'])->name('post');
-    Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
-    Route::get('product/show/{product}', [ProductController::class, 'show'])->name('product.show');
-    Route::get('product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::post('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
+    Route::resource('product', MypageProductController::class);
+    Route::get('post', [MypageProductController::class, 'index'])->name('post');
+    Route::post('product/store', [MypageProductController::class, 'store'])->name('product.store');
+    Route::get('product/show/{product}', [MypageProductController::class, 'show'])->name('product.show');
+    Route::get('product/edit/{product}', [MypageProductController::class, 'edit'])->name('product.edit');
+    Route::post('product/update/{product}', [MypageProductController::class, 'update'])->name('product.update');
+
+
+    Route::post('product/preview',[MypageProductController::class,'preview'])->name('product.preview');
 
 
     // 秘訣
