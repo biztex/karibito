@@ -59,4 +59,43 @@ $(function () {
 		$('#box02').trigger('click');
 	}
 
+	// 提供登録画像プレビュー / sessionStorageに画像一時保存
+	for (let i = 0; i < 10; i++) {
+		$("#product_pic"+i).on('click', function () {
+			$("input[name='path["+i+"]']").on('click', function (e) {
+				e.stopPropagation();
+			});
+			$("input[name='path["+i+"]']").click();
+			$("input[name='path["+i+"]']").on('change', function (e) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$("#preview_product"+i).attr('src', e.target.result);
+					$("input[name='path["+i+"]']").attr('value', e.target.result);
+					localStorage.setItem("pic"+i, reader.result);
+				}
+				reader.readAsDataURL(e.target.files[0]);
+			});
+		});
+
+		// 削除ボタンでクリア
+		$("#storage_delete"+i).on('click', function () {
+			$("input[name='path["+i+"]']").attr('value', null);
+			$("#preview_product"+i).attr('src', "/img/service/img_provide.jpg");
+			localStorage.removeItem('pic'+i);
+		});
+
+		// プレビューページ
+		$(function () {
+			if (localStorage.getItem("pic"+i)) {
+				$("input[name='path["+i+"]']").attr('value', localStorage.getItem("pic"+i));
+				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
+				$("#preview_slider"+i).attr('src', localStorage.getItem("pic"+i));
+				$("#preview_slider"+i+i).attr('src', localStorage.getItem("pic"+i));
+			} else {
+				$("#preview_slider"+i).remove();
+				$("#preview_slider"+i+i).remove();
+			}
+		});
+	};
+
 });

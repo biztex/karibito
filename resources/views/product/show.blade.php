@@ -60,14 +60,6 @@
                         <div class="content">
                             <h2 class="hdM">サービス内容</h2>
                             {{$product->content}}
-                            {{--						<p>おかげさまで今年で8年目を迎え、販売実績数が1000件を突破いたしました！<br>引き続き価格以上のデザインを提供できるように頑張ります！</p>--}}
-                            {{--						<p>プロフィールページ「ポートフォリオ」にて実績を掲載しております、<br>ご依頼の検討、仕上がりイメージ、テイストなどの参考にご覧ください：）<br>企業・個人・店舗・サービスやアプリ・ブランドロゴまで、何でも安心してご依頼くださいませ。</p>--}}
-                            {{--						<p>＼販売８年目！選ばれ続ける0つの理由／</p>--}}
-                            {{--						<p>❶初稿【３案】製作<br>同サービスの中でもトップクラスの『３案』ご提案。色々なデザイン案を見た上で選びたい人にぴったりです。さらに、作り直し・修正も無料ですので、実質無制限にデザインの検討が可能です！</p>--}}
-                            {{--						<p>❷細かい修正・大幅な修正まで無制限対応</p>--}}
-                            {{--						<p>❸aiデータ納品<br>他サービスでは有料オプションとして提供されることが多い、Aiデータ（印刷物などに必要なロゴ原本データ）も含まれます。</p>--}}
-                            {{--						<p>❹初稿時キャンセル保証付<br>デザインには相性のようなものが少なからず存在します。<br>修正は無制限ではございますが、初稿を見た上でその後の修正に可能性を感じなかったり、テイストが合わないなど判断された場合は、相談の上無料でキャンセルを受け付けております。</p>--}}
-                            {{--						<p>❺充実のアフターサポート<br>納品後もデザインの修正対応からその他制作物に関するご相談・アドバイスまで、専属のデザイナーとして半永久的にサポートさせていただきます！</p>--}}
                         </div>
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
@@ -77,10 +69,6 @@
                                         <span class="price">￥@if(!is_null($option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$option->price]}}@endif</span>
                                     </li>
                                 @endforeach
-                                {{--							<li><span class="add">＋ ヒアリング完了後、翌日初稿提出</span><span class="price">￥10,000</span></li>--}}
-                                {{--							<li><span class="add">＋ イラストデザイン初稿提案数１案追加</span><span class="price">￥10,000</span></li>--}}
-                                {{--							<li><span class="add">＋ 新規追加オプション</span><span class="price">￥10,000</span></li>--}}
-                                {{--							<li><span class="add">＋ 新規追加オプション</span><span class="price">￥10,000</span></li>--}}
                             </ul>
                         </div>
                         <div class="optional faq">
@@ -93,22 +81,6 @@
                                         <p class="answer toggleBox">{{$question->answer}}</p>
                                     </li>
                                 @endforeach
-                                {{--                            <li>--}}
-                                {{--								<p class="quest toggleBtn"><span>質問内容が入ります質問内容が入ります</span><span class="more">回答を見る</span></p>--}}
-                                {{--								<p class="answer toggleBox">質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります</p>--}}
-                                {{--							</li>--}}
-                                {{--							<li>--}}
-                                {{--								<p class="quest toggleBtn"><span>質問内容が入ります質問内容が入ります</span><span class="more">回答を見る</span></p>--}}
-                                {{--								<p class="answer toggleBox">質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります</p>--}}
-                                {{--							</li>--}}
-                                {{--							<li>--}}
-                                {{--								<p class="quest toggleBtn"><span>質問内容が入ります質問内容が入ります</span><span class="more">回答を見る</span></p>--}}
-                                {{--								<p class="answer toggleBox">質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります</p>--}}
-                                {{--							</li>--}}
-                                {{--							<li>--}}
-                                {{--								<p class="quest toggleBtn"><span>質問内容が入ります質問内容が入ります</span><span class="more">回答を見る</span></p>--}}
-                                {{--								<p class="answer toggleBox">質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります質問内容が入ります</p>--}}
-                                {{--							</li>--}}
                             </ul>
                         </div>
                         {{--					<div class="clientEvaluate">--}}
@@ -254,10 +226,16 @@
                                 <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
                             </div>
                             <div class="functeBtns">
-                                @if($product->productUser->user_id = Auth::id())
-                                    <a href="{{ route('product.edit',  ["product" => $product->id]) }}" class="orange full">編集する</a>
-                                @else
-                                    <a href="" class="orange full">交渉画面へ進む</a>
+                                @if($product->user_id === Auth::id() )
+                                    <div class="functeBtns">
+                                        <a href="{{ route('product.edit', $product->id)}}" class="orange full">編集</a>
+                                    </div>
+                                    <form method="post" action="{{ route('product.destroy', $product->id ) }}">
+                                        @csrf @method('delete')
+                                        <div class="functeBtns">
+                                            <input type="submit" class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
+                                        </div>
+                                    </form>
                                 @endif
                             </div>
                             <p class="specialtyBtn"><span>この情報をシェアする</span></p>

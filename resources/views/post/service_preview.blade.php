@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('service') }}">サービスを探す</a>　>　<a href="#">デザイン</a>　>　<a href="#">その他デザイン</a>　>　<span>似顔絵イラスト描きます</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="detailStyle">
 			<div class="inner02 ">
 				<div class="clearfix">
@@ -27,20 +27,14 @@
 					</div>
 					<div class="slider">
 						<div class="big">
-							<div class="item"><img src="img/service/img_slider_small03.jpg" srcset="img/service/img_slider_small03.jpg 1x, img/service/img_slider_small03.jpg 2x" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_big01.jpg" srcset="img/service/img_slider_big01.jpg 1x, img/service/img_slider_big01@2x.jpg 2x" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_big.jpg" srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_big.jpg" srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_big.jpg" srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_big.jpg" srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x" alt=""></div>
+						@for($i = 0; $i < 10; $i++)
+							<div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="" srcset="" alt=""></div>
+						@endfor
 						</div>
 						<div class="small">
-							<div class="item"><img src="img/service/img_slider_small03.jpg" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_small04.jpg" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
-							<div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
+						@for($i = 0; $i < 10; $i++)
+							<div class="item"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="img/service/img_slider_small.jpg" alt=""></div>
+						@endfor
 						</div>
 					</div>
 					<div class="content">

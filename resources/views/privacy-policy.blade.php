@@ -6,8 +6,8 @@
 					<a href="{{ route('home') }}">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
 				</div>
 			</div><!-- /.breadcrumb -->
-			<div class="btnFixed"><a href="{{ route('post') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
-			
+			<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+
 			<div id="contents" class="oneColumnPage">
 				<div class="inner">
 					<div id="main">

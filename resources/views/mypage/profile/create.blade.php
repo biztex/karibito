@@ -1,7 +1,7 @@
 <x-layout>
 	<article>
 		<body id="create">
-			<div class="btnFixed"><a href="{{ route('post') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
+			<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 			<div id="contents" class="oneColumnPage02">
 				<div class="inner">
 					<div id="main">

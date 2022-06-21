@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
 
@@ -70,6 +71,12 @@ class Product extends Model
     public function productQuestions()
     {
         return $this->hasMany(ProductQuestion::class, 'product_id');
+    }
+
+    // ProductImageモデルとのリレーション
+    public function productImage()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 
     // MProductChildCategoryモデルとのリレーション
