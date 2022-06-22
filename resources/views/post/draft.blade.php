@@ -22,38 +22,40 @@
 							<!---------------- 提供 ------------------>
 							<div class="tabBox is_active" id="tab_box01">
 								<ul class="favoriteUl01">
-									@if(!empty($products))
-									@foreach($products as $val)
-									<li>
-										<div class="cont01">
-											<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
-											@if(isset($val->productImage[0]))
-											<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
-											@else
-											<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-											@endif
-											<div class="info">
-												@if(!empty($val->category_id))
-												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
+									@if(empty($products[0]))
+										<li><div>投稿がありません。</div></li>
+									@else
+										@foreach($products as $val)
+										<li>
+											<div class="cont01">
+												<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
+												@if(isset($val->productImage[0]))
+												<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
 												@else
-												<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
+												<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
 												@endif
-												<div class="draw">
-													<p class="price">
-														<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
-													</p>
-												</div>
-												<div class="single">
-													@if(!empty($val->is_online))
-													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+												<div class="info">
+													@if(!empty($val->category_id))
+													<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
+													@else
+													<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
 													@endif
+													<div class="draw">
+														<p class="price">
+															<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
+														</p>
+													</div>
+													<div class="single">
+														@if(!empty($val->is_online))
+														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+														@endif
+													</div>
 												</div>
-											</div>
-											<p class="link"><a href="#">編集する</a></p>
+												<p class="link"><a href="#">編集する</a></p>
 
-										</div>
-									</li>
-									@endforeach
+											</div>
+										</li>
+										@endforeach
 									@endif
 								</ul>
 								{{ $products->links() }}
@@ -62,32 +64,34 @@
 							<!---------------- リクエスト ------------------>
 							<div class="tabBox" id="tab_box02">
 								<ul class="favoriteUl01">
-									@if(!empty($job_requests))
-									@foreach($job_requests as $val)
-									<li>
-										<div class="cont01">
-											<!-- <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p> -->
-											<div class="info">
-												@if(!empty($val->category_id))
-												<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
-												@else
-												<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
-												@endif
-												<div class="draw">
-													<p class="price">
-														<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
-													</p>
-												</div>
-												<div class="single">
-													@if(!empty($val->is_online))
-													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+									@if(empty($job_requests[0]))
+										<li><div>投稿がありません。</div></li>
+									@else
+										@foreach($job_requests as $val)
+										<li>
+											<div class="cont01">
+												<!-- <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p> -->
+												<div class="info">
+													@if(!empty($val->category_id))
+													<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
+													@else
+													<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
 													@endif
+													<div class="draw">
+														<p class="price">
+															<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
+														</p>
+													</div>
+													<div class="single">
+														@if(!empty($val->is_online))
+														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+														@endif
+													</div>
 												</div>
+												<p class="link"><a href="{{ route('job_request.edit',$val->id) }}">編集する</a></p>
 											</div>
-											<p class="link"><a href="{{ route('job_request.edit',$val->id) }}">編集する</a></p>
-										</div>
-									</li>
-									@endforeach
+										</li>
+										@endforeach
 									@endif
 								</ul>
 								{{ $job_requests->fragment('job-request')->links() }}
