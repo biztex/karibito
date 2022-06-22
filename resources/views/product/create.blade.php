@@ -241,7 +241,7 @@
                                             カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。
                                         </p>
                                     </div>
-                                  
+
                                     <ul class="mypagePortfolioUl03 mt40">
                                         @for($i = 0; $i < 10; $i++) <li >
                                             <div id="product_pic{{$i}}" class="img">
@@ -270,7 +270,7 @@
                                 <div class="functeBtns">
                                     <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
                                     <input type="submit" class="full green" style="color:white;" formenctype="multipart/form-data" formaction="{{ route('product.store') }}" value="サービス提供を開始">
-                                    <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
+                                    <input type="submit" class="full green_o" formaction="{{ route('product.storeDraft') }}" value="下書きとして保存">
                                 </div>
                     </form>
                 </div>
