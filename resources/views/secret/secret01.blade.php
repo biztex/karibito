@@ -21,7 +21,7 @@
 							<p class="secretTxt">あなたの提案を選んでもらうために、提供・依頼をする時に気をつけたいポイントを紹介します。</p>
 						</div>
 						<div class="secretPager">
-							<div class="secretPagerPrev"><a href="#" class="none">前へ</a></div>
+							<div class="secretPagerPrev"><a href="{{ route('secret06') }}">前へ</a></div>
 							<select onchange="document.location.href=this.options[this.selectedIndex].value;">
 								<option value="{{ route('secret01') }}" selected>1/6</option>
 								<option value="{{ route('secret02') }}">2/6</option>
