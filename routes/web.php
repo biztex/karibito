@@ -112,7 +112,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //    Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
 //    Route::get('product/show/{product}', [ProductController::class, 'show'])->name('product.show');
 //    Route::get('product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
-   Route::put('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
+//   Route::put('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
 //    Route::get('product/destroy/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::post('product/preview/', [MypageProductController::class, 'preview'])->name('product.preview');
     Route::put('product/{product}/edit/preview',[MypageProductController::class,'editPreview'])->name('product.edit.preview');

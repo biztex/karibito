@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
-//use App\Http\Requests\JobRequestController\PreviewRequest;
 use App\Http\Requests\ProductController\PreviewRequest;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Libraries\Age;
@@ -203,7 +202,7 @@ class ProductController extends Controller
         \DB::transaction(function () use ($product) {
 
             $product->delete(); // データ論理削除
-            \Session::put('flash_msg','リクエストを削除しました');
+            \Session::put('flash_msg','提供商品を削除しました');
 
         });
         return redirect()->route('mypage');

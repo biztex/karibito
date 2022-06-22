@@ -15,7 +15,7 @@ class ProductService
     public function storeImage($request, $id)
     {
         $paths = $request->file('path');
-        dd($paths);
+//        dd($paths);
         if (isset($paths)) {
             foreach ($paths as $path) {
                 $product_image = new ProductImage;
@@ -43,7 +43,7 @@ class ProductService
             for($i=0; $i<10; $i++){
                 if(isset($b[$i]) && $b[$i] == "delete"){
                     // 削除されたら何もしない
-                    
+
                 }elseif(isset($b[$i]) && $b[$i] == "insert"){
                     // 挿入されたらリクエストをDBに登録
                     $product_image = new ProductImage;
