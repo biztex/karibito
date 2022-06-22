@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        // return view('admin.dashboard');
+        return redirect()->route('admin.users.index');
     }
 }
