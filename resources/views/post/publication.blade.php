@@ -20,7 +20,9 @@
 							<!---------------- 提供 ------------------>
 							<div class="tabBox is_active" id="tab_box01">
 								<ul class="favoriteUl01">
-									@if(!empty($products))
+									@if(empty($products[0]))
+									<li><div>投稿がありません。</div></li>
+									@else
 									@foreach($products as $val)
 									<li>
 										<div class="cont01">
@@ -51,7 +53,9 @@
 							<!---------------- リクエスト ------------------>
 							<div class="tabBox" id="tab_box02">
 								<ul class="favoriteUl01">
-									@if(!empty($job_requests))
+									@if(empty($job_requests[0]))
+									<li><div>投稿がありません。</div></li>
+									@else
 									@foreach($job_requests as $val)
 									<li>
 										<div class="cont01">
