@@ -556,3 +556,19 @@
 	cursor: pointer;
 	
 }
+.functeBtns input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s;
+    margin: 15px auto 0;
+    width: 100%;
+    max-width: 304px;
+    height: 45px;
+    background: #B5B5B5;
+    border: 0;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
