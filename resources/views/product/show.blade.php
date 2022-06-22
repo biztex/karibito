@@ -63,14 +63,14 @@
                             </div>
                         </div>
                         <div class="content">
-                            <h2 class="hdM">サービス内容</h2>
-						    <p style="overflow-wrap: break-word;">@if(!is_null($product->content)) {!! nl2br(e($product->content)) !!} @endif</p>
+                            <h2 class="hdM">サービス内容</h2>{{$product->content}}
                         </div>
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
                                 @foreach($product->additionalOptions as $option)
-                                    <li><span class="add">＋ {{$option->name}}</span>
+                                    <li>
+                                        <span class="add">＋ {{$option->name}}</span>
                                         <span class="price">￥@if(!is_null($option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$option->price]}}@endif</span>
                                     </li>
                                 @endforeach
@@ -81,8 +81,7 @@
                             <ul class="toggleWrapPC">
                                 @foreach($product->productQuestions as $question)
                                     <li>
-                                        <p class="quest toggleBtn"><span>{{$question->title}}</span><span class="more">回答を見る</span>
-                                        </p>
+                                        <p class="quest toggleBtn"><span>{{$question->title}}</span><span class="more">回答を見る</span></p>
                                         <p class="answer toggleBox">{{$question->answer}}</p>
                                     </li>
                                 @endforeach
@@ -220,12 +219,10 @@
                     </div>
                     <aside id="side" class="pc">
                         <div class="box reservate">
-                            <h3>{{number_format($product->price)}}円</h3>
-                            <p class="status">所要時間</p>
+                            <h3>{{$product->price}}円</h3>
+                            <p class="status">所用期間</p>
                             <p class="date">{{$product->number_of_day}}日</p>
-                            <!-- <div class="calendar">
-                                <div id="datepicker"></div>
-                            </div> -->
+{{--                            <div class="calendar"><div id="datepicker"></div></div>--}}
                         </div>
                         <div>
                             <div class="peace">
@@ -280,7 +277,7 @@
                                             <p class="price"><font>{{$all_product->title}}</font><br>{{$all_product->price}}円</p>
                                         </div>
                                         <div class="single">
-                                            <span>単発リクエスト</span>
+{{--                                            <span>単発リクエスト</span>--}}
                                             <a href="#">{{App\Models\Product::IS_ONLINE[$all_product->is_online]}}</a>
                                         </div>
                                         <div class="aboutUser">

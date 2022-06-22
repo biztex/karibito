@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductRequest;
+//use App\Http\Requests\JobRequestController\PreviewRequest;
+use App\Http\Requests\ProductController\PreviewRequest;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Libraries\Age;
 use App\Models\AdditionalOption;
@@ -206,5 +207,28 @@ class ProductController extends Controller
 
         });
         return redirect()->route('mypage');
+    }
+
+    public function preview(PreviewRequest $request)
+    {
+
+        $user = \Auth::user();
+        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
+        $age = Age::group($birthday);
+
+        return view('product.preview',compact('request','user','age'));
+    }
+
+    /**
+     * 既存リクエスト、編集からプレビュー表示
+     */
+    public function editPreview(PreviewRequest $request, Product $product)
+    {
+
+        $user = \Auth::user();
+        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
+        $age = Age::group($birthday);
+
+        return view('product.preview',compact('request','user','age', 'product'));
     }
 }
