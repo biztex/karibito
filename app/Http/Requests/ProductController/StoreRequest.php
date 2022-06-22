@@ -32,7 +32,10 @@ class StoreRequest extends FormRequest
             'is_online' => 'required | boolean',
             'number_of_day' => 'required | integer',
             'is_call' => 'required | boolean',
-            'number_of_sale' => ' required | integer',
+            'number_of_sale' => 'required | integer',
+//            'option_name' => 'nullable | max:3000',
+//            'option_price' => 'integer',
+//            'option_is_public' => 'integer',
         ];
     }
 }

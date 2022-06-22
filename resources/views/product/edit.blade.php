@@ -11,8 +11,9 @@
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
-                    <form method="post" class="contactForm" action="{{ route('product.store') }}">
-                        @csrf
+                    <form method="post" class="contactForm">
+                        @csrf @method('PUT')
+
                         <p class="th">カテゴリ<span class="must">必須</span></p>
                         <div class="td">
                             <select name="category_id">
@@ -88,7 +89,7 @@
                         </div>
 
                         <p class="th">販売数<span class="must">必須</span></p>
-                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
+{{--                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
                         <div class="td">
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>
@@ -97,18 +98,18 @@
                             </select>
                         </div>
 
+                        @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <p class="th">有料オプション1</p>
-                            @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            @foreach($product->additionalOptions as $additional_option)
+                            @foreach($product->additionalOptions as $num => $additional_option)
                                 <div class="paid">
                                     <div class="enter">
-                                        <textarea class="@error('option_name') is-invalid @enderror" value="{{ old('option_name', $additional_option->title) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name', $additional_option->name)}}</textarea>
+                                        <textarea class="" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.$num, $additional_option->name)}}</textarea>
                                     </div>
                                     <div class="selects">
                                         <select name="option_price[]" value="">
                                             @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                                <option value="{{ $key }}" @if(old('option_price', $additional_option->price) == $key) selected @endif>
+                                                <option value="{{ $key }}" @if(old('option_price.'.$num, $additional_option->price) == $key) selected @endif>
                                                     {{ $value }}円
                                                 </option>
                                             @endforeach
@@ -126,10 +127,10 @@
 
                         @for($i = 0; $i < 3; $i++)
                         <p class="th">質問のタイトル1</p>
-                        @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                        @error('question_title[$i]')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                    <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title', $product->productQuestions[$i]?->title ?? '' )}}" placeholder="質問のタイトル入力してください">{{ old('question_title', $product->productQuestions[$i]?->title ?? '' )}}</textarea>
+                                    <textarea type="text" name="question_title[]" class="" placeholder="質問のタイトル入力してください">{{ old('question_title[$i]', $product->productQuestions[$i]?->title ?? '' )}}</textarea>
                                     <p class="taR">400</p>
                                     <div>
 {{--                                        <a  class="fs25 flR" href="{{ route('product.question.destroy', ["product" => $product->id, "question_id" => $product->productQuestions[$i]->id]) }}">×</a>--}}
@@ -137,10 +138,10 @@
                                 </div>
                             </div>
                             <p class="th">質問の回答1</p>
-                            @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('answer[$i]')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="enter">
-                                    <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer', $product->productQuestions[$i]?->answer ?? '' )}}" placeholder="質問の回答入力してください">{{ old('answer', $product->productQuestions[$i]?->answer ?? '' )}}</textarea>
+                                    <textarea type="text" name="answer[]" class="" placeholder="質問の回答入力してください">{{ old('answer[$i]', $product->productQuestions[$i]?->answer ?? '' )}}</textarea>
                                     <p class="taR">400</p>
                                 </div>
                         @endfor
@@ -236,8 +237,8 @@
                                 </select>
                             </div>
                             <div class="functeBtns">
-                                <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
-                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', ["product" => $product->id]) }}" value="サービス提供を開始">
+                                <input type="submit" class="full" style="color:white;" formaction="{{ route('product.edit.preview', $product->id) }}" value="プレビュー画面を見る">
+                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $product->id) }}" value="サービス提供を開始">
                                 <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
                             </div>
                     </form>

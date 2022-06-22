@@ -32,7 +32,7 @@ class PreviewRequest extends FormRequest
             'application_deadline' => 'nullable | date | after_or_equal:tomorrow',
             'required_date' => 'nullable | date | after_or_equal:application_deadline',
             'is_online' => 'nullable | boolean',
-            'is_call' => 'nullable | boolean',           
+            'is_call' => 'nullable | boolean',
             ];
     }
 }

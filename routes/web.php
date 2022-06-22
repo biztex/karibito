@@ -115,6 +115,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //    Route::post('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
 //    Route::get('product/destroy/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::post('product/preview/', [MypageProductController::class, 'preview'])->name('product.preview');
+    Route::put('product/{product}/edit/preview',[MypageProductController::class,'editPreview'])->name('product.edit.preview');
+//    Route::post('product/store/preview',[MypageProductController::class,'storePreview'])->name('product.store.preview');
+
 
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');

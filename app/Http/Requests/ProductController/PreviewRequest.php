@@ -27,12 +27,17 @@ class PreviewRequest extends FormRequest
             'category_id' => 'nullable | integer | exists:m_product_child_categories,id',
             'prefecture_id' => 'nullable | integer | between:1,47',
             'title' => 'nullable | string | max:30',
-            'content' => 'nullable | string | min:30 | max:3000 ',
+            'content' => 'nullable | string | max:3000 ',
             'price' => 'nullable | integer | min:500 | max:9990000',
             'is_online' => 'nullable | boolean',
             'number_of_day' => 'nullable | integer',
             'is_call' => 'nullable | boolean',
-            'number_of_sale' => ' nullable | integer',
+            'number_of_sale' => 'nullable | integer',
+//            'option_name' => 'nullable | max:3000 ',
+//            'option_price' => 'nullable | integer',
+//            'option_is_public' => 'nullable | integer',
+//            'question_title' => 'nullable | max:3000 ',
+//            'answer' => 'nullable | max:3000 ',
         ];
     }
 }
