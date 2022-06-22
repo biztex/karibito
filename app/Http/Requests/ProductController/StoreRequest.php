@@ -25,14 +25,17 @@ class StoreRequest extends FormRequest
     {
         return [
             'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'nullable | integer | between:1,47',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
             'title' => 'required | string | max:30',
             'content' => 'required | string | min:30 | max:3000 ',
             'price' => 'required | integer | min:500 | max:9990000',
-            'is_online' => 'required | integer | boolean',
+            'is_online' => 'required | boolean',
             'number_of_day' => 'required | integer',
-            'is_call' => 'required | integer | boolean',
-            'number_of_sale' => ' required | integer',
+            'is_call' => 'required | boolean',
+            'number_of_sale' => 'required | integer',
+//            'option_name' => 'nullable | max:3000',
+//            'option_price' => 'integer',
+//            'option_is_public' => 'integer',
         ];
     }
 }

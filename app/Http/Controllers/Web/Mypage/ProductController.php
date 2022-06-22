@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
+//use App\Http\Requests\JobRequestController\PreviewRequest;
+use App\Http\Request\ProductController\PreviewRequest;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Http\Requests\ProductController\DraftRequest;
 use App\Libraries\Age;
@@ -244,8 +246,77 @@ class ProductController extends Controller
             }
         }
 
-        $this->product_service->storeImage($request,$product->id);
+        $this->product_service->storeImage($request, $product->id);
 
+        return redirect()->route('draft')->with('flash_msg', '下書きに保存しました！');
+    }
+
+    public function updateDraft(DraftRequest $request, Product $product)
+    {
+        $product->fill([
+            'category_id' => $request->category_id,
+            'prefecture_id' => $request->prefecture,
+            'title' => $request->title,
+            'content' => $request->input('content'),
+            'price' => $request->price,
+            'is_online' => $request->is_online,
+            'number_of_day' => $request->number_of_day,
+            'is_call' => $request->is_call,
+            'number_of_sale' => $request->number_of_sale,
+            'status' => $request->status,
+            'is_draft' => Product::IS_DRAFT
+        ]);
+
+        $product->additionalOptions()->delete();
+
+        if ($request->option_name) {
+            foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
+                $product->additionalOptions()->create([
+                    'name' => $option,
+                    'price' => $request->option_price[$index],
+                    'is_public' => $request->option_is_public[$index]
+                ]);
+            }
+        }
+
+        $product->productQuestions()->delete();
+
+        if ($request->question_title) {
+            foreach ($request->question_title as $index =>$title){
+                $product->productQuestions()->create([
+                    'title' => $request->question_title[$index],
+                    'answer' => $request->answer[$index]
+                ]);
+            }
+        }
+
+        $product->save();
+
+        $this->product_service->updateImage($request,$product->id);
         return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
+    }
+
+
+    public function preview(PreviewRequest $request)
+    {
+
+        $user = \Auth::user();
+        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
+        $age = Age::group($birthday);
+
+        return view('product.preview',compact('request','user','age'));
+    }
+
+    /**
+     * 既存リクエスト、編集からプレビュー表示
+     */
+    public function editPreview(PreviewRequest $request, Product $product)
+    {
+
+        $user = \Auth::user();
+        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
+        $age = Age::group($birthday);
+
+        return view('product.preview',compact('request','user','age', 'product'));
     }
 }

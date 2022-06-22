@@ -10,8 +10,7 @@
         <div id="contents">
             <div class="cancelWrap">
                 <div class="inner inner05">
-                    <h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a>
-                    </h2>
+                    <h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
                     <form method="post" class="contactForm">
                         @csrf
 
@@ -45,7 +44,7 @@
                         <p class="th">価格<span class="must">必須</span></p>
                             @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <p class="price"><input type="text" value="{{ old('price',0) }}" name="price"></p>
+                            <p class="budget price"><input type="text" placeholder="0" name="price" value="{{ old('price') }}"></p>
                         </div>
 
                         <div class="td">
@@ -74,7 +73,7 @@
                             </select>
                         </div>
 
-                        <p class="th">所要時間<span class="must">必須</span></p>
+                        <p class="th">所要期間<span class="must">必須</span></p>
                             @error('number_of_day')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <p class="time"><input type="number" name="number_of_day" value="{{ old('number_of_day') }}" placeholder="入力してください"></p>
@@ -258,18 +257,16 @@
 
                                 <p class="th">公開設定<span class="must">必須</span></p>
                                 <div class="td">
-                                    @error('status')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <select name="status">
                                         <option>選択してください</option>
-                                        <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(!is_null(old('status')) && old('status') == App\Models\Product::NOT_PUBLIC) selected @endif required>非公開</option>
-                                        <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status') == App\Models\Product::IS_PUBLIC) selected @endif required>公開</option>
+                                        <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(old('status') == App\Models\Product::NOT_PUBLIC) selected @endif>非公開</option>
+                                        <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status') == App\Models\Product::IS_PUBLIC) selected @endif>公開</option>
                                     </select>
                                 </div>
                                 <div class="functeBtns">
-                                    <a href="{{ route('service_preview') }}" class="full">プレビュー画面を見る</a>
-                                    <input type="submit" class="full green" style="color:white;" formenctype="multipart/form-data" formaction="{{ route('product.store') }}" value="サービス提供を開始">
+                                    <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
+                                    <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
                                     <input type="submit" class="full green_o" formaction="{{ route('product.storeDraft') }}" value="下書きとして保存">
                                 </div>
                     </form>
