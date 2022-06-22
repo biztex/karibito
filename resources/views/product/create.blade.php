@@ -44,7 +44,7 @@
                         <p class="th">価格<span class="must">必須</span></p>
                             @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <p class="price"><input type="text" placeholder="0" value="{{ old('price') }}" name="price"></p>
+                            <p class="budget price"><input type="text" placeholder="0" value="{{ old('price') }}" name="price"></p>
                         </div>
 
                         <div class="td">
