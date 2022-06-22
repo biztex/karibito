@@ -17,7 +17,8 @@ class AdminController extends Controller
     {
         $admins = Admin::all();
 
-        return view('admin.admin.index',compact('admins'));
+        // return view('admin.admin.index',compact('admins'));
+        return redirect()->route('admin.dashboard');
     }
 
     /**

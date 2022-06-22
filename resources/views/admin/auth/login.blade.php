@@ -39,11 +39,11 @@
 							<form method="POST" action="{{ route('admin.login') }}">
             				@csrf
 								<div class="labelCategory">
-									<p>メールアドレス</p>
+									<p>ID</p>
 									@error('email')
 										<div class="alert alert-danger">{{ $message }}</div>
                             		@enderror
-									<p><input type="email" name="email" placeholder="例） email@karibito.jp" value="{{old('email')}}" required></p>
+									<p><input type="text" name="email" value="{{old('email')}}" required></p>
 								</div>
 								<div class="labelCategory">
 									<p>パスワード</p>

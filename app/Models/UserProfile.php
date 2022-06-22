@@ -26,7 +26,7 @@ class UserProfile extends Model
     const IS_IDENTIFY = 1;
     const NOT_IDENTIFY = 0;
     const IDENTIFY = [
-        self::IS_IDENTIFY =>'認証済',
+        self::IS_IDENTIFY =>'承認済',
         self::NOT_IDENTIFY =>'未',
     ];
 
