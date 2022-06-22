@@ -301,7 +301,7 @@
 											</dd>
 										</dl>
 									</div>
-									<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">学歴・経歴を追加</span></p>
+									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">学歴・経歴を追加</span></p>
 								</div>
 								<div class="specialtyItem">
 									<div class="clone">
@@ -317,7 +317,7 @@
 											</dd>
 										</dl>
 									</div>
-									<p class="specialtyBtn"><span><img src="img/mypage/icon_add.svg" alt="">免許・資格</span></p>
+									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">免許・資格</span></p>
 								</div>
 							</div>
 							<dl>

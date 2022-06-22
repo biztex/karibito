@@ -9,6 +9,7 @@ use App\Http\Requests\ProductController\StoreRequest;
 use App\Libraries\Age;
 use App\Models\AdditionalOption;
 use App\Models\MProductCategory;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use Illuminate\Http\Request;
@@ -113,10 +114,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $user = User::find($product->user_id);
+
         $all_products = Product::all();
         $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
         $age = Age::group($birthday);
-        return view('product.show', compact('product', 'age', 'all_products'));
+        return view('product.show', compact('user','product', 'age', 'all_products'));
 //        return view('product.show', compact('product', 'age', 'all_products'));
     }
 
@@ -129,6 +132,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = MProductCategory::all();
+
+
+
         return view('product.edit', compact('product', 'categories'));
     }
 
@@ -141,7 +147,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-//        $product = Product::find($id);
+
         $product->fill([
             'category_id' => $request->category_id,
             'prefecture_id' => $request->prefecture,
@@ -180,6 +186,9 @@ class ProductController extends Controller
             }
 
         $product->save();
+
+        $this->product_service->updateImage($request,$product->id);
+
         return redirect()->route('service_thanks');
     }
 

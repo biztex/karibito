@@ -168,62 +168,31 @@
                             <p class="th">画像投稿<span class="must">必須</span></p>
                             <div class="td">
                                 <div class="warnNotes">
-                                    <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
+                                    <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font>
+                                    </p>
                                     <p>
                                         カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。
                                     </p>
                                 </div>
+
                                 <ul class="mypagePortfolioUl03 mt40">
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide01.jpg" alt=""></div>
-                                        <div class="fun">
-                                            <a href="#" class="del">削除</a>
-                                            <a href="#" class="edit">編集</a>
+                                    @for($i = 0; $i < 10; $i++) <li>
+                                        <div id="product_pic{{$i}}" class="img">
+                                        @if(isset($product->productImage[$i]))
+                                            <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->productImage[$i]->path)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                            <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple >
+                                        @else
+                                            <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                            <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                        @endif
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/mypage/img_portfolio01.jpg" alt=""></div>
                                         <div class="fun">
-                                            <a href="#" class="del">削除</a>
-                                            <a href="#" class="edit">編集</a>
+                                            <div class="del" id="storage_delete{{$i}}">削除</div>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide02.jpg" alt=""></div>
-                                        <div class="fun">
-                                            <a href="#" class="del">削除</a>
-                                            <a href="#" class="edit">編集</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                        <div class="fun">
-                                            <a href="#" class="del">削除</a>
-                                            <a href="#" class="edit">編集</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                        <div class="fun">
-                                            <a href="#" class="del">削除</a>
-                                            <a href="#" class="edit">編集</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                    </li>
-                                    <li>
-                                        <div class="img"><img src="img/service/img_provide.jpg" alt=""></div>
-                                    </li>
+                                        </li>
+
+                                    @endfor
+                                    <input type="hidden" name="image_status" value="">
                                 </ul>
                             </div>
 

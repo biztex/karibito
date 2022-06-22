@@ -59,7 +59,11 @@ $(function () {
 		$('#box02').trigger('click');
 	}
 
-	// 提供登録画像プレビュー / sessionStorageに画像一時保存
+
+	
+	// 提供登録画像プレビュー / localStorageに画像一時保存
+	// 画像に変更あれば'delete'/'insert'のいずれかを配列の番号とともに格納していく
+	var image_status = {};
 	for (let i = 0; i < 10; i++) {
 		$("#product_pic"+i).on('click', function () {
 			$("input[name='path["+i+"]']").on('click', function (e) {
@@ -74,12 +78,18 @@ $(function () {
 					localStorage.setItem("pic"+i, reader.result);
 				}
 				reader.readAsDataURL(e.target.files[0]);
+				image_status[i] = 'insert';
+				$("input[name='image_status']").val(JSON.stringify(image_status));
 			});
 		});
 
 		// 削除ボタンでクリア
 		$("#storage_delete"+i).on('click', function () {
 			$("input[name='path["+i+"]']").attr('value', null);
+
+			image_status[i] = 'delete';
+			$("input[name='image_status']").val(JSON.stringify(image_status));
+
 			$("#preview_product"+i).attr('src', "/img/service/img_provide.jpg");
 			localStorage.removeItem('pic'+i);
 		});

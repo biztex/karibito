@@ -101,11 +101,15 @@
 				</div>
 				<aside id="side" class="pc">
 					<div class="box reservate">
-						<h3>@if(!is_null($request->price)) {{ number_format($request->price) }} @endif円</h3>
+						<h3>@if(!is_null($request->price)) {{ number_format($request->price) }}@else - @endif円</h3>
 						<input type="hidden" value="@if(!is_null($request->price)){{ $request->price }}@endif" name="price">
-						<p class="status">予約状況</p>
-						<p class="date">5日</p>
-						<div class="calendar"><div id="datepicker"></div></div>
+						<p class="status">応募期限</p>
+						<p class="date" style="margin-bottom:10px;height:33.5px;">@if(!is_null($request->application_deadline)) {{ date('Y/m/d',strtotime($request->application_deadline)) }}@endif</p>
+						@if(!is_null($request->required_date)) 
+							<p class="status">納品希望日</p>
+							<p class="date">{{ date('Y/m/d',strtotime($request->required_date)) }}</p>
+						@endif
+						<!-- <div class="calendar"><div id="datepicker"></div></div> -->
 					</div>
 					<div>
 						<div class="peace">
@@ -116,7 +120,7 @@
 							<a href="javascript:history.back();" class="orange_o">編集画面に戻る</a>
 						</div>
 						<div class="functeBtns">
-							<input type="submit" name="regist" class="orange" style="color:white;" value="サービス提供を開始">
+							<input type="submit" name="regist" class="orange full" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">
 						</div>
 					</div>
 					<div class="box seller">
