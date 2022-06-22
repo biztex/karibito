@@ -7,7 +7,7 @@
                     href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　<span>{{$product->title}}</span>
             </div>
         </div><!-- /.breadcrumb -->
-        <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+        <div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
         <div id="contents" class="detailStyle">
             <div class="inner02 ">
                 <div class="clearfix">
@@ -34,19 +34,19 @@
                                 @endforeach
                                                        <!-- srcset="img/service/img_slider_small01.jpg 1x, img/service/img_slider_small01.jpg 2x"
                                                        alt=""></div> -->
-                                <!-- <div class="item"><img src="img/service/img_slider_small02.jpg"
+                                <!-- <div class="item"><img src="/img/service/img_slider_small02.jpg"
                                                        srcset="img/service/img_slider_small02.jpg 1x, img/service/img_slider_small02.jpg 2x"
                                                        alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_big.jpg"
+                                <div class="item"><img src="/img/service/img_slider_big.jpg"
                                                        srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x"
                                                        alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_big.jpg"
+                                <div class="item"><img src="/img/service/img_slider_big.jpg"
                                                        srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x"
                                                        alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_big.jpg"
+                                <div class="item"><img src="/img/service/img_slider_big.jpg"
                                                        srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x"
                                                        alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_big.jpg"
+                                <div class="item"><img src="/img/service/img_slider_big.jpg"
                                                        srcset="img/service/img_slider_big.jpg 1x, img/service/img_slider_big@2x.jpg 2x"
                                                        alt=""></div> -->
                             </div>
@@ -54,12 +54,12 @@
                                 @foreach($product->productImage as $val)
                                     <div class="item"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:cover;"></div>
                                 @endforeach
-                                <!-- <div class="item"><img src="img/service/img_slider_small01.jpg" alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_small02.jpg" alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div>
-                                <div class="item"><img src="img/service/img_slider_small.jpg" alt=""></div> -->
+                                <!-- <div class="item"><img src="/img/service/img_slider_small01.jpg" alt=""></div>
+                                <div class="item"><img src="/img/service/img_slider_small02.jpg" alt=""></div>
+                                <div class="item"><img src="/img/service/img_slider_small.jpg" alt=""></div>
+                                <div class="item"><img src="/img/service/img_slider_small.jpg" alt=""></div>
+                                <div class="item"><img src="/img/service/img_slider_small.jpg" alt=""></div>
+                                <div class="item"><img src="/img/service/img_slider_small.jpg" alt=""></div> -->
                             </div>
                         </div>
                         <div class="content">
@@ -94,7 +94,7 @@
                         {{--							<div class="ftBox">--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva01"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -104,7 +104,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva01"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -114,7 +114,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva02"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -124,7 +124,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva03"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -134,7 +134,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva01"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -144,7 +144,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva01"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -154,7 +154,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva02"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -164,7 +164,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva03"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -174,7 +174,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva01"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -184,7 +184,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva01"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -194,7 +194,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva02"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -204,7 +204,7 @@
                         {{--								</li>--}}
                         {{--								<li>--}}
                         {{--									<div class="img">--}}
-                        {{--										<p class="head"><img src="img/service/ico_head.png" alt=""></p>--}}
+                        {{--										<p class="head"><img src="/img/service/ico_head.png" alt=""></p>--}}
                         {{--										<p class="evaluate eva03"></p>--}}
                         {{--									</div>--}}
                         {{--									<div class="info">--}}
@@ -220,12 +220,12 @@
                     </div>
                     <aside id="side" class="pc">
                         <div class="box reservate">
-                            <h3>{{$product->price}}円</h3>
-                            <p class="status">予約状況</p>
+                            <h3>{{number_format($product->price)}}円</h3>
+                            <p class="status">所要時間</p>
                             <p class="date">{{$product->number_of_day}}日</p>
-                            <div class="calendar">
+                            <!-- <div class="calendar">
                                 <div id="datepicker"></div>
-                            </div>
+                            </div> -->
                         </div>
                         <div>
                             <div class="peace">
@@ -270,13 +270,13 @@
                             @foreach($all_products as $all_product)
                                 <div class="item">
                                     <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
-                                        <img src="img/common/img_270x160.png" alt="">
+                                        <img src="/img/common/img_270x160.png" alt="">
                                         <button class="favorite">お気に入り</button>
                                     </a>
                                     <div class="info">
                                         <div class="breadcrumb"><a href="#">@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->mProductCategory->name}} @endif</a>&emsp;＞&emsp;<span>@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->name}}@endif</span></div>
                                         <div class="draw">
-                                            <p class="ico"><img src="img/service/ico_color.png" alt=""></p>
+                                            <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>
                                             <p class="price"><font>{{$all_product->title}}</font><br>{{$all_product->price}}円</p>
                                         </div>
                                         <div class="single">
@@ -285,7 +285,7 @@
                                         </div>
                                         <div class="aboutUser">
                                             <div class="user">
-                                                <p class="ico"><img src="img/common/ico_head.png" alt=""></p>
+                                                <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>
                                                 <div class="introd">
                                                     <p class="name">{{$all_product->productUser->name}}</p>
                                                     <p>({{App\Models\UserProfile::GENDER[$all_product->productUser->userProfile->gender]}}/ {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>
@@ -303,13 +303,13 @@
 
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -318,7 +318,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -334,13 +334,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -349,7 +349,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -365,13 +365,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -380,7 +380,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -396,13 +396,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -411,7 +411,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -427,13 +427,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -442,7 +442,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -458,13 +458,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -473,7 +473,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -489,13 +489,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -504,7 +504,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -520,13 +520,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -535,7 +535,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
@@ -551,13 +551,13 @@
 {{--                            </div>--}}
 {{--                            <div class="item">--}}
 {{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="img/common/img_270x160.png" alt="">--}}
+{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
 {{--                                    <button class="favorite">お気に入り</button>--}}
 {{--                                </a>--}}
 {{--                                <div class="info">--}}
 {{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
 {{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="img/service/ico_color.png" alt=""></p>--}}
+{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
 {{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
 {{--                                    </div>--}}
 {{--                                    <div class="single">--}}
@@ -566,7 +566,7 @@
 {{--                                    </div>--}}
 {{--                                    <div class="aboutUser">--}}
 {{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="img/common/ico_head.png" alt=""></p>--}}
+{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                            <div class="introd">--}}
 {{--                                                <p class="name">クリエイター名</p>--}}
 {{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
