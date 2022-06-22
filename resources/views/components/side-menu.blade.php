@@ -28,6 +28,7 @@
                     <li><a href="/sample/friends" class="">フォロー・フォロワー</a></li>
                     <li><a href="/sample/news" class="">お知らせ</a></li>
                     <li><a href="/sample/faq" class="">カリビト知恵袋</a></li>
+                    <li><a href="{{ route('secret01') }}" class="">マッチングする秘訣</a></li>
                     <li><a href="#" class="">クーポン</a></li>
                     <li><a href="#" class="">DM</a></li>
                     <li><a href="{{ route('member') }}" class="">会員情報</a></li>
