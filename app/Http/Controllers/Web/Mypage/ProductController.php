@@ -148,7 +148,7 @@ class ProductController extends Controller
      */
     public function update(StoreRequest $request, Product $product)
     {
-        \DB::transaction(function () use ($product, $request) {
+        \DB::transaction(function () use ($request, $product) {
             $product->fill([
                 'category_id' => $request->category_id,
                 'prefecture_id' => $request->prefecture,
