@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 //use App\Http\Requests\JobRequestController\PreviewRequest;
-use App\Http\Request\ProductController\PreviewRequest;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Http\Requests\ProductController\DraftRequest;
+use App\Http\Requests\ProductController\PreviewRequest;
 use App\Libraries\Age;
 use App\Models\AdditionalOption;
 use App\Models\MProductCategory;
@@ -146,7 +146,7 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreRequest $request, Product $product)
     {
 
         $product->fill([

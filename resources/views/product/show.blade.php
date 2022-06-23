@@ -68,10 +68,10 @@
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
-                                @foreach($product->additionalOptions as $option)
+                                @foreach($product->additionalOptions as $additional_option)
                                     <li>
-                                        <span class="add">＋ {{$option->name}}</span>
-                                        <span class="price">￥@if(!is_null($option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$option->price]}}@endif</span>
+                                        <span class="add">＋ {{$additionaloption->name}}</span>
+                                        <span class="price">￥@if(!is_null($additional_option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$additional_option->price]}}@endif</span>
                                     </li>
                                 @endforeach
                             </ul>
@@ -79,10 +79,10 @@
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
-                                @foreach($product->productQuestions as $question)
+                                @foreach($product->productQuestions as $product_question)
                                     <li>
-                                        <p class="quest toggleBtn"><span>{{$question->title}}</span><span class="more">回答を見る</span></p>
-                                        <p class="answer toggleBox">{{$question->answer}}</p>
+                                        <p class="quest toggleBtn"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
+                                        <p class="answer toggleBox">{{$product_question->answer}}</p>
                                     </li>
                                 @endforeach
                             </ul>
@@ -260,328 +260,49 @@
                         </div>
                     </aside>
                 </div>
-                <div id="">
-                    <div class="recommendList style2">
-                        <h2 class="hdM">{{$product->productUser->name}}さんのその他の出品</h2>
-                        <div class="list sliderSP">
-                            @foreach($all_products as $all_product)
-                                <div class="item">
-                                    <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
-                                        <img src="/img/common/img_270x160.png" alt="">
-                                        <button class="favorite">お気に入り</button>
-                                    </a>
-                                    <div class="info">
-                                        <div class="breadcrumb"><a href="#">@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->mProductCategory->name}} @endif</a>&emsp;＞&emsp;<span>@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->name}}@endif</span></div>
-                                        <div class="draw">
-                                            <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>
-                                            <p class="price"><font>{{$all_product->title}}</font><br>{{$all_product->price}}円</p>
-                                        </div>
-                                        <div class="single">
+{{--                <div id="">--}}
+{{--                    <div class="recommendList style2">--}}
+{{--                        <h2 class="hdM">{{$product->productUser->name}}さんのその他の出品</h2>--}}
+{{--                        <div class="list sliderSP">--}}
+{{--                            @foreach($all_products as $all_product)--}}
+{{--                                <div class="item">--}}
+{{--                                    <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
+{{--                                        <img src="/img/common/img_270x160.png" alt="">--}}
+{{--                                        <button class="favorite">お気に入り</button>--}}
+{{--                                    </a>--}}
+{{--                                    <div class="info">--}}
+{{--                                        <div class="breadcrumb"><a href="#">@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->mProductCategory->name}} @endif</a>&emsp;＞&emsp;<span>@if(!is_null($all_product->category_id)){{$all_product->mProductChildCategory->name}}@endif</span></div>--}}
+{{--                                        <div class="draw">--}}
+{{--                                            <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
+{{--                                            <p class="price"><font>{{$all_product->title}}</font><br>{{$all_product->price}}円</p>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="single">--}}
 {{--                                            <span>単発リクエスト</span>--}}
-                                            <a href="#">{{App\Models\Product::IS_ONLINE[$all_product->is_online]}}</a>
-                                        </div>
-                                        <div class="aboutUser">
-                                            <div class="user">
-                                                <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>
-                                                <div class="introd">
-                                                    <p class="name">{{$all_product->productUser->name}}</p>
-                                                    <p>({{App\Models\UserProfile::GENDER[$all_product->productUser->userProfile->gender]}}/ {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>
-                                                </div>
-                                            </div>
-                                            <div class="evaluates">
-                                                <span class="good">0</span>
-                                                <span class="usually">0</span>
-                                                <span class="pity">0</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+{{--                                            <a href="#">{{App\Models\Product::IS_ONLINE[$all_product->is_online]}}</a>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="aboutUser">--}}
+{{--                                            <div class="user">--}}
+{{--                                                <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
+{{--                                                <div class="introd">--}}
+{{--                                                    <p class="name">{{$all_product->productUser->name}}</p>--}}
+{{--                                                    <p>({{App\Models\UserProfile::GENDER[$all_product->productUser->userProfile->gender]}}/ {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="evaluates">--}}
+{{--                                                <span class="good">0</span>--}}
+{{--                                                <span class="usually">0</span>--}}
+{{--                                                <span class="pity">0</span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
 
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">--}}
-{{--                                    <img src="/img/common/img_270x160.png" alt="">--}}
-{{--                                    <button class="favorite">お気に入り</button>--}}
-{{--                                </a>--}}
-{{--                                <div class="info">--}}
-{{--                                    <div class="breadcrumb"><a href="#">デザイン</a>&emsp;＞&emsp;<span>その他デザイン</span></div>--}}
-{{--                                    <div class="draw">--}}
-{{--                                        <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>--}}
-{{--                                        <p class="price"><font>似顔絵イラスト描きます</font><br>0,000円</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="single">--}}
-{{--                                        <span>単発リクエスト</span>--}}
-{{--                                        <a href="#">対面</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="aboutUser">--}}
-{{--                                        <div class="user">--}}
-{{--                                            <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
-{{--                                            <div class="introd">--}}
-{{--                                                <p class="name">クリエイター名</p>--}}
-{{--                                                <p>(女性/ 20代/ 東京都)</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="evaluates">--}}
-{{--                                            <span class="good">0</span>--}}
-{{--                                            <span class="usually">0</span>--}}
-{{--                                            <span class="pity">0</span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                        </div>
-                    </div>
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                </div>
-            </div><!--inner-->
+{{--                </div>--}}
+{{--            </div><!--inner-->--}}
     </article>
 </x-layout>
 <script type="text/javascript">

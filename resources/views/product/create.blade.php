@@ -15,6 +15,7 @@
                         @csrf
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
+                        @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="category_id">
                                 <option value="">選択してください</option>
