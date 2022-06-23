@@ -28,7 +28,7 @@ class UserProfileFactory extends Factory
             'zip'                 => $this->faker->postcode,
             'address'             => $this->faker->address,
             'introduction'        => $this->faker->sentence(),
-            'identification_path' => $this->faker->imageUrl,
+            'identification_path' => null,
             'is_identify'         => $this->faker->boolean,
         ];
     }
@@ -42,8 +42,8 @@ class UserProfileFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'identification_path' => $this->faker->imageUrl,
-                'is_identify'         => 1,
+                'identification_path' => null,
+                'is_identify'         => 0,
             ];
         });
     }

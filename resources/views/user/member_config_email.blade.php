@@ -1,6 +1,6 @@
 <x-layout>
 	<article>
-		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
+		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">

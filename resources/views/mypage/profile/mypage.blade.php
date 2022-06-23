@@ -47,11 +47,15 @@
 									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox fancybox_profile"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
 									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
-									<p class="mypageP04 check"><a href="#">本人確認済み</a><a href="#">機密保持契約(NDA) 可能</a></p>
-									<p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
+									<p class="mypageP04 check">
+										@if($user_profile->is_identify == 1)
+											<a href="#">本人確認済み</a>
+										@endif
+										<!-- <a href="#">機密保持契約(NDA) 可能</a></p> -->
+									<!-- <p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
 										<div class="evaluate three"></div><a href="#">(3.0)</a>
-									</div>
+									</div> -->
 								</dd>
 						</dl>
 							<div class="mypageIntro">
