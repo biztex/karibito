@@ -30,8 +30,8 @@ class StoreRequest extends FormRequest
         'title' => 'required | string | max:30',
         'content' => 'required | string | min:30 | max:3000 ',
         'price' => 'required | integer | min:500 | max:9990000',
-        'application_deadline' => 'required | date | after_or_equal:tomorrow',
-        'required_date' => 'nullable | date | after_or_equal:application_deadline',
+        'application_deadline' => 'required | date | after:yesterday',
+        'required_date' => 'nullable | date | after:yesterday',
         'is_online' => 'required | boolean',
         'is_call' => 'required | boolean',           
         ];
