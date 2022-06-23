@@ -1,6 +1,5 @@
 <x-layout>
 	<article>
-		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="oneColumnPage02">
 			<div class="inner">
 				<div id="main">

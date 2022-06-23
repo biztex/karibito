@@ -1116,7 +1116,7 @@
 	z-index: 99;
 	border-radius: 50%;
 	box-shadow: 0 2px 8px rgba(0,0,0,.16);
-	display: none!important;
+	/* display: none!important; */
 }
 @media screen and (max-width: 767px) {
 	.beginGuide{margin-top: 30px}
