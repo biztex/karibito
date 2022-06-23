@@ -30,7 +30,7 @@
 								<option value="{{ route('secret05') }}">5/6</option>
 								<option value="{{ route('secret06') }}" selected>6/6</option>
 							</select>
-							<div class="secretPagerNext"><a href="" class="none">次へ</a></div>
+							<div class="secretPagerNext"><a href="{{ route('secret01') }}">次へ</a></div>
 						</div>
 					</div>
 				</div><!-- /#main -->
