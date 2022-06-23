@@ -68,41 +68,43 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $product = Product::create([
-            'user_id' => \Auth::id(),
-            'category_id' => $request->category_id,
-            'prefecture_id' => $request->prefecture_id,
-            'title' => $request->title,
-            'content' => $request->input('content'),
-            'price' => $request->price,
-            'is_online' => $request->is_online,
-            'number_of_day' => $request->number_of_day,
-            'is_call' => $request->is_call,
-            'number_of_sale' => $request->number_of_sale,
-            'status' => $request->status,
-            'is_draft' => Product::NOT_DRAFT
-        ]);
+        \DB::transaction(function () use ($request) {
+            $product = Product::create([
+                'user_id' => \Auth::id(),
+                'category_id' => $request->category_id,
+                'prefecture_id' => $request->prefecture_id,
+                'title' => $request->title,
+                'content' => $request->input('content'),
+                'price' => $request->price,
+                'is_online' => $request->is_online,
+                'number_of_day' => $request->number_of_day,
+                'is_call' => $request->is_call,
+                'number_of_sale' => $request->number_of_sale,
+                'status' => $request->status,
+                'is_draft' => Product::NOT_DRAFT
+            ]);
 
-        for ($i = 0; $i < 3; $i++) {
-            if (!is_null($request->option_name[$i])) {
-                $product->additionalOptions()->create([
-                    'name' => $request->option_name[$i],
-                    'price' => $request->option_price[$i],
-                    'is_public' => $request->option_is_public[$i]
-                ]);
+            for ($i = 0; $i < 3; $i++) {
+                if (!is_null($request->option_name[$i])) {
+                    $product->additionalOptions()->create([
+                        'name' => $request->option_name[$i],
+                        'price' => $request->option_price[$i],
+                        'is_public' => $request->option_is_public[$i]
+                    ]);
+                }
             }
-        }
 
-        for ($i = 0; $i < 3; $i++) {
-            if (!is_null($request->question_title[$i])) {
-                $product->productQuestions()->create([
-                    'title' => $request->question_title[$i],
-                    'answer' => $request->answer[$i]
-                ]);
+            for ($i = 0; $i < 3; $i++) {
+                if (!is_null($request->question_title[$i])) {
+                    $product->productQuestions()->create([
+                        'title' => $request->question_title[$i],
+                        'answer' => $request->answer[$i]
+                    ]);
+                }
             }
-        }
 
-        $this->product_service->storeImage($request,$product->id);
+            $this->product_service->storeImage($request, $product->id);
+        });
 
         return redirect()->route('service_thanks');
     }
@@ -146,47 +148,48 @@ class ProductController extends Controller
      */
     public function update(StoreRequest $request, Product $product)
     {
+        \DB::transaction(function () use ($request, $product) {
+            $product->fill([
+                'category_id' => $request->category_id,
+                'prefecture_id' => $request->prefecture,
+                'title' => $request->title,
+                'content' => $request->input('content'),
+                'price' => $request->price,
+                'is_online' => $request->is_online,
+                'number_of_day' => $request->number_of_day,
+                'is_call' => $request->is_call,
+                'number_of_sale' => $request->number_of_sale,
+                'status' => $request->status,
+                'is_draft' => Product::NOT_DRAFT
+            ]);
 
-        $product->fill([
-            'category_id' => $request->category_id,
-            'prefecture_id' => $request->prefecture,
-            'title' => $request->title,
-            'content' => $request->input('content'),
-            'price' => $request->price,
-            'is_online' => $request->is_online,
-            'number_of_day' => $request->number_of_day,
-            'is_call' => $request->is_call,
-            'number_of_sale' => $request->number_of_sale,
-            'status' => $request->status,
-            'is_draft' => Product::NOT_DRAFT
-        ]);
+            $product->additionalOptions()->delete();
 
-        $product->additionalOptions()->delete();
-
-        if ($request->option_name) {
-            foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                $product->additionalOptions()->create([
-                    'name' => $option,
-                    'price' => $request->option_price[$index],
-                    'is_public' => $request->option_is_public[$index]
-                ]);
-            }
-        }
-
-        $product->productQuestions()->delete();
-
-        if ($request->question_title) {
-            foreach ($request->question_title as $index =>$title){
-                $product->productQuestions()->create([
-                        'title' => $request->question_title[$index],
-                        'answer' => $request->answer[$index]
+            if ($request->option_name) {
+                foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
+                    $product->additionalOptions()->create([
+                        'name' => $option,
+                        'price' => $request->option_price[$index],
+                        'is_public' => $request->option_is_public[$index]
                     ]);
                 }
             }
 
+            $product->productQuestions()->delete();
+
+            if ($request->question_title) {
+                foreach ($request->question_title as $index =>$title){
+                    $product->productQuestions()->create([
+                            'title' => $request->question_title[$index],
+                            'answer' => $request->answer[$index]
+                        ]);
+                    }
+                }
+
         $product->save();
 
         $this->product_service->updateImage($request,$product->id);
+        });
 
         return redirect()->route('service_thanks');
     }
@@ -254,47 +257,46 @@ class ProductController extends Controller
     public function updateDraft(DraftRequest $request, Product $product)
     {
         \DB::transaction(function () use ($request, $product) {
-
             $product->fill([
-            'category_id' => $request->category_id,
-            'prefecture_id' => $request->prefecture,
-            'title' => $request->title,
-            'content' => $request->input('content'),
-            'price' => $request->price,
-            'is_online' => $request->is_online,
-            'number_of_day' => $request->number_of_day,
-            'is_call' => $request->is_call,
-            'number_of_sale' => $request->number_of_sale,
-            'status' => $request->status,
-            'is_draft' => Product::IS_DRAFT
-        ]);
+                'category_id' => $request->category_id,
+                'prefecture_id' => $request->prefecture,
+                'title' => $request->title,
+                'content' => $request->input('content'),
+                'price' => $request->price,
+                'is_online' => $request->is_online,
+                'number_of_day' => $request->number_of_day,
+                'is_call' => $request->is_call,
+                'number_of_sale' => $request->number_of_sale,
+                'status' => $request->status,
+                'is_draft' => Product::IS_DRAFT
+            ]);
 
-        $product->additionalOptions()->delete();
+            $product->additionalOptions()->delete();
 
-        if ($request->option_name) {
-            foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                $product->additionalOptions()->create([
-                    'name' => $option,
-                    'price' => $request->option_price[$index],
-                    'is_public' => $request->option_is_public[$index]
-                ]);
+            if ($request->option_name) {
+                foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
+                    $product->additionalOptions()->create([
+                        'name' => $option,
+                        'price' => $request->option_price[$index],
+                        'is_public' => $request->option_is_public[$index]
+                    ]);
+                }
             }
-        }
 
-        $product->productQuestions()->delete();
+            $product->productQuestions()->delete();
 
-        if ($request->question_title) {
-            foreach ($request->question_title as $index =>$title){
-                $product->productQuestions()->create([
-                    'title' => $request->question_title[$index],
-                    'answer' => $request->answer[$index]
-                ]);
+            if ($request->question_title) {
+                foreach ($request->question_title as $index =>$title){
+                    $product->productQuestions()->create([
+                        'title' => $request->question_title[$index],
+                        'answer' => $request->answer[$index]
+                    ]);
+                }
             }
-        }
 
-        $product->save();
-        $this->product_service->updateImage($request,$product->id);
-    });
+            $product->save();
+            $this->product_service->updateImage($request,$product->id);
+        });
 
         return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
