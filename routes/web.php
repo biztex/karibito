@@ -108,12 +108,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 商品登録
     Route::resource('product', MypageProductController::class);
-//    Route::get('post', [ProductController::class, 'index'])->name('post');
-//    Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
-//    Route::get('product/show/{product}', [ProductController::class, 'show'])->name('product.show');
-//    Route::get('product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
-//   Route::put('product/update/{product}', [ProductController::class, 'update'])->name('product.update');
-//    Route::get('product/destroy/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::put('product/update/{product}', [MypageProductController::class, 'update'])->name('product.update');
+    Route::post('product/draft',[MypageProductController::class,'storeDraft'])->name('product.storeDraft');
+    Route::put('product/{product}/draft',[MypageProductController::class,'updateDraft'])->name('product.updateDraft');
     Route::post('product/preview/', [MypageProductController::class, 'preview'])->name('product.preview');
     Route::put('product/{product}/edit/preview',[MypageProductController::class,'editPreview'])->name('product.edit.preview');
 //    Route::post('product/store/preview',[MypageProductController::class,'storePreview'])->name('product.store.preview');

@@ -15,6 +15,7 @@
                         @csrf
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
+                        @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="category_id">
                                 <option value="">選択してください</option>
@@ -44,7 +45,7 @@
                         <p class="th">価格<span class="must">必須</span></p>
                             @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <p class="budget price"><input type="text" placeholder="0" value="{{ old('price') }}" name="price"></p>
+                            <p class="budget price"><input type="text" placeholder="0" name="price" value="{{ old('price') }}"></p>
                         </div>
 
                         <div class="td">
@@ -257,9 +258,7 @@
 
                                 <p class="th">公開設定<span class="must">必須</span></p>
                                 <div class="td">
-                                    @error('status')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <select name="status">
                                         <option>選択してください</option>
                                         <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(old('status') == App\Models\Product::NOT_PUBLIC) selected @endif>非公開</option>
@@ -269,7 +268,7 @@
                                 <div class="functeBtns">
                                     <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
                                     <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
-                                    <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
+                                    <input type="submit" class="full green_o" formaction="{{ route('product.storeDraft') }}" value="下書きとして保存">
                                 </div>
                     </form>
                 </div>

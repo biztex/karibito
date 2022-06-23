@@ -51,7 +51,7 @@
 														@endif
 													</div>
 												</div>
-												<p class="link"><a href="#">編集する</a></p>
+												<p class="link"><a href="{{ route('product.edit',$val->id) }}">編集する</a></p>
 
 											</div>
 										</li>

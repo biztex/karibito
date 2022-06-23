@@ -15,6 +15,7 @@
                         @csrf @method('PUT')
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
+                        @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="category_id">
                                 <option value="">選択してください</option>
@@ -41,10 +42,11 @@
                         </div>
 
                         <p class="th">価格<span class="must">必須</span></p>
-                            @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                        @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <p class="price"><input type="number" name="price" class="@error('price') is-invalid @enderror" value="{{old('price', $product->price)}}"></p>
+                            <p class="budget price"><input type="text" placeholder="0" name="price" value="{{ old('price', $product->price) }}"></p>
                         </div>
+
                         <div class="td">
                             <div class="warnNotes">
                                 <p>【対面】：直接会って提供する内容を相手に行います。<br>【非対面】：互いが直接会わずに提供する内容を相手に行います。</p>
@@ -64,7 +66,7 @@
                         <p class="th">エリア（対面の場合のみ）</p>
                             @error('prefecture')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <select name="prefecture" class="@error('prefecture') is-invalid @enderror">
+                            <select name="prefecture" class="">
                                 <option value="">選択してください</option>
                                 @foreach ( $prefectures as $prefecture )
                                     <option value="{{ $prefecture->id }}" @if( old('prefecture_id', $product->prefecture_id) == $prefecture->id ) selected @endif>{{ $prefecture->name }}</option>
@@ -197,18 +199,18 @@
                             </div>
 
                             <p class="th">公開設定<span class="must">必須</span></p>
-                                @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <select name="status">
-                                    <option>選択してください</option>
-                                    <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(old('status',$product->status) == App\Models\Product::NOT_PUBLIC)) selected @endif required>非公開</option>
-                                    <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status', $product->status) == App\Models\Product::IS_PUBLIC)) selected @endif required>公開</option>
+                                    <option value="">選択してください</option>
+                                    <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(!is_null(old('status', $product->status )) && old('status', $product->status ) == App\Models\Product::NOT_PUBLIC) selected @endif>非公開</option>
+                                    <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status', $product->status) == App\Models\Product::IS_PUBLIC)) selected @endif>公開</option>
                                 </select>
                             </div>
                             <div class="functeBtns">
                                 <input type="submit" class="full" style="color:white;" formaction="{{ route('product.edit.preview', $product->id) }}" value="プレビュー画面を見る">
                                 <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $product->id) }}" value="サービス提供を開始">
-                                <a href="{{ route('draft') }}" class="full green_o">下書きとして保存</a>
+                                <input type="submit" class="full green_o" formaction="{{ route('product.updateDraft', $product->id) }}" value="下書きとして保存">
                             </div>
                     </form>
                 </div>
