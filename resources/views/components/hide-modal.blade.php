@@ -1,6 +1,5 @@
 <x-app>		
 
-
 	<div class="hide">
 		<!-- 身分証明証提出モーダル -------------------------------------------------------------- -->
 			<div id="fancybox_register" class="fancyboxWrap">
@@ -21,7 +20,7 @@
 					</div>
 					<div class="fancyRegisterItem">
 						<p class="notice">注意事項</p>
-						<p class="txt">カリビトアプリのプロフィールで、住所・氏名・生年月日はしっかり記載していますか?<br>身分証明書との一致が確認できないと本人確認はできないのでご注意ください!<br>登録いただいた３営業日以内にご返信します。</p>
+						<p class="txt">カリビトアプリのプロフィールで、住所・氏名・生年月日はしっかり記載していますか?<br>身分証明書との一致が確認できないと本人確認はできないのでご注意ください!<br>登録いただいた３営業日以内にご返信します。<br>また、アップロードできる画像形式はJPEG/PNGのみです。</p>
 					</div>
 					<div class="fancyRegisterItem">
 						<p class="txt">提出可能な本人確認書類は、下記となっております。</p>
@@ -36,16 +35,21 @@
 					</div>
 				</div>
 				<p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集はこちら</a></p>
-
-				<form action="{{ route('identification') }}" method="POST" name="upload" enctype="multipart/form-data">
-					@csrf
-					<label>
-						<input type="file" name="identification_path" style="display:none;"  accept=".png,.jpg">
-						<p class="fancyRegisterUpload">身分証明書をアップロード</p>
-					</label>
-					
-					<p class="fancyRegisterSubmit"><a href="#" onclick="document.upload.submit()">提出する</a></p>
-				</form>
+				@if(!empty($user_profile->zip) && !empty($user_profile->address) && !empty($user_profile->birthday))
+					<form action="{{ route('identification') }}" method="POST" name="upload" enctype="multipart/form-data">
+						@csrf
+						<label>
+							<input type="file" name="identification_path" style="display:none;"  accept="image/png,image/jpeg,">
+							<p class="fancyRegisterUpload">身分証明書をアップロード</p>
+						</label>
+						
+						<p class="fancyRegisterSubmit"><a href="#" onclick="document.upload.submit()">提出する</a></p>
+					</form>
+				@else
+					<div class="fancyRegisterItem">
+						<p class="txt">本人確認にはご住所 / 本名/ 生年月日のご登録が必要です。<br/>「プロフィール編集はこちら」より、郵便番号・住所の登録をお願いいたします。</p>
+					</div>
+				@endif
 			</div>
 
 		<!-- プロフィール編集モーダル -------------------------------------------------------------- -->
@@ -96,7 +100,7 @@
 								@error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-								<dd><input type="text" name="name" class="@error('name') is-invalid @enderror" value="{{old('name',\Auth::user()->name)}}"></dd>
+								<dd><input type="text" name="name" value="{{old('name',\Auth::user()->name)}}"></dd>
 							</dl>
 								<dl>
 								
@@ -110,14 +114,25 @@
 										<!--  -->
 									@endif
 								</dl>
-							<dl class=" inlineFlex">
-								<dt>姓<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name="first_name" class="@error('first_name') is-invalid @enderror" value="{{old('first_name',$user_profile->first_name)}}"></dd>
-							</dl>
-							<dl class=" inlineFlex">
-								<dt>名<span>(本名は非公開です)</span></dt>
-								<dd><input type="text" name="last_name" class="@error('last_name') is-invalid @enderror" value="{{old('last_name',$user_profile->last_name)}}"></dd>
-							</dl>
+
+							@if($user_profile->is_identify == 0)
+								<dl class=" inlineFlex">
+									<dt>姓<span>(本名は非公開です)</span></dt>
+									<dd><input type="text" name="first_name" value="{{old('first_name',$user_profile->first_name)}}"></dd>
+								</dl>
+								<dl class=" inlineFlex">
+									<dt>名<span>(本名は非公開です)</span></dt>
+									<dd><input type="text" name="last_name" value="{{old('last_name',$user_profile->last_name)}}"></dd>
+								</dl>
+							@else
+								<dl class=" inlineFlex">
+									<dt>姓名<span>(本名は非公開です)</span></dt>
+									<dd>{{ $user_profile->first_name.'  '.$user_profile->last_name }}</dd>
+									<input type="hidden" name="first_name" value="{{ $user_profile->first_name }}">
+									<input type="hidden" name="last_name" value="{{ $user_profile->last_name }}">
+								</dl>
+							@endif
+
 							<dl>
 								<dt>性別</dt>
 								<dd>
@@ -133,51 +148,72 @@
 							</dl>
 							<dl>
 								<dt>生年月日<span>(年代のみ公開されます)</span></dt>
+								@if($user_profile->is_identify == 0)
 									@error('birthday')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
-								<dd>
-									<select class="year" name="year">
-										<option value="">年</option>
-										@for ($i = 1900; $i < 2023; $i++ )
-											<option value="{{$i}}" @if($i == old('year', date("Y",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
-										@endfor
-									</select>
-									<select class="month" name="month">
-										<option value="">月</option>
-										@for ($i = 1; $i < 13; $i++ )
-											<option value="{{$i}}" @if($i == old('month', date("n",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
-										@endfor
-									</select>
-									<select class="day" name="day" type="day">
-										<option value="">日</option>
-										@for ($i = 1; $i < 32; $i++ )
-											<option value="{{$i}}" @if($i == old('day', date("j",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
-										@endfor
-									</select>
-								</dd>
-							</dl>
-							<dl>
-								<dt>住所<span>(都道府県のみ表示されます)</span></dt>
-								    @error('zip')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-								<dd>
-									<p class="addrNumber"><input class="short" type="text" name="zip" value="{{old('zip',$user_profile->zip)}}"></p>
-									<div class="addrSelect">
-										<select class="short" name="prefecture">
-										    <option value="">選択してください</option>
-											@foreach($prefectures as $prefecture)
-												<option value="{{$prefecture->id}}" @if($prefecture->id == (int)old('prefecture',$user_profile->prefecture_id)) selected @endif>{{$prefecture->name}}</option>
-											@endforeach
+									<dd>
+										<select class="year" name="year">
+											<option value="">年</option>
+											@for ($i = 1900; $i < 2023; $i++ )
+												<option value="{{$i}}" @if($i == old('year', date("Y",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
+											@endfor
 										</select>
-									</div>
-									@error('address')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-									<p><input type="text" name="address" placeholder="市区町村" value="{{old('address',$user_profile->address)}}"></p>
-								</dd>
+										<select class="month" name="month">
+											<option value="">月</option>
+											@for ($i = 1; $i < 13; $i++ )
+												<option value="{{$i}}" @if($i == old('month', date("n",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
+											@endfor
+										</select>
+										<select class="day" name="day" type="day">
+											<option value="">日</option>
+											@for ($i = 1; $i < 32; $i++ )
+												<option value="{{$i}}" @if($i == old('day', date("j",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
+											@endfor
+										</select>
+									</dd>
+								@else
+										<dd>{{ date("Y年n月j日",strtotime($user_profile->birthday)) }}</dd>
+										<input type="hidden" name="year" value="{{ date("Y",strtotime($user_profile->birthday)) }}">
+										<input type="hidden" name="month" value="{{ date("n",strtotime($user_profile->birthday)) }}">
+										<input type="hidden" name="day" value="{{ date("j",strtotime($user_profile->birthday)) }}">
+								@endif
 							</dl>
+
+							@if($user_profile->is_identify == 0)
+								<dl>
+									<dt>住所<span>(都道府県のみ表示されます)</span></dt>
+										@error('zip')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									<dd>
+										<p class="addrNumber"><input class="short" type="text" name="zip" value="{{old('zip',$user_profile->zip)}}"></p>
+										<div class="addrSelect">
+											<select class="short" name="prefecture">
+												<option value="">選択してください</option>
+												@foreach($prefectures as $prefecture)
+													<option value="{{$prefecture->id}}" @if($prefecture->id == (int)old('prefecture',$user_profile->prefecture_id)) selected @endif>{{$prefecture->name}}</option>
+												@endforeach
+											</select>
+										</div>
+										@error('address')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+										<p><input type="text" name="address" placeholder="市区町村" value="{{old('address',$user_profile->address)}}"></p>
+									</dd>
+								</dl>
+							@else
+								<dl>
+									<dt>住所<span>(都道府県のみ表示されます)</span></dt>
+									<dd>
+										<p class="addrNumber">〒{{ substr($user_profile->zip, 0, 3).'-'.substr($user_profile->zip, 3, 7)}}</p>
+										{{ $user_profile->prefecture->name.$user_profile->address }}
+									</dd>
+									<input type="hidden" name="zip" value="{{ $user_profile->zip }}">
+									<input type="hidden" name="prefecture" value="{{ $user_profile->prefecture_id }}">
+									<input type="hidden" name="address" value="{{ $user_profile->address }}">
+								</dl>
+							@endif
 							<div class="specialtyBox">
 								<div class="specialtyItem">
 									<div class="clone">
@@ -221,7 +257,6 @@
 				</form>
 			</div>
 		@endif
-
 		<!--　履歴書作成モーダル -------------------------------------------------------------- -->
 			<div id="fancybox_resume" class="fancyboxWrap">
 				<form>

@@ -45,7 +45,7 @@
 								@endif
 								<dd>
 									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox fancybox_profile"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
-									<p class="mypageP02">最終ログイン：8時間前</p>
+									<!-- <p class="mypageP02">最終ログイン：8時間前</p> -->
 									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
 									<p class="mypageP04 check">
 										@if($user_profile->is_identify == 1)
@@ -78,53 +78,22 @@
 						<div class="mypageSec02">
 							<p class="mypageHd02">お知らせ</p>
 							<ul class="mypageUl02">
-								<li>
-									<a href="#">
-										<dl>
-											<dt><img src="/img/mypage/img_notice01.png" alt=""></dt>
-											<dd>
-												<p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-												<p class="time">0時間前</p>
-											</dd>
-										</dl>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<dl>
-											<dt><img src="/img/mypage/img_notice01.png" alt=""></dt>
-											<dd>
-												<p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-												<p class="time">0時間前</p>
-											</dd>
-										</dl>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<dl>
-											<dt><img src="/img/mypage/img_notice01.png" alt=""></dt>
-											<dd>
-												<p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-												<p class="time">0時間前</p>
-											</dd>
-										</dl>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<dl>
-											<dt><img src="/img/mypage/img_notice01.png" alt=""></dt>
-											<dd>
-												<p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-												<p class="time">0時間前</p>
-											</dd>
-										</dl>
-									</a>
-								</li>
+								@for($i=0; $i<4; $i++)
+									<li>
+										<a href="#">
+											<dl>
+												<dt><img src="/img/mypage/img_notice01.png" alt=""></dt>
+												<dd>
+													<p class="txt">事務局から個別メッセージ「ログイン通知」</p>
+													<p class="time">0時間前</p>
+												</dd>
+											</dl>
+										</a>
+									</li>
+								@endfor
 							</ul>
 						</div>
-						 <div class="mypageSec03">
+						<div class="mypageSec03">
 							<p class="mypageHd02">出品サービス<a href="#" class="more">出品サービスを編集する</a></p>
 							<div class="box">
 								<p class="title">出品サービス</p>
