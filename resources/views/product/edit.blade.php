@@ -11,7 +11,7 @@
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
-                    <form method="post" class="contactForm">
+                    <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf @method('PUT')
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
@@ -182,10 +182,10 @@
                                         <div id="product_pic{{$i}}" class="img">
                                         @if(isset($product->productImage[$i]))
                                             <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->productImage[$i]->path)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                            <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple >
+                                            <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
                                         @else
                                             <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                            <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                            <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
                                         @endif
                                         </div>
                                         <div class="fun">

@@ -66,15 +66,15 @@ $(function () {
 	var image_status = {};
 	for (let i = 0; i < 10; i++) {
 		$("#product_pic"+i).on('click', function () {
-			$("input[name='path["+i+"]']").on('click', function (e) {
+			$("input[name='paths["+i+"]']").on('click', function (e) {
 				e.stopPropagation();
 			});
-			$("input[name='path["+i+"]']").click();
-			$("input[name='path["+i+"]']").on('change', function (e) {
+			$("input[name='paths["+i+"]']").click();
+			$("input[name='paths["+i+"]']").on('change', function (e) {
 				var reader = new FileReader();
 				reader.onload = function (e) {
 					$("#preview_product"+i).attr('src', e.target.result);
-					$("input[name='path["+i+"]']").attr('value', e.target.result);
+					$("input[name='paths["+i+"]']").attr('value', e.target.result);
 					localStorage.setItem("pic"+i, reader.result);
 				}
 				reader.readAsDataURL(e.target.files[0]);
@@ -85,7 +85,7 @@ $(function () {
 
 		// 削除ボタンでクリア
 		$("#storage_delete"+i).on('click', function () {
-			$("input[name='path["+i+"]']").attr('value', null);
+			$("input[name='paths["+i+"]']").attr('value', null);
 
 			image_status[i] = 'delete';
 			$("input[name='image_status']").val(JSON.stringify(image_status));
@@ -97,7 +97,7 @@ $(function () {
 		// プレビューページ
 		$(function () {
 			if (localStorage.getItem("pic"+i)) {
-				$("input[name='path["+i+"]']").attr('value', localStorage.getItem("pic"+i));
+				$("input[name='paths["+i+"]']").attr('value', localStorage.getItem("pic"+i));
 				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
 				$("#preview_slider"+i).attr('src', localStorage.getItem("pic"+i));
 				$("#preview_slider"+i+i).attr('src', localStorage.getItem("pic"+i));
