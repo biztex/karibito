@@ -91,7 +91,7 @@
                         </div>
 
                         <p class="th">販売数<span class="must">必須</span></p>
-{{--                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
+                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>

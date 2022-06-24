@@ -65,6 +65,58 @@ class ProductService
     }
 
 
+    /**
+     * 商品編集
+     */
+    public function updateProduct(array $params, $product):Product
+    {
+        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale'];
+
+        foreach($columns as $column){
+            $product->$column = $params[$column];
+        }
+        $product->is_draft = Product::NOT_DRAFT;
+        $product->status = Product::STATUS_PUBLISH;
+        $product->save();
+        return $product;
+    }
+
+
+    /**
+     * 有料オプション編集
+     */
+    public function updateAdditionalOption(array $request, $product)
+    {
+        $product->additionalOptions()->delete();
+
+        if ($request['option_name']) {
+            foreach ($request['option_name'] as $index => $option) {
+                $product->additionalOptions()->create([
+                    'name' => $request['option_name'][$index],
+                    'price' => $request['option_price'][$index],
+                    'is_public' => $request['option_is_public'][$index]
+                ]);
+            }
+        }
+    }
+
+
+    /**
+     * よくある質問編集
+     */
+    public function updateProductQuestion(array $request, $product)
+    {
+        $product->productQuestions()->delete();
+
+        if ($request['question_title']) {
+            foreach ($request['question_title'] as $index => $title){
+                $product->productQuestions()->create([
+                    'title' => $request['question_title'][$index],
+                    'answer' => $request['answer'][$index]
+                ]);
+            }
+        }
+    }
 
 
     /**

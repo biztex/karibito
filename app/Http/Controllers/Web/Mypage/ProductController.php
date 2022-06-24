@@ -114,44 +114,46 @@ class ProductController extends Controller
     public function update(StoreRequest $request, Product $product)
     {
         \DB::transaction(function () use ($request, $product) {
-            $product->fill([
-                'category_id' => $request->category_id,
-                'prefecture_id' => $request->prefecture,
-                'title' => $request->title,
-                'content' => $request->input('content'),
-                'price' => $request->price,
-                'is_online' => $request->is_online,
-                'number_of_day' => $request->number_of_day,
-                'is_call' => $request->is_call,
-                'number_of_sale' => $request->number_of_sale,
-                'status' => $request->status,
-                'is_draft' => Product::NOT_DRAFT
-            ]);
+            $this->product_service->updateProduct($request->all(), $product);
+            $this->product_service->updateAdditionalOption($request->all(), $product);
+            $this->product_service->updateProductQuestion($request->all(), $product);
+//            $product->fill([
+//                'category_id' => $request->category_id,
+//                'prefecture_id' => $request->prefecture,
+//                'title' => $request->title,
+//                'content' => $request->input('content'),
+//                'price' => $request->price,
+//                'is_online' => $request->is_online,
+//                'number_of_day' => $request->number_of_day,
+//                'is_call' => $request->is_call,
+//                'number_of_sale' => $request->number_of_sale,
+//                'status' => $request->status,
+//                'is_draft' => Product::NOT_DRAFT
+//            ]);
 
-            $product->additionalOptions()->delete();
+//            $product->additionalOptions()->delete();
+//
+//            if ($request->option_name) {
+//                foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
+//                    $product->additionalOptions()->create([
+//                        'name' => $option,
+//                        'price' => $request->option_price[$index],
+//                        'is_public' => $request->option_is_public[$index]
+//                    ]);
+//                }
+//            }
 
-            if ($request->option_name) {
-                foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                    $product->additionalOptions()->create([
-                        'name' => $option,
-                        'price' => $request->option_price[$index],
-                        'is_public' => $request->option_is_public[$index]
-                    ]);
-                }
-            }
+//            $product->productQuestions()->delete();
+//
+//            if ($request->question_title) {
+//                foreach ($request->question_title as $index =>$title){
+//                    $product->productQuestions()->create([
+//                            'title' => $request->question_title[$index],
+//                            'answer' => $request->answer[$index]
+//                        ]);
+//                    }
+//                }
 
-            $product->productQuestions()->delete();
-
-            if ($request->question_title) {
-                foreach ($request->question_title as $index =>$title){
-                    $product->productQuestions()->create([
-                            'title' => $request->question_title[$index],
-                            'answer' => $request->answer[$index]
-                        ]);
-                    }
-                }
-
-        $product->save();
 
         $this->product_service->updateImage($request,$product->id);
         });
