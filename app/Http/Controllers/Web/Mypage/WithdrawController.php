@@ -21,12 +21,12 @@ class WithdrawController extends Controller
         $user = \Auth::user();
 
         \DB::transaction(function () use ($request, $user) {
-            
+
             \Auth::logout();// ログアウト
             $user->delete(); // データ論理削除
-            \Session::put('flash_msg','退会しました');
-            
         });
+
+        \Session::put('flash_msg','退会しました');
 
 
         return redirect()->route('home');
