@@ -88,8 +88,8 @@ class ProductService
     public function updateAdditionalOption(array $request, $product)
     {
         $product->additionalOptions()->delete();
-
-        if ($request['option_name']) {
+        
+        if (!is_null($request['option_name'])) {
             foreach ($request['option_name'] as $index => $option) {
                 $product->additionalOptions()->create([
                     'name' => $request['option_name'][$index],
