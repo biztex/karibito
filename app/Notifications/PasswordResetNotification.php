@@ -13,11 +13,11 @@ class PasswordResetNotification extends Notification
 
     /**
      * Create a new notification instance.
-     *
      * @return void
      */
     public static $toMailCallback;
     public static $createUrlCallback;
+    public static $token;
     public function __construct(string $token)
     {
         $this->token = $token;
