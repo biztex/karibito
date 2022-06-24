@@ -134,9 +134,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = MProductCategory::all();
-
-        return view('product.edit', compact('product', 'categories'));
+        return view('product.edit', compact('product'));
     }
 
     /**
@@ -202,12 +200,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        \DB::transaction(function () use ($product) {
 
-            $product->delete(); // データ論理削除
-            \Session::put('flash_msg','提供商品を削除しました');
+        $product->delete(); // データ論理削除
+        \Session::put('flash_msg','提供商品を削除しました');
 
-        });
         return redirect()->route('mypage');
     }
 
