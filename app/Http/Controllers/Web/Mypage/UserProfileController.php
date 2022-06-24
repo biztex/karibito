@@ -55,13 +55,11 @@ class UserProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
-
-
         \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUser($request->all());
             $this->user_profile_service->storeUserProfile($request->all());
@@ -104,8 +102,7 @@ class UserProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  UpdateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request)

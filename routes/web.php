@@ -150,50 +150,14 @@ Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 
 
 
-// 動詞	URI	アクション	ルート名
-// GET	/photos	index	photos.index
-// GET	/photos/create	create	photos.create
-// POST	/photos	store	photos.store
-// GET	/photos/{photo}	show	photos.show
-// GET	/photos/{photo}/edit	edit	photos.edit
-// PUT/PATCH	/photos/{photo}	update	photos.update
-// DELETE	/photos/{photo}	destroy	photos.destroy
+// GET	        /photos	index	        photos.index　          一覧画面
+// GET	        /photos/create	        create	photos.create　 登録画面
+// POST	        /photos	store	        photos.store　          登録処理
+// GET	        /photos/{photo}	show	photos.show　           詳細画面
+// GET	        /photos/{photo}/edit	photos.edit　           編集画面
+// PUT/PATCH	/photos/{photo}	update	photos.update　         編集処理
+// DELETE	    /photos/{photo}	destroy	photos.destroy　        削除処理
 
-// index:一覧画面(get)
-// create:登録画面(get)
-// store:登録(post)
-// show:詳細画面(get)
-// edit:編集画面(get)
-// update:編集(put)
-// destroy:削除(delete)
-
-Route::get('', [HomeController::class, 'index'])->name('home');
-
-Route::get('add_category', [CategoryController::class, 'createCategory']);
-
-Route::get('contact', [ContactController::class, 'contact']);
-
-Route::get('estimate', [EstimateController::class, 'index']);
-
-Route::get('evaluation', [EvaluationController::class, 'index']);
-
-Route::get('faq_answer', [FaqController::class, 'indexAnswer']);
-Route::get('faq_detail', [FaqController::class, 'indexDetail']);
-Route::get('faq_post', [FaqController::class, 'createPost']);
-Route::get('faq', [FaqController::class, 'index']);
-
-Route::get('favorite', [MypageController::class, 'indexFavorite']);
-Route::get('friends', [MypageController::class, 'indexFriends']);
-Route::get('past', [MypageController::class, 'indexPast']);
-
-Route::get('news_detail', [NewsController::class, 'showDetail']);
-Route::get('news', [NewsController::class, 'indexNews']);
-
-Route::get('payment_history', [PaymentController::class, 'index']);
-
-Route::get('point_history', [PointController::class, 'index']);
-
-Route::get('notation', [NotationController::class, 'show']);
 
 
 // google login
@@ -207,26 +171,9 @@ Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth'
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
 
 
-Route::prefix('sample')->group(function () {
-    Route::view('add_category', 'sample.add_category');
-    Route::view('contact', 'sample.contact');
-    Route::view('estimate', 'sample.estimate');
-    Route::view('evaluation', 'sample.evaluation');
-    Route::view('faq_answer', 'sample.faq_answer');
-    Route::view('faq_detail', 'sample.faq_detail');
-    Route::view('faq_post', 'sample.faq_post');
-    Route::view('faq', 'sample.faq');
-    Route::view('favorite', 'sample.favorite');
-    Route::view('friends', 'sample.friends');
-    Route::view('news_detail', 'sample.news_detail');
-    Route::view('news', 'sample.news');
-    Route::view('notation', 'sample.notation');
-    Route::view('past', 'sample.past');
-    Route::view('payment_history', 'sample.payment_history');
-    Route::view('payment_history', 'sample.payment_history');
-    Route::view('point_history', 'sample.point_history');
-});
+ 
 
+Route::get('', [HomeController::class, 'index'])->name('home');
 
 
 // --管理者画面-----------------------------------------------------------------------------
@@ -248,4 +195,26 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 
 
+});
+
+
+
+// 未着手
+Route::prefix('sample')->group(function (){  
+    Route::view('add_category', 'sample.add_category');
+    Route::view('contact', 'sample.contact');
+    Route::view('estimate', 'sample.estimate');
+    Route::view('evaluation', 'sample.evaluation');
+    Route::view('faq_answer', 'sample.faq_answer');
+    Route::view('faq_detail', 'sample.faq_detail');
+    Route::view('faq_post', 'sample.faq_post');
+    Route::view('faq', 'sample.faq');
+    Route::view('favorite', 'sample.favorite');
+    Route::view('friends', 'sample.friends');
+    Route::view('news_detail', 'sample.news_detail');
+    Route::view('news', 'sample.news');
+    Route::view('notation', 'sample.notation');
+    Route::view('past', 'sample.past');
+    Route::view('payment_history', 'sample.payment_history');
+    Route::view('point_history', 'sample.point_history');
 });

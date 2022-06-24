@@ -63,7 +63,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param StoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
@@ -112,7 +112,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -120,16 +120,15 @@ class ProductController extends Controller
         $user = User::find($product->user_id);
 
         $all_products = Product::all();
-        $birthday = (int)str_replace("-", "", $product->productUser->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($product->productUser->userProfile->birthday);
         return view('product.show', compact('user','product', 'age', 'all_products'));
 //        return view('product.show', compact('product', 'age', 'all_products'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param int $id
+     * 
+     * @param  \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -140,8 +139,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param StoreRequest $request
+     * @param  \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, Product $product)
@@ -161,11 +160,11 @@ class ProductController extends Controller
                 'is_draft' => Product::NOT_DRAFT
             ]);
 
-            $product->additionalOptions()->delete();
+            $product->additionalOptions->delete();
 
             if ($request->option_name) {
                 foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                    $product->additionalOptions()->create([
+                    $product->additionalOptions->create([
                         'name' => $option,
                         'price' => $request->option_price[$index],
                         'is_public' => $request->option_is_public[$index]
@@ -173,11 +172,11 @@ class ProductController extends Controller
                 }
             }
 
-            $product->productQuestions()->delete();
+            $product->productQuestions->delete();
 
             if ($request->question_title) {
                 foreach ($request->question_title as $index =>$title){
-                    $product->productQuestions()->create([
+                    $product->productQuestions->create([
                             'title' => $request->question_title[$index],
                             'answer' => $request->answer[$index]
                         ]);
@@ -227,7 +226,7 @@ class ProductController extends Controller
 
             for ($i = 0; $i < 3; $i++) {
                 if (!is_null($request->option_name[$i])) {
-                    $product->additionalOptions()->create([
+                    $product->additionalOptions->create([
                         'name' => $request->option_name[$i],
                         'price' => $request->option_price[$i],
                         'is_public' => $request->option_is_public[$i]
@@ -237,7 +236,7 @@ class ProductController extends Controller
 
             for ($i = 0; $i < 3; $i++) {
                 if (!is_null($request->question_title[$i])) {
-                    $product->productQuestions()->create([
+                    $product->productQuestions->create([
                         'title' => $request->question_title[$i],
                         'answer' => $request->answer[$i]
                     ]);
@@ -267,11 +266,11 @@ class ProductController extends Controller
                 'is_draft' => Product::IS_DRAFT
             ]);
 
-            $product->additionalOptions()->delete();
+            $product->additionalOptions->delete();
 
             if ($request->option_name) {
                 foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                    $product->additionalOptions()->create([
+                    $product->additionalOptions->create([
                         'name' => $option,
                         'price' => $request->option_price[$index],
                         'is_public' => $request->option_is_public[$index]
@@ -279,11 +278,11 @@ class ProductController extends Controller
                 }
             }
 
-            $product->productQuestions()->delete();
+            $product->productQuestions->delete();
 
             if ($request->question_title) {
                 foreach ($request->question_title as $index =>$title){
-                    $product->productQuestions()->create([
+                    $product->productQuestions->create([
                         'title' => $request->question_title[$index],
                         'answer' => $request->answer[$index]
                     ]);
@@ -302,8 +301,7 @@ class ProductController extends Controller
     {
 
         $user = \Auth::user();
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($user->userProfile->birthday);
 
         return view('product.preview',compact('request','user','age'));
     }
@@ -315,8 +313,7 @@ class ProductController extends Controller
     {
 
         $user = \Auth::user();
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($user->userProfile->birthday);
 
         return view('product.preview',compact('request','user','age', 'product'));
     }
