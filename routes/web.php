@@ -126,21 +126,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // 提供・リクエスト一覧
+    Route::get('job_request',function(){ return redirect()->route('publication');});
     Route::get('publication',[MypageJobRequestController::class,'index'])->name('publication');
     // 提供・リクエスト 下書き一覧
     Route::get('draft',[MypageJobRequestController::class,'draft'])->name('draft');
 
     // リクエスト
-    Route::get('job_request',function(){ return redirect()->route('publication');});
-    Route::resource('job_request',MypageJobRequestController::class, ['except' => ['index']]);
-    Route::post('job_request/draft',[MypageJobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
-    Route::post('job_request/preview',[MypageJobRequestController::class,'preview'])->name('job_request.preview');
-    Route::put('job_request/edit/{job_request}/preview',[MypageJobRequestController::class,'editPreview'])->name('job_request.edit.preview');
-    Route::put('job_request/{job_request}/preview',[MypageJobRequestController::class,'updatePreview'])->name('job_request.update.preview');
-    Route::post('job_request/store/preview',[MypageJobRequestController::class,'storePreview'])->name('job_request.store.preview');
-    Route::put('job_request/{job_request}/draft',[MypageJobRequestController::class,'updateDraft'])->name('job_request.updateDraft');
-
-
+    Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function (){
+        Route::middleware('can:my.job.request,job_request')->group(function (){
+            Route::get('{job_request}/show','show')->name('show');
+            Route::get('{job_request}/edit','edit')->name('edit');
+            Route::put('{job_request}','update')->name('update');
+            Route::delete('{job_request}','destroy')->name('destroy');
+            Route::put('edit/{job_request}/preview','editPreview')->name('edit.preview');
+            Route::put('{job_request}/preview','updatePreview')->name('update.preview');
+            Route::put('{job_request}/draft','updateDraft')->name('update.draft');
+        });
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+        Route::post('draft','storeDraft')->name('storeDraft');
+        Route::post('preview','preview')->name('preview');
+        Route::post('store/preview','storePreview')->name('store.preview');
+    });
 });
 
 // プライバシーポリシーと運営会社
@@ -150,13 +157,13 @@ Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 
 
 
-// GET	        /photos	index	        photos.index　          一覧画面
-// GET	        /photos/create	        create	photos.create　 登録画面
-// POST	        /photos	store	        photos.store　          登録処理
-// GET	        /photos/{photo}	show	photos.show　           詳細画面
-// GET	        /photos/{photo}/edit	photos.edit　           編集画面
-// PUT/PATCH	/photos/{photo}	update	photos.update　         編集処理
-// DELETE	    /photos/{photo}	destroy	photos.destroy　        削除処理
+// GET	        /photo	index	        photo.index　          一覧画面
+// GET	        /photo/create	        photo.create　         登録画面
+// POST	        /photo	store	        photo.store　          登録処理
+// GET	        /photo/{photo}	        photo.show　           詳細画面
+// GET	        /photo/{photo}/edit	    photo.edit　           編集画面
+// PUT/PATCH	/photo/{photo}	        photo.update　         編集処理
+// DELETE	    /photo/{photo}	        photo.destroy　        削除処理
 
 
 

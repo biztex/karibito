@@ -95,7 +95,7 @@ class JobRequestController extends Controller
     {
         $user = User::find($job_request->user_id);
 
-        $birthday = (int)str_replace("-","",$user->userProfile()->birthday);
+        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
         $age = Age::group($birthday);
 
         return view('job_request.show',compact('job_request','user','age'));
@@ -180,7 +180,7 @@ class JobRequestController extends Controller
     {
         $user = \Auth::user();
 
-        $age = Age::group($user->userProfile()->birthday);
+        $age = Age::group($user->userProfile->birthday);
 
         return view('job_request.preview',compact('request','user','age'));
     }

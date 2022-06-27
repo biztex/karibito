@@ -105,7 +105,7 @@
 						<div class="functeBtns">
 							<input type="submit" class="full" style="color:white;" formaction="{{ route('job_request.edit.preview',$job_request->id) }}" value="プレビュー画面を見る">
 							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.update',$job_request->id) }}" value="サービス提供を開始">
-							<input type="submit" class="full green_o" formaction="{{ route('job_request.updateDraft', $job_request->id) }}" value="下書きとして保存">
+							<input type="submit" class="full green_o" formaction="{{ route('job_request.update.draft', $job_request->id) }}" value="下書きとして保存">
 
 						</div>
 					</form>

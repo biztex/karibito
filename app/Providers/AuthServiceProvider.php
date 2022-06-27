@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Models\Product;
+use App\Models\JobRequest;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +28,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // 自分の提供商品
+        Gate::define('my.product', function (User $user, Product $product) {
+            return $user->id === $product->user_id;
+        });
+
+        // 自分のリクエスト
+        Gate::define('my.job.request', function (User $user, JobRequest $job_request) {
+            return $user->id === $job_request->user_id;
+        });
+
     }
 }
