@@ -25,13 +25,12 @@ class AdditionalOption extends Model
         10 => '5500'
     ];
 
-    const NOT_PUBLIC = 0;
-    
-    const IS_PUBLIC = 1;
+    const STATUS_PUBLISH = 1;
+    const STATUS_PRIVATE = 2;
 
     const PUBLIC_STATUS = [
-        self::NOT_PUBLIC => '非公開',
-        self::IS_PUBLIC => '公開',
+        self::STATUS_PUBLISH => '公開',
+        self::STATUS_PRIVATE => '非公開',
     ];
 }
 

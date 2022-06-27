@@ -23,7 +23,6 @@ class ProductController extends Controller
     public function __construct(ProductService $product_service)
     {
         $this->product_service = $product_service;
-
     }
 
     /**
@@ -68,41 +67,10 @@ class ProductController extends Controller
     public function store(StoreRequest $request)
     {
         \DB::transaction(function () use ($request) {
-            $product = Product::create([
-                'user_id' => \Auth::id(),
-                'category_id' => $request->category_id,
-                'prefecture_id' => $request->prefecture_id,
-                'title' => $request->title,
-                'content' => $request->input('content'),
-                'price' => $request->price,
-                'is_online' => $request->is_online,
-                'number_of_day' => $request->number_of_day,
-                'is_call' => $request->is_call,
-                'number_of_sale' => $request->number_of_sale,
-                'status' => $request->status,
-                'is_draft' => Product::NOT_DRAFT
-            ]);
-
-            for ($i = 0; $i < 3; $i++) {
-                if (null !== ($request->option_name[$i])) {
-                    $product->additionalOptions()->create([
-                        'name' => $request->option_name[$i],
-                        'price' => $request->option_price[$i],
-                        'is_public' => $request->option_is_public[$i]
-                    ]);
-                }
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                if (null !== ($request->question_title[$i])) {
-                    $product->productQuestions()->create([
-                        'title' => $request->question_title[$i],
-                        'answer' => $request->answer[$i]
-                    ]);
-                }
-            }
-
-            $this->product_service->storeImage($request, $product->id);
+          $product = $this->product_service->storeProduct($request->all());
+          $this->product_service->storeAdditionalOption($request->all(), $product->id);
+          $this->product_service->storeProductQuestion($request->all(), $product->id);
+          $this->product_service->storeImage($request, $product->id);
         });
 
         return redirect()->route('service_thanks');
@@ -120,9 +88,12 @@ class ProductController extends Controller
         $user = User::find($product->user_id);
 
         $all_products = Product::all();
-        $age = Age::group($product->productUser->userProfile->birthday);
+        if ($product->productUser->userProfile->birthday !== NULL){
+            $age = Age::group($product->productUser->userProfile->birthday);
+        } else {
+            $age = '不明';
+        }
         return view('product.show', compact('user','product', 'age', 'all_products'));
-//        return view('product.show', compact('product', 'age', 'all_products'));
     }
 
     /**
@@ -148,46 +119,10 @@ class ProductController extends Controller
     public function update(StoreRequest $request, Product $product)
     {
         \DB::transaction(function () use ($request, $product) {
-            $product->fill([
-                'category_id' => $request->category_id,
-                'prefecture_id' => $request->prefecture,
-                'title' => $request->title,
-                'content' => $request->input('content'),
-                'price' => $request->price,
-                'is_online' => $request->is_online,
-                'number_of_day' => $request->number_of_day,
-                'is_call' => $request->is_call,
-                'number_of_sale' => $request->number_of_sale,
-                'status' => $request->status,
-                'is_draft' => Product::NOT_DRAFT
-            ]);
-
-            $product->additionalOptions->delete();
-
-            if ($request->option_name) {
-                foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                    $product->additionalOptions->create([
-                        'name' => $option,
-                        'price' => $request->option_price[$index],
-                        'is_public' => $request->option_is_public[$index]
-                    ]);
-                }
-            }
-
-            $product->productQuestions->delete();
-
-            if ($request->question_title) {
-                foreach ($request->question_title as $index =>$title){
-                    $product->productQuestions->create([
-                            'title' => $request->question_title[$index],
-                            'answer' => $request->answer[$index]
-                        ]);
-                    }
-                }
-
-        $product->save();
-
-        $this->product_service->updateImage($request,$product->id);
+            $this->product_service->updateProduct($request->all(), $product);
+            $this->product_service->updateAdditionalOption($request->all(), $product);
+            $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateImage($request,$product->id);
         });
 
         return redirect()->route('service_thanks');
@@ -212,40 +147,9 @@ class ProductController extends Controller
     public function storeDraft(DraftRequest $request)
     {
         \DB::transaction(function () use ($request) {
-                $product = Product::create([
-                'user_id' => \Auth::id(),
-                'category_id' => $request->category_id,
-                'prefecture_id' => $request->prefecture_id,
-                'title' => $request->title,
-                'content' => $request->input('content'),
-                'price' => $request->price,
-                'is_online' => $request->is_online,
-                'number_of_day' => $request->number_of_day,
-                'is_call' => $request->is_call,
-                'number_of_sale' => $request->number_of_sale,
-                'status' => $request->status,
-                'is_draft' => Product::IS_DRAFT
-            ]);
-
-            for ($i = 0; $i < 3; $i++) {
-                if (null !== ($request->option_name[$i])) {
-                    $product->additionalOptions->create([
-                        'name' => $request->option_name[$i],
-                        'price' => $request->option_price[$i],
-                        'is_public' => $request->option_is_public[$i]
-                    ]);
-                }
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                if (null !== ($request->question_title[$i])) {
-                    $product->productQuestions->create([
-                        'title' => $request->question_title[$i],
-                        'answer' => $request->answer[$i]
-                    ]);
-                }
-            }
-
+            $product = $this->product_service->storeDraftProduct($request->all());
+            $this->product_service->storeDraftAdditionalOption($request->all(), $product->id);
+            $this->product_service->storeDraftProductQuestion($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
@@ -269,7 +173,7 @@ class ProductController extends Controller
                 'is_draft' => Product::IS_DRAFT
             ]);
 
-            $product->additionalOptions->delete();
+            $product->additionalOptions()->delete();
 
             if ($request->option_name) {
                 foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
@@ -281,11 +185,11 @@ class ProductController extends Controller
                 }
             }
 
-            $product->productQuestions->delete();
+            $product->productQuestions()->delete();
 
             if ($request->question_title) {
                 foreach ($request->question_title as $index =>$title){
-                    $product->productQuestions->create([
+                    $product->productQuestions()->create([
                         'title' => $request->question_title[$index],
                         'answer' => $request->answer[$index]
                     ]);
@@ -303,7 +207,11 @@ class ProductController extends Controller
     {
 
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
+        if ($user->userProfile->birthday !== NULL){
+            $age = Age::group($user->userProfile->birthday);
+        } else {
+            $age = '不明';
+        }
 
         return view('product.preview',compact('request','user','age'));
     }
@@ -315,7 +223,11 @@ class ProductController extends Controller
     {
 
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
+        if ($user->userProfile->birthday !== NULL){
+            $age = Age::group($user->userProfile->birthday);
+        } else {
+            $age = '不明';
+        }
 
         return view('product.preview',compact('request','user','age', 'product'));
     }

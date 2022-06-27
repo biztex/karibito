@@ -33,9 +33,14 @@ class StoreRequest extends FormRequest
             'number_of_day' => 'required | integer',
             'is_call' => 'required | boolean',
             'number_of_sale' => 'required | integer',
-//            'option_name' => 'nullable | max:3000',
-//            'option_price' => 'integer',
-//            'option_is_public' => 'integer',
+            'status' => 'required | integer',
+//            'option_name' => 'array:nullable',
+            'option_name.*' => 'nullable | string | max:400',
+//            'option_price' => 'array:nullable',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'nullable | max:400',
+            'answer.*' => 'required_if:question_title,true | max:400',
         ];
     }
 }
