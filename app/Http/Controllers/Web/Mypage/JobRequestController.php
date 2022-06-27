@@ -75,7 +75,7 @@ class JobRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
@@ -95,7 +95,7 @@ class JobRequestController extends Controller
     {
         $user = User::find($job_request->user_id);
 
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
+        $birthday = (int)str_replace("-","",$user->userProfile()->birthday);
         $age = Age::group($birthday);
 
         return view('job_request.show',compact('job_request','user','age'));
@@ -115,7 +115,7 @@ class JobRequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreRequest  $request
      * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
@@ -146,7 +146,7 @@ class JobRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  DraftRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function storeDraft(DraftRequest $request)
@@ -159,7 +159,7 @@ class JobRequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  DraftRequest  $request
      * @param  \App\Models\JobRequest  $job_request
      * @return \Illuminate\Http\Response
      */
@@ -173,15 +173,14 @@ class JobRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobRequest  $job_request
+     * @param  PreviewRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function preview(PreviewRequest $request)
     {
         $user = \Auth::user();
 
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($user->userProfile()->birthday);
 
         return view('job_request.preview',compact('request','user','age'));
     }
@@ -223,8 +222,7 @@ class JobRequestController extends Controller
     {
         $user = \Auth::user();
 
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($user->userProfile->birthday);
 
         return view('job_request.preview',compact('request','user','age','job_request'));
     }

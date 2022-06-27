@@ -11,7 +11,7 @@
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
-                    <form method="post" class="contactForm">
+                    <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
@@ -211,7 +211,7 @@
                                         @for($i = 0; $i < 10; $i++) <li >
                                             <div id="product_pic{{$i}}" class="img">
                                                 <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                                <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                                <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
                                             </div>
                                             <div class="fun">
                                                 <div class="del" id="storage_delete{{$i}}">削除</div>

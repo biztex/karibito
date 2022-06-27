@@ -20,7 +20,7 @@ class WithdrawController extends Controller
     {
         $user = \Auth::user();
 
-        \DB::transaction(function () use ($request, $user) {
+        \DB::transaction(function () use ($user) {
 
             \Auth::logout();// ログアウト
             $user->delete(); // データ論理削除

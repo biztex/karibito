@@ -70,7 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Override to send for password reset notification.
      *
-     * @param [type] $token
+     * @param string $token
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -86,8 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail
         parent::boot();
 
         static::deleted(function ($user) {
-            $user->userProfile()->delete(); // プロフィール削除
-            $user->jobRequest()->delete(); // ジョブリクエスト削除
+            $user->userProfile->delete(); // プロフィール削除
         });
     }
 }
