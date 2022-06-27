@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\JobRequest;
@@ -6,7 +7,6 @@ use App\Http\Requests\JobRequest\StoreRequest;
 
 class JobRequestService
 {
-
     /**
      * 新規リクエスト投稿
      */
@@ -61,7 +61,6 @@ class JobRequestService
         return $job_request;
     }
 
-
     /**
      * 編集画面よりジョブリクエスト下書き保存
      */
@@ -78,5 +77,4 @@ class JobRequestService
 
         return $job_request;
     }
-
 }

@@ -8,10 +8,8 @@ use App\Http\Requests\UserProfile\UpdateCoverRequest;
 use App\Services\UserProfileService;
 use App\Models\UserProfile;
 
-
 class CoverController extends Controller
 {
-
     private $user_profile_service;
 
     public function __construct(UserProfileService $user_profile_service)
@@ -26,7 +24,6 @@ class CoverController extends Controller
         \Session::put('flash_msg','カバーを変更しました！');
         return redirect()->route('mypage');
     }
-
 
     public function delete() 
     {

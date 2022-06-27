@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class UserProfile extends Model
 {
     use HasFactory;
@@ -33,8 +32,6 @@ class UserProfile extends Model
         self::NOT_IDENTIFY =>'未',
     ];
 
-
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -44,5 +41,4 @@ class UserProfile extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
-
 }

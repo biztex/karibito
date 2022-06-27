@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-
 class FacebookLoginController extends Controller
 {
     public function getFacebookAuth()
@@ -47,7 +46,6 @@ class FacebookLoginController extends Controller
 
         // すでにFacebook登録済みじゃなかったらユーザーを登録する
         $user = User::where('facebook_id', $sns_user->id)->first();
-
 
         if ($user){
             Auth::login($user);

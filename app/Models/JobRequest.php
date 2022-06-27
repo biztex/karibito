@@ -46,7 +46,6 @@ class JobRequest extends Model
         self::OFFLINE => '対面',
     ];
 
-
     /**
      * The attributes that are mass assignable.
      *

@@ -16,10 +16,8 @@ use App\Models\JobRequest;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 
-
 class ProductController extends Controller
 {
-
     private $product_service;
 
     public function __construct(ProductService $product_service)
@@ -300,7 +298,6 @@ class ProductController extends Controller
 
         return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
-
 
     public function preview(PreviewRequest $request)
     {

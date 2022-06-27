@@ -13,6 +13,7 @@ class PasswordResetNotification extends Notification
 
     /**
      * Create a new notification instance.
+     *
      * @return void
      */
     public static $toMailCallback;
@@ -64,7 +65,6 @@ class PasswordResetNotification extends Notification
 
     }
 
-
     /**
      * Get the reset password notification mail message for the given URL.
      *
@@ -81,7 +81,6 @@ class PasswordResetNotification extends Notification
             ->line(\Lang::get('このリンクの有効期限は :count 分です。', ['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]))
             ->line(\Lang::get('このメールにお心当たりがない場合は、お手数をおかけしますがこのメールは破棄してください。'));
     }
-
 
     // /**
     //  * Get the array representation of the notification.

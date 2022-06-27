@@ -18,6 +18,7 @@ class VerifyEmail extends Notification
      * @return void
      */
     public static $toMailCallback;
+
     public function __construct()
     {
         //
@@ -89,8 +90,6 @@ class VerifyEmail extends Notification
     {
         static::$toMailCallback = $callback;
     }
-
-
 
     // /**
     //  * Get the array representation of the notification.

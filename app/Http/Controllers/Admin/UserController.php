@@ -9,7 +9,6 @@ use App\Models\UserProfile;
 use App\Models\Prefecture;
 use App\Libraries\Age;
 
-
 class UserController extends Controller
 {
     /**
@@ -50,6 +49,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -97,7 +97,6 @@ class UserController extends Controller
 
     /**
      * 身分証明証の承認をする
-     *
      */
     public function approve($id)
     {
@@ -110,7 +109,6 @@ class UserController extends Controller
 
     /**
      * 身分証明証の承認を取り消す
-     *
      */
     public function revokeApproval($id)
     {

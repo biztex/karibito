@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\User;
@@ -7,7 +8,6 @@ use App\Http\Requests\UserProfile\StoreRequest;
 
 class UserProfileService
 {
-
     /**
      * ニックネーム変更
      */
@@ -64,8 +64,6 @@ class UserProfileService
 
         return $user_profile->save();
     }
-
-
 
     /**
      * ユーサープロフィール

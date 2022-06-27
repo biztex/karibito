@@ -66,7 +66,6 @@ class Product extends Model
         self::IS_PUBLIC => '公開',
     ];
 
-
     // AdditionalOptionモデルとのリレーション
     public function additionalOptions()
     {

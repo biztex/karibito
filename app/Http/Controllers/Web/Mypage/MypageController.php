@@ -10,10 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserProfile;
 use App\Models\Prefecture;
 
-
 class MypageController extends Controller
 {
-
     /**
      * Display the specified resource.
      *
@@ -27,5 +25,4 @@ class MypageController extends Controller
 
         return view('mypage.profile.mypage', compact('age'));
     }
-
 }

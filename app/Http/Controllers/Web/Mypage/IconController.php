@@ -10,7 +10,6 @@ use App\Http\Requests\UserProfile\StoreRequest;
 
 class IconController extends Controller
 {
-
     private $user_profile_service;
 
     public function __construct(UserProfileService $user_profile_service)
@@ -18,6 +17,7 @@ class IconController extends Controller
         $this->user_profile_service = $user_profile_service;
 
     }
+
     public function delete() {
 
         $previous = url()->previous();

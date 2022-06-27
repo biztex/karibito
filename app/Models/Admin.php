@@ -17,8 +17,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new AdminPasswordResetNotification($token));
-    }
-    
+    }    
 
     /**
      * The attributes that are mass assignable.

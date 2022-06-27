@@ -28,10 +28,11 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param \Illuminate\Http\Request $request
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -48,7 +49,6 @@ class RegisteredUserController extends Controller
             // 'verifyemail_send_at' => Carbon::now()
         ])->save();
 
-        
         event(new Registered($user));
 
         //Auth::guard('admin')->login($user);

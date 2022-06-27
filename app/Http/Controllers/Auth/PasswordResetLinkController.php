@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
 
-
 class PasswordResetLinkController extends Controller
 {
     /**
@@ -25,9 +24,9 @@ class PasswordResetLinkController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * 
-     * @return \Illuminate\Http\RedirectResponse
-     *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -42,8 +41,6 @@ class PasswordResetLinkController extends Controller
 
         // dd($user_model);
         // // $email = $user->email;
-
-
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
