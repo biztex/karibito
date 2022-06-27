@@ -134,7 +134,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // リクエスト
     Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
         Route::middleware('can:my.job.request,job_request')->group(function () {
-            Route::get('{job_request}/show','show')->name('show');
             Route::get('{job_request}/edit','edit')->name('edit');
             Route::put('{job_request}','update')->name('update');
             Route::delete('{job_request}','destroy')->name('destroy');
@@ -144,6 +143,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
         Route::get('create','create')->name('create');
         Route::post('store','store')->name('store');
+        Route::get('{job_request}/show','show')->name('show');
         Route::post('draft','storeDraft')->name('storeDraft');
         Route::post('preview','preview')->name('preview');
         Route::post('store/preview','storePreview')->name('store.preview');
