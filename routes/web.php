@@ -109,10 +109,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 商品登録
     Route::resource('product', MypageProductController::class);
     Route::put('product/update/{product}', [MypageProductController::class, 'update'])->name('product.update');
-    Route::post('product/draft',[MypageProductController::class,'storeDraft'])->name('product.storeDraft');
-    Route::put('product/{product}/draft',[MypageProductController::class,'updateDraft'])->name('product.updateDraft');
+    Route::post('product/draft',[MypageProductController::class, 'storeDraft'])->name('product.storeDraft');
+    Route::put('product/{product}/draft',[MypageProductController::class, 'updateDraft'])->name('product.updateDraft');
     Route::post('product/preview/', [MypageProductController::class, 'preview'])->name('product.preview');
-    Route::put('product/{product}/edit/preview',[MypageProductController::class,'editPreview'])->name('product.edit.preview');
+    Route::put('product/{product}/edit/preview',[MypageProductController::class, 'editPreview'])->name('product.edit.preview');
 //    Route::post('product/store/preview',[MypageProductController::class,'storePreview'])->name('product.store.preview');
 
 
@@ -126,14 +126,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // 提供・リクエスト一覧
-    Route::get('job_request',function(){ return redirect()->route('publication');});
-    Route::get('publication',[MypageJobRequestController::class,'index'])->name('publication');
+    Route::get('job_request',function () { return redirect()->route('publication');});
+    Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
     // 提供・リクエスト 下書き一覧
-    Route::get('draft',[MypageJobRequestController::class,'draft'])->name('draft');
+    Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
 
     // リクエスト
-    Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function (){
-        Route::middleware('can:my.job.request,job_request')->group(function (){
+    Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
+        Route::middleware('can:my.job.request,job_request')->group(function () {
             Route::get('{job_request}/show','show')->name('show');
             Route::get('{job_request}/edit','edit')->name('edit');
             Route::put('{job_request}','update')->name('update');
@@ -184,9 +184,9 @@ Route::get('', [HomeController::class, 'index'])->name('home');
 
 
 // --管理者画面-----------------------------------------------------------------------------
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')->name('admin.')->group(function () {
 
-    require __DIR__.'/admin.php';
+    require __DIR__ . '/admin.php';
 
     Route::middleware('auth:admin')->group(function () {
 
@@ -195,8 +195,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::resource('/', AdminController::class,['only' => ['index']]);
         });
 
-        Route::get('/dashboard', [AdminHomeController::class,'index'])->name('dashboard');
-        Route::resource('/users',UserController::class,['only' => ['index','show']]);
+        Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard');
+        Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
     });
@@ -207,7 +207,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 
 // 未着手
-Route::prefix('sample')->group(function (){  
+Route::prefix('sample')->group(function () {  
     Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
     Route::view('estimate', 'sample.estimate');
