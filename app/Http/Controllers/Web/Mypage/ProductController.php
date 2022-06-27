@@ -88,7 +88,11 @@ class ProductController extends Controller
         $user = User::find($product->user_id);
 
         $all_products = Product::all();
-        $age = Age::group($product->productUser->userProfile->birthday);
+        if ($product->productUser->userProfile->birthday !== NULL){
+            $age = Age::group($product->productUser->userProfile->birthday);
+        } else {
+            $age = '不明';
+        }
         return view('product.show', compact('user','product', 'age', 'all_products'));
     }
 
@@ -166,7 +170,7 @@ class ProductController extends Controller
                 'is_draft' => Product::IS_DRAFT
             ]);
 
-            $product->additionalOptions->delete();
+            $product->additionalOptions()->delete();
 
             if ($request->option_name) {
                 foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
@@ -178,11 +182,11 @@ class ProductController extends Controller
                 }
             }
 
-            $product->productQuestions->delete();
+            $product->productQuestions()->delete();
 
             if ($request->question_title) {
                 foreach ($request->question_title as $index =>$title){
-                    $product->productQuestions->create([
+                    $product->productQuestions()->create([
                         'title' => $request->question_title[$index],
                         'answer' => $request->answer[$index]
                     ]);
@@ -201,7 +205,11 @@ class ProductController extends Controller
     {
 
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
+        if ($user->userProfile->birthday !== NULL){
+            $age = Age::group($user->userProfile->birthday);
+        } else {
+            $age = '不明';
+        }
 
         return view('product.preview',compact('request','user','age'));
     }
@@ -213,7 +221,11 @@ class ProductController extends Controller
     {
 
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
+        if ($user->userProfile->birthday !== NULL){
+            $age = Age::group($user->userProfile->birthday);
+        } else {
+            $age = '不明';
+        }
 
         return view('product.preview',compact('request','user','age', 'product'));
     }
