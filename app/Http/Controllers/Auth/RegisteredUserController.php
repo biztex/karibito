@@ -28,7 +28,8 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     * 
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -37,7 +38,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'email' => ['required','confirmed', 'string', 'email', 'max:128', 'unique:users'],
-            'password' => ['required', 'confirmed','between:8,100', Rules\Password::defaults(), new AlphaRule],
+            'password' => ['required', 'confirmed', 'between:8,100', Rules\Password::defaults(), new AlphaRule()],
             'terms' => 'required',
         ]);
 

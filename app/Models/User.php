@@ -71,6 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Override to send for password reset notification.
      *
      * @param string $token
+     * 
      * @return void
      */
     public function sendPasswordResetNotification($token)

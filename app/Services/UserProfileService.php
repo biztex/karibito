@@ -21,16 +21,15 @@ class UserProfileService
     /**
      * ユーサープロフィール基本情報登録
      */
-    public function storeUserProfile(array $params):UserProfile
+    public function storeUserProfile(array $params): UserProfile
     {
-        $user_profile = UserProfile::updateOrCreate(
-            ['user_id' => \Auth::id()],
-            [
-                'first_name' => $params['first_name'],
-                'last_name' => $params['last_name'],
-                'gender' => $params['gender'],
-                'prefecture_id' => $params['prefecture'],
-            ],  );
+        $user_profile = UserProfile::updateOrCreate([
+            'user_id' => \Auth::id(),
+            'first_name' => $params['first_name'],
+            'last_name' => $params['last_name'],
+            'gender' => $params['gender'],
+            'prefecture_id' => $params['prefecture'],
+        ]);
         return $user_profile;
     }
 
@@ -39,7 +38,7 @@ class UserProfileService
      */
     public function updateUserProfile($request)
     {
-        $birthday = $request->year.'-'.$request->month.'-'.$request->day;
+        $birthday = $request->year . '-' . $request->month . '-' . $request->day;
         $user_profile = \Auth::user()->userProfile;
 
         $user_profile->fill([
@@ -79,10 +78,10 @@ class UserProfileService
         $old = $user_profile->$value;
 
         if(isset($request->$value)){
-            $user_profile->$value = $request->file($value)->store($value.'s','public');
+            $user_profile->$value = $request->file($value)->store($value . 's','public');
 
-            if(!is_null($old)){
-                \Storage::delete('public/'.$old);
+            if(null !== $old){
+                \Storage::delete('public/' . $old);
             }
         }
         return $user_profile->save();
@@ -98,8 +97,8 @@ class UserProfileService
         $old = $user_profile->$value;
         $user_profile->$value = null;
 
-        if(!is_null($old)){
-            \Storage::delete('public/'.$old);
+        if(null !== $old){
+            \Storage::delete('public/' . $old);
         }
         return $user_profile->save();
     }

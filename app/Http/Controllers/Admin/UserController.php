@@ -49,13 +49,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $user = UserProfile::with(['user','prefecture'])->firstWhere('user_id',$id);
-        $birthday = (int)str_replace("-","",$user->birthday);
+        $user = UserProfile::with(['user', 'prefecture'])->firstWhere('user_id', $id);
+        $birthday = (int) str_replace("-","", $user->birthday);
         $now_age = Age::nowAge($birthday);
         $age = Age::group($birthday);
         return view('admin.user.show',compact('user','age','now_age'));
@@ -104,7 +104,7 @@ class UserController extends Controller
         $user = UserProfile::firstWhere('user_id',$id);
         $user->fill(['is_identify' => 1])->save();
 
-        $flash_msg = "id:".$user->user_id." ".$user->first_name.$user->last_name."さんの本人確認を承認しました！";
+        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの本人確認を承認しました！";
         return back()->with('flash_msg',$flash_msg);
     }
 
@@ -117,7 +117,7 @@ class UserController extends Controller
         $user = UserProfile::firstWhere('user_id',$id);
         $user->fill(['is_identify' => 0])->save();
 
-        $flash_msg = "id:".$user->user_id." ".$user->first_name.$user->last_name."さんの本人確認の承認を取り消しました！";
+        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの本人確認の承認を取り消しました！";
         return back()->with('flash_msg',$flash_msg);
 
     }

@@ -13,6 +13,7 @@ class AdminFactory extends Factory
     /**
      * Define the model's default state.
      * 使い方：Admin::factory()->create()
+     * 
      * @return array<string, mixed>
      */
     public function definition()

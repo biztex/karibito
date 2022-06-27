@@ -40,16 +40,16 @@ class DatabaseSeeder extends Seeder
         }
 
         // 指定の開発環境のみ実行
-        if (in_array(config('app.env'), ['local', 'development'])) {
+        if (\in_array(config('app.env'), ['local', 'development'], true)) {
             // 開発ログイン用
             User::factory()
                 ->has(UserProfile::factory()->approved()->count(1)) // 承認済み
                 ->has(
                     Product::factory()                    // サービス投稿
-                    ->has(ProductImage::factory()->count(3)) // 画像
-                    ->has(AdditionalOption::factory()->count(3)) // 追加オプション
-                    ->has(ProductQuestion::factory()->count(3))  // よくある質問
-                    ->count(30)
+                        ->has(ProductImage::factory()->count(3)) // 画像
+                        ->has(AdditionalOption::factory()->count(3)) // 追加オプション
+                        ->has(ProductQuestion::factory()->count(3))  // よくある質問
+                        ->count(30)
                 )
                 ->has(JobRequest::factory()->count(30)) // サービスリクエスト投稿
                 ->create();

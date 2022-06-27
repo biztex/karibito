@@ -13,6 +13,7 @@ class Product extends Model
     protected $guarded = ['id'];
 
     const STATUS_PUBLISH = 1;
+
     const STATUS_PRIVATE = 2;
 
     const SALES_STATUS = [
@@ -21,6 +22,7 @@ class Product extends Model
     ];
 
     const OFFLINE = 0;
+
     const ONLINE = 1;
 
     const IS_ONLINE = [
@@ -29,6 +31,7 @@ class Product extends Model
     ];
 
     const OFF_CALL = 0;
+
     const ON_CALL = 1;
 
     const IS_CALL = [
@@ -37,6 +40,7 @@ class Product extends Model
     ];
 
     const ONE_OF_SALE = 0;
+
     const UNLIMITED_OF_SALE = 99;
 
     const NUMBER_OF_SALE = [
@@ -45,13 +49,16 @@ class Product extends Model
     ];
 
     const NOT_DRAFT = 0;
+
     const IS_DRAFT = 1;
+    
     const DRAFT_STATUS = [
         self::NOT_DRAFT => '下書きでない',
         self::IS_DRAFT => '下書き',
     ];
 
     const NOT_PUBLIC = 1;
+    
     const IS_PUBLIC = 2;
 
     const PUBLIC_STATUS = [

@@ -6,7 +6,7 @@ class Age
     /**
      * $birthday : 2020-01-01
      */
-    public static function int_birthday(string $birthday) :int
+    public static function int_birthday(string $birthday): int
     {
         $int_birthday = (int) str_replace("-","",$birthday);
         return $int_birthday;
@@ -15,10 +15,10 @@ class Age
     /**
      * $birthday : 2020-01-01 → 20200101
      */
-    public static function nowAge(string $birthday) :string
+    public static function nowAge(string $birthday): string
     { 
         $int_birthday = self::int_birthday($birthday);
-        $now = (int)date('Ymd');
+        $now = (int) date('Ymd');
         $now_age = floor(($now - $int_birthday) / 10000);
 
         return $now_age; 
@@ -27,7 +27,7 @@ class Age
     /**
      * $birthday : 2020-01-01 → 20200101
      */
-    public static function group(string $birthday) :string
+    public static function group(string $birthday): string
     { 
 
         $int_birthday = self::int_birthday($birthday);

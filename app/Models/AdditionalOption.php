@@ -26,6 +26,7 @@ class AdditionalOption extends Model
     ];
 
     const NOT_PUBLIC = 0;
+    
     const IS_PUBLIC = 1;
 
     const PUBLIC_STATUS = [

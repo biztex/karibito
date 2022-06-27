@@ -16,9 +16,9 @@ class ProductService
     {
         $paths = $request->file('paths');
 
-        if ($paths !== NULL) {
+        if ($paths !== null) {
             foreach ($paths as $path) {
-                    $product_image = new ProductImage;
+                    $product_image = new ProductImage();
                     $product_image->path = $path->store('product_paths', 'public');
                     $product_image->product_id = $id;
                     $product_image->save();
@@ -44,7 +44,7 @@ class ProductService
 
                 }elseif(isset($image_status[$i]) && $image_status[$i] === "insert"){
                     // 挿入されたらリクエストをDBに登録
-                    $product_image = new ProductImage;
+                    $product_image = new ProductImage();
                     $product_image->path = $request->paths[$i]->store('product_paths', 'public');
                     $product_image->product_id = $id;
                     $product_image->save();
@@ -52,7 +52,7 @@ class ProductService
                 }elseif(isset($old_images[$i])){
                     // 変更なければ元のpathをDBに登録しなおす
                     $new_images[] = $old_images[$i];
-                    $product_image = new ProductImage;
+                    $product_image = new ProductImage();
                     $product_image->path = $old_images[$i]->path;
                     $product_image->product_id = $id;
                     $product_image->save();

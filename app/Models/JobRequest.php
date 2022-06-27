@@ -11,6 +11,7 @@ class JobRequest extends Model
     use HasFactory, SoftDeletes;
 
     const STATUS_PUBLISH = 1;
+
     const STATUS_PRIVATE = 2;
 
     const SALES_STATUS = [
@@ -19,21 +20,27 @@ class JobRequest extends Model
     ];
 
     const NOT_DRAFT = 0;
+
     const IS_DRAFT = 1;
+
     const DRAFT_STATUS = [
         self::NOT_DRAFT => '下書きでない',
         self::IS_DRAFT => '下書き',
     ];
 
     const CALL_INPOSSIBLE = 0;
+
     const CALL_POSSIBLE = 1;
+    
     const IS_CALL = [
         self::CALL_POSSIBLE => 'あり',
         self::CALL_INPOSSIBLE => 'なし',
     ];
 
     const OFFLINE = 0;
+
     const ONLINE = 1;
+    
     const IS_ONLINE = [
         self::ONLINE => '非対面',
         self::OFFLINE => '対面',
@@ -56,12 +63,12 @@ class JobRequest extends Model
     // Userモデルとのリレーション
     public function user()
     {
-        return $this->belongsTo(JobRequest::class);
+        return $this->belongsTo(User::class);
     }
 
     // Prefectureモデルとのリレーション
     public function prefecture()
     {
-        return $this->belongsTo(JobRequest::class);
+        return $this->hasOne(User::class);
     }
 }

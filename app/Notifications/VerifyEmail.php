@@ -26,7 +26,8 @@ class VerifyEmail extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     * 
      * @return array
      */
     public function via($notifiable)
@@ -37,7 +38,8 @@ class VerifyEmail extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     * 
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -45,22 +47,23 @@ class VerifyEmail extends Notification
         $verificationUrl = $this->verificationUrl($notifiable);
  
         if (static::$toMailCallback) {
-            return call_user_func(static::$toMailCallback, $notifiable, $verificationUrl);
+            return \call_user_func(static::$toMailCallback, $notifiable, $verificationUrl);
         }
 
-        return (new MailMessage)
-                    ->subject(\Lang::get('【カリビト】メールアドレス確認'))
-                    ->line(\Lang::get('この度はカリビトにご登録いただきありがとうございます。'))
-                    ->line(\Lang::get('本メールはご登録いただいたメールアドレスが正しいかどうか確認するための認証用のメールです。'))
-                    ->line(\Lang::get('メールアドレス認証を完了するには以下のボタンをクリックしてください。'))
-                    ->action(\Lang::get('メールアドレスを認証'),$verificationUrl)
-                    ->line(\Lang::get('このメールにお心当たりがない場合は、お手数をおかけしますがこのメールは破棄してください。'));
+        return (new MailMessage())
+            ->subject(\Lang::get('【カリビト】メールアドレス確認'))
+            ->line(\Lang::get('この度はカリビトにご登録いただきありがとうございます。'))
+            ->line(\Lang::get('本メールはご登録いただいたメールアドレスが正しいかどうか確認するための認証用のメールです。'))
+            ->line(\Lang::get('メールアドレス認証を完了するには以下のボタンをクリックしてください。'))
+            ->action(\Lang::get('メールアドレスを認証'),$verificationUrl)
+            ->line(\Lang::get('このメールにお心当たりがない場合は、お手数をおかけしますがこのメールは破棄してください。'));
     }
 
     /**
      * Get the verification URL for the given notifiable.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     * 
      * @return string
      */
     protected function verificationUrl($notifiable)
@@ -78,7 +81,8 @@ class VerifyEmail extends Notification
     /**
      * Set a callback that should be used when building the notification mail message.
      *
-     * @param  \Closure  $callback
+     * @param \Closure $callback
+     * 
      * @return void
      */
     public static function toMailUsing($callback)
@@ -88,12 +92,13 @@ class VerifyEmail extends Notification
 
 
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    // /**
+    //  * Get the array representation of the notification.
+    //  *
+    //  * @param mixed $notifiable
+    //  * 
+    //  * @return array
+    //  */
     // public function toArray($notifiable)
     // {
     //     return [
