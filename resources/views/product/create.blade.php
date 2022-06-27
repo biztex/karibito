@@ -94,6 +94,7 @@
                             @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="number_of_sale">
+                                <option value="">選択してください</option>
                                 <option value="{{App\Models\Product::ONE_OF_SALE}}" @if(!is_null(old('number_of_sale')) && old('number_of_sale') == App\Models\Product::ONE_OF_SALE) selected @endif required>１人様限定</option>
                                 <option value="{{App\Models\Product::UNLIMITED_OF_SALE}}" @if(old('number_of_sale') == App\Models\Product::UNLIMITED_OF_SALE) selected @endif required>無制限</option>
                             </select>
@@ -115,44 +116,8 @@
                                         @endforeach
                                     </select>
                                     <select name="option_is_public[]">
-                                        <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                        <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="paid">
-                                <div class="enter">
-                                    <textarea class="@error('option_name[]') is-invalid @enderror" type="text" value="{{ old('option_name[]') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
-                                </div>
-                                <div class="selects">
-                                    <select name="option_price[]">
-                                        @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                            <option value="{{ $key }}" @if(old('option_price.1') == $key) selected @endif>
-                                                {{ $value }}円
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <select name="option_is_public[]">
-                                        <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                        <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="paid">
-                                <div class="enter">
-                                    <textarea class="@error('option_name[]') is-invalid @enderror" type="text" value="{{ old('option_name[]') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
-                                </div>
-                                <div class="selects">
-                                    <select name="option_price[]">
-                                        @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                            <option value="{{ $key }}" @if(old('option_price.2') == $key) selected @endif>
-                                                {{ $value }}円
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <select name="option_is_public[]">
-                                        <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                        <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
+                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
+                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
                                     </select>
                                 </div>
                             </div>
@@ -260,9 +225,9 @@
                                 <div class="td">
                                     @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <select name="status">
-                                        <option>選択してください</option>
-                                        <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(old('status') == App\Models\Product::NOT_PUBLIC) selected @endif>非公開</option>
-                                        <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status') == App\Models\Product::IS_PUBLIC) selected @endif>公開</option>
+                                        <option value="">選択してください</option>
+                                        <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(old('status') == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
+                                        <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status') == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
                                     </select>
                                 </div>
                                 <div class="functeBtns">
