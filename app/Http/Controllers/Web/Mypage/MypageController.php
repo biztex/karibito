@@ -23,7 +23,11 @@ class MypageController extends Controller
     {
         $user_profile = UserProfile::firstWhere('user_id',Auth::id());
 
-        $age = Age::group($user_profile->birthday);
+        if ($user_profile->birthday !== NULL){
+            $age = Age::group($user_profile->birthday);
+        } else {
+            $age = '不明';
+        }
 
         return view('mypage.profile.mypage', compact('age'));
     }
