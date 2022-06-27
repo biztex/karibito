@@ -35,7 +35,7 @@ class ProductService
     public function storeAdditionalOption(array $request, $id)
     {
         for ($i = 0; $i < 3; $i++) {
-            if (!is_null($request['option_name'][$i])) {
+            if (isset($request['option_name'][$i])) {
                 $additional_option = new AdditionalOption;
                 $additional_option->create([
                     'name' => $request['option_name'][$i],
@@ -53,7 +53,7 @@ class ProductService
     public function storeProductQuestion(array $request, $id)
     {
         for ($i = 0; $i < 3; $i++) {
-            if (!is_null($request['question_title'][$i])) {
+            if (isset($request['question_title'][$i])) {
                 $question = new ProductQuestion;
                 $question->create([
                     'title' => $request['question_title'][$i],
@@ -88,8 +88,8 @@ class ProductService
     public function updateAdditionalOption(array $request, $product)
     {
         $product->additionalOptions()->delete();
-        
-        if (!is_null($request['option_name'])) {
+
+        if (isset($request['option_name'])) {
             foreach ($request['option_name'] as $index => $option) {
                 $product->additionalOptions()->create([
                     'name' => $request['option_name'][$index],
@@ -108,7 +108,7 @@ class ProductService
     {
         $product->productQuestions()->delete();
 
-        if ($request['question_title']) {
+        if (isset($request['question_title'])) {
             foreach ($request['question_title'] as $index => $title){
                 $product->productQuestions()->create([
                     'title' => $request['question_title'][$index],
@@ -181,4 +181,63 @@ class ProductService
             return $product_image;
         }
     }
+
+
+    /**
+     * 新規リクエスト下書き保存
+     */
+    public function storeDraftProduct(array $params):Product
+    {
+        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale'];
+
+        $product = new Product;
+        $product->user_id = \Auth::id();
+        foreach($columns as $column){
+            $product->$column = $params[$column];
+        }
+        $product->is_draft = Product::IS_DRAFT;
+        $product->status = Product::STATUS_PRIVATE;
+        $product->save();
+
+        return $product;
+    }
+
+
+    /**
+     * 新規有料オプション下書き保存
+     */
+    public function storeDraftAdditionalOption(array $request, $id)
+    {
+        for ($i = 0; $i < 3; $i++) {
+            if (isset($request['option_name'][$i])) {
+                $additional_option = new AdditionalOption;
+                $additional_option->create([
+                    'name' => $request['option_name'][$i],
+                    'price' => $request['option_price'][$i],
+                    'is_public' => $request['option_is_public'][$i],
+                    'product_id' => $id
+                ]);
+            }
+        }
+    }
+
+
+    /**
+     * 新規よくある質問下書き保存
+     */
+    public function storeDraftProductQuestion(array $request, $id)
+    {
+        for ($i = 0; $i < 3; $i++) {
+            if (isset($request['question_title'][$i])) {
+                $question = new ProductQuestion;
+                $question->create([
+                    'title' => $request['question_title'][$i],
+                    'answer' => $request['answer'][$i],
+                    'product_id' => $id
+                ]);
+            }
+        }
+    }
+
+
 }

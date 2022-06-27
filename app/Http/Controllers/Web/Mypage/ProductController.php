@@ -141,40 +141,9 @@ class ProductController extends Controller
     public function storeDraft(DraftRequest $request)
     {
         \DB::transaction(function () use ($request) {
-                $product = Product::create([
-                'user_id' => \Auth::id(),
-                'category_id' => $request->category_id,
-                'prefecture_id' => $request->prefecture_id,
-                'title' => $request->title,
-                'content' => $request->input('content'),
-                'price' => $request->price,
-                'is_online' => $request->is_online,
-                'number_of_day' => $request->number_of_day,
-                'is_call' => $request->is_call,
-                'number_of_sale' => $request->number_of_sale,
-                'status' => $request->status,
-                'is_draft' => Product::IS_DRAFT
-            ]);
-
-            for ($i = 0; $i < 3; $i++) {
-                if (!is_null($request->option_name[$i])) {
-                    $product->additionalOptions()->create([
-                        'name' => $request->option_name[$i],
-                        'price' => $request->option_price[$i],
-                        'is_public' => $request->option_is_public[$i]
-                    ]);
-                }
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                if (!is_null($request->question_title[$i])) {
-                    $product->productQuestions()->create([
-                        'title' => $request->question_title[$i],
-                        'answer' => $request->answer[$i]
-                    ]);
-                }
-            }
-
+            $product = $this->product_service->storeDraftProduct($request->all());
+            $this->product_service->storeDraftAdditionalOption($request->all(), $product->id);
+            $this->product_service->storeDraftProductQuestion($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
