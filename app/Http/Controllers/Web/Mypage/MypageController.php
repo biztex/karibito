@@ -23,51 +23,13 @@ class MypageController extends Controller
     {
         $user_profile = UserProfile::firstWhere('user_id',Auth::id());
 
-        $birthday = (int)str_replace("-", "", $user_profile->birthday);
-        $age = Age::group($birthday);
+        if ($user_profile->birthday !== NULL){
+            $age = Age::group($user_profile->birthday);
+        } else {
+            $age = '不明';
+        }
 
         return view('mypage.profile.mypage', compact('age'));
-    }
-
-    /**
-     * お気に入り一覧画面を表示する
-     *
-     * @return view
-     */
-    public function indexFavorite()
-    {
-        return view('sample.favorite');
-    }
-
-    /**
-     * 友達一覧画面を表示する
-     *
-     * @return view
-     */
-    public function indexFriends()
-    {
-        return view('sample.friends');
-    }
-
-    /**
-     * メンバー情報画面を表示する
-     *
-     * @return view
-     */
-    public function showMember()
-    {
-        return view('sample.member');
-    }
-
-
-    /**
-     * 過去取引一覧画面を表示する
-     *
-     * @return view
-     */
-    public function indexPast()
-    {
-        return view('sample.past');
     }
 
 }

@@ -55,13 +55,11 @@ class UserProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
-
-
         \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUser($request->all());
             $this->user_profile_service->storeUserProfile($request->all());
@@ -76,36 +74,35 @@ class UserProfileController extends Controller
     public function showComplete()
     {
         $user = UserProfile::with('user')->firstWhere('user_id',\Auth::id());
-//        $user->
         return view('mypage.profile.created',compact('user'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show()
+    // {
+    //    
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit($id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  UpdateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request)
@@ -118,20 +115,20 @@ class UserProfileController extends Controller
             $this->user_profile_service->updateUserProfileImage($request,'cover');
             $this->user_profile_service->updateUserProfileImage($request,'icon');
 
-            \Session::put('flash_msg','プロフィールを編集しました！');
         });
+        \Session::put('flash_msg','プロフィールを編集しました！');
 
         return redirect($previous);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 }

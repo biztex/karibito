@@ -109,10 +109,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 商品登録
     Route::resource('product', MypageProductController::class);
     Route::put('product/update/{product}', [MypageProductController::class, 'update'])->name('product.update');
-    Route::post('product/draft',[MypageProductController::class,'storeDraft'])->name('product.storeDraft');
-    Route::put('product/{product}/draft',[MypageProductController::class,'updateDraft'])->name('product.updateDraft');
+    Route::post('product/draft',[MypageProductController::class, 'storeDraft'])->name('product.storeDraft');
+    Route::put('product/{product}/draft',[MypageProductController::class, 'updateDraft'])->name('product.updateDraft');
     Route::post('product/preview/', [MypageProductController::class, 'preview'])->name('product.preview');
-    Route::put('product/{product}/edit/preview',[MypageProductController::class,'editPreview'])->name('product.edit.preview');
+    Route::put('product/{product}/edit/preview',[MypageProductController::class, 'editPreview'])->name('product.edit.preview');
 //    Route::post('product/store/preview',[MypageProductController::class,'storePreview'])->name('product.store.preview');
 
 
@@ -126,21 +126,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // 提供・リクエスト一覧
-    Route::get('publication',[MypageJobRequestController::class,'index'])->name('publication');
+    Route::get('job_request',function () { return redirect()->route('publication');});
+    Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
     // 提供・リクエスト 下書き一覧
-    Route::get('draft',[MypageJobRequestController::class,'draft'])->name('draft');
+    Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
 
     // リクエスト
-    Route::get('job_request',function(){ return redirect()->route('publication');});
-    Route::resource('job_request',MypageJobRequestController::class, ['except' => ['index']]);
-    Route::post('job_request/draft',[MypageJobRequestController::class,'storeDraft'])->name('job_request.storeDraft');
-    Route::post('job_request/preview',[MypageJobRequestController::class,'preview'])->name('job_request.preview');
-    Route::put('job_request/edit/{job_request}/preview',[MypageJobRequestController::class,'editPreview'])->name('job_request.edit.preview');
-    Route::put('job_request/{job_request}/preview',[MypageJobRequestController::class,'updatePreview'])->name('job_request.update.preview');
-    Route::post('job_request/store/preview',[MypageJobRequestController::class,'storePreview'])->name('job_request.store.preview');
-    Route::put('job_request/{job_request}/draft',[MypageJobRequestController::class,'updateDraft'])->name('job_request.updateDraft');
-
-
+    Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
+        Route::middleware('can:my.job.request,job_request')->group(function () {
+            Route::get('{job_request}/edit','edit')->name('edit');
+            Route::put('{job_request}','update')->name('update');
+            Route::delete('{job_request}','destroy')->name('destroy');
+            Route::put('edit/{job_request}/preview','editPreview')->name('edit.preview');
+            Route::put('{job_request}/preview','updatePreview')->name('update.preview');
+            Route::put('{job_request}/draft','updateDraft')->name('update.draft');
+        });
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+        Route::get('{job_request}/show','show')->name('show');
+        Route::post('draft','storeDraft')->name('storeDraft');
+        Route::post('preview','preview')->name('preview');
+        Route::post('store/preview','storePreview')->name('store.preview');
+    });
 });
 
 // プライバシーポリシーと運営会社
@@ -150,50 +157,14 @@ Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 
 
 
-// 動詞	URI	アクション	ルート名
-// GET	/photos	index	photos.index
-// GET	/photos/create	create	photos.create
-// POST	/photos	store	photos.store
-// GET	/photos/{photo}	show	photos.show
-// GET	/photos/{photo}/edit	edit	photos.edit
-// PUT/PATCH	/photos/{photo}	update	photos.update
-// DELETE	/photos/{photo}	destroy	photos.destroy
+// GET	        /photo	index	        photo.index　          一覧画面
+// GET	        /photo/create	        photo.create　         登録画面
+// POST	        /photo	store	        photo.store　          登録処理
+// GET	        /photo/{photo}	        photo.show　           詳細画面
+// GET	        /photo/{photo}/edit	    photo.edit　           編集画面
+// PUT/PATCH	/photo/{photo}	        photo.update　         編集処理
+// DELETE	    /photo/{photo}	        photo.destroy　        削除処理
 
-// index:一覧画面(get)
-// create:登録画面(get)
-// store:登録(post)
-// show:詳細画面(get)
-// edit:編集画面(get)
-// update:編集(put)
-// destroy:削除(delete)
-
-Route::get('', [HomeController::class, 'index'])->name('home');
-
-Route::get('add_category', [CategoryController::class, 'createCategory']);
-
-Route::get('contact', [ContactController::class, 'contact']);
-
-Route::get('estimate', [EstimateController::class, 'index']);
-
-Route::get('evaluation', [EvaluationController::class, 'index']);
-
-Route::get('faq_answer', [FaqController::class, 'indexAnswer']);
-Route::get('faq_detail', [FaqController::class, 'indexDetail']);
-Route::get('faq_post', [FaqController::class, 'createPost']);
-Route::get('faq', [FaqController::class, 'index']);
-
-Route::get('favorite', [MypageController::class, 'indexFavorite']);
-Route::get('friends', [MypageController::class, 'indexFriends']);
-Route::get('past', [MypageController::class, 'indexPast']);
-
-Route::get('news_detail', [NewsController::class, 'showDetail']);
-Route::get('news', [NewsController::class, 'indexNews']);
-
-Route::get('payment_history', [PaymentController::class, 'index']);
-
-Route::get('point_history', [PointController::class, 'index']);
-
-Route::get('notation', [NotationController::class, 'show']);
 
 
 // google login
@@ -207,7 +178,36 @@ Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth'
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
 
 
-Route::prefix('sample')->group(function () {
+ 
+
+Route::get('', [HomeController::class, 'index'])->name('home');
+
+
+// --管理者画面-----------------------------------------------------------------------------
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    require __DIR__ . '/admin.php';
+
+    Route::middleware('auth:admin')->group(function () {
+
+        // --最高管理者のみ-----------------------------------------------------------------
+        Route::middleware('admin.role')->group(function () {
+            Route::resource('/', AdminController::class,['only' => ['index']]);
+        });
+
+        Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard');
+        Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
+        Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
+        Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
+    });
+
+
+});
+
+
+
+// 未着手
+Route::prefix('sample')->group(function () {  
     Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
     Route::view('estimate', 'sample.estimate');
@@ -223,29 +223,5 @@ Route::prefix('sample')->group(function () {
     Route::view('notation', 'sample.notation');
     Route::view('past', 'sample.past');
     Route::view('payment_history', 'sample.payment_history');
-    Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
-});
-
-
-
-// --管理者画面-----------------------------------------------------------------------------
-Route::prefix('admin')->name('admin.')->group(function(){
-
-    require __DIR__.'/admin.php';
-
-    Route::middleware('auth:admin')->group(function () {
-
-        // --最高管理者のみ-----------------------------------------------------------------
-        Route::middleware('admin.role')->group(function () {
-            Route::resource('/', AdminController::class,['only' => ['index']]);
-        });
-
-        Route::get('/dashboard', [AdminHomeController::class,'index'])->name('dashboard');
-        Route::resource('/users',UserController::class,['only' => ['index','show']]);
-        Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
-        Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
-    });
-
-
 });

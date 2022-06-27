@@ -11,7 +11,7 @@
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
-                    <form method="post" class="contactForm">
+                    <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
@@ -94,6 +94,7 @@
                             @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="number_of_sale">
+                                <option value="">選択してください</option>
                                 <option value="{{App\Models\Product::ONE_OF_SALE}}" @if(!is_null(old('number_of_sale')) && old('number_of_sale') == App\Models\Product::ONE_OF_SALE) selected @endif required>１人様限定</option>
                                 <option value="{{App\Models\Product::UNLIMITED_OF_SALE}}" @if(old('number_of_sale') == App\Models\Product::UNLIMITED_OF_SALE) selected @endif required>無制限</option>
                             </select>
@@ -105,28 +106,25 @@
 
                             <p class="th">有料オプション1</p>
                             @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                            <div class="td">
-                                <div class="paid">
-                                    <div class="enter">
-                                        <textarea class="@error('option_name.' .'0') is-invalid @enderror" type="text" value="{{ old('option_name.'.'0') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'0') }}</textarea>
-                                    </div>
-                                    <div class="selects">
-                                        <select name="option_price[]">
-                                            @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                                <option value="{{ $key }}" @if(old('option_price.'.'0') == $key) selected @endif>
-                                                    {{ $value }}円
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <select name="option_is_public[]">
-                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public.'.'0')) && old('option_is_public.'.'0') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public.'.'0') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <a href="javascript:;" onclick="" class="fs25 ml05 js-deleteOption">×</a>
-                                    </div>
+                        <div class="td">
+                            <div class="paid">
+                                <div class="enter">
+                                    <textarea class="@error('option_name[]') is-invalid @enderror" type="text" value="{{ old('option_name[]') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
                                 </div>
+                                <div class="selects">
+                                    <select name="option_price[]">
+                                        @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                            <option value="{{ $key }}" @if(old('option_price.0') == $key) selected @endif>
+                                                {{ $value }}円
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <select name="option_is_public[]">
+                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
+                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
+                                    </select>
+                                </div>
+                            </div>
                             </div>
                             </div>
                             @if(!is_null(old('option_name.'.'1')))
@@ -148,8 +146,8 @@
                                                     @endforeach
                                                 </select>
                                                 <select name="option_is_public[]">
-                                                    <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public.'.'0')) && old('option_is_public.'.'0') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                                    <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public.'.'0') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.'0')) && old('option_is_public.'.'0') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'0') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -157,7 +155,6 @@
                                 @endfor
                             @endif
 
-                        </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
 
                         <div class="formFaqArea">
@@ -189,35 +186,34 @@
                                     カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。
                                 </p>
                             </div>
+                                    <ul class="mypagePortfolioUl03 mt40">
+                                        @for($i = 0; $i < 10; $i++) <li >
+                                            <div id="product_pic{{$i}}" class="img">
+                                                <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                            </div>
+                                            <div class="fun">
+                                                <div class="del" id="storage_delete{{$i}}">削除</div>
+                                            </div>
+                                            </li>
+                                        @endfor
+                                    </ul>
+                                </div>
 
-                            <ul class="mypagePortfolioUl03 mt40">
-                                @for($i = 0; $i < 10; $i++) <li >
-                                    <div id="product_pic{{$i}}" class="img">
-                                        <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                        <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple>
-                                    </div>
-                                    <div class="fun">
-                                        <div class="del" id="storage_delete{{$i}}">削除</div>
-                                    </div>
-                                    </li>
-                                @endfor
-                            </ul>
-                        </div>
-
-                        <p class="th">公開設定<span class="must">必須</span></p>
-                        <div class="td">
-                            @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                            <select name="status">
-                                <option>選択してください</option>
-                                <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(old('status') == App\Models\Product::NOT_PUBLIC) selected @endif>非公開</option>
-                                <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status') == App\Models\Product::IS_PUBLIC) selected @endif>公開</option>
-                            </select>
-                        </div>
-                        <div class="functeBtns">
-                            <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
-                            <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
-                            <input type="submit" class="full green_o" formaction="{{ route('product.storeDraft') }}" value="下書きとして保存">
-                        </div>
+                                <p class="th">公開設定<span class="must">必須</span></p>
+                                <div class="td">
+                                    @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <select name="status">
+                                        <option value="">選択してください</option>
+                                        <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(old('status') == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
+                                        <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status') == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
+                                    </select>
+                                </div>
+                                <div class="functeBtns">
+                                    <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
+                                    <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
+                                    <input type="submit" class="full green_o" formaction="{{ route('product.storeDraft') }}" value="下書きとして保存">
+                                </div>
                     </form>
                 </div>
             </div><!--cancelWrap-->

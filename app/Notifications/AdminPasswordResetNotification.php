@@ -18,6 +18,7 @@ class AdminPasswordResetNotification extends Notification
      */
     public static $toMailCallback;
     public static $createUrlCallback;
+    public static $token;
     public function __construct(string $token)
     {
         $this->token = $token;

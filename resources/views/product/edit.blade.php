@@ -11,7 +11,7 @@
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
-                    <form method="post" class="contactForm">
+                    <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf @method('PUT')
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
@@ -64,9 +64,9 @@
                         </div>
 
                         <p class="th">エリア（対面の場合のみ）</p>
-                            @error('prefecture')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('prefecture_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <select name="prefecture" class="">
+                            <select name="prefecture_id" class="">
                                 <option value="">選択してください</option>
                                 @foreach ( $prefectures as $prefecture )
                                     <option value="{{ $prefecture->id }}" @if( old('prefecture_id', $product->prefecture_id) == $prefecture->id ) selected @endif>{{ $prefecture->name }}</option>
@@ -91,7 +91,7 @@
                         </div>
 
                         <p class="th">販売数<span class="must">必須</span></p>
-{{--                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
+                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>
@@ -100,10 +100,13 @@
                             </select>
                         </div>
 
-                        @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <p class="th">有料オプション1</p>
+                                @error('option_name'.'*')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                @error('option_price')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                @error('option_is_public')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             @foreach($product->additionalOptions as $num => $additional_option)
+
                                 <div class="paid">
                                     <div class="enter">
                                         <textarea class="" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.$num, $additional_option->name)}}</textarea>
@@ -117,15 +120,14 @@
                                             @endforeach
                                         </select>
                                         <select name="option_is_public[]">
-                                            <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public', $additional_option->is_public )) && old('option_is_public', $additional_option->is_public ) == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option>
-                                            <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public', $additional_option->is_public) == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
+                                            <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public', $additional_option->is_public )) && old('option_is_public', $additional_option->is_public ) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
+                                            <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public', $additional_option->is_public) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
                                         </select>
                                     </div>
                                 </div>
                             @endforeach
                             <p class="specialtyBtn add"><a href="#"><img src="img/mypage/icon_add.svg" alt="" class="add">得意分野を追加</a></p>
                         </div>
-
 
                         @for($i = 0; $i < 3; $i++)
                         <p class="th">質問のタイトル1</p>
@@ -168,6 +170,7 @@
                             </div>
 
                             <p class="th">画像投稿<span class="must">必須</span></p>
+                            @error('product_pic')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
                                 <div class="warnNotes">
                                     <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font>
@@ -176,23 +179,21 @@
                                         カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。
                                     </p>
                                 </div>
-
                                 <ul class="mypagePortfolioUl03 mt40">
                                     @for($i = 0; $i < 10; $i++) <li>
                                         <div id="product_pic{{$i}}" class="img">
                                         @if(isset($product->productImage[$i]))
                                             <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->productImage[$i]->path)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                            <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple >
+                                            <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
                                         @else
                                             <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                            <input type="file" name="path[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                            <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
                                         @endif
                                         </div>
                                         <div class="fun">
                                             <div class="del" id="storage_delete{{$i}}">削除</div>
                                         </div>
                                         </li>
-
                                     @endfor
                                     <input type="hidden" name="image_status" value="">
                                 </ul>
@@ -203,8 +204,8 @@
                             <div class="td">
                                 <select name="status">
                                     <option value="">選択してください</option>
-                                    <option value="{{App\Models\Product::NOT_PUBLIC}}" @if(!is_null(old('status', $product->status )) && old('status', $product->status ) == App\Models\Product::NOT_PUBLIC) selected @endif>非公開</option>
-                                    <option value="{{App\Models\Product::IS_PUBLIC}}" @if(old('status', $product->status) == App\Models\Product::IS_PUBLIC)) selected @endif>公開</option>
+                                    <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(!is_null(old('status', $product->status )) && old('status', $product->status ) == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
+                                    <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status', $product->status) == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
                                 </select>
                             </div>
                             <div class="functeBtns">

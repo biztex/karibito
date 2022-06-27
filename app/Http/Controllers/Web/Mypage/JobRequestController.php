@@ -28,14 +28,14 @@ class JobRequestController extends Controller
     {
         // 下書きのみ表示
         $products = Product::where('user_id',\Auth::id())
-                                      ->where('is_draft',Product::IS_DRAFT)
-                                      ->orderBy('updated_at','desc')
-                                      ->paginate(10);
+            ->where('is_draft',Product::IS_DRAFT)
+            ->orderBy('updated_at','desc')
+            ->paginate(10);
 
         $job_requests = JobRequest::where('user_id',\Auth::id())
-                                             ->where('is_draft',JobRequest::IS_DRAFT)
-                                             ->orderBy('updated_at','desc')
-                                             ->paginate(10);
+            ->where('is_draft',JobRequest::IS_DRAFT)
+            ->orderBy('updated_at','desc')
+            ->paginate(10);
 
         return view('post.draft', compact('products','job_requests'));
     }
@@ -48,16 +48,16 @@ class JobRequestController extends Controller
     {
         // 下書き・非公開除いて表示
         $products = Product::where('user_id',\Auth::id())
-                                      ->where('status',Product::STATUS_PUBLISH)
-                                      ->where('is_draft',Product::NOT_DRAFT)
-                                      ->orderBy('updated_at','desc')
-                                      ->paginate(10);
+            ->where('status',Product::STATUS_PUBLISH)
+            ->where('is_draft',Product::NOT_DRAFT)
+            ->orderBy('updated_at','desc')
+            ->paginate(10);
 
         $job_requests = JobRequest::where('user_id',\Auth::id())
-                                             ->where('status',JobRequest::STATUS_PUBLISH)
-                                             ->where('is_draft',JobRequest::NOT_DRAFT)
-                                             ->orderBy('updated_at','desc')
-                                             ->paginate(10);
+            ->where('status',JobRequest::STATUS_PUBLISH)
+            ->where('is_draft',JobRequest::NOT_DRAFT)
+            ->orderBy('updated_at','desc')
+            ->paginate(10);
 
         return view('post.publication', compact('products','job_requests'));
     }
@@ -75,7 +75,8 @@ class JobRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreRequest $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
@@ -88,15 +89,15 @@ class JobRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobRequest  $job_request
+     * @param \App\Models\JobRequest $job_request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function show(JobRequest $job_request)
     {
         $user = User::find($job_request->user_id);
 
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($user->userProfile->birthday);
 
         return view('job_request.show',compact('job_request','user','age'));
     }
@@ -104,7 +105,8 @@ class JobRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobRequest  $job_request
+     * @param \App\Models\JobRequest $job_request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function edit(JobRequest $job_request)
@@ -115,8 +117,9 @@ class JobRequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobRequest  $job_request
+     * @param StoreRequest $request
+     * @param \App\Models\JobRequest $job_request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, JobRequest $job_request)
@@ -129,7 +132,8 @@ class JobRequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobRequest  $job_request
+     * @param \App\Models\JobRequest $job_request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function destroy(JobRequest $job_request)
@@ -146,7 +150,8 @@ class JobRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param DraftRequest $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function storeDraft(DraftRequest $request)
@@ -159,8 +164,9 @@ class JobRequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobRequest  $job_request
+     * @param DraftRequest $request
+     * @param \App\Models\JobRequest $job_request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function updateDraft(DraftRequest $request, JobRequest $job_request)
@@ -173,15 +179,15 @@ class JobRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobRequest  $job_request
+     * @param PreviewRequest $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function preview(PreviewRequest $request)
     {
         $user = \Auth::user();
 
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($user->userProfile->birthday);
 
         return view('job_request.preview',compact('request','user','age'));
     }
@@ -223,8 +229,7 @@ class JobRequestController extends Controller
     {
         $user = \Auth::user();
 
-        $birthday = (int)str_replace("-","",$user->userProfile->birthday);
-        $age = Age::group($birthday);
+        $age = Age::group($user->userProfile->birthday);
 
         return view('job_request.preview',compact('request','user','age','job_request'));
     }

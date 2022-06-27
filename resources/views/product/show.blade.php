@@ -70,7 +70,7 @@
                             <ul>
                                 @foreach($product->additionalOptions as $additional_option)
                                     <li>
-                                        <span class="add">＋ {{$additionaloption->name}}</span>
+                                        <span class="add">＋ {{$additional_option->name}}</span>
                                         <span class="price">￥@if(!is_null($additional_option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$additional_option->price]}}@endif</span>
                                     </li>
                                 @endforeach

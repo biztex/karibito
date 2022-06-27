@@ -1,0 +1,36 @@
+name: PHP Coding Standards Fixer
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  php-cs-fixer:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+      - name: OS Version
+        run: cat /etc/os-release
+      - name: PHP, Composer Version
+        run: |
+          php --version
+          composer --version
+      - name: Composer Install PHP CS Fixer
+        run: |
+          composer require --dev friendsofphp/php-cs-fixer=3.8 --with-all-dependencies
+      - name: PHP CS Fixer Version
+        run: ./vendor/bin/php-cs-fixer --version
+      - name: PHP CS Fixer Run
+        run: ./vendor/bin/php-cs-fixer fix --diff -vvv --dry-run
