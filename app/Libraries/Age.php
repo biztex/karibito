@@ -8,7 +8,7 @@ class Age
      */
     public static function int_birthday(string $birthday) :int
     {
-        $int_birthday = (int)str_replace("-","",$birthday);
+        $int_birthday = (int) str_replace("-","",$birthday);
         return $int_birthday;
     }
 
