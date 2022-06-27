@@ -100,6 +100,9 @@
                         </div>
 
                         <div class="formOptionsArea">
+                            <div class="js-formOption">
+
+
                             <p class="th">有料オプション1</p>
                             @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="td">
@@ -120,7 +123,11 @@
                                             <option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public.'.'0') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option>
                                         </select>
                                     </div>
+                                    <div>
+                                        <a href="javascript:;" onclick="" class="fs25 ml05 js-deleteOption">×</a>
+                                    </div>
                                 </div>
+                            </div>
                             </div>
                             @if(!is_null(old('option_name.'.'1')))
 {{--                                    {{dd(old('option_name.'.'2'))}}--}}
@@ -151,7 +158,7 @@
                             @endif
 
                         </div>
-                        <p class="specialtyBtn"><a href="javascript:;" onclick="addOptopns();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
 
                         <div class="formFaqArea">
                             <p class="th">質問のタイトル1</p>
@@ -219,13 +226,17 @@
 </x-layout>Z
 <script type="text/javascript">
     var options_num = 2;
-    function addOptopns(){
+    function addOption(){
         // var str = '<p class="th">有料オプション%NUM%</p><div class="td"><div class="paid"><div class="enter"><textarea name="options%NUM%" placeholder="入力してください"></textarea></div><div class="selects"><select name="options_price%NUM%"><option>500円</option><option>1000円</option><option>1500円</option></select><select name="options_states%NUM%"><option>公開</option><option>不公開</option></select></div></div></div>'
-        var str = '<p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" value="{{ old('option_name.'.'%NUM%') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円 </option>@endforeach</select> <select name="option_is_public[]"> <option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option></select></div></div></div>'
+        var str = '<div class="js-formOption"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" value="{{ old('option_name.'.'%NUM%') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div>'
 
         str = str.replace(/%\w+%/g, options_num);
-        $('.formOptionsArea').append(str);
+        $('.js-formOption').append(str);
         options_num = options_num + 1;
+
+        $('.js-deleteOption').on('click', '.js-formOption', function() {
+            $(this).remove();
+        });
     }
 
     var faq_num = 2;
