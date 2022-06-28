@@ -16,10 +16,8 @@ use App\Models\JobRequest;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 
-
 class ProductController extends Controller
 {
-
     private $product_service;
 
     public function __construct(ProductService $product_service)
@@ -35,16 +33,16 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::where('user_id',\Auth::id())
-                            ->where('status',Product::STATUS_PUBLISH)
-                            ->where('is_draft',Product::NOT_DRAFT)
-                            ->orderBy('updated_at','desc')
-                            ->paginate(5);
+            ->where('status',Product::STATUS_PUBLISH)
+            ->where('is_draft',Product::NOT_DRAFT)
+            ->orderBy('updated_at','desc')
+            ->paginate(5);
 
         $job_requests = JobRequest::where('user_id',\Auth::id())
-                                    ->where('status',JobRequest::STATUS_PUBLISH)
-                                    ->where('is_draft',JobRequest::NOT_DRAFT)
-                                    ->orderBy('updated_at','desc')
-                                    ->paginate(5);
+            ->where('status',JobRequest::STATUS_PUBLISH)
+            ->where('is_draft',JobRequest::NOT_DRAFT)
+            ->orderBy('updated_at','desc')
+            ->paginate(5);
 
         return view('post.post', compact('products','job_requests'));
     }
@@ -63,15 +61,16 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreRequest $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
         \DB::transaction(function () use ($request) {
-        $product = $this->product_service->storeProduct($request->all());
-        $this->product_service->storeAdditionalOption($request->all(), $product->id);
-        $this->product_service->storeProductQuestion($request->all(), $product->id);
-        $this->product_service->storeImage($request, $product->id);
+          $product = $this->product_service->storeProduct($request->all());
+          $this->product_service->storeAdditionalOption($request->all(), $product->id);
+          $this->product_service->storeProductQuestion($request->all(), $product->id);
+          $this->product_service->storeImage($request, $product->id);
         });
 
         return redirect()->route('service_thanks');
@@ -80,7 +79,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product $product
+     * @param \App\Models\Product $product
+     * 
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -98,8 +98,9 @@ class ProductController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product $product
+     * 
+     * @param \App\Models\Product $product
+     * 
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -111,7 +112,8 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param StoreRequest $request
-     * @param  \App\Models\Product $product
+     * @param \App\Models\Product $product
+     * 
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, Product $product)
@@ -129,7 +131,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Product  $product
+     * @param \App\Models\Product $product
+     * 
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
@@ -199,7 +202,6 @@ class ProductController extends Controller
 
         return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
-
 
     public function preview(PreviewRequest $request)
     {

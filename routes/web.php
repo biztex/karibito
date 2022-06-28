@@ -17,7 +17,6 @@ use App\Http\Controllers\Web\Mypage\ProductController as MypageProductController
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
@@ -32,7 +31,6 @@ use App\Http\Controllers\SecretController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\PublicationController;
-
 
 // 管理者用
 
@@ -51,7 +49,6 @@ Route::get('sample', function () {
     return view('sample');
 });
 
-
 // 画面組込中
 // Route::view('/post', 'post.post')->name('post');
 Route::view('service_preview', 'post.service_preview')->name('service_preview');
@@ -65,7 +62,6 @@ Route::view('service', 'post.service')->name('service');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
 
-
 Route::view('support', 'support.support')->name('support');
 Route::view('support_detail', 'support.support_detail')->name('support_detail');
 Route::view('guide', 'support.guide')->name('guide');
@@ -75,13 +71,11 @@ Route::view('member_config', 'user.member_config')->name('member_config');
 Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
 Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
-
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -115,7 +109,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('product/{product}/edit/preview',[MypageProductController::class, 'editPreview'])->name('product.edit.preview');
 //    Route::post('product/store/preview',[MypageProductController::class,'storePreview'])->name('product.store.preview');
 
-
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
     Route::view('secret02','secret.secret02')->name('secret02');
@@ -123,7 +116,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret04','secret.secret04')->name('secret04');
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
-
 
     // 提供・リクエスト一覧
     Route::get('job_request',function () { return redirect()->route('publication');});
@@ -155,8 +147,6 @@ Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 
-
-
 // GET	        /photo	index	        photo.index　          一覧画面
 // GET	        /photo/create	        photo.create　         登録画面
 // POST	        /photo	store	        photo.store　          登録処理
@@ -164,8 +154,6 @@ Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 // GET	        /photo/{photo}/edit	    photo.edit　           編集画面
 // PUT/PATCH	/photo/{photo}	        photo.update　         編集処理
 // DELETE	    /photo/{photo}	        photo.destroy　        削除処理
-
-
 
 // google login
 Route::get('/register/google', [GoogleLoginController::class, 'getGoogleAuth']);
@@ -182,7 +170,6 @@ Route::get('contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('contact', [ContactController::class, 'sendSupportMail']);
 
 Route::get('', [HomeController::class, 'index'])->name('home');
-
 
 // --管理者画面-----------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -202,10 +189,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
     });
 
-
 });
-
-
 
 // 未着手
 Route::prefix('sample')->group(function () {

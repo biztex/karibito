@@ -5,7 +5,6 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>サービスをリクエストする</span>　>　<span>プレビュー</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="detailStyle">
 			@if(empty($job_request))
 					<form class="contactForm" method="post" action="{{ route('job_request.store.preview') }}">

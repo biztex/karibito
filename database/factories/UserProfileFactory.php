@@ -14,6 +14,7 @@ class UserProfileFactory extends Factory
     /**
      * Define the model's default state.
      * 使い方：UserProfile::factory()->create()
+     * 
      * @return array<string, mixed>
      */
     public function definition()
@@ -36,6 +37,7 @@ class UserProfileFactory extends Factory
     /**
      * 認証済みユーザー
      * 使い方：UserProfile::factory()->approved()->create()
+     * 
      * @return static
      */
     public function approved()
