@@ -3,7 +3,7 @@
 
         <div id="breadcrumb">
             <div class="inner">
-                <a href="index.html">ホーム</a>　&gt;　<span>サービスを編集する</span>
+                <a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスを編集する</span>
             </div>
         </div>
 
@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="formOptionsArea">
-                            @if(null === $product->additionalOptions)
+                            @if(null === $product->additionalOptions))
                                 <div class="js-optionForm">
                                     <p class="th">有料オプション1</p>
                                     @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror

@@ -3,7 +3,7 @@
 
         <div id="breadcrumb">
             <div class="inner">
-                <a href="index.html">ホーム</a>　&gt;　<span>サービスを提供する</span>
+                <a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスを提供する</span>
             </div>
         </div>
 
@@ -103,7 +103,7 @@
                             @if(is_null(old('option_name.'.'0')))
                                 <div class="js-optionForm">
                                     <p class="th">有料オプション1</p>
-                                        @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        @error('option_name.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="paid">
                                             <div class="enter">
@@ -132,7 +132,7 @@
                                 @foreach(old('option_name') as $k => $v)
                                     <div class="js-optionForm">
                                         <p class="th">有料オプション {{$k + 1}}</p>
-                                            @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('option_name.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="paid">
                                                 <div class="enter">
@@ -168,14 +168,14 @@
                             @if(is_null(old('question_title.'.'0')))
                                 <div class="js-questionForm">
                                     <p class="th">質問のタイトル1</p>
-                                        @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        @error('question_title.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="enter">
                                             <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
                                             <p class="taR">400</p>
                                         </div>
                                         <p class="th">質問の回答1</p>
-                                            @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('answer.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="enter">
                                             <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
                                             <p class="taR">400</p>
@@ -188,7 +188,7 @@
                             @else
                                 @foreach(old('question_title') as $k => $v)
                                     <div class="js-questionForm">
-                                        <p class="th">質問のタイトル {{$loop->index + 1}}</p>
+                                        <p class="th">質問のタイトル {{$k + 1}}</p>
                                             @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
@@ -213,6 +213,7 @@
 
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
+                            @error('product_pic')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="warnNotes">
                                 <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
                                 <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>

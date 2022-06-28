@@ -2,9 +2,9 @@
     <article>
         <div id="breadcrumb">
             <div class="inner">
-                <a href="index.html">ホーム</a>　>　<a href="service.html">サービスを探す</a>　>　<a
-                    href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a>　>　<a
-                    href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　<span>{{$product->title}}</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　<a href="service.html">サービスを探す</a>　>　
+                <a href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a>　>　
+                <a href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　<span>{{$product->title}}</span>
             </div>
         </div><!-- /.breadcrumb -->
         <div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
