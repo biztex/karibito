@@ -210,7 +210,8 @@ return [
         'application_deadline' => '応募期限',
         'required_date' => '納品希望日',
         'is_online' => '仕事体系',
-        'is_call' => '電話相談の受付'  
+        'is_call' => '電話相談の受付',
+        'status' => '公開設定'
     ],
 
 ];
