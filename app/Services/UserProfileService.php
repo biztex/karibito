@@ -23,13 +23,15 @@ class UserProfileService
      */
     public function storeUserProfile(array $params): UserProfile
     {
-        $user_profile = UserProfile::updateOrCreate([
-            'user_id' => \Auth::id(),
-            'first_name' => $params['first_name'],
-            'last_name' => $params['last_name'],
-            'gender' => $params['gender'],
-            'prefecture_id' => $params['prefecture'],
-        ]);
+        $user_profile = UserProfile::updateOrCreate(
+            ['user_id' => \Auth::id()],
+            [
+                'first_name' => $params['first_name'],
+                'last_name' => $params['last_name'],
+                'gender' => $params['gender'],
+                'prefecture_id' => $params['prefecture'],
+            ],
+        );
         return $user_profile;
     }
 
