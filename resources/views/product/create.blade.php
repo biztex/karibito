@@ -15,7 +15,7 @@
                         @csrf
 
                         <p class="th">カテゴリ<span class="must">必須</span></p>
-                        @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="category_id">
                                 <option value="">選択してください</option>
@@ -31,13 +31,13 @@
                         </div>
 
                         <p class="th">商品名<span class="must">必須</span></p>
-                        @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <input type="text" name="title" value="{{ old('title') }}">
                         </div>
 
                         <p class="th">商品の詳細<span class="must">必須</span></p>
-                        @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <textarea type="text" name="content">{{ old('content') }}</textarea>
                         </div>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <p class="th">仕事体系<span class="must">必須</span></p>
-                        @error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_online">
                                 <option value="">選択してください</option>
@@ -64,7 +64,7 @@
                         </div>
 
                         <p class="th">エリア（対面の場合のみ）</p>
-                        @error('prefecture_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('prefecture_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="prefecture_id">
                                 <option value="">選択してください</option>
@@ -81,7 +81,7 @@
                         </div>
 
                         <p class="th">電話相談の受付<span class="must">必須</span></p>
-{{--                        @error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
+                            @error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_call">
                                 <option value="">選択してください</option>
@@ -91,7 +91,7 @@
                         </div>
 
                         <p class="th">販売数<span class="must">必須</span></p>
-{{--                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
+                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>
@@ -102,10 +102,9 @@
 
                         <div class="formOptionsArea">
                             @if(is_null(old('option_name.'.'0')))
-{{--                                {{dd(is_null(old('option_name.'.'0')))}}--}}
                                 <div class="js-optionForm">
                                     <p class="th">有料オプション1</p>
-                                    @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="paid">
                                             <div class="enter">
@@ -134,7 +133,7 @@
                                 @foreach(old('option_name') as $k => $v)
                                     <div class="js-optionForm">
                                         <p class="th">有料オプション {{$k + 1}}</p>
-                                        @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="paid">
                                                 <div class="enter">
@@ -168,14 +167,14 @@
                             @if(is_null(old('question_title.'.'0')))
                                 <div class="js-questionForm">
                                     <p class="th">質問のタイトル1</p>
-                                    <div class="td">
                                         @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <div class="td">
                                         <div class="enter">
                                             <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
                                             <p class="taR">400</p>
                                         </div>
                                         <p class="th">質問の回答1</p>
-                                        @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="enter">
                                             <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
                                             <p class="taR">400</p>
@@ -189,18 +188,18 @@
                                 @foreach(old('question_title') as $k => $v)
                                     <div class="js-questionForm">
                                         <p class="th">質問のタイトル {{$loop->index + 1}}</p>
-                                        @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
                                                 <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{$v}}</textarea>
                                                 <p class="taR">400</p>
                                             </div>
-                                                <p class="th">質問の回答 {{$k + 1}}</p>
+                                            <p class="th">質問の回答 {{$k + 1}}</p>
                                                 @error('answer.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                <div class="enter">
-                                                    <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$k)}}</textarea>
-                                                    <p class="taR">400</p>
-                                                </div>
+                                            <div class="enter">
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$k)}}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
                                             <div>
                                                 <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
                                             </div>
@@ -214,40 +213,38 @@
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
                             <div class="warnNotes">
-                                <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font>
-                                </p>
-                                <p>
-                                    カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。
-                                </p>
+                                <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
+                                <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>
                             </div>
-                                    <ul class="mypagePortfolioUl03 mt40">
-                                        @for($i = 0; $i < 10; $i++) <li >
-                                            <div id="product_pic{{$i}}" class="img">
-                                                <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                                <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
-                                            </div>
-                                            <div class="fun">
-                                                <div class="del" id="storage_delete{{$i}}">削除</div>
-                                            </div>
-                                            </li>
-                                        @endfor
-                                    </ul>
-                                </div>
+                            <ul class="mypagePortfolioUl03 mt40">
+                                @for($i = 0; $i < 10; $i++)
+                                    <li >
+                                        <div id="product_pic{{$i}}" class="img">
+                                            <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                            <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                        </div>
+                                        <div class="fun">
+                                            <div class="del" id="storage_delete{{$i}}">削除</div>
+                                        </div>
+                                    </li>
+                                @endfor
+                            </ul>
+                        </div>
 
-                                <p class="th">公開設定<span class="must">必須</span></p>
-                                <div class="td">
-                                    @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                    <select name="status">
-                                        <option value="">選択してください</option>
-                                        <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(old('status') == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
-                                        <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status') == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
-                                    </select>
-                                </div>
-                                <div class="functeBtns">
-                                    <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
-                                    <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
-                                    <input type="submit" class="full green_o" formaction="{{ route('product.storeDraft') }}" value="下書きとして保存">
-                                </div>
+                        <p class="th">公開設定<span class="must">必須</span></p>
+                        <div class="td">
+                            @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            <select name="status">
+                                <option value="">選択してください</option>
+                                <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(old('status') == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
+                                <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status') == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
+                            </select>
+                        </div>
+                        <div class="functeBtns">
+                            <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
+                            <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
+                            <input type="submit" class="full green_o" formaction="{{ route('product.storeDraft') }}" value="下書きとして保存">
+                        </div>
                     </form>
                 </div>
             </div><!--cancelWrap-->
