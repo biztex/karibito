@@ -7,7 +7,7 @@
 						<div class="item">
 							<h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
 							<p class="searchBtnSp sp"><!-- <img src="/img/common/ico_sea.svg" alt=""> --></p>
-						</div> 
+						</div>
 
 						<div class="item">
 							<div class="btnMenu"><span></span><span></span><span></span></div>
@@ -21,11 +21,11 @@
 							</nav>
 						</div>
 					</div>
-				</div><!-- /.headLinks -->           
+				</div><!-- /.headLinks -->
 			</div><!-- /#header -->
 		</header>
 		<article>
-			<div id="contents"> 
+			<div id="contents">
 				<div class="companyTop">
 					<h2 class="title">街と人を繋げ隊！</h2>
 					<p class="logo"><img src="/img/common/logo_title.svg" alt="LOGO"></p>
@@ -34,7 +34,7 @@
 					<div class="btnTeams">
 						<a href="#" class="blue">Our Service</a>
 					</div>
-				</div> 
+				</div>
 				<div class="companyStep">
 					<div class="inner">
 						<div class="part policy" id="company01">
@@ -76,7 +76,7 @@
 									<li>7　医師の不足により病院の減少が始まっていたり、医師の負担による、患者への十分な対応ができない。</li>
 									<li>8　女性の社会への積極的な進出を助けるための、職場雇用を斡旋できるツールが少なく、より多くの情報をマッチングできる仕組みがない。</li>
 									<li>9　専門技術者の定年退職や少子化による人材不足などで、日本のモノづくりを支えることができていない。</li>
-									<li>10　今後のさらなる国籍化による、日本の労働者不足を補うために訪れる海外労働者のための就職斡旋の仕組みが確立されていない。</li> 
+									<li>10　今後のさらなる国籍化による、日本の労働者不足を補うために訪れる海外労働者のための就職斡旋の仕組みが確立されていない。</li>
 								</ul>
 								<p class="tit">Mission　〜使命〜</p>
 								<ul>
@@ -116,7 +116,7 @@
 								<p>アフターコロナ における世の中は、地域一極集中から、地方分散の時代へと変わろうとしています。それはビジネスだけでなく、日常生活からレジャーにおいてまで、地域活性化に繋がる取り組みを各関連機関が積極的に推進し始めています。<br>そのためには、地方に自然に溶け込むなかで、雇用機会を生み出す一つのきっかけとなります。<br>カリビトが街と人を繋げるプラットフォームツールとなるよう雇用機会拡大の一角を担って参ります。</p>
 							</div>
 						</div>
-						<div class="part companyProfile"> 
+						<div class="part companyProfile">
 							<h2 class="hdS"><img class="ico" src="/img/company/ico_logo.svg"><span class="eng">Company profile</span><span class="jap">〜会社概要〜</span></h2>
 							<div class="profile">
 								<table>
@@ -177,11 +177,11 @@
 						</div>
 						<div class="part contact" id="company04">
 							<h2 class="mypageHd02"><span><img class="ico" src="/img/company/ico_tel.svg">お問い合わせ</span></h2>
-							<p class="email"><a href="">メールでのお問い合わせ</a></p>
+							<p class="email"><a href="{{ route('contact') }}">メールでのお問い合わせ</a></p>
 							<div class="btnTeams">
-								<a href="#" class="blue">お問い合わせフォーム</a>
+								<a href="{{ route('contact') }}" class="blue">お問い合わせフォーム</a>
 							</div>
-						</div> 
+						</div>
 					</div>
 				</div>
 			</div><!-- /#contents -->
@@ -190,7 +190,7 @@
 
 		<footer>
 			<div id="footer">
-				
+
 				<div class="bottom">
 					<div class="inner">
 						<div class="serviceLinks">
@@ -199,7 +199,7 @@
 							<a href="#">約款特定</a>
 							<a href="#">商取引法に基づく表示</a>
 							<a href="#">よくある質問</a>
-							<a href="#">お問い合わせ</a>
+							<a href="{{ route('contact') }}">お問い合わせ</a>
 						</div>
 						<div class="sns sp">
 							<a href="#" target="_blank"><img src="img/common/ico_facebook.png" alt="Facebook"></a>

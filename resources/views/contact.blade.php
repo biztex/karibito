@@ -273,17 +273,18 @@
                         <h2 class="subPagesHd">お問い合わせ</h2>
                         <div class="contactBox">
                             <p class="contactTop">当サービスへのお問い合わせは、下記フォームにご入力いただき、送信いただきますようお願いいたします。</p>
-                            <form action="#" method="post">
-                                <div class="labelName"><input type="text" name="name" placeholder="名前"></div>
-                                <div class="labelMail"><input type="email" name="mail" placeholder="メールアドレス"></div>
+                            <form action="{{ route('contact') }}" method="post">
+                                @csrf
+                                <div class="labelName"><input type="text" name="name" placeholder="名前" required></div>
+                                <div class="labelMail"><input type="email" name="mail" placeholder="メールアドレス" required></div>
                                 <div class="labelType"><select name="type">
-                                        <option>お問い合わせ種別</option>
-                                        <option>お問い合わせ種別1</option>
-                                        <option>お問い合わせ種別2</option>
+                                        <option value='0'>お問い合わせ種別</option>
+                                        <option value='0'>お問い合わせ種別1</option>
+                                        <option value='0'>お問い合わせ種別2</option>
                                     </select></div>
                                 <div class="labelMessage">
                                     <p>お問い合わせ内容</p>
-                                    <textarea name="message" placeholder="入力してください"></textarea>
+                                    <textarea name="message" placeholder="10文字入力してください" required minlength="10"></textarea>
                                 </div>
                                 <p class="formBtn"><input type="submit" class="submit" value="送信する"></p>
                             </form>

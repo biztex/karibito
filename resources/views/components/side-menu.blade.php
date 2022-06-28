@@ -16,7 +16,7 @@
 
                         <img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
             </div>
-            
+
             <div class="sideItem">
                 <ul class="sideUl01">
                     <li><a href="{{ route('mypage') }}" class="">マイページ</a></li>
@@ -48,7 +48,7 @@
             <div class="sideItem">
                 <p class="sideHd">カリビトについて</p>
                 <ul class="sideUl01">
-                    <li><a href="#">お問い合わせ</a></li>
+                    <li><a href="{{ route('contact') }}">お問い合わせ</a></li>
                     <li><a href="{{ route('support') }}">ご利用ガイド</a></li>
                     <li><a href="#">カテゴリー項目追加依頼</a></li>
                     <li><a href="{{ route('privacy-policy') }}">個人情報の取り扱いについて</a></li>
@@ -78,6 +78,6 @@
                     $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
 		}
 
-        
+
 	})
 </script>

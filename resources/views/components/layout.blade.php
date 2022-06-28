@@ -133,7 +133,7 @@
                                         <a href="#">カリビトQ&A</a>
                                         <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
                                         <a href="#">設定</a>
-                                        <a href="#">お問い合わせ</a>
+                                        <a href="{{ route('contact') }}">お問い合わせ</a>
                                     </div>
                                     @auth
                                         <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
@@ -1212,7 +1212,7 @@
                             <a href="#">約款特定</a>
                             <a href="#">商取引法に基づく表示</a>
                             <a href="#">よくある質問</a>
-                            <a href="#">お問い合わせ</a>
+                            <a href="{{ route('contact') }}">お問い合わせ</a>
                         </div>
                         <div class="sns sp">
                             <a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>

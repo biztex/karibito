@@ -6,14 +6,14 @@
                 <div id="headerLinks">
                     <div class="inner">
                         <div class="item">
-                            <h1 id="headerLogo"><a href="{{ route('home') }}"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1> 
+                            <h1 id="headerLogo"><a href="{{ route('home') }}"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
                         </div>
                         <p class="custTit">CUSTOMER SUPPORT</p>
-                    </div> 
-                </div><!-- /.headLinks -->   
+                    </div>
+                </div><!-- /.headLinks -->
             </div><!-- /#header -->
         </header>
-    {{$slot}}	
+    {{$slot}}
         <footer>
             <div id="footer">
                 <div class="aboutFeatures">
@@ -69,7 +69,7 @@
                             <a href="#">約款特定</a>
                             <a href="#">商取引法に基づく表示</a>
                             <a href="#">よくある質問</a>
-                            <a href="#">お問い合わせ</a>
+                            <a href="{{ route('contact') }}">お問い合わせ</a>
                         </div>
                         <div class="sns sp">
                             <a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>
