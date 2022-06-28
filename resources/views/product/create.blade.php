@@ -11,7 +11,6 @@
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
-                    {{var_dump($errors)}}
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf
 
