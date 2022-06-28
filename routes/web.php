@@ -177,8 +177,9 @@ Route::get('/register/facebook', [FacebookLoginController::class, 'getFacebookAu
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
 
-
- 
+// お問い合わせ
+Route::get('contact', [ContactController::class, 'contact'])->name('contact');
+Route::post('contact', [ContactController::class, 'sendSupportMail']);
 
 Route::get('', [HomeController::class, 'index'])->name('home');
 
@@ -207,7 +208,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 // 未着手
-Route::prefix('sample')->group(function () {  
+Route::prefix('sample')->group(function () {
     Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
     Route::view('estimate', 'sample.estimate');
