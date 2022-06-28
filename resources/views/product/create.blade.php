@@ -22,8 +22,7 @@
                                 @foreach ($categories as $category)
                                     <optgroup label="{{$category->name}}">
                                         @foreach ($category->mProductChildCategory as $child_category)
-                                            <option value="{{$child_category->id}}"
-                                                    @if( old('category_id') == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
+                                            <option value="{{$child_category->id}}" @if( old('category_id', $request->catecory_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach
@@ -33,19 +32,19 @@
                         <p class="th">商品名<span class="must">必須</span></p>
                             @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <input type="text" name="title" value="{{ old('title') }}">
+							<input type="text" name="title" value="{{ old('title',$request->title) }}">
                         </div>
 
                         <p class="th">商品の詳細<span class="must">必須</span></p>
                             @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <textarea type="text" name="content">{{ old('content') }}</textarea>
+                            <textarea type="text" name="content">{{ old('content', $request->content) }}</textarea>
                         </div>
 
                         <p class="th">価格<span class="must">必須</span></p>
                             @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <p class="budget price"><input type="text" placeholder="0" name="price" value="{{ old('price') }}"></p>
+                            <p class="budget price"><input type="text" placeholder="0" name="price" value="{{ old('price', $request->price) }}"></p>
                         </div>
 
                         <div class="td">
@@ -58,8 +57,8 @@
                         <div class="td">
                             <select name="is_online">
                                 <option value="">選択してください</option>
-                                <option value="{{App\Models\Product::OFFLINE}}" @if(!is_null(old('is_online')) && old('is_online') == App\Models\Product::OFFLINE) selected @endif>対面</option>
-                                <option value="{{App\Models\Product::ONLINE}}" @if(old('is_online') == App\Models\Product::ONLINE) selected @endif>非対面</option>
+                                <option value="{{App\Models\Product::OFFLINE}}" @if(!is_null(old('is_online', $request->is_online)) && old('is_online', $request->is_onine) == App\Models\Product::OFFLINE) selected @endif>対面</option>
+                                <option value="{{App\Models\Product::ONLINE}}" @if(old('is_online', $request->is_online) == App\Models\Product::ONLINE) selected @endif>非対面</option>
                             </select>
                         </div>
 
@@ -69,7 +68,7 @@
                             <select name="prefecture_id">
                                 <option value="">選択してください</option>
                                 @foreach($prefectures as $prefecture)
-                                    <option value="{{ $prefecture->id }}" @if( old('prefecture_id') == $prefecture->id) selected @endif>{{ $prefecture->name }}</option>
+                                    <option value="{{ $prefecture->id }}" @if( old('prefecture_id', $request->prefecture_id) == $prefecture->id) selected @endif>{{ $prefecture->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -77,7 +76,7 @@
                         <p class="th">所要期間<span class="must">必須</span></p>
                             @error('number_of_day')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <p class="time"><input type="number" name="number_of_day" value="{{ old('number_of_day') }}" placeholder="入力してください"></p>
+                            <p class="time"><input type="number" name="number_of_day" value="{{ old('number_of_day', $request->number_of_day) }}" placeholder="入力してください"></p>
                         </div>
 
                         <p class="th">電話相談の受付<span class="must">必須</span></p>
@@ -85,8 +84,8 @@
                         <div class="td">
                             <select name="is_call">
                                 <option value="">選択してください</option>
-                                <option value="{{App\Models\Product::OFF_CALL}}" @if(!is_null(old('is_call')) && old('is_call') == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
-                                <option value="{{App\Models\Product::ON_CALL}}" @if(old('is_call') == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
+                                <option value="{{App\Models\Product::ON_CALL}}" @if(old('is_call', $request->is_call) == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
+                                <option value="{{App\Models\Product::OFF_CALL}}" @if(!is_null(old('is_call', $request->is_call)) && old('is_call', $request->is_call) == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
                             </select>
                         </div>
 
@@ -95,8 +94,8 @@
                         <div class="td">
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>
-                                <option value="{{App\Models\Product::ONE_OF_SALE}}" @if(!is_null(old('number_of_sale')) && old('number_of_sale') == App\Models\Product::ONE_OF_SALE) selected @endif required>１人様限定</option>
-                                <option value="{{App\Models\Product::UNLIMITED_OF_SALE}}" @if(old('number_of_sale') == App\Models\Product::UNLIMITED_OF_SALE) selected @endif required>無制限</option>
+                                <option value="{{App\Models\Product::ONE_OF_SALE}}" @if(!is_null(old('number_of_sale', $request->number_of_sale)) && old('number_of_sale', $request->number_of_sale) == App\Models\Product::ONE_OF_SALE) selected @endif required>１人様限定</option>
+                                <option value="{{App\Models\Product::UNLIMITED_OF_SALE}}" @if(old('number_of_sale', $request->number_of_sale) == App\Models\Product::UNLIMITED_OF_SALE) selected @endif required>無制限</option>
                             </select>
                         </div>
 
@@ -162,6 +161,56 @@
                             @endif
                         </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
+
+
+
+                        <div class="formQuestionsArea">
+                            @if(is_null(old('question_title.'.'0')))
+                                <div class="js-questionForm">
+                                    <p class="th">質問のタイトル1</p>
+                                        @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <div class="td">
+                                        <div class="enter">
+                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
+                                            <p class="taR">400</p>
+                                        </div>
+                                        <p class="th">質問の回答1</p>
+                                            @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="enter">
+                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
+                                            <p class="taR">400</p>
+                                        </div>
+                                        <div>
+                                            <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                @foreach(old('question_title') as $k => $v)
+                                    <div class="js-questionForm">
+                                        <p class="th">質問のタイトル {{$loop->index + 1}}</p>
+                                            @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="enter">
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{$v}}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
+                                            <p class="th">質問の回答 {{$k + 1}}</p>
+                                                @error('answer.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            <div class="enter">
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$k)}}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
+
 
                         <div class="formQuestionsArea">
                             @if(is_null(old('question_title.'.'0')))
