@@ -58,8 +58,7 @@
                             <div class="big">
                             @for($i = 0; $i < 10; $i++)
                                 <div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="" srcset="" alt=""></div>
-                                <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
-                                <!-- <input type="file" name="paths[{{$i}}]" value=""> -->
+                                <input type="hidden" name="base64_text[{{$i}}]" value="">
                             @endfor
                             </div>
                             <div class="small">

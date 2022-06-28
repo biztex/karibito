@@ -223,6 +223,7 @@
                                         <div id="product_pic{{$i}}" class="img">
                                             <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                             <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                            <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
                                         </div>
                                         <div class="fun">
                                             <div class="del" id="storage_delete{{$i}}">削除</div>

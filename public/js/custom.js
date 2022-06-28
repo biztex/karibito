@@ -74,7 +74,6 @@ $(function () {
 				var reader = new FileReader();
 				reader.onload = function (e) {
 					$("#preview_product"+i).attr('src', e.target.result);
-					$("input[name='paths["+i+"]']").attr('value', e.target.result);
 					localStorage.setItem("pic"+i, reader.result);
 				}
 				reader.readAsDataURL(e.target.files[0]);
@@ -97,7 +96,7 @@ $(function () {
 		// プレビューページ
 		$(function () {
 			if (localStorage.getItem("pic"+i)) {
-				$("input[name='paths["+i+"]']").attr('value', localStorage.getItem("pic"+i));
+				$("input[name='base64_text["+i+"]']").attr('value', localStorage.getItem("pic"+i));
 				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
 				$("#preview_slider"+i).attr('src', localStorage.getItem("pic"+i));
 				$("#preview_slider"+i+i).attr('src', localStorage.getItem("pic"+i));
