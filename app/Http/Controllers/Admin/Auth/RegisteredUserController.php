@@ -28,17 +28,18 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param \Illuminate\Http\Request $request
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required','string','max:24'],
-            'email' => ['required','confirmed', 'string', 'email', 'max:128', 'unique:admins'],
-            'password' => ['required', 'confirmed','between:8,100', Rules\Password::defaults(), new AlphaRule],
+            'name' => ['required', 'string', 'max:24'],
+            'email' => ['required', 'confirmed', 'string', 'email', 'max:128', 'unique:admins'],
+            'password' => ['required', 'confirmed', 'between:8,100', Rules\Password::defaults(), new AlphaRule()],
         ]);
 
         $user = Admin::create([
@@ -48,7 +49,6 @@ class RegisteredUserController extends Controller
             // 'verifyemail_send_at' => Carbon::now()
         ])->save();
 
-        
         event(new Registered($user));
 
         //Auth::guard('admin')->login($user);

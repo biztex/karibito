@@ -28,7 +28,6 @@ class WithdrawController extends Controller
 
         \Session::put('flash_msg','退会しました');
 
-
         return redirect()->route('home');
     }
 }

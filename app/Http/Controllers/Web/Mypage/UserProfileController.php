@@ -15,12 +15,10 @@ use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
 use Laravel\Socialite\Facades\Socialite;
 
-
 use App\Services\UserProfileService;
 
 class UserProfileController extends Controller
 {
-
     private $user_profile_service;
 
     public function __construct(UserProfileService $user_profile_service)
@@ -28,8 +26,6 @@ class UserProfileController extends Controller
         $this->user_profile_service = $user_profile_service;
 
     }
-
-
 
     /**
      * Display a listing of the resource.
@@ -55,7 +51,8 @@ class UserProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreRequest  $request
+     * @param StoreRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
@@ -102,7 +99,8 @@ class UserProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateRequest  $request
+     * @param UpdateRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request)

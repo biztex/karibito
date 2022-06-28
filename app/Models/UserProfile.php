@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class UserProfile extends Model
 {
     use HasFactory;
@@ -16,6 +15,7 @@ class UserProfile extends Model
     protected $guarded = [ 'id' ];
 
     const GENDER_MAN = 1;
+
     const GENDER_WOMAN = 2;
 
     const GENDER = [
@@ -24,13 +24,13 @@ class UserProfile extends Model
     ];
 
     const IS_IDENTIFY = 1;
+
     const NOT_IDENTIFY = 0;
+    
     const IDENTIFY = [
         self::IS_IDENTIFY =>'承認済',
         self::NOT_IDENTIFY =>'未',
     ];
-
-
 
     public function user()
     {
@@ -41,5 +41,4 @@ class UserProfile extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
-
 }

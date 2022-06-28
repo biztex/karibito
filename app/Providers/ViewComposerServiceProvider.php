@@ -27,10 +27,10 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \View::composer('*', function($view) {
+        \View::composer('*', function ($view) {
             $view->with('user_profile', UserProfile::firstWhere('user_id',\Auth::id()))
-                 ->with('prefectures' , Prefecture::all())
-                 ->with('categories'  , MProductCategory::all());
+                ->with('prefectures', Prefecture::all())
+                ->with('categories', MProductCategory::all());
         });
     }
 }

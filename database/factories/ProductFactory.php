@@ -14,6 +14,7 @@ class ProductFactory extends Factory
     /**
      * Define the model's default state.
      * 使い方：Product::factory()->create()
+     * 
      * @return array<string, mixed>
      */
     public function definition()
