@@ -211,6 +211,11 @@ return [
         'required_date' => '納品希望日',
         'is_online' => '仕事体系',
         'is_call' => '電話相談の受付',
+        'number_of_sale' => '販売数',
+        'number_of_day' =>'所用期間',
+        'option_name.*' => '有料オプション',
+        'question_title.*' => '質問のタイトル',
+        'answer.*' => '質問の回答',
         'status' => '公開設定'
     ],
 

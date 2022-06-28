@@ -90,13 +90,14 @@ class ProductService
 
         if (isset($request['option_name'])) {
             foreach ($request['option_name'] as $index => $option) {
-                $product->additionalOptions()->create([
-                    'name' => $request['option_name'][$index],
-                    'price' => $request['option_price'][$index],
-                    'is_public' => $request['option_is_public'][$index]
-                ]);
+                    $product->additionalOptions()->create([
+                        'name' => $request['option_name'][$index],
+                        'price' => $request['option_price'][$index],
+                        'is_public' => $request['option_is_public'][$index]
+                    ]);
+                    break;
+                }
             }
-        }
     }
 
 
@@ -109,10 +110,11 @@ class ProductService
 
         if (isset($request['question_title'])) {
             foreach ($request['question_title'] as $index => $title){
-                $product->productQuestions()->create([
-                    'title' => $request['question_title'][$index],
-                    'answer' => $request['answer'][$index]
-                ]);
+                    $product->productQuestions()->create([
+                        'title' => $request['question_title'][$index],
+                        'answer' => $request['answer'][$index]
+                    ]);
+                    break;
             }
         }
     }

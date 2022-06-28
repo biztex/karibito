@@ -202,7 +202,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 // 未着手
-Route::prefix('sample')->group(function () {  
+Route::prefix('sample')->group(function () {
     Route::view('add_category', 'sample.add_category');
     Route::view('contact', 'sample.contact');
     Route::view('estimate', 'sample.estimate');
