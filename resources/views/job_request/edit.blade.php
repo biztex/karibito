@@ -5,7 +5,6 @@
 				<a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスをリクエストする</span>
 			</div>
 		</div>
-		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<div id="contents">
 			<div class="cancelWrap">
