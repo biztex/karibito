@@ -278,13 +278,13 @@
                                 <div class="labelName"><input type="text" name="name" placeholder="名前" required></div>
                                 <div class="labelMail"><input type="email" name="mail" placeholder="メールアドレス" required></div>
                                 <div class="labelType"><select name="type">
-                                        <option value='0'>お問い合わせ種別</option>
-                                        <option value='0'>お問い合わせ種別1</option>
-                                        <option value='0'>お問い合わせ種別2</option>
-                                    </select></div>
+                                    @foreach ($contactOptions as $i => $option)
+                                        <option value='{{ $i }}'>{{ $option }}</option>
+                                    @endforeach
+                                </select></div>
                                 <div class="labelMessage">
                                     <p>お問い合わせ内容</p>
-                                    <textarea name="message" placeholder="10文字入力してください" required minlength="10"></textarea>
+                                    <textarea name="message" placeholder="入力してください" required></textarea>
                                 </div>
                                 <p class="formBtn"><input type="submit" class="submit" value="送信する"></p>
                             </form>

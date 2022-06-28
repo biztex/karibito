@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMailHistory;
 use Illuminate\Http\Request;
 use App\Services\UserContactService;
 use App\Services\AdminContactService;
@@ -15,7 +16,9 @@ class ContactController extends Controller
      */
     public function contact()
     {
-        return view('contact');
+        $contactOptions = ContactMailHistory::CONTACT_TYPES;
+
+        return view('contact', compact('contactOptions'));
     }
 
     /**
