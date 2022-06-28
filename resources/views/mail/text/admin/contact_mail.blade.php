@@ -5,7 +5,7 @@
 
 メールアドレス：{{ $request->mail }}
 
-タイプ：{{ $request->type }}
+タイプ：{{ \App\Models\ContactMailHistory::CONTACT_TYPES[$request->type] }}
 
 内容
 {{ $request->message }}
