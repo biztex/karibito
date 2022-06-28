@@ -101,9 +101,7 @@
                         </div>
 
                         <div class="formOptionsArea">
-{{--                            {{dd($product->additionalOptions)}}--}}
-                                {{dd($product->additionalOptions->pluck('name'))}}
-                            @if(null === $product->additionalOptions->pluck('name')))
+                            @if(null === $product->additionalOptions))
                                 <div class="js-optionForm">
                                     <p class="th">有料オプション1</p>
                                     @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror

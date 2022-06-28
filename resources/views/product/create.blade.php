@@ -104,7 +104,6 @@
                             @if(is_null(old('option_name.'.'0')))
                                 <div class="js-optionForm">
                                     <p class="th">有料オプション1</p>
-{{--                                    {{dd($errors)}}--}}
                                         @error('option_name.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="paid">
@@ -187,7 +186,6 @@
                                 </div>
                             @else
                                 @foreach(old('question_title') as $k => $v)
-{{--                                        {{dd($errors)}}--}}
                                     <div class="js-questionForm">
                                         <p class="th">質問のタイトル {{$k + 1}}</p>
                                             @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -211,7 +209,7 @@
                             @endif
                         </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
-{{--{{dd($errors)}}--}}
+
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
                             @error('product_pic')<div class="alert alert-danger">{{ $message }}</div>@enderror

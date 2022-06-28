@@ -95,7 +95,6 @@ class ProductService
                         'price' => $request['option_price'][$index],
                         'is_public' => $request['option_is_public'][$index]
                     ]);
-                    break;
                 }
             }
     }
@@ -114,7 +113,6 @@ class ProductService
                         'title' => $request['question_title'][$index],
                         'answer' => $request['answer'][$index]
                     ]);
-                    break;
             }
         }
     }
