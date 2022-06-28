@@ -3,7 +3,7 @@
 
         <div id="breadcrumb">
             <div class="inner">
-                <a href="index.html">ホーム</a>　&gt;　<span>サービスを編集する</span>
+                <a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスを編集する</span>
             </div>
         </div>
 
