@@ -211,54 +211,6 @@
                         </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
 
-
-                        <div class="formQuestionsArea">
-                            @if(is_null(old('question_title.'.'0')))
-                                <div class="js-questionForm">
-                                    <p class="th">質問のタイトル1</p>
-                                        @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                    <div class="td">
-                                        <div class="enter">
-                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
-                                            <p class="taR">400</p>
-                                        </div>
-                                        <p class="th">質問の回答1</p>
-                                            @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                        <div class="enter">
-                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
-                                            <p class="taR">400</p>
-                                        </div>
-                                        <div>
-                                            <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
-                                @foreach(old('question_title') as $k => $v)
-                                    <div class="js-questionForm">
-                                        <p class="th">質問のタイトル {{$loop->index + 1}}</p>
-                                            @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                        <div class="td">
-                                            <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{$v}}</textarea>
-                                                <p class="taR">400</p>
-                                            </div>
-                                            <p class="th">質問の回答 {{$k + 1}}</p>
-                                                @error('answer.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            <div class="enter">
-                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$k)}}</textarea>
-                                                <p class="taR">400</p>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                        <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
-
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
                             <div class="warnNotes">
