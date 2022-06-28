@@ -21,7 +21,7 @@
 						<div class="datas">
 							<span class="data">電話相談の受付：@if(!is_null($job_request->is_call)){{ App\Models\JobRequest::IS_CALL[$job_request->is_call] }} @endif</span>
 							<!-- <span class="data">閲覧：1000</span> -->
-							<span class="data">エリア：@if(!is_null($job_request->prefecture_id)){{ App\Models\Prefecture::find($job_request->prefecture_id)->name }} @endif</span>
+							<span class="data">エリア：@if(!is_null($job_request->prefecture_id)){{ $job_request->prefecture->name }} @endif</span>
 							<!-- <span class="data">販売数：無制限</span> -->
 						</div>
 						<h2><span>{{ $job_request->title }}</span></h2>
