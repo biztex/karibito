@@ -9,7 +9,6 @@ use App\Services\UserProfileService;
 
 class IdentificationController extends Controller
 {
-
     private $user_profile_service;
 
     public function __construct(UserProfileService $user_profile_service)
@@ -17,7 +16,6 @@ class IdentificationController extends Controller
         $this->user_profile_service = $user_profile_service;
 
     }
-
 
     public function update(UpdateIdentificationRequest $request)
     {

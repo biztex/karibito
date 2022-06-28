@@ -13,7 +13,6 @@ use App\Http\Requests\JobRequestController\DraftRequest;
 use App\Http\Requests\JobRequestController\PreviewRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
 
-
 class JobRequestController extends Controller
 {
     private $job_request_service;
@@ -22,7 +21,6 @@ class JobRequestController extends Controller
     {
         $this->job_request_service = $job_request_service;
     }
-
 
     public function draft()
     {
@@ -39,6 +37,7 @@ class JobRequestController extends Controller
 
         return view('post.draft', compact('products','job_requests'));
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -192,7 +191,6 @@ class JobRequestController extends Controller
         return view('job_request.preview',compact('request','user','age'));
     }
 
-
     /**
      * プレビュー画面から投稿
      */
@@ -221,7 +219,6 @@ class JobRequestController extends Controller
         return redirect()->route('service_thanks');
     }
 
-
     /**
      * 既存リクエスト、編集からプレビュー表示
      */
@@ -233,7 +230,6 @@ class JobRequestController extends Controller
 
         return view('job_request.preview',compact('request','user','age','job_request'));
     }
-
 
     /**
      * プレビュー画面から投稿
@@ -262,5 +258,4 @@ class JobRequestController extends Controller
 
         return redirect()->route('service_thanks');
     }
-
 }

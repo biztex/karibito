@@ -13,6 +13,7 @@ class UserFactory extends Factory
     /**
      * Define the model's default state.
      * 使い方：User::factory()->create()
+     * 
      * @return array<string, mixed>
      */
     public function definition()
@@ -30,6 +31,7 @@ class UserFactory extends Factory
     /**
      * Indicate that the model's email address should be unverified.
      * 使い方：User::factory()->unverified()->create()
+     * 
      * @return static
      */
     public function unverified()
