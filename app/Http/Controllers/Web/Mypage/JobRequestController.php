@@ -250,7 +250,7 @@ class JobRequestController extends Controller
 
         // バリデーション引っかかれば入力画面に戻す
         if ($validate->fails()) {
-            return redirect()->route("job_request.create")->withInput()->withErrors($validate->messages());
+            return redirect()->route("job_request.edit", $job_request->id)->withInput()->withErrors($validate->messages());
         }
 
         // バリデーション通れば通常通り登録
