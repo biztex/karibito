@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use App\Models\Product;
 use App\Models\JobRequest;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -27,6 +28,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        // 本人確認認証済チェック
+        Gate::define('identify', function (User $user) {
+            return $user->userProfile->is_identify === 1;
+        });
 
         // 自分の提供商品
         Gate::define('my.product', function (User $user, Product $product) {

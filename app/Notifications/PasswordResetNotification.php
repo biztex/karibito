@@ -20,7 +20,7 @@ class PasswordResetNotification extends Notification
 
     public static $createUrlCallback;
 
-    public static $token;
+    // public static $token;
 
     public function __construct(string $token)
     {
