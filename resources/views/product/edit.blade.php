@@ -100,13 +100,44 @@
                             </select>
                         </div>
 
+                        <div class="formOptionsArea">
+                            @foreach($product->additionalOptions as $num => $additional_option)
+                                @if(is_null($additional_option))
+                                <div class="js-optionForm">
+                                    <p class="th">有料オプション1</p>
+                                    @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <div class="td">
+                                        <div class="paid">
+                                            <div class="enter">
+                                                <textarea class="@error('option_name[]') is-invalid @enderror" type="text" value="{{ old('option_name[]') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
+                                            </div>
+                                            <div class="selects">
+                                                <select name="option_price[]">
+                                                    @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                        <option value="{{ $key }}" @if(old('option_price.0') == $key) selected @endif>
+                                                            {{ $value }}円
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <select name="option_is_public[]">
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
                         <p class="th">有料オプション1</p>
                                 @error('option_name'.'*')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 @error('option_price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 @error('option_is_public')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             @foreach($product->additionalOptions as $num => $additional_option)
-
+                                @if(is_null($additional_option))
                                 <div class="paid">
                                     <div class="enter">
                                         <textarea class="" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.$num, $additional_option->name)}}</textarea>

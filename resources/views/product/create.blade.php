@@ -81,7 +81,7 @@
                         </div>
 
                         <p class="th">電話相談の受付<span class="must">必須</span></p>
-                        @error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror
+{{--                        @error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
                         <div class="td">
                             <select name="is_call">
                                 <option value="">選択してください</option>
@@ -91,7 +91,7 @@
                         </div>
 
                         <p class="th">販売数<span class="must">必須</span></p>
-                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
+{{--                            @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror--}}
                         <div class="td">
                             <select name="number_of_sale">
                                 <option value="">選択してください</option>
@@ -101,81 +101,122 @@
                         </div>
 
                         <div class="formOptionsArea">
-                            <div class="js-formOption">
-
-
-                            <p class="th">有料オプション1</p>
-                            @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                        <div class="td">
-                            <div class="paid">
-                                <div class="enter">
-                                    <textarea class="@error('option_name[]') is-invalid @enderror" type="text" value="{{ old('option_name[]') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
-                                </div>
-                                <div class="selects">
-                                    <select name="option_price[]">
-                                        @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                            <option value="{{ $key }}" @if(old('option_price.0') == $key) selected @endif>
-                                                {{ $value }}円
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <select name="option_is_public[]">
-                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
-                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
-                                    </select>
-                                </div>
-                            </div>
-                            </div>
-                            </div>
-                            @if(!is_null(old('option_name.'.'1')))
-{{--                                    {{dd(old('option_name.'.'2'))}}--}}
-                                @for($i = 1; $i > 5; $i++)
-                                    <p class="th">有料オプション%NUM%</p>
+                            @if(is_null(old('option_name.'.'0')))
+{{--                                {{dd(is_null(old('option_name.'.'0')))}}--}}
+                                <div class="js-optionForm">
+                                    <p class="th">有料オプション1</p>
                                     @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="paid">
                                             <div class="enter">
-                                                <textarea class="" type="text" value="{{ old('option_name.'.$i) }}" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.$i) }}</textarea>
+                                                <textarea class="@error('option_name[]') is-invalid @enderror" type="text" value="{{ old('option_name[]') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
                                             </div>
                                             <div class="selects">
                                                 <select name="option_price[]">
                                                     @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                                        <option value="{{ $key }}" @if(old('option_price.'.$i) == $key) selected @endif>
+                                                        <option value="{{ $key }}" @if(old('option_price.0') == $key) selected @endif>
                                                             {{ $value }}円
                                                         </option>
                                                     @endforeach
                                                 </select>
                                                 <select name="option_is_public[]">
-                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.'0')) && old('option_is_public.'.'0') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
-                                                    <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'0') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
                                                 </select>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a>
                                             </div>
                                         </div>
                                     </div>
-                                @endfor
+                                </div>
+                            @else
+                                @foreach(old('option_name') as $k => $v)
+                                    <div class="js-optionForm">
+                                        <p class="th">有料オプション {{$k + 1}}</p>
+                                        @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="paid">
+                                                <div class="enter">
+                                                    <textarea class="" type="text" value="{{ $v }}" name="option_name[]" placeholder="入力してください">{{ $v }}</textarea>
+                                                </div>
+                                                <div class="selects">
+                                                    <select name="option_price[]">
+                                                        @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                            <option value="{{ $key }}" @if(old('option_price.'.$k) == $key) selected @endif>
+                                                                {{ $value }}円
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <select name="option_is_public[]">
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$k)) && old('option_is_public.'.$k) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$k) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             @endif
-
+                        </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
 
-                        <div class="formFaqArea">
-                            <p class="th">質問のタイトル1</p>
-                            <div class="td">
-                                @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                <div class="enter">
-                                    <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title[]') }}" placeholder="質問のタイトル入力してください"></textarea>
-                                    <p class="taR">400</p>
+                        <div class="formQuestionsArea">
+                            @if(is_null(old('question_title.'.'0')))
+                                <div class="js-questionForm">
+                                    <p class="th">質問のタイトル1</p>
+                                    <div class="td">
+                                        @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="enter">
+                                            <textarea type="text" name="question_title[]" value="{{ old('question_title[]') }}" placeholder="質問のタイトル入力してください"></textarea>
+                                            <p class="taR">400</p>
+                                        </div>
+                                        <p class="th">質問の回答1</p>
+                                        @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="enter">
+                                            <textarea type="text" name="answer[]" value="{{ old('answer[]') }}" placeholder="質問の回答入力してください"></textarea>
+                                            <p class="taR">400</p>
+                                        </div>
+                                        <div>
+                                            <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
+                                        </div>
+                                    </div>
                                 </div>
-{{--                            </div>--}}
-                            <p class="th">質問の回答1</p>
-{{--                            <div class="td">--}}
-                                @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                <div class="enter">
-                                    <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer[]') }}" placeholder="質問の回答入力してください"></textarea>
-                                    <p class="taR">400</p>
-                                </div>
-                            </div>
+                            @else
+                                @foreach(old('question_title') as $k => $v)
+                                    <div class="js-questionForm">
+                                        <p class="th">質問のタイトル {{$loop->index + 1}}</p>
+                                        @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="enter">
+                                                <textarea type="text" name="question_title[]" value="{{$v}}" placeholder="質問のタイトル入力してください">{{$v}}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
+                                            @foreach(old('answer') as $key => $value)
+                                                @continue($key == $k + 1)
+{{--                                            {{dd($k)}}--}}
+                                                <p class="th">質問の回答 {{$k + 1}}</p>
+                                                @error('answer.'.$key)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                <div class="enter">
+                                                    <textarea type="text" name="answer[]" value="{{ $value }}" placeholder="質問の回答入力してください">{{ $value }}</textarea>
+                                                    <p class="taR">400</p>
+                                                </div>
+{{--                                                    {{break;}}--}}
+{{--                                                @endif--}}
+                                                @break
+                                            @endforeach回すのが難しい、それぞれ
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
-                        <p class="specialtyBtn"><a href="javascript:;" onclick="addFaq();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
 
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
@@ -219,29 +260,56 @@
             </div><!--cancelWrap-->
         </div>
     </article>
-</x-layout>Z
+</x-layout>
 <script type="text/javascript">
-    var options_num = 2;
     function addOption(){
-        // var str = '<p class="th">有料オプション%NUM%</p><div class="td"><div class="paid"><div class="enter"><textarea name="options%NUM%" placeholder="入力してください"></textarea></div><div class="selects"><select name="options_price%NUM%"><option>500円</option><option>1000円</option><option>1500円</option></select><select name="options_states%NUM%"><option>公開</option><option>不公開</option></select></div></div></div>'
-        var str = '<div class="js-formOption"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" value="{{ old('option_name.'.'%NUM%') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::NOT_PUBLIC}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::NOT_PUBLIC) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::IS_PUBLIC}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::IS_PUBLIC) selected @endif required>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div>'
+        let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" value="{{ old('option_name.'.'%NUM%') }}" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
+        let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
 
-        str = str.replace(/%\w+%/g, options_num);
-        $('.js-formOption').append(str);
-        options_num = options_num + 1;
+        if (number_js_optionForm < 5) {
+            str = str.replace(/%\w+%/g, number_js_optionForm + 1);
+            $('.formOptionsArea').append(str);
+        }
 
-        $('.js-deleteOption').on('click', '.js-formOption', function() {
-            $(this).remove();
+        $('.js-deleteOption').click(function(){
+            let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
+            if (number_js_optionForm > 1 ) {
+                $(this).parents('.js-optionForm').remove(); //divだけを消す
+                $(".formOptionsArea").children(".js-optionForm").each(function(index, element){
+                    $(element).children(".th").text("有料オプション" + (index + 1));
+                })
+            }
         });
     }
 
-    var faq_num = 2;
-    function addFaq(){
-        // var str = '<p class="th">質問のタイトル%NUM%</p><div class="td"><div class="enter"><textarea name="faq_questions%NUM%" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div></div><p class="th">質問の回答%NUM%</p><div class="td"><div class="enter"><textarea name="faq_answer%NUM%" placeholder="質問の回答入力してください"></textarea><p class="taR">400</p></div></div>'
-        var str = '<p class="th">質問のタイトル%NUM%</p><div class="td">@error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title[]') }}" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer[]') }}" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p> </div> </div>'
+    function addQuestion(){
+        let str = '<div class="js-questionForm"><p class="th">質問のタイトル%NUM%</p><div class="td">@error('question_title.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" value="{{ old('question_title[]') }}" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"><textarea type="text" name="answer[]" value="{{ old('answer[]') }}" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a> </div></div></div>'
+        let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
 
-        str = str.replace(/%\w+%/g, faq_num);
-        $('.formFaqArea').append(str);
-        faq_num = faq_num + 1;
+        if(number_js_questionForm < 5) {
+        str = str.replace(/%\w+%/g, number_js_questionForm + 1);
+        $('.formQuestionsArea').append(str);
+        }
+
+        $('.js-deleteQuestion').click(function(){
+            let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
+            if (number_js_questionForm > 1 ) {
+                $(this).parents('.js-questionForm').remove(); //divだけを消す
+                $(".formQuestionsArea").children(".js-questionForm").each(function(index, element){
+                    $(element).find(".th").text("質問のタイトル" + (index + 1));
+                    $(element).find(".th").text("質問の回答" + (index + 1));
+                })
+            }
+        });
     }
+
+    {{--var faq_num = 2;--}}
+    {{--function addFaq(){--}}
+    {{--    // var str = '<p class="th">質問のタイトル%NUM%</p><div class="td"><div class="enter"><textarea name="faq_questions%NUM%" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div></div><p class="th">質問の回答%NUM%</p><div class="td"><div class="enter"><textarea name="faq_answer%NUM%" placeholder="質問の回答入力してください"></textarea><p class="taR">400</p></div></div>'--}}
+    {{--    var str = '<p class="th">質問のタイトル%NUM%</p><div class="td">@error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" class="@error('question_title') is-invalid @enderror" value="{{ old('question_title[]') }}" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="answer[]" class="@error('answer') is-invalid @enderror" value="{{ old('answer[]') }}" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p> </div> </div>'--}}
+
+    {{--    str = str.replace(/%\w+%/g, faq_num);--}}
+    {{--    $('.formFaqArea').append(str);--}}
+    {{--    faq_num = faq_num + 1;--}}
+    {{--}--}}
 </script>
