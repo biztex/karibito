@@ -270,4 +270,43 @@ class ProductController extends Controller
 
         return redirect()->route('service_thanks');
     }
+
+    /**
+     * プレビュー画面から投稿
+     */
+    public function updatePreview(Request $request, Product $product)
+    {
+        $validate = \Validator::make($request->all(), [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'number_of_day' => 'required | integer',
+            'is_online' => 'required | integer | boolean',
+            'is_call' => 'required | integer | boolean',
+            'number_of_sale' => 'required | integer',
+            'status' => 'required | integer',
+            'option_name.*' => 'nullable | string | max:400',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'nullable | max:400',
+            'answer.*' => 'required_if:question_title,true | max:400',  
+        ]);
+
+        // バリデーション引っかかれば入力画面に戻す
+        if ($validate->fails()) {
+            return redirect()->route("product.edit", $product->id)->withInput()->withErrors($validate->messages());
+        }
+
+        // バリデーション通れば通常通り登録
+        \DB::transaction(function () use ($request, $product) {
+            $this->product_service->updateProduct($request->all(), $product);
+            $this->product_service->updateAdditionalOption($request->all(), $product);
+            $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateImage($request,$product->id);
+        });
+
+        return redirect()->route('service_thanks');
+    }
 }

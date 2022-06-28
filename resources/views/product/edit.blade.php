@@ -184,6 +184,28 @@
                                         </div>
                                     </div>
                                 </div>
+                            @elseif(null !== old('question_title.0'))
+                                @foreach(old('question_title') as $num => $product_question)
+                                    <div class="js-questionForm">
+                                        <p class="th">質問のタイトル {{$num + 1}}</p>
+                                            @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="enter">
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num) }}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
+                                            <p class="th">質問の回答 {{$num + 1}}</p>
+                                                @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            <div class="enter">
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$num) }}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             @else
                                 @foreach($product->productQuestions as $num => $product_question)
                                     <div class="js-questionForm">
@@ -191,13 +213,13 @@
                                             @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{$product_question->title}}</textarea>
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question->title) }}</textarea>
                                                 <p class="taR">400</p>
                                             </div>
                                             <p class="th">質問の回答 {{$num + 1}}</p>
                                                 @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
-                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{$product_question->answer}}</textarea>
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$num, $product_question->answer) }}</textarea>
                                                 <p class="taR">400</p>
                                             </div>
                                             <div>
