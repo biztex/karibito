@@ -11,7 +11,7 @@ class AdminContactService
     /**
      * お問い合わせ完了メール送信
      */
-    public static function sendMail($request)
+    public function sendMail($request)
     {
         ContactMailHistory::create([
             'name'    => $request->name,
