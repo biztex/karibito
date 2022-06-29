@@ -10,7 +10,7 @@ class UserContactService
     /**
      * お問い合わせ完了メール送信
      */
-    public function sendMail($request)
+    public static function sendMail($request)
     {
         Mail::to($request->mail)
             ->send(new ContactMail($request));

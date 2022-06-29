@@ -278,7 +278,7 @@
                                 <div class="labelName"><input type="text" name="name" placeholder="名前" required></div>
                                 <div class="labelMail"><input type="email" name="mail" placeholder="メールアドレス" required></div>
                                 <div class="labelType"><select name="type">
-                                    @foreach ($contactOptions as $i => $option)
+                                    @foreach (App\Models\ContactMailHistory::CONTACT_TYPES as $i => $option)
                                         <option value='{{ $i }}'>{{ $option }}</option>
                                     @endforeach
                                 </select></div>

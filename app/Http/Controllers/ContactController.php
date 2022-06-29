@@ -16,9 +16,7 @@ class ContactController extends Controller
      */
     public function contact()
     {
-        $contactOptions = ContactMailHistory::CONTACT_TYPES;
-
-        return view('contact', compact('contactOptions'));
+        return view('contact');
     }
 
     /**
@@ -31,10 +29,10 @@ class ContactController extends Controller
         return view('sample.draft');
     }
 
-    public function sendSupportMail(AdminContactService $adminMail, UserContactService $userMail, Request $request)
+    public function sendSupportMail(Request $request)
     {
-        $adminMail->sendMail($request);
-        $userMail->sendMail($request);
+        AdminContactService::sendMail($request);
+        UserContactService::sendMail($request);
         return redirect()->route("contact")->with('flash_msg', 'お問い合わせありがとうございます。内容確認の上、ご連絡させていただきます。');
     }
 }
