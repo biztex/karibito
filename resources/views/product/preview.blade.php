@@ -2,24 +2,20 @@
     <article>
         <div id="breadcrumb">
             <div class="inner">
-{{--                <a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>　>　<span>プレビュー</span>--}}
+                <a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>　>　<span>プレビュー</span>
             </div>
         </div><!-- /.breadcrumb -->
-        <div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a>
-        </div>
         <div id="contents" class="detailStyle">
             @if(empty($product))
-                {{--                <form class="contactForm" method="post" action="{{ route('product.store.preview') }}">--}}
-                @csrf
-            @else
-                {{--                        <form class="contactForm" method="post" action="{{ route('product.update.preview',$product->id) }}">--}}
-                @csrf @method('put')
-            @endif
-            <input type="hidden" value="@if(!is_null($request->category_id)){{ $request->category_id }}@endif"
-                   name="category_id">
-            {{--                            <input type="hidden" value="@if(!is_null($request->application_deadline)){{ $request->application_deadline }}@endif" name="application_deadline">--}}
-            {{--                            <input type="hidden" value="@if(!is_null($request->required_date)){{ $request->required_date }}@endif" name="required_date">--}}
-
+					<form class="contactForm" method="post" action="{{ route('product.store.preview') }}" enctype="multipart/form-data">
+					@csrf
+				@else
+					<form class="contactForm" method="post" action="{{ route('product.update.preview',$product->id) }}" enctype="multipart/form-data">
+					@csrf @method('put')
+			@endif
+			<input type="hidden" value="@if(!is_null($request->category_id)){{ $request->category_id }}@endif" name="category_id">
+            <input type="hidden" value="@if(!is_null($request->number_of_sale)){{ $request->number_of_sale }}@endif" name="number_of_sale">
+            <input type="hidden" value="@if(!is_null($request->status)){{ $request->status }}@endif" name="status">
             <div class="inner02 ">
                 <div class="clearfix">
                     <div id="main">
@@ -57,10 +53,12 @@
                             <input type="hidden" value="@if(!is_null($request->title)){{ $request->title }}@endif"
                                    name="title">
                         </div>
+
                         <div class="slider">
                             <div class="big">
                             @for($i = 0; $i < 10; $i++)
                                 <div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="" srcset="" alt=""></div>
+                                <input type="hidden" name="base64_text[{{$i}}]" value="">
                             @endfor
                             </div>
                             <div class="small">
@@ -69,6 +67,7 @@
                             @endfor
                             </div>
                         </div>
+
                         <div class="content">
                             <h2 class="hdM">サービス内容</h2>
                             <p style="overflow-wrap: break-word;">
@@ -87,6 +86,9 @@
                                             <span class="add">＋ {{$request->option_name[$i]}}</span>
                                             <span class="price">￥{{ App\Models\AdditionalOption::OPTION_PRICE[$request->option_price[$i]]}}</span>
                                         </li>
+                                        <input type="hidden" value="@if(!is_null($request->option_name[$i])){{ $request->option_name[$i] }}@endif" name="option_name[{{$i}}]">
+                                        <input type="hidden" value="@if(!is_null($request->option_price[$i])){{ $request->option_price[$i] }}@endif" name="option_price[{{$i}}]">
+                                        <input type="hidden" value="@if(!is_null($request->option_is_public[$i])){{ $request->option_is_public[$i] }}@endif" name="option_is_public[{{$i}}]">
                                     @endif
                                 @endfor
                             </ul>
@@ -99,6 +101,8 @@
                                         <li>
                                             <p class="quest toggleBtn"><span>{{$request->question_title[$i]}}</span><span class="more">回答を見る</span></p>
                                             <p class="answer toggleBox">{{$request->answer[$i]}}</p>
+                                            <input type="hidden" value="@if(!is_null($request->question_title[$i])){{ $request->question_title[$i] }}@endif" name="question_title[{{$i}}]">
+                                            <input type="hidden" value="@if(!is_null($request->answer[$i])){{ $request->answer[$i] }}@endif" name="answer[{{$i}}]">
                                         </li>
                                     @endif
                                 @endfor
@@ -130,8 +134,7 @@
                                 <a href="javascript:history.back();" class="orange_o">編集画面に戻る</a>
                             </div>
                             <div class="functeBtns">
-                                <input type="submit" name="regist" class="orange" style="color:white;"
-                                       value="サービス提供を開始">
+                                <input type="submit" class="orange full" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">
                             </div>
                         </div>
                         <div class="box seller">

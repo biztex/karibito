@@ -101,13 +101,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
     // 商品登録
-    Route::resource('product', MypageProductController::class);
-    Route::put('product/update/{product}', [MypageProductController::class, 'update'])->name('product.update');
-    Route::post('product/draft',[MypageProductController::class, 'storeDraft'])->name('product.storeDraft');
-    Route::put('product/{product}/draft',[MypageProductController::class, 'updateDraft'])->name('product.updateDraft');
-    Route::post('product/preview/', [MypageProductController::class, 'preview'])->name('product.preview');
-    Route::put('product/{product}/edit/preview',[MypageProductController::class, 'editPreview'])->name('product.edit.preview');
-//    Route::post('product/store/preview',[MypageProductController::class,'storePreview'])->name('product.store.preview');
+    Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
+        Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
+            Route::get('{product}/edit', 'edit')->name('edit');
+            Route::put('{product}', 'update')->name('update');
+            Route::delete('{product}','destroy')->name('destroy');
+            Route::put('edit/{product}/preview','editPreview')->name('edit.preview');
+            Route::put('{product}/preview','updatePreview')->name('update.preview');
+            Route::put('{product}/draft','updateDraft')->name('updateDraft');
+        });
+        Route::middleware('can:identify')->group(function () {
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::post('draft', 'storeDraft')->name('storeDraft');
+            Route::post('preview', 'preview')->name('preview');
+            Route::post('store/preview', 'storePreview')->name('store.preview');
+        });
+        Route::get('/', 'index')->name('index');
+        Route::get('{product}/show', 'show')->name('show');
+    });
 
     // 秘訣
     Route::view('secret01','secret.secret01')->name('secret01');
@@ -125,7 +137,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // リクエスト
     Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
-        Route::middleware('can:my.job.request,job_request')->group(function () {
+        Route::middleware(['can:my.job.request,job_request', 'can:identify'])->group(function () {
             Route::get('{job_request}/edit','edit')->name('edit');
             Route::put('{job_request}','update')->name('update');
             Route::delete('{job_request}','destroy')->name('destroy');
@@ -133,12 +145,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('{job_request}/preview','updatePreview')->name('update.preview');
             Route::put('{job_request}/draft','updateDraft')->name('update.draft');
         });
-        Route::get('create','create')->name('create');
-        Route::post('store','store')->name('store');
+        Route::middleware('can:identify')->group(function () {
+            Route::get('create','create')->name('create');
+            Route::post('store','store')->name('store');
+            Route::post('draft','storeDraft')->name('storeDraft');
+            Route::post('preview','preview')->name('preview');
+            Route::post('store/preview','storePreview')->name('store.preview');
+        });
         Route::get('{job_request}/show','show')->name('show');
-        Route::post('draft','storeDraft')->name('storeDraft');
-        Route::post('preview','preview')->name('preview');
-        Route::post('store/preview','storePreview')->name('store.preview');
     });
 });
 

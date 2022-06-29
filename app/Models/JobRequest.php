@@ -68,6 +68,6 @@ class JobRequest extends Model
     // Prefectureモデルとのリレーション
     public function prefecture()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(Prefecture::class);
     }
 }
