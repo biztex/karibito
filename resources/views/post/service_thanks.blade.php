@@ -2,9 +2,15 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　
+                @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create')
+                    <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/create')
+                    <a href="{{route('job_request.create')}}">サービスをリクエストする</a>　>　
+                @endif
+                <span>投稿完了</span>
 			</div>
-		</div><!-- /.breadcrumb -->
+        </div><!-- /.breadcrumb -->
 		<div id="contents">
 			<div class="cancelWrap">
 				<div class="inner inner05">
