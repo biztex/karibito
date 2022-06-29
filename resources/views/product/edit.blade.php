@@ -242,13 +242,24 @@
                                 @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <ul class="mypagePortfolioUl03 mt40">
                                     @for($i = 0; $i < 10; $i++)
+
                                         <li>
                                             <div id="product_pic{{$i}}" class="img">
-                                                @if(isset($product->productImage[$i]))
+                                                @if(isset($product->productImage[$i]) && old('image_status'.$i) === null)
                                                     <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->productImage[$i]->path)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
                                                     <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]', '#') }}">
                                                     <input type="hidden" name="old_image[{{$i}}]" value="{{ $product->productImage[$i]->path }}">
+                                                @elseif(old('image_status'.$i) === "delete")
+                                                    <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
+                                                    <input type="hidden" name="old_image[{{$i}}]" value="">
+                                                @elseif(old('image_status'.$i) === "insert")
+                                                    <img id="preview_product{{$i}}" src="{{ old('base64_text[$i]')}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
+                                                    <input type="hidden" name="old_image[{{$i}}]" value="">
                                                 @else
                                                     <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
@@ -329,7 +340,18 @@
 
 
     
-	$(function () {
+	$(function()  {
+    	for (let i = 0; i < 10; i++) {
+            if (localStorage.getItem('status'+i) === "delete") {
+                $("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'delete')}}");
+                $("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
+
+            } else if (localStorage.getItem('status'+i) === "insert") {
+                $("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'insert')}}");
+				$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
+            }
+        }
+
     	for (let i = 0; i < 10; i++) {
             if (localStorage.getItem("pic"+i)) {
 				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
@@ -339,6 +361,8 @@
         if (@json($errors->has('base64_text.0'))) {
             $("#preview_product0").attr('src', '/img/service/img_provide.jpg');
 		} 
+	
+        
 	});
 
 </script>

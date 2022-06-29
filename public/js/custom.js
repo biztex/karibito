@@ -79,7 +79,8 @@ $(function () {
 				}
 				reader.readAsDataURL(e.target.files[0]);
 				// image_status = 'insert';
-				$("input[name='image_status"+i+"']").val('insert');				
+				$("input[name='image_status"+i+"']").val('insert');	
+				localStorage.setItem('status'+i,"insert");			
 			});
 		});
 
@@ -90,6 +91,7 @@ $(function () {
 
 			// image_status = 'delete';
 			$("input[name='image_status"+i+"']").val('delete');
+			localStorage.setItem('status'+i,"delete");			
 
 			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
 			localStorage.removeItem('pic'+i);
