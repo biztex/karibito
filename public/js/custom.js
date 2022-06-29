@@ -84,7 +84,8 @@ $(function () {
 
 		// 削除ボタンでクリア
 		$("#storage_delete"+i).on('click', function () {
-			$("input[name='paths["+i+"]']").attr('value', null);
+			$("input[name='paths["+i+"]']").val('');
+			$("input[name='base64_text["+i+"]']").attr('value', null);
 
 			image_status[i] = 'delete';
 			$("input[name='image_status']").val(JSON.stringify(image_status));

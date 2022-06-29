@@ -211,7 +211,9 @@ return [
         'required_date' => '納品希望日',
         'is_online' => '仕事体系',
         'is_call' => '電話相談の受付',
-        'status' => '公開設定'
+        'status' => '公開設定',
+        'base64_text.0' => '画像1枚目'
+
     ],
 
 ];
