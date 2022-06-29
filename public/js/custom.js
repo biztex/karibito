@@ -63,7 +63,7 @@ $(function () {
 	
 	// 提供登録画像プレビュー / localStorageに画像一時保存
 	// 画像に変更あれば'delete'/'insert'のいずれかを配列の番号とともに格納していく
-	var image_status = {};
+	// var image_status = {};
 	for (let i = 0; i < 10; i++) {
 		$("#product_pic"+i).on('click', function () {
 			$("input[name='paths["+i+"]']").on('click', function (e) {
@@ -75,10 +75,11 @@ $(function () {
 				reader.onload = function (e) {
 					$("#preview_product"+i).attr('src', e.target.result);
 					localStorage.setItem("pic"+i, reader.result);
+					$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
 				}
 				reader.readAsDataURL(e.target.files[0]);
-				image_status[i] = 'insert';
-				$("input[name='image_status']").val(JSON.stringify(image_status));
+				// image_status = 'insert';
+				$("input[name='image_status"+i+"']").val('insert');				
 			});
 		});
 
@@ -87,25 +88,19 @@ $(function () {
 			$("input[name='paths["+i+"]']").val('');
 			$("input[name='base64_text["+i+"]']").attr('value', null);
 
-			image_status[i] = 'delete';
-			$("input[name='image_status']").val(JSON.stringify(image_status));
+			// image_status = 'delete';
+			$("input[name='image_status"+i+"']").val('delete');
 
-			$("#preview_product"+i).attr('src', "/img/service/img_provide.jpg");
+			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
 			localStorage.removeItem('pic'+i);
 		});
 
-		// プレビューページ
 		$(function () {
-			if (localStorage.getItem("pic"+i)) {
-				$("input[name='base64_text["+i+"]']").attr('value', localStorage.getItem("pic"+i));
-				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
-				$("#preview_slider"+i).attr('src', localStorage.getItem("pic"+i));
-				$("#preview_slider"+i+i).attr('src', localStorage.getItem("pic"+i));
-			} else {
-				$("#preview_slider"+i).remove();
-				$("#preview_slider"+i+i).remove();
+			if ($("input[name='image_status"+i+"']").val() === "delete") {
+				$("input[name='base64_text["+i+"]']").attr('value', null);
 			}
-		});
+		})
+
 	};
 
 });

@@ -239,6 +239,7 @@
                                     <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
                                     <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>
                                 </div>
+                                @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <ul class="mypagePortfolioUl03 mt40">
                                     @for($i = 0; $i < 10; $i++)
                                         <li>
@@ -246,17 +247,21 @@
                                                 @if(isset($product->productImage[$i]))
                                                     <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->productImage[$i]->path)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]', '#') }}">
+                                                    <input type="hidden" name="old_image[{{$i}}]" value="{{ $product->productImage[$i]->path }}">
                                                 @else
                                                     <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
+                                                    <input type="hidden" name="old_image[{{$i}}]" value="">
                                                 @endif
                                             </div>
                                             <div class="fun">
                                                 <div class="del" id="storage_delete{{$i}}">削除</div>
                                             </div>
                                         </li>
+                                        <input type="hidden" name="image_status{{$i}}" value="{{ old('image_status'.$i) }}">
                                     @endfor
-                                    <input type="hidden" name="image_status" value="">
                                 </ul>
                             </div>
 
@@ -321,4 +326,19 @@
             }
         });
     }
+
+
+    
+	$(function () {
+    	for (let i = 0; i < 10; i++) {
+            if (localStorage.getItem("pic"+i)) {
+				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
+            }
+        }
+
+        if (@json($errors->has('base64_text.0'))) {
+            $("#preview_product0").attr('src', '/img/service/img_provide.jpg');
+		} 
+	});
+
 </script>

@@ -221,7 +221,7 @@ class ProductController extends Controller
         $user = \Auth::user();
         $age = Age::group($user->userProfile->birthday);
 
-        return view('product.preview',compact('request','user','age', 'product'));
+        return view('product.update_preview',compact('request','user','age', 'product'));
     }
 
     /**

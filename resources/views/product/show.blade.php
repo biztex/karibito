@@ -219,7 +219,7 @@
                     </div>
                     <aside id="side" class="pc">
                         <div class="box reservate">
-                            <h3>{{$product->price}}円</h3>
+                            <h3>{{number_format($product->price)}}円</h3>
                             <p class="status">所用期間</p>
                             <p class="date">{{$product->number_of_day}}日</p>
 {{--                            <div class="calendar"><div id="datepicker"></div></div>--}}
