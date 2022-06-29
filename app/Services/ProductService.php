@@ -119,21 +119,62 @@ class ProductService
 
 
     /**
+     * Base64エンコードされたデータをファイルに変換
+     */
+    public function changeUploadFile($base64)
+    {
+        $storage = 'public';
+        $dir = 'product_paths';
+
+        // 拡張子を取得
+        preg_match('/data:image\/(\w+);base64,/', $base64, $matches);
+        $extension = $matches[1];
+
+        // base64にエンコードされたデータをデコード
+        $img = preg_replace('/^data:image.*base64,/', '', $base64);
+        $img = str_replace(' ', '+', $img);
+        $fileData = base64_decode($img);
+
+        // pathを整形
+        $dir = rtrim($dir, '/').'/';
+        $fileName = md5($img);
+        $path = $dir.$fileName.'.'.$extension;
+
+        \Storage::disk($storage)->put($path, $fileData);
+
+        return $path;
+    }
+
+
+    /**
      * 提供画像登登録
      */
     public function storeImage($request, $id)
     {
-        $paths = $request->file('paths');
-
-        if ($paths !== null) {
+        // input:fileでわたってきているとき
+        if ($request->paths !== null) {
+            $paths = $request->paths;
             foreach ($paths as $path) {
+                if ($path !== null){
                     $product_image = new ProductImage();
                     $product_image->path = $path->store('product_paths', 'public');
                     $product_image->product_id = $id;
                     $product_image->save();
+                }
+            }
+        }
+
+        // input:fileでわたってこないとき
+        foreach ($request->base64_text as $path) {
+            if ($path !== null){
+                $product_image = new ProductImage();
+                $product_image->path = self::changeUploadFile($path);
+                $product_image->product_id = $id;
+                $product_image->save();
             }
         }
     }
+    
 
     /**
      * 提供画像編集（画像変更）

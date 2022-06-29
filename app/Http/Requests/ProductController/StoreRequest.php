@@ -39,7 +39,8 @@ class StoreRequest extends FormRequest
             'option_price.*' => 'nullable | integer',
             'option_is_public.*' => 'integer',
             'question_title.*' => 'nullable | max:400',
-            'answer.*' => 'required_if:question_title.*,true | max:400', //まだできていない
+            'answer.*' => 'required_if:question_title,true | max:400', //まだできていない
+            'base64_text.0' => 'required',
         ];
     }
 }

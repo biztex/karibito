@@ -203,15 +203,11 @@ class ProductController extends Controller
         return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
 
-    public function preview(PreviewRequest $request)
+    public function preview(StoreRequest $request)
     {
 
         $user = \Auth::user();
-        if ($user->userProfile->birthday !== NULL){
-            $age = Age::group($user->userProfile->birthday);
-        } else {
-            $age = '不明';
-        }
+        $age = Age::group($user->userProfile->birthday);
 
         return view('product.preview',compact('request','user','age'));
     }
@@ -219,15 +215,11 @@ class ProductController extends Controller
     /**
      * 既存リクエスト、編集からプレビュー表示
      */
-    public function editPreview(PreviewRequest $request, Product $product)
+    public function editPreview(StoreRequest $request, Product $product)
     {
 
         $user = \Auth::user();
-        if ($user->userProfile->birthday !== NULL){
-            $age = Age::group($user->userProfile->birthday);
-        } else {
-            $age = '不明';
-        }
+        $age = Age::group($user->userProfile->birthday);
 
         return view('product.preview',compact('request','user','age', 'product'));
     }
@@ -237,30 +229,6 @@ class ProductController extends Controller
      */
     public function storePreview(Request $request)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'number_of_day' => 'required | integer',
-            'is_online' => 'required | integer | boolean',
-            'is_call' => 'required | integer | boolean',
-            'number_of_sale' => 'required | integer',
-            'status' => 'required | integer',
-            'option_name.*' => 'nullable | string | max:400',
-            'option_price.*' => 'nullable | integer',
-            'option_is_public.*' => 'integer',
-            'question_title.*' => 'nullable | max:400',
-            'answer.*' => 'required_if:question_title,true | max:400',
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            return redirect()->route("product.create")->withInput()->withErrors($validate->messages());
-        }
-
-        // バリデーション通れば通常通り登録
         \DB::transaction(function () use ($request) {
             $product = $this->product_service->storeProduct($request->all());
             $this->product_service->storeAdditionalOption($request->all(), $product->id);

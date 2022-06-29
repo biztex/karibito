@@ -218,12 +218,14 @@
                                 <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
                                 <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>
                             </div>
+                            @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <ul class="mypagePortfolioUl03 mt40">
                                 @for($i = 0; $i < 10; $i++)
                                     <li >
                                         <div id="product_pic{{$i}}" class="img">
                                             <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                             <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                            <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
                                         </div>
                                         <div class="fun">
                                             <div class="del" id="storage_delete{{$i}}">削除</div>

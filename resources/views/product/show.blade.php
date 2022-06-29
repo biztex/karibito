@@ -7,7 +7,6 @@
                 <a href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　<span>{{$product->title}}</span>
             </div>
         </div><!-- /.breadcrumb -->
-        <div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
         <div id="contents" class="detailStyle">
             <div class="inner02 ">
                 <div class="clearfix">

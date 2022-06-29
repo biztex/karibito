@@ -216,7 +216,8 @@ return [
         'option_name.*' => '有料オプション',
         'question_title.*' => '質問のタイトル',
         'answer.*' => '質問の回答',
-        'status' => '公開設定'
+        'status' => '公開設定',
+        'base64_text.0' => '画像1枚目'
     ],
 
 ];
