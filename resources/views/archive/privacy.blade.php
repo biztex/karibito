@@ -2,7 +2,7 @@
 <article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>個人情報の取り扱いについて</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -44,7 +44,7 @@
 							<p class="img"><img src="/img/mypage/pic_head.png" alt=""></p>
 							<a href="#"><img src="/img/mypage/icon_camera02.svg" alt=""></a>
 						</div>
-						<div class="fancyPersonTable">	
+						<div class="fancyPersonTable">
 							<dl class="">
 								<dt>ニックネーム</dt>
 								<dd><input type="text" name=""></dd>
@@ -313,7 +313,7 @@
 						</div>
 					</div>
 				</div><!-- /#main -->
-				
+
 			</div><!--inner-->
 		</div><!-- /#contents -->
 	</article>

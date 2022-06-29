@@ -3,7 +3,7 @@
 
         <div id="breadcrumb">
             <div class="inner">
-                <a href="index.html">ホーム</a>　&gt;　<span>サービスを提供する</span>
+                <a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスを提供する</span>
             </div>
         </div>
 
@@ -103,7 +103,7 @@
                             @if(is_null(old('option_name.'.'0')))
                                 <div class="js-optionForm">
                                     <p class="th">有料オプション1</p>
-                                        @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        @error('option_name.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="paid">
                                             <div class="enter">
@@ -132,7 +132,7 @@
                                 @foreach(old('option_name') as $k => $v)
                                     <div class="js-optionForm">
                                         <p class="th">有料オプション {{$k + 1}}</p>
-                                            @error('option_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('option_name.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="paid">
                                                 <div class="enter">
@@ -168,14 +168,14 @@
                             @if(is_null(old('question_title.'.'0')))
                                 <div class="js-questionForm">
                                     <p class="th">質問のタイトル1</p>
-                                        @error('question_title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        @error('question_title.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="enter">
                                             <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
                                             <p class="taR">400</p>
                                         </div>
                                         <p class="th">質問の回答1</p>
-                                            @error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('answer.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="enter">
                                             <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
                                             <p class="taR">400</p>
@@ -188,7 +188,7 @@
                             @else
                                 @foreach(old('question_title') as $k => $v)
                                     <div class="js-questionForm">
-                                        <p class="th">質問のタイトル {{$loop->index + 1}}</p>
+                                        <p class="th">質問のタイトル {{$k + 1}}</p>
                                             @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
@@ -213,6 +213,7 @@
 
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
+                            @error('product_pic')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="warnNotes">
                                 <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
                                 <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>
@@ -259,7 +260,7 @@
         let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
         let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
 
-        if (number_js_optionForm < 5) {
+        if (number_js_optionForm < 10) {
             str = str.replace(/%\w+%/g, number_js_optionForm + 1);
             $('.formOptionsArea').append(str);
         }
@@ -279,7 +280,7 @@
         let str = '<div class="js-questionForm"><p class="th">質問のタイトル%NUM%</p><div class="td">@error('question_title.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"><textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a> </div></div></div>'
         let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
 
-        if(number_js_questionForm < 5) {
+        if(number_js_questionForm < 10) {
         str = str.replace(/%\w+%/g, number_js_questionForm + 1);
         $('.formQuestionsArea').append(str);
         }

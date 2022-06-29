@@ -3,7 +3,7 @@
     <article>
         <div id="breadcrumb">
             <div class="inner">
-                <a href="index.html">ホーム</a>　>　<span>お問い合わせ</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　<span>お問い合わせ</span>
             </div>
         </div><!-- /.breadcrumb -->
         <div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
