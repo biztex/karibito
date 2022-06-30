@@ -184,20 +184,33 @@ class ProductService
     {
         // 登録済の画像を配列で取得
         $old_images = ProductImage::where('product_id',$id)->get();
-        $image_status = json_decode($request->image_status,true);
+        // $image_status = json_decode($request->image_status,true);
 
         // 追加・変更・削除があれば実行
-        if (isset($image_status)) {
+        // if (isset($image_status)) {
             for($i=0; $i<10; $i++){
-                if(isset($image_status[$i]) && $image_status[$i] === "delete"){
+                $image_status = $request['image_status'.$i];
+
+                if(isset($image_status) && $image_status === "delete"){
                     // 削除されたら何もしない
 
-                }elseif(isset($image_status[$i]) && $image_status[$i] === "insert"){
+                }elseif(isset($image_status) && $image_status === "insert"){
                     // 挿入されたらリクエストをDBに登録
-                    $product_image = new ProductImage();
-                    $product_image->path = $request->paths[$i]->store('product_paths', 'public');
-                    $product_image->product_id = $id;
-                    $product_image->save();
+                    if($request->paths !== null && $request['paths'.$i] !== null) {
+                        // input:fileでわたってきているとき
+                        $product_image = new ProductImage();
+                        $product_image->path = $request->paths['paths'.$i]->store('product_paths', 'public');
+                        $product_image->product_id = $id;
+                        $product_image->save();
+
+                    } else {
+                        // input:fileでわたってきてこないとき
+                        $product_image = new ProductImage();
+                        $product_image->path = self::changeUploadFile($request->base64_text[$i]);
+                        $product_image->product_id = $id;
+                        $product_image->save();
+                    }
+                    
 
                 }elseif(isset($old_images[$i])){
                     // 変更なければ元のpathをDBに登録しなおす
@@ -213,7 +226,7 @@ class ProductService
             foreach($old_images as $val){
                 $val->delete();
             }
-        }
+        // }s
     }
 
 
