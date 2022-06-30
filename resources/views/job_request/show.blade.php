@@ -53,9 +53,13 @@
 				<aside id="side" class="pc">
 					<div class="box reservate">
 						<h3>@if(!is_null($job_request->price)) {{ number_format($job_request->price) }} @endif円</h3>
-						<p class="status">予約状況</p>
-						<p class="date">5日</p>
-						<div class="calendar"><div id="datepicker"></div></div>
+						<p class="status">応募期限</p>
+						<p class="date" style="margin-bottom:10px;height:33.5px;">@if(!is_null($job_request->application_deadline)) {{ date('Y/m/d',strtotime($job_request->application_deadline)) }}@endif</p>
+						@if(!is_null($job_request->required_date)) 
+							<p class="status">納品希望日</p>
+							<p class="date">{{ date('Y/m/d',strtotime($job_request->required_date)) }}</p>
+						@endif
+						<!-- <div class="calendar"><div id="datepicker"></div></div> -->
 					</div>
 					<div>
 						<div class="peace">

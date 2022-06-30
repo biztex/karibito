@@ -10,7 +10,6 @@ use App\Libraries\Age;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
 use App\Http\Requests\JobRequestController\DraftRequest;
-use App\Http\Requests\JobRequestController\PreviewRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
 
 class JobRequestController extends Controller
@@ -182,7 +181,7 @@ class JobRequestController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function preview(PreviewRequest $request)
+    public function preview(StoreRequest $request)
     {
         $user = \Auth::user();
 
@@ -194,26 +193,8 @@ class JobRequestController extends Controller
     /**
      * プレビュー画面から投稿
      */
-    public function storePreview(Request $request)
+    public function storePreview(StoreRequest $request)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'nullable | integer | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'application_deadline' => 'required | date | after_or_equal:tomorrow',
-            'required_date' => 'nullable | date | after_or_equal:application_deadline',
-            'is_online' => 'required | integer | boolean',
-            'is_call' => 'required | integer | boolean',    
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            return redirect()->route("job_request.create")->withInput()->withErrors($validate->messages());
-        }
-
-        // バリデーション通れば通常通り登録
         $this->job_request_service->storeJobRequest($request->all());
 
         return redirect()->route('service_thanks');
@@ -222,7 +203,7 @@ class JobRequestController extends Controller
     /**
      * 既存リクエスト、編集からプレビュー表示
      */
-    public function editPreview(PreviewRequest $request, JobRequest $job_request)
+    public function editPreview(StoreRequest $request, JobRequest $job_request)
     {
         $user = \Auth::user();
 
@@ -234,26 +215,8 @@ class JobRequestController extends Controller
     /**
      * プレビュー画面から投稿
      */
-    public function updatePreview(Request $request, JobRequest $job_request)
+    public function updatePreview(StoreRequest $request, JobRequest $job_request)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'nullable | integer | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'application_deadline' => 'required | date | after_or_equal:tomorrow',
-            'required_date' => 'nullable | date | after_or_equal:application_deadline',
-            'is_online' => 'required | integer | boolean',
-            'is_call' => 'required | integer | boolean',    
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            return redirect()->route("job_request.edit", $job_request->id)->withInput()->withErrors($validate->messages());
-        }
-
-        // バリデーション通れば通常通り登録
         $this->job_request_service->updateJobRequest($request->all(), $job_request);
 
         return redirect()->route('service_thanks');
