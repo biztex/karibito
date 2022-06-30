@@ -3,7 +3,11 @@
 
         <div id="breadcrumb">
             <div class="inner">
-                <a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスを編集する</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+                <a href="{{(url()->previous())}}">サービス提供の詳細</a>　>　
+                <a href="{{(url()->current())}}">サービスを編集する</a>
             </div>
         </div>
 

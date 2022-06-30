@@ -2,7 +2,16 @@
 	<article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>  >  <a href="#">掲載一覧</a>@if(!is_null($job_request->title))  >  <span>{{ $job_request->title }}</spa> @endif
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                @if($job_request->user_id === Auth::id())
+                    <a href="{{ route('mypage') }}">マイページ</a>　>　
+                    <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+                    <a href="{{(url()->current())}}">リクエストの詳細</a>
+                @else
+{{--                    <a href="service.html">サービスを探す</a>　>　--}}
+
+                    {{--<a href="#"></a>@if(!is_null($job_request->title))  >  <span>{{ $job_request->title }}</span> @endif--}}
+                @endif
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>

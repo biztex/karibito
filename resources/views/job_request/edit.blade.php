@@ -2,14 +2,18 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　&gt;　<span>サービスをリクエストする</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+                <a href="{{(url()->previous())}}">リクエストの詳細</a>　>　
+                <a href="{{(url()->current())}}">リクエストを編集する</a>
 			</div>
 		</div>
 
 		<div id="contents">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					<h2 class="subPagesHd">サービスをリクエストする<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
+					<h2 class="subPagesHd">リクエストを編集する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
 					<form class="contactForm" method="POST">
 						@csrf @method('PUT')
 

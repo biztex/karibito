@@ -2,7 +2,16 @@
     <article>
         <div id="breadcrumb">
             <div class="inner">
-                <a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>　>　<span>プレビュー</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create')
+                <a href="{{ route('product.index') }}">投稿する</a>　>　
+                <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                @else
+                    <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+                    <a href="{{(url()->previous())}}">サービスを編集する</a>　>　
+                @endif
+                    <a href="{{ route('product.preview') }}">プレビュー</a>
             </div>
         </div><!-- /.breadcrumb -->
         <div id="contents" class="detailStyle">
