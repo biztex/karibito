@@ -20,7 +20,7 @@
 							</li>
 							<li class="biggerlink">
 								<p class="tit">お問い合わせ</p>
-								<a href="#" class="ico_support03"></a>
+								<a href="{{ route('contact') }}" class="ico_support03"></a>
 								<p>直接お問い合わせる</p>
 							</li>
 							<li class="biggerlink">

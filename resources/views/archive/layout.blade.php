@@ -12,7 +12,7 @@
 <meta name="keywords" content="キーワード">
 <meta name="description" content="ディスクリプション">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
- 
+
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/slick.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
@@ -40,15 +40,15 @@
                                 <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="">
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="item">
                         <p class="navHeadSp">
                             <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="/img/common/nav_head.png" alt=""></a>
                         </p>
-                        <div class="btnMenu"><span></span><span></span><span></span></div> 
+                        <div class="btnMenu"><span></span><span></span><span></span></div>
                         <nav id="gNavi" @if(!Auth::check()) style="padding-top:50px"@endif>
                             <ul class="navUl02 pc">
-                                <li><a href="#" class="nav01">サポート</a></li> 
+                                <li><a href="#" class="nav01">サポート</a></li>
                                 <li class="navLink">
                                     <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>1</span></a>
                                     <div class="navBox">
@@ -123,17 +123,17 @@
 								@endif
                                 <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
 								@if(!Auth::check())
-								
-									
+
+
 										<a href="{{route('login')}}" class="log">ログイン</a>
 										<a href="{{route('register')}}" class="sign">新規登録</a>
-								
+
 								@endif
                                     <a href="#">ご利用ガイド</a>
                                     <a href="#">カリビトQ&A</a>
                                     <a href="#">プライバシーポリシー</a>
                                     <a href="#">設定</a>
-                                    <a href="#">お問い合わせ</a>
+                                    <a href="{{ route('contact') }}">お問い合わせ</a>
                                 </div>
                                 @if(Auth::check())
                                 <form method="POST" name="logout" action="{{ route('logout') }}">
@@ -150,7 +150,7 @@
                                 <a href="{{route('register')}}" class="sign">新規登録</a>
                             @endif
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="searchWrapSp">
                     <div class="searchWrapTop">
@@ -1063,7 +1063,7 @@
                                 </div>
                             </div>
                         </div>
-						@if(Auth::check()) 
+						@if(Auth::check())
                         <div class="right">
                             <a href="#">投稿する</a>
                         </div>
@@ -1186,7 +1186,7 @@
     						<li><a href="#">初めての方へ</a></li>
     						<li><a href="#">ゲストの方へ</a></li>
     						<li><a href="#">ホストの方へ</a></li>
-    						<li><a href="#">ワークを掲載するには</a></li> 
+    						<li><a href="#">ワークを掲載するには</a></li>
     					</ul>
     				</div>
     				<div class="item toggleWrap">
@@ -1210,7 +1210,7 @@
     					<a href="#">約款特定</a>
     					<a href="#">商取引法に基づく表示</a>
     					<a href="#">よくある質問</a>
-    					<a href="#">お問い合わせ</a>
+    					<a href="{{ route('contact') }}">お問い合わせ</a>
     				</div>
     				<div class="sns sp">
 						<a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>
@@ -1220,7 +1220,7 @@
 					</div>
     				<p id="copyright">©2021 karibito, Inc.</p>
     			</div>
-    		</div> 
+    		</div>
         </div><!-- /#footer -->
 	</footer>
 </div><!-- /#wrapper -->

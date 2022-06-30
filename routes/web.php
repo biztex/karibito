@@ -179,6 +179,10 @@ Route::get('/register/facebook', [FacebookLoginController::class, 'getFacebookAu
 Route::get('/login/facebook', [FacebookLoginController::class, 'getFacebookAuth']);
 Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFacebookCallback']);
 
+// お問い合わせ
+Route::get('contact', [ContactController::class, 'contact'])->name('contact');
+Route::post('contact', [ContactController::class, 'sendSupportMail']);
+
 Route::get('', [HomeController::class, 'index'])->name('home');
 
 // --管理者画面-----------------------------------------------------------------------------
