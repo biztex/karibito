@@ -2,7 +2,9 @@
     <article>
         <div id="breadcrumb">
             <div class="inner">
-                <a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                <a href="{{ route('product.index') }}">投稿する</a>
             </div>
         </div><!-- /.breadcrumb -->
         <div class="btnFixed">

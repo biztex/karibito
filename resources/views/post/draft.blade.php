@@ -2,7 +2,9 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>下書き一覧</span>
+                <a href="{{ route('home') }}">ホーム</a>　&gt;　
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                <a href="{{ route('draft') }}">下書き一覧</a>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>

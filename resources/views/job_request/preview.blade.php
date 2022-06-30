@@ -2,7 +2,16 @@
 	<article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>サービスをリクエストする</span>　>　<span>プレビュー</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/create')
+                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('job_request.create') }}">リクエストを提供する</a>　>　
+                @else
+                    <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+                    <a href="{{(url()->previous())}}">リクエストを編集する</a>　>　
+                @endif
+                <a href="{{ route('job_request.preview') }}">プレビュー</a>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents" class="detailStyle">
@@ -17,7 +26,7 @@
 			<input type="hidden" value="@if(!is_null($request->application_deadline)){{ $request->application_deadline }}@endif" name="application_deadline">
 			<input type="hidden" value="@if(!is_null($request->required_date)){{ $request->required_date }}@endif" name="required_date">
 
-			<div class="inner02 ">
+			<div class="inner02">
 				<div class="clearfix">
 				<div id="main">
 					<div class="title">
@@ -104,7 +113,7 @@
 						<input type="hidden" value="@if(!is_null($request->price)){{ $request->price }}@endif" name="price">
 						<p class="status">応募期限</p>
 						<p class="date" style="margin-bottom:10px;height:33.5px;">@if(!is_null($request->application_deadline)) {{ date('Y/m/d',strtotime($request->application_deadline)) }}@endif</p>
-						@if(!is_null($request->required_date)) 
+						@if(!is_null($request->required_date))
 							<p class="status">納品希望日</p>
 							<p class="date">{{ date('Y/m/d',strtotime($request->required_date)) }}</p>
 						@endif

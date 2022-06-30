@@ -3,12 +3,28 @@
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　
-                @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create')
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                {{--                {{dd(url()->previous())}}--}}
+                @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create') {{--提供-完了--}}
+                    <a href="{{ route('product.index') }}">投稿する</a>　>　
                     <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
-                @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/create')
+                @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/preview') {{--提供-プレビュー-完了--}}
+                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                    <a href="{{(url()->previous())}}">プレビュー</a>　>　
+                @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/create') {{--リクエスト-完了--}}
+                    <a href="{{ route('product.index') }}">投稿する</a>　>　
                     <a href="{{route('job_request.create')}}">サービスをリクエストする</a>　>　
+                @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/preview') {{--リクエスト-プレビュー-完了--}}
+                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('product.create') }}">サービスをリクエストする</a>　>　
+                    <a href="{{(url()->previous())}}">プレビュー</a>　>　
+                @else
+                    <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+{{--                    <a href="{{(url()->previous())}}">リクエストを編集する</a>　>　--}}
                 @endif
                 <span>投稿完了</span>
+{{--                {{(str_replace(url(''), "", $_SERVER['HTTP_REFERER']))}}--}}
 			</div>
         </div><!-- /.breadcrumb -->
 		<div id="contents">
