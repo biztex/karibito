@@ -31,7 +31,7 @@ class StoreRequest extends FormRequest
             'content' => 'required | string | min:30 | max:3000 ',
             'price' => 'required | integer | min:500 | max:9990000',
             'is_online' => 'required | boolean',
-            'number_of_day' => 'required | integer',
+            'number_of_day' => 'required | integer | between:1,730',
             'is_call' => 'required | boolean',
             'number_of_sale' => 'required | integer',
             'status' => 'required | integer',
@@ -41,6 +41,7 @@ class StoreRequest extends FormRequest
             'question_title.*' => 'nullable | max:400',
             'answer.*' => 'required_if:question_title,true | max:400', //まだできていない
             'base64_text.0' => 'required',
+            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
         ];
     }
 }
