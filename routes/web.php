@@ -116,8 +116,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('draft', 'storeDraft')->name('storeDraft');
             Route::post('preview', 'preview')->name('preview');
             Route::post('store/preview', 'storePreview')->name('store.preview');
+            Route::get('/', 'index')->name('index');
         });
-        Route::get('/', 'index')->name('index');
         Route::get('{product}/show', 'show')->name('show');
     });
 
