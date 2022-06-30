@@ -7,6 +7,7 @@ use App\Models\JobRequest;
 use App\Models\Product;
 use App\Models\User;
 use App\Libraries\Age;
+use App\Libraries\DiffDateTime;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
 use App\Http\Requests\JobRequestController\DraftRequest;
@@ -96,8 +97,12 @@ class JobRequestController extends Controller
         $user = User::find($job_request->user_id);
 
         $age = Age::group($user->userProfile->birthday);
+        
+        $day1 = now();
+        $day2 = $job_request->application_deadline;
+        $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
 
-        return view('job_request.show',compact('job_request','user','age'));
+        return view('job_request.show',compact('job_request','user','age','diff_date_time'));
     }
 
     /**
@@ -187,7 +192,11 @@ class JobRequestController extends Controller
 
         $age = Age::group($user->userProfile->birthday);
 
-        return view('job_request.preview',compact('request','user','age'));
+        $day1 = now();
+        $day2 = $request->application_deadline;
+        $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
+
+        return view('job_request.preview',compact('request','user','age','diff_date_time'));
     }
 
     /**
@@ -209,7 +218,11 @@ class JobRequestController extends Controller
 
         $age = Age::group($user->userProfile->birthday);
 
-        return view('job_request.preview',compact('request','user','age','job_request'));
+        $day1 = now();
+        $day2 = $request->application_deadline;
+        $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
+
+        return view('job_request.preview',compact('request','user','age','job_request','diff_date_time'));
     }
 
     /**
