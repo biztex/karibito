@@ -118,7 +118,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('store/preview', 'storePreview')->name('store.preview');
             Route::get('/', 'index')->name('index');
         });
-        Route::get('{product}/show', 'show')->name('show');
+        Route::get('{product}', 'show')->name('show');
     });
 
     // 秘訣
@@ -152,7 +152,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('preview','preview')->name('preview');
             Route::post('store/preview','storePreview')->name('store.preview');
         });
-        Route::get('{job_request}/show','show')->name('show');
+        Route::get('{job_request}','show')->name('show');
     });
 });
 
@@ -161,9 +161,9 @@ Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
 Route::view('/company', 'company')->name('company');
 Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
 
-// GET	        /photo	index	        photo.index　          一覧画面
+// GET	        /photo      	        photo.index　          一覧画面
 // GET	        /photo/create	        photo.create　         登録画面
-// POST	        /photo	store	        photo.store　          登録処理
+// POST	        /photo      	        photo.store　          登録処理
 // GET	        /photo/{photo}	        photo.show　           詳細画面
 // GET	        /photo/{photo}/edit	    photo.edit　           編集画面
 // PUT/PATCH	/photo/{photo}	        photo.update　         編集処理
