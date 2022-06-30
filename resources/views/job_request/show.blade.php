@@ -2,8 +2,17 @@
 	<article>
     	<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>  >  <a href="{{ route('publication') }}">掲載一覧</a>  >  
-				<span>{{ $job_request->mProductChildCategory->mProductCategory->name }}</span>  >  <span>{{ $job_request->mProductChildCategory->name }}</span>  >  <span>{{ $job_request->title }}</span>
+
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                @if($job_request->user_id === Auth::id())
+                    <a href="{{ route('mypage') }}">マイページ</a>　>　
+                    <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+                    <a href="{{(url()->current())}}">リクエストの詳細</a>
+                @else
+{{--                    <a href="service.html">サービスを探す</a>　>　--}}
+
+                    {{--<a href="#"></a>@if(!is_null($job_request->title))  >  <span>{{ $job_request->title }}</span> @endif--}}
+                @endif
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents" class="detailStyle">

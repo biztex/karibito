@@ -63,7 +63,6 @@ $(function () {
 	
 	// 提供登録画像プレビュー / localStorageに画像一時保存
 	// 画像に変更あれば'delete'/'insert'のいずれかを配列の番号とともに格納していく
-	// var image_status = {};
 	for (let i = 0; i < 10; i++) {
 		$("#product_pic"+i).on('click', function () {
 			$("input[name='paths["+i+"]']").on('click', function (e) {
@@ -78,7 +77,6 @@ $(function () {
 					$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
 				}
 				reader.readAsDataURL(e.target.files[0]);
-				// image_status = 'insert';
 				$("input[name='image_status"+i+"']").val('insert');	
 				localStorage.setItem('status'+i,"insert");			
 			});
@@ -89,7 +87,6 @@ $(function () {
 			$("input[name='paths["+i+"]']").val('');
 			$("input[name='base64_text["+i+"]']").attr('value', null);
 
-			// image_status = 'delete';
 			$("input[name='image_status"+i+"']").val('delete');
 			localStorage.setItem('status'+i,"delete");			
 

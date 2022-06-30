@@ -2,7 +2,16 @@
     <article>
         <div id="breadcrumb">
             <div class="inner">
-                <a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>　>　<span>プレビュー</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　
+                <a href="{{ route('mypage') }}">マイページ</a>　>　
+                @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create')
+                <a href="{{ route('product.index') }}">投稿する</a>　>　
+                <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                @else
+                    <a href="{{route('publication')}}">掲載内容一覧</a>　>　
+                    <a href="{{(url()->previous())}}">サービスを編集する</a>　>　
+                @endif
+                    <a href="{{ route('product.preview') }}">プレビュー</a>
             </div>
         </div><!-- /.breadcrumb -->
         <div id="contents" class="detailStyle">
@@ -57,18 +66,23 @@
                         <div class="slider">
                             <div class="big">
                                 @for($i = 0; $i < 10; $i++)
-                                    <div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="" srcset="" alt=""></div>
+                                    @if($request['image_status'.$i] === "insert")
+                                        <div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="{{ $request['base64_text'][$i] }}" srcset="" alt=""></div>
+                                    @endif
                                 @endfor
                             </div>
                             <div class="small">
                                 @for($i = 0; $i < 10; $i++)
-                                    <div class="item"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="" alt=""></div>
+                                    @if($request['image_status'.$i] === "insert")
+                                        <div class="item"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="{{ $request['base64_text'][$i] }}"  srcset="" alt=""></div>
+                                    @endif
                                 @endfor
                             </div>
                         </div>
 
                         @for($i = 0; $i < 10; $i++)
-                            <input type="hidden" name="base64_text[{{$i}}]" value="">
+                            <input type="hidden" name="base64_text[{{$i}}]" value="{{ $request->base64_text[$i] }}">
+                            <input type="hidden" name="image_status{{$i}}" value="{{ $request['image_status'.$i] }}">
                         @endfor
 
                         <div class="content">
@@ -197,16 +211,4 @@
     }
     moreload.init();
 
-    // プレビューページ
-	$(function () {
-        if (localStorage.getItem("pic"+i)) {
-            $("input[name='base64_text["+i+"]']").attr('value', localStorage.getItem("pic"+i));
-            $("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
-            $("#preview_slider"+i).attr('src', localStorage.getItem("pic"+i));
-            $("#preview_slider"+i+i).attr('src', localStorage.getItem("pic"+i));
-        } else {
-            $("#preview_slider"+i).remove();
-            $("#preview_slider"+i+i).remove();
-        }
-	});
 </script>
