@@ -57,18 +57,23 @@
                         <div class="slider">
                             <div class="big">
                                 @for($i = 0; $i < 10; $i++)
-                                    <div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="" srcset="" alt=""></div>
+                                    @if($request['image_status'.$i] === "insert")
+                                        <div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="{{ $request['base64_text'][$i] }}" srcset="" alt=""></div>
+                                    @endif
                                 @endfor
                             </div>
                             <div class="small">
                                 @for($i = 0; $i < 10; $i++)
-                                    <div class="item"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="" alt=""></div>
+                                    @if($request['image_status'.$i] === "insert")
+                                        <div class="item"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="{{ $request['base64_text'][$i] }}"  srcset="" alt=""></div>
+                                    @endif
                                 @endfor
                             </div>
                         </div>
 
                         @for($i = 0; $i < 10; $i++)
-                            <input type="hidden" name="base64_text[{{$i}}]" value="">
+                            <input type="hidden" name="base64_text[{{$i}}]" value="{{ $request->base64_text[$i] }}">
+                            <input type="hidden" name="image_status{{$i}}" value="{{ $request['image_status'.$i] }}">
                         @endfor
 
                         <div class="content">
@@ -197,16 +202,4 @@
     }
     moreload.init();
 
-    // プレビューページ
-	$(function () {
-        if (localStorage.getItem("pic"+i)) {
-            $("input[name='base64_text["+i+"]']").attr('value', localStorage.getItem("pic"+i));
-            $("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
-            $("#preview_slider"+i).attr('src', localStorage.getItem("pic"+i));
-            $("#preview_slider"+i+i).attr('src', localStorage.getItem("pic"+i));
-        } else {
-            $("#preview_slider"+i).remove();
-            $("#preview_slider"+i+i).remove();
-        }
-	});
 </script>

@@ -223,14 +223,25 @@
                                 @for($i = 0; $i < 10; $i++)
                                     <li >
                                         <div id="product_pic{{$i}}" class="img">
-                                            <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                            <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
-                                            <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
+                                                @if(old('image_status'.$i) === "delete")
+                                                    <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
+                                                @elseif(old('image_status'.$i) === "insert")
+                                                    <img id="preview_product{{$i}}" src="{{ old('base64_text.'.$i)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text.'.$i) }}">
+                                                @else
+                                                    <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text.'.$i) }}">
+                                                @endif
                                         </div>
                                         <div class="fun">
                                             <div class="del" id="storage_delete{{$i}}">削除</div>
                                         </div>
                                     </li>
+                                <input type="hidden" name="image_status{{$i}}" value="{{ old('image_status'.$i) }}">
                                 @endfor
                             </ul>
                         </div>
