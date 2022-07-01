@@ -14,7 +14,7 @@
         <div id="contents">
             <div class="cancelWrap">
                 <div class="inner inner05">
-                    <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
+                    <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" target="_blank" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf @method('PUT')
 
@@ -343,7 +343,7 @@
     }
 
 
-    
+
 	$(function()  {
     	for (let i = 0; i < 10; i++) {
             if (localStorage.getItem('status'+i) === "delete") {
@@ -358,9 +358,9 @@
 
         if (@json($errors->has('base64_text.0'))) {
             $("#preview_product0").attr('src', '/img/service/img_provide.jpg');
-		} 
-	
-        
+		}
+
+
 	});
 
 </script>
