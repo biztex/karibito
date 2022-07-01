@@ -14,7 +14,7 @@
         <div id="contents">
             <div class="cancelWrap">
                 <div class="inner inner05">
-                    <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
+                    <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" target="_blank" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf @method('PUT')
 
@@ -333,6 +333,10 @@
     </article>
 </x-layout>
 <script type="text/javascript">
+    $(function(){
+        delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
+        delQuestion();
+    })
     function addOption(){
         let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
         let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
@@ -341,27 +345,33 @@
             str = str.replace(/%\w+%/g, number_js_optionForm + 1);
             $('.formOptionsArea').append(str);
         }
+        delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
+    }
 
-        $('.js-deleteOption').click(function(){
+    function delOption() {
+        $('.js-deleteOption').click(function () {
             let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
-            if (number_js_optionForm > 1 ) {
+            if (number_js_optionForm > 1) {
                 $(this).parents('.js-optionForm').remove(); //divだけを消す
-                $(".formOptionsArea").children(".js-optionForm").each(function(index, element){
+                $(".formOptionsArea").children(".js-optionForm").each(function (index, element) {
                     $(element).children(".th").text("有料オプション" + (index + 1));
                 })
             }
         });
     }
 
-    function addQuestion(){
+    function addQuestion() {
         let str = '<div class="js-questionForm"><p class="th">質問のタイトル%NUM%</p><div class="td">@error('question_title.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"><textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a> </div></div></div>'
         let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
 
-        if(number_js_questionForm < 10) {
+        if (number_js_questionForm < 10) {
             str = str.replace(/%\w+%/g, number_js_questionForm + 1);
             $('.formQuestionsArea').append(str);
         }
+        delQuestion();
+    }
 
+    function delQuestion() {
         $('.js-deleteQuestion').click(function(){
             let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
             if (number_js_questionForm > 1 ) {

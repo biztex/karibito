@@ -43,9 +43,9 @@
 									</tr>
 									<tr>
 										<th><span class="th">残り時間</span></th>
-										<td><big>1日と10時間</big></td>
+										<td><big>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</big></td>
 									</tr>
-									@if(!is_null($job_request->required_date)) 
+									@if(!is_null($job_request->required_date))
 									<tr>
 										<th><span class="th">納品希望日</span></th>
 										<td>{{ date('Y年m月d日',strtotime($job_request->required_date)) }}</td>
@@ -53,7 +53,7 @@
 									@endif
 									<tr>
 										<th><span class="th">掲載日</span></th>
-										<td>{{ date('Y年m月d日', strtotime(today())) }}</td>
+										<td>{{ date('Y年m月d日', strtotime($job_request->created_at)) }}</td>
 									</tr>
 									<tr>
 										<th><span class="th">締切日</span></th>
@@ -68,7 +68,7 @@
 							<div class="content">
 								<h2 class="hdM">サービス内容</h2>
 								<p style="overflow-wrap: break-word;">{!! nl2br(e($job_request->content)) !!}</p>
-							</div>					
+							</div>
 						</div>
 
 						<aside id="side" class="pc">
@@ -76,7 +76,7 @@
 								<h3>{{ number_format($job_request->price) }}円</h3>
 								<p class="status">応募期限</p>
 								<p class="date" style="margin-bottom:10px;height:33.5px;">{{ date('Y/m/d',strtotime($job_request->application_deadline)) }}</p>
-								@if(!is_null($job_request->required_date)) 
+								@if(!is_null($job_request->required_date))
 									<p class="status">納品希望日</p>
 									<p class="date">{{ date('Y/m/d',strtotime($job_request->required_date)) }}</p>
 								@endif

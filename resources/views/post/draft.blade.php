@@ -8,7 +8,6 @@
                 <a href="{{ route('draft') }}">下書き一覧</a>
 			</div>
 		</div><!-- /.breadcrumb -->
-
 		<x-parts.flash-msg />
 
 		<div id="contents" class="otherPage">
@@ -19,7 +18,7 @@
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">
 								<li><a href="#tab_box01" class="is_active">提供の下書き</a></li>
-								<li><a href="#tab_box02" id="box02">依頼の下書き</a></li>
+								<li><a href="#tab_box02" id="box02">リクエストの下書き</a></li>
 							</ul>
 							<!---------------- 提供 ------------------>
 							<div class="tabBox is_active" id="tab_box01">

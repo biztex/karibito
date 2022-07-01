@@ -45,7 +45,9 @@
 								<div class="datas">
 									<span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$request->is_call] }}</span>
 									<!-- <span class="data">閲覧：1000</span> -->
-									<span class="data">エリア：@if(!is_null($request->prefecture_id)){{ App\Models\Prefecture::find($request->prefecture_id)->name }} @endif</span>
+                                    @if(!is_null($request->prefecture_id))
+                                        <span class="data">エリア：{{ App\Models\Prefecture::find($request->prefecture_id)->name }}</span>
+                                    @endif
 								</div>
 							</div>
 							<div class="drawIllustration">
@@ -59,7 +61,7 @@
 										<th><span class="th">残り時間</span></th>
 										<td><big>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</big></td>
 									</tr>
-									@if(!is_null($request->required_date)) 
+									@if(!is_null($request->required_date))
 									<tr>
 										<th><span class="th">納品希望日</span></th>
 										<td>{{ date('Y年m月d日',strtotime($request->required_date)) }}</td>
@@ -67,7 +69,13 @@
 									@endif
 									<tr>
 										<th><span class="th">掲載日</span></th>
-										<td>{{ date('Y年m月d日', strtotime(today())) }}</td>
+										<td>
+                                            @if($request->created_at)
+                                                {{ date('Y年m月d日', strtotime($job_request->created_at)) }}
+                                            @else
+                                                {{ date('Y年m月d日', strtotime(today())) }}
+                                            @endif
+                                        </td>
 									</tr>
 									<tr>
 										<th><span class="th">締切日</span></th>
@@ -82,7 +90,7 @@
 							<div class="content">
 								<h2 class="hdM">サービス内容</h2>
 								<p style="overflow-wrap: break-word;">{!! nl2br(e($request->content)) !!}</p>
-							</div>					
+							</div>
 
 						</div>
 
@@ -91,7 +99,7 @@
 								<h3>{{ number_format($request->price) }}円</h3>
 								<p class="status">応募期限</p>
 								<p class="date" style="margin-bottom:10px;height:33.5px;">{{ date('Y/m/d',strtotime($request->application_deadline)) }}</p>
-								@if(!is_null($request->required_date)) 
+								@if(!is_null($request->required_date))
 									<p class="status">納品希望日</p>
 									<p class="date">{{ date('Y/m/d',strtotime($request->required_date)) }}</p>
 								@endif

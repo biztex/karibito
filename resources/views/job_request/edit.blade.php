@@ -13,7 +13,7 @@
 		<div id="contents">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					<h2 class="subPagesHd">リクエストを編集する<a href="{{ route('support') }}" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
+					<h2 class="subPagesHd">リクエストを編集する<a href="{{ route('support') }}" target="_blank" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
 					<form class="contactForm" method="POST">
 						@csrf @method('PUT')
 
@@ -103,9 +103,10 @@
 								<option value="1" @if(old('is_call', $job_request->is_call ) == 1) selected @endif>電話を受け付ける</option>
 							</select>
 						</div>
+                        <input type="hidden" value="{{ $job_request->created_at }}" name="created_at">
 
 
-						<div class="functeBtns">
+                        <div class="functeBtns">
 							<input type="submit" class="full" style="color:white;" formaction="{{ route('job_request.edit.preview',$job_request->id) }}" value="プレビュー画面を見る">
 							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.update',$job_request->id) }}" value="サービス提供を開始">
 							<input type="submit" class="full green_o" formaction="{{ route('job_request.update.draft', $job_request->id) }}" value="下書きとして保存">
