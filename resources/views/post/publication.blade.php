@@ -2,7 +2,7 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載一覧</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載内容一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -11,7 +11,7 @@
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="subPagesWrap">
-						<h2 class="subPagesHd">掲載内容</h2>
+						<h2 class="subPagesHd">掲載内容一覧</h2>
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">
 								<li><a href="#tab_box01" class="is_active">提供</a></li>
