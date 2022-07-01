@@ -23,7 +23,6 @@
                         <div class="item">
                             @auth
                                 <p class="navHeadSp">
-
                                     @if(empty($user_profile->icon))
                                         <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="/img/mypage/no_image.jpg" alt=""></a>
                                         @else
@@ -87,7 +86,7 @@
                                             <dl class="navMypageDl">
                                                 @if(empty($user_profile->icon))
                                                     <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
-                                                    @else
+                                                @else
                                                     <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                                 @endif
                                                     <dd>{{\Auth::user()->name}}</dd>
@@ -95,7 +94,9 @@
                                             @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
                                                 <div class="navMypageUl">
                                                     <a href="{{ route('mypage') }}">マイページ</a>
-                                                    <a href="{{ route('publication') }}">掲載内容一覧</a>
+                                                    @can('identify')
+                                                        <a href="{{ route('publication') }}">掲載内容一覧</a>
+                                                    @endcan
                                                     <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
                                                     <a href="#">設定</a>
                                                 </div>
@@ -119,9 +120,14 @@
                                         <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                         <div class="navMypageUl link01">
                                             <a href="{{ route('mypage') }}">マイページ</a>
-                                            <a href="#">掲載内容一覧</a>
+                                            @can('identify')
+                                                <a href="{{ route('publication') }}">掲載内容一覧</a>
+                                            @endcan
                                             <a href="#">お気に入り</a>
-                                            <a href="{{ route('product.index') }}" class="blueBtn">投稿する</a>
+                                            @can('identify')
+                                                <a href="{{ route('publication') }}">掲載内容一覧</a>
+                                                <a href="{{ route('product.index') }}" class="blueBtn">投稿する</a>
+                                            @endcan
                                         </div>
                                     @endauth
                                     <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
@@ -1060,11 +1066,13 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(Auth::check())
+{{--                            @if(Auth::check() && $user_profile->is_identify == 1))--}}
+                            @can('identify')
                             <div class="right">
                                 <a href="{{ route('product.index') }}">投稿する</a>
                             </div>
-                            @endif
+{{--                            @endif--}}
+                            @endcan
                         </div>
                     </div>
                 </div>

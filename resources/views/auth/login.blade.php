@@ -1,7 +1,6 @@
 <x-layout>
 <article>
 	<body id="login">
-		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		{{-- フェイスブックのメアドがない場合にエラーを表示 --}}
 		@if($errors->has('error_msg'))
 			<div class="error-txt">{{ $errors->first('error_msg') }}</div>

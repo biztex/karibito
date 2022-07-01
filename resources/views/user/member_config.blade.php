@@ -1,4 +1,5 @@
 <x-layout>
+<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
@@ -6,8 +7,6 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.flash-msg/>
-
-		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
