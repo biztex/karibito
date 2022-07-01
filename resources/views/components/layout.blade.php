@@ -1066,12 +1066,10 @@
                                     </div>
                                 </div>
                             </div>
-{{--                            @if(Auth::check() && $user_profile->is_identify == 1))--}}
                             @can('identify')
                             <div class="right">
                                 <a href="{{ route('product.index') }}">投稿する</a>
                             </div>
-{{--                            @endif--}}
                             @endcan
                         </div>
                     </div>
