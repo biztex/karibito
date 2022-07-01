@@ -61,7 +61,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreRequest $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
@@ -80,7 +80,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Product $product
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -98,13 +98,14 @@ class ProductController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @param \App\Models\Product $product
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
+//        {{dd('aa');}}
         return view('product.edit', compact('product'));
     }
 
@@ -113,7 +114,7 @@ class ProductController extends Controller
      *
      * @param StoreRequest $request
      * @param \App\Models\Product $product
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, Product $product)
@@ -132,7 +133,7 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Product $product
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
@@ -259,7 +260,7 @@ class ProductController extends Controller
             'option_price.*' => 'nullable | integer',
             'option_is_public.*' => 'integer',
             'question_title.*' => 'nullable | max:400',
-            'answer.*' => 'required_if:question_title,true | max:400',  
+            'answer.*' => 'required_if:question_title,true | max:400',
         ]);
 
         // バリデーション引っかかれば入力画面に戻す
