@@ -97,6 +97,8 @@ $(function () {
 		$(function () {
 			if ($("input[name='image_status"+i+"']").val() === "delete") {
 				$("input[name='base64_text["+i+"]']").attr('value', null);
+			} else if ($("input[name='image_status"+i+"']").val() === "insert") {
+				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
 			}
 		})
 
