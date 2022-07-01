@@ -1,4 +1,5 @@
 <x-layout>
+    <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
 <article>
 	<body id="mypage">
 		<div id="breadcrumb">
@@ -6,7 +7,6 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>マイページ</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		@if(empty($user_profile->identification_path))
 			<div class="unregisteredP">

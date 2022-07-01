@@ -35,16 +35,18 @@
                     <li><a href="{{ route('showWithdrawForm') }}" class="">退会</a></li>
                 </ul>
             </div>
-            <div class="sideItem">
-                <p class="sideHd">出品者向け</p>
-                <ul class="sideUl01">
-                    <li><a href="#" class="">スキル / 経歴</a></li>
-                    <li><a href="#" class="">ポートフォリオ</a></li>
-                    <li><a href="#">ブログ</a></li>
-                    <li><a href="{{ route('publication') }}" class="">掲載内容一覧</a></li>
-                    <li><a href="{{ route('draft') }}">掲載内容の下書き</a></li>
-                </ul>
-            </div>
+            @can('identify')
+                <div class="sideItem">
+                    <p class="sideHd">出品者向け</p>
+                    <ul class="sideUl01">
+                        <li><a href="#" class="">スキル / 経歴</a></li>
+                        <li><a href="#" class="">ポートフォリオ</a></li>
+                        <li><a href="#">ブログ</a></li>
+                        <li><a href="{{ route('publication') }}" class="">掲載内容一覧</a></li>
+                        <li><a href="{{ route('draft') }}">掲載内容の下書き</a></li>
+                    </ul>
+                </div>
+            @endcan
             <div class="sideItem">
                 <p class="sideHd">カリビトについて</p>
                 <ul class="sideUl01">
