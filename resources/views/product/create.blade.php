@@ -270,16 +270,23 @@
     </article>
 </x-layout>
 <script type="text/javascript">
+    $(function(){
+        delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
+        delQuestion();
+    })
     function addOption(){
-        let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
+        let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"><textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
         let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
 
         if (number_js_optionForm < 10) {
             str = str.replace(/%\w+%/g, number_js_optionForm + 1);
             $('.formOptionsArea').append(str);
+            delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
         }
+    }
 
-        $('.js-deleteOption').click(function(){
+    function delOption(){
+        $('.js-deleteOption').on('click', function () {
             let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
             if (number_js_optionForm > 1 ) {
                 $(this).parents('.js-optionForm').remove(); //divだけを消す
@@ -298,7 +305,10 @@
         str = str.replace(/%\w+%/g, number_js_questionForm + 1);
         $('.formQuestionsArea').append(str);
         }
+        delQuestion();
+    }
 
+    function delQuestion() {
         $('.js-deleteQuestion').click(function(){
             let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
             if (number_js_questionForm > 1 ) {
