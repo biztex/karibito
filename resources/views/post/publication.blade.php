@@ -43,6 +43,7 @@
 												</div>
 											</div>
 											<p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
+                                            <p class="" style="position: absolute; bottom: 0; right: 0;">{{date('Y/m/d', strtotime($val->created_at))}}</p>
 										</div>
 									</li>
 									@endforeach
@@ -71,7 +72,8 @@
 												</div>
 											</div>
 											<p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
-										</div>
+                                            <p class="" style="position: absolute; bottom: 0; right: 0;">{{date('Y/m/d', strtotime($val->created_at))}}</p>
+                                        </div>
 									</li>
 									@endforeach
 									@endif

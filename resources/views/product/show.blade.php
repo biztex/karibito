@@ -28,8 +28,11 @@
                             <div class="datas">
                                 <span class="data">電話相談の受付：@if(!is_null($product->is_call)) {{ App\Models\Product::IS_CALL[$product->is_call] }} @endif</span>
                                 <!-- <span class="data">閲覧：1000</span> -->
-                                <span class="data">エリア：@if(!is_null($product->prefecture_id)) {{ App\Models\Prefecture::find($product->prefecture_id)->name }} @endif</span>
+                                @if(!is_null($product->prefecture_id))
+                                <span class ="data">エリア： {{ App\Models\Prefecture::find($product->prefecture_id)->name }} </span>
+                                @endif
                                 <span class="data">販売数：@if(!is_null($product->number_of_sale)){{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}@endif</span>
+                                <span class="data">投稿日：{{date('Y/m/d', strtotime($product->created_at))}}
                             </div>
                             <h2><span>{{$product->title}}</span></h2>
                         </div>

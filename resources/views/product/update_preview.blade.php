@@ -35,16 +35,13 @@
                                 <span class="data">電話相談の受付：@if(!is_null($request->is_call))
                                         {{ App\Models\Product::IS_CALL[$request->is_call] }}
                                     @endif</span>
-                                <input type="hidden"
-                                       value="@if(!is_null($request->is_call)){{ $request->is_call }}@endif"
-                                       name="is_call">
+                                <input type="hidden" value="@if(!is_null($request->is_call)){{ $request->is_call }}@endif" name="is_call">
                                 <!-- <span class="data">閲覧：1000</span> -->
-                                <span class="data">エリア：@if(!is_null($request->prefecture_id))
-                                        {{ App\Models\Prefecture::find($request->prefecture_id)->name }}
-                                    @endif</span>
-                                <input type="hidden"
-                                       value="@if(!is_null($request->prefecture_id)){{ $request->prefecture_id }}@endif"
-                                       name="prefecture_id">
+                                @if(!is_null($request->prefecture_id))
+                                    <span class="data">エリア：{{ App\Models\Prefecture::find($request->prefecture_id)->name }}</span>
+                                @endif
+{{--                                <span class="data">投稿日：{{date('Y/m/d', strtotime($request->created_at))}}</span>--}}
+                                <input type="hidden" value="@if(!is_null($request->prefecture_id)){{ $request->prefecture_id }}@endif" name="prefecture_id">
                                 <!-- <span class="data">販売数：無制限</span> -->
                             </div>
                             <h2><span>@if(!is_null($request->title))
