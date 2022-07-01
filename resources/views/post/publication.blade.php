@@ -1,5 +1,5 @@
 <x-layout>
-{{--<x-parts.post-button/>--}}{{--投稿ボタンの読み込み--}}
+<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">

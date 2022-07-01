@@ -50,15 +50,12 @@ Route::get('sample', function () {
 });
 
 // 画面組込中
-// Route::view('/post', 'post.post')->name('post');
 Route::view('service_preview', 'post.service_preview')->name('service_preview');
 Route::view('service_provide', 'post.service_provide')->name('service_provide');
 Route::view('service_detail', 'post.service_detail')->name('service_detail');
 Route::view('service_request', 'post.service_request')->name('service_request');
 Route::view('service_thanks', 'post.service_thanks')->name('service_thanks');
 Route::view('service', 'post.service')->name('service');
-// Route::view('draft', 'post.draft')->name('draft');
-// Route::view('publication', 'post.publication')->name('publication');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
 
@@ -100,6 +97,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');
     Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
+    // 提供・リクエスト一覧
+    Route::get('job_request',function () { return redirect()->route('publication');});
+    Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
+    // 提供・リクエスト 下書き一覧
+    Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
+
     // 商品登録
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
@@ -121,20 +124,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('{product}', 'show')->name('show');
     });
 
-    // 秘訣
-    Route::view('secret01','secret.secret01')->name('secret01');
-    Route::view('secret02','secret.secret02')->name('secret02');
-    Route::view('secret03','secret.secret03')->name('secret03');
-    Route::view('secret04','secret.secret04')->name('secret04');
-    Route::view('secret05','secret.secret05')->name('secret05');
-    Route::view('secret06','secret.secret06')->name('secret06');
-
-    // 提供・リクエスト一覧
-    Route::get('job_request',function () { return redirect()->route('publication');});
-    Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
-    // 提供・リクエスト 下書き一覧
-    Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
-
     // リクエスト
     Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
         Route::middleware(['can:my.job.request,job_request', 'can:identify'])->group(function () {
@@ -154,6 +143,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
         Route::get('{job_request}','show')->name('show');
     });
+
+    // 秘訣
+    Route::view('secret01','secret.secret01')->name('secret01');
+    Route::view('secret02','secret.secret02')->name('secret02');
+    Route::view('secret03','secret.secret03')->name('secret03');
+    Route::view('secret04','secret.secret04')->name('secret04');
+    Route::view('secret05','secret.secret05')->name('secret05');
+    Route::view('secret06','secret.secret06')->name('secret06');
+    
 });
 
 // プライバシーポリシーと運営会社

@@ -1,11 +1,11 @@
 <x-layout>
+<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
 	<article>
     <div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('service') }}">サービスを探す</a>　>　<a href="#">デザイン</a>　>　<a href="#">その他デザイン</a>　>　<span>似顔絵イラスト描きます</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="detailStyle">
 			<div class="inner02 ">
 				<div class="clearfix">

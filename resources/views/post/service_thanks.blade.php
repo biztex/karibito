@@ -11,14 +11,12 @@
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/preview') {{--提供-プレビュー-完了--}}
                     <a href="{{ route('product.index') }}">投稿する</a>　>　
                     <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
-                    <a href="{{(url()->previous())}}">プレビュー</a>　>　
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/create') {{--リクエスト-完了--}}
                     <a href="{{ route('product.index') }}">投稿する</a>　>　
                     <a href="{{route('job_request.create')}}">サービスをリクエストする</a>　>　
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/preview') {{--リクエスト-プレビュー-完了--}}
                     <a href="{{ route('product.index') }}">投稿する</a>　>　
                     <a href="{{ route('product.create') }}">サービスをリクエストする</a>　>　
-                    <a href="{{(url()->previous())}}">プレビュー</a>　>　
                 @else
                     <a href="{{route('publication')}}">掲載内容一覧</a>　>　
 {{--                    <a href="{{(url()->previous())}}">リクエストを編集する</a>　>　--}}

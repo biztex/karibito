@@ -105,6 +105,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+//        {{dd('aa');}}
         return view('product.edit', compact('product'));
     }
 
