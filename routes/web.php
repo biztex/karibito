@@ -16,6 +16,7 @@ use App\Http\Controllers\Web\Mypage\WithdrawController;
 use App\Http\Controllers\Web\Mypage\ProductController as MypageProductController;
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
+use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
@@ -68,6 +69,8 @@ Route::view('guide', 'support.guide')->name('guide');
 
 Route::view('member', 'user.member')->name('member');
 Route::view('member_config', 'user.member_config')->name('member_config');
+// Route::get('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('member_config');
+// Route::get('member_config', 'user.member_config')->name('member_config');
 Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
 Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
 
@@ -94,7 +97,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+        Route::post('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('mail.send');
     });
+
+    // メールアドレス変更確認（Authの後に書かないとダメ）
+    Route::get('email/{token}', [ChangeEmailController::class, 'updateEmail'])->name('email.update');
 
     // 退会フォーム表示
     Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');

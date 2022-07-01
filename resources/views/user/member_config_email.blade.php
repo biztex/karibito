@@ -8,17 +8,18 @@
 					<div class="configEditWrap">
 						<div class="configEditItem">
 							<h2 class="subPagesHd">メールアドレスの変更</h2>
-							<div class="configEditBox">
-								<dl class="configEditDl01">
-									<dt>新しいメールアドレス</dt>
-									<dd>
-										<div class="mypageEditInput"><input type="text" name="" placeholder=""></div>
-									</dd>
-								</dl>
-								<div class="configEditButton">
-									<input type="submit" value="送信" name="">
-								</div>
-							</div>
+                            <form method="POST" action="{{ route('mail.send') }}">
+                                @csrf
+                                <div class="configEditBox">
+                                    <dl class="configEditDl01">
+                                        <dt>新しいメールアドレス</dt>
+                                        <dd>
+                                            <div class="mypageEditInput"><input type="text" name="email" placeholder=""></div>
+                                        </dd>
+                                    </dl>
+                                        <button>送信</button>
+                                </div>
+                            </form>
 						</div>
 					</div>
 				</div><!-- /#main -->

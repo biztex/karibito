@@ -8,11 +8,12 @@ class HomeController extends Controller
 {
     /**
      * トップ画面を表示する
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
-        return view('index');
+        dd('home');
+        return view('home.index');
     }
 }
