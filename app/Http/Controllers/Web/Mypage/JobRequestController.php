@@ -75,7 +75,7 @@ class JobRequestController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreRequest $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
@@ -89,7 +89,7 @@ class JobRequestController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\JobRequest $job_request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(JobRequest $job_request)
@@ -97,7 +97,7 @@ class JobRequestController extends Controller
         $user = User::find($job_request->user_id);
 
         $age = Age::group($user->userProfile->birthday);
-        
+
         $day1 = now();
         $day2 = $job_request->application_deadline;
         $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
@@ -109,7 +109,7 @@ class JobRequestController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\JobRequest $job_request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(JobRequest $job_request)
@@ -122,7 +122,7 @@ class JobRequestController extends Controller
      *
      * @param StoreRequest $request
      * @param \App\Models\JobRequest $job_request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, JobRequest $job_request)
@@ -136,17 +136,21 @@ class JobRequestController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\JobRequest $job_request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(JobRequest $job_request)
     {
-        \DB::transaction(function () use ($job_request) {
-            
-            $job_request->delete(); // データ論理削除
-            \Session::put('flash_msg','リクエストを削除しました');
-            
-        });
+
+        $job_request->delete(); // データ論理削除
+        \Session::put('flash_msg','リクエストを削除しました');
+
+        if ($job_request->is_draft === 0) {
+            return redirect()->route('publication');
+        } elseif($job_request->is_draft === 1) {
+            return redirect()->route('draft');
+        }
+
         return redirect()->route('mypage');
     }
 
@@ -154,7 +158,7 @@ class JobRequestController extends Controller
      * Store a newly created resource in storage.
      *
      * @param DraftRequest $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function storeDraft(DraftRequest $request)
@@ -169,7 +173,7 @@ class JobRequestController extends Controller
      *
      * @param DraftRequest $request
      * @param \App\Models\JobRequest $job_request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function updateDraft(DraftRequest $request, JobRequest $job_request)
@@ -183,7 +187,7 @@ class JobRequestController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param PreviewRequest $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function preview(StoreRequest $request)
