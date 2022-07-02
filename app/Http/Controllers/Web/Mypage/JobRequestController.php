@@ -165,7 +165,7 @@ class JobRequestController extends Controller
     {
         $job_request = $this->job_request_service->storeDraftJobRequest($request->all());
 
-        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft','#job-request')->with('flash_msg','下書きに保存しました！');
     }
 
     /**
@@ -180,7 +180,7 @@ class JobRequestController extends Controller
     {
         $this->job_request_service->updateDraftJobRequest($request->all(), $job_request);
 
-        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft','#job-request')->with('flash_msg','下書きに保存しました！');
     }
 
     /**
