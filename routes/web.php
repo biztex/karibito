@@ -137,7 +137,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('can:identify')->group(function () {
             Route::get('create','create')->name('create');
             Route::post('store','store')->name('store');
-            Route::post('draft','storeDraft')->name('storeDraft');
+            Route::post('draft','storeDraft')->name('store.draft');
             Route::post('preview','preview')->name('preview');
             Route::post('store/preview','storePreview')->name('store.preview');
         });

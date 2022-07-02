@@ -108,7 +108,7 @@
 						<div class="functeBtns">
 							<input type="submit" class="full" style="color:white;" formaction="{{ route('job_request.preview') }}" value="プレビュー画面を見る">
 							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.store') }}" value="サービス提供を開始">
-							<input type="submit" class="full green_o" formaction="{{ route('job_request.storeDraft') }}" value="下書きとして保存">
+							<input type="submit" class="full green_o" formaction="{{ route('job_request.store.draft') }}" value="下書きとして保存">
 						</div>
 					</form>
 				</div>
