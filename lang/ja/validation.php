@@ -174,6 +174,9 @@ return [
         ],
         'number_of_day' => [
             'between' => '所要日数は1~730日以内で指定してください。'
+        ],
+        'identification_path' => [
+            'max' => ':attributeには、20MB以下のファイルを指定してください。',
         ]
 
     ],
