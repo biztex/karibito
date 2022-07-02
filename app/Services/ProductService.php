@@ -34,7 +34,7 @@ class ProductService
     public function storeAdditionalOption(array $request, $id)
     {
         for ($i = 0; $i < 3; $i++) {
-            if (isset($request['option_name'][$i])) {
+            if (null !== ($request['option_name'][$i])) {
                 $additional_option = new AdditionalOption;
                 $additional_option->create([
                     'name' => $request['option_name'][$i],
@@ -52,7 +52,7 @@ class ProductService
     public function storeProductQuestion(array $request, $id)
     {
         for ($i = 0; $i < 3; $i++) {
-            if (isset($request['question_title'][$i])) {
+            if (null !== ($request['question_title'][$i])) {
                 $question = new ProductQuestion;
                 $question->create([
                     'title' => $request['question_title'][$i],
@@ -88,15 +88,15 @@ class ProductService
     {
         $product->additionalOptions()->delete();
 
-        if (isset($request['option_name'])) {
-            foreach ($request['option_name'] as $index => $option) {
-                    $product->additionalOptions()->create([
-                        'name' => $request['option_name'][$index],
-                        'price' => $request['option_price'][$index],
-                        'is_public' => $request['option_is_public'][$index]
-                    ]);
-                }
+        foreach ($request['option_name'] as $index => $option) {
+            if (null !== ($request['option_name'][$index])) {
+                $product->additionalOptions()->create([
+                    'name' => $request['option_name'][$index],
+                    'price' => $request['option_price'][$index],
+                    'is_public' => $request['option_is_public'][$index]
+                ]);
             }
+        }
     }
 
 
@@ -107,12 +107,12 @@ class ProductService
     {
         $product->productQuestions()->delete();
 
-        if (isset($request['question_title'])) {
-            foreach ($request['question_title'] as $index => $title){
-                    $product->productQuestions()->create([
-                        'title' => $request['question_title'][$index],
-                        'answer' => $request['answer'][$index]
-                    ]);
+        foreach ($request['question_title'] as $index => $title){
+            if (null !== ($request['question_title'][$index])) {
+                $product->productQuestions()->create([
+                    'title' => $request['question_title'][$index],
+                    'answer' => $request['answer'][$index]
+                ]);
             }
         }
     }
