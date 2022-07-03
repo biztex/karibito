@@ -79,10 +79,12 @@
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
                                 @foreach($product->additionalOptions as $additional_option)
-                                    <li>
-                                        <span class="add">＋ {{$additional_option->name}}</span>
-                                        <span class="price">￥@if(!is_null($additional_option->price)){{ App\Models\AdditionalOption::OPTION_PRICE[$additional_option->price]}}@endif</span>
-                                    </li>
+                                    @if($additional_option->is_public === \App\Models\AdditionalOption::STATUS_PUBLISH)
+                                        <li>
+                                            <span class="add">＋ {{$additional_option->name}}</span>
+                                            <span class="price">￥@if(!is_null($additional_option->price)){{ number_format(App\Models\AdditionalOption::OPTION_PRICE[$additional_option->price])}}@endif</span>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>

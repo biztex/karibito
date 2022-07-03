@@ -5,7 +5,7 @@ parameters:
         - app/
         - database/
         - tests/
-    level: 2
+    level: 3
     excludePaths:
         - ./*/*/FileToBeExcluded.php
     checkMissingIterableValueType: false

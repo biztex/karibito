@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="formOptionsArea">
-                            @if(is_null(old('option_name.'.'0')))
+                            @if(is_null(old('option_name.0')))
                                 <div class="js-optionForm">
                                     <p class="th">有料オプション1</p>
                                         @error('option_name.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -164,7 +164,6 @@
                             @endif
                         </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
-
 
 
                         <div class="formQuestionsArea">
