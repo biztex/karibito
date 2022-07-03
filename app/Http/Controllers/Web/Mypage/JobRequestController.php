@@ -141,17 +141,14 @@ class JobRequestController extends Controller
      */
     public function destroy(JobRequest $job_request)
     {
-
         $job_request->delete(); // データ論理削除
         \Session::put('flash_msg','リクエストを削除しました');
 
-        if ($job_request->is_draft === 0) {
-            return redirect()->route('publication');
-        } elseif($job_request->is_draft === 1) {
-            return redirect()->route('draft');
+        if ($job_request->is_draft == JobRequest::NOT_DRAFT) {
+            return redirect()->route('publication',['#job-request']);
+        } else {
+            return redirect()->route('draft',['#job-request']);
         }
-
-        return redirect()->route('mypage');
     }
 
     /**
