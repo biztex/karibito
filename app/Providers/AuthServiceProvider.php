@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         // 本人確認認証済チェック
         Gate::define('identify', function (User $user) {
             if($user->userProfile !== null){
-                return $user->userProfile->is_identify === 1;
+                return $user->userProfile->is_identify == UserProfile::IS_IDENTIFY;
             }
         });
 

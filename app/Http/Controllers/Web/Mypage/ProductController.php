@@ -134,16 +134,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-
         $product->delete(); // データ論理削除
         \Session::put('flash_msg','提供商品を削除しました');
-        if ($product->is_draft === 0) {
+        if ($product->is_draft == Product::NOT_DRAFT) {
             return redirect()->route('publication');
-        } elseif($product->is_draft === 1) {
+        } else {
             return redirect()->route('draft');
         }
-
-        return redirect()->route('mypage');
     }
 
     /**
