@@ -21,7 +21,7 @@ class ContactController extends Controller
     /**
      * コンタクト画面を表示する
      *
-     * @return view
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function contact()
     {
@@ -31,7 +31,7 @@ class ContactController extends Controller
     /**
      * 下書き一覧画面を表示する
      *
-     * @return view
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function indexDraft()
     {

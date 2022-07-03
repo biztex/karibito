@@ -30,7 +30,7 @@ class UserProfileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {
@@ -40,7 +40,7 @@ class UserProfileController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
     {
@@ -53,7 +53,7 @@ class UserProfileController extends Controller
      *
      * @param StoreRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRequest $request)
     {
@@ -67,6 +67,8 @@ class UserProfileController extends Controller
 
     /**
      * 基本情報登録完了画面
+     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showComplete()
     {
@@ -101,7 +103,7 @@ class UserProfileController extends Controller
      *
      * @param UpdateRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request)
     {

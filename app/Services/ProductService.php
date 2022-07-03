@@ -33,15 +33,15 @@ class ProductService
      */
     public function storeAdditionalOption(array $request, $id)
     {
-        for ($i = 0; $i < 3; $i++) {
-            if (null !== ($request['option_name'][$i])) {
-                $additional_option = new AdditionalOption;
-                $additional_option->create([
-                    'name' => $request['option_name'][$i],
-                    'price' => $request['option_price'][$i],
-                    'is_public' => $request['option_is_public'][$i],
-                    'product_id' => $id
-                ]);
+        foreach ($request['option_name'] as $index => $value) {
+            if (null !== ($request['option_name'][$index])) {
+                $options = [
+                    'name' => $request['option_name'][$index],
+                    'price' => $request['option_price'][$index],
+                    'is_public' => $request['option_is_public'][$index]
+                ];
+                $product = Product::find($id);
+                $product->additionalOptions()->create($options);
             }
         }
     }
@@ -51,14 +51,16 @@ class ProductService
      */
     public function storeProductQuestion(array $request, $id)
     {
-        for ($i = 0; $i < 3; $i++) {
-            if (null !== ($request['question_title'][$i])) {
-                $question = new ProductQuestion;
-                $question->create([
-                    'title' => $request['question_title'][$i],
-                    'answer' => $request['answer'][$i],
-                    'product_id' => $id
-                ]);
+        if ($request['question_title'] !== null){
+            foreach ($request['question_title'] as $index => $value) {
+                if ($request['question_title'][$index]){
+                    $questions = [
+                        'title' => $request['question_title'][$index],
+                        'answer' => $request['answer'][$index],
+                    ];
+                    $product = Product::find($id);
+                    $product->productQuestions()->create($questions);
+                }
             }
         }
     }
@@ -88,13 +90,15 @@ class ProductService
     {
         $product->additionalOptions()->delete();
 
-        foreach ($request['option_name'] as $index => $option) {
+        foreach ($request['option_name'] as $index => $value) {
             if (null !== ($request['option_name'][$index])) {
-                $product->additionalOptions()->create([
+                $options = [
                     'name' => $request['option_name'][$index],
                     'price' => $request['option_price'][$index],
                     'is_public' => $request['option_is_public'][$index]
-                ]);
+                ];
+                $product = Product::find($product->id);
+                $product->additionalOptions()->create($options);
             }
         }
     }
@@ -107,12 +111,16 @@ class ProductService
     {
         $product->productQuestions()->delete();
 
-        foreach ($request['question_title'] as $index => $title){
-            if (null !== ($request['question_title'][$index])) {
-                $product->productQuestions()->create([
-                    'title' => $request['question_title'][$index],
-                    'answer' => $request['answer'][$index]
-                ]);
+        if ($request['question_title'] !== null){
+            foreach ($request['question_title'] as $index => $value) {
+                if ($request['question_title'][$index]){
+                    $questions = [
+                        'title' => $request['question_title'][$index],
+                        'answer' => $request['answer'][$index],
+                    ];
+                    $product = Product::find($product->id);
+                    $product->productQuestions()->create($questions);
+                }
             }
         }
     }
@@ -162,17 +170,17 @@ class ProductService
                     $product_image->save();
                 }
             }
-        }
-
-        // input:fileでわたってこないとき
-        foreach ($request->base64_text as $path) {
-            if ($path !== null){
-                $product_image = new ProductImage();
-                $product_image->path = self::changeUploadFile($path);
-                $product_image->product_id = $id;
-                $product_image->save();
+        } else {
+            // input:fileでわたってこないとき
+            foreach ($request->base64_text as $path) {
+                if ($path !== null){
+                    $product_image = new ProductImage();
+                    $product_image->path = self::changeUploadFile($path);
+                    $product_image->product_id = $id;
+                    $product_image->save();
+                }
             }
-        }
+        }        
     }
     
 
@@ -251,6 +259,7 @@ class ProductService
 
 
     /**
+     * 未使用
      * 新規有料オプション下書き保存
      */
     public function storeDraftAdditionalOption(array $request, $id)
@@ -270,6 +279,7 @@ class ProductService
 
 
     /**
+     * 未使用
      * 新規よくある質問下書き保存
      */
     public function storeDraftProductQuestion(array $request, $id)

@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="draw">
                                             <p class="price">
-                                                <font>{{$val->title}}</font><br>{{$val->price}}円
+                                                <font>{{$val->title}}</font><br>{{number_format($val->price)}}円
                                             </p>
                                         </div>
                                         <div class="single">
@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="draw">
                                             <p class="price">
-                                                <font>{{$val->title}}</font><br>{{$val->price}}円
+                                                <font>{{$val->title}}</font><br>{{number_format($val->price)}}円
                                             </p>
                                         </div>
                                         <div class="single">

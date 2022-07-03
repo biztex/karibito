@@ -38,8 +38,8 @@ class StoreRequest extends FormRequest
             'option_name.*' => 'nullable | string | max:400',
             'option_price.*' => 'nullable | integer',
             'option_is_public.*' => 'integer',
-            'question_title.*' => 'required_unless:answer.*, "" | max:400',
-            'answer.*' => 'required_unless:question_title.*, "" | max:400',
+            'question_title.*' => 'required_unless:answer.*,null| max:400',
+            'answer.*' => 'required_unless:question_title.*,null| max:400',
             'base64_text.0' => 'required',
             'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
         ];

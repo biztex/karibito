@@ -16,7 +16,7 @@ class Age
     /**
      * $birthday : 2020-01-01 → 20200101
      */
-    public static function nowAge(string $birthday): string
+    public static function nowAge(string $birthday): float
     { 
         $int_birthday = self::int_birthday($birthday);
         $now = (int) date('Ymd');

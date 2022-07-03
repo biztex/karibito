@@ -41,7 +41,7 @@ class JobRequestController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
@@ -64,7 +64,7 @@ class JobRequestController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create(Request $request)
     {
@@ -76,7 +76,7 @@ class JobRequestController extends Controller
      *
      * @param StoreRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRequest $request)
     {
@@ -90,7 +90,7 @@ class JobRequestController extends Controller
      *
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(JobRequest $job_request)
     {
@@ -110,7 +110,7 @@ class JobRequestController extends Controller
      *
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(JobRequest $job_request)
     {
@@ -123,7 +123,7 @@ class JobRequestController extends Controller
      * @param StoreRequest $request
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(StoreRequest $request, JobRequest $job_request)
     {
@@ -137,7 +137,7 @@ class JobRequestController extends Controller
      *
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(JobRequest $job_request)
     {
@@ -159,7 +159,7 @@ class JobRequestController extends Controller
      *
      * @param DraftRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function storeDraft(DraftRequest $request)
     {
@@ -174,7 +174,7 @@ class JobRequestController extends Controller
      * @param DraftRequest $request
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function updateDraft(DraftRequest $request, JobRequest $job_request)
     {
@@ -186,9 +186,9 @@ class JobRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param PreviewRequest $request
+     * @param StoreRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function preview(StoreRequest $request)
     {
@@ -205,6 +205,8 @@ class JobRequestController extends Controller
 
     /**
      * プレビュー画面から投稿
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function storePreview(StoreRequest $request)
     {
@@ -215,6 +217,8 @@ class JobRequestController extends Controller
 
     /**
      * 既存リクエスト、編集からプレビュー表示
+     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editPreview(StoreRequest $request, JobRequest $job_request)
     {
@@ -231,6 +235,8 @@ class JobRequestController extends Controller
 
     /**
      * プレビュー画面から投稿
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function updatePreview(StoreRequest $request, JobRequest $job_request)
     {

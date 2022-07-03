@@ -66,37 +66,49 @@ class Product extends Model
         self::IS_PUBLIC => '公開',
     ];
 
-    // AdditionalOptionモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function additionalOptions()
     {
-        return $this->hasMany(AdditionalOption::class, 'product_id');
+        return $this->hasMany(AdditionalOption::class);
     }
 
-    // ProductQuestionモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function productQuestions()
     {
         return $this->hasMany(ProductQuestion::class, 'product_id');
     }
 
-    // ProductImageモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function productImage()
     {
         return $this->hasMany(ProductImage::class);
     }
 
-    // MProductChildCategoryモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function mProductChildCategory()
     {
         return $this->hasOne(MProductChildCategory::class, 'id', 'category_id');
     }
 
-    // Prefectureモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function productPrefecture()
     {
         return $this->hasOne(Prefecture::class, 'id');
     }
 
-    // Userモデルとのリレーション
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
     public function productUser()
     {
         return $this->belongsTo(User::class, 'user_id');

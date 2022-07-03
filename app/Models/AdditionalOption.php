@@ -32,5 +32,10 @@ class AdditionalOption extends Model
         self::STATUS_PUBLISH => '公開',
         self::STATUS_PRIVATE => '非公開',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
 
