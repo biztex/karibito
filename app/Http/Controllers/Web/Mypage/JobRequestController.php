@@ -30,8 +30,8 @@ class JobRequestController extends Controller
     public function draft()
     {
         // 下書きのみ表示
-        $products = Product::loginUsers()->draft()->orderBy('updated_at','desc')->paginate(10);
-        $job_requests = JobRequest::loginUsers()->draft()->orderBy('updated_at','desc')->paginate(10);
+        $products = Product::loginUsers()->draft()->orderBy('created_at','desc')->paginate(10);
+        $job_requests = JobRequest::loginUsers()->draft()->orderBy('created_at','desc')->paginate(10);
 
         return view('post.draft', compact('products','job_requests'));
     }
@@ -44,8 +44,8 @@ class JobRequestController extends Controller
     public function index()
     {
         // 下書き除いて表示
-        $products = Product::loginUsers()->notDraft()->orderBy('updated_at','desc')->paginate(10);
-        $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('updated_at','desc')->paginate(10);
+        $products = Product::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(10);
 
         return view('post.publication', compact('products','job_requests'));
     }
