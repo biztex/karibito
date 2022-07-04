@@ -228,5 +228,6 @@ Route::prefix('sample')->group(function () {
 
 // 該当ユーザーの各ページ
 Route::prefix('user')->name('user.')->group(function () {
-    Route::get('{user}/publication',[OtherUserController::class, 'index'])->name('product.index');
+    Route::get('{user}/publication',[OtherUserController::class, 'product'])->name('product.index');
+    Route::get('{product}/chat',[OtherUserController::class, 'productChat'])->name('product.chat');
 });
