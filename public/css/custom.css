@@ -127,7 +127,7 @@
     margin-top: 5px;
 }
 
-.public02:before{
+.public01:before{
 	content: '非公開';
 	position: absolute;
 	left: -1px;
@@ -138,7 +138,7 @@
 	padding: 5px;
 	background-color: #B4B4B4
 }
-.public01:before{
+.public02:before{
 	content: '公開';
 	position: absolute;
 	left: -1px;
