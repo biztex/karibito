@@ -14,6 +14,8 @@ class UserProfile extends Model
     
     protected $guarded = [ 'id' ];
 
+    protected $dates = [ 'birthday' ];
+    
     const GENDER_MAN = 1;
 
     const GENDER_WOMAN = 2;
