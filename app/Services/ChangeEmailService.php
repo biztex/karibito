@@ -40,11 +40,11 @@ class ChangeEmailService
             \DB::commit();
             \Mail::to($new_email)->send(new ChangeEmailMail($token));
 
-            return back()->with('flash_msg', '確認メールを送信しました。');
+            return true;
         } catch (\Exception $e) {
             \DB::rollback();
 
-            return back()->with('flash_msg', 'メール更新に失敗しました。');
+            return false;
         }
     }
 
@@ -64,14 +64,14 @@ class ChangeEmailService
             // レコードを削除
             $email_resets->delete();
 
-            return redirect()->route('member_config')->with('flash_msg', 'メールアドレスを更新しました！');
+            return true;
         } else {
             // レコードが存在していた場合削除
             if ($email_resets) {
                 $email_resets->delete();
             }
 
-            return view('home');//->with('flash_msg', 'トークンの有効期限が切れているか、トークンが不正です。');
+            return false;
         }
     }
 
