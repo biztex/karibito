@@ -28,7 +28,7 @@
 						<p class="txt">【法人の場合】<br>履歴事項全部証明書　(※3 ヵ月以内のものに限ります)</p>
 					</div>
 					<div class="fancyRegisterItem">
-						<p class="txt">【カリビトアプリ登録情報】<br>都道府県:〇〇〇〇〇〇<br>住所:〇〇〇〇〇〇<br>氏名:〇〇〇〇〇〇<br>生年月日:〇〇〇〇〇〇</p>
+						<p class="txt">【カリビトアプリ登録情報】<br>都道府県:{{ $user_profile->prefecture->name }}<br>住所:{{ $user_profile->address }}<br>氏名:{{ $user_profile->first_name.$user_profile->last_name }}<br>生年月日:{{ date("Y年n月j日",strtotime($user_profile->birthday)) }}</p>
 					</div>
 					<div class="fancyRegisterItem">
 						<p class="txt">安心安全のため、本人確認承認後はご住所 / 本名/ 生年月日のご変更ができなくなっておりますので、本人確認承認後にご住所 / 本名 / 生年月日をご変更されたい場合は、カリビト事務局へ、お問い合わせください</p>
