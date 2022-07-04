@@ -17,6 +17,9 @@ use App\Http\Controllers\Web\Mypage\ProductController as MypageProductController
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
+use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
+
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
@@ -221,4 +224,9 @@ Route::prefix('sample')->group(function () {
     Route::view('past', 'sample.past');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
+});
+
+// 該当ユーザーの各ページ
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('{user}/publication',[OtherUserController::class, 'index'])->name('product.index');
 });

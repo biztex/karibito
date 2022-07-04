@@ -78,6 +78,28 @@ class Product extends Model
     }
 
     /**
+     * 自分以外の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOtherUsers($query)
+    {
+        return $query->where('user_id','<>', \Auth::id());
+    }
+
+    /**
+     * 特定ユーザーの提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeGetUser($query, $user)
+    {
+        return $query->where('user_id', $user);
+    }
+
+    /**
      * 自分の提供のみ取得
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
