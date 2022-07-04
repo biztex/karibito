@@ -14,7 +14,7 @@ class ProductService
      */
     public function storeProduct(array $params):Product
     {
-        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale'];
+        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale', 'status'];
 
         $product = new Product;
         $product->user_id = \Auth::id();
@@ -22,7 +22,6 @@ class ProductService
             $product->$column = $params[$column];
         }
         $product->is_draft = Product::NOT_DRAFT;
-        $product->status = Product::STATUS_PUBLISH;
         $product->save();
 
         return $product;
@@ -71,13 +70,12 @@ class ProductService
      */
     public function updateProduct(array $params, $product):Product
     {
-        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale'];
+        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale', 'status'];
 
         foreach($columns as $column){
             $product->$column = $params[$column];
         }
         $product->is_draft = Product::NOT_DRAFT;
-        $product->status = Product::STATUS_PUBLISH;
         $product->save();
         return $product;
     }
@@ -243,7 +241,7 @@ class ProductService
      */
     public function storeDraftProduct(array $params):Product
     {
-        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale'];
+        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale','status'];
 
         $product = new Product;
         $product->user_id = \Auth::id();
@@ -251,7 +249,6 @@ class ProductService
             $product->$column = $params[$column];
         }
         $product->is_draft = Product::IS_DRAFT;
-        $product->status = Product::STATUS_PRIVATE;
         $product->save();
 
         return $product;

@@ -26,9 +26,9 @@
 									@else
 									@foreach($products as $val)
 									<li>
-										@if($val->status == App\Models\Product::NOT_PUBLIC)
+										@if($val->status === App\Models\Product::NOT_PUBLIC)
 										<div class="cont01 public01">
-										@elseif($val->status == App\Models\Product::IS_PUBLIC)
+										@elseif($val->status === App\Models\Product::IS_PUBLIC)
 										<div class="cont01 public02">
 										@endif
 											<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
