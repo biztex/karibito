@@ -127,6 +127,29 @@
     margin-top: 5px;
 }
 
+.public02:before{
+	content: '非公開';
+	position: absolute;
+	left: -1px;
+	top:  -1px;
+	z-index: 99;
+	color: #fff;
+	font-size: 1rem;
+	padding: 5px;
+	background-color: #B4B4B4
+}
+.public01:before{
+	content: '公開';
+	position: absolute;
+	left: -1px;
+	top:  -1px;
+	z-index: 99;
+	color: #fff;
+	font-size: 1rem;
+	padding: 5px;
+	background-color: #FCAA00
+}
+
 @media screen and (max-width: 767px){
 	#gNavi .navLinks li {
 		margin: 0 20px;
