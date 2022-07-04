@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
-//use App\Http\Requests\JobRequestController\PreviewRequest;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Http\Requests\ProductController\DraftRequest;
 use App\Libraries\Age;

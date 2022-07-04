@@ -18,6 +18,7 @@ use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestCont
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
+use App\Http\Controllers\Web\ChatController;
 
 
 use App\Http\Controllers\HomeController;
@@ -229,5 +230,7 @@ Route::prefix('sample')->group(function () {
 // 該当ユーザーの各ページ
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/publication',[OtherUserController::class, 'product'])->name('product.index');
-    Route::get('{product}/chat',[OtherUserController::class, 'productChat'])->name('product.chat');
+    
 });
+Route::get('chats',[ChatController::class, 'index'])->name('chat.index');
+Route::get('chats/{product}',[ChatController::class, 'show'])->name('chat.show');
