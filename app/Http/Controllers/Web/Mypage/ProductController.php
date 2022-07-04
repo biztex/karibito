@@ -29,17 +29,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('user_id',\Auth::id())
-            ->where('status',Product::STATUS_PUBLISH)
-            ->where('is_draft',Product::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(5);
-
-        $job_requests = JobRequest::where('user_id',\Auth::id())
-            ->where('status',JobRequest::STATUS_PUBLISH)
-            ->where('is_draft',JobRequest::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(5);
+        $products = Product::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(5);
+        $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(5);
 
         return view('post.post', compact('products','job_requests'));
     }
