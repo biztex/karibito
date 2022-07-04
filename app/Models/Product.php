@@ -67,6 +67,50 @@ class Product extends Model
     ];
 
     /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLoginUsers($query)
+    {
+        return $query->where('user_id',\Auth::id());
+    }
+
+    /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublish($query)
+    {
+        return $query->where('status',Product::STATUS_PUBLISH);
+    }
+
+    /**
+     * 下書きのみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeDraft($query)
+    {
+        return $query->where('is_draft', Product::IS_DRAFT);
+    }
+
+    /**
+     * 下書き以外のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNotDraft($query)
+    {
+        return $query->where('is_draft', Product::NOT_DRAFT);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function additionalOptions()

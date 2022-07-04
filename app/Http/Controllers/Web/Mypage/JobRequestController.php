@@ -22,18 +22,16 @@ class JobRequestController extends Controller
         $this->job_request_service = $job_request_service;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function draft()
     {
         // 下書きのみ表示
-        $products = Product::where('user_id',\Auth::id())
-            ->where('is_draft',Product::IS_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
-
-        $job_requests = JobRequest::where('user_id',\Auth::id())
-            ->where('is_draft',JobRequest::IS_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
+        $products = Product::loginUsers()->draft()->orderBy('updated_at','desc')->paginate(10);
+        $job_requests = JobRequest::loginUsers()->draft()->orderBy('updated_at','desc')->paginate(10);
 
         return view('post.draft', compact('products','job_requests'));
     }
@@ -45,18 +43,9 @@ class JobRequestController extends Controller
      */
     public function index()
     {
-        // 下書き・非公開除いて表示
-        $products = Product::where('user_id',\Auth::id())
-            ->where('status',Product::STATUS_PUBLISH)
-            ->where('is_draft',Product::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
-
-        $job_requests = JobRequest::where('user_id',\Auth::id())
-            ->where('status',JobRequest::STATUS_PUBLISH)
-            ->where('is_draft',JobRequest::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
+        // 下書き除いて表示
+        $products = Product::loginUsers()->notDraft()->orderBy('updated_at','desc')->paginate(10);
+        $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('updated_at','desc')->paginate(10);
 
         return view('post.publication', compact('products','job_requests'));
     }
