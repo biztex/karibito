@@ -69,8 +69,6 @@ Route::view('guide', 'support.guide')->name('guide');
 
 Route::view('member', 'user.member')->name('member');
 Route::view('member_config', 'user.member_config')->name('member_config');
-// Route::get('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('member_config');
-// Route::get('member_config', 'user.member_config')->name('member_config');
 Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
 Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
 

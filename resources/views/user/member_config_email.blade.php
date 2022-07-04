@@ -11,13 +11,21 @@
                             <form method="POST" action="{{ route('mail.send') }}">
                                 @csrf
                                 <div class="configEditBox">
+                                    <dl class="configEditDl01 text-left">
+                                        <dt>現在のメールアドレス：</dt>
+                                        <dt>
+                                            <div class="align-bottom">{{ Auth::user()->email }}</div>
+                                        </dt>
+                                    </dl>
                                     <dl class="configEditDl01">
                                         <dt>新しいメールアドレス</dt>
                                         <dd>
                                             <div class="mypageEditInput"><input type="text" name="email" placeholder=""></div>
                                         </dd>
                                     </dl>
-                                        <button>送信</button>
+                                    <div class="configEditButton">
+                                        <input type="submit" value="変更する">
+                                    </div>
                                 </div>
                             </form>
 						</div>
