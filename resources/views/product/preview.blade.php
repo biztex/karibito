@@ -5,8 +5,8 @@
                 <a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
                 @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create')
-                <a href="{{ route('product.index') }}">投稿する</a>　>　
-                <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
                 @else
                     <a href="{{route('publication')}}">掲載内容一覧</a>　>　
                     <a href="{{(url()->previous())}}">サービスを編集する</a>　>　
@@ -15,43 +15,33 @@
             </div>
         </div><!-- /.breadcrumb -->
         <div id="contents" class="detailStyle">
-            @if(empty($product))
-					<form class="contactForm" method="post" action="{{ route('product.store.preview') }}" enctype="multipart/form-data">
-					@csrf
-				@else
-					<form class="contactForm" method="post" action="{{ route('product.update.preview',$product->id) }}" enctype="multipart/form-data">
-					@csrf @method('put')
-			@endif
-			<input type="hidden" value="@if(!is_null($request->category_id)){{ $request->category_id }}@endif" name="category_id">
-            <input type="hidden" value="@if(!is_null($request->number_of_sale)){{ $request->number_of_sale }}@endif" name="number_of_sale">
-            <input type="hidden" value="@if(!is_null($request->status)){{ $request->status }}@endif" name="status">
+            <form class="contactForm" method="post" action="{{ route('product.store.preview') }}" enctype="multipart/form-data">
+            @csrf
+			<input type="hidden" value="{{ $request->category_id }}" name="category_id">
+            <input type="hidden" value="{{ $request->number_of_sale }}" name="number_of_sale">
+            <input type="hidden" value="{{ $request->status }}" name="status">
             <div class="inner02 ">
                 <div class="clearfix">
                     <div id="main">
                         <div class="title">
                             <div class="fun">
                                 <div class="single">
-                                    <a href="#" tabindex="0">@if(!is_null($request->is_online))
-                                            {{ App\Models\Product::IS_ONLINE[$request->is_online] }}
-                                        @endif</a>
-                                    <input type="hidden"
-                                           value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif"
-                                           name="is_online">
+                                    <a href="#" tabindex="0">@if(!is_null($request->is_online)){{ App\Models\Product::IS_ONLINE[$request->is_online] }}@endif</a>
+                                    <input type="hidden" value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif" name="is_online">
                                 </div>
                                 <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
                             </div>
                             <div class="datas">
-                                <span class="data">電話相談の受付：@if(!is_null($request->is_call))
-                                        {{ App\Models\Product::IS_CALL[$request->is_call] }}@endif
+                                <span class="data">電話相談の受付：@if(!is_null($request->is_call)){{ App\Models\Product::IS_CALL[$request->is_call] }}@endif
                                 </span>
                                 <input type="hidden" value="@if(!is_null($request->is_call)){{ $request->is_call }}@endif" name="is_call">
                                 <!-- <span class="data">閲覧：1000</span> -->
-                                    @if(!is_null($request->prefecture_id))
                                 <span class="data">エリア：
+                                    @if(!is_null($request->prefecture_id))
                                         {{ App\Models\Prefecture::find($request->prefecture_id)->name }}
                                     @endif
                                 </span>
-                                <span class="data">投稿日：{{date('Y/m/d', strtotime($request->created_at))}}</span>
+                                <span class="data">投稿日：{{now()->format('Y/m/d')}}</span>
                                 <input type="hidden" value="@if(!is_null($request->prefecture_id)){{ $request->prefecture_id }}@endif" name="prefecture_id">
                                 <!-- <span class="data">販売数：無制限</span> -->
                             </div>
@@ -94,11 +84,13 @@
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
                                 @for($i = 0; $i < 10; $i++)
-                                    @if(isset($request->option_name[$i]) && $request->option_is_public[$i] == App\Models\AdditionalOption::STATUS_PUBLISH)
-                                        <li>
-                                            <span class="add">＋ {{$request->option_name[$i]}}</span>
-                                            <span class="price">￥{{ number_format(App\Models\AdditionalOption::OPTION_PRICE[$request->option_price[$i]])}}</span>
-                                        </li>
+                                    @if(isset($request->option_name[$i]))
+                                        @if ($request->option_is_public[$i] == App\Models\AdditionalOption::STATUS_PUBLISH))
+                                            <li>
+                                                <span class="add">＋ {{$request->option_name[$i]}}</span>
+                                                <span class="price">￥{{ number_format(App\Models\AdditionalOption::OPTION_PRICE[$request->option_price[$i]])}}</span>
+                                            </li>
+                                        @endif
                                         <input type="hidden" value="@if(!is_null($request->option_name[$i])){{ $request->option_name[$i] }}@endif" name="option_name[{{$i}}]">
                                         <input type="hidden" value="@if(!is_null($request->option_price[$i])){{ $request->option_price[$i] }}@endif" name="option_price[{{$i}}]">
                                         <input type="hidden" value="@if(!is_null($request->option_is_public[$i])){{ $request->option_is_public[$i] }}@endif" name="option_is_public[{{$i}}]">
@@ -144,7 +136,7 @@
                                 <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
                             </div>
                             <div class="functeBtns">
-                                <a href="javascript:history.back();" class="orange_o">編集画面に戻る</a>
+                                <input type="submit" class="full" style="color:white;" formaction="{{ route('product.post.create') }}" value="編集画面に戻る">
                             </div>
                             <div class="functeBtns">
                                 <input type="submit" class="orange full" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">

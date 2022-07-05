@@ -52,8 +52,34 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
+        $validate = \Validator::make($request->all(), [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'is_online' => 'required | boolean',
+            'number_of_day' => 'required | integer | between:1,730',
+            'is_call' => 'required | boolean',
+            'number_of_sale' => 'required | integer',
+            'status' => 'required | integer',
+            'option_name.*' => 'nullable | string | max:400',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'required_unless:answer.*,null| max:400',
+            'answer.*' => 'required_unless:question_title.*,null| max:400',
+            'base64_text.0' => 'required',
+            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
+        ]);
+
+        // バリデーション引っかかれば入力画面に戻す
+        if ($validate->fails()) {
+            return redirect()->route("product.create")->withInput()->withErrors($validate->messages());
+        }
+
+
         \DB::transaction(function () use ($request) {
           $product = $this->product_service->storeProduct($request->all());
           $this->product_service->storeAdditionalOption($request->all(), $product->id);
@@ -182,12 +208,53 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function preview(StoreRequest $request)
+    public function preview(Request $request)
     {
+        $validate = \Validator::make($request->all(), [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'is_online' => 'required | boolean',
+            'number_of_day' => 'required | integer | between:1,730',
+            'is_call' => 'required | boolean',
+            'number_of_sale' => 'required | integer',
+            'status' => 'required | integer',
+            'option_name.*' => 'nullable | string | max:400',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'required_unless:answer.*,null| max:400',
+            'answer.*' => 'required_unless:question_title.*,null| max:400',
+            'base64_text.0' => 'required',
+            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
+        ]);
+
+        // バリデーション引っかかれば入力画面に戻す
+        if ($validate->fails()) {
+            return redirect()->route("product.create")->withInput()->withErrors($validate->messages());
+        }
+
         $user = \Auth::user();
         $age = Age::group($user->userProfile->birthday);
 
         return view('product.preview',compact('request','user','age'));
+    }
+
+    public function postCreate(Request $request)
+    {
+        $user = \Auth::user();
+        $age = Age::group($user->userProfile->birthday);
+
+        return view('product.create',compact('request','user','age'));
+    }
+
+    public function postEdit(Request $request)
+    {
+        $user = \Auth::user();
+        $age = Age::group($user->userProfile->birthday);
+        $product = $request;
+        return view('product.edit', compact('product','user','age'));
     }
 
     /**
@@ -203,7 +270,7 @@ class ProductController extends Controller
 
     /**
      * プレビュー画面から投稿
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function storePreview(Request $request)
@@ -220,7 +287,7 @@ class ProductController extends Controller
 
     /**
      * プレビュー画面から投稿
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updatePreview(StoreRequest $request, Product $product)

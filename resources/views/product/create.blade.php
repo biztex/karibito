@@ -9,14 +9,12 @@
                 <a href="{{ route('product.create') }}">サービスを提供する</a>
             </div>
         </div>
-
         <div id="contents">
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを提供する<a href="{{ route('support') }}" target="_blank" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf
-
                         <p class="th">カテゴリ<span class="must">必須</span></p>
                             @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
@@ -25,7 +23,7 @@
                                 @foreach ($categories as $category)
                                     <optgroup label="{{$category->name}}">
                                         @foreach ($category->mProductChildCategory as $child_category)
-                                            <option value="{{$child_category->id}}" @if( old('category_id', $request->catecory_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
+                                            <option value="{{$child_category->id}}" @if( old('category_id', $request->category_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach
@@ -105,39 +103,11 @@
                         </div>
 
                         <div class="formOptionsArea">
-                            @if(is_null(old('option_name.0')))
-                                <div class="js-optionForm">
-                                    <p class="th">有料オプション1</p>
-                                        @error('option_name.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                    <div class="td">
-                                        <div class="paid">
-                                            <div class="enter">
-                                                <textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
-                                            </div>
-                                            <div class="selects">
-                                                <select name="option_price[]">
-                                                    @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                                        <option value="{{ $key }}" @if(old('option_price.0') == $key) selected @endif>
-                                                            {{ $value }}円
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <select name="option_is_public[]">
-                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
-                                                    <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
+                            @if(old('option_name'))
                                 @foreach(old('option_name') as $k => $v)
                                     <div class="js-optionForm">
                                         <p class="th">有料オプション {{$k + 1}}</p>
-                                            @error('option_name.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        @error('option_name.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="paid">
                                                 <div class="enter">
@@ -152,8 +122,8 @@
                                                         @endforeach
                                                     </select>
                                                     <select name="option_is_public[]">
-                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$k)) && old('option_is_public.'.$k) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option>
-                                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$k) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$k)) && old('option_is_public.'.$k) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$k) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
                                                     </select>
                                                 </div>
                                                 <div>
@@ -163,44 +133,81 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            @elseif(collect($request->option_name)->isNotEmpty())
+                                @foreach($request->option_name as $num => $additional_option)
+                                    <div class="js-optionForm">
+                                        <p class="th">有料オプション {{$num + 1}}</p>
+                                        @error('option_name.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="paid">
+                                                <div class="enter">
+                                                    <textarea class="" type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.$num, $additional_option.$num) }}</textarea>
+                                                </div>
+                                                <div class="selects">
+                                                    <select name="option_price[]">
+                                                        @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                            <option value="{{ $key }}" @if(old('option_price.'.$num, $request->option_price[$num]) == $key) == $key) selected @endif>
+                                                            {{ $value }}円
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <select name="option_is_public[]">
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num, $request->option_is_public[$num])) && old('option_is_public.'.$num, $request->option_is_public[$num]) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$num, $request->option_is_public[$num])) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="js-optionForm">
+                                    <p class="th">有料オプション1</p>
+                                    @error('option_name.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <div class="td">
+                                        <div class="paid">
+                                            <div class="enter">
+                                                <textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name[]') }}</textarea>
+                                            </div>
+                                            <div class="selects">
+                                                <select name="option_price[]">
+                                                    @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
+                                                        <option value="{{ $key }}" @if(old('option_price.0') == $key) selected @endif>
+                                                            {{ $value }}円
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <select name="option_is_public[]">
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public')) && old('option_is_public') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
                         </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
 
-
                         <div class="formQuestionsArea">
-                            @if(is_null(old('question_title.'.'0')))
-                                <div class="js-questionForm">
-                                    <p class="th">質問のタイトル1</p>
-                                        @error('question_title.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                    <div class="td">
-                                        <div class="enter">
-                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
-                                            <p class="taR">400</p>
-                                        </div>
-                                        <p class="th">質問の回答1</p>
-                                            @error('answer.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                        <div class="enter">
-                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
-                                            <p class="taR">400</p>
-                                        </div>
-                                        <div>
-                                            <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
+                            @if((old('question_title') || old('answer')))
                                 @foreach(old('question_title') as $k => $v)
                                     <div class="js-questionForm">
                                         <p class="th">質問のタイトル {{$k + 1}}</p>
-                                            @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
                                                 <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{$v}}</textarea>
                                                 <p class="taR">400</p>
                                             </div>
                                             <p class="th">質問の回答 {{$k + 1}}</p>
-                                                @error('answer.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            @error('answer.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
                                                 <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$k)}}</textarea>
                                                 <p class="taR">400</p>
@@ -211,6 +218,48 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            @elseif(collect($request->question_title)->isNotEmpty())
+                                @foreach($request->question_title as $num => $product_question)
+                                    <div class="js-questionForm">
+                                        <p class="th">質問のタイトル {{$num + 1}}</p>
+                                        @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="enter">
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question.$num) }}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
+                                            <p class="th">質問の回答 {{$num + 1}}</p>
+                                            @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                            <div class="enter">
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$num, $request->answer[$num]) }}</textarea>
+                                                <p class="taR">400</p>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="js-questionForm">
+                                    <p class="th">質問のタイトル1</p>
+                                    @error('question_title.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <div class="td">
+                                        <div class="enter">
+                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
+                                            <p class="taR">400</p>
+                                        </div>
+                                        <p class="th">質問の回答1</p>
+                                        @error('answer.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="enter">
+                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
+                                            <p class="taR">400</p>
+                                        </div>
+                                        <div>
+                                            <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
                         </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
@@ -225,7 +274,7 @@
                             @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <ul class="mypagePortfolioUl03 mt40">
                                 @for($i = 0; $i < 10; $i++)
-                                    <li >
+                                    <li>
                                         <div id="product_pic{{$i}}" class="img">
                                                 @if(old('image_status'.$i) === "delete")
                                                     <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
@@ -255,8 +304,8 @@
                             @error('status')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <select name="status">
                                 <option value="">選択してください</option>
-                                <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(old('status') == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
-                                <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status') == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
+                                <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(old('status', $request->status) == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
+                                <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status', $request->status) == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
                             </select>
                         </div>
                         <div class="functeBtns">

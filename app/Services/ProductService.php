@@ -32,15 +32,17 @@ class ProductService
      */
     public function storeAdditionalOption(array $request, $id)
     {
-        foreach ($request['option_name'] as $index => $value) {
-            if (null !== ($request['option_name'][$index])) {
-                $options = [
-                    'name' => $request['option_name'][$index],
-                    'price' => $request['option_price'][$index],
-                    'is_public' => $request['option_is_public'][$index]
-                ];
-                $product = Product::find($id);
-                $product->additionalOptions()->create($options);
+        if (isset($request['option_name'])) {
+            foreach ($request['option_name'] as $index => $value) {
+                if (null !== ($request['option_name'][$index])) {
+                    $options = [
+                        'name' => $request['option_name'][$index],
+                        'price' => $request['option_price'][$index],
+                        'is_public' => $request['option_is_public'][$index]
+                    ];
+                    $product = Product::find($id);
+                    $product->additionalOptions()->create($options);
+                }
             }
         }
     }
@@ -50,7 +52,7 @@ class ProductService
      */
     public function storeProductQuestion(array $request, $id)
     {
-        if ($request['question_title'] !== null){
+        if (isset($request['question_title'])) {
             foreach ($request['question_title'] as $index => $value) {
                 if ($request['question_title'][$index]){
                     $questions = [
@@ -87,16 +89,17 @@ class ProductService
     public function updateAdditionalOption(array $request, $product)
     {
         $product->additionalOptions()->delete();
-
-        foreach ($request['option_name'] as $index => $value) {
-            if (null !== ($request['option_name'][$index])) {
-                $options = [
-                    'name' => $request['option_name'][$index],
-                    'price' => $request['option_price'][$index],
-                    'is_public' => $request['option_is_public'][$index]
-                ];
-                $product = Product::find($product->id);
-                $product->additionalOptions()->create($options);
+        if (isset($request['option_name'])) {
+            foreach ($request['option_name'] as $index => $value) {
+                if (null !== ($request['option_name'][$index])) {
+                    $options = [
+                        'name' => $request['option_name'][$index],
+                        'price' => $request['option_price'][$index],
+                        'is_public' => $request['option_is_public'][$index]
+                    ];
+                    $product = Product::find($product->id);
+                    $product->additionalOptions()->create($options);
+                }
             }
         }
     }
@@ -108,16 +111,17 @@ class ProductService
     public function updateProductQuestion(array $request, $product)
     {
         $product->productQuestions()->delete();
-
-        if ($request['question_title'] !== null){
-            foreach ($request['question_title'] as $index => $value) {
-                if ($request['question_title'][$index]){
-                    $questions = [
-                        'title' => $request['question_title'][$index],
-                        'answer' => $request['answer'][$index],
-                    ];
-                    $product = Product::find($product->id);
-                    $product->productQuestions()->create($questions);
+        if (isset($request['question_title'])) {
+            if ($request['question_title'] !== null) {
+                foreach ($request['question_title'] as $index => $value) {
+                    if ($request['question_title'][$index]) {
+                        $questions = [
+                            'title' => $request['question_title'][$index],
+                            'answer' => $request['answer'][$index],
+                        ];
+                        $product = Product::find($product->id);
+                        $product->productQuestions()->create($questions);
+                    }
                 }
             }
         }
@@ -178,9 +182,9 @@ class ProductService
                     $product_image->save();
                 }
             }
-        }        
+        }
     }
-    
+
 
     /**
      * 提供画像編集（画像変更）
@@ -216,7 +220,7 @@ class ProductService
                         $product_image->product_id = $id;
                         $product_image->save();
                     }
-                    
+
 
                 }elseif(isset($old_images[$i])){
                     // 変更なければ元のpathをDBに登録しなおす
