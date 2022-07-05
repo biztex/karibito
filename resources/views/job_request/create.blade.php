@@ -38,6 +38,7 @@
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<input type="text" name="title" value="{{ old('title',$request->title) }}">
+							<p class="taR">1-30</p>
 						</div>
 
 
@@ -45,6 +46,7 @@
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<textarea type="text" name="content">{{ old('content', $request->content) }}</textarea>
+							<p class="taR">30-3000</p>
 						</div>
 
 
