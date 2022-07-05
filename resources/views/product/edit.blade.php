@@ -13,8 +13,8 @@
 
         <div id="contents">
             <div class="cancelWrap">
-                <div class="inner inner05">
-                    <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" target="_blank" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
+                <div class="inner inner05">          
+                    <h2 class="subPagesHd">サービスを編集する<p class="checkGuideOriginal" target="_blank"><a href="{{ route('support') }}">カリビト安心サポートをご確認ください</a></p></h2>
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf @method('PUT')
 
