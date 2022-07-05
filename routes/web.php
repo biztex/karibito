@@ -78,9 +78,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('null.user.profile')->group(function () {
         Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
         Route::put('user_profile', [UserProfileController::class, 'update'])->name('user_profile.update');
-        Route::put('update_cover', [CoverController ::class, 'update'])->name('cover.update');
-        Route::get('delete_cover', [CoverController ::class, 'delete'])->name('cover.delete');
-        Route::get('delete_icon', [IconController ::class, 'delete'])->name('icon.delete');
+        Route::put('update_cover', [CoverController::class, 'update'])->name('cover.update');
+        Route::get('delete_cover', [CoverController::class, 'delete'])->name('cover.delete');
+        Route::get('delete_icon', [IconController::class, 'delete'])->name('icon.delete');
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
@@ -104,6 +104,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
+            Route::post('post/{product}/edit', 'postEdit')->name('post.edit');
             Route::delete('{product}','destroy')->name('destroy');
             Route::post('edit/{product}/preview','editPreview')->name('edit.preview');
             Route::post('{product}/preview','updatePreview')->name('update.preview');
@@ -113,7 +114,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('can:identify')->group(function () {
             Route::get('create', 'create')->name('create');
             Route::post('post/create', 'postCreate')->name('post.create');
-            Route::post('post/{product}/edit', 'postEdit')->name('post.edit');
             Route::post('store', 'store')->name('store');
             Route::post('draft', 'storeDraft')->name('storeDraft');
             Route::post('preview', 'preview')->name('preview');

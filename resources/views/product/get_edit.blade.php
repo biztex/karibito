@@ -17,9 +17,6 @@
                     <h2 class="subPagesHd">サービスを編集する<a href="{{ route('support') }}" target="_blank" class="more checkGuide">カリビト安心サポートをご確認ください</a></h2>
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf
-
-                        <input type="hidden" value="{{ $product->id }}" name="id">
-
                         <p class="th">カテゴリ<span class="must">必須</span></p>
                         @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
@@ -331,6 +328,7 @@
                                 @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <ul class="mypagePortfolioUl03 mt40">
                                     @for($i = 0; $i < 10; $i++)
+
                                         <li>
                                             <div id="product_pic{{$i}}" class="img">
                                                 @if(isset($product->productImage[$i]) && old('image_status'.$i) === null)
@@ -338,11 +336,6 @@
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
                                                     <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]', '#') }}">
                                                     <input type="hidden" name="old_image[{{$i}}]" value="{{ $product->productImage[$i]->path }}">
-                                                @elseif(isset($product->old_image[$i]) && old('image_status'.$i) === null)
-                                                    <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->old_image[$i])}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
-                                                    <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
-                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]', '#') }}">
-                                                    <input type="hidden" name="old_image[{{$i}}]" value="{{ $product->old_image[$i] }}">
                                                 @elseif(old('image_status'.$i) === "delete")
                                                     <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
@@ -379,9 +372,9 @@
                                 </select>
                             </div>
                             <div class="functeBtns">
-                                <input type="submit" class="full" style="color:white;" formaction="{{ route('product.edit.preview', $product->id) }}" value="プレビュー画面を見る">
-                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $product->id) }}" value="サービス提供を開始">
-                                <input type="submit" class="full green_o" formaction="{{ route('product.updateDraft', $product->id) }}" value="下書きとして保存">
+                                <input type="submit" class="full" style="color:white;" formaction="{{ route('product.edit.preview', $request->id) }}" value="プレビュー画面を見る">
+                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $request->id) }}" value="サービス提供を開始">
+                                <input type="submit" class="full green_o" formaction="{{ route('product.updateDraft', $request->id) }}" value="下書きとして保存">
                             </div>
                     </form>
                 </div>
