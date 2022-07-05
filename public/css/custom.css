@@ -606,6 +606,11 @@
     background-color: #FCAA00;
     pointer-events: none;
  }
+ .dm-page #side div:nth-of-type(2) ul li:nth-of-type(12) a {
+    color: #333333;
+    background-color: #FCAA00;
+    pointer-events: none;
+ }
 
  .fancyRegisterUpload {
 	display: block;
