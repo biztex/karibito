@@ -41,7 +41,7 @@
                                         {{ App\Models\Prefecture::find($request->prefecture_id)->name }}
                                     @endif
                                 </span>
-                                <span class="data">投稿日：{{date('Y/m/d', strtotime($request->created_at))}}</span>
+                                <span class="data">投稿日：{{now()->format('Y/m/d')}}</span>
                                 <input type="hidden" value="@if(!is_null($request->prefecture_id)){{ $request->prefecture_id }}@endif" name="prefecture_id">
                                 <!-- <span class="data">販売数：無制限</span> -->
                             </div>

@@ -274,7 +274,7 @@
                             @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <ul class="mypagePortfolioUl03 mt40">
                                 @for($i = 0; $i < 10; $i++)
-                                    <li >
+                                    <li>
                                         <div id="product_pic{{$i}}" class="img">
                                                 @if(old('image_status'.$i) === "delete")
                                                     <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">

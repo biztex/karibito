@@ -88,9 +88,8 @@ class ProductService
      */
     public function updateAdditionalOption(array $request, $product)
     {
+        $product->additionalOptions()->delete();
         if (isset($request['option_name'])) {
-
-            $product->additionalOptions()->delete();
             foreach ($request['option_name'] as $index => $value) {
                 if (null !== ($request['option_name'][$index])) {
                     $options = [
@@ -111,9 +110,8 @@ class ProductService
      */
     public function updateProductQuestion(array $request, $product)
     {
+        $product->productQuestions()->delete();
         if (isset($request['question_title'])) {
-            $product->productQuestions()->delete();
-
             if ($request['question_title'] !== null) {
                 foreach ($request['question_title'] as $index => $value) {
                     if ($request['question_title'][$index]) {
