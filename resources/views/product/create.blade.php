@@ -141,7 +141,7 @@
                                         <div class="td">
                                             <div class="paid">
                                                 <div class="enter">
-                                                    <textarea class="" type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.$num, $additional_option.$num) }}</textarea>
+                                                    <textarea class="" type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.$num, $additional_option) }}</textarea>
                                                 </div>
                                                 <div class="selects">
                                                     <select name="option_price[]">
@@ -225,7 +225,7 @@
                                         @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question.$num) }}</textarea>
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question) }}</textarea>
                                                 <p class="taR">400</p>
                                             </div>
                                             <p class="th">質問の回答 {{$num + 1}}</p>
@@ -279,7 +279,7 @@
                                                 @if(old('image_status'.$i, $request['image_status'.$i] ) === "delete")
                                                     <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
-                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
+                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text.'.$i) }}">
                                                 @elseif(old('image_status'.$i, $request['image_status'.$i] ) === "insert")
                                                     <img id="preview_product{{$i}}" src="{{ old('base64_text.'.$i)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >

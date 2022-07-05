@@ -20,7 +20,8 @@
 					@csrf
 				@else
 					<form class="contactForm" method="post" action="{{ route('job_request.update.preview',$job_request->id) }}">
-					@csrf @method('put')
+					@csrf
+					<input type="hidden" value="{{ $job_request->id }}" name="id">
 			@endif
 				<input type="hidden" value="{{ $request->category_id }}" name="category_id">
 				<input type="hidden" value="{{ $request->title }}" name="title">
@@ -111,7 +112,11 @@
 									<p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
 								</div>
 								<div class="functeBtns">
-									<a href="javascript:history.back();" class="orange_o">編集画面に戻る</a>
+								@if(empty($job_request))
+									<input type="submit" class="orange_o" style="color:#EB6A1A;font-weight:700;font-size: 1.8rem;height: 55px;" formaction="{{ route('job_request.post.create') }}" value="編集画面に戻る">
+								@else
+									<input type="submit" class="orange_o" style="color:#EB6A1A;font-weight:700;font-size: 1.8rem;height: 55px;" formaction="{{ route('job_request.post.edit', $job_request->id) }}" value="編集画面に戻る">
+								@endif
 								</div>
 								<div class="functeBtns">
 									<input type="submit" name="regist" class="orange full" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\JobRequestController;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreRequest extends FormRequest
 {
@@ -35,5 +36,24 @@ class StoreRequest extends FormRequest
         'is_online' => 'required | boolean',
         'is_call' => 'required | boolean',           
         ];
+    }
+
+    /**
+     * @Override
+     * 勝手にリダイレクトさせない
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        //
+    }
+
+    /**
+     * バリデータを取得する
+     * @return  \Illuminate\Contracts\Validation\Validator  $validator
+     */
+    public function getValidator()
+    {
+        return $this->validator;
     }
 }

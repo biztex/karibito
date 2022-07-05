@@ -26,7 +26,7 @@
 								@foreach ($categories as $category)
                                     <optgroup label="{{$category->name}}">
                                         @foreach ($category->mProductChildCategory as $child_category)
-                                            <option value="{{$child_category->id}}" @if( old('category_id', $request->catecory_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
+                                            <option value="{{$child_category->id}}" @if( old('category_id', $request->category_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach
