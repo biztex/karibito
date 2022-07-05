@@ -20,7 +20,12 @@
                                     <dl class="configEditDl01">
                                         <dt>新しいメールアドレス</dt>
                                         <dd>
-                                            <div class="mypageEditInput"><input type="text" name="email" placeholder=""></div>
+                                            <div class="mypageEditInput">
+                                                @error('email')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                                <input type="text" name="email" placeholder="" autocomplete="email" required>
+                                            </div>
                                         </dd>
                                     </dl>
                                     <div class="configEditButton">
