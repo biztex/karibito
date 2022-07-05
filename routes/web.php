@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Mypage\UserProfileController;
 use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
@@ -17,20 +16,13 @@ use App\Http\Controllers\Web\Mypage\ProductController as MypageProductController
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 
+use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
+use App\Http\Controllers\Web\ChatController;
+
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\EstimateController;
-use App\Http\Controllers\EvaluationController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\NotationController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\PointController;
-use App\Http\Controllers\SecretController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\PrivacyController;
-use App\Http\Controllers\PublicationController;
+
 
 // 管理者用
 
@@ -139,7 +131,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('can:identify')->group(function () {
             Route::get('create','create')->name('create');
             Route::post('store','store')->name('store');
-            Route::post('draft','storeDraft')->name('storeDraft');
+            Route::post('draft','storeDraft')->name('store.draft');
             Route::post('preview','preview')->name('preview');
             Route::post('store/preview','storePreview')->name('store.preview');
         });
@@ -224,3 +216,15 @@ Route::prefix('sample')->group(function () {
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
 });
+
+// 該当ユーザーの各ページ
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('{user}/publication',[OtherUserController::class, 'publication'])->name('publication');
+    Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
+    
+});
+Route::get('chats',[ChatController::class, 'index'])->name('chat.index');
+Route::get('chats/{product}',[ChatController::class, 'show'])->name('chat.show');
+
+Route::view('/dm','mypage.dm.index')->name('dm.index');
+Route::view('/dm/show','mypage.dm.show');

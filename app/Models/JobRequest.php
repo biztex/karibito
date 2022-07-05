@@ -47,6 +47,50 @@ class JobRequest extends Model
     ];
 
     /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLoginUsers($query)
+    {
+        return $query->where('user_id',\Auth::id());
+    }
+
+    /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublish($query)
+    {
+        return $query->where('status',self::STATUS_PUBLISH);
+    }
+
+    /**
+     * 下書きのみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeDraft($query)
+    {
+        return $query->where('is_draft', JobRequest::IS_DRAFT);
+    }
+
+    /**
+     * 下書き以外のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNotDraft($query)
+    {
+        return $query->where('is_draft', JobRequest::NOT_DRAFT);
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

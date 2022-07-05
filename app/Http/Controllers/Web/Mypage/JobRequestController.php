@@ -22,18 +22,16 @@ class JobRequestController extends Controller
         $this->job_request_service = $job_request_service;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function draft()
     {
         // 下書きのみ表示
-        $products = Product::where('user_id',\Auth::id())
-            ->where('is_draft',Product::IS_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
-
-        $job_requests = JobRequest::where('user_id',\Auth::id())
-            ->where('is_draft',JobRequest::IS_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
+        $products = Product::loginUsers()->draft()->orderBy('created_at','desc')->paginate(10);
+        $job_requests = JobRequest::loginUsers()->draft()->orderBy('created_at','desc')->paginate(10);
 
         return view('post.draft', compact('products','job_requests'));
     }
@@ -41,22 +39,13 @@ class JobRequestController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
-        // 下書き・非公開除いて表示
-        $products = Product::where('user_id',\Auth::id())
-            ->where('status',Product::STATUS_PUBLISH)
-            ->where('is_draft',Product::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
-
-        $job_requests = JobRequest::where('user_id',\Auth::id())
-            ->where('status',JobRequest::STATUS_PUBLISH)
-            ->where('is_draft',JobRequest::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(10);
+        // 下書き除いて表示
+        $products = Product::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(10);
 
         return view('post.publication', compact('products','job_requests'));
     }
@@ -64,7 +53,7 @@ class JobRequestController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create(Request $request)
     {
@@ -76,7 +65,7 @@ class JobRequestController extends Controller
      *
      * @param StoreRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRequest $request)
     {
@@ -90,7 +79,7 @@ class JobRequestController extends Controller
      *
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(JobRequest $job_request)
     {
@@ -110,7 +99,7 @@ class JobRequestController extends Controller
      *
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(JobRequest $job_request)
     {
@@ -123,7 +112,7 @@ class JobRequestController extends Controller
      * @param StoreRequest $request
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(StoreRequest $request, JobRequest $job_request)
     {
@@ -137,21 +126,18 @@ class JobRequestController extends Controller
      *
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(JobRequest $job_request)
     {
-
         $job_request->delete(); // データ論理削除
         \Session::put('flash_msg','リクエストを削除しました');
 
-        if ($job_request->is_draft === 0) {
-            return redirect()->route('publication');
-        } elseif($job_request->is_draft === 1) {
-            return redirect()->route('draft');
+        if ($job_request->is_draft == JobRequest::NOT_DRAFT) {
+            return redirect()->route('publication',['#job-request']);
+        } else {
+            return redirect()->route('draft',['#job-request']);
         }
-
-        return redirect()->route('mypage');
     }
 
     /**
@@ -159,13 +145,13 @@ class JobRequestController extends Controller
      *
      * @param DraftRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function storeDraft(DraftRequest $request)
     {
         $job_request = $this->job_request_service->storeDraftJobRequest($request->all());
 
-        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft','#job-request')->with('flash_msg','下書きに保存しました！');
     }
 
     /**
@@ -174,21 +160,21 @@ class JobRequestController extends Controller
      * @param DraftRequest $request
      * @param \App\Models\JobRequest $job_request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function updateDraft(DraftRequest $request, JobRequest $job_request)
     {
         $this->job_request_service->updateDraftJobRequest($request->all(), $job_request);
 
-        return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
+        return redirect()->route('draft','#job-request')->with('flash_msg','下書きに保存しました！');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param PreviewRequest $request
+     * @param StoreRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function preview(StoreRequest $request)
     {
@@ -205,6 +191,8 @@ class JobRequestController extends Controller
 
     /**
      * プレビュー画面から投稿
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function storePreview(StoreRequest $request)
     {
@@ -215,6 +203,8 @@ class JobRequestController extends Controller
 
     /**
      * 既存リクエスト、編集からプレビュー表示
+     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editPreview(StoreRequest $request, JobRequest $job_request)
     {
@@ -231,6 +221,8 @@ class JobRequestController extends Controller
 
     /**
      * プレビュー画面から投稿
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function updatePreview(StoreRequest $request, JobRequest $job_request)
     {

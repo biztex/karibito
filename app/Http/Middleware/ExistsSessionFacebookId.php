@@ -34,6 +34,6 @@ class ExistsSessionFacebookId
         }
 
         return $response;
-        return $next($request);
+        // return $next($request);
     }
 }

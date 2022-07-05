@@ -174,6 +174,15 @@ return [
         ],
         'number_of_day' => [
             'between' => '所要日数は1~730日以内で指定してください。'
+        ],
+        'identification_path' => [
+            'max' => ':attributeには、20MB以下のファイルを指定してください。',
+        ],
+        'question_title.*' => [
+            'required_unless' => '質問の回答を入力される場合、質問のタイトルも入力してください。'
+        ],
+        'answer.*' => [
+            'required_unless' => '質問のタイトルを入力される場合、質問の回答も入力してください。'
         ]
 
     ],

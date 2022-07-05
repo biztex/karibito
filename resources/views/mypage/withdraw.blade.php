@@ -1,5 +1,6 @@
 <x-layout>
 	<article>
+	<body id="withdraw">
 		<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">

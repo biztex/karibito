@@ -1,5 +1,6 @@
 <x-layout>
 <article>
+<body id="payment">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="index.html">ホーム</a>　>　<span>決済履歴</span>

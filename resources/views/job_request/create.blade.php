@@ -38,6 +38,7 @@
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<input type="text" name="title" value="{{ old('title',$request->title) }}">
+							<p class="taR">1-30</p>
 						</div>
 
 
@@ -45,6 +46,7 @@
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<textarea type="text" name="content">{{ old('content', $request->content) }}</textarea>
+							<p class="taR">30-3000</p>
 						</div>
 
 
@@ -108,7 +110,7 @@
 						<div class="functeBtns">
 							<input type="submit" class="full" style="color:white;" formaction="{{ route('job_request.preview') }}" value="プレビュー画面を見る">
 							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.store') }}" value="サービス提供を開始">
-							<input type="submit" class="full green_o" formaction="{{ route('job_request.storeDraft') }}" value="下書きとして保存">
+							<input type="submit" class="full green_o" formaction="{{ route('job_request.store.draft') }}" value="下書きとして保存">
 						</div>
 					</form>
 				</div>

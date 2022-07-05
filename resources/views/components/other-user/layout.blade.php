@@ -1,6 +1,6 @@
 <x-app>
     <body>
-        <div id="wrapper">
+        <div id="wrapper" class="other_user">
             <x-header/>
                 {{$slot}}
             <x-footer/>

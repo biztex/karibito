@@ -1,13 +1,12 @@
 <x-layout>
 	<article>
+	<body id="member">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>メンバー情報</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.flash-msg/>
-
-		<div class="btnFixed"><a href="{{ route('product.index')}}"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">

@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
-//use App\Http\Requests\JobRequestController\PreviewRequest;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Http\Requests\ProductController\DraftRequest;
-use App\Http\Requests\ProductController\PreviewRequest;
 use App\Libraries\Age;
-use App\Models\AdditionalOption;
-use App\Models\MProductCategory;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
+use App\Models\AdditionalOption;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 
@@ -28,21 +25,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
-        $products = Product::where('user_id',\Auth::id())
-            ->where('status',Product::STATUS_PUBLISH)
-            ->where('is_draft',Product::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(5);
-
-        $job_requests = JobRequest::where('user_id',\Auth::id())
-            ->where('status',JobRequest::STATUS_PUBLISH)
-            ->where('is_draft',JobRequest::NOT_DRAFT)
-            ->orderBy('updated_at','desc')
-            ->paginate(5);
+        $products = Product::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(5);
+        $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(5);
 
         return view('post.post', compact('products','job_requests'));
     }
@@ -50,7 +38,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create(Request $request)
     {
@@ -62,7 +50,7 @@ class ProductController extends Controller
      *
      * @param StoreRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRequest $request)
     {
@@ -81,7 +69,7 @@ class ProductController extends Controller
      *
      * @param \App\Models\Product $product
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(Product $product)
     {
@@ -93,7 +81,8 @@ class ProductController extends Controller
         } else {
             $age = '不明';
         }
-        return view('product.show', compact('user','product', 'age', 'all_products'));
+        $additional_options = $product->additionalOptions->where('is_public',AdditionalOption::STATUS_PUBLISH);
+        return view('product.show', compact('user','product', 'age', 'all_products','additional_options'));
     }
 
     /**
@@ -101,7 +90,7 @@ class ProductController extends Controller
      *
      * @param \App\Models\Product $product
      *
-     * @return \Illuminate\Http\Response
+     *@return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(Product $product)
     {
@@ -114,7 +103,7 @@ class ProductController extends Controller
      * @param StoreRequest $request
      * @param \App\Models\Product $product
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(StoreRequest $request, Product $product)
     {
@@ -133,34 +122,37 @@ class ProductController extends Controller
      *
      * @param \App\Models\Product $product
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Product $product)
     {
-
         $product->delete(); // データ論理削除
         \Session::put('flash_msg','提供商品を削除しました');
-        if ($product->is_draft === 0) {
+        if ($product->is_draft == Product::NOT_DRAFT) {
             return redirect()->route('publication');
-        } elseif($product->is_draft === 1) {
+        } else {
             return redirect()->route('draft');
         }
-
-        return redirect()->route('mypage');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function storeDraft(DraftRequest $request)
     {
         \DB::transaction(function () use ($request) {
             $product = $this->product_service->storeDraftProduct($request->all());
-            $this->product_service->storeDraftAdditionalOption($request->all(), $product->id);
-            $this->product_service->storeDraftProductQuestion($request->all(), $product->id);
+            $this->product_service->storeAdditionalOption($request->all(), $product->id);
+            $this->product_service->storeProductQuestion($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
         return redirect()->route('draft')->with('flash_msg', '下書きに保存しました！');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateDraft(DraftRequest $request, Product $product)
     {
         \DB::transaction(function () use ($request, $product) {
@@ -177,37 +169,19 @@ class ProductController extends Controller
                 'status' => $request->status,
                 'is_draft' => Product::IS_DRAFT
             ]);
-
-            $product->additionalOptions()->delete();
-
-            if ($request->option_name) {
-                foreach ($request->option_name as $index => $option) {//indexに回した数が入る、0から
-                    $product->additionalOptions->create([
-                        'name' => $option,
-                        'price' => $request->option_price[$index],
-                        'is_public' => $request->option_is_public[$index]
-                    ]);
-                }
-            }
-
-            $product->productQuestions()->delete();
-
-            if ($request->question_title) {
-                foreach ($request->question_title as $index =>$title){
-                    $product->productQuestions()->create([
-                        'title' => $request->question_title[$index],
-                        'answer' => $request->answer[$index]
-                    ]);
-                }
-            }
-
             $product->save();
+
+            $this->product_service->updateAdditionalOption($request->all(), $product);
+            $this->product_service->updateProductQuestion($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 
         return redirect()->route('draft')->with('flash_msg','下書きに保存しました！');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function preview(StoreRequest $request)
     {
         $user = \Auth::user();
@@ -233,7 +207,7 @@ class ProductController extends Controller
     }
 
     /**
-     * 既存リクエスト、編集からプレビュー表示
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editPreview(StoreRequest $request, Product $product)
     {
@@ -245,6 +219,8 @@ class ProductController extends Controller
 
     /**
      * プレビュー画面から投稿
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function storePreview(Request $request)
     {
@@ -260,32 +236,11 @@ class ProductController extends Controller
 
     /**
      * プレビュー画面から投稿
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function updatePreview(Request $request, Product $product)
+    public function updatePreview(StoreRequest $request, Product $product)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'number_of_day' => 'required | integer',
-            'is_online' => 'required | integer | boolean',
-            'is_call' => 'required | integer | boolean',
-            'number_of_sale' => 'required | integer',
-            'status' => 'required | integer',
-            'option_name.*' => 'nullable | string | max:400',
-            'option_price.*' => 'nullable | integer',
-            'option_is_public.*' => 'integer',
-            'question_title.*' => 'nullable | max:400',
-            'answer.*' => 'required_if:question_title,true | max:400',
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            return redirect()->route("product.edit", $product->id)->withInput()->withErrors($validate->messages());
-        }
-
         // バリデーション通れば通常通り登録
         \DB::transaction(function () use ($request, $product) {
             $this->product_service->updateProduct($request->all(), $product);

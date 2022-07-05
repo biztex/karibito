@@ -12,16 +12,26 @@ class PasswordResetNotification extends Notification
     use Queueable;
 
     /**
-     * Create a new notification instance.
+     * The password reset token.
      *
+     * @var string
+     */
+    public $token;
+
+    /**
+     * Create a new notification instance.
      * @return void
      */
     public static $toMailCallback;
 
     public static $createUrlCallback;
 
-    // public static $token;
-
+    /**
+     * Create a notification instance.
+     *
+     * @param  string  $token
+     * @return void
+     */
     public function __construct(string $token)
     {
         $this->token = $token;

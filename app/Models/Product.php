@@ -66,37 +66,115 @@ class Product extends Model
         self::IS_PUBLIC => '公開',
     ];
 
-    // AdditionalOptionモデルとのリレーション
-    public function additionalOptions()
+    /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLoginUsers($query)
     {
-        return $this->hasMany(AdditionalOption::class, 'product_id');
+        return $query->where('user_id',\Auth::id());
     }
 
-    // ProductQuestionモデルとのリレーション
+    /**
+     * 自分以外の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOtherUsers($query)
+    {
+        return $query->where('user_id','<>', \Auth::id());
+    }
+
+    /**
+     * 特定ユーザーの提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeGetUser($query, $user)
+    {
+        return $query->where('user_id', $user);
+    }
+
+    /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublish($query)
+    {
+        return $query->where('status',Product::STATUS_PUBLISH);
+    }
+
+    /**
+     * 下書きのみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeDraft($query)
+    {
+        return $query->where('is_draft', Product::IS_DRAFT);
+    }
+
+    /**
+     * 下書き以外のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNotDraft($query)
+    {
+        return $query->where('is_draft', Product::NOT_DRAFT);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function additionalOptions()
+    {
+        return $this->hasMany(AdditionalOption::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function productQuestions()
     {
         return $this->hasMany(ProductQuestion::class, 'product_id');
     }
 
-    // ProductImageモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function productImage()
     {
         return $this->hasMany(ProductImage::class);
     }
 
-    // MProductChildCategoryモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function mProductChildCategory()
     {
         return $this->hasOne(MProductChildCategory::class, 'id', 'category_id');
     }
 
-    // Prefectureモデルとのリレーション
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function productPrefecture()
     {
         return $this->hasOne(Prefecture::class, 'id');
     }
 
-    // Userモデルとのリレーション
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
     public function productUser()
     {
         return $this->belongsTo(User::class, 'user_id');

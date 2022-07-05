@@ -1,5 +1,6 @@
 <x-layout>
 <article>
+<body id="past">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="index.html">ホーム</a>　>　<span>過去の取引</span>
