@@ -15,6 +15,7 @@ use App\Http\Controllers\Web\Mypage\WithdrawController;
 use App\Http\Controllers\Web\Mypage\ProductController as MypageProductController;
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
+use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\ChatController;
@@ -83,7 +84,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+        Route::post('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('mail.send');
     });
+
+    // メールアドレス変更確認（Authの後に書かないとダメ）
+    Route::get('email/{token}', [ChangeEmailController::class, 'updateEmail'])->name('email.update');
 
     // 退会フォーム表示
     Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');

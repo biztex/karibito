@@ -29,7 +29,7 @@
 								<dl class="memberConfigDl">
 									<dt>メールアドレス</dt>
 									<dd>
-										<a class="configLink" href="{{ route('member_config_email') }}">変更する</a>
+										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('member_config_email') }}">変更する</a>
 									</dd>
 								</dl>
 								<dl class="memberConfigDl">

@@ -8,17 +8,31 @@
 					<div class="configEditWrap">
 						<div class="configEditItem">
 							<h2 class="subPagesHd">メールアドレスの変更</h2>
-							<div class="configEditBox">
-								<dl class="configEditDl01">
-									<dt>新しいメールアドレス</dt>
-									<dd>
-										<div class="mypageEditInput"><input type="text" name="" placeholder=""></div>
-									</dd>
-								</dl>
-								<div class="configEditButton">
-									<input type="submit" value="送信" name="">
-								</div>
-							</div>
+                            <form method="POST" action="{{ route('mail.send') }}">
+                                @csrf
+                                <div class="configEditBox">
+                                    <dl class="configEditDl01 text-left">
+                                        <dt>現在のメールアドレス：</dt>
+                                        <dt>
+                                            <div class="align-bottom">{{ Auth::user()->email }}</div>
+                                        </dt>
+                                    </dl>
+                                    <dl class="configEditDl01">
+                                        <dt>新しいメールアドレス</dt>
+                                        <dd>
+                                            <div class="mypageEditInput">
+                                                @error('email')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                                <input type="text" name="email" placeholder="" autocomplete="email" required>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <div class="configEditButton">
+                                        <input type="submit" value="変更する">
+                                    </div>
+                                </div>
+                            </form>
 						</div>
 					</div>
 				</div><!-- /#main -->
