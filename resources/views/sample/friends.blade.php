@@ -1,5 +1,6 @@
 <x-layout>
 <article>
+<body id="friends">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="index.html">ホーム</a>　>　<span>お気に入り</span>

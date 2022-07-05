@@ -1,5 +1,6 @@
 <x-layout>
 <article>
+<body id="news">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="index.html">ホーム</a>　>　<span>お知らせ</span>

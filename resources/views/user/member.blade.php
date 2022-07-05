@@ -1,5 +1,6 @@
 <x-layout>
 	<article>
+	<body id="member">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>メンバー情報</span>
