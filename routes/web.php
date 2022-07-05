@@ -235,3 +235,5 @@ Route::prefix('user')->name('user.')->group(function () {
 });
 Route::get('chats',[ChatController::class, 'index'])->name('chat.index');
 Route::get('chats/{product}',[ChatController::class, 'show'])->name('chat.show');
+
+Route::view('/dm','mypage.dm');
