@@ -75,19 +75,20 @@
                             <h2 class="hdM">サービス内容</h2>
                             <p style="overflow-wrap: break-word;">{{$product->content}}</p>
                         </div>
+                        @if($additional_options->isNotEmpty())
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
-                                @foreach($product->additionalOptions as $additional_option)
-                                    @if($additional_option->is_public === \App\Models\AdditionalOption::STATUS_PUBLISH)
+                                @foreach($additional_options as $additional_option)
                                         <li>
                                             <span class="add">＋ {{$additional_option->name}}</span>
                                             <span class="price">￥@if(!is_null($additional_option->price)){{ number_format(App\Models\AdditionalOption::OPTION_PRICE[$additional_option->price])}}@endif</span>
                                         </li>
-                                    @endif
                                 @endforeach
                             </ul>
                         </div>
+                        @endif
+                        @if($product->productQuestions->isNotEmpty())
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
@@ -99,6 +100,7 @@
                                 @endforeach
                             </ul>
                         </div>
+                        @endif
                         {{--					<div class="clientEvaluate">--}}
                         {{--						<h2 class="hdM">依頼者からの評価</h2>--}}
                         {{--						<div class="box">--}}

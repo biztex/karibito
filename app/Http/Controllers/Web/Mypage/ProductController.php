@@ -9,6 +9,7 @@ use App\Libraries\Age;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
+use App\Models\AdditionalOption;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 
@@ -80,7 +81,8 @@ class ProductController extends Controller
         } else {
             $age = '不明';
         }
-        return view('product.show', compact('user','product', 'age', 'all_products'));
+        $additional_options = $product->additionalOptions->where('is_public',AdditionalOption::STATUS_PUBLISH);
+        return view('product.show', compact('user','product', 'age', 'all_products','additional_options'));
     }
 
     /**
