@@ -118,9 +118,9 @@ class ProductController extends Controller
      *
      *@return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function edit(Product $product)
+    public function edit(Request $request, Product $product)
     {
-        return view('product.edit', compact('product'));
+        return view('product.edit', compact('product','request'));
     }
 
     /**
@@ -131,8 +131,34 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(StoreRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
+        $validate = \Validator::make($request->all(), [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'is_online' => 'required | boolean',
+            'number_of_day' => 'required | integer | between:1,730',
+            'is_call' => 'required | boolean',
+            'number_of_sale' => 'required | integer',
+            'status' => 'required | integer',
+            'option_name.*' => 'nullable | string | max:400',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'required_unless:answer.*,null| max:400',
+            'answer.*' => 'required_unless:question_title.*,null| max:400',
+            'base64_text.0' => 'required',
+            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
+        ]);
+
+        // バリデーション引っかかれば入力画面に戻す
+        if ($validate->fails()) {
+            dd($request);
+            return redirect()->route("product.edit", $request->id)->withInput()->withErrors($validate->messages());
+        }
+
         \DB::transaction(function () use ($request, $product) {
             $this->product_service->updateProduct($request->all(), $product);
             $this->product_service->updateAdditionalOption($request->all(), $product);
@@ -249,7 +275,8 @@ class ProductController extends Controller
         return view('product.create',compact('request','user','age'));
     }
 
-    public function postEdit(Request $request)
+    // 編集⇒プレビュー⇒編集
+    public function postEdit(Request $request, Product $product)
     {
         $user = \Auth::user();
         $age = Age::group($user->userProfile->birthday);
@@ -260,8 +287,33 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function editPreview(StoreRequest $request, Product $product)
+    public function editPreview(Request $request, Product $product)
     {
+        $validate = \Validator::make($request->all(), [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'is_online' => 'required | boolean',
+            'number_of_day' => 'required | integer | between:1,730',
+            'is_call' => 'required | boolean',
+            'number_of_sale' => 'required | integer',
+            'status' => 'required | integer',
+            'option_name.*' => 'nullable | string | max:400',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'required_unless:answer.*,null| max:400',
+            'answer.*' => 'required_unless:question_title.*,null| max:400',
+            'base64_text.0' => 'required',
+            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
+        ]);
+
+        // バリデーション引っかかれば入力画面に戻す
+        if ($validate->fails()) {
+            return redirect()->route("product.edit", $request->id)->withInput()->withErrors($validate->messages());
+        }
+
         $user = \Auth::user();
         $age = Age::group($user->userProfile->birthday);
 
