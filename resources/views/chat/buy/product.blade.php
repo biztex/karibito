@@ -12,7 +12,7 @@
                         <div class="sellerTop">
                             <div class="user">
                                 @if(null !== $product->productUser->userProfile->icon)
-                                    <p class="head"><img src="{{ asset('/storage/'.$product->productUser->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                                    <p class="head"><img src="{{ asset('/storage/'.$product->productUser->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;border-radius: 50px;"></p>
                                 @else
                                     <p class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
                                 @endif
@@ -98,11 +98,11 @@
                         <div class="sideUl01">
                             <div class="publicate">
                                 <div class="cont">
-                                        @if(isset($product->productImage[0]))
-                                            <p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt="" style="width: 75px;height: 62.5x;object-fit: cover;"></p>
-                                        @else
-                                            <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
-                                        @endif
+                                    @if(isset($product->productImage[0]))
+                                        <p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt="" style="width: 75px;height: 62.5px;object-fit: cover;"></p>
+                                    @else
+                                        <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+                                    @endif
                                     <p class="txt">{{ $product->title }}</p>
                                 </div>
                                 <div class="amount">

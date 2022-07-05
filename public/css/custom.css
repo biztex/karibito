@@ -595,3 +595,23 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
+
+.other_user #header {
+	box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
+}
+.otherNav {
+	box-shadow: none;
+}
+
+@media screen and (min-width: 768px){
+	.other_user#wrapper {
+		padding-top: 178px;
+	}
+	.other_user #header {
+		box-shadow: none;
+	}
+	.otherNav {
+		box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
+	}
+
+}

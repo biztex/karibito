@@ -95,7 +95,7 @@
                                 @foreach($product->productQuestions as $product_question)
                                     <li>
                                         <p class="quest toggleBtn"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
-                                        <p class="answer toggleBox">{{$product_question->answer}}</p>
+                                        <p class="answer toggleBox" style="width:100%;">{{$product_question->answer}}</p>
                                     </li>
                                 @endforeach
                             </ul>

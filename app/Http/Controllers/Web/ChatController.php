@@ -26,6 +26,9 @@ class ChatController extends Controller
      */
     public function show(Product $product)
     {
+        if (\Auth::id() === $product->user_id) {
+            return redirect()->route('product.show',$product->id);
+        };
         return view('chat.buy.product', compact('product'));
     }
 }
