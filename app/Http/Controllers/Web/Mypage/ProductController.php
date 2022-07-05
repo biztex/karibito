@@ -52,33 +52,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'is_online' => 'required | boolean',
-            'number_of_day' => 'required | integer | between:1,730',
-            'is_call' => 'required | boolean',
-            'number_of_sale' => 'required | integer',
-            'status' => 'required | integer',
-            'option_name.*' => 'nullable | string | max:400',
-            'option_price.*' => 'nullable | integer',
-            'option_is_public.*' => 'integer',
-            'question_title.*' => 'required_unless:answer.*,null| max:400',
-            'answer.*' => 'required_unless:question_title.*,null| max:400',
-            'base64_text.0' => 'required',
-            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            return redirect()->route("product.create")->withInput()->withErrors($validate->messages());
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("product.create")->withErrors($validator)->withInput();
         }
-
 
         \DB::transaction(function () use ($request) {
           $product = $this->product_service->storeProduct($request->all());
@@ -131,33 +111,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreRequest $request, Product $product)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'is_online' => 'required | boolean',
-            'number_of_day' => 'required | integer | between:1,730',
-            'is_call' => 'required | boolean',
-            'number_of_sale' => 'required | integer',
-            'status' => 'required | integer',
-            'option_name.*' => 'nullable | string | max:400',
-            'option_price.*' => 'nullable | integer',
-            'option_is_public.*' => 'integer',
-            'question_title.*' => 'required_unless:answer.*,null| max:400',
-            'answer.*' => 'required_unless:question_title.*,null| max:400',
-            'base64_text.0' => 'required',
-            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            dd($request);
-            return redirect()->route("product.edit", $request->id)->withInput()->withErrors($validate->messages());
-        }
+       // バリデーションかかれば入力画面に戻す
+       $validator = $request->getValidator();
+       if ($validator->fails()) {
+           return redirect()->route("product.edit", $request->id)->withErrors($validator)->withInput();
+       }
 
         \DB::transaction(function () use ($request, $product) {
             $this->product_service->updateProduct($request->all(), $product);
@@ -234,31 +194,12 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function preview(Request $request)
+    public function preview(StoreRequest $request)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'is_online' => 'required | boolean',
-            'number_of_day' => 'required | integer | between:1,730',
-            'is_call' => 'required | boolean',
-            'number_of_sale' => 'required | integer',
-            'status' => 'required | integer',
-            'option_name.*' => 'nullable | string | max:400',
-            'option_price.*' => 'nullable | integer',
-            'option_is_public.*' => 'integer',
-            'question_title.*' => 'required_unless:answer.*,null| max:400',
-            'answer.*' => 'required_unless:question_title.*,null| max:400',
-            'base64_text.0' => 'required',
-            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            return redirect()->route("product.create")->withInput()->withErrors($validate->messages());
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("product.create")->withErrors($validator)->withInput();
         }
 
         $user = \Auth::user();
@@ -287,31 +228,12 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function editPreview(Request $request, Product $product)
+    public function editPreview(StoreRequest $request, Product $product)
     {
-        $validate = \Validator::make($request->all(), [
-            'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
-            'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'price' => 'required | integer | min:500 | max:9990000',
-            'is_online' => 'required | boolean',
-            'number_of_day' => 'required | integer | between:1,730',
-            'is_call' => 'required | boolean',
-            'number_of_sale' => 'required | integer',
-            'status' => 'required | integer',
-            'option_name.*' => 'nullable | string | max:400',
-            'option_price.*' => 'nullable | integer',
-            'option_is_public.*' => 'integer',
-            'question_title.*' => 'required_unless:answer.*,null| max:400',
-            'answer.*' => 'required_unless:question_title.*,null| max:400',
-            'base64_text.0' => 'required',
-            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
-        ]);
-
-        // バリデーション引っかかれば入力画面に戻す
-        if ($validate->fails()) {
-            return redirect()->route("product.edit", $request->id)->withInput()->withErrors($validate->messages());
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("product.edit", $request->id)->withErrors($validator)->withInput();
         }
 
         $user = \Auth::user();

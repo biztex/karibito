@@ -104,12 +104,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
+            Route::post('{product}', 'update')->name('update');
             Route::post('post/{product}/edit', 'postEdit')->name('post.edit');
             Route::delete('{product}','destroy')->name('destroy');
             Route::post('edit/{product}/preview','editPreview')->name('edit.preview');
             Route::post('{product}/preview','updatePreview')->name('update.preview');
             Route::post('{product}/draft','updateDraft')->name('updateDraft');
-            Route::post('{product}/update', 'update')->name('update');
         });
         Route::middleware('can:identify')->group(function () {
             Route::get('create', 'create')->name('create');
@@ -127,18 +127,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
         Route::middleware(['can:my.job.request,job_request', 'can:identify'])->group(function () {
             Route::get('{job_request}/edit','edit')->name('edit');
-            Route::put('{job_request}','update')->name('update');
+            Route::post('{job_request}/update','update')->name('update');
+            Route::post('post/{job_request}/edit', 'postEdit')->name('post.edit');
             Route::delete('{job_request}','destroy')->name('destroy');
             Route::put('edit/{job_request}/preview','editPreview')->name('edit.preview');
-            Route::put('{job_request}/preview','updatePreview')->name('update.preview');
+            Route::post('{job_request}/preview','updatePreview')->name('update.preview');
             Route::put('{job_request}/draft','updateDraft')->name('update.draft');
         });
         Route::middleware('can:identify')->group(function () {
             Route::get('create','create')->name('create');
+            Route::post('post/create', 'postCreate')->name('post.create');
             Route::post('store','store')->name('store');
             Route::post('draft','storeDraft')->name('store.draft');
             Route::post('preview','preview')->name('preview');
-            Route::post('store/preview','storePreview')->name('store.preview');
+            Route::post('post/store/preview','storePreview')->name('store.preview');
         });
         Route::get('{job_request}','show')->name('show');
     });

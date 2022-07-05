@@ -3,7 +3,7 @@
 namespace App\Http\Requests\ProductController;
 
 use Illuminate\Foundation\Http\FormRequest;
-use phpDocumentor\Reflection\Types\Nullable;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreRequest extends FormRequest
 {
@@ -43,5 +43,24 @@ class StoreRequest extends FormRequest
             'base64_text.0' => 'required',
             'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
         ];
+    }
+
+    /**
+     * @Override
+     * 勝手にリダイレクトさせない
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        //
+    }
+
+    /**
+     * バリデータを取得する
+     * @return  \Illuminate\Contracts\Validation\Validator  $validator
+     */
+    public function getValidator()
+    {
+        return $this->validator;
     }
 }
