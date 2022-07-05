@@ -36,14 +36,14 @@
                             @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
 							<input type="text" name="title" value="{{ old('title',$request->title) }}">
-                            <p class="taR">1~30</p>
+                            <p class="taR">1-30</p>
                         </div>
 
                         <p class="th">商品の詳細<span class="must">必須</span></p>
                             @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <textarea type="text" name="content">{{ old('content', $request->content) }}</textarea>
-                            <p class="taR">30~3000</p>
+                            <p class="taR">30-3000</p>
                         </div>
 
                         <p class="th">価格<span class="must">必須</span></p>
