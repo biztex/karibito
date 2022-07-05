@@ -2,7 +2,7 @@
 	<div class="otherNav">
 		<div class="inner">
 			<ul>
-				<li><a href="#">ホーム</a></li>
+				<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
 				<li><a href="#">評価</a></li>
 				<li><a href="#">スキル・経歴</a></li>
 				<li><a href="#">ポートフォリオ</a></li>
@@ -32,12 +32,7 @@
 											@foreach($products as $product)
 											<li>
 												<div class="cont01">
-													<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
-													@if(isset($product->productImage[0]))
 														<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
-													@else
-														<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
-													@endif
 													<div class="info">
 														<div class="breadcrumb"><a href="#" tabindex="0">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
 														<div class="draw">
