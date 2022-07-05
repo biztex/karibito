@@ -107,14 +107,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
-            Route::put('{product}', 'update')->name('update');
+            Route::post('{product}', 'update')->name('update');
             Route::delete('{product}','destroy')->name('destroy');
-            Route::put('edit/{product}/preview','editPreview')->name('edit.preview');
-            Route::put('{product}/preview','updatePreview')->name('update.preview');
-            Route::put('{product}/draft','updateDraft')->name('updateDraft');
+            Route::post('edit/{product}/preview','editPreview')->name('edit.preview');
+            Route::post('{product}/preview','updatePreview')->name('update.preview');
+            Route::post('{product}/draft','updateDraft')->name('updateDraft');
         });
         Route::middleware('can:identify')->group(function () {
             Route::get('create', 'create')->name('create');
+            Route::post('create', 'postCreate')->name('post.create');
+            Route::post('{product}/edit', 'postEdit')->name('post.edit');
             Route::post('store', 'store')->name('store');
             Route::post('draft', 'storeDraft')->name('storeDraft');
             Route::post('preview', 'preview')->name('preview');
@@ -151,7 +153,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret04','secret.secret04')->name('secret04');
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
-    
+
 });
 
 // プライバシーポリシーと運営会社

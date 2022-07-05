@@ -105,7 +105,6 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-//        {{dd('aa');}}
         return view('product.edit', compact('product'));
     }
 
@@ -211,11 +210,26 @@ class ProductController extends Controller
 
     public function preview(StoreRequest $request)
     {
-
         $user = \Auth::user();
         $age = Age::group($user->userProfile->birthday);
 
         return view('product.preview',compact('request','user','age'));
+    }
+
+    public function postCreate(Request $request)
+    {
+        $user = \Auth::user();
+        $age = Age::group($user->userProfile->birthday);
+
+        return view('product.create',compact('request','user','age'));
+    }
+
+    public function postEdit(Request $request)
+    {
+        $user = \Auth::user();
+        $age = Age::group($user->userProfile->birthday);
+        $product = $request;
+        return view('product.edit', compact('product','user','age'));
     }
 
     /**
@@ -223,7 +237,6 @@ class ProductController extends Controller
      */
     public function editPreview(StoreRequest $request, Product $product)
     {
-
         $user = \Auth::user();
         $age = Age::group($user->userProfile->birthday);
 

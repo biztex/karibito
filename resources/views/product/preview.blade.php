@@ -5,8 +5,8 @@
                 <a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
                 @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create')
-                <a href="{{ route('product.index') }}">投稿する</a>　>　
-                <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
                 @else
                     <a href="{{route('publication')}}">掲載内容一覧</a>　>　
                     <a href="{{(url()->previous())}}">サービスを編集する</a>　>　
@@ -22,32 +22,27 @@
 					<form class="contactForm" method="post" action="{{ route('product.update.preview',$product->id) }}" enctype="multipart/form-data">
 					@csrf @method('put')
 			@endif
-			<input type="hidden" value="@if(!is_null($request->category_id)){{ $request->category_id }}@endif" name="category_id">
-            <input type="hidden" value="@if(!is_null($request->number_of_sale)){{ $request->number_of_sale }}@endif" name="number_of_sale">
-            <input type="hidden" value="@if(!is_null($request->status)){{ $request->status }}@endif" name="status">
+			<input type="hidden" value="{{ $request->category_id }}" name="category_id">
+            <input type="hidden" value="{{ $request->number_of_sale }}" name="number_of_sale">
+            <input type="hidden" value="{{ $request->status }}" name="status">
             <div class="inner02 ">
                 <div class="clearfix">
                     <div id="main">
                         <div class="title">
                             <div class="fun">
                                 <div class="single">
-                                    <a href="#" tabindex="0">@if(!is_null($request->is_online))
-                                            {{ App\Models\Product::IS_ONLINE[$request->is_online] }}
-                                        @endif</a>
-                                    <input type="hidden"
-                                           value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif"
-                                           name="is_online">
+                                    <a href="#" tabindex="0">@if(!is_null($request->is_online)){{ App\Models\Product::IS_ONLINE[$request->is_online] }}@endif</a>
+                                    <input type="hidden" value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif" name="is_online">
                                 </div>
                                 <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
                             </div>
                             <div class="datas">
-                                <span class="data">電話相談の受付：@if(!is_null($request->is_call))
-                                        {{ App\Models\Product::IS_CALL[$request->is_call] }}@endif
+                                <span class="data">電話相談の受付：@if(!is_null($request->is_call)){{ App\Models\Product::IS_CALL[$request->is_call] }}@endif
                                 </span>
                                 <input type="hidden" value="@if(!is_null($request->is_call)){{ $request->is_call }}@endif" name="is_call">
                                 <!-- <span class="data">閲覧：1000</span> -->
-                                    @if(!is_null($request->prefecture_id))
                                 <span class="data">エリア：
+                                    @if(!is_null($request->prefecture_id))
                                         {{ App\Models\Prefecture::find($request->prefecture_id)->name }}
                                     @endif
                                 </span>
@@ -144,7 +139,7 @@
                                 <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
                             </div>
                             <div class="functeBtns">
-                                <a href="javascript:history.back();" class="orange_o">編集画面に戻る</a>
+                                <input type="submit" class="full" style="color:white;" formaction="{{ route('product.post.create') }}" value="編集画面に戻る">
                             </div>
                             <div class="functeBtns">
                                 <input type="submit" class="orange full" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">

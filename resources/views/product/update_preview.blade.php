@@ -6,16 +6,13 @@
             </div>
         </div><!-- /.breadcrumb -->
         <div id="contents" class="detailStyle">
-            @if(empty($product))
-					<form class="contactForm" method="post" action="{{ route('product.store.preview') }}" enctype="multipart/form-data">
-					@csrf
-				@else
 					<form class="contactForm" method="post" action="{{ route('product.update.preview',$product->id) }}" enctype="multipart/form-data">
-					@csrf @method('put')
-			@endif
+					@csrf
+
 			<input type="hidden" value="@if(!is_null($request->category_id)){{ $request->category_id }}@endif" name="category_id">
             <input type="hidden" value="@if(!is_null($request->number_of_sale)){{ $request->number_of_sale }}@endif" name="number_of_sale">
             <input type="hidden" value="@if(!is_null($request->status)){{ $request->status }}@endif" name="status">
+            <input type="hidden" value="{{ $product->id }}" name="id">
             <div class="inner02 ">
                 <div class="clearfix">
                     <div id="main">
@@ -25,9 +22,7 @@
                                     <a href="#" tabindex="0">@if(!is_null($request->is_online))
                                             {{ App\Models\Product::IS_ONLINE[$request->is_online] }}
                                         @endif</a>
-                                    <input type="hidden"
-                                           value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif"
-                                           name="is_online">
+                                    <input type="hidden" value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif" name="is_online">
                                 </div>
                                 <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
                             </div>
@@ -94,11 +89,13 @@
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
                                 @for($i = 0; $i < 10; $i++)
-                                    @if(isset($request->option_name[$i]) && $request->option_is_public[$i] == App\Models\AdditionalOption::STATUS_PUBLISH)
-                                        <li>
-                                            <span class="add">＋ {{$request->option_name[$i]}}</span>
-                                            <span class="price">￥{{ App\Models\AdditionalOption::OPTION_PRICE[$request->option_price[$i]]}}</span>
-                                        </li>
+                                    @if(isset($request->option_name[$i]))
+                                        @if ($request->option_is_public[$i] == App\Models\AdditionalOption::STATUS_PUBLISH)
+                                            <li>
+                                                <span class="add">＋ {{$request->option_name[$i]}}</span>
+                                                <span class="price">￥{{ App\Models\AdditionalOption::OPTION_PRICE[$request->option_price[$i]]}}</span>
+                                            </li>
+                                        @endif
                                         <input type="hidden" value="@if(!is_null($request->option_name[$i])){{ $request->option_name[$i] }}@endif" name="option_name[{{$i}}]">
                                         <input type="hidden" value="@if(!is_null($request->option_price[$i])){{ $request->option_price[$i] }}@endif" name="option_price[{{$i}}]">
                                         <input type="hidden" value="@if(!is_null($request->option_is_public[$i])){{ $request->option_is_public[$i] }}@endif" name="option_is_public[{{$i}}]">
@@ -144,7 +141,7 @@
                                 <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
                             </div>
                             <div class="functeBtns">
-                                <a href="javascript:history.back();" class="orange_o">編集画面に戻る</a>
+                                <input type="submit" class="full" style="color:white;" formaction="{{ route('product.post.edit', $product->id) }}" value="編集画面に戻る">
                             </div>
                             <div class="functeBtns">
                                 <input type="submit" class="orange full" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">
