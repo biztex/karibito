@@ -1,5 +1,6 @@
 <x-layout>
 <article>
+<body id="point">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="index.html">ホーム</a>　>　<span>ポイント履歴</span>

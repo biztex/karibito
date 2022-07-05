@@ -1,6 +1,7 @@
 <x-layout>
 <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
 	<article>
+	<body id="publication">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載内容一覧</span>
