@@ -219,7 +219,7 @@ class ProductController extends Controller
 
     /**
      * プレビュー画面から投稿
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function storePreview(Request $request)
@@ -236,7 +236,7 @@ class ProductController extends Controller
 
     /**
      * プレビュー画面から投稿
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updatePreview(StoreRequest $request, Product $product)
