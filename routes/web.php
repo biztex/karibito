@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Mypage\UserProfileController;
 use App\Http\Controllers\Web\Mypage\MypageController;
 use App\Http\Controllers\Web\Mypage\CoverController;
@@ -23,18 +22,7 @@ use App\Http\Controllers\Web\ChatController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\EstimateController;
-use App\Http\Controllers\EvaluationController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\NotationController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\PointController;
-use App\Http\Controllers\SecretController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\PrivacyController;
-use App\Http\Controllers\PublicationController;
+
 
 // 管理者用
 
@@ -236,4 +224,5 @@ Route::prefix('user')->name('user.')->group(function () {
 Route::get('chats',[ChatController::class, 'index'])->name('chat.index');
 Route::get('chats/{product}',[ChatController::class, 'show'])->name('chat.show');
 
-Route::view('/dm','mypage.dm');
+Route::view('/dm','mypage.dm.index')->name('dm.index');
+Route::view('/dm/show','mypage.dm.show');

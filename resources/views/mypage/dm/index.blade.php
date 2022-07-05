@@ -14,7 +14,7 @@
 								<li>
 									<a href="dm_detail.html">
 										<div class="user">
-											<p class="ico"><img src="/img/service/ico_head.png" alt=""></p>
+											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 											<div class="introd">
 												<p class="name">購入者の名前</p>
 											</div>
@@ -25,7 +25,7 @@
 								<li>
 									<a href="dm_detail.html">
 										<div class="user">
-											<p class="ico"><img src="/img/common/ico_head.png" alt=""></p>
+											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 											<div class="introd">
 												<p class="name">クリエイター名</p>
 											</div>
@@ -36,7 +36,7 @@
 								<li>
 									<a href="dm_detail.html">
 										<div class="user">
-											<p class="ico"><img src="/img/common/ico_head.png" alt=""></p>
+											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 											<div class="introd">
 												<p class="name">クリエイター名</p>
 											</div>
@@ -47,7 +47,7 @@
 								<li>
 									<a href="dm_detail.html">
 										<div class="user">
-											<p class="ico"><img src="/img/common/ico_head.png" alt=""></p>
+											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 											<div class="introd">
 												<p class="name">クリエイター名</p>
 											</div>
@@ -58,7 +58,7 @@
 								<li>
 									<a href="dm_detail.html">
 										<div class="user">
-											<p class="ico"><img src="/img/common/ico_head.png" alt=""></p>
+											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 											<div class="introd">
 												<p class="name">クリエイター名</p>
 											</div>
@@ -69,7 +69,7 @@
 								<li>
 									<a href="dm_detail.html">
 										<div class="user">
-											<p class="ico"><img src="/img/common/ico_head.png" alt=""></p>
+											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 											<div class="introd">
 												<p class="name">クリエイター名</p>
 											</div>
