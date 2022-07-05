@@ -15,11 +15,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function product(User $user)
+    public function publication(User $user)
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $age = Age::group($user->userProfile->birthday);
 
         return view('other-user.publication', compact('user','products', 'age'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function mypage(User $user)
+    {
+        $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $age = Age::group($user->userProfile->birthday);
+
+        return view('other-user.mypage', compact('user','products', 'age'));
     }
 }
