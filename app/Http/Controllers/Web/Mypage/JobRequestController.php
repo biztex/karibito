@@ -60,6 +60,23 @@ class JobRequestController extends Controller
         return view('job_request.create')->with('request',$request);
     }
 
+    public function postCreate(Request $request)
+    {
+        $user = \Auth::user();
+        $age = Age::group($user->userProfile->birthday);
+
+        return view('job_request.create',compact('request','user','age'));
+    }
+
+    // 編集⇒プレビュー⇒編集
+    public function postEdit(Request $request, JobRequest $job_request)
+    {
+        $user = \Auth::user();
+        $age = Age::group($user->userProfile->birthday);
+        $job_request = $request;
+        return view('job_request.edit', compact('request','job_request','user','age'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -69,6 +86,12 @@ class JobRequestController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("job_request.create")->withErrors($validator)->withInput();
+        }
+
         $this->job_request_service->storeJobRequest($request->all());
 
         return redirect()->route('service_thanks');
@@ -116,6 +139,12 @@ class JobRequestController extends Controller
      */
     public function update(StoreRequest $request, JobRequest $job_request)
     {
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("job_request.edit", $job_request->id)->withErrors($validator)->withInput();
+        }
+
         $this->job_request_service->updateJobRequest($request->all(), $job_request);
 
         return redirect()->route('service_thanks');
@@ -149,7 +178,7 @@ class JobRequestController extends Controller
      */
     public function storeDraft(DraftRequest $request)
     {
-        $job_request = $this->job_request_service->storeDraftJobRequest($request->all());
+        $this->job_request_service->storeDraftJobRequest($request->all());
 
         return redirect()->route('draft','#job-request')->with('flash_msg','下書きに保存しました！');
     }
@@ -178,6 +207,12 @@ class JobRequestController extends Controller
      */
     public function preview(StoreRequest $request)
     {
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route('job_request.create')->withErrors($validator)->withInput();
+        }
+
         $user = \Auth::user();
 
         $age = Age::group($user->userProfile->birthday);
@@ -196,6 +231,11 @@ class JobRequestController extends Controller
      */
     public function storePreview(StoreRequest $request)
     {
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route('job_request.create')->withErrors($validator)->withInput();
+        }
         $this->job_request_service->storeJobRequest($request->all());
 
         return redirect()->route('service_thanks');
@@ -208,6 +248,12 @@ class JobRequestController extends Controller
      */
     public function editPreview(StoreRequest $request, JobRequest $job_request)
     {
+        // バリデーションかかれば入力画面に戻す
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("job_request.edit" ,$job_request->id)->withErrors($validator)->withInput();
+        }
+
         $user = \Auth::user();
 
         $age = Age::group($user->userProfile->birthday);

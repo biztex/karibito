@@ -18,6 +18,8 @@
 						@csrf @method('PUT')
 
 
+                        <input type="hidden" value="{{ $job_request->id }}" name="id">
+
 						<p class="th">カテゴリ<span class="must">必須</span></p>
 							@error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
