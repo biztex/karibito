@@ -1123,7 +1123,6 @@
                 </div>
             </div>
         </div>
-        {{$slot}}
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
