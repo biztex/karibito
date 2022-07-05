@@ -75,7 +75,7 @@
                             <h2 class="hdM">サービス内容</h2>
                             <p style="overflow-wrap: break-word;">{{$product->content}}</p>
                         </div>
-                        @if(isset($additional_options[0]))
+                        @if($additional_options->isNotEmpty())
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
@@ -88,7 +88,7 @@
                             </ul>
                         </div>
                         @endif
-                        @if(isset($product->productQuestions[0]))
+                        @if($product->productQuestions->isNotEmpty())
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
