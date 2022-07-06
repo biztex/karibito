@@ -13,7 +13,7 @@
 
         <div id="contents">
             <div class="cancelWrap">
-                <div class="inner inner05">          
+                <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを編集する<p class="checkGuideOriginal" target="_blank"><a href="{{ route('support') }}">カリビト安心サポートをご確認ください</a></p></h2>
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf
@@ -381,7 +381,7 @@
                             <div class="functeBtns">
                                 <input type="submit" class="full" style="color:white;" formaction="{{ route('product.edit.preview', $product->id) }}" value="プレビュー画面を見る">
                                 <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $product->id) }}" value="サービス提供を開始">
-                                <input type="submit" class="full green_o" formaction="{{ route('product.updateDraft', $product->id) }}" value="下書きとして保存">
+                                <input type="submit" class="full green_o" formaction="{{ route('product.update.draft', $product->id) }}" value="下書きとして保存">
                             </div>
                     </form>
                 </div>
