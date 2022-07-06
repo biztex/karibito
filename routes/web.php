@@ -130,9 +130,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('{job_request}/update','update')->name('update');
             Route::post('post/{job_request}/edit', 'postEdit')->name('post.edit');
             Route::delete('{job_request}','destroy')->name('destroy');
-            Route::put('edit/{job_request}/preview','editPreview')->name('edit.preview');
+            Route::post('edit/{job_request}/preview','editPreview')->name('edit.preview');
             Route::post('{job_request}/preview','updatePreview')->name('update.preview');
-            Route::put('{job_request}/draft','updateDraft')->name('update.draft');
+            Route::post('{job_request}/draft','updateDraft')->name('update.draft');
         });
         Route::middleware('can:identify')->group(function () {
             Route::get('create','create')->name('create');
