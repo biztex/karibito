@@ -612,6 +612,21 @@
     pointer-events: none;
  }
 
+ 
+ .checkGuide.more{
+	float:none;
+	display:block;
+	padding:0;
+	margin-top: 30px;
+}
+.checkGuideOriginal a{
+	color: #158ACC;
+	font-size: 14px;
+	font-weight: 100;
+}
+.checkGuideOriginal a:hover{
+	text-decoration: underline;
+}
  .fancyRegisterUpload {
 	display: block;
 	border-radius: 4px;
@@ -624,6 +639,11 @@
 	border: 1px solid;
 }
 @media screen and (max-width: 767px) {
+	.checkGuideOriginal a{
+		color: #158ACC;
+		font-size: 11px;
+	}
+
 	.fancyRegisterUpload {
 		display: block;
 		border-radius: 4px;
