@@ -104,18 +104,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
-            Route::post('{product}', 'update')->name('update');
+            Route::post('{product}/update', 'update')->name('update');
             Route::post('post/{product}/edit', 'postEdit')->name('post.edit');
             Route::delete('{product}','destroy')->name('destroy');
             Route::post('edit/{product}/preview','editPreview')->name('edit.preview');
             Route::post('{product}/preview','updatePreview')->name('update.preview');
-            Route::post('{product}/draft','updateDraft')->name('updateDraft');
+            Route::post('{product}/draft','updateDraft')->name('update.draft');
         });
         Route::middleware('can:identify')->group(function () {
             Route::get('create', 'create')->name('create');
             Route::post('post/create', 'postCreate')->name('post.create');
             Route::post('store', 'store')->name('store');
-            Route::post('draft', 'storeDraft')->name('storeDraft');
+            Route::post('draft', 'storeDraft')->name('store.draft');
             Route::post('preview', 'preview')->name('preview');
             Route::post('post/store/preview', 'storePreview')->name('store.preview');
             Route::get('/', 'index')->name('index');
