@@ -234,7 +234,8 @@ Route::prefix('user')->name('user.')->group(function () {
 // やり取り画面組込中
 Route::prefix('chatrooms')->controller(ChatRoomController::class)->name('chatroom.')->group(function () {
     Route::get('', 'index')->name('index');
-    Route::get('{product}', 'show')->name('show');
+    Route::get('{product}', 'show')->name('product.show');
+
     Route::get('{product}/sample', 'sample')->name('sample');
 
     // 支払い
