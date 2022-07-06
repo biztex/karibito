@@ -72,7 +72,7 @@
                                     <p class="navMessageLink"><a href="#">すべて見る</a></p>
                                 </div>
                             </li>
-                            <li><a href="{{ route('chat.index') }}" class="nav03">やりとり</a></li>
+                            <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
                             <li><a href="#" class="nav02">お気に入り</a></li>
                             <li class="navLink">
                                     @if(empty($user_profile->icon))
@@ -1138,7 +1138,7 @@
                     </a>
                 </div>
                 <div class="spFixedItem">
-                    <a href="{{ route('chat.index') }}" class="spFixedLink">
+                    <a href="{{ route('chatroom.index') }}" class="spFixedLink">
                         <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>
                         <p class="linkTxt">やりとり</p>
                     </a>

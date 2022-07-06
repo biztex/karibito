@@ -18,7 +18,7 @@ use App\Http\Controllers\Web\Mypage\IdentificationController;
 use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
-use App\Http\Controllers\Web\ChatController;
+use App\Http\Controllers\Web\ChatRoomController;
 
 
 use App\Http\Controllers\HomeController;
@@ -230,8 +230,23 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
 
 });
-Route::get('chats',[ChatController::class, 'index'])->name('chat.index');
-Route::get('chats/{product}',[ChatController::class, 'show'])->name('chat.show');
 
+// やり取り画面組込中
+Route::prefix('chatrooms')->controller(ChatRoomController::class)->name('chatroom.')->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::get('{product}', 'show')->name('show');
+    Route::get('{product}/sample', 'sample')->name('sample');
+
+    // 支払い
+    Route::view('cart/buy03','chatroom.cart_buy03');
+    Route::view('cart/buy04','chatroom.cart_buy04');
+    Route::view('cart/buy05','chatroom.cart_buy05');
+    // 評価
+    Route::view('cart/buy08','chatroom.cart_buy08');
+    Route::view('cart/buy09','chatroom.cart_buy09');
+
+});
+
+// DM画面組込まで
 Route::view('/dm','mypage.dm.index')->name('dm.index');
 Route::view('/dm/show','mypage.dm.show');

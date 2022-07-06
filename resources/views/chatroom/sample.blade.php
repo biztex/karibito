@@ -5,6 +5,31 @@
                 <a href="index.html">ホーム</a>　>　<span>カリビト知恵袋</span>
             </div>
         </div><!-- /.breadcrumb -->
+        <div class="hide">
+			<div id="fancybox_proposal" class="fancyboxWrap">
+				<p class="fancyboxHd">掲載内容の提案</p>
+				<div class="fancyboxCont">
+					<div class="fancyboxProposal">
+						<ul class="contactForm">
+							<li>
+								<p><span class="th">商品名</span><br>同人誌などのタイトルロゴをお作りします</p>
+							</li>
+							<li>
+								<div class="amount">
+									<p>希望報酬額</p>
+									<p class="num">¥5,500</p>
+								</div>
+								<p class="th">提供価格</p>
+								<p class="budget"><input type="text" value="0"></p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="functeBtns">
+					<a href="#" class="orange">この内容で商品を提案する</a>
+				</div>
+			</div>
+		</div>
         <div id="contents" class="otherPage otherPage2">
             <div class="inner02 clearfix">
                 <div id="main">
@@ -23,6 +48,15 @@
                             </div>
                             <p class="login">最終ログイン：オンライン中</p>
                         </div>
+                        <div class="tellTop">
+							<div class="support">
+								<span class="pre">電話対応：待機中</span>
+								<span class="fix">「待機中」のみ着信可能です</span>
+							</div>
+							<div class="functeBtns">
+								<a href="tel:00000000" class="full blue">電話をかける</a>
+							</div>
+						</div>
                     </div>
                     <h2 class="hdM">チャット<a href="#" class="more st2">契約後のキャンセルについて</a></h2>
                     <div class="subPagesTab">
@@ -62,6 +96,121 @@
                                         </div>
                                         <p class="time">既読 2021年7月26日9:10</p>
                                     </li>
+
+                                    <li>
+										<div class="img">
+											<p class="head"><img src="/img/common/nav_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">出品者の名前</p>
+												<p>掲載内容の提案をしました</p>
+												<div class="proposeBuy">
+													<p class="tit">同人誌などのタイトルロゴをお作りします</p>
+													<p>提供価格：¥5,500</p>
+													<p class="buy"><input type="submit" value="購入する"></p>
+												</div>
+											</div>
+										</div>
+									</li>
+                                    <li>
+										<div class="img">
+											<p class="head"><img src="/img/common/nav_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">出品者の名前</p>
+												<p>掲載内容の提案をしました</p>
+												<div class="proposeBuy">
+													<p class="tit">同人誌などのタイトルロゴをお作りします</p>
+													<p>提供価格：¥5,500</p>
+													<p class="buy"><input type="submit" class="white" value="購入済み"></p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+
+									<li>
+										<div class="img">
+											<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">購入者の名前</p>
+												<p>商品を購入しました</p>
+												<div class="proposeBuy">
+													<p class="tit">同人誌などのタイトルロゴをお作りします</p>
+													<p>提供価格：¥5,500</p>
+												</div>
+											</div>
+										</div>
+										<p class="time">既読 2021年7月26日9:10</p>
+									</li>
+									<li>
+										<div class="img">
+											<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">購入者の名前</p>
+												<p>購入しました<br>よろしくお願いします</p>
+											</div>
+										</div>
+										<p class="time">既読 2021年7月26日9:10</p>
+									</li>
+
+
+                                    <li>
+										<div class="img">
+											<p class="head"><img src="img/common/nav_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">出品者の名前</p>
+												<p>作業報告が完了しました</p>
+												<div class="proposeBuy">
+													<p class="tit">同人誌などのタイトルロゴをお作りします</p>
+													<p>提供価格：¥5,500</p>
+													<p class="buy"><input type="submit" class="red" value="お相手を評価する"></p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+
+                                    <li>
+										<div class="img">
+											<p class="head"><img src="img/common/nav_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">出品者の名前</p>
+												<p>作業報告が完了しました</p>
+												<div class="proposeBuy">
+													<p class="tit">作業報告が完了しました</p>
+													<p>提供価格：¥5,500</p>
+													<p class="buy"><input type="submit" value="評価しました" disabled></p>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="img">
+											<p class="head"><img src="img/service/ico_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">出品者の名前</p>
+												<p>評価が完了しました</p>
+												<div class="proposeBuy">
+													<p class="buy none"><input type="submit" value="お相手を評価をお待ちください" disabled></p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+                                    <li>
+										<div class="img">
+											<p class="head"><img src="img/service/ico_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">購入者の名前</p>
+												<p>評価が完了しました</p>
+												<div class="proposeBuy">
+													<p class="buy"><input type="submit" class="red" value="お相手を評価を評価する"></p>
+												</div>
+											</div>
+										</div>
+										<p class="time">既読 2021年7月26日9:10</p>
+									</li>
+
+
                                 </ul>
                             </div>
                             <div class="item">
@@ -111,6 +260,13 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="functeBtns">
+							<a href="#fancybox_proposal" class="orange fancybox">提案する</a>
+							<input type="submit" class="" value="キャンセル申請をする">
+						</div>
+
+
                     </div>
                 </aside><!-- /#side -->
             </div><!--inner-->

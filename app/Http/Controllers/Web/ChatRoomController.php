@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 
 
-class ChatController extends Controller
+class ChatRoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return view('chat.index');
+        return view('chatroom.index');
     }
 
     /**
@@ -29,6 +29,19 @@ class ChatController extends Controller
         if (\Auth::id() === $product->user_id) {
             return redirect()->route('product.show',$product->id);
         };
-        return view('chat.buy.product', compact('product'));
+        return view('chatroom.buy.product', compact('product'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function sample(Product $product)
+    {
+        if (\Auth::id() === $product->user_id) {
+            return redirect()->route('product.show',$product->id);
+        };
+        return view('chatroom.sample', compact('product'));
     }
 }
