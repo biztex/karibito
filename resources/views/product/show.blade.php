@@ -254,11 +254,7 @@
                                             <input type="submit" class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
                                         </div>
                                     </form>
-<<<<<<< Updated upstream
                                 @elseif($product->user_id !== Auth::id())
-=======
-                                    @elseif($product->user_id !== Auth::id())
->>>>>>> Stashed changes
                                     <div class="functeBtns">
                                         <a href="" class="orange full">交渉画面へ進む</a>
                                     </div>
