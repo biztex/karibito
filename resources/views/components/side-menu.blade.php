@@ -67,19 +67,17 @@
 	$(function(){
 
 		// バリデーションエラーの際、モーダルを最初から表示する
-        if (@json($errors->has('identification_path'))){
+        if (@json($errors->has('email'))){
+
+        } else if (@json($errors->has('identification_path'))){
                 $('.fancybox_register').trigger('click');
                 $('html').addClass('fancybox-margin');
                 $('html').addClass('fancybox-lock');
                 $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
-        }
-
-		else if (@json($errors->any())) {
+        } else if (@json($errors->any())) {
 					$('.fancybox').trigger('click');
                     $('html').addClass('fancybox-margin fancybox-lock');
                     $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
 		}
-
-
 	})
 </script>
