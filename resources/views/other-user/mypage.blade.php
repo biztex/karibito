@@ -14,7 +14,7 @@
 	<x-parts.post-button/>
 	<article>
         <x-parts.flash-msg/>
-        <div id="contents" class="oneColumnPage03">
+        <div id="contents" class="oneColumnPage03 otherPage">
 			<div class="inner">
 				<div id="main">
 					<div class="otherMypageWrap">
