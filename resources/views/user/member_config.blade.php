@@ -1,4 +1,5 @@
 <x-layout>
+<body id="member-page">
 <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
 	<article>
 		<div id="breadcrumb">
