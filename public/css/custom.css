@@ -620,7 +620,7 @@
 	font-weight: 100;
 }
 .checkGuideOriginal a:hover{
-	border-bottom: 1px solid #158ACC;
+	text-decoration: underline;
 }
  .fancyRegisterUpload {
 	display: block;
