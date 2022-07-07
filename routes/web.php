@@ -59,8 +59,6 @@ Route::view('support', 'support.support')->name('support');
 Route::view('support_detail', 'support.support_detail')->name('support_detail');
 Route::view('guide', 'support.guide')->name('guide');
 
-Route::view('member', 'user.member')->name('member');
-Route::view('member_config', 'user.member_config')->name('member_config');
 Route::view('resume','resume')->name('resume');
 Route::view('resume_edit','resume_edit')->name('resume_edit');
 
@@ -87,8 +85,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+        // メンバー情報
+        Route::view('member', 'member.index')->name('member');
         // 会員情報
         Route::prefix('member_config')->name('member_config.')->group(function () {
+            Route::view('', 'member.member_config.index')->name('index');
             // メールアドレス変更
             Route::controller(ChangeEmailController::class)->name('email.')->group(function () {
                 Route::get('email', 'edit')->name('edit');

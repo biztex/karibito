@@ -17,7 +17,7 @@ class ChangeTelController extends Controller
 
     public function edit()
     {
-        return view('user.member_config_tel');
+        return view('member.member_config.edit_tel');
     }
 
     public function update(RegisterTelRequest $request)

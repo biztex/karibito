@@ -15,7 +15,7 @@
 						<h2 class="subPagesHd">メンバー情報</h2>
 						<div class="">
 							<ul class="mypageUl02 memberUl01">
-								<li><a href="{{ route('member_config') }}">プロフィール</a></li>
+								<li><a href="{{ route('member_config.index') }}">プロフィール</a></li>
 								<li><a href="#">お支払い方法</a></li>
 								<li><a href="#">受取口座の登録・変更</a></li>
 								<li><a href="#">入出金履歴</a></li>

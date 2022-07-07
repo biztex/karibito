@@ -5021,6 +5021,7 @@ select.searchSelect{
 		display: flex;
 		justify-content: center;
 		margin-bottom: 10px;
+		flex-wrap: wrap;
 	}
 	.configEditDl01 dt{
 		margin-right: 10px;

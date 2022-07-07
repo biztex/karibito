@@ -4,7 +4,7 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>メンバー情報</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('member') }}">メンバー情報</a>　>　<span>会員情報</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.flash-msg/>
@@ -25,7 +25,7 @@
 								</dl>
 								<dl class="memberConfigDl">
 									<dt>ユーザーID</dt>
-									<dd>000000000000</dd>
+									<dd>{{ Auth::user()->id }}</dd>
 								</dl>
 								<dl class="memberConfigDl">
 									<dt>メールアドレス</dt>
