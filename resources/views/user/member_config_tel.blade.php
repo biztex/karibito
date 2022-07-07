@@ -20,8 +20,6 @@
                                                     @enderror
                                                     <input type="tel" name="tel" autocomplete="tel" required>
                                                     <p class="noticeP">※電話番号はハイフンなしで入力してください。</p>
-                                                    <p class="noticeP">※10~13桁で入力してください。</p>
-                                                    <p class="noticeP">※先頭は0で入力してください。</p>
                                                 </div>
                                             </dd>
                                         </dl>
