@@ -25,7 +25,7 @@
                                 <th scope="col" class="text-nowrap">投稿日</th>
 {{--                                <th scope="col" class="text-nowrap">公開状況</th>--}}
                                 <th scope="col" class="text-nowrap">タイトル</th>
-                                <th scope="col" class="text-nowrap">詳細</th>
+{{--                                <th scope="col" class="text-nowrap">詳細</th>--}}
                                 <th scope="col" class="text-nowrap">編集</th>
                                 <th scope="col" class="text-nowrap">削除</th>
                             </tr>
@@ -44,9 +44,9 @@
                                     <td class="text-nowrap px-2">
                                         <a href="{{ route('admin.news.show', $news->id) }}">{{ $news->title }}</a>
                                     </td>
-                                    <td class="text-nowrap px-2">
-                                        <a class="btn btn-primary" href="">詳細</a>
-                                    </td>
+{{--                                    <td class="text-nowrap px-2">--}}
+{{--                                        <a class="btn btn-primary" href="">詳細</a>--}}
+{{--                                    </td>--}}
                                     <td class="text-nowrap px-2">
                                         <a class="btn btn-primary" href="{{ route('admin.news.edit', $news->id) }}">編集</a>
                                     </td>
