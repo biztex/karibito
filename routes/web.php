@@ -61,6 +61,8 @@ Route::view('member', 'user.member')->name('member');
 Route::view('member_config', 'user.member_config')->name('member_config');
 Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
 Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
+Route::view('resume','resume')->name('resume');
+Route::view('resume_edit','resume_edit')->name('resume_edit');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

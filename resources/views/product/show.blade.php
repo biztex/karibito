@@ -231,7 +231,7 @@
                         {{--						</div>--}}
                         {{--					</div>--}}
                     </div>
-                    <aside id="side" class="pc">
+                    <aside id="side">
                         <div class="box reservate">
                             <h3>{{number_format($product->price)}}円</h3>
                             <p class="status">所用期間</p>
