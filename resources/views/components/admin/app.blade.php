@@ -9,7 +9,7 @@
 
 
 <title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
-<meta name="keywords" content="カリビト,知識,スキル,経験,マッチング,プラットフォーム">  
+<meta name="keywords" content="カリビト,知識,スキル,経験,マッチング,プラットフォーム">
 <meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
 
@@ -32,6 +32,7 @@
 				<!-- <a class="nav-item nav-link active" href="{{ route('admin.dashboard') }}">Home <span class="sr-only">(current)</span></a> -->
 				<a class="nav-item nav-link active" href="{{ route('admin.users.index') }}">Users</a>
 				<!-- @if(\Auth::guard('admin')->user()->role == 1)<a class="nav-item nav-link" href="{{ route('admin.index') }}">Admin</a>@endif -->
+				<a class="nav-item nav-link active" href="{{ route('admin.news.create') }}">News</a>
 				<a class="nav-item nav-link" href="{{ route('admin.logout') }}">LOGOUT</a>
 				</div>
 			</div>

@@ -1,0 +1,82 @@
+<templateSet group="Blade">
+  <template name="form_error" value="'components.form.error', ['name' =&gt; '']" description="include form error" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_text" value="'components.form.text', ['name' =&gt; '', 'required' =&gt; false]" description="include form text" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_edit_text" value="'components.form.edit_text', ['name' =&gt; '', 'value' =&gt; '', 'required' =&gt; false]" description="include form edit text" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_edit_select" value="'components.form.edit_select', ['name' =&gt; '', 'data' =&gt; (array)[$v], 'value' =&gt; '']" description="include form edit select" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_edit_select_k_v" value="'components.form.edit_select_k_v', ['name' =&gt; '', 'data' =&gt; (array)[$k=&gt;$v], 'value' =&gt; '']" description="include form edit select key and value" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_edit_radio_k_v" value="'components.form.edit_radio_k_v', ['name' =&gt; '', 'data' =&gt; (array)[$k=&gt;$v], 'value' =&gt; '']" description="include form edit input radio key and value" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_edit_radio" value="'components.form.edit_radio', ['name' =&gt; '', 'data' =&gt; (array)[$v], 'value' =&gt; '']" description="include form edit radio" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_radio_k_v" value="'components.form.radio_k_v', ['name' =&gt; '', 'data' =&gt; (array)[$k=&gt;$v]]" description="include radio key and value" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_radio" value="'components.form.radio', ['name' =&gt; '', 'data' =&gt; (array)[$v]]" description="include form radio" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_select_k_v" value="'components.form.select_k_v', ['name' =&gt; '', 'data' =&gt; (array)[$k=&gt;$v]]" description="include form select key and value" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_textarea" value="'components.form.textarea', ['name' =&gt; '', 'required' =&gt; false, 'cols' =&gt; 30, 'rows' =&gt; 5]" description="include form textarea" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_edit_textarea" value="'components.form.edit_textarea', ['name' =&gt; '', 'value' =&gt; '', 'required' =&gt; false, 'cols' =&gt; 30, 'rows' =&gt; 5]" description="include form edit textarea" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_select" value="'components.form.select', ['name' =&gt; '', 'data' =&gt; (array)[$v]]" description="include form select" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_select_collection" value="'components.form.select_collection', ['name' =&gt; '', 'data' =&gt; (collection), 'id' =&gt; 'id', 'str' =&gt; '']" description="include form select set collection" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_edit_select_collection" value="'components.form.edit_select_collection', ['name' =&gt; '', 'data' =&gt; (collection), 'id' =&gt; 'id', 'str' =&gt; '', 'value' =&gt; '']" description="include form edit select set collection" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="form_file" value="'components.form.file', ['name' =&gt; '', 'required' =&gt; false]" description="include form file" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+</templateSet>

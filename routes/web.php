@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
@@ -200,6 +201,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
+
+        //お知らせ機能
+        Route::resource('/news', NewsController::class);
     });
 
 });
