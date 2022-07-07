@@ -88,11 +88,11 @@
                             </ul>
                         </div>
                         @endif
-                        @if($product->productQuestions->isNotEmpty())
+                        @if($product->productQuestion->isNotEmpty())
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
-                                @foreach($product->productQuestions as $product_question)
+                                @foreach($product->productQuestion as $product_question)
                                     <li>
                                         <p class="quest toggleBtn"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
                                         <p class="answer toggleBox" style="width:100%;">{{$product_question->answer}}</p>
@@ -280,7 +280,7 @@
                 </div>
 {{--                <div id="">--}}
 {{--                    <div class="recommendList style2">--}}
-{{--                        <h2 class="hdM">{{$product->productUser->name}}さんのその他の出品</h2>--}}
+{{--                        <h2 class="hdM">{{$product->user->name}}さんのその他の出品</h2>--}}
 {{--                        <div class="list sliderSP">--}}
 {{--                            @foreach($all_products as $all_product)--}}
 {{--                                <div class="item">--}}
@@ -302,8 +302,8 @@
 {{--                                            <div class="user">--}}
 {{--                                                <p class="ico"><img src="/img/common/ico_head.png" alt=""></p>--}}
 {{--                                                <div class="introd">--}}
-{{--                                                    <p class="name">{{$all_product->productUser->name}}</p>--}}
-{{--                                                    <p>({{App\Models\UserProfile::GENDER[$all_product->productUser->userProfile->gender]}}/ {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>--}}
+{{--                                                    <p class="name">{{$all_product->user->name}}</p>--}}
+{{--                                                    <p>({{App\Models\UserProfile::GENDER[$all_product->user->userProfile->gender]}}/ {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>--}}
 {{--                                                </div>--}}
 {{--                                            </div>--}}
 {{--                                            <div class="evaluates">--}}

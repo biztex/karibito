@@ -41,7 +41,7 @@ class ProductService
                         'is_public' => $request['option_is_public'][$index]
                     ];
                     $product = Product::find($id);
-                    $product->additionalOptions()->create($options);
+                    $product->additionalOption()->create($options);
                 }
             }
         }
@@ -60,7 +60,7 @@ class ProductService
                         'answer' => $request['answer'][$index],
                     ];
                     $product = Product::find($id);
-                    $product->productQuestions()->create($questions);
+                    $product->productQuestion()->create($questions);
                 }
             }
         }
@@ -88,7 +88,7 @@ class ProductService
      */
     public function updateAdditionalOption(array $request, $product)
     {
-        $product->additionalOptions()->delete();
+        $product->additionalOption()->delete();
         if (isset($request['option_name'])) {
             foreach ($request['option_name'] as $index => $value) {
                 if (null !== ($request['option_name'][$index])) {
@@ -98,7 +98,7 @@ class ProductService
                         'is_public' => $request['option_is_public'][$index]
                     ];
                     $product = Product::find($product->id);
-                    $product->additionalOptions()->create($options);
+                    $product->additionalOption()->create($options);
                 }
             }
         }
@@ -110,7 +110,7 @@ class ProductService
      */
     public function updateProductQuestion(array $request, $product)
     {
-        $product->productQuestions()->delete();
+        $product->productQuestion()->delete();
         if (isset($request['question_title'])) {
             if ($request['question_title'] !== null) {
                 foreach ($request['question_title'] as $index => $value) {
@@ -120,7 +120,7 @@ class ProductService
                             'answer' => $request['answer'][$index],
                         ];
                         $product = Product::find($product->id);
-                        $product->productQuestions()->create($questions);
+                        $product->productQuestion()->create($questions);
                     }
                 }
             }

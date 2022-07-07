@@ -135,7 +135,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function additionalOptions()
+    public function additionalOption()
     {
         return $this->hasMany(AdditionalOption::class);
     }
@@ -143,7 +143,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function productQuestions()
+    public function productQuestion()
     {
         return $this->hasMany(ProductQuestion::class, 'product_id');
     }
@@ -167,17 +167,17 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function productPrefecture()
+    public function prefecture()
     {
-        return $this->hasOne(Prefecture::class, 'id');
+        return $this->hasOne(Prefecture::class);
     }
 
     /**
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
-    public function productUser()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**

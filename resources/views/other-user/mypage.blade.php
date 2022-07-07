@@ -96,8 +96,8 @@
 														    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
                                                         @endif
 														<div class="introd">
-															<p class="name">{{$product->productUser->name}}</p>
-															<p>({{\App\Models\UserProfile::GENDER[$product->productUser->userProfile->gender]}}/ {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>
+															<p class="name">{{$product->user->name}}</p>
+															<p>({{\App\Models\UserProfile::GENDER[$product->user->userProfile->gender]}}/ {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>
 														</div>
 													</div>
 													<p class="check"><a href="#">本人確認済み</a></p>

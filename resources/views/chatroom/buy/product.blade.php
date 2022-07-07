@@ -13,13 +13,13 @@
                     <div class="friendsTop">
                         <div class="sellerTop">
                             <div class="user">
-                                @if(null !== $product->productUser->userProfile->icon)
-                                    <p class="head"><img src="{{ asset('/storage/'.$product->productUser->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;border-radius: 50px;"></p>
+                                @if(null !== $product->user->userProfile->icon)
+                                    <p class="head"><img src="{{ asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;border-radius: 50px;"></p>
                                 @else
                                     <p class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
                                 @endif
                                 <div class="info">
-                                    <p class="name">出品者・{{ $product->productUser->name }}</p>
+                                    <p class="name">出品者・{{ $product->user->name }}</p>
                                     <p><a href="#" class="link">職務経歴書を見る</a></p>
                                 </div>
                             </div>

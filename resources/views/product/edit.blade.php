@@ -168,8 +168,8 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            @elseif(collect($product->additionalOptions)->isNotEmpty())
-                                @foreach($product->additionalOptions as $num => $additional_option)
+                            @elseif(collect($product->additionalOption)->isNotEmpty())
+                                @foreach($product->additionalOption as $num => $additional_option)
                                     <div class="js-optionForm">
                                         <p class="th">有料オプション {{$num + 1}}</p>
                                         @error('option_name.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -275,8 +275,8 @@
                                     </div>
                                 </div>
                                 @endforeach
-                            @elseif(collect($product->productQuestions)->isNotEmpty())
-                                @foreach($product->productQuestions as $num => $product_question)
+                            @elseif(collect($product->productQuestion)->isNotEmpty())
+                                @foreach($product->productQuestion as $num => $product_question)
                                     <div class="js-questionForm">
                                         <p class="th">質問のタイトル {{$num + 1}}</p>
                                         @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
