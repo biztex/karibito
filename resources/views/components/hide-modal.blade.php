@@ -28,7 +28,8 @@
 						<p class="txt">【法人の場合】<br>履歴事項全部証明書　(※3 ヵ月以内のものに限ります)</p>
 					</div>
 					<div class="fancyRegisterItem">
-						<p class="txt">【カリビトアプリ登録情報】<br>都道府県:{{ $user_profile->prefecture->name }}<br>住所:{{ $user_profile->address }}<br>氏名:{{ $user_profile->first_name.$user_profile->last_name }}<br>生年月日:{{ date("Y年n月j日",strtotime($user_profile->birthday)) }}</p>
+						<p class="txt">【カリビトアプリ登録情報】<br>都道府県:{{ $user_profile->prefecture->name }}<br>住所:{{ $user_profile->address }}<br>氏名:{{ $user_profile->first_name.$user_profile->last_name }}
+															   <br>生年月日:@if($user_profile->birthday !== null){{ date("Y年n月j日",strtotime($user_profile->birthday)) }}@endif</p>
 					</div>
 					<div class="fancyRegisterItem">
 						<p class="txt">安心安全のため、本人確認承認後はご住所 / 本名/ 生年月日のご変更ができなくなっておりますので、本人確認承認後にご住所 / 本名 / 生年月日をご変更されたい場合は、カリビト事務局へ、お問い合わせください</p>
@@ -154,21 +155,24 @@
                                     @enderror
 									<dd>
 										<select class="year" name="year">
-											<option value="">年</option>
+											<option value="" selected>年</option>
 											@for ($i = 1900; $i < 2023; $i++ )
-												<option value="{{$i}}" @if($i == old('year', date("Y",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
+												<option value="{{$i}}" @if(old('year', $user_profile->birthday) == null)
+																	   @elseif($i == old('year', date("Y",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 											@endfor
 										</select>
 										<select class="month" name="month">
-											<option value="">月</option>
+											<option value="" selected>月</option>
 											@for ($i = 1; $i < 13; $i++ )
-												<option value="{{$i}}" @if($i == old('month', date("n",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
+												<option value="{{$i}}" @if(old('month', $user_profile->birthday) == null)
+																	   @elseif($i == old('month', date("n",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 											@endfor
 										</select>
 										<select class="day" name="day" type="day">
-											<option value="">日</option>
+											<option value="" selected>日</option>
 											@for ($i = 1; $i < 32; $i++ )
-												<option value="{{$i}}" @if($i == old('day', date("j",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
+												<option value="{{$i}}" @if(old('day', $user_profile->birthday) == null)
+																	   @elseif($i == old('day', date("j",strtotime($user_profile->birthday)))) selected @endif>{{$i}}</option>
 											@endfor
 										</select>
 									</dd>
