@@ -9,7 +9,7 @@
 					<div class="configEditWrap">
 						<div class="configEditItem">
 							<h2 class="subPagesHd">メールアドレスの変更</h2>
-                            <form method="POST" action="{{ route('mail.send') }}">
+                            <form method="POST" action="{{ route('member_config.email.send') }}">
                                 @csrf
                                 <div class="configEditBox">
                                     <dl class="configEditDl01 text-left">

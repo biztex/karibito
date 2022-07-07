@@ -8,17 +8,25 @@
                         <div class="configEditWrap">
                             <div class="configEditItem">
                                 <h2 class="subPagesHd">電話番号の登録</h2>
-                                <form method="POST" action="{{ route('tel.regist') }}">
+                                <form method="POST" action="{{ route('member_config.tel.update') }}">
                                     @csrf
                                     <div class="configEditBox">
+                                        @if (Auth::user()->tel)
+                                            <dl class="configEditDl01 text-left">
+                                                <dt>現在の電話番号：</dt>
+                                                <dt>
+                                                    <div class="align-bottom">{{ Auth::user()->tel }}</div>
+                                                </dt>
+                                            </dl>
+                                        @endif
                                         <dl class="configEditDl01">
                                             <dt>電話番号</dt>
                                             <dd>
+                                                @error('tel')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                                 <div class="mypageEditInput">
-                                                    @error('tel')
-                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                                    <input type="tel" name="tel" autocomplete="tel" required>
+                                                    <input type="tel" name="tel" autocomplete="tel" value="{{ old('tel') }}" required>
                                                     <p class="noticeP">※電話番号はハイフンなしで入力してください。</p>
                                                 </div>
                                             </dd>

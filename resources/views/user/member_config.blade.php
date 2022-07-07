@@ -30,14 +30,14 @@
 								<dl class="memberConfigDl">
 									<dt>メールアドレス</dt>
 									<dd>
-										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('member_config_email') }}">変更する</a>
+										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('member_config.email.edit') }}">変更する</a>
 									</dd>
 								</dl>
 								@can('exist.password')
 									<dl class="memberConfigDl">
 										<dt>パスワード</dt>
 										<dd>
-											<a class="configLink" href="{{ route('member_config.password.index') }}">変更する</a>
+											<a class="configLink" href="{{ route('member_config.password.edit') }}">変更する</a>
 										</dd>
 									</dl>
 								@endcan
@@ -45,7 +45,7 @@
 									<dt>電話番号</dt>
 									<dd>
                                         @if (Auth::user()->tel)
-                                            {{ Auth::user()->tel }}　<a class="configLink" href="{{ route('member_config_tel') }}">登録する</a>
+                                            {{ Auth::user()->tel }}　<a class="configLink" href="{{ route('member_config.tel.edit') }}">変更する</a>
                                         @else
                                             <a class="configLink" href="{{ route('member_config_tel') }}">登録する</a>
                                         @endif

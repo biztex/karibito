@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mypage\ChangeEmailController\SendChangeEmailLinkRequest;
 use App\Services\ChangeEmailService;
-use Illuminate\Http\Request;
 
 class ChangeEmailController extends Controller
 {
     public function __construct(ChangeEmailService $change_email_service)
     {
         $this->change_email_service = $change_email_service;
+    }
+
+    public function edit()
+    {
+        return view('user.member_config_email');
     }
 
     // メールアドレス変更確認メール送信

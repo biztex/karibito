@@ -8,7 +8,7 @@ use App\Models\User;
 
 class ChangePasswordController extends Controller
 {
-    public function index()
+    public function edit()
     {
         return view('user.member_config_pass');
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
+use App\Http\Controllers\Web\Mypage\ChangeTelController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -60,9 +61,6 @@ Route::view('guide', 'support.guide')->name('guide');
 
 Route::view('member', 'user.member')->name('member');
 Route::view('member_config', 'user.member_config')->name('member_config');
-Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
-Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
-Route::view('member_config_tel', 'user.member_config_tel')->name('member_config_tel');
 Route::view('resume','resume')->name('resume');
 Route::view('resume_edit','resume_edit')->name('resume_edit');
 
@@ -89,14 +87,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
-        Route::post('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('mail.send');
+        // 会員情報
         Route::prefix('member_config')->name('member_config.')->group(function () {
+            // メールアドレス変更
+            Route::controller(ChangeEmailController::class)->name('email.')->group(function () {
+                Route::get('email', 'edit')->name('edit');
+                Route::post('email', 'sendChangeEmailLink')->name('send');
+            });
+            // パスワード変更
             Route::middleware('can:exist.password')->controller(ChangePasswordController::class)->name('password.')->group(function () {
-                Route::get('password', 'index')->name('index');
+                Route::get('password', 'edit')->name('edit');
                 Route::post('password', 'update')->name('update');
             });
+            // 電話番号変更
+            Route::controller(ChangeTelController::class)->name('tel.')->group(function () {
+                Route::get('tel', 'edit')->name('edit');
+                Route::post('tel', 'update')->name('update');
+            });
         });
-        Route::post('member_config_tel', [UserProfileController::class, 'telRegist'])->name('tel.regist');
     });
 
     // メールアドレス変更確認（Authの後に書かないとダメ）

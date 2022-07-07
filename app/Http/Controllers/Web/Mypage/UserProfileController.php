@@ -3,18 +3,10 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Web\Mypage\MypageController;
-
-use Illuminate\Http\Request;
-
-use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\Prefecture;
-
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
-use App\Http\Requests\UserProfile\RegistTelRequest;
-use Laravel\Socialite\Facades\Socialite;
 
 use App\Services\UserProfileService;
 
@@ -120,15 +112,6 @@ class UserProfileController extends Controller
         \Session::put('flash_msg','プロフィールを編集しました！');
 
         return redirect($previous);
-    }
-
-    public function telRegist(RegistTelRequest $request)
-    {
-        $user = \Auth::user();
-        $user->tel = $request->tel;
-        $user->save();
-
-        return redirect()->route('member_config')->with('flash_msg', '電話番号を登録しました。');
     }
     // /**
     //  * Remove the specified resource from storage.
