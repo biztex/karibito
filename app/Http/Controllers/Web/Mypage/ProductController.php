@@ -82,12 +82,12 @@ class ProductController extends Controller
         $user = User::find($product->user_id);
 
         $all_products = Product::all();
-        if ($product->productUser->userProfile->birthday !== NULL){
-            $age = Age::group($product->productUser->userProfile->birthday);
+        if ($product->user->userProfile->birthday !== NULL){
+            $age = Age::group($product->user->userProfile->birthday);
         } else {
             $age = '不明';
         }
-        $additional_options = $product->additionalOptions->where('is_public',AdditionalOption::STATUS_PUBLISH);
+        $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
         return view('product.show', compact('user','product', 'age', 'all_products','additional_options'));
     }
 
