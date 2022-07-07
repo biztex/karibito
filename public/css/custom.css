@@ -644,7 +644,33 @@
 	color: #158ACC;
 	border: 1px solid;
 }
+.linkdel{
+	margin-top: 50px;
+}
+.linkdel input{
+	position: absolute;
+	right: 0;
+	top: 50;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 35px;
+	border: 1px solid #6e6a6a;
+	font-size: 1.4rem;
+	font-weight: bold;
+	border-radius: 3px;
+	color: #6e6a6a;
+	background-color: white;
+}
 @media screen and (max-width: 767px) {
+	.linkdel input{
+		width: 100px;
+	    height: 25px;
+	    font-size: 1.2rem;
+	}
+
 	.checkGuideOriginal a{
 		color: #158ACC;
 		font-size: 11px;
