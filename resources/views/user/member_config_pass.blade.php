@@ -9,30 +9,42 @@
 					<div class="configEditWrap">
 						<div class="configEditItem">
 							<h2 class="subPagesHd">パスワードの変更</h2>
-							<div class="configEditBox">
-								<dl class="configEditDl01">
-									<dt>　　　　現在のパスワード</dt>
-									<dd>
-										<div class="mypageEditInput"><input type="text" name="" placeholder=""></div>
-									</dd>
-								</dl>
-								<dl class="configEditDl01">
-									<dt>　　　　新しいパスワード</dt>
-									<dd>
-										<div class="mypageEditInput"><input type="text" name="" placeholder=""></div>
-									</dd>
-								</dl>
-								<dl class="configEditDl01">
-									<dt>新しいパスワードの再入力</dt>
-									<dd>
-										<div class="mypageEditInput"><input type="text" name="" placeholder=""></div>
-										<p class="noticeP">※同じパスワードを確認のため入力してください</p>
-									</dd>
-								</dl>
-								<div class="configEditButton">
-									<input type="submit" value="変更する" name="">
+							<form method="POST" action="{{ route('member_config.password.update') }}">
+								@csrf
+								<div class="configEditBox">
+									<dl class="configEditDl01">
+										<dt>　　　　現在のパスワード</dt>
+										<dd>
+											@error('current_password')<div class="alert alert-danger">{{ $message }}</div>@enderror
+											<div class="mypageEditInput">
+												<input type="password" name="current_password" autocomplete="on" required>
+											</div>
+										</dd>
+									</dl>
+									<dl class="configEditDl01">
+										<dt>　　　　新しいパスワード</dt>
+										<dd>
+											@error('password')<div class="alert alert-danger">{{ $message }}</div>@enderror
+											<div class="mypageEditInput">
+												<input type="password" name="password" required>
+											</div>
+										</dd>
+									</dl>
+									<dl class="configEditDl01">
+										<dt>新しいパスワードの再入力</dt>
+										<dd>
+											@error('password_confirmation')<div class="alert alert-danger">{{ $message }}</div>@enderror
+											<div class="mypageEditInput">
+												<input type="password" name="password_confirmation" required>
+											</div>
+											<p class="noticeP">※同じパスワードを確認のため入力してください</p>
+										</dd>
+									</dl>
+									<div class="configEditButton">
+										<input type="submit" value="変更する">
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 				</div><!-- /#main -->
