@@ -1,0 +1,4 @@
+/* タグ内の文字を改行表示(textareaの表示など) */
+.pre-wrap {
+    white-space: pre-wrap;
+}

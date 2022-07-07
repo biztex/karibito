@@ -30,7 +30,7 @@
 {{--                                </td>--}}
 {{--                            </tr>--}}
                             <tr>
-                                <td>タイトル</td>
+                                <td class="text-nowrap">タイトル</td>
                                 <td>{{ $news->title }}</td>
                             </tr>
                             <tr>

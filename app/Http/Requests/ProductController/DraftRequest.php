@@ -33,7 +33,7 @@ class DraftRequest extends FormRequest
             'number_of_day' => 'nullable | integer',
             'is_call' => 'nullable | integer | boolean',
             'number_of_sale' => ' nullable | integer',
-            'status' => 'required',
+            'status' => ' nullable | integer',
         ];
     }
 
