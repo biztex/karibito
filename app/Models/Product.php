@@ -183,7 +183,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function chatroom()
+    public function productChatroom()
     {
         return $this->hasMany(ProductChatroom::class);
     }

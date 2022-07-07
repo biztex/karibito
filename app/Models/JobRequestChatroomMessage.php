@@ -29,7 +29,7 @@ class JobRequestChatroomMessage extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function chatroom()
+    public function jobRequestChatroom()
     {
         return $this->belongsTo(JobRequestChatroom::class);
     }

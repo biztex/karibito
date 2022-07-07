@@ -17,19 +17,19 @@ class JobRequestProposal extends Model
         self::NOT_PURCHESE => '未購入',
         self::IS_PURCHESE => '購入',
     ];
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
-    public function chatroomMessage()
+    public function jobRequestChatroomMessage()
     {
-        return $this->morphOne(JobRequestroomMessage::class, 'reference');
+        return $this->morphOne(JobRequestChatroomMessage::class, 'reference');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function chatroom()
+    public function jobRequestChatroom()
     {
         return $this->belongsTo(JobRequestChatroom::class);
     }

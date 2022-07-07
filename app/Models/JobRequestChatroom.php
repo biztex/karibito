@@ -45,7 +45,7 @@ class JobRequestChatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function chatroomMessage()
+    public function jobRequestChatroomMessage()
     {
         return $this->hasMany(JobRequestChatroomMessage::class);
     }
@@ -53,7 +53,7 @@ class JobRequestChatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function proposal()
+    public function jobRequestProposal()
     {
         return $this->hasMany(JobRequestProposal::class);
     }  

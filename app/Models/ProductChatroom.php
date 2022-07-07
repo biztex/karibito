@@ -45,7 +45,7 @@ class ProductChatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function chatroomMessage()
+    public function ProductChatroomMessage()
     {
         return $this->hasMany(ProductChatroomMessage::class);
     }
@@ -53,7 +53,7 @@ class ProductChatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function proposal()
+    public function productProposal()
     {
         return $this->hasMany(ProductProposal::class);
     }    

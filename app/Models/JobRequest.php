@@ -118,7 +118,7 @@ class JobRequest extends Model
      /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function chatroom()
+    public function jobRequestChatroom()
     {
         return $this->hasMany(JobRequestChatroom::class);
     }

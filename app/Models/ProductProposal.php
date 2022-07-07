@@ -21,7 +21,7 @@ class ProductProposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
-    public function chatroomMessage()
+    public function productChatroomMessage()
     {
         return $this->morphOne(ProductChatroomMessage::class, 'reference');
     }
@@ -29,7 +29,7 @@ class ProductProposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function chatroom()
+    public function productChatroom()
     {
         return $this->belongsTo(ProductChatroom::class);
     }
