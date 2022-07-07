@@ -114,4 +114,12 @@ class JobRequest extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function chatroom()
+    {
+        return $this->hasMany(JobRequestChatroom::class);
+    }
 }
