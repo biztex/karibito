@@ -47,7 +47,7 @@
                                         @if (Auth::user()->tel)
                                             {{ Auth::user()->tel }}　<a class="configLink" href="{{ route('member_config.tel.edit') }}">変更する</a>
                                         @else
-                                            <a class="configLink" href="{{ route('member_config_tel') }}">登録する</a>
+                                            <a class="configLink" href="{{ route('member_config.tel.edit') }}">登録する</a>
                                         @endif
 									</dd>
 								</dl>
