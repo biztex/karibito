@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
+use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -89,6 +90,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
         Route::post('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('mail.send');
+        Route::prefix('member_config')->name('member_config.')->group(function () {
+            Route::middleware('can:exist.password')->controller(ChangePasswordController::class)->name('password.')->group(function () {
+                Route::get('password', 'index')->name('index');
+                Route::post('password', 'update')->name('update');
+            });
+        });
         Route::post('member_config_tel', [UserProfileController::class, 'telRegist'])->name('tel.regist');
     });
 

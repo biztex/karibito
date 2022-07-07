@@ -20,7 +20,9 @@
 								<li><a href="#">受取口座の登録・変更</a></li>
 								<li><a href="#">入出金履歴</a></li>
 								<li><a href="{{ route('member_config_email') }}">メールアドレスの変更</a></li> <!--1 追加 -->
-								<li><a href="{{ route('member_config_pass') }}">パスワードの変更</a></li>
+								@can('exist.password')
+									<li><a href="{{ route('member_config.password.index') }}">パスワードの変更</a></li>
+								@endcan
 							</ul>
 						</div>
 					</div>

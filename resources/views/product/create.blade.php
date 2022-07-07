@@ -199,14 +199,14 @@
                             @if((old('question_title') || old('answer')))
                                 @foreach(old('question_title') as $k => $v)
                                     <div class="js-questionForm">
-                                        <p class="th">質問のタイトル {{$k + 1}}</p>
+                                        <p class="th js-title">質問のタイトル {{$k + 1}}</p>
                                         @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
                                                 <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{$v}}</textarea>
                                                 <p class="taR">400</p>
                                             </div>
-                                            <p class="th">質問の回答 {{$k + 1}}</p>
+                                            <p class="th js-answer">質問の回答 {{$k + 1}}</p>
                                             @error('answer.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
                                                 <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$k)}}</textarea>
@@ -221,14 +221,14 @@
                             @elseif(collect($request->question_title)->isNotEmpty())
                                 @foreach($request->question_title as $num => $product_question)
                                     <div class="js-questionForm">
-                                        <p class="th">質問のタイトル {{$num + 1}}</p>
+                                        <p class="th js-title">質問のタイトル {{$num + 1}}</p>
                                         @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
                                                 <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question) }}</textarea>
                                                 <p class="taR">400</p>
                                             </div>
-                                            <p class="th">質問の回答 {{$num + 1}}</p>
+                                            <p class="th js-answer">質問の回答 {{$num + 1}}</p>
                                             @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
                                                 <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$num, $request->answer[$num]) }}</textarea>
@@ -242,14 +242,14 @@
                                 @endforeach
                             @else
                                 <div class="js-questionForm">
-                                    <p class="th">質問のタイトル1</p>
+                                    <p class="th js-title">質問のタイトル1</p>
                                     @error('question_title.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="enter">
                                             <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
                                             <p class="taR">400</p>
                                         </div>
-                                        <p class="th">質問の回答1</p>
+                                        <p class="th js-answer">質問の回答1</p>
                                         @error('answer.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="enter">
                                             <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
@@ -348,7 +348,7 @@
     }
 
     function addQuestion(){
-        let str = '<div class="js-questionForm"><p class="th">質問のタイトル%NUM%</p><div class="td">@error('question_title.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"><textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a> </div></div></div>'
+        let str = '<div class="js-questionForm"><p class="th js-title">質問のタイトル%NUM%</p><div class="td">@error('question_title.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th js-answer">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"><textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a> </div></div></div>'
         let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
 
         if(number_js_questionForm < 10) {
@@ -357,15 +357,15 @@
         }
         delQuestion();
     }
-
+//追加時は正常にタイトルと回答が表示されるが、消す時に一つ消すと全てが両方とも解答に代わってしまう
     function delQuestion() {
         $('.js-deleteQuestion').click(function(){
             let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
             if (number_js_questionForm > 1 ) {
                 $(this).parents('.js-questionForm').remove(); //divだけを消す
                 $(".formQuestionsArea").children(".js-questionForm").each(function(index, element){
-                    $(element).find(".th").text("質問のタイトル" + (index + 1));
-                    $(element).find(".th").text("質問の回答" + (index + 1));
+                    $(element).find(".js-title").text("質問のタイトル" + (index + 1));
+                    $(element).find(".js-answer").text("質問の回答" + (index + 1));
                 })
             }
         });
