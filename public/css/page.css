@@ -7889,3 +7889,45 @@ input.small{
 .recommendList .list .evaluates .pity{
 	background-image:url(../img/cart_buy/ico_rate_pity.svg);
 }
+/*add 20220705*/
+.mypagePortfolioUl02 .editP {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.mypagePortfolioUl02 .editP a {
+	display: block;
+	margin: 0 10px;
+}
+
+.mypageUl03 li {
+	position: relative;
+	padding-right: 60px;
+}
+
+.mypageUl03 li .mypageCtrl {
+	width: 60px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 3;
+}
+
+.mypageUl03 li .mypageCtrl a {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    border-radius: 3px;
+    font-size: 1.4rem;
+    border: 1px solid #158ACC;
+    padding: 0 12px;
+    background-color: #158ACC;
+    color: #fff;
+    margin-left: 5px;
+}

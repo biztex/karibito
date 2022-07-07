@@ -40,7 +40,11 @@ class UserProfileService
      */
     public function updateUserProfile($request)
     {
-        $birthday = $request->year . '-' . $request->month . '-' . $request->day;
+        if ( $request->year == null || $request->month == null || $request->day == null ){
+            $birthday = null;
+        } else {
+            $birthday = $request->year . '-' . $request->month . '-' . $request->day;
+        }
         $user_profile = \Auth::user()->userProfile;
 
         $user_profile->fill([

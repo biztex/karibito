@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,8 @@ Route::view('member_config', 'user.member_config')->name('member_config');
 Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
 Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
 Route::view('member_config_tel', 'user.member_config_tel')->name('member_config_tel');
+Route::view('resume','resume')->name('resume');
+Route::view('resume_edit','resume_edit')->name('resume_edit');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -202,6 +205,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
+
+        //お知らせ機能
+        Route::resource('/news', NewsController::class);
     });
 
 });
@@ -236,7 +242,8 @@ Route::prefix('user')->name('user.')->group(function () {
 // やり取り画面組込中
 Route::prefix('chatrooms')->controller(ChatRoomController::class)->name('chatroom.')->group(function () {
     Route::get('', 'index')->name('index');
-    Route::get('{product}', 'show')->name('show');
+    Route::get('{product}', 'show')->name('product.show');
+
     Route::get('{product}/sample', 'sample')->name('sample');
 
     // 支払い

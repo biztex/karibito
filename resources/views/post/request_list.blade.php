@@ -1041,7 +1041,7 @@
 						</div>
 					</div>
 				</div><!-- /#main -->
-				<aside id="side" class="pc">
+				<aside id="side">
 					<h2 class="cate cate01">スケジュールから探す</h2>
 					<div class="calendar">
 						<div id="datepicker"></div>

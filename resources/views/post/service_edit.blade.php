@@ -82,7 +82,7 @@
                             @enderror
                             <select name="prefecture" class="@error('prefecture') is-invalid @enderror">
                                 <option
-                                    value="{{old('prefecture', $product->productPrefecture->id)}}">{{old('prefecture', $product->productPrefecture->name)}}</option>
+                                    value="{{old('prefecture', $product->prefecture->id)}}">{{old('prefecture', $product->prefecture->name)}}</option>
                                 <option value="">選択してください</option>
                                 @foreach ( $prefectures as $prefecture )
                                     <option value="{{$prefecture->id}}"
@@ -140,7 +140,7 @@
                             @enderror
                             <div class="paid">
                                 <div class="enter">
-                                    @foreach($product->additionalOptions as $option)
+                                    @foreach($product->additionalOption as $option)
                                         <textarea class="@error('option_name') is-invalid @enderror"
                                                   value="{{ old('option_name', $option->title) }}" name="option_name"
                                                   placeholder="入力してください">{{ old('option_name', $option->name)}}</textarea>
@@ -174,7 +174,7 @@
                             <p class="specialtyBtn"><a href="#"><img src="img/mypage/icon_add.svg" alt="">得意分野を追加</a>
                             </p>
                         </div>
-                        @foreach($product->productQuestions as $question)
+                        @foreach($product->productQuestion as $question)
                             <p class="th">質問のタイトル1</p>
                             <div class="td">
                                 @error('question_title')

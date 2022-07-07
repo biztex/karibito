@@ -1,4 +1,5 @@
 <x-layout>
+<body id="member-page">
 <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
 	<article>
 		<div id="breadcrumb">
@@ -47,13 +48,6 @@
 							</div>
 							<div class="memberConfigItem">
 								<h3 class="memberConfigHd">各種認証申請</h3>
-								<dl class="memberConfigDl">
-									<dt>出品者情報</dt>
-									<dd>
-										<span class="status_span status_confirmed">登録済み</span>
-										<a class="configLink" href="#">編集する</a>
-									</dd>
-								</dl>
 								<dl class="memberConfigDl">
 									<dt>本人確認	</dt>
 									<dd>

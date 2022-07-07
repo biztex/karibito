@@ -39,7 +39,7 @@
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<input type="text" name="title" value="{{ old('title', $job_request->title ) }}">
-							<p class="taR">1-30</p>
+							<p class="taR">30</p>
 						</div>
 
 

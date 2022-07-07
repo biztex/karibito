@@ -95,7 +95,7 @@
 
 						</div>
 
-						<aside id="side" class="pc">
+						<aside id="side">
 							<div class="box reservate">
 								<h3>{{ number_format($request->price) }}円</h3>
 								<p class="status">応募期限</p>

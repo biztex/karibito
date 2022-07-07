@@ -22,7 +22,7 @@
                             <div class="datas">
                                 <span class="data">電話相談の受付：{{App\Models\Product::IS_CALL[$product->is_call]}}</span>
                                 <span class="data">閲覧：1000</span>
-                                <span class="data">エリア：{{$product->productPrefecture->name}}</span>
+                                <span class="data">エリア：{{$product->prefecture->name}}</span>
                                 <span class="data">販売数：{{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}</span>
                             </div>
                             <h2><span>{{$product->title}}</span></h2>
@@ -72,7 +72,7 @@
                         <div class="optional">
                             <h2 class="hdM">オプション追加料金</h2>
                             <ul>
-                                @foreach($product->additionalOptions as $option)
+                                @foreach($product->additionalOption as $option)
                                     <li><span class="add">＋ {{$option->name}}</span><span
                                             class="price">￥{{$option->price}}</span></li>
                                 @endforeach
@@ -85,7 +85,7 @@
                         <div class="optional faq">
                             <h2 class="hdM">よくあるご質問</h2>
                             <ul class="toggleWrapPC">
-                                @foreach($product->productQuestions as $question)
+                                @foreach($product->productQuestion as $question)
                                     <li>
                                         <p class="quest toggleBtn"><span>{{$question->title}}</span><span class="more">回答を見る</span>
                                         </p>
@@ -255,7 +255,7 @@
                                 <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
                             </div>
                             <div class="functeBtns">
-                                @if($product->productUser->user_id = Auth::id())
+                                @if($product->user->user_id = Auth::id())
                                     <a href="{{ route('product.edit', ["id" => $product->id]) }}" class="orange full">編集する</a>
                                 @else
                                     <a href="" class="orange full">交渉画面へ進む</a>
@@ -266,13 +266,13 @@
                         <div class="box seller">
                             <h3>スキル出品者</h3>
                             <a href="#" class="head"><img
-                                    src={{asset('/storage/'.$product->productUser->userProfile->icon) }} alt=""></a>
+                                    src={{asset('/storage/'.$product->user->userProfile->icon) }} alt=""></a>
                             <p class="login">最終ログイン：8時間前</p>
                             <p class="introd"><a href="#"
-                                                 class="name">{{$product->productUser->name}}</a><br>({{App\Models\UserProfile::GENDER[$product->productUser->userProfile->gender]}}
-                                / {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>
+                                                 class="name">{{$product->user->name}}</a><br>({{App\Models\UserProfile::GENDER[$product->user->userProfile->gender]}}
+                                / {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>
                             <div class="evaluate three"></div>
-                            @if($product->productUser->userProfile->is_identify = 1)
+                            @if($product->user->userProfile->is_identify = 1)
                                 <p class="check"><a href="#">本人確認済み</a></p>
                             @endif
                         </div>
@@ -280,7 +280,7 @@
                 </div>
                 <div id="">
                     <div class="recommendList style2">
-                        <h2 class="hdM">{{$product->productUser->name}}さんのその他の出品</h2>
+                        <h2 class="hdM">{{$product->user->name}}さんのその他の出品</h2>
                         <div class="list sliderSP">
                             @foreach($all_products as $all_product)
                                 <div class="item">
@@ -302,8 +302,8 @@
                                             <div class="user">
                                                 <p class="ico"><img src="img/common/ico_head.png" alt=""></p>
                                                 <div class="introd">
-                                                    <p class="name">{{$all_product->productUser->name}}</p>
-                                                    <p>({{App\Models\UserProfile::GENDER[$all_product->productUser->userProfile->gender]}}/ {{$age}}/ {{$product->productUser->userProfile->prefecture->name}})</p>
+                                                    <p class="name">{{$all_product->user->name}}</p>
+                                                    <p>({{App\Models\UserProfile::GENDER[$all_product->user->userProfile->gender]}}/ {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>
                                                 </div>
                                             </div>
                                             <div class="evaluates">
