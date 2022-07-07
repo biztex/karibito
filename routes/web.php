@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
+use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -59,7 +60,6 @@ Route::view('guide', 'support.guide')->name('guide');
 
 Route::view('member', 'user.member')->name('member');
 Route::view('member_config', 'user.member_config')->name('member_config');
-Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
 Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
 Route::view('resume','resume')->name('resume');
 Route::view('resume_edit','resume_edit')->name('resume_edit');
@@ -88,6 +88,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
         Route::post('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('mail.send');
+        Route::prefix('member_config')->name('member_config.')->group(function () {
+            Route::middleware('can:exist.password')->controller(ChangePasswordController::class)->name('password.')->group(function () {
+                Route::get('password', 'index')->name('index');
+                Route::post('password', 'update')->name('update');
+            });
+        });
     });
 
     // メールアドレス変更確認（Authの後に書かないとダメ）

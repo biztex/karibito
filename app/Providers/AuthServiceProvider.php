@@ -29,6 +29,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // パスワード有無(※SNS認証で登録した場合)
+        Gate::define('exist.password', function (User $user) {
+            return $user->password !== null;
+        });
+
         // 本人確認認証済チェック
         Gate::define('identify', function (User $user) {
             if($user->userProfile !== null){
