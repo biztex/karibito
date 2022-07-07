@@ -179,4 +179,13 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productChatroom()
+    {
+        return $this->hasMany(ProductChatroom::class);
+    }
+
 }

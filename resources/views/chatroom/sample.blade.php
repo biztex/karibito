@@ -33,6 +33,8 @@
         <div id="contents" class="otherPage otherPage2">
             <div class="inner02 clearfix">
                 <div id="main">
+
+                	<!-- 購入した時、表示する出品者情報 -->
                     <div class="friendsTop">
                         <div class="sellerTop">
                             <div class="user">
@@ -58,6 +60,20 @@
 							</div>
 						</div>
                     </div>
+
+					<!-- 購入されたとき、表示する購入者情報 -->
+                    <div class="friendsTop">
+						<div class="sellerTop">
+							<div class="user">
+								<p class="head"><img src="img/service/ico_head.png" alt=""></p>
+								<div class="info">
+									<p class="name">購入者の名前</p>
+								</div>
+							</div>
+							<p class="login">最終ログイン：オンライン中</p>
+						</div>
+					</div>
+
                     <h2 class="hdM">チャット<a href="#" class="more st2">契約後のキャンセルについて</a></h2>
                     <div class="subPagesTab">
                         <div class="chatPages">
@@ -68,6 +84,8 @@
                                     <p class="note">※返信は3日以内にお願いします</p>
                                 </div>
                                 <ul class="communicate">
+
+									<!-- 通常メッセージ -->
                                     <li>
                                         <div class="img">
                                             @if(null !== \Auth::user()->userProfile->icon)
