@@ -45,7 +45,7 @@
                                         <a href="{{ route('admin.news.show', $news->id) }}">{{ $news->title }}</a>
                                     </td>
                                     <td class="text-nowrap px-2">
-                                        <a class="btn btn-primary" href="">詳細</a>
+                                        <a class="btn btn-primary" href="{{ route('admin.news.show', $news->id) }}">詳細</a>
                                     </td>
                                     <td class="text-nowrap px-2">
                                         <a class="btn btn-primary" href="{{ route('admin.news.edit', $news->id) }}">編集</a>
