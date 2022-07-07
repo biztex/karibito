@@ -113,9 +113,9 @@ class UserProfileService
      * @param string $newTel
      * @return User
      */
-    public function updateTel(User $user, string $newTel)
+    public function updateTel(User $user, string $new_tel)
     {
-        $user->tel = $newTel;
+        $user->tel = $new_tel;
         $user->save();
         return $user;
     }
