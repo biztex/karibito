@@ -283,7 +283,11 @@
                                                 @elseif(old('image_status'.$i, $request['image_status'.$i] ) === "insert")
                                                     <img id="preview_product{{$i}}" src="{{ old('base64_text.'.$i)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
-                                                    <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text.'.$i, $request->base64_text[$i]) }}">
+                                                    @if($request->base64_text)
+                                                        <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text.'.$i, $request->base64_text[$i]) }}">
+                                                    @else
+                                                        <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text.'.$i) }}">
+                                                    @endif
                                                 @else
                                                     <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>

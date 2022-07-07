@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('is_call')->comment('0.電話受付不可 1.電話受付可')->nullable();
             $table->integer('number_of_sale')->comment('販売個数')->nullable();
             $table->boolean('is_draft')->comment('0.下書きではない 1.下書き');
-            $table->tinyInteger('status')->comment('1.公開 2.非公開');
+            $table->tinyInteger('status')->comment('1.公開 2.非公開')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -178,7 +178,7 @@ class ProductController extends Controller
                 'number_of_day' => $request->number_of_day,
                 'is_call' => $request->is_call,
                 'number_of_sale' => $request->number_of_sale,
-                'status' => Product::STATUS_PRIVATE,
+                'status' => $request->status,
                 'is_draft' => Product::IS_DRAFT
             ]);
             $product->save();
