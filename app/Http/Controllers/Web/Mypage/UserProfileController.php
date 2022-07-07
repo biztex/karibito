@@ -13,6 +13,7 @@ use App\Models\Prefecture;
 
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
+use App\Http\Requests\UserProfile\RegistTelRequest;
 use Laravel\Socialite\Facades\Socialite;
 
 use App\Services\UserProfileService;
@@ -121,7 +122,7 @@ class UserProfileController extends Controller
         return redirect($previous);
     }
 
-    public function telRegist(Request $request)
+    public function telRegist(RegistTelRequest $request)
     {
         $user = \Auth::user();
         $user->tel = $request->tel;
