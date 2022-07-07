@@ -49,9 +49,8 @@ class NewsController extends Controller
     {
         $this->news_service->storeNews($request->all());
 
-        \Session::put('flash_msg','ニュースを投稿しました');
-        return redirect()->route('admin.index');
-
+        return back()->with('flash_msg', 'ニュースを投稿しました');
+//TOdo..newsのインデックスをつくったらそこに遷移させる
     }
 
     /**
