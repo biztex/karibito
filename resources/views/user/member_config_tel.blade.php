@@ -10,7 +10,6 @@
                                 <h2 class="subPagesHd">電話番号の登録</h2>
                                 <form method="POST" action="{{ route('tel.regist') }}">
                                     @csrf
-                                    <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                                     <div class="configEditBox">
                                         <dl class="configEditDl01">
                                             <dt>電話番号</dt>

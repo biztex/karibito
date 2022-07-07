@@ -42,7 +42,11 @@
 								<dl class="memberConfigDl">
 									<dt>電話番号</dt>
 									<dd>
-										{{ Auth::user()->tel }}　<a class="configLink" href="{{ route('member_config_tel') }}">登録する</a>
+                                        @if (Auth::user()->tel)
+                                            {{ Auth::user()->tel }}　<a class="configLink" href="{{ route('member_config_tel') }}">登録する</a>
+                                        @else
+                                            <a class="configLink" href="{{ route('member_config_tel') }}">登録する</a>
+                                        @endif
 									</dd>
 								</dl>
 							</div>
