@@ -67,7 +67,7 @@ class UserProfileController extends Controller
 
     /**
      * 基本情報登録完了画面
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showComplete()
@@ -84,7 +84,7 @@ class UserProfileController extends Controller
     //  */
     // public function show()
     // {
-    //    
+    //
     // }
 
     // /**
@@ -121,6 +121,14 @@ class UserProfileController extends Controller
         return redirect($previous);
     }
 
+    public function telRegist(Request $request)
+    {
+        $user = \Auth::user();
+        $user->tel = $request->tel;
+        $user->save();
+
+        return redirect()->route('member_config')->with('flash_msg', '電話番号を登録しました。');
+    }
     // /**
     //  * Remove the specified resource from storage.
     //  *

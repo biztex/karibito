@@ -60,6 +60,7 @@ Route::view('member', 'user.member')->name('member');
 Route::view('member_config', 'user.member_config')->name('member_config');
 Route::view('member_config_pass', 'user.member_config_pass')->name('member_config_pass');
 Route::view('member_config_email', 'user.member_config_email')->name('member_config_email');
+Route::view('member_config_tel', 'user.member_config_tel')->name('member_config_tel');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -85,6 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
         Route::post('member_config', [ChangeEmailController::class, 'sendChangeEmailLink'])->name('mail.send');
+        Route::post('member_config_tel', [UserProfileController::class, 'telRegist'])->name('tel.regist');
     });
 
     // メールアドレス変更確認（Authの後に書かないとダメ）
