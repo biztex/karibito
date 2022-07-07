@@ -26,9 +26,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required | string | max:30',
-            'content' => 'required | string | min:30 | max:3000 ',
-            'public_date' => 'integer',
-            'is_public' => 'required | integer'
+            'content' => 'required | string | max:3000'
         ];
     }
     public function attributes()

@@ -47,12 +47,9 @@ class NewsController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $news = $this->news_service->storeNews($request->all());
+        $this->news_service->storeNews($request->all());
 
-        if($news->is_public == 1) {
-            $news->fill([ 'public_date' => Carbon::now() ])->save();
-        }
-
+        \Session::put('flash_msg','ニュースを投稿しました');
         return redirect()->route('admin.index');
 
     }

@@ -33,13 +33,6 @@
                                     @endif
 
                                     <div class="form-group row py-1">
-                                        <label for="is_release" class="col-md-4 col-form-label text-md-right">公開設定<span class="badge badge-danger ml-1">必須</span></label>
-                                        <div class="col-md-6">
-                                            @include('components.form.radio', ['name' => 'is_public', 'data' => [1 => '公開', 0 => '非公開']])
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row py-1">
                                         <label for="title" class="col-md-4 col-form-label text-md-right">タイトル<span class="badge badge-danger ml-1">必須</span></label>
                                         <div class="col-md-6">
                                             @include('components.form.text', ['name' => 'title', 'required' => true])

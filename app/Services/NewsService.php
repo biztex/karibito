@@ -11,7 +11,7 @@ class NewsService
      */
     public function storeNews(array $params): News
     {
-        $columns = ['title', 'content', 'is_public'];
+        $columns = ['title', 'content'];
 
         $news = new News;
         foreach($columns as $column){

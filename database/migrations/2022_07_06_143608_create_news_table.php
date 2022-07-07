@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('title')->comment('タイトル')->nullable();
             $table->text('content')->comment('詳細')->nullable();
-            $table->boolean('is_public')->comment('0.非公開 1.公開');
-            $table->date('public_date')->nullable()->comment('公開日');
             $table->softDeletes();
             $table->timestamps();
         });

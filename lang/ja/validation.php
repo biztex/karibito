@@ -230,8 +230,7 @@ return [
         'answer.*' => '質問の回答',
         'status' => '公開設定',
         'base64_text.0' => '画像1枚目',
-        'paths.*' => '画像',
-        'is_public' => '公開設定'
+        'paths.*' => '画像'
     ],
 
 ];
