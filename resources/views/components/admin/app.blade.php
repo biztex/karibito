@@ -18,6 +18,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css" href="/css/admin-custom.css" media="all">
 
 </head>
 <body>
@@ -32,7 +33,7 @@
 				<!-- <a class="nav-item nav-link active" href="{{ route('admin.dashboard') }}">Home <span class="sr-only">(current)</span></a> -->
 				<a class="nav-item nav-link active" href="{{ route('admin.users.index') }}">Users</a>
 				<!-- @if(\Auth::guard('admin')->user()->role == 1)<a class="nav-item nav-link" href="{{ route('admin.index') }}">Admin</a>@endif -->
-				<a class="nav-item nav-link active" href="{{ route('admin.news.create') }}">News</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.news.index') }}">News</a>
 				<a class="nav-item nav-link" href="{{ route('admin.logout') }}">LOGOUT</a>
 				</div>
 			</div>

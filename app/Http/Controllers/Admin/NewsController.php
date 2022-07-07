@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\News\StoreRequest;
+use App\Models\News;
 use App\Services\NewsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news_list = News::all();
+
+        return view('Admin.news.index', compact('news_list'));
     }
 
     /**
@@ -59,9 +62,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(News $news)
     {
-        //
+        return view('Admin.news.show', compact('news'));
     }
 
     /**
