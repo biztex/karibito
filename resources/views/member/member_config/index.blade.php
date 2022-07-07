@@ -4,7 +4,7 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>メンバー情報</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('member') }}">メンバー情報</a>　>　<span>会員情報</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.flash-msg/>
@@ -25,26 +25,30 @@
 								</dl>
 								<dl class="memberConfigDl">
 									<dt>ユーザーID</dt>
-									<dd>000000000000</dd>
+									<dd>{{ Auth::user()->id }}</dd>
 								</dl>
 								<dl class="memberConfigDl">
 									<dt>メールアドレス</dt>
 									<dd>
-										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('member_config_email') }}">変更する</a>
+										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('member_config.email.edit') }}">変更する</a>
 									</dd>
 								</dl>
 								@can('exist.password')
 									<dl class="memberConfigDl">
 										<dt>パスワード</dt>
 										<dd>
-											<a class="configLink" href="{{ route('member_config.password.index') }}">変更する</a>
+											<a class="configLink" href="{{ route('member_config.password.edit') }}">変更する</a>
 										</dd>
 									</dl>
 								@endcan
 								<dl class="memberConfigDl">
 									<dt>電話番号</dt>
 									<dd>
-										<a class="configLink" href="#">確認する</a>
+                                        @if (Auth::user()->tel)
+                                            {{ Auth::user()->tel }}　<a class="configLink" href="{{ route('member_config.tel.edit') }}">変更する</a>
+                                        @else
+                                            <a class="configLink" href="{{ route('member_config_tel') }}">登録する</a>
+                                        @endif
 									</dd>
 								</dl>
 							</div>

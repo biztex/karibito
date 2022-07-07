@@ -106,4 +106,17 @@ class UserProfileService
         }
         return $user_profile->save();
     }
+
+    /**
+     * ユーザーの電話番号変更
+     * @param User $user
+     * @param string $new_tel
+     * @return User
+     */
+    public function updateTel(User $user, string $new_tel): User
+    {
+        $user->tel = $new_tel;
+        $user->save();
+        return $user;
+    }
 }

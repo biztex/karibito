@@ -3,17 +3,10 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Web\Mypage\MypageController;
-
-use Illuminate\Http\Request;
-
-use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\Prefecture;
-
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
-use Laravel\Socialite\Facades\Socialite;
 
 use App\Services\UserProfileService;
 
@@ -67,7 +60,7 @@ class UserProfileController extends Controller
 
     /**
      * 基本情報登録完了画面
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showComplete()
@@ -84,7 +77,7 @@ class UserProfileController extends Controller
     //  */
     // public function show()
     // {
-    //    
+    //
     // }
 
     // /**
@@ -120,7 +113,6 @@ class UserProfileController extends Controller
 
         return redirect($previous);
     }
-
     // /**
     //  * Remove the specified resource from storage.
     //  *
