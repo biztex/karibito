@@ -114,7 +114,7 @@
                             </ul>
                         </div>
                     </div>
-                    <aside id="side" class="pc">
+                    <aside id="side">
                         <div class="box reservate">
                             <h3>@if(!is_null($request->price))
                                     {{ number_format($request->price) }}
