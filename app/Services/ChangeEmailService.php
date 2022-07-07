@@ -2,13 +2,10 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Mypage\ChangeEmailController\SendChangeEmailLinkRequest;
 use App\Mail\ChangeEmailMail;
 use App\Models\EmailReset;
 use App\Models\User;
 use Carbon\Carbon;
-use App\Services\ChangeEmailService;
-use Illuminate\Http\Request;
 
 class ChangeEmailService
 {
