@@ -3212,7 +3212,7 @@
 								</div>
 								<div class="otherBtn"><a href="#">その他カテゴリ別ランキングをみる</a></div>
 								<div class="newsList mt60">
-									<h2 class="hdM">カリビトからのお知らせ<a href="#" class="more">お知らせをもっと見る</a></h2>
+									<h2 class="hdM">カリビトからのお知らせ<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
                                         @foreach($news_list as $news)
                                             <dl>
@@ -6409,7 +6409,7 @@
 								</div>
 								<div class="otherBtn"><a href="#">その他カテゴリ別ランキングをみる</a></div>
 								<div class="newsList mt60">
-									<h2 class="hdM">カリビトからのお知らせ<a href="#" class="more">お知らせをもっと見る</a></h2>
+									<h2 class="hdM">カリビトからのお知らせ<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
                                         @foreach($news_list as $news)
 										<dl>

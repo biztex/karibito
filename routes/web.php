@@ -206,6 +206,7 @@ Route::post('contact', [ContactController::class, 'sendSupportMail']);
 
 Route::get('', [HomeController::class, 'index'])->name('home');
 Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
+Route::get('news', [NewsController::class, 'index'])->name('news.index');
 
 // --管理者画面-----------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
