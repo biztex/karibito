@@ -9,6 +9,8 @@ class JobRequestChatroomMessage extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     const NOT_COMPLETE = 0;
     
     const IS_COMPLETE = 1;
