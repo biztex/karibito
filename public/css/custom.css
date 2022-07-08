@@ -1,7 +1,7 @@
 @charset "utf-8";
 /*
  * custom.css
- * 
+ *
  */
 
  /* スマホ表示切替レスポンシブ(766xまでスマホ表示)
@@ -10,12 +10,12 @@
 									　 ↓
 		@media screen and (max-width: 767px) {
 										変更する必要あり。
-		
+
 		@media screen and (max-width: 767px) {
 		#gNavi .navUl02.pc{display: none}
 		#gNavi .navUl02.sp{display: block;}
 		.btnMenu{ display:block; }
-		#gNavi{ ~~~~~~ 
+		#gNavi{ ~~~~~~
 
 	page.css 4095あたり、
 		@media screen and (max-width: 860px) {　
@@ -27,7 +27,7 @@
 /* コメントアウトしている間のみヘッダーフッター調整 */
 	/* ヘッダー */
 	/* #wrapper {
-		padding-top: 81px; 
+		padding-top: 81px;
 	} */
 	/* フッター */
 	/* @media screen and (max-width: 767px){
@@ -57,7 +57,7 @@
 #mypage .sidePerson {
 	display: none;
 }
-#mypage 
+#mypage
 .detailStyle .recommendList .list .item{max-width: 212px}
 .fancyPersonTable select {
 	color: black;
@@ -530,7 +530,7 @@
 		font-size: 14px;
 	}
 	.error_small{
-		font-size:8px !important; 
+		font-size:8px !important;
 	}
 
 }
@@ -616,7 +616,7 @@
     pointer-events: none;
  }
 
- 
+
  .checkGuide.more{
 	float:none;
 	display:block;
@@ -704,7 +704,7 @@
 }
 .mypagePortfolioUl03 .fun div:hover{
 	cursor: pointer;
-	
+
 }
 .functeBtns input {
     display: flex;
@@ -740,5 +740,5 @@
 	.otherNav {
 		box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
 	}
-
 }
+
