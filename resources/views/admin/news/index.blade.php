@@ -52,8 +52,7 @@
                                     </td>
                                     <td class="text-nowrap px-2">
                                         <form action="{{ route('admin.news.destroy',$news->id ) }}" method="post" class="d-inline">
-                                            @method("DELETE")
-                                            @csrf
+                                            @csrf @method('delete')
                                             <button class="btn btn-outline-danger" onclick='return confirm("削除しますか？");'>削除</button>
                                         </form>
                                     </td>
