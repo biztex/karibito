@@ -7,7 +7,7 @@ use App\Models\News;
 class NewsService
 {
     /**
-     * お問い合わせ完了メール送信
+     * ニュースを登録
      */
     public function storeNews(array $params): News
     {
@@ -19,6 +19,17 @@ class NewsService
         }
         $news->save();
 
+        return $news;
+    }
+
+    public function updateNews(array $params, $news):News
+    {
+        $columns = ['title', 'content'];
+
+        foreach($columns as $column){
+            $news->$column = $params[$column];
+        }
+        $news->save();
         return $news;
     }
 }
