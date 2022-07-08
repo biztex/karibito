@@ -21,8 +21,8 @@ use App\Http\Controllers\Web\Mypage\IdentificationController;
 use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
-use App\Http\Controllers\Web\ChatRoomController;
 use App\Http\Controllers\Web\NewsController;
+use App\Http\Controllers\Web\ProductChatroomController;
 
 
 use App\Http\Controllers\HomeController;
@@ -258,10 +258,14 @@ Route::prefix('user')->name('user.')->group(function () {
 
 });
 
+Route::get('chatroom', [ProductChatroomController::class, 'index'])->name('chatroom.index');
+
 // やり取り画面組込中
-Route::prefix('chatrooms')->controller(ChatRoomController::class)->name('chatroom.')->group(function () {
-    Route::get('', 'index')->name('index');
-    Route::get('{product}', 'show')->name('product.show');
+Route::prefix('product/chatroom')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
+    Route::get('start/{product}', 'newroom')->name('newroom');
+    Route::post('start/{product}', 'start')->name('start');
+    Route::get('{product_chatroom}', 'show')->name('show');
+    Route::post('message/{product_chatroom}', 'message')->name('message');
 
     Route::get('{product}/sample', 'sample')->name('sample');
 
