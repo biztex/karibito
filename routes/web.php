@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
@@ -22,6 +22,7 @@ use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\ChatRoomController;
+use App\Http\Controllers\Web\NewsController;
 
 
 use App\Http\Controllers\HomeController;
@@ -204,6 +205,7 @@ Route::get('contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('contact', [ContactController::class, 'sendSupportMail']);
 
 Route::get('', [HomeController::class, 'index'])->name('home');
+Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
 
 // --管理者画面-----------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -223,7 +225,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 
         //お知らせ機能
-        Route::resource('/news', NewsController::class);
+        Route::resource('/news', AdminNewsController::class);
     });
 
 });

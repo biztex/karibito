@@ -1,4 +1,3 @@
-
 <x-layout>
 <x-parts.flash-msg/>
 <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
@@ -3215,26 +3214,12 @@
 								<div class="newsList mt60">
 									<h2 class="hdM">カリビトからのお知らせ<a href="#" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
+                                        @foreach($news_list as $news)
+                                            <dl>
+                                                <dt>{{$news->created_at->format('Y/m/d')}}</dt>
+                                                <dd><a href="{{ route('news.show', $news->id) }}">{{$news->title}}</a></dd>
+                                            </dl>
+                                        @endforeach
 									</div>
 								</div>
 							</div><!-- /#main -->
@@ -6426,26 +6411,12 @@
 								<div class="newsList mt60">
 									<h2 class="hdM">カリビトからのお知らせ<a href="#" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
+                                        @foreach($news_list as $news)
 										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
+											<dt>{{$news->created_at}}</dt>
+											<dd><a href="{{ route('news.show', $news->id) }}">{{$news->title}}</a></dd>
 										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
+                                        @endforeach
 									</div>
 								</div>
 							</div><!-- /#main -->
