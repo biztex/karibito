@@ -31,37 +31,38 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($news_list as $news)
-                                <tr>
-                                    <td class="text-nowrap px-2">{{ $news->created_at->format('Y/m/d') }}</td>
-{{--                                    <td class="text-nowrap px-2">--}}
-{{--                                        @if($news->is_release === 1)--}}
-{{--                                            <p class="btn btn-outline-info" href="">公開中</p>--}}
-{{--                                        @else--}}
-{{--                                            <p class="btn btn-outline-danger" href="">非公開</p>--}}
-{{--                                        @endif--}}
-{{--                                    </td>--}}
-                                    <td class="text-nowrap px-2">
-                                        <a href="{{ route('admin.news.show', $news->id) }}">{{ $news->title }}</a>
-                                    </td>
-{{--                                    <td class="text-nowrap px-2">--}}
-{{--                                        <a class="btn btn-primary" href="">詳細</a>--}}
-{{--                                    </td>--}}
-                                    <td class="text-nowrap px-2">
-                                        <a class="btn btn-primary" href="{{ route('admin.news.edit', $news->id) }}">編集</a>
-                                    </td>
-                                    <td class="text-nowrap px-2">
-                                        <form action="{{ route('admin.news.destroy',$news->id ) }}" method="post" class="d-inline">
-                                            @csrf @method('delete')
-                                            <button class="btn btn-outline-danger" onclick='return confirm("削除しますか？");'>削除</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach($news_list as $news)
+                                    <tr>
+                                        <td class="text-nowrap px-2">{{ $news->created_at->format('Y/m/d') }}</td>
+    {{--                                    <td class="text-nowrap px-2">--}}
+    {{--                                        @if($news->is_release === 1)--}}
+    {{--                                            <p class="btn btn-outline-info" href="">公開中</p>--}}
+    {{--                                        @else--}}
+    {{--                                            <p class="btn btn-outline-danger" href="">非公開</p>--}}
+    {{--                                        @endif--}}
+    {{--                                    </td>--}}
+                                        <td class="text-nowrap px-2">
+                                            <a href="{{ route('admin.news.show', $news->id) }}">{{ $news->title }}</a>
+                                        </td>
+    {{--                                    <td class="text-nowrap px-2">--}}
+    {{--                                        <a class="btn btn-primary" href="">詳細</a>--}}
+    {{--                                    </td>--}}
+                                        <td class="text-nowrap px-2">
+                                            <a class="btn btn-primary" href="{{ route('admin.news.edit', $news->id) }}">編集</a>
+                                        </td>
+                                        <td class="text-nowrap px-2">
+                                            <form action="{{ route('admin.news.destroy',$news->id ) }}" method="post" class="d-inline">
+                                                @csrf @method('delete')
+                                                <button class="btn btn-outline-danger" onclick='return confirm("削除しますか？");'>削除</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+                {{ $news_list->links() }}
             </div>
         </div>
     </div>
