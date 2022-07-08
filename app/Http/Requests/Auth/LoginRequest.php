@@ -21,6 +21,12 @@ class LoginRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        // input name=idをemailとして処理する
+        $this->merge(['email' => $this->id]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

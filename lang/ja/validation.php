@@ -202,6 +202,7 @@ return [
         'name' => 'ニックネーム',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'tel' => '電話番号',
         'gender' => '性別',
         'prefecture' => '都道府県',
         'icon' => 'アイコン画像',

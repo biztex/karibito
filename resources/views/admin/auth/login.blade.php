@@ -27,9 +27,11 @@
 					<div class="loginWrap">
 						<h2 class="subPagesHd">ログイン</h2>
 
-						@if (session('flash_alert'))
-							<div class="alert alert-danger mb05" style="z-index: 9999;">
-								{{ session('flash_alert') }}
+						@if ($errors->any())
+							<div class="alert alert-danger">
+								<ul>
+									<li>IDまたはパスワードが異なります</li>
+								</ul>
 							</div>
 						@endif
 
@@ -40,16 +42,10 @@
             				@csrf
 								<div class="labelCategory">
 									<p>ID</p>
-									@error('email')
-										<div class="alert alert-danger">{{ $message }}</div>
-                            		@enderror
-									<p><input type="text" name="email" value="{{old('email')}}" required></p>
+									<p><input type="text" name="id" value="{{old('email')}}" required></p>
 								</div>
 								<div class="labelCategory">
 									<p>パスワード</p>
-									@error('password')
-										<div class="alert alert-danger">{{ $message }}</div>
-                            		@enderror
 									<p><input type="password" name="password" placeholder="" required></p>
 								</div>
 								<ul class="loginFormBtn" >
