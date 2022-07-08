@@ -9,6 +9,8 @@ class ProductChatroom extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     const STATUS = [
         1 => 'チャット開始',
         2 => '契約',
@@ -45,7 +47,7 @@ class ProductChatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function ProductChatroomMessage()
+    public function productChatroomMessage()
     {
         return $this->hasMany(ProductChatroomMessage::class);
     }

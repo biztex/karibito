@@ -9,6 +9,8 @@ class JobRequestChatroom extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+    
     const STATUS = [
         1 => 'チャット開始',
         2 => '契約',
