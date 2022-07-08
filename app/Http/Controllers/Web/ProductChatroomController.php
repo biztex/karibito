@@ -61,10 +61,8 @@ class ProductChatroomController extends Controller
      */
     public function start(MessageRequest $request, Product $product)
     {
-
-       $product_chatroom = $this->product_chatroom_service->startProductChatroom($product);
-       $this->product_chatroom_service->storeProductChatroomMessage($request->all(), $product_chatroom);
-
+        $product_chatroom = $this->product_chatroom_service->startProductChatroom($product);
+        $this->product_chatroom_service->storeProductChatroomMessage($request->all(), $product_chatroom);
         return redirect()->route('chatroom.product.show', $product_chatroom->id);
     }
 

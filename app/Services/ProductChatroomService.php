@@ -15,6 +15,8 @@ class ProductChatroomService
             'buyer_user_id' => \Auth::id(),
         ];
         $product_chatroom = $product->productChatroom()->create($users);
+        
+        return $product_chatroom;
     }
 
     public function storeProductChatroomMessage(array $request, $product_chatroom)
