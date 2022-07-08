@@ -48,7 +48,7 @@
                             <div class="form-group row mt-5 mb-0">
                                 <div class="col-md-6 offset-md-3 text-center">
                                     <button type="submit" class="btn btn-outline-info btn-block rounded-pill shadow-sm mb-4">
-                                        登録
+                                        更新
                                         <i class="fa fa-check-circle ml-2"></i>
                                     </button>
                                 </div>
