@@ -52,6 +52,7 @@ Route::view('service_provide', 'post.service_provide')->name('service_provide');
 Route::view('service_detail', 'post.service_detail')->name('service_detail');
 Route::view('service_request', 'post.service_request')->name('service_request');
 Route::view('service_thanks', 'post.service_thanks')->name('service_thanks');
+Route::view('job_request_thanks', 'post.job_request_thanks')->name('job_request_thanks');
 Route::view('service', 'post.service')->name('service');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
