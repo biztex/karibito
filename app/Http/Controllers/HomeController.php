@@ -37,7 +37,7 @@ class HomeController extends Controller
         }
         $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->paginate(9);
       
-     　　　　 $news_list = News::orderBy('created_at','desc')->paginate(5);
+        $news_list = News::orderBy('created_at','desc')->paginate(5);
      
         return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list'));
         

@@ -405,7 +405,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div><!-- /#contents -->
 	</article>
 </x-layout>
