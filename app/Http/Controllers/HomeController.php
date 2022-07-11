@@ -28,18 +28,19 @@ class HomeController extends Controller
         {
             $product_category_id[] = $product->mProductChildCategory->mProductCategory->id;
         }
-
         $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->paginate(9);
-       
+
         $job_requests = JobRequest::publish()->orderBy('created_at','desc')->paginate(10);
         foreach($job_requests as $job_request)
         {
             $job_category_id[] = $job_request->mProductChildCategory->mProductCategory->id;
         }
-
         $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->paginate(9);
 
-        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks'));
+        $news_list = News::orderBy('created_at','desc')->paginate(5);
+
+        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list'));
+
 
     }
 }
