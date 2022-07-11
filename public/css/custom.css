@@ -691,6 +691,12 @@
 		color: #158ACC;
 		border: 1px solid;
 	}
+
+	#main, .detailStyle #main, .otherPage #main {
+		float: none;
+		margin-bottom: 0px;
+		width: 100%;
+	}
 }
 .mypagePortfolioUl03 .fun div{
 	display:inline-block;
@@ -741,4 +747,3 @@
 		box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
 	}
 }
-

@@ -2,7 +2,7 @@
     <article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
+				<a href="{{route('home')}}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents">
@@ -30,10 +30,10 @@
 						<h2>お支払いが完了いたしました</h2>
 					</div>
 					<div class="cancelRea">
-						<p class="reason">チケットの購入が完了しました。<br>チケットの購入が完了しました。</p>
+						<p class="reason">チケットの購入が完了しました。</p>
 					</div>
 					<div class="functeBtns">
-						<input type="submit" value="やりとり画面に戻る">
+						<a href="{{route('chatroom.product.show', $product_proposal->productChatroom->id)}}">やりとり画面に戻る</a>
 					</div>
 				</div>
 			</div>
