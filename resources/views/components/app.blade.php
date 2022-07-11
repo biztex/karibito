@@ -9,7 +9,7 @@
 
 
 <title>【カリビト 】知識・スキル・経験を商品化できるマッチングプラットフォーム！</title>
-<meta name="keywords" content="カリビト,知識,スキル,経験,マッチング,プラットフォーム">  
+<meta name="keywords" content="カリビト,知識,スキル,経験,マッチング,プラットフォーム">
 <meta name="description" content="知識・スキル・経験を商品化できるマッチングプラットフォーム「カリビト」。">
 <!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif] -->
 
@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="/css/jquery.fancybox.css">
 <link rel="stylesheet" type="/text/css" href="/style.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" media="all">
-
+<link rel="stylesheet" type="text/css" href="/css/common-custom.css" media="all">
 </head>
 
 {{ $slot }}
