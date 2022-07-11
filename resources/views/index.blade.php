@@ -1,4 +1,3 @@
-
 <x-layout>
 <x-parts.flash-msg/>
 <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
@@ -125,34 +124,14 @@
 												</div>
 											</div>
 										</div>
+
 										@endforeach
+
 									</div>
 								</div>
 								<div class="recommendList style2">
 									<h2 class="hdM">カテゴリ別ランキング</h2>
-									@foreach( $product_category_ranks as  $val)
-										<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
-										<div class="list sliderSP">
-											@foreach($products as $product)
-												@if($product->mProductChildCategory->mProductCategory->name === $val->name)
-													<div class="item">
-														<a href="#" class="img imgBox">
-															<img src="{{ asset('storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 100px;object-fit: cover;">
-															<button class="favorite">お気に入り</button>
-														</a>
-														<div class="infoTop">
-														<div>
-															<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
-															<div class="draw">
-																<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
-															</div>
-															<div class="single">
-																@if($product->is_online == App\Models\Product::OFFLINE)
-																<a href="#">対面</a>
-																@else
-																<a href="#">非対面</a>
-																@endif
-															</div>
+
 														</div>
 															<div class="aboutUser">
 																<div class="user">
@@ -355,28 +334,18 @@
 								</div>
 								<div class="otherBtn"><a href="#">その他カテゴリ別ランキングをみる</a></div>
 								<div class="newsList mt60">
-									<h2 class="hdM">カリビトからのお知らせ<a href="#" class="more">お知らせをもっと見る</a></h2>
+									<h2 class="hdM">カリビトからのお知らせ<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
+                                        @if(empty($news_list[0]))
+                                            <div>カリビトからのお知らせがありません。</div>
+                                        @else
+                                            @foreach($news_list as $news)
+                                                <dl>
+                                                    <dt>{{$news->created_at->format('Y/m/d')}}</dt>
+                                                    <dd><a href="{{ route('news.show', $news->id) }}">{{$news->title}}</a></dd>
+                                                </dl>
+                                            @endforeach
+                                        @endif
 									</div>
 								</div>
 							</div><!-- /#main -->

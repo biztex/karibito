@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('text')->comment('本文')->nullable();
             $table->string('file_name')->comment('画像名')->nullable();
             $table->string('file_path')->comment('画像ファイルパス')->nullable();
-            $table->morphs('reference'); // reference_id, reference_typeを作成
+            $table->nullableMorphs('reference'); // reference_id, reference_typeを作成
             $table->boolean('is_complete_message')->default(0)->comment('作業完了メッセージフラグ(1.購入完了メッセージ)');
             $table->softDeletes();
             $table->timestamps();

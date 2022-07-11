@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
@@ -21,7 +21,8 @@ use App\Http\Controllers\Web\Mypage\IdentificationController;
 use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
-use App\Http\Controllers\Web\ChatRoomController;
+use App\Http\Controllers\Web\NewsController;
+use App\Http\Controllers\Web\ProductChatroomController;
 
 
 use App\Http\Controllers\HomeController;
@@ -204,6 +205,8 @@ Route::get('contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('contact', [ContactController::class, 'sendSupportMail']);
 
 Route::get('', [HomeController::class, 'index'])->name('home');
+Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
+Route::get('news', [NewsController::class, 'index'])->name('news.index');
 
 // --管理者画面-----------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -223,7 +226,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 
         //お知らせ機能
-        Route::resource('/news', NewsController::class);
+        Route::resource('/news', AdminNewsController::class);
     });
 
 });
@@ -255,10 +258,14 @@ Route::prefix('user')->name('user.')->group(function () {
 
 });
 
+Route::get('chatroom', [ProductChatroomController::class, 'index'])->name('chatroom.index');
+
 // やり取り画面組込中
-Route::prefix('chatrooms')->controller(ChatRoomController::class)->name('chatroom.')->group(function () {
-    Route::get('', 'index')->name('index');
-    Route::get('{product}', 'show')->name('product.show');
+Route::prefix('product/chatroom')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
+    Route::get('start/{product}', 'newroom')->name('newroom');
+    Route::post('start/{product}', 'start')->name('start');
+    Route::get('{product_chatroom}', 'show')->name('show');
+    Route::post('message/{product_chatroom}', 'message')->name('message');
 
     Route::get('{product}/sample', 'sample')->name('sample');
 

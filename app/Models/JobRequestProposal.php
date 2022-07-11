@@ -9,6 +9,8 @@ class JobRequestProposal extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     const NOT_PURCHESE = 0;
     
     const IS_PURCHESE = 1;

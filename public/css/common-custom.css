@@ -1,4 +1,11 @@
+/*全画面で汎用的なクラス*/
+
 /* タグ内の文字を改行表示(textareaの表示など) */
 .pre-wrap {
     white-space: pre-wrap;
+}
+
+/*背景系*/
+.bg-white {
+    background: #FFFFFF;
 }
