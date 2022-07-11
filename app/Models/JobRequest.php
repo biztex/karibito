@@ -58,14 +58,14 @@ class JobRequest extends Model
     }
 
     /**
-     * 自分の提供のみ取得
+     * 公開かつ下書きでない
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePublish($query)
     {
-        return $query->where('status',self::STATUS_PUBLISH);
+        return $query->notDraft()->where('status',self::STATUS_PUBLISH);
     }
 
     /**

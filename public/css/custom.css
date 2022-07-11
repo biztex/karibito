@@ -668,6 +668,18 @@
 	color: #6e6a6a;
 	background-color: white;
 }
+.recommendList.style2 .list .info {
+    border: 1px solid #DDDDDD;
+}
+.infoTop{
+	border: 1px solid #DDDDDD;
+	padding: 7px 8px 13px;
+	display:flex;
+    flex-flow: column;
+    justify-content:space-between;
+	width: 192px;
+	height: 260px;
+}
 @media screen and (max-width: 767px) {
 	.linkdel input{
 		width: 100px;

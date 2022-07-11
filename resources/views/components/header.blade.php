@@ -362,7 +362,7 @@
                             <a href="#" class="findLinkA">サービスを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
-                                    @foreach($categories as $category)
+                                @foreach($categories as $category)
                                     <li class="findSubLinkLi">
                                         <a href="#">{{$category->name}}</a>
                                         <div class="findThirdLink">
@@ -373,7 +373,7 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    @endforeach
+                                @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -392,7 +392,7 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    @endforeach
+                                @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -411,7 +411,7 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    @endforeach
+                                @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -428,11 +428,11 @@
             <div class="inner">
                 <div class="cont">
                     <div class="box">
-                        @foreach($categories as $category)
+                    @foreach($categories as $category)
                         <div class="link">
                             <a href="#" class="linkA">{{ $category->name }}</a>
                         </div>
-                        @endforeach
+                    @endforeach
                     </div>
                     <div class="span"><img src="/img/common/icon_slink.svg" alt=""></div>
                 </div>
