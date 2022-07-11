@@ -21,6 +21,42 @@ class ProductChatroom extends Model
     ];
 
     /**
+     * 進行中のやりとり
+     * status キャンセル・完了以外
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->whereIn('status', [1,2,3,4]);
+    }
+
+    /**
+     * 過去のやりとり
+     * status キャンセル・完了
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInActive($query)
+    {
+        return $query->whereIn('status', [5,6]);
+    }
+
+    /**
+     * seller / buyer がログインユーザーである
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLoginUser($query)
+    {
+        return $query->where('seller_user_id', \Auth::id())
+                     ->orWhere('buyer_user_id', \Auth::id());
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()

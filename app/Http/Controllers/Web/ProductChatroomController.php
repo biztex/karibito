@@ -27,16 +27,6 @@ class ProductChatroomController extends Controller
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
-    {
-        return view('chatroom.index');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     */
     public function newroom(Product $product)
     {
         return view('chatroom.product.newroom', compact('product'));

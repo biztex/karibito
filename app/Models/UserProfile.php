@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Age;
 
 class UserProfile extends Model
 {
@@ -31,6 +32,14 @@ class UserProfile extends Model
         self::IS_IDENTIFY =>'承認済',
         self::NOT_IDENTIFY =>'未',
     ];
+
+    protected function getBirthdayAttribute($birthday)
+    {
+        $day = date("Ymd",strtotime($birthday));
+
+        $birthday = Age::group($day);
+        return ucfirst($birthday);
+    }
 
     public function user()
     {
