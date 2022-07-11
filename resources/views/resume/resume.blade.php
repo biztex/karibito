@@ -3,7 +3,6 @@
     <article>
     <body id="resume">
 		<div id="breadcrumb">
-        @can('identify')
 			<div class="inner">
 				<a href="index.html">ホーム</a>　>　<span>スキル・経歴</span>
 			</div>
@@ -68,7 +67,6 @@
                 <x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-        @endcan
 		<x-hide-modal/>
 	</article>
 </x-layout>

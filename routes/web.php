@@ -60,7 +60,7 @@ Route::view('support', 'support.support')->name('support');
 Route::view('support_detail', 'support.support_detail')->name('support_detail');
 Route::view('guide', 'support.guide')->name('guide');
 
-Route::get('resume',[ResumeController::class, 'resume'])->name('resume');
+Route::get('resume',[ResumeController::class, 'resume'])->middleware('can:identify')->name('resume');
 Route::view('resume_edit','resume_edit')->name('resume_edit');
 
 Route::get('/dashboard', function () {
