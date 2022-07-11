@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Admin\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -19,6 +19,12 @@ class LoginRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        // input name=idをemailとして処理する
+        $this->merge(['email' => $this->id]);
     }
 
     /**
