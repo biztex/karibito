@@ -115,7 +115,7 @@
                                         <p class="time">既読 2021年7月26日9:10</p>
                                     </li>
 
-                                    <li>
+                                    <!-- <li>
 										<div class="img">
 											<p class="head"><img src="/img/common/nav_head.png" alt=""></p>
 											<div class="info">
@@ -128,7 +128,7 @@
 												</div>
 											</div>
 										</div>
-									</li>
+									</li> -->
                                     <li>
 										<div class="img">
 											<p class="head"><img src="/img/common/nav_head.png" alt=""></p>

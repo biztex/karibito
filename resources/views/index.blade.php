@@ -1,4 +1,3 @@
-
 <x-layout>
 <x-parts.flash-msg/>
 <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
@@ -153,6 +152,7 @@
 																<a href="#">非対面</a>
 																@endif
 															</div>
+
 														</div>
 															<div class="aboutUser">
 																<div class="user">
@@ -355,28 +355,18 @@
 								</div>
 								<div class="otherBtn"><a href="#">その他カテゴリ別ランキングをみる</a></div>
 								<div class="newsList mt60">
-									<h2 class="hdM">カリビトからのお知らせ<a href="#" class="more">お知らせをもっと見る</a></h2>
+									<h2 class="hdM">カリビトからのお知らせ<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
-										<dl>
-											<dt>2021/00/00</dt>
-											<dd><a href="#">【NEWS情報】ニュース情報が入りますニュース情報が入りますニュース情報が入ります</a></dd>
-										</dl>
+                                        @if(empty($news_list[0]))
+                                            <div>カリビトからのお知らせがありません。</div>
+                                        @else
+                                            @foreach($news_list as $news)
+                                                <dl>
+                                                    <dt>{{$news->created_at->format('Y/m/d')}}</dt>
+                                                    <dd><a href="{{ route('news.show', $news->id) }}">{{$news->title}}</a></dd>
+                                                </dl>
+                                            @endforeach
+                                        @endif
 									</div>
 								</div>
 							</div><!-- /#main -->

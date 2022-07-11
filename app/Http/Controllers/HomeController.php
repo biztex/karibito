@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 use App\Models\JobRequest;
 use App\Models\Product;
@@ -20,13 +21,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         // 公開&&下書きでない
         $products = Product::publish()->orderBy('created_at','desc')->paginate(10);
         foreach($products as $product)
         {
             $product_category_id[] = $product->mProductChildCategory->mProductCategory->id;
         }
-
         $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->paginate(9);
        
         $job_requests = JobRequest::publish()->orderBy('created_at','desc')->paginate(10);
@@ -34,9 +35,11 @@ class HomeController extends Controller
         {
             $job_category_id[] = $job_request->mProductChildCategory->mProductCategory->id;
         }
-
         $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->paginate(9);
-
-        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks'));
+      
+     　　　　 $news_list = News::orderBy('created_at','desc')->paginate(5);
+     
+        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list'));
+        
     }
 }

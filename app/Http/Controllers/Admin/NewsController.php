@@ -27,7 +27,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news_list = News::all();
+        $news_list = News::orderBy('created_at','desc')->paginate(5);
 
         return view('Admin.news.index', compact('news_list'));
     }
@@ -52,8 +52,7 @@ class NewsController extends Controller
     {
         $this->news_service->storeNews($request->all());
 
-        return back()->with('flash_msg', 'ニュースを投稿しました');
-//TOdo..newsのインデックスをつくったらそこに遷移させる
+        return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを投稿しました');
     }
 
     /**
@@ -73,9 +72,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        return view('Admin.news.edit', compact('news',));
     }
 
     /**
@@ -85,9 +84,11 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, News $news)
     {
-        //
+        $this->news_service->updateNews($request->all(), $news);
+
+        return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを編集しました');
     }
 
     /**
@@ -96,8 +97,10 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(News $news)
     {
-        //
+        $news->delete(); // データ論理削除
+
+        return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを削除しました');
     }
 }
