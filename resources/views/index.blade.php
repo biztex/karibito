@@ -124,14 +124,34 @@
 												</div>
 											</div>
 										</div>
-
 										@endforeach
-
 									</div>
 								</div>
 								<div class="recommendList style2">
 									<h2 class="hdM">カテゴリ別ランキング</h2>
-
+									@foreach( $product_category_ranks as  $val)
+										<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
+										<div class="list sliderSP">
+											@foreach($products as $product)
+												@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
+													<div class="item">
+														<a href="#" class="img imgBox">
+														    <img src="{{ asset('storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 100px;object-fit: cover;">														
+															<button class="favorite">お気に入り</button>
+														</a>
+														<div class="infoTop">
+														<div>
+															<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+															<div class="draw">
+																<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+															</div>
+															<div class="single">
+																@if($product->is_online == App\Models\Product::OFFLINE)
+																<a href="#">対面</a>
+																@else
+																<a href="#">非対面</a>
+																@endif
+															</div>
 														</div>
 															<div class="aboutUser">
 																<div class="user">
