@@ -23,8 +23,8 @@ use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\ChatRoomController;
 
-
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ContactController;
 
 
@@ -59,7 +59,7 @@ Route::view('support', 'support.support')->name('support');
 Route::view('support_detail', 'support.support_detail')->name('support_detail');
 Route::view('guide', 'support.guide')->name('guide');
 
-Route::view('resume','resume')->name('resume');
+Route::get('resume',[ResumeController::class, 'resume'])->name('resume');
 Route::view('resume_edit','resume_edit')->name('resume_edit');
 
 Route::get('/dashboard', function () {
