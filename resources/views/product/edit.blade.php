@@ -127,8 +127,8 @@
                                                         @endforeach
                                                     </select>
                                                     <select name="option_is_public[]">
-                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num)) && old('option_is_public.'.$num) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                         <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$num) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num)) && old('option_is_public.'.$num) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                     </select>
                                                 </div>
                                                 <div>
@@ -157,8 +157,8 @@
                                                         @endforeach
                                                     </select>
                                                     <select name="option_is_public[]">
-                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num, $product->option_is_public[$num])) && old('option_is_public.'.$num, $product->option_is_public[$num]) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                         <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$num, $product->option_is_public[$num]) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num, $product->option_is_public[$num])) && old('option_is_public.'.$num, $product->option_is_public[$num]) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                     </select>
                                                 </div>
                                                 <div>
@@ -187,8 +187,8 @@
                                                         @endforeach
                                                     </select>
                                                     <select name="option_is_public[]">
-                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num, $additional_option->is_public)) && old('option_is_public.'.$num, $additional_option->is_public) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                         <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$num, $additional_option->is_public) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num, $additional_option->is_public)) && old('option_is_public.'.$num, $additional_option->is_public) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                     </select>
                                                 </div>
                                                 <div>
@@ -216,8 +216,8 @@
                                                     @endforeach
                                                 </select>
                                                 <select name="option_is_public[]">
-                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.0')) && old('option_is_public.0') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                     <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.0') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
+                                                    <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.0')) && old('option_is_public.0') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                 </select>
                                             </div>
                                             <div>
@@ -374,8 +374,8 @@
                             <div class="td">
                                 <select name="status">
                                     <option value="">選択してください</option>
-                                    <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(!is_null(old('status', $product->status )) && old('status', $product->status ) == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
                                     <option value="{{App\Models\Product::STATUS_PUBLISH}}" @if(old('status', $product->status) == App\Models\Product::STATUS_PUBLISH) selected @endif>公開</option>
+                                    <option value="{{App\Models\Product::STATUS_PRIVATE}}" @if(!is_null(old('status', $product->status )) && old('status', $product->status ) == App\Models\Product::STATUS_PRIVATE) selected @endif>非公開</option>
                                 </select>
                             </div>
                             <div class="functeBtns">
@@ -395,7 +395,7 @@
         delQuestion();
     })
     function addOption(){
-        let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"> <textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif required>非公開</option><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif required>公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
+        let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"><textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
         let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
 
         if (number_js_optionForm < 10) {
