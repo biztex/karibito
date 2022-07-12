@@ -27,7 +27,7 @@ use App\Http\Controllers\Web\ProductChatroomController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResumeController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Web\ContactController;
 
 
 // 管理者用
