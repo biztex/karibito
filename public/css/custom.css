@@ -769,3 +769,18 @@
 		box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
 	}
 }
+
+/* 会員情報、お知らせ機能の変更ボタン */
+.blue-button {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    border-radius: 3px;
+    font-size: 1.4rem;
+    border: 1px solid #158ACC;
+    padding: 0 12px;
+    background-color: #158ACC;
+    color: #fff;
+    margin-left: 5px;
+}

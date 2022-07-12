@@ -100,10 +100,7 @@
 												<label><input type="checkbox" name="is_promo" value="1" @if (Auth::user()->notificationSetting->is_promo === 1)checked @endif>プロモーション</label>
 											</div>
 										</dd>
-										<dd>
-											<button class="configLink" type="submit">変更する</button>
-											<input class="link" type="submit" value="変更する">
-										</dd>
+										<input class="blue-button mt20" type="submit" value="変更する">
 									</form>
 								</dl>
 							</div>
