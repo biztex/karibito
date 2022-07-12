@@ -78,19 +78,23 @@
 						<div class="mypageSec02">
 							<p class="mypageHd02">お知らせ</p>
 							<ul class="mypageUl02">
-								@for($i=0; $i<4; $i++)
-									<li>
-										<a href="#">
-											<dl>
-												<dt><img src="/img/mypage/img_notice01.png" alt=""></dt>
-												<dd>
-													<p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-													<p class="time">0時間前</p>
-												</dd>
-											</dl>
-										</a>
-									</li>
-								@endfor
+								@if(empty($news_list[0]))
+                                    <div class="pl10">カリビトからのお知らせがありません。</div>
+                                @else
+                                    @foreach($news_list as $news)
+										<li>
+											<a href="{{route('news.show', $news->id)}}">
+												<dl>
+													<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
+													<dd>
+														<p class="txt">{{$news->title}}</p>
+														<p class="time">{{$news->created_at->diffForHumans()}}</p>
+													</dd>
+												</dl>
+											</a>
+										</li>
+                                    @endforeach
+                                @endif
 							</ul>
 						</div>
 						<div class="mypageSec03">

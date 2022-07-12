@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Libraries\Age;
+use App\Models\News;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\UserProfile;
@@ -20,6 +21,7 @@ class MypageController extends Controller
     public function show()
     {
         $user_profile = UserProfile::firstWhere('user_id',Auth::id());
+        $news_list = News::orderBy('created_at','desc')->paginate(5);
 
         if ($user_profile->birthday !== NULL){
             $age = Age::group($user_profile->birthday);
@@ -27,6 +29,6 @@ class MypageController extends Controller
             $age = '不明';
         }
 
-        return view('mypage.profile.mypage', compact('age'));
+        return view('mypage.profile.mypage', compact('age', 'news_list'));
     }
 }

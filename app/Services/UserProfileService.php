@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Http\Requests\UserProfile\StoreRequest;
+use Carbon\Carbon;
 
 class UserProfileService
 {
@@ -32,6 +33,15 @@ class UserProfileService
                 'prefecture_id' => $params['prefecture'],
             ],
         );
+
+        \DB::table('user_notification_settings')->insert([
+            [
+                'user_id' => \Auth::id(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ]);
+
         return $user_profile;
     }
 
