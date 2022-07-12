@@ -143,7 +143,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('post/store/preview', 'storePreview')->name('store.preview');
             Route::get('/', 'index')->name('index');
         });
-        Route::get('{product}', 'show')->name('show');
     });
 
     // リクエスト
@@ -165,7 +164,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('preview','preview')->name('preview');
             Route::post('post/store/preview','storePreview')->name('store.preview');
         });
-        Route::get('{job_request}','show')->name('show');
     });
 
     // 秘訣
@@ -176,7 +174,32 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
 
+    Route::get('chatroom', [ChatroomController::class, 'index'])->name('chatroom.index');
+
+    // やり取り画面組込中
+    Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
+        Route::get('start/{product}', 'newroom')->name('newroom');
+        Route::post('start/{product}', 'start')->name('start');
+        Route::get('{product_chatroom}', 'show')->name('show');
+        Route::post('message/{product_chatroom}', 'message')->name('message');
+        Route::post('{product_chatroom}/proposal','proposal')->name('proposal');
+        Route::post('{product_proposal}/purchese','purchess')->name('purchese');
+
+        Route::get('{product}/sample', 'sample')->name('sample');
+
+        // 支払い
+        Route::get('purchese/{product_proposal}','purchese')->name('purchese');
+        Route::get('purchese/{product_proposal}/confirm','purchese_confirm')->name('purchese_confirm');
+        Route::post('purchesed/{product_proposal}','purchesed')->name('purchesed');
+        // 評価
+        Route::view('cart/buy08','chatroom.cart_buy08');
+        Route::view('cart/buy09','chatroom.cart_buy09');
+    });
+
 });
+// 提供・リクエストの詳細ページ
+Route::get('product/{product}', [MypageProductController::class, 'show'])->name('product.show');
+Route::get('job_request/{job_request}', [MypageJobRequestController::class, 'show'])->name('job_request.show');
 
 // プライバシーポリシーと運営会社
 Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
@@ -259,28 +282,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
 });
 
-Route::get('chatroom', [ChatroomController::class, 'index'])->name('chatroom.index');
 
-// やり取り画面組込中
-Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
-    Route::get('start/{product}', 'newroom')->name('newroom');
-    Route::post('start/{product}', 'start')->name('start');
-    Route::get('{product_chatroom}', 'show')->name('show');
-    Route::post('message/{product_chatroom}', 'message')->name('message');
-    Route::post('{product_chatroom}/proposal','proposal')->name('proposal');
-    Route::post('{product_proposal}/purchese','purchess')->name('purchese');
-
-    Route::get('{product}/sample', 'sample')->name('sample');
-
-    // 支払い
-    Route::get('purchese/{product_proposal}','purchese')->name('purchese');
-    Route::get('purchese/{product_proposal}/confirm','purchese_confirm')->name('purchese_confirm');
-    Route::post('purchesed/{product_proposal}','purchesed')->name('purchesed');
-    // 評価
-    Route::view('cart/buy08','chatroom.cart_buy08');
-    Route::view('cart/buy09','chatroom.cart_buy09');
-
-});
 
 // DM画面組込まで
 Route::view('/dm','mypage.dm.index')->name('dm.index');
