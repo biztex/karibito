@@ -771,6 +771,8 @@
 }
 .chatroom-text a {
 	color: #158ACC;
+}
+.chatroom-text a:hover {
 	text-decoration: underline;
 }
 .chatPages .btns p {
