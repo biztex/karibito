@@ -41,13 +41,6 @@ class UserProfile extends Model
         return ucfirst($birthday);
     }
 
-    protected function getBirthdayAttribute($birthday)
-    {
-        $day = date("Ymd",strtotime($birthday));
-
-        $birthday = Age::group($day);
-        return ucfirst($birthday);
-    }
 
     public function user()
     {

@@ -87,6 +87,9 @@
 									<div class="list sliderSP">
 										@foreach($products as $product)
 										<div class="item">
+
+											
+
 											<a href="{{ route('product.show',$product->id) }}" class="img imgBox">
 											@if(isset($product->productImage[0]))
 											<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
@@ -97,6 +100,7 @@
 											@endif
 											</a>
 											
+
 											<div class="infoTop">
 											<div>
 												<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
@@ -163,6 +167,9 @@
 																<a href="#">非対面</a>
 																@endif
 															</div>
+
+
+
 														</div>
 															<div class="aboutUser">
 																<div class="user">
@@ -283,9 +290,12 @@
 											<div>
 												<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
 												<div class="draw">
+
+												
 													<a href="{{ route('job_request.show',$job_request->id)}}">
 														<p class="price" style="width:100%"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
 													</a>
+
 												</div>
 												<div class="single">
 													@if($job_request->is_online == App\Models\Product::OFFLINE)
@@ -331,6 +341,8 @@
 														<div>
 															<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
 															<div class="draw">
+
+															
 															    <a href="{{ route('job_request.show',$job_request->id)}}">
 														            <p class="price" style="width:100%"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
 													            </a>
@@ -342,6 +354,7 @@
 																<a href="#">非対面</a>
 																@endif
 															</div>
+
 														</div>
 															<div class="aboutUser">
 																<div class="user">
@@ -419,7 +432,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div><!-- /#contents -->
 	</article>
 </x-layout>
