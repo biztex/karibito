@@ -22,6 +22,7 @@ use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\NewsController;
+use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\ProductChatroomController;
 
 
@@ -258,7 +259,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
 });
 
-Route::get('chatroom', [ProductChatroomController::class, 'index'])->name('chatroom.index');
+Route::get('chatroom', [ChatroomController::class, 'index'])->name('chatroom.index');
 
 // やり取り画面組込中
 Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
