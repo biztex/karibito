@@ -11,8 +11,8 @@
 - 関数名    ローワーキャメル（createProfile）動詞を前にする
 - 変数名    スネーク（$user_id）
 
-
 ## コントローラー
+- ウェブに関してはWebディレクトリに入れるようにする(今後スマホアプリ化する可能性もあるため。アプリ時はApiディレクトリを作成する)。
 - redirectの書き方
   1. routeを使ってnameを指定する
   1. return redirect()->route('user_profile.create');

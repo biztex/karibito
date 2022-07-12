@@ -41,6 +41,7 @@ class UserProfile extends Model
         return ucfirst($birthday);
     }
 
+
     public function user()
     {
         return $this->belongsTo(User::class);

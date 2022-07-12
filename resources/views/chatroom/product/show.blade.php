@@ -16,7 +16,7 @@
                         <div class="sellerTop">
                             <div class="user">
                                 @if(null !== $product->user->userProfile->icon)
-                                    <p class="head"><img src="{{ asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;border-radius: 50px;"></p>
+                                    <p class="head"><img src="{{ asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="width: 50px;max-height: 50px;object-fit: cover;border-radius: 50px;"></p>
                                 @else
                                     <p class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
                                 @endif
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </div><!-- /#main -->
-                <aside id="side" class="pc">
+                <aside id="side">
                     <div class="sideItem">
                         <p class="sideHd">掲載内容</p>
                         <div class="sideUl01">
@@ -116,9 +116,53 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="functeBtns">
+                            @if($product->user_id === Auth::id())
+                                @if($product_chatroom->status === 1)
+							        <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
+                                @elseif($product_chatroom->status ===3)
+							        <a href="" class="orange">作業完了報告をする</a>
+                                @endif
+                            @endif
+							<input type="submit" class="" value="キャンセル申請をする">
+						</div>
+
                     </div>
                 </aside><!-- /#side -->
+
+                
             </div><!--inner-->
         </div><!-- /#contents -->
+
+        <div class="hide"><!-- #fancybox_proposal -->
+			<div id="fancybox_proposal" class="fancyboxWrap">
+				<form action="{{route('chatroom.product.proposal', $product_chatroom->id)}}" method="POST">
+				@csrf
+					<p class="fancyboxHd">掲載内容の提案</p>
+					<div class="fancyboxCont">
+						<div class="fancyboxProposal">
+							<ul class="contactForm">
+								<li>
+									<p><span class="th">商品名</span><br>{{ $product->title }}</p>
+								</li>
+								<li>
+									<div class="amount">
+										<p>希望報酬額</p>
+										<p class="num">¥{{ number_format($product->price) }}</p>
+									</div>
+									<p class="th">提供価格</p>
+									<p class="budget"><input type="text" name="price" placeholder="0" autofocus></p>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="functeBtns">
+						<input type="submit" class="orange" value="この内容で商品を提案する">
+					</div>
+				</form>
+			</div>
+		</div><!-- /#fancybox_proposal -->
+
     </article>
 </x-layout>

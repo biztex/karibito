@@ -2,7 +2,7 @@
     <article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
+				<a href="{{route('home')}}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents">
@@ -143,7 +143,7 @@
 							</div>
 						</div>
 						<div class="functeBtns">
-							<input type="submit" class="orange full" value="確認する">
+							<a href="{{route('chatroom.product.purchese_confirm', $product_proposal->id)}}" class="orange full">確認する</a>
 						</div>
 					</div>
 				</div>

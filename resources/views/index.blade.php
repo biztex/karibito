@@ -87,10 +87,20 @@
 									<div class="list sliderSP">
 										@foreach($products as $product)
 										<div class="item">
-											<a href="#" class="img imgBox">
-												<img src="{{ asset('storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 100px;object-fit: cover;">
-												<button class="favorite">お気に入り</button>
+
+											
+
+											<a href="{{ route('product.show',$product->id) }}" class="img imgBox">
+											@if(isset($product->productImage[0]))
+											<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+											<button class="favorite">お気に入り</button>
+											@else
+											<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+											<button class="favorite">お気に入り</button>
+											@endif
 											</a>
+											
+
 											<div class="infoTop">
 											<div>
 												<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
@@ -133,11 +143,16 @@
 										<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
 										<div class="list sliderSP">
 											@foreach($products as $product)
-												@if($product->mProductChildCategory->mProductCategory->name === $val->name)
+												@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
 													<div class="item">
-														<a href="#" class="img imgBox">
-															<img src="{{ asset('storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 100px;object-fit: cover;">
-															<button class="favorite">お気に入り</button>
+														<a href="{{route('product.show',$product->id)}}" class="img imgBox">
+														@if(isset($product->productImage[0]))
+											               <p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+											               <button class="favorite">お気に入り</button>
+											            @else
+											               <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+											               <button class="favorite">お気に入り</button>
+											            @endif
 														</a>
 														<div class="infoTop">
 														<div>
@@ -152,6 +167,8 @@
 																<a href="#">非対面</a>
 																@endif
 															</div>
+
+
 
 														</div>
 															<div class="aboutUser">
@@ -273,7 +290,12 @@
 											<div>
 												<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
 												<div class="draw">
-													<p class="price" style="width:100%"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
+
+												
+													<a href="{{ route('job_request.show',$job_request->id)}}">
+														<p class="price" style="width:100%"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
+													</a>
+
 												</div>
 												<div class="single">
 													@if($job_request->is_online == App\Models\Product::OFFLINE)
@@ -319,7 +341,11 @@
 														<div>
 															<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
 															<div class="draw">
-																<p class="price" style="width:100%"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
+
+															
+															    <a href="{{ route('job_request.show',$job_request->id)}}">
+														            <p class="price" style="width:100%"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
+													            </a>
 															</div>
 															<div class="single">
 																@if($job_request->is_online == App\Models\Product::OFFLINE)
@@ -328,6 +354,7 @@
 																<a href="#">非対面</a>
 																@endif
 															</div>
+
 														</div>
 															<div class="aboutUser">
 																<div class="user">

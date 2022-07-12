@@ -14,7 +14,7 @@
                         <div class="sellerTop">
                             <div class="user">
                                 @if(null !== $product->user->userProfile->icon)
-                                    <p class="head"><img src="{{ asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;border-radius: 50px;"></p>
+                                    <p class="head"><img src="{{ asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="width: 50px;max-height: 50px;object-fit: cover;border-radius: 50px;"></p>
                                 @else
                                     <p class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
                                 @endif
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 </div><!-- /#main -->
-                <aside id="side" class="pc">
+                <aside id="side">
                     <div class="sideItem">
                         <p class="sideHd">掲載内容</p>
                         <div class="sideUl01">

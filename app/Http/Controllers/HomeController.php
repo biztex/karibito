@@ -22,6 +22,7 @@ class HomeController extends Controller
     public function index()
     {
 
+
         // 公開&&下書きでない
         $products = Product::publish()->orderBy('created_at','desc')->paginate(10);
         foreach($products as $product)
@@ -41,5 +42,6 @@ class HomeController extends Controller
      
         return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list'));
         
+
     }
 }
