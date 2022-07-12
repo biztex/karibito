@@ -82,19 +82,29 @@
 								<h3 class="memberConfigHd">お知らせ機能</h3>
 								<dl class="memberConfigDl">
 									<dt>お知らせ受信を設定</dt>
-									<dd>
-										<div class="labelBox">
-											<label><input type="checkbox" name="is_like" @if (Auth::user()->notificationSetting->is_like === 1)checked @endif>いいね！</label>
-											<label><input type="checkbox" name="is_posting" @if (Auth::user()->notificationSetting->is_posting === 1)checked @endif>フォロー中の方の掲載</label>
-											<label><input type="checkbox" name="is_fav" @if (Auth::user()->notificationSetting->is_fav === 1)checked @endif>お気に入りの再掲載</label>
-											<label><input type="checkbox" name="is_arrival" @if (Auth::user()->notificationSetting->is_arrival === 1)checked @endif>保存した検索条件の新着</label>
-											<label><input type="checkbox" name="is_news" @if (Auth::user()->notificationSetting->is_news === 1)checked @endif>お知らせ・ニュース</label>
-											<label><input type="checkbox" name="is_promo" @if (Auth::user()->notificationSetting->is_promo === 1)checked @endif>プロモーション</label>
-										</div>
-									</dd>
-									<dd> //ボタンに変更
-										<a class="configLink" href="member_config_card_edit.html">変更する</a>
-									</dd>
+									<form class="" method="post" action="{{ route('member_config.notification.update') }}" enctype="multipart/form-data">
+										@csrf @method("PUT")
+										<dd>
+											<input type="hidden" name="is_like" value="0">
+											<input type="hidden" name="is_posting" value="0">
+											<input type="hidden" name="is_fav" value="0">
+											<input type="hidden" name="is_arrival" value="0">
+											<input type="hidden" name="is_news" value="0">
+											<input type="hidden" name="is_promo" value="0">
+											<div class="labelBox">
+												<label><input type="checkbox" name="is_like" value="1" @if(Auth::user()->notificationSetting->is_like === 1)checked @endif>いいね！</label>
+												<label><input type="checkbox" name="is_posting" value="1" @if (Auth::user()->notificationSetting->is_posting === 1)checked @endif>フォロー中の方の掲載</label>
+												<label><input type="checkbox" name="is_fav" value="1" @if (Auth::user()->notificationSetting->is_fav === 1)checked @endif>お気に入りの再掲載</label>
+												<label><input type="checkbox" name="is_arrival" value="1" @if (Auth::user()->notificationSetting->is_arrival === 1)checked @endif>保存した検索条件の新着</label>
+												<label><input type="checkbox" name="is_news" value="1" @if (Auth::user()->notificationSetting->is_news === 1)checked @endif>お知らせ・ニュース</label>
+												<label><input type="checkbox" name="is_promo" value="1" @if (Auth::user()->notificationSetting->is_promo === 1)checked @endif>プロモーション</label>
+											</div>
+										</dd>
+										<dd>
+											<button class="configLink" type="submit">変更する</button>
+											<input class="link" type="submit" value="変更する">
+										</dd>
+									</form>
 								</dl>
 							</div>
 						</div>

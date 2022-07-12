@@ -27,7 +27,8 @@ use App\Http\Controllers\Web\ProductChatroomController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
+use App\Http\Controllers\Web\UserNotificationController;
 
 // 管理者用
 
@@ -106,6 +107,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('tel', 'edit')->name('edit');
                 Route::post('tel', 'update')->name('update');
             });
+            // お知らせ機能の設定
+            Route::put('/notification', [UserNotificationSettingController::class, 'update'])->name('notification.update');
         });
     });
 
