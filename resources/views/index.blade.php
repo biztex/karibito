@@ -88,9 +88,15 @@
 										@foreach($products as $product)
 										<div class="item">
 											<a href="#" class="img imgBox">
-												<img src="{{ asset('storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 100px;object-fit: cover;">
-												<button class="favorite">お気に入り</button>
+											@if(isset($product->productImage[0]))
+											<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+											<button class="favorite">お気に入り</button>
+											@else
+											<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+											<button class="favorite">お気に入り</button>
+											@endif
 											</a>
+											
 											<div class="infoTop">
 											<div>
 												<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
@@ -136,8 +142,13 @@
 												@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
 													<div class="item">
 														<a href="#" class="img imgBox">
-														    <img src="{{ asset('storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 100px;object-fit: cover;">														
-															<button class="favorite">お気に入り</button>
+														@if(isset($product->productImage[0]))
+											               <p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+											               <button class="favorite">お気に入り</button>
+											            @else
+											               <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+											               <button class="favorite">お気に入り</button>
+											            @endif
 														</a>
 														<div class="infoTop">
 														<div>
