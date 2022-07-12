@@ -32,6 +32,14 @@ class UserProfile extends Model
         self::IS_IDENTIFY =>'承認済',
         self::NOT_IDENTIFY =>'未',
     ];
+    
+    protected function getBirthdayAttribute($birthday)
+    {
+        $day = date("Ymd",strtotime($birthday));
+        
+        $birthday = Age::group($day);
+        return ucfirst($birthday);
+    }
 
     protected function getBirthdayAttribute($birthday)
     {
