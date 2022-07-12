@@ -261,18 +261,20 @@ Route::prefix('user')->name('user.')->group(function () {
 Route::get('chatroom', [ProductChatroomController::class, 'index'])->name('chatroom.index');
 
 // やり取り画面組込中
-Route::prefix('product/chatroom')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
+Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
     Route::get('start/{product}', 'newroom')->name('newroom');
     Route::post('start/{product}', 'start')->name('start');
     Route::get('{product_chatroom}', 'show')->name('show');
     Route::post('message/{product_chatroom}', 'message')->name('message');
+    Route::post('{product_chatroom}/proposal','proposal')->name('proposal');
+    Route::post('{product_proposal}/purchese','purchess')->name('purchese');
 
     Route::get('{product}/sample', 'sample')->name('sample');
 
     // 支払い
-    Route::view('cart/buy03','chatroom.cart_buy03');
-    Route::view('cart/buy04','chatroom.cart_buy04');
-    Route::view('cart/buy05','chatroom.cart_buy05');
+    Route::get('purchese/{product_proposal}','purchese')->name('purchese');
+    Route::get('purchese/{product_proposal}/confirm','purchese_confirm')->name('purchese_confirm');
+    Route::post('purchesed/{product_proposal}','purchesed')->name('purchesed');
     // 評価
     Route::view('cart/buy08','chatroom.cart_buy08');
     Route::view('cart/buy09','chatroom.cart_buy09');

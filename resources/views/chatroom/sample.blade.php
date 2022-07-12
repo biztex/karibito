@@ -115,7 +115,7 @@
                                         <p class="time">既読 2021年7月26日9:10</p>
                                     </li>
 
-                                    <!-- <li>
+                                    <li>
 										<div class="img">
 											<p class="head"><img src="/img/common/nav_head.png" alt=""></p>
 											<div class="info">
@@ -128,7 +128,21 @@
 												</div>
 											</div>
 										</div>
-									</li> -->
+									</li>
+									<li>
+										<div class="img">
+											<p class="head"><img src="/img/common/nav_head.png" alt=""></p>
+											<div class="info">
+												<p class="name">出品者の名前</p>
+												<p>掲載内容の提案をしました</p>
+												<div class="proposeBuy">
+													<p class="tit">同人誌などのタイトルロゴをお作りします</p>
+													<p>提供価格：¥5,500</p>
+													<p class="buy"><input type="submit" value="購入されていません" disabled></p>
+												</div>
+											</div>
+										</div>
+									</li>
                                     <li>
 										<div class="img">
 											<p class="head"><img src="/img/common/nav_head.png" alt=""></p>
