@@ -109,7 +109,7 @@
 									@if(empty($user->userProfile->icon))
 										<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 									@else
-										<a href="#" class="head"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></a>
+										<a href="#" class="head"><img src="{{asset('/storage/'.$user->userProfile->icon) }}" alt=""></a>
 									@endif
 								<!-- <p class="login">最終ログイン：8時間前</p> -->
 								<p class="introd"><a href="#" class="name">{{ $user->name }}</a><br>({{ App\Models\UserProfile::GENDER[$user->userProfile->gender] }}/ {{ $age }} / {{ $user->userProfile->prefecture->name }})</p>

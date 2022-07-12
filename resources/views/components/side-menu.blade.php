@@ -39,7 +39,7 @@
                 <div class="sideItem">
                     <p class="sideHd">出品者向け</p>
                     <ul class="sideUl01">
-                        <li><a href="#" class="">スキル / 経歴</a></li>
+                        <li><a href="{{ route('resume') }}" class="">スキル / 経歴</a></li>
                         <li><a href="#" class="">ポートフォリオ</a></li>
                         <li><a href="#">ブログ</a></li>
                         <li><a href="{{ route('publication') }}" class="">掲載内容一覧</a></li>

@@ -2,7 +2,7 @@
     <article>
     <div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
+				<a href="{{route('home')}}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents">
@@ -88,7 +88,10 @@
 							<p>※他のクーポンと併用はできません。</p>
 						</div>
 						<div class="functeBtns">
-							<input type="submit" class="orange full" value="確認する">
+							<form action="{{route('chatroom.product.purchesed', $product_proposal->id)}}" method="post">
+							@csrf
+								<input type="submit" class="orange full" value="確定する">
+							</form>
 						</div>
 					</div>
 				</div>

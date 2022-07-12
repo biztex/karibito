@@ -22,7 +22,7 @@ class Age
         $now = (int) date('Ymd');
         $now_age = floor(($now - $int_birthday) / 10000);
 
-        return $now_age; 
+        return $now_age;
     }
 
     /**
@@ -30,7 +30,6 @@ class Age
      */
     public static function group(string|int|null $birthday): string
     { 
-
         $int_birthday = self::int_birthday($birthday);
         $now_age = self::nowAge($birthday);
         if($now_age < 0 || $now_age > 150 || empty($now_age)){
@@ -53,6 +52,6 @@ class Age
             $age = '不明';
         }
 
-        return $age; 
+        return $age;
     } 
 }

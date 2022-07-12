@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use App\Models\JobRequest;
+use App\Models\Product;
+use App\Models\UserProfile;
+use App\Models\User;
+use App\Models\MProductCategory;
+use App\Libraries\Age;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,8 +21,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $news_list = News::orderBy('created_at','desc')->paginate(5);
 
-        return view('index', compact('news_list'));
+
+        // 公開&&下書きでない
+        $products = Product::publish()->orderBy('created_at','desc')->paginate(10);
+        foreach($products as $product)
+        {
+            $product_category_id[] = $product->mProductChildCategory->mProductCategory->id;
+        }
+        $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->paginate(9);
+       
+        $job_requests = JobRequest::publish()->orderBy('created_at','desc')->paginate(10);
+        foreach($job_requests as $job_request)
+        {
+            $job_category_id[] = $job_request->mProductChildCategory->mProductCategory->id;
+        }
+        $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->paginate(9);
+      
+        $news_list = News::orderBy('created_at','desc')->paginate(5);
+     
+        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list'));
+        
+
     }
 }

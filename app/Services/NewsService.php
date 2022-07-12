@@ -30,6 +30,14 @@ class NewsService
             $news->$column = $params[$column];
         }
         $news->save();
+
         return $news;
+    }
+
+    public function paginate($i)
+    {
+        $news_list = News::orderBy('created_at','desc')->paginate($i);
+
+        return $news_list;
     }
 }
