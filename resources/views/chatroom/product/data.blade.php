@@ -10,7 +10,7 @@
             @endif
             <div class="info">
                 <p class="name">{{$message->user->name}}</p>
-                <p>{!! nl2br(e($message->text)) !!}</p>
+                <p class="chatroom-text">{!! $message->text !!}</p>
             </div>
         </div>
         <p class="time">既読 {{date('Y年m月d日 G:i', strtotime($message->created_at))}}</p>
