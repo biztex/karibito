@@ -32,7 +32,6 @@ class ProductChatroomService
                 'user_id' => \Auth::id(),
                 'text' => $request['text'],
                 'file_name' => $request['file_name'],
-                'file_path' => null
             ];
         }
 
@@ -45,11 +44,28 @@ class ProductChatroomService
         $message = [
             'product_chatroom_id' => $product_chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => null,
-            'file_name' => null,
-            'file_path' => null,
         ];
         $product_proposal->productChatroomMessage()->create($message);
+    }
+
+    // 作業完了報告
+    public function storeProductCompleteMessage($product_chatroom)
+    {
+        $message = [
+            'user_id' => \Auth::id(),
+            'is_complete_message' => 1,
+        ];
+        $product_chatroom->productChatroomMessage()->create($message);
+    }
+
+    // 評価
+    public function storeProductEvaluationMessage($product_evaluation, $product_chatroom)
+    {
+        $message = [
+            'product_chatroom_id' => $product_chatroom->id,
+            'user_id' => \Auth::id(),
+        ];
+        $product_evaluation->productChatroomMessage()->create($message);
     }
 
     // ステータスを 2:契約 に変更
@@ -62,6 +78,24 @@ class ProductChatroomService
     public function statusChangeWork($product_proposal)
     {
         $product_proposal->productChatroom->fill(['status' => 3])->save();
+    }
+
+    // ステータスを 4:購入者評価 に変更
+    public function statusChangeBuyerEvaluation($product_chatroom)
+    {
+        $product_chatroom->fill(['status' => 4])->save();
+    }
+
+    // ステータスを 5:出品者評価 に変更
+    public function statusChangeSellerEvaluation($product_chatroom)
+    {
+        $product_chatroom->fill(['status' => 5])->save();
+    }
+
+    // ステータスを 6:完了 に変更
+    public function statusChangeComplete($product_chatroom)
+    {
+        $product_chatroom->fill(['status' => 6])->save();
     }
 
 }

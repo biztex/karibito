@@ -181,6 +181,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret06','secret.secret06')->name('secret06');
 
     Route::get('chatroom', [ChatroomController::class, 'index'])->name('chatroom.index');
+    Route::view('chatroom/complete/evaluation','chatroom.complete_evaluation')->name('chatroom.complete.evaluation');
 
     // やり取り画面組込中
     Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
@@ -188,8 +189,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('start/{product}', 'start')->name('start');
         Route::get('{product_chatroom}', 'show')->name('show');
         Route::post('message/{product_chatroom}', 'message')->name('message');
-        Route::post('{product_chatroom}/proposal','proposal')->name('proposal');
-        Route::post('{product_proposal}/purchese','purchess')->name('purchese');
+        Route::post('{product_chatroom}/proposal','proposal')->name('proposal'); //提案
+        Route::post('{product_proposal}/purchese','purchess')->name('purchese'); //購入
+        Route::get('{product_chatroom}/complete','complete')->name('complete'); //作業完了
+        Route::get('{product_chatroom}/evaluation','evaluation')->name('evaluation'); //評価画面
+        Route::post('{product_chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
+        Route::post('{product_chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //出品者評価
 
         Route::get('{product}/sample', 'sample')->name('sample');
 
