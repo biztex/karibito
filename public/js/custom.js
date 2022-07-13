@@ -1,4 +1,15 @@
 $(function () {
+	
+	// チャットルーム資料添付・送信
+	$(".chatroom_file_input").on('click', function () {
+		$("input[name='file_path']").click();
+		$("input[name='file_path']").on('change', function () {
+			var result = $('#file_path').prop('files')[0].name;
+			$("input[name='file_name']").val(result);
+			$("input[name='file_path_submit']").click();
+		});
+	});
+
 
 	// マイページ画面からカバー変更
 	$(".update_cover").on('click', function () {

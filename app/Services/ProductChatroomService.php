@@ -30,6 +30,18 @@ class ProductChatroomService
         $product_chatroom->productChatroomMessage()->create($message);
     }
 
+    // 資料添付
+    public function storeInputFileProductChatroomMessage(array $request, $product_chatroom)
+    {
+        $message = [
+            'user_id' => \Auth::id(),
+            'text' => null,
+            'file_name' => $request['file_name'],
+            'file_path' => $request['file_path']->store('file_paths','public')
+        ];
+        $product_chatroom->productChatroomMessage()->create($message);
+    }
+
     // 提案 product chatroom message テーブル
     public function storeProductProposalMessage($product_proposal, $product_chatroom)
     {

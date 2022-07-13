@@ -43,6 +43,19 @@ class ProductChatroomController extends Controller
         $this->product_chatroom_service->storeProductChatroomMessage($request->all(), $product_chatroom);
 
         return redirect()->route('chatroom.product.show', $product_chatroom->id);
+    }
+
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    */
+    public function startInputFile(Request $request, Product $product)
+    {
+        $product_chatroom = $this->product_chatroom_service->startProductChatroom($product);
+        $this->product_chatroom_service->storeInputFileProductChatroomMessage($request->all(), $product_chatroom);
+
+        return redirect()->route('chatroom.product.show', $product_chatroom->id);
 
     }
 
@@ -64,6 +77,16 @@ class ProductChatroomController extends Controller
     {
         $this->product_chatroom_service->storeProductChatroomMessage($request->all(), $product_chatroom);
 
+        return back();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function inputFile(Request $request, ProductChatroom $product_chatroom)
+    {
+        $this->product_chatroom_service->storeInputFileProductChatroomMessage($request->all(), $product_chatroom);
+        
         return back();
     }
 

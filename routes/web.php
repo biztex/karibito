@@ -186,10 +186,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
         Route::get('start/{product}', 'newroom')->name('newroom');
         Route::post('start/{product}', 'start')->name('start');
+        Route::post('start/{product}/input_file', 'startInputFile')->name('start.input.file');
         Route::get('{product_chatroom}', 'show')->name('show');
         Route::post('message/{product_chatroom}', 'message')->name('message');
         Route::post('{product_chatroom}/proposal','proposal')->name('proposal');
         Route::post('{product_proposal}/purchese','purchess')->name('purchese');
+        Route::post('{product_chatroom}/input_file', 'inputFile')->name('input.file');
 
         Route::get('{product}/sample', 'sample')->name('sample');
 
