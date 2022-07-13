@@ -25,7 +25,7 @@ use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\ProductChatroomController;
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\UserNotificationController;
 
