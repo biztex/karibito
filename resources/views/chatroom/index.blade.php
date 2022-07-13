@@ -83,7 +83,7 @@
 											</div>
 										</div>
 										<div class="functeBtns st2">
-											<a href="#" class="blue_o">チケット詳細</a>
+											<a href="{{route('product.show', $value->product_id)}}" class="blue_o">チケット詳細</a>
 											<a href="{{route('chatroom.product.show', $value->id)}}" class="green">チャットを開始</a>
 										</div>
 									</li>
@@ -158,7 +158,7 @@
 											</div>
 										</div>
 										<div class="functeBtns st2">
-											<a href="#" class="blue_o">チケット詳細</a>
+											<a href="{{route('product.show', $value->product_id)}}" class="blue_o">チケット詳細</a>
 											<a href="{{route('chatroom.product.show', $value->id)}}" class="green">チャットを開始</a>
 										</div>
 									</li>
