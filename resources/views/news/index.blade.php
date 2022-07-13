@@ -45,9 +45,7 @@
                                                 <dt><img src="img/mypage/img_notice01.png" alt=""></dt>
                                                 <dd>
                                                     <p class="txt">{{$news->title}}</p>
-                                                    <p class="time">
-                                                        {{$news->created_at->diffForHumans()}}
-                                                    </p>
+                                                    <p class="time">{{$news->created_at->diffForHumans()}}</p>
                                                 </dd>
                                             </dl>
                                         </a>
