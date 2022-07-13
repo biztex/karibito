@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Models\News;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobRequest;
 use App\Models\Product;
@@ -21,7 +22,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
 
         // 公開&&下書きでない
         $products = Product::publish()->orderBy('created_at','desc')->paginate(10);

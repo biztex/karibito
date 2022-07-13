@@ -25,13 +25,12 @@ use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\ProductChatroomController;
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
-use App\Http\Controllers\Web\UserNotificationController;
+use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\Web\ContactController;
-
 
 // 管理者用
 
@@ -91,6 +90,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+        // お知らせ一覧表示(UserNotification)
+        Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
+        Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報
@@ -111,6 +113,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('tel', 'edit')->name('edit');
                 Route::post('tel', 'update')->name('update');
             });
+
+
             // お知らせ機能の設定
             Route::put('/notification', [UserNotificationSettingController::class, 'update'])->name('notification.update');
         });
@@ -236,6 +240,7 @@ Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFac
 Route::get('contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('contact', [ContactController::class, 'sendSupportMail']);
 
+// トップ画面のニュース
 Route::get('', [HomeController::class, 'index'])->name('home');
 Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
