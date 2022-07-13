@@ -21,24 +21,21 @@ class ProductChatroomService
     // 通常メッセージ
     public function storeProductChatroomMessage(array $request, $product_chatroom)
     {
-        $message = [
-            'user_id' => \Auth::id(),
-            'text' => $request['text'],
-            'file_name' => null,
-            'file_path' => null,
-        ];
-        $product_chatroom->productChatroomMessage()->create($message);
-    }
+        if(isset($request['file_path'])){
+            $message = [
+                'user_id' => \Auth::id(),
+                'text' => $request['text'],
+                'file_name' => $request['file_name'],
+                'file_path' => $request['file_path']->store('file_paths','public')];
+        } else {
+            $message = [
+                'user_id' => \Auth::id(),
+                'text' => $request['text'],
+                'file_name' => $request['file_name'],
+                'file_path' => null
+            ];
+        }
 
-    // 資料添付
-    public function storeInputFileProductChatroomMessage(array $request, $product_chatroom)
-    {
-        $message = [
-            'user_id' => \Auth::id(),
-            'text' => null,
-            'file_name' => $request['file_name'],
-            'file_path' => $request['file_path']->store('file_paths','public')
-        ];
         $product_chatroom->productChatroomMessage()->create($message);
     }
 
