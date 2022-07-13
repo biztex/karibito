@@ -769,3 +769,22 @@
 		box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
 	}
 }
+.chatroom-text a {
+	color: #158ACC;
+}
+.chatroom-text a:hover {
+	text-decoration: underline;
+}
+.chatPages .btns p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(50% - 10px);
+    height: 40px;
+    background: url(../img/common/arrow_find02_on.svg)no-repeat 95% center;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+}
+.chatPages .btns p:hover {
+	cursor: pointer;
+}
