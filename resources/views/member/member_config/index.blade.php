@@ -82,16 +82,26 @@
 								<h3 class="memberConfigHd">お知らせ機能</h3>
 								<dl class="memberConfigDl">
 									<dt>お知らせ受信を設定</dt>
-									<dd>
-										<div class="labelBox">
-											<label><input type="checkbox" name="checkbox_config">いいね！</label>
-											<label><input type="checkbox" name="checkbox_config">フォロー中の方の掲載</label>
-											<label><input type="checkbox" name="checkbox_config">お気に入りの再掲載</label>
-											<label><input type="checkbox" name="checkbox_config">保存した検索条件の新着</label>
-											<label><input type="checkbox" name="checkbox_config">お知らせ・ニュース</label>
-											<label><input type="checkbox" name="checkbox_config">プロモーション</label>
-										</div>
-									</dd>
+									<form class="" method="post" action="{{ route('member_config.notification.update') }}" enctype="multipart/form-data">
+										@csrf @method("PUT")
+										<dd>
+											<input type="hidden" name="is_like" value="0">
+											<input type="hidden" name="is_posting" value="0">
+											<input type="hidden" name="is_fav" value="0">
+											<input type="hidden" name="is_arrival" value="0">
+											<input type="hidden" name="is_news" value="0">
+											<input type="hidden" name="is_promo" value="0">
+											<div class="labelBox">
+												<label><input type="checkbox" name="is_like" value="1" @if(Auth::user()->notificationSetting->is_like === 1)checked @endif>いいね！</label>
+												<label><input type="checkbox" name="is_posting" value="1" @if (Auth::user()->notificationSetting->is_posting === 1)checked @endif>フォロー中の方の掲載</label>
+												<label><input type="checkbox" name="is_fav" value="1" @if (Auth::user()->notificationSetting->is_fav === 1)checked @endif>お気に入りの再掲載</label>
+												<label><input type="checkbox" name="is_arrival" value="1" @if (Auth::user()->notificationSetting->is_arrival === 1)checked @endif>保存した検索条件の新着</label>
+												<label><input type="checkbox" name="is_news" value="1" @if (Auth::user()->notificationSetting->is_news === 1)checked @endif>お知らせ・ニュース</label>
+												<label><input type="checkbox" name="is_promo" value="1" @if (Auth::user()->notificationSetting->is_promo === 1)checked @endif>プロモーション</label>
+											</div>
+										</dd>
+										<input class="blue-button mt20" type="submit" value="変更する">
+									</form>
 								</dl>
 							</div>
 						</div>

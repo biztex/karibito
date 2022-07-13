@@ -98,4 +98,13 @@ class User extends Authenticatable implements MustVerifyEmail
             $user->userProfile->delete(); // プロフィール削除
         });
     }
+
+    /**
+     * 通知設定
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function notificationSetting()
+    {
+        return $this->hasOne(UserNotificationSetting::class);
+    }
 }
