@@ -33,7 +33,9 @@
 										</li>
 										@endforeach
 									</ul>
-									<p class="specialtyBtn"><a href="{{route('show.skill')}}"><img src="img/mypage/icon_add.svg" alt="">スキルを追加</a></p>
+									@if($skills->count() < 10)
+									    <p class="specialtyBtn"><a href="{{route('show.skill')}}"><img src="img/mypage/icon_add.svg" alt="">スキルを追加</a></p>
+									@endif
 								</div>
 							</div>
 							<div class="mypageItem">

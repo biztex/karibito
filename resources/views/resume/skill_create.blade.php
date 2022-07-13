@@ -22,10 +22,12 @@
                                             <div class="flexLine01">
                                                 <div class="mypageEditList flexLineLeft01">
                                                     <p class="mypageEditHd">スキル名</p>
+                                                    @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     <div class="mypageEditInput"><input type="text" name="name" placeholder="スキル名を入力してください"></div>
                                                 </div>
                                                 <div class="mypageEditList flexLineRight01">
                                                     <p class="mypageEditHd">経験年数</p>
+                                                    @error('year')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     <div class="mypageEditInput flexLine02">
                                                         <select name="year">
                                                             <option>1</option>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Mypage\SkillController\StoreRequest;
 
 use App\Models\UserSkill;
 use App\Services\SkillService;
@@ -43,7 +44,7 @@ class SkillController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $userskill = $this->skill_service->storeUserSkill($request->all());
 

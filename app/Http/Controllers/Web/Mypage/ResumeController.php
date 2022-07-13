@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 use App\Models\UserSkill;
 use App\Services\ResumeService;
@@ -65,8 +66,8 @@ class ResumeController extends Controller
      */
     public function show()
     {
-        $skills = UserSkill::loginUsers()->paginate(5);
-
+        $skills = \Auth::user()->userSkills;
+        
         return view('resume.resume', compact('skills'));
     }
 
