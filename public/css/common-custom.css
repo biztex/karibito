@@ -1,9 +1,14 @@
 /*全画面で汎用的なクラス*/
 
-/* タグ内の文字を改行表示(textareaの表示など) */
+/* タグ内の文字を改行表示(textareaの表示など)  改行や半角スペースがブラウザ表示にそのまま反映*/
 .pre-wrap {
     white-space: pre-wrap;
 }
+
+/* 表示する時に要素内で改行してくれる */
+/* .break-word { 使わない可能性あり
+    overflow-wrap: break-word;
+} */
 
 /*背景系*/
 .bg-white {

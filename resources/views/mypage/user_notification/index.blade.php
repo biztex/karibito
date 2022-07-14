@@ -287,6 +287,7 @@
 								@endif
 							</ul>
 						</div>
+						{{ $user_notifications->links() }}
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu/>
