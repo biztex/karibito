@@ -25,7 +25,9 @@ class UserNotificationController extends Controller
 
     public function show(UserNotification $user_notification)
     {
-        // $user_notification->is_view = 1;
+        $user_notification->is_view = 1;
+        $user_notification->save();
+
         return view('mypage.user_notification.show', compact('user_notification'));
     }
 }

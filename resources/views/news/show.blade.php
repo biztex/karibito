@@ -12,7 +12,7 @@
                         <h2 class="hdM">{{$news->title}}</h2>
                         <span class="">{{date('Y/m/d', strtotime($news->created_at))}}</span>
 {{--                        TODO 必要であればデザイン修正--}}
-                        <p class="sub pre-wrap">{{$news->content}}</p>
+                        <p class="sub pre-wrap break-word">{{$news->content}}</p>
 {{--                        <p class="hd01">禁止行為の一例</p>--}}
 {{--                        <div class="example">--}}
 {{--                            <p class="hd02">ダミーテキスト・ダミーテキスト・ダミーテキスト</p>--}}

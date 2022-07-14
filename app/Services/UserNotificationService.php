@@ -9,7 +9,8 @@ class UserNotificationService
 
     public function paginate($i)
     {
-        $user_notifications = UserNotification::orderBy('created_at','desc')->paginate($i);
+        $user_id = \Auth::id();
+        $user_notifications = UserNotification::latest()->where('user_id', $user_id)->paginate($i);
 
         return $user_notifications;
     }

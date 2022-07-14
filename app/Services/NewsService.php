@@ -41,9 +41,9 @@ class NewsService
         $users_id = User::where('deleted_at', null)->get('id');
         // dd($users_id[0]->id);
 
-        $user_notification = new UserNotification;
-
+        
         foreach($users_id as $user_id){
+            $user_notification = new UserNotification;
             $user_notification->user_id = $user_id->id;
 
             if(empty($user_id->notificationSetting->is_news)) {
@@ -51,18 +51,17 @@ class NewsService
             } else {
                 $user_notification->is_notification = 1;
             }
+            $user_notification->title = $params['title'];
+            $user_notification->content = $params['content'];
+
+            $user_notification->save();
         }
-
-        $user_notification->title = $params['title'];
-        $user_notification->content = $params['content'];
-
-        $user_notification->save();
 
     }
 
     public function paginate($i)
     {
-        $news_list = News::orderBy('created_at','desc')->paginate($i);
+        $news_list = News::latest()->paginate($i);
 
         return $news_list;
     }

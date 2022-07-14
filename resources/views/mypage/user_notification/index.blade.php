@@ -271,7 +271,7 @@
 								@else
 									@foreach($user_notifications as $user_notification)
 									<li>
-										<a href="{{route('user_notification.show', $user_notification->id)}}">
+										<a href="{{route('user_notification.show', $user_notification->id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
 											<dl>
 												<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
 												<dd>
@@ -287,6 +287,7 @@
 								@endif
 							</ul>
 						</div>
+						{{ $user_notifications->links() }}
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu/>

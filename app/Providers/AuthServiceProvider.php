@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\Product;
 use App\Models\JobRequest;
+use App\Models\UserNotification;
 use App\Models\UserSkill;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -50,6 +51,11 @@ class AuthServiceProvider extends ServiceProvider
         // 自分のリクエスト
         Gate::define('my.job.request', function (User $user, JobRequest $job_request) {
             return $user->id === $job_request->user_id;
+        });
+
+        // 自分へのお知らせ
+        Gate::define('my.user.notification', function (User $user, UserNotification $user_notification) {
+            return $user->id === $user_notification->user_id;
         });
 
         // 自分のスキル

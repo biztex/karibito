@@ -104,7 +104,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // お知らせ一覧表示(UserNotification)
         Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
-        Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
+        // お知らせ一覧表示(UserNotification)
+        Route::middleware(['can:my.user.notification,user_notification'])->group(function () {
+            Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
+        });
 
         // メンバー情報
         Route::view('member', 'member.index')->name('member');

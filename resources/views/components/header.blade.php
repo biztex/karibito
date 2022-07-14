@@ -34,42 +34,32 @@
                             <li><a href="{{ route('support') }}" class="nav01">サポート</a></li>
                             @auth
                             <li class="navLink">
-                                <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>1</span></a>
+                                <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>{{ $not_view_user_notifications->count() }}</span></a>
+                                {{-- ない場合は0で表示されている --}}
                                 <div class="navBox">
                                     <p class="navMessageHd">メッセージ</p>
                                     <div class="navMessageUl">
-                                        <a href="#">
-                                            <dl>
-                                                <dt><img src="/img/common/img_message01.png" alt=""></dt>
-                                                <dd>
-                                                    <p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-                                                    <p class="time">0時間前</p>
-                                                </dd>
-                                            </dl>
-                                        </a>
-                                        <a href="#">
-                                            <dl>
-                                                <dt><img src="/img/common/img_message02.png" alt=""></dt>
-                                                <dd>
-                                                    <p class="txt">〇〇〇〇について作業完了報告が届きました</p>
-                                                    <p class="time">0時間前</p>
-                                                </dd>
-                                            </dl>
-                                        </a>
-                                        <a href="#">
-                                            <dl>
-                                                <dt><img src="/img/common/img_message01.png" alt=""></dt>
-                                                <dd>
-                                                    <p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-                                                    <p class="time">0時間前</p>
-                                                </dd>
-                                            </dl>
-                                        </a>
+                                        @if(isset($not_view_user_notifications[0]))
+                                            @foreach ($not_view_user_notifications as $not_view_user_notification)
+                                                @if ($not_view_user_notification->is_view === 0)
+                                                    <a href="{{route('user_notification.show', $not_view_user_notification->id)}}">
+                                                        <dl>
+                                                            <dt><img src="/img/common/img_message01.png" alt=""></dt>
+                                                            <dd>
+                                                                <p class="txt">{{$not_view_user_notification->title}}</p>
+                                                                <p class="time">{{$not_view_user_notification->created_at->diffForHumans()}}</p>
+                                                            </dd>
+                                                        </dl>
+                                                    </a>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <div class="navMessageUl">
+                                                <p class="noMessage">現在、メッセージの通知はありません。</p>
+                                            </div>
+                                        @endif
                                     </div>
-                                    <div class="navMessageUl">
-                                        <p class="noMessage">現在、メッセージの通知はありません。</p>
-                                    </div>
-                                    <p class="navMessageLink"><a href="#">すべて見る</a></p>
+                                    <p class="navMessageLink"><a href="{{ route('user_notification.index') }}">すべて見る</a></p>
                                 </div>
                             </li>
                             <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
@@ -77,7 +67,7 @@
                             <li class="navLink">
                                     @if(empty($user_profile->icon))
                                         <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
-                                        @else
+                                    @else
                                         <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
                                     @endif
                                 <div class="navBox navMypageBox">
