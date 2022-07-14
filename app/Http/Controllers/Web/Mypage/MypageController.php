@@ -21,7 +21,7 @@ class MypageController extends Controller
     public function show()
     {
         $user_profile = UserProfile::firstWhere('user_id',Auth::id());
-        $user_notifications = UserNotification::orderBy('created_at','desc')->paginate(5);
+        $user_notifications = UserNotification::latest()->where('user_id', \Auth::id())->paginate(5);
 
         if ($user_profile->birthday !== NULL){
             $age = Age::group($user_profile->birthday);

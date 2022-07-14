@@ -90,9 +90,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
-        // お知らせ一覧表示(UserNotification)
         Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
+        // お知らせ一覧表示(UserNotification)
+        // Route::middleware(['can:my.user.notification, user_notification'])->group(function () {
         Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
+        // });
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報

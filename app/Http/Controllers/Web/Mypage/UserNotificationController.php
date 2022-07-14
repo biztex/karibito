@@ -25,6 +25,9 @@ class UserNotificationController extends Controller
 
     public function show(UserNotification $user_notification)
     {
+        if (! \Gate::allows('my.user.notification', $user_notification)) {
+            abort(403);
+        }
         $user_notification->is_view = 1;
         $user_notification->save();
 
