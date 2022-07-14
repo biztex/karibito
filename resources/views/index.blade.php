@@ -215,25 +215,9 @@
 							<aside id="side" class="pc">
 								<h2>サービス一覧</h2>
 								<ul class="links">
-									<li><a href="#">家事</a></li>
-									<li><a href="#">修理組み立て</a></li>
-									<li><a href="#">ペット</a></li>
-									<li><a href="#">高齢者向け</a></li>
-									<li><a href="#">乗り物</a></li>
-									<li><a href="#">引越し</a></li>
-									<li><a href="#">趣味・習い事</a></li>
-									<li><a href="#">美容・ファッション</a></li>
-									<li><a href="#">写真動作制作</a></li>
-									<li><a href="#">その他</a></li>
-									<li><a href="#">インテリア</a></li>
-									<li><a href="#">デザイン</a></li>
-									<li><a href="#">パソコン</a></li>
-									<li><a href="#">ビジネスサポート</a></li>
-									<li><a href="#">冠婚葬祭</a></li>
-									<li><a href="#">料理</a></li>
-									<li><a href="#">恋愛・結婚</a></li>
-									<li><a href="#">体験・アクティビティ</a></li>
-									<li><a href="#">出張サービス</a></li>
+								@foreach($categories as $category)
+									<li><a href="#">{{ $category->name }}</a></li>
+								@endforeach
 								</ul>
 								<h2>ガイド</h2>
 								<ul class="links">
@@ -388,27 +372,11 @@
 								</div>
 							</div><!-- /#main -->
 							<aside id="side" class="pc">
-								<h2>サービス一覧</h2>
+							<h2>サービス一覧</h2>
 								<ul class="links">
-									<li><a href="#">家事</a></li>
-									<li><a href="#">修理組み立て</a></li>
-									<li><a href="#">ペット</a></li>
-									<li><a href="#">高齢者向け</a></li>
-									<li><a href="#">乗り物</a></li>
-									<li><a href="#">引越し</a></li>
-									<li><a href="#">趣味・習い事</a></li>
-									<li><a href="#">美容・ファッション</a></li>
-									<li><a href="#">写真動作制作</a></li>
-									<li><a href="#">その他</a></li>
-									<li><a href="#">インテリア</a></li>
-									<li><a href="#">デザイン</a></li>
-									<li><a href="#">パソコン</a></li>
-									<li><a href="#">ビジネスサポート</a></li>
-									<li><a href="#">冠婚葬祭</a></li>
-									<li><a href="#">料理</a></li>
-									<li><a href="#">恋愛・結婚</a></li>
-									<li><a href="#">体験・アクティビティ</a></li>
-									<li><a href="#">出張サービス</a></li>
+								@foreach($categories as $category)
+									<li><a href="#">{{ $category->name }}</a></li>
+								@endforeach
 								</ul>
 								<h2>ガイド</h2>
 								<ul class="links">

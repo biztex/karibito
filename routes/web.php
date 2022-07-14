@@ -19,6 +19,8 @@ use App\Http\Controllers\Web\Mypage\ProductController as MypageProductController
 use App\Http\Controllers\Web\Mypage\JobRequestController as MypageJobRequestController;
 use App\Http\Controllers\Web\Mypage\IdentificationController;
 use App\Http\Controllers\Web\Mypage\ChangeEmailController;
+use App\Http\Controllers\Web\Mypage\ResumeController;
+use App\Http\Controllers\Web\Mypage\SkillController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\NewsController;
@@ -29,7 +31,6 @@ use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
-use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\Web\ContactController;
 
 // 管理者用
@@ -64,8 +65,6 @@ Route::view('support', 'support.support')->name('support');
 Route::view('support_detail', 'support.support_detail')->name('support_detail');
 Route::view('guide', 'support.guide')->name('guide');
 
-Route::get('resume',[ResumeController::class, 'resume'])->middleware('can:identify')->name('resume');
-Route::view('resume_edit','resume_edit')->name('resume_edit');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -90,11 +89,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+
+        Route::middleware(['can:my.skill,user_skill', 'can:identify'])->group(function () {
+            Route::post('skill_create/{user_skill}',[SkillController::class, 'destroy'])->name('destroy.skill');
+        });
+        Route::get('resume',[ResumeController::class, 'show'])->name('resume.show');
+        Route::get('skill_create',[SkillController::class, 'show'])->name('show.skill');
+        Route::post('skill_create',[SkillController::class, 'store'])->name('store.skill');
+
+        Route::get('career_create',[ResumeController::class, 'careerCreate'])->middleware('can:identify')->name('resume.career_create');
+        Route::get('job_create',[ResumeController::class, 'jobCreate'])->middleware('can:identify')->name('resume.job_create');
+        Route::view('resume_edit','resume_edit')->name('resume_edit');
+
+
+        // お知らせ一覧表示(UserNotification)
         Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
         // お知らせ一覧表示(UserNotification)
-        // Route::middleware(['can:my.user.notification, user_notification'])->group(function () {
-        Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
-        // });
+        Route::middleware(['can:my.user.notification,user_notification'])->group(function () {
+            Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
+        });
+
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報

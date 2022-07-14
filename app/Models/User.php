@@ -107,4 +107,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(UserNotificationSetting::class);
     }
+
+    public function userSkills()
+    {
+        return $this->hasMany(UserSkill::class);
+    }
 }

@@ -690,6 +690,15 @@
     margin-top: 32px;
 }
 
+#wrapper {
+	position: relative; 
+	overflow: hidden;
+	width:100%;
+	min-height:100vh;
+	z-index: 2;
+	padding-top: 125px;
+}
+
 @media screen and (max-width: 767px) {
 	.linkdel input{
 		width: 100px;
@@ -803,4 +812,49 @@
 }
 .chatPages .btns p:hover {
 	cursor: pointer;
+}
+
+
+/*add 中澤 20220705 スキルページ */
+.mypagePortfolioUl02 .editP {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.mypagePortfolioUl02 .editP a {
+	display: block;
+	margin: 0 10px;
+}
+
+.mypageUl03 li {
+	position: relative;
+	padding-right: 60px;
+}
+
+.mypageUl03 li .mypageCtrl {
+	width: 60px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 3;
+}
+
+.mypageUl03 li .mypageCtrl a,
+.mypageUl03 li .mypageCtrl button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 35px;
+	border-radius: 3px;
+	font-size: 1.4rem;
+	border: 1px solid #158ACC;
+	padding: 0 12px;
+	background-color: #158ACC;
+	color: #fff;
+	margin-left: 5px;
 }
