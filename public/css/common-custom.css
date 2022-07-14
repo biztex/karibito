@@ -5,6 +5,11 @@
     white-space: pre-wrap;
 }
 
+/* pタグ内の文字を開業表示 */
+.break-word {
+    overflow-wrap: break-word;
+}
+
 /*背景系*/
 .bg-white {
     background: #FFFFFF;

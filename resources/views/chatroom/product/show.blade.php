@@ -60,21 +60,24 @@
                             </div>
 
                             <!-- 入力エリア -->
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('chatroom.product.message', $product_chatroom->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                                 <div class="item">
                                     @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
-
                                     <div class="evaluation">
                                         <textarea name="text" placeholder="依頼する入力してください"></textarea>
                                     </div>
+                                    
+                                    @error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
                                     <div class="btns">
 
-                                            <input type="file" name="file_path" id="file_path" style="display:none;"><p class="chatroom_file_input">資料を添付する</p>
-                                            <input type="hidden" name="file_name" value="">
-                                            <input type="submit" name="file_path_submit" value="" style="display:none;" formaction="{{ route('chatroom.product.input.file', $product_chatroom->id) }}">
+                                        <p class="chatroom_file_input">資料を添付する</p>
+                                        <input type="file" name="file_path" id="file_path" style="display:none;">
+                                        <input type="hidden" name="file_name" value="">
 
-                                            <a href="#">定型分を使う</a>
+                                        <a href="#">定型分を使う</a>
+
                                     </div>
                                     <div class="about mt25">
                                         <p class="tit">【資料を添付する】について</p>
@@ -84,7 +87,7 @@
                                         <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
                                     </div>
                                     <div class="functeBtns">
-                                        <input type="submit" class="orange" formaction="{{ route('chatroom.product.message', $product_chatroom->id) }}" value="送信する">
+                                        <input type="submit" class="orange" value="送信する">
                                     </div>
                                 </div>
                             </form>
@@ -123,8 +126,8 @@
                             @if($product->user_id === Auth::id())
                                 @if($product_chatroom->status === 1)
 							        <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
-                                @elseif($product_chatroom->status ===3)
-							        <a href="" class="orange">作業完了報告をする</a>
+                                @elseif($product_chatroom->status === 3)
+							        <a href="{{route('chatroom.product.complete', $product_chatroom->id)}}" class="orange">作業完了報告をする</a>
                                 @endif
                             @endif
 							<input type="submit" class="" value="キャンセル申請をする">
