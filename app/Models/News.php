@@ -12,11 +12,11 @@ class News extends Model
 
     protected $guarded = ['id'];
 
-    const STATUS_PRIVATE = 0;
-    const STATUS_PUBLISH = 1;
+    // const STATUS_PRIVATE = 0;
+    // const STATUS_PUBLISH = 1;
 
-    const PUBLIC_STATUS = [
-        self::STATUS_PRIVATE => '非公開',
-        self::STATUS_PUBLISH => '公開',
-    ];
+    // const PUBLIC_STATUS = [
+    //     self::STATUS_PRIVATE => '非公開',
+    //     self::STATUS_PUBLISH => '公開',
+    // ];
 }
