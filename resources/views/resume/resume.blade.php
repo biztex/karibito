@@ -45,30 +45,26 @@
 								<p class="mypageHd03">経歴</p>
 								<div class="mypageBox">
 									<ul class="mypageUl03">
+										@foreach($careers as $career)
 										<li>
 											<dl class="mypageDl02">
 												<dt>経歴名</dt>
-												<dd><span>アパレルメーカー アパレルデザイナー</span></dd>
+												<dd><span>{{ $career->name }}</span></dd>
 											</dl>
 											<dl class="mypageDl02">
 												<dt>在籍期間</dt>
-												<dd>2012年 4月 ～ 2016年 3月</dd>
+												<dd>{{ $career->first_year }}年 {{$career->first_month}}月 ～ @if($career->last_year == null && $career->last_month == null)現在 @else{{ $career->last_year }}年 {{$career->last_month}}月 @endif</dd>
 											</dl>
-											<div class="mypageCtrl"><a href="#">削除</a></div>
+											<form method="post"  action="{{route('destroy.career',$career->id)}}" enctype="multipart/form-data">
+													@csrf
+													<div class="mypageCtrl"><button type="submit" onclick='return confirm("削除しますか？");'>削除</button></div>
+												</form>
 										</li>
-										<li>
-											<dl class="mypageDl02">
-												<dt>経歴名</dt>
-												<dd><span>デザイン事務所 デザイナー</span></dd>
-											</dl>
-											<dl class="mypageDl02">
-												<dt>在籍期間</dt>
-												<dd>2016年 4月 ～ 現在</dd>
-											</dl>
-											<div class="mypageCtrl"><a href="#">削除</a></div>
-										</li>
+										@endforeach
 									</ul>
-									<p class="specialtyBtn"><a href="{{route('resume.career_create')}}"><img src="img/mypage/icon_add.svg" alt="">経歴を追加</a></p>
+									@if($careers->count() < 10)
+										<p class="specialtyBtn"><a href="{{route('resume.career_create')}}"><img src="img/mypage/icon_add.svg" alt="">経歴を追加</a></p>
+									@endif
 								</div>
 							</div>
 							<div class="mypageItem">

@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\UserNotification;
 use App\Models\UserSkill;
+use App\Models\UserCareer;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -61,6 +62,11 @@ class AuthServiceProvider extends ServiceProvider
         // 自分のスキル
         Gate::define('my.skill', function (User $user, UserSkill $user_skill) {
             return $user->id ===  $user_skill->user_id;
+        });
+
+        // 自分の経歴
+        Gate::define('my.career', function (User $user, UserCareer $user_career) {
+            return $user->id ===  $user_career->user_id;
         });
     }
 }

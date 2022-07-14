@@ -1,6 +1,6 @@
 <x-layout>
 <x-parts.post-button/>
-    <article>
+    <article class="careerCreate">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home')}}">ホーム</a>　>　<span>スキル・経歴</span>
@@ -16,76 +16,63 @@
 							<div class="mypageItem">
 								<p class="mypageHd03">経歴</p>
 								<div class="mypageBox">
-									<ul class="mypageUl03">
-										<li>
-											<dl class="mypageDl02">
-												<dt>経歴名</dt>
-												<dd><span>アパレルメーカー アパレルデザイナー</span></dd>
-											</dl>
-											<dl class="mypageDl02">
-												<dt>在籍期間</dt>
-												<dd>2012年 4月 ～ 2016年 3月</dd>
-											</dl>
-											<div class="mypageCtrl"><a href="#">削除</a></div>
-										</li>
-										<li>
-											<dl class="mypageDl02">
-												<dt>経歴名</dt>
-												<dd><span>デザイン事務所 デザイナー</span></dd>
-											</dl>
-											<dl class="mypageDl02">
-												<dt>在籍期間</dt>
-												<dd>2016年 4月 ～ 現在</dd>
-											</dl>
-											<div class="mypageCtrl"><a href="#">削除</a></div>
-										</li>
-									</ul>
-
 									<div class="mypageEditBox">
-										<div class="mypageEditList">
-											<p class="mypageEditHd">経歴名</p>
-											<div class="mypageEditInput"><input type="text" name="" placeholder="経歴を入力してください"></div>
-										</div>
-										<div class="mypageEditList">
-											<p class="mypageEditHd">在籍期間</p>
-											<div class="mypageEditDate">
-												<div class="mypageEditHalf">
-													<p class="mypageEditDateHd">開始</p>
-													<div class="mypageEditInput flexLine01">
-														<select>
-															<option>2022年</option>
-															<option>2021年</option>
-															<option>2020年</option>
-														</select>
-														<select>
-															<option>11月</option>
-															<option>12月</option>
-															<option>01月</option>
-														</select>
+										<form method="post" enctype="multipart/form-data">
+										@csrf
+											<div class="mypageEditList">
+												<p class="mypageEditHd">経歴名</p>
+												@error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												<div class="mypageEditInput"><input type="text" name="name" value="{{ old('name') }}" placeholder="経歴名を入力してください" required></div>
+											</div>
+											<div class="mypageEditList">
+												<p class="mypageEditHd">在籍期間</p>
+												@error('first_year')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												@error('first_month')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												@error('last_year')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												@error('last_month')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												<div class="mypageEditDate">
+													<div class="mypageEditHalf">
+														<p class="mypageEditDateHd">開始</p>
+														<div class="mypageEditInput flexLine01">
+															<select name="first_year">
+																<option value="">選択してください</option>
+																@for($year = 1970; $year<= now()->year; $year++)
+																	<option value="{{$year}}" @if(old('first_year') == $year) selected @endif>{{$year}}</option>
+																@endfor
+															</select>
+															<select name="first_month">
+																<option value="">選択してください</option>
+																@for($month = 1; $month <= 12; $month++)
+																<option value='{{ $month }}' @if(old('first_month') == $month) selected @endif>{{ $month }}</option>
+																@endfor
+															</select>
+														</div>
 													</div>
-												</div>
-												<span class="date_span02 pc">〜</span>
-												<div class="mypageEditHalf">
-													<p class="mypageEditDateHd">終了</p>
-													<div class="mypageEditInput flexLine01">
-														<select>
-															<option>2022年</option>
-															<option>2021年</option>
-															<option>2020年</option>
-														</select>
-														<select>
-															<option>12月</option>
-															<option>01月</option>
-															<option>02月</option>
-														</select>
+													<span class="date_span02 pc">〜</span>
+													<div class="mypageEditHalf">
+														<p class="mypageEditDateHd">終了</p>
+														<div class="mypageEditInput flexLine01">
+															<select name="last_year">
+																<option value="">選択してください</option>
+																@for($year = 1970; $year<= now()->year; $year++)
+																	<option value="{{$year}}" @if(old('last_year') == $year) selected @endif>{{$year}}</option>;
+																@endfor
+															</select>
+															<select name="last_month">
+																<option value="">選択してください</option>
+																@for($month = 1; $month <= 12; $month++)
+																<option value='{{ $month }}' @if(old('last_month') == $month) selected @endif>{{ $month }}</option>
+																@endfor
+															</select>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										<div class="fancyPersonBtn">
-											<a href="#" class="fancyPersonCancel">キャンセル</a>
-											<a href="#" class="fancyPersonSign">登録する</a>
-										</div>
+											<div class="fancyPersonBtn">
+                                                <a href="#" class="fancyPersonCancel">キャンセル</a>
+                                                <input type="submit" class="fancyPersonSign" formaction="{{ route('store.career') }}" value="登録する">
+                                            </div>
+										</form>
 									</div>
 								</div>
 							</div>
