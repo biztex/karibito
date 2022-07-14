@@ -24,15 +24,17 @@ class MessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required | max:3000'
+            'text' => 'required_without_all:file_name,file_path, | max:3000',
+            'file_path' => 'max:20480 '
         ];
     }
 
     public function messages()
     {
       return [
-        'text.required' => '入力してください。',
+        'text.required_without_all' => 'メッセージもしくは添付資料を指定してください。',
         'text.max' => '3000文字以下で指定してください。',
+        'file_path.max' => '添付できる資料は20MBまでです。',
       ];
     }
 }

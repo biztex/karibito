@@ -1,12 +1,17 @@
 $(function () {
 	
 	// チャットルーム資料添付・送信
+
 	$(".chatroom_file_input").on('click', function () {
+		// 添付ファイルをリセット
+		$(".input-file-name").text("");
+		$("input[name='file_name']").val("");
+
 		$("input[name='file_path']").click();
 		$("input[name='file_path']").on('change', function () {
-			var result = $('#file_path').prop('files')[0].name;
+			let result = $('#file_path').prop('files')[0].name;
 			$("input[name='file_name']").val(result);
-			$("input[name='file_path_submit']").click();
+			$(".input-file-name").text("添付資料："+result);
 		});
 	});
 

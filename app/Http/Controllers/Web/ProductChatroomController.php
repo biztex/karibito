@@ -9,6 +9,7 @@ use App\Models\ProductChatroom;
 use App\Models\ProductProposal;
 use App\Services\ProductChatroomService;
 use App\Services\ProductProposalService;
+use App\Services\ProductEvaluationService;
 use App\Http\Requests\ProductChatroom\MessageRequest;
 
 class ProductChatroomController extends Controller
@@ -16,10 +17,11 @@ class ProductChatroomController extends Controller
     private $product_chatroom_service;
     private $product_proposal_service;
 
-    public function __construct(ProductChatroomService $product_chatroom_service, ProductProposalService $product_proposal_service)
+    public function __construct(ProductChatroomService $product_chatroom_service, ProductProposalService $product_proposal_service, ProductEvaluationService $product_evaluation_service)
     {
         $this->product_chatroom_service = $product_chatroom_service;
         $this->product_proposal_service = $product_proposal_service;
+        $this->product_evaluation_service = $product_evaluation_service;
     }
 
     /**
@@ -46,20 +48,6 @@ class ProductChatroomController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-    */
-    public function startInputFile(Request $request, Product $product)
-    {
-        $product_chatroom = $this->product_chatroom_service->startProductChatroom($product);
-        $this->product_chatroom_service->storeInputFileProductChatroomMessage($request->all(), $product_chatroom);
-
-        return redirect()->route('chatroom.product.show', $product_chatroom->id);
-
-    }
-
-    /**
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(ProductChatroom $product_chatroom)
@@ -77,16 +65,6 @@ class ProductChatroomController extends Controller
     {
         $this->product_chatroom_service->storeProductChatroomMessage($request->all(), $product_chatroom);
 
-        return back();
-    }
-
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function inputFile(Request $request, ProductChatroom $product_chatroom)
-    {
-        $this->product_chatroom_service->storeInputFileProductChatroomMessage($request->all(), $product_chatroom);
-        
         return back();
     }
 
@@ -130,6 +108,45 @@ class ProductChatroomController extends Controller
             $this->product_chatroom_service->statusChangeWork($product_proposal);
         });
         return view('chatroom.cart_buy05', compact('product_proposal'));
+    }
+
+    // 作業完了
+    public function complete(ProductChatroom $product_chatroom)
+    {
+        $this->product_chatroom_service->storeProductCompleteMessage($product_chatroom);
+        $this->product_chatroom_service->statusChangeBuyerEvaluation($product_chatroom);
+
+        return back();
+    }
+
+    // 評価画面
+    public function evaluation(ProductChatroom $product_chatroom)
+    {
+        return view('chatroom.product.evaluation', compact('product_chatroom'));
+    }
+
+    // 購入者評価
+    public function buyerEvaluation(Request $request, ProductChatroom $product_chatroom)
+    {
+        \DB::transaction(function () use ($request, $product_chatroom) {
+            $product_evaluation = $this->product_evaluation_service->storeProductEvaluation($request->all(), $product_chatroom);
+            $this->product_chatroom_service->storeProductEvaluationMessage($product_evaluation, $product_chatroom);
+            $this->product_chatroom_service->statusChangeSellerEvaluation($product_chatroom);
+        });
+
+        return redirect()->route('chatroom.complete.evaluation');
+    }
+
+    // 出品者評価
+    public function sellerEvaluation(Request $request, ProductChatroom $product_chatroom)
+    {
+        \DB::transaction(function () use ($request, $product_chatroom) {
+            $product_evaluation = $this->product_evaluation_service->storeProductEvaluation($request->all(), $product_chatroom);
+            $this->product_chatroom_service->storeProductEvaluationMessage($product_evaluation, $product_chatroom);
+            $this->product_chatroom_service->statusChangeComplete($product_chatroom);
+        });
+
+        return redirect()->route('chatroom.complete.evaluation');
     }
 
     // sample
