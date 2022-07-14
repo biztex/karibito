@@ -93,6 +93,8 @@ class SkillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userskill = $this->skill_service->deleteUserSkill($id);
+
+        return redirect()->route('resume.show')->with('flash_msg','削除に保存しました！');
     }
 }

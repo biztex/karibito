@@ -25,4 +25,15 @@ class SkillService
         return $userskill;
     }
 
+     /**
+     *  スキルを削除
+     */
+    public function deleteUserSkill($id):UserSkill
+    {
+        $userskill = UserSkill::where('id', '=', $id)->first();
+        $userskill->delete();
+
+        return $userskill;
+    }
+
 }

@@ -29,7 +29,7 @@
 												<dt>経験年数</dt>
 												<dd>{{ $skill->year }}年</dd>
 											</dl>
-											<div class="mypageCtrl"><a href="#">削除</a></div>
+											<div class="mypageCtrl"><button type-"submit" action="{{route('destroy.skill',$skill->id)}}">削除</button></div>
 										</li>
 										@endforeach
 									</ul>
