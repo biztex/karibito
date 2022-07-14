@@ -126,8 +126,8 @@
                             @if($product->user_id === Auth::id())
                                 @if($product_chatroom->status === 1)
 							        <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
-                                @elseif($product_chatroom->status ===3)
-							        <a href="" class="orange">作業完了報告をする</a>
+                                @elseif($product_chatroom->status === 3)
+							        <a href="{{route('chatroom.product.complete', $product_chatroom->id)}}" class="orange">作業完了報告をする</a>
                                 @endif
                             @endif
 							<input type="submit" class="" value="キャンセル申請をする">

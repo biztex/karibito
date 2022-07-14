@@ -29,10 +29,9 @@ use App\Http\Controllers\Web\ProductChatroomController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
-use App\Http\Controllers\Web\UserNotificationController;
+use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
-
 
 // 管理者用
 
@@ -90,6 +89,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+
         Route::middleware(['can:my.skill,user_skill', 'can:identify'])->group(function () {
             Route::post('skill_create/{user_skill}',[SkillController::class, 'destroy'])->name('destroy.skill');
         });
@@ -100,6 +100,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('career_create',[ResumeController::class, 'careerCreate'])->middleware('can:identify')->name('resume.career_create');
         Route::get('job_create',[ResumeController::class, 'jobCreate'])->middleware('can:identify')->name('resume.job_create');
         Route::view('resume_edit','resume_edit')->name('resume_edit');
+
+
+        // お知らせ一覧表示(UserNotification)
+        Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
+        Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
 
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
@@ -121,6 +126,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('tel', 'edit')->name('edit');
                 Route::post('tel', 'update')->name('update');
             });
+
+
             // お知らせ機能の設定
             Route::put('/notification', [UserNotificationSettingController::class, 'update'])->name('notification.update');
         });
@@ -191,6 +198,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret06','secret.secret06')->name('secret06');
 
     Route::get('chatroom', [ChatroomController::class, 'index'])->name('chatroom.index');
+    Route::view('chatroom/complete/evaluation','chatroom.complete_evaluation')->name('chatroom.complete.evaluation');
 
     // やり取り画面組込中
     Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
@@ -198,8 +206,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('start/{product}', 'start')->name('start');
         Route::get('{product_chatroom}', 'show')->name('show');
         Route::post('message/{product_chatroom}', 'message')->name('message');
-        Route::post('{product_chatroom}/proposal','proposal')->name('proposal');
-        Route::post('{product_proposal}/purchese','purchess')->name('purchese');
+        Route::post('{product_chatroom}/proposal','proposal')->name('proposal'); //提案
+        Route::post('{product_proposal}/purchese','purchess')->name('purchese'); //購入
+        Route::get('{product_chatroom}/complete','complete')->name('complete'); //作業完了
+        Route::get('{product_chatroom}/evaluation','evaluation')->name('evaluation'); //評価画面
+        Route::post('{product_chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
+        Route::post('{product_chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //出品者評価
 
         Route::get('{product}/sample', 'sample')->name('sample');
 
@@ -244,6 +256,7 @@ Route::get('/login/facebook/callback', [FacebookLoginController::class, 'authFac
 Route::get('contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('contact', [ContactController::class, 'sendSupportMail']);
 
+// トップ画面のニュース
 Route::get('', [HomeController::class, 'index'])->name('home');
 Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
 Route::get('news', [NewsController::class, 'index'])->name('news.index');

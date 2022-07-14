@@ -15,9 +15,10 @@ class ProductChatroom extends Model
         1 => 'チャット開始',
         2 => '契約',
         3 => '作業',
-        4 => '評価',
-        5 => '完了',
-        6 => 'キャンセル'
+        4 => '購入者評価',
+        5 => '出品者評価',
+        6 => '完了',
+        7 => 'キャンセル'
     ];
 
     /**
@@ -29,7 +30,7 @@ class ProductChatroom extends Model
      */
     public function scopeActive($query)
     {
-        return $query->whereIn('status', [1,2,3,4]);
+        return $query->whereIn('status', [1,2,3,4,5]);
     }
 
     /**
@@ -41,7 +42,7 @@ class ProductChatroom extends Model
      */
     public function scopeInActive($query)
     {
-        return $query->whereIn('status', [5,6]);
+        return $query->whereIn('status', [6,7]);
     }
 
     /**
@@ -94,5 +95,13 @@ class ProductChatroom extends Model
     public function productProposal()
     {
         return $this->hasMany(ProductProposal::class);
+    }    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productEvaluation()
+    {
+        return $this->hasMany(ProductEvaluation::class);
     }    
 }

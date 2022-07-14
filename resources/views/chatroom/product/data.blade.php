@@ -1,6 +1,172 @@
 @foreach($messages as $message)
+    <!-- 作業完了報告 購入者評価前-->
+    @if($message->is_complete_message === 1 && $product_chatroom->status === 4)
+        <!-- 購入者側　相手を評価するボタン -->
+        @if($message->user_id !== Auth::id())
+        <li>
+            <div class="img">
+                @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p>作業報告が完了しました</p>
+                    <div class="proposeBuy">
+                        <p class="tit">{{$product->title}}</p>
+                        <p>提供価格：¥{{ number_format($product_chatroom->productProposal[0]->price) }}</p>
+                        <p class="buy"><a href="{{route('chatroom.product.evaluation',$product_chatroom->id)}}" class="red">お相手を評価する</a></p>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- 出品者側 相手の評価待ち -->
+        @else
+        <li>
+            <div class="img">
+                @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p>作業報告が完了しました</p>
+                    <div class="proposeBuy">
+                        <p class="tit">作業報告が完了しました</p>
+                        <p>提供価格：¥{{ number_format($product_chatroom->productProposal[0]->price) }}</p>
+                        <p class="buy"><input type="submit" value="お相手の評価をお待ちください" disabled></p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        @endif
+
+    @elseif($message->is_complete_message === 1 && $product_chatroom->status === 5)
+        <!-- 購入者側　評価完了-->
+        @if($message->user_id !== Auth::id())
+        <li>
+            <div class="img">
+                @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p>作業報告が完了しました</p>
+                    <div class="proposeBuy">
+                        <p class="tit">作業報告が完了しました</p>
+                        <p>提供価格：¥{{ number_format($product_chatroom->productProposal[0]->price) }}</p>
+                        <p class="buy"><input type="submit" value="評価しました" disabled></p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        @else
+        <li>
+            <div class="img">
+                @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p>作業報告が完了しました</p>
+                    <div class="proposeBuy">
+                        <p class="tit">作業報告が完了しました</p>
+                        <p>提供価格：¥{{ number_format($product_chatroom->productProposal[0]->price) }}</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        @endif
+
+    @elseif($message->is_complete_message === 1 && $product_chatroom->status === 6)
+
+        <li>
+            <div class="img">
+                @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p>作業報告が完了しました</p>
+                    <div class="proposeBuy">
+                        <p class="tit">作業報告が完了しました</p>
+                        <p>提供価格：¥{{ number_format($product_chatroom->productProposal[0]->price) }}</p>
+                        <p class="buy"><input type="submit" value="評価しました" disabled></p>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+    <!-- 作業完了報告 出品者評価前-->
+    @elseif($message->reference_type === 'App\Models\ProductEvaluation' && $product_chatroom->status === 5)
+
+        <!-- 購入者側　評価完了 -->
+        @if($message->user_id === Auth::id())
+        <li>
+            <div class="img">
+                @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p>評価が完了しました</p>
+                    <div class="proposeBuy">
+                        <p class="buy none"><input type="submit" value="お相手の評価をお待ちください" disabled></p>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- 出品者側　相手を評価ボタン -->
+        @else
+        <li>
+            <div class="img">
+                @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p>評価が完了しました</p>
+                    <div class="proposeBuy">
+                        <p class="buy"><a href="{{route('chatroom.product.evaluation',$product_chatroom->id)}}" class="red">お相手を評価する</a></p>
+                    </div>
+                </div>
+            </div>
+            <p class="time">既読 2021年7月26日9:10</p>
+        </li>
+        @endif
+
+    @elseif($message->reference_type === 'App\Models\ProductEvaluation' && $product_chatroom->status === 6)
+
+    <li>
+        <div class="img">
+            @if(null !== $message->user->userProfile->icon)
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @else
+                    <p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                @endif
+            <div class="info">
+                <p class="name">{{$message->user->name}}</p>
+                <p>評価が完了しました</p>
+            </div>
+        </div>
+    </li>
+
     <!-- 通常メッセージ -->
-    @if($message->reference_type === null)
+    @elseif($message->reference_type === null)
     <li>
         <div class="img">
             @if(null !== $message->user->userProfile->icon)

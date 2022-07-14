@@ -76,19 +76,19 @@
 						</div>
 						<div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div>
 						<div class="mypageSec02">
-							<p class="mypageHd02">お知らせ</p>
+							<p class="mypageHd02">お知らせ<a href="{{ route('user_notification.index') }}" class="more">お知らせをもっと見る</a></p>
 							<ul class="mypageUl02">
-								@if(empty($news_list[0]))
+								@if(empty($user_notifications[0]))
                                     <div class="pl10">カリビトからのお知らせがありません。</div>
                                 @else
-                                    @foreach($news_list as $news)
+                                    @foreach($user_notifications as $user_notification)
 										<li>
-											<a href="{{route('news.show', $news->id)}}">
+											<a href="{{route('user_notification.show', $user_notification->id)}}">
 												<dl>
 													<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
 													<dd>
-														<p class="txt">{{$news->title}}</p>
-														<p class="time">{{$news->created_at->diffForHumans()}}</p>
+														<p class="txt">{{$user_notification->title}}</p>
+														<p class="time">{{$user_notification->created_at->diffForHumans()}}</p>
 													</dd>
 												</dl>
 											</a>
