@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers\Web\Mypage;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Requests\Mypage\CareerController\StoreRequest;
 
-use App\Models\UserSkill;
-use App\Services\ResumeService;
+use App\Models\UserCareer;
+use App\Services\CareerService;
 
-class ResumeController extends Controller
+class CareerController extends Controller
 {
-    
+    private $career_service;
+
+    public function __construct(CareerService $career_service)
+    {
+        $this->career_service = $career_service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,21 +28,6 @@ class ResumeController extends Controller
         //
     }
 
-    public function skillCreate()
-    {
-        return view('resume.skill_create');
-    }
-
-
-    public function careerCreate()
-    {
-        return view('resume.career_create');
-    }
-
-    public function jobCreate()
-    {
-        return view('resume.job_create');
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -53,9 +44,11 @@ class ResumeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $usercareer = $this->career_service->storeUserCareer($request->all());
+
+        return redirect()->route('resume.show');
     }
 
     /**
@@ -64,12 +57,9 @@ class ResumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $skills = \Auth::user()->userSkills;
-        $careers = \Auth::user()->userCareers;
-        
-        return view('resume.resume', compact('skills', 'careers'));
+        //
     }
 
     /**
@@ -101,8 +91,11 @@ class ResumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserCareer $user_career)
     {
-        //
+        $id = $user_career->id;
+        $usercareer = $this->career_service->deleteUserCareer($id);
+
+        return redirect()->route('resume.show')->with('flash_msg','削除に保存しました！');
     }
 }

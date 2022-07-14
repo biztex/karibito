@@ -23,33 +23,16 @@
                                                 <div class="mypageEditList flexLineLeft01">
                                                     <p class="mypageEditHd">スキル名</p>
                                                     @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                    <div class="mypageEditInput"><input type="text" name="name" placeholder="スキル名を入力してください" required></div>
+                                                    <div class="mypageEditInput"><input type="text" name="name" value="{{ old('name') }}" placeholder="スキル名を入力してください" required></div>
                                                 </div>
                                                 <div class="mypageEditList flexLineRight01">
                                                     <p class="mypageEditHd">経験年数</p>
                                                     @error('year')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     <div class="mypageEditInput flexLine02">
                                                         <select name="year">
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
-                                                            <option>6</option>
-                                                            <option>7</option>
-                                                            <option>8</option>
-                                                            <option>9</option>
-                                                            <option>10</option>
-                                                            <option>11</option>
-                                                            <option>12</option>
-                                                            <option>13</option>
-                                                            <option>14</option>
-                                                            <option>15</option>
-                                                            <option>16</option>
-                                                            <option>17</option>
-                                                            <option>18</option>
-                                                            <option>19</option>
-                                                            <option>20</option>
+                                                            @for($year = 1; $year <= 20; $year++)
+                                                                <option value="{{$year}}" @if(old('year') == $year) selected @endif>{{$year}}</option>;
+                                                            @endfor
                                                         </select>
                                                         <span class="date_span">年</span>
                                                     </div>
