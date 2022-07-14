@@ -29,12 +29,15 @@
 												<dt>経験年数</dt>
 												<dd>{{ $skill->year }}年</dd>
 											</dl>
-											<div class="mypageCtrl"><button type-"submit" action="{{route('destroy.skill',$skill->id)}}">削除</button></div>
-										</li>
+												<form method="post"  action="{{route('destroy.skill',$skill->id)}}" enctype="multipart/form-data">
+													@csrf
+													<div class="mypageCtrl"><button type="submit" onclick='return confirm("削除しますか？");'>削除</button></div>
+												</form>
+											</li>
 										@endforeach
 									</ul>
 									@if($skills->count() < 10)
-									    <p class="specialtyBtn"><a href="{{route('show.skill')}}"><img src="img/mypage/icon_add.svg" alt="">スキルを追加</a></p>
+										<p class="specialtyBtn"><a href="{{route('show.skill')}}"><img src="img/mypage/icon_add.svg" alt="">スキルを追加</a></p>
 									@endif
 								</div>
 							</div>

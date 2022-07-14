@@ -93,7 +93,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('resume',[ResumeController::class, 'show'])->middleware('can:identify')->name('resume.show');
         Route::get('skill_create',[SkillController::class, 'show'])->middleware('can:identify')->name('show.skill');
         Route::post('skill_create',[SkillController::class, 'store'])->middleware('can:identify')->name('store.skill');
-        Route::get('skill_create/{id}',[SkillController::class, 'destroy'])->name('destroy.skill');
+        Route::post('skill_create/{id}',[SkillController::class, 'destroy'])->name('destroy.skill');
 
         Route::get('career_create',[ResumeController::class, 'careerCreate'])->middleware('can:identify')->name('resume.career_create');
         Route::get('job_create',[ResumeController::class, 'jobCreate'])->middleware('can:identify')->name('resume.job_create');
