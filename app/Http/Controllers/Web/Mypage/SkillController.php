@@ -91,8 +91,9 @@ class SkillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserSkill $user_skill)
     {
+        $id = $user_skill->id;
         $userskill = $this->skill_service->deleteUserSkill($id);
 
         return redirect()->route('resume.show')->with('flash_msg','削除に保存しました！');

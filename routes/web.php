@@ -90,10 +90,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
-        Route::get('resume',[ResumeController::class, 'show'])->middleware('can:identify')->name('resume.show');
-        Route::get('skill_create',[SkillController::class, 'show'])->middleware('can:identify')->name('show.skill');
-        Route::post('skill_create',[SkillController::class, 'store'])->middleware('can:identify')->name('store.skill');
-        Route::post('skill_create/{id}',[SkillController::class, 'destroy'])->name('destroy.skill');
+        Route::middleware(['can:my.skill,user_skill', 'can:identify'])->group(function () {
+            Route::post('skill_create/{user_skill}',[SkillController::class, 'destroy'])->name('destroy.skill');
+        });
+        Route::get('resume',[ResumeController::class, 'show'])->name('resume.show');
+        Route::get('skill_create',[SkillController::class, 'show'])->name('show.skill');
+        Route::post('skill_create',[SkillController::class, 'store'])->name('store.skill');
 
         Route::get('career_create',[ResumeController::class, 'careerCreate'])->middleware('can:identify')->name('resume.career_create');
         Route::get('job_create',[ResumeController::class, 'jobCreate'])->middleware('can:identify')->name('resume.job_create');
