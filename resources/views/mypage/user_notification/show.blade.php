@@ -269,13 +269,6 @@
 								{{$user_notification->content}}
 							</div>
 						</div>
-						{{-- <h2 class="subPagesHd">{{$info->title}}</h2>
-						<div class="newsDtWrap">
-							<p class="date">{{date('Y/m/d', strtotime($info->created_at))}}</p>
-							<div class="cont">
-								{{$info->content}}
-							</div>
-						</div> --}}
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu/>
