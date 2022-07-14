@@ -424,7 +424,7 @@
                 </div>
             </div>
         </div>
-        <div class="serviceLink pc">
+        <!-- <div class="serviceLink pc">
             <div class="inner">
                 <div class="cont">
                     <div class="box">
@@ -437,7 +437,7 @@
                     <div class="span"><img src="/img/common/icon_slink.svg" alt=""></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
