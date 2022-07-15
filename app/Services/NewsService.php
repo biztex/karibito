@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendNewNewsNotificationMail;
 use App\Mail\NewsRegisterMail;
 use App\Models\News;
 use App\Models\User;
@@ -53,10 +54,10 @@ class NewsService
             $user_notification->title = $params['title'];
             $user_notification->content = $params['content'];
             $user_notification->save();
-            \Mail::to($user_notification->user->email)->send(new NewsRegisterMail($user_notification));
-            sleep(1);
+            // \Mail::to($user_notification->user->email)->send(new NewsRegisterMail($user_notification));
+            SendNewNewsNotificationMail::dispatch($user_notification);
+            // sleep(1);
         }
-
     }
 
     public function paginate($i)
