@@ -96,6 +96,6 @@ class CareerController extends Controller
         $id = $user_career->id;
         $usercareer = $this->career_service->deleteUserCareer($id);
 
-        return redirect()->route('resume.show')->with('flash_msg','削除に保存しました！');
+        return redirect()->route('resume.show')->with('flash_msg','経歴を削除しました！');
     }
 }
