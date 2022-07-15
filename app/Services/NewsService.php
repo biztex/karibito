@@ -54,9 +54,7 @@ class NewsService
             $user_notification->title = $params['title'];
             $user_notification->content = $params['content'];
             $user_notification->save();
-            // \Mail::to($user_notification->user->email)->send(new NewsRegisterMail($user_notification));
             SendNewNewsNotificationMail::dispatch($user_notification);
-            // sleep(1);
         }
     }
 
