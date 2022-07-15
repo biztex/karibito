@@ -22,8 +22,9 @@
                                             <div class="flexLine01">
                                                 <div class="mypageEditList flexLineLeft01">
                                                     <p class="mypageEditHd">スキル名</p>
-                                                    @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     <div class="mypageEditInput"><input type="text" name="name" value="{{ old('name') }}" placeholder="スキル名を入力してください" required></div>
+                                                    <p class="taR">1-30</p>
+                                                    @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                 </div>
                                                 <div class="mypageEditList flexLineRight01">
                                                     <p class="mypageEditHd">経験年数</p>
