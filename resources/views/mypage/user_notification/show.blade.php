@@ -265,9 +265,7 @@
 						<h2 class="subPagesHd">{{$user_notification->title}}</h2>
 						<div class="newsDtWrap">
 							<p class="date">{{date('Y/m/d', strtotime($user_notification->created_at))}}</p>
-							<div class="cont pre-wrap break-word">
-								{{$user_notification->content}}
-							</div>
+							<div class="cont pre-wrap break-word">{{$user_notification->content}}</div>
 						</div>
 					</div>
 				</div><!-- /#main -->
