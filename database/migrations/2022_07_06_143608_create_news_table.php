@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->comment('タイトル')->nullable();
             $table->text('content')->comment('詳細')->nullable();
+            $table->boolean('is_important')->default(0)->comment('重要なお知らせ 0.重要ではない 1.重要');
             $table->softDeletes();
             $table->timestamps();
         });
