@@ -71,9 +71,13 @@
 								<p class="mypageHd03">職務</p>
 								<div class="mypageBox">
 									<div class="mypageDuties">
-										<p>{{ $jobs->content }}</p>
+										<p>@if(!is_null($jobs)){{ $jobs->content }}@endif</p>
 									</div>
+									@if(is_null($jobs))
+									<p class="specialtyBtn"><a href="{{route('resume.job_create')}}"><img src="img/mypage/icon_edit.svg" alt="">職務を登録</a></p>
+									@else
 									<p class="specialtyBtn"><a href="{{route('resume.job_create')}}"><img src="img/mypage/icon_edit.svg" alt="">職務を編集</a></p>
+								    @endif
 								</div>
 							</div>
 						</div>
