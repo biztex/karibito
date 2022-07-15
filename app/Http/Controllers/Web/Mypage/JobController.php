@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers\Web\Mypage;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Requests\Mypage\JobController\StoreRequest;
 
-use App\Models\UserSkill;
-use App\Services\ResumeService;
+use App\Models\UserJob;
+use App\Services\JobService;
 
-class ResumeController extends Controller
+class JobController extends Controller
 {
-    
+    private $job_service;
+
+    public function __construct(JobService $job_service)
+    {
+        $this->job_service = $job_service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,22 +28,6 @@ class ResumeController extends Controller
         //
     }
 
-    public function skillCreate()
-    {
-        return view('resume.skill_create');
-    }
-
-
-    public function careerCreate()
-    {
-        return view('resume.career_create');
-    }
-
-    public function jobCreate()
-    {
-        $jobs = \Auth::user()->userJob->first();
-        return view('resume.job_create', compact('jobs'));
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -54,9 +44,11 @@ class ResumeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $userjob = $this->job_service->storeUserJob($request->all());
+
+        return redirect()->route('resume.show');
     }
 
     /**
@@ -65,13 +57,9 @@ class ResumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $skills = \Auth::user()->userSkills;
-        $careers = \Auth::user()->userCareers;
-        $jobs = \Auth::user()->userJob->first();
-        
-        return view('resume.resume', compact('skills', 'careers','jobs'));
+        //
     }
 
     /**
@@ -92,9 +80,11 @@ class ResumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request)
     {
-        //
+        $userjob = $this->job_service->updateUserJob($request->all());
+
+        return redirect()->route('resume.show');
     }
 
     /**

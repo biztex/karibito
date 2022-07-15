@@ -69,7 +69,7 @@
 												</div>
 											</div>
 											<div class="fancyPersonBtn">
-                                                <a href="#" class="fancyPersonCancel">キャンセル</a>
+                                                <a href="{{ route('resume.show') }}" class="fancyPersonCancel">キャンセル</a>
                                                 <input type="submit" class="fancyPersonSign" formaction="{{ route('store.career') }}" value="登録する">
                                             </div>
 										</form>
