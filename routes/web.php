@@ -22,6 +22,7 @@ use App\Http\Controllers\Web\Mypage\ChangeEmailController;
 use App\Http\Controllers\Web\Mypage\ResumeController;
 use App\Http\Controllers\Web\Mypage\SkillController;
 use App\Http\Controllers\Web\Mypage\CareerController;
+use App\Http\Controllers\Web\Mypage\JobController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\NewsController;
@@ -91,6 +92,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
 
+         // スキル・経歴・職務
         Route::middleware(['can:my.skill,user_skill', 'can:identify'])->group(function () {
             Route::post('skill_create/{user_skill}',[SkillController::class, 'destroy'])->name('destroy.skill');
         });
@@ -98,12 +100,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('career_create/{user_career}',[CareerController::class, 'destroy'])->name('destroy.career');
         });
         Route::get('resume',[ResumeController::class, 'show'])->name('resume.show');
-        Route::get('skill_create',[SkillController::class, 'show'])->name('show.skill');
+        Route::get('skill_create',[SkillController::class, 'show'])->middleware('can:identify')->name('show.skill');
         Route::post('skill_create',[SkillController::class, 'store'])->name('store.skill');
         Route::post('career_create',[CareerController::class, 'store'])->name('store.career');
-
         Route::get('career_create',[ResumeController::class, 'careerCreate'])->middleware('can:identify')->name('resume.career_create');
         Route::get('job_create',[ResumeController::class, 'jobCreate'])->middleware('can:identify')->name('resume.job_create');
+        Route::post('job_create',[JobController::class, 'store'])->name('store.job');
+        Route::post('job_update',[JobController::class, 'update'])->name('update.job');
         Route::view('resume_edit','resume_edit')->name('resume_edit');
 
 

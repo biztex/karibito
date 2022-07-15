@@ -22,15 +22,11 @@
 										<div class="mypageEditBox">
 											<div class="mypageDuties mypageEditInput">
 												<textarea type="text" name="content">@if(!is_null($jobs)){{ old('content', $jobs->content)}} @endif</textarea>
-												<p class="taR">0-3000</p>
+                                                <p class="taR">0-3000</p>
 											</div>
 											<div class="fancyPersonBtn">
                                                 <a href="{{ route('resume.show') }}" class="fancyPersonCancel">キャンセル</a>
-												@if(is_null($jobs))
-                                                <input type="submit" class="fancyPersonSign" formaction="{{ route('store.job') }}" value="登録する">
-												@else
 												<input type="submit" class="fancyPersonSign" formaction="{{ route('update.job') }}" value="編集する">
-												@endif
                                             </div>
 										</div>
 									</div>
