@@ -122,4 +122,12 @@ class JobRequest extends Model
     {
         return $this->hasMany(JobRequestChatroom::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function chatroom()
+    {
+        return $this->morphMany(Chatroom::class, 'reference');
+    }
 }
