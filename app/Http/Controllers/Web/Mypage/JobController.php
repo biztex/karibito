@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Mypage\JobController\StoreRequest;
+use App\Http\Requests\Mypage\JobController\UpdateRequest;
 
 use App\Models\UserJob;
 use App\Services\JobService;
@@ -80,7 +81,7 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request)
+    public function update(UpdateRequest $request)
     {
         $userjob = $this->job_service->updateUserJob($request->all());
 

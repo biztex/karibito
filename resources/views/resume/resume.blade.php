@@ -40,6 +40,7 @@
 										<p class="specialtyBtn"><a href="{{route('show.skill')}}"><img src="img/mypage/icon_add.svg" alt="">スキルを追加</a></p>
 									@endif
 								</div>
+								<p class="taRResume">＊スキルは１０個まで追加できます。</p>
 							</div>
 							<div class="mypageItem">
 								<p class="mypageHd03">経歴</p>
@@ -66,11 +67,12 @@
 										<p class="specialtyBtn"><a href="{{route('resume.career_create')}}"><img src="img/mypage/icon_add.svg" alt="">経歴を追加</a></p>
 									@endif
 								</div>
+								<p class="taRResume">＊経歴は１０個まで追加できます。</p>
 							</div>
 							<div class="mypageItem">
 								<p class="mypageHd03">職務</p>
 								<div class="mypageBox">
-									<div class="mypageDuties">
+									<div class="mypageDuties" style="word-wrap: break-word;">
 										<p>@if(!is_null($jobs)){!!nl2br($jobs->content)!!}@endif</p>
 									</div>
 									@if(is_null($jobs))
