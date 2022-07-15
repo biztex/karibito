@@ -31,7 +31,7 @@ class ProductChatroomController extends Controller
      */
     public function newroom(Product $product)
     {
-        return view('chatroom.product.newroom', compact('product'));
+        return view('chatroom.samples.product.newroom', compact('product'));
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductChatroomController extends Controller
         $product = $product_chatroom->product;
         $messages = $product_chatroom->productChatroomMessage;
 
-        return view('chatroom.product.show', compact('product', 'product_chatroom', 'messages'));
+        return view('chatroom.samples.product.show', compact('product', 'product_chatroom', 'messages'));
     }
 
     /**
@@ -87,7 +87,7 @@ class ProductChatroomController extends Controller
      */
     public function purchese(ProductProposal $product_proposal)
     {
-        return view('chatroom.cart_buy03',compact('product_proposal'));
+        return view('chatroom.samples.cart_buy03',compact('product_proposal'));
     }
 
     /**
@@ -95,7 +95,7 @@ class ProductChatroomController extends Controller
      */
     public function purchese_confirm(ProductProposal $product_proposal)
     {
-        return view('chatroom.cart_buy04',compact('product_proposal'));
+        return view('chatroom.samples.cart_buy04',compact('product_proposal'));
     }
 
     /**
@@ -107,7 +107,7 @@ class ProductChatroomController extends Controller
             $this->product_proposal_service->purchesedProductProposal($product_proposal);
             $this->product_chatroom_service->statusChangeWork($product_proposal);
         });
-        return view('chatroom.cart_buy05', compact('product_proposal'));
+        return view('chatroom.samples.cart_buy05', compact('product_proposal'));
     }
 
     // 作業完了
@@ -122,7 +122,7 @@ class ProductChatroomController extends Controller
     // 評価画面
     public function evaluation(ProductChatroom $product_chatroom)
     {
-        return view('chatroom.product.evaluation', compact('product_chatroom'));
+        return view('chatroom.samples.product.evaluation', compact('product_chatroom'));
     }
 
     // 購入者評価
@@ -152,6 +152,6 @@ class ProductChatroomController extends Controller
     // sample
     public function sample(Product $product)
     {
-        return view('chatroom.sample', compact('product'));
+        return view('chatroom.samples.sample', compact('product'));
     }
 }

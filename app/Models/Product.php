@@ -188,4 +188,12 @@ class Product extends Model
         return $this->hasMany(ProductChatroom::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function chatroom()
+    {
+        return $this->morphMany(Chatroom::class, 'reference');
+    }
+
 }

@@ -250,7 +250,7 @@
                                     </form>
                                 @elseif($product->user_id !== Auth::id())
                                     <div class="functeBtns">
-                                        <a href="{{ route('chatroom.product.newroom', $product->id ) }}" class="orange full">交渉画面へ進む</a>
+                                        <a href="{{ route('chatroom.new.product', $product->id ) }}" class="orange full">交渉画面へ進む</a>
                                     </div>
                                 @endif
                             </div>

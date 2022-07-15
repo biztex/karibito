@@ -205,7 +205,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
 
-    Route::get('chatroom', [ChatroomController::class, 'index'])->name('chatroom.index');
     Route::view('chatroom/complete/evaluation','chatroom.complete_evaluation')->name('chatroom.complete.evaluation');
 
     // やり取り画面組込中
@@ -230,6 +229,31 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // 評価
         Route::view('cart/buy08','chatroom.cart_buy08');
         Route::view('cart/buy09','chatroom.cart_buy09');
+    });
+
+    // やり取り（提供・リクエスト共用版）
+    Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
+        Route::get('','index')->name('index');
+        Route::get('new/product/{product}','newProduct')->name('new.product'); // productからのnew room
+        Route::get('new/job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestからのnew room
+
+        Route::post('create/product/{product}', 'createProduct')->name('create.product'); // productからのstart
+        Route::post('create/job_request/{job_request}', 'createJobRequest')->name('create.job_request'); // job_requestからのstart
+
+        Route::get('{chatroom}', 'show')->name('show');
+        Route::post('message/{chatroom}', 'message')->name('message'); //通常メッセージ
+        Route::post('{chatroom}/proposal','proposal')->name('proposal'); //提案
+        Route::post('{proposal}/purchase','purchase')->name('purchase'); //購入
+        Route::get('{chatroom}/complete','complete')->name('complete'); //作業完了
+        Route::get('{chatroom}/evaluation','evaluation')->name('evaluation'); //評価画面
+        Route::post('{chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
+        Route::post('{chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //提供者評価
+        Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->name('evaluation.complete'); // 評価完了
+
+        // 支払い
+        Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
+        Route::get('purchase/{proposal}/confirm','purchaseConfirm')->name('purchase.confirm'); // 確認画面
+        Route::post('purchased/{proposal}','purchased')->name('purchased');
     });
 
 });
