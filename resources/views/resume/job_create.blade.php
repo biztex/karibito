@@ -22,6 +22,7 @@
 										<div class="mypageEditBox">
 											<div class="mypageDuties mypageEditInput">
 												<textarea type="text" name="content">@if(!is_null($jobs)){{ old('content', $jobs->content)}} @endif</textarea>
+												<p class="taR">0-3000</p>
 											</div>
 											<div class="fancyPersonBtn">
                                                 <a href="{{ route('resume.show') }}" class="fancyPersonCancel">キャンセル</a>
