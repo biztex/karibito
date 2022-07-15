@@ -40,18 +40,18 @@
 										</ul>
 										<div class="conts">
 											<div class="cont01">
-												@if(isset($value->product->productImage[0]))
-													<p class="img"><img src="{{ asset('/storage/'.$value->product->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+												@if(isset($value->reference->productImage[0]))
+													<p class="img"><img src="{{ asset('/storage/'.$value->reference->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
 												@else
 													<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
 												@endif
 												<div class="info">
-													<div class="breadcrumb"><a href="#" tabindex="0">{{$value->product->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->product->mProductChildCategory->name}}</span></div>
+													<div class="breadcrumb"><a href="#" tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
 													<div class="draw">
-														<p class="price"><font>{{$value->product->title}}</font><br>{{ number_format($value->product->price)}}円</p>
+														<p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
 													</div>
 													<div class="single">
-														<a href="#" tabindex="0">{{App\Models\Product::IS_ONLINE[$value->product->is_online]}}</a>
+														<a href="#" tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</a>
 													</div>
 												</div>
 											</div>
@@ -83,8 +83,8 @@
 											</div>
 										</div>
 										<div class="functeBtns st2">
-											<a href="{{route('product.show', $value->product_id)}}" class="blue_o">チケット詳細</a>
-											<a href="{{route('chatroom.product.show', $value->id)}}" class="green">チャットを開始</a>
+											<a href="{{route('product.show', $value->reference_id)}}" class="blue_o">チケット詳細</a>
+											<a href="{{route('chatroom.show', $value->id)}}" class="green">チャットを開始</a>
 										</div>
 									</li>
 								@endforeach
@@ -115,18 +115,18 @@
 										</ul>
 										<div class="conts">
 											<div class="cont01">
-												@if(isset($value->product->productImage[0]))
-													<p class="img"><img src="{{ asset('/storage/'.$value->product->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+												@if(isset($value->reference->productImage[0]))
+													<p class="img"><img src="{{ asset('/storage/'.$value->reference->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
 												@else
 													<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
 												@endif
 												<div class="info">
-													<div class="breadcrumb"><a href="#" tabindex="0">{{$value->product->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->product->mProductChildCategory->name}}</span></div>
+													<div class="breadcrumb"><a href="#" tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
 													<div class="draw">
-														<p class="price"><font>{{$value->product->title}}</font><br>{{ number_format($value->product->price)}}円</p>
+														<p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
 													</div>
 													<div class="single">
-														<a href="#" tabindex="0">{{App\Models\Product::IS_ONLINE[$value->product->is_online]}}</a>
+														<a href="#" tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</a>
 													</div>
 												</div>
 											</div>
@@ -158,8 +158,8 @@
 											</div>
 										</div>
 										<div class="functeBtns st2">
-											<a href="{{route('product.show', $value->product_id)}}" class="blue_o">チケット詳細</a>
-											<a href="{{route('chatroom.product.show', $value->id)}}" class="green">チャットを開始</a>
+											<a href="{{route('product.show', $value->reference_id)}}" class="blue_o">チケット詳細</a>
+											<a href="{{route('chatroom.show', $value->id)}}" class="green">チャットを開始</a>
 										</div>
 									</li>
 								@endforeach

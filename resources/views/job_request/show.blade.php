@@ -99,7 +99,7 @@
 									</form>
 								@else
 									<div class="functeBtns">
-										<a href="" class="orange full">交渉画面へ進む</a>
+										<a href="{{ route('chatroom.new.job_request', $job_request->id ) }}" class="orange full">交渉画面へ進む</a>
 									</div>
 								@endif
 								<p class="specialtyBtn"><span>この情報をシェアする</span></p>
