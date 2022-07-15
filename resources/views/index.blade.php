@@ -46,10 +46,12 @@
 				<div class="inner">
 					<div class="box newsList">
 						<h2 class="hd">運営からのお知らせ</h2>
-						<dl>
-							<dt>2021/00/00</dt>
-							<dd><a href="#">【お知らせ】年末年始のお問い合わせ・サービス対応について</a></dd>
-						</dl>
+						@foreach ($important_news_list as $important_news)
+							<dl>
+								<dt>{{$important_news->created_at->format('Y/m/d')}}</dt>
+								<dd><a href="{{ route('news.show', $important_news->id) }}">{{$important_news->title}}</a></dd>
+							</dl>
+						@endforeach
 					</div>
 				</div>
 			</div>
