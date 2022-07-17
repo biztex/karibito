@@ -868,3 +868,20 @@
     text-align: right;
 	font-size: 11px;
 }
+.specialtyBtnCustom span,
+.specialtyBtnCustom a{
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	padding: 5px 10px;
+	font-size: 1.2rem;
+	border-radius: 20px;
+	background-color: #fff;
+	color: #158ACC;
+}
+.specialtyBtnCustom img{margin-right: 4px}
+.specialtyItem + .specialtyItem{
+	border-top: 1px solid #CCCCCC;
+	padding-top: 25px;
+	margin-top: 25px;
+}
