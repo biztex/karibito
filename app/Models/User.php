@@ -117,4 +117,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(UserCareer::class);
     }
+    public function userJob()
+    {
+        return $this->hasMany(UserJob::class);
+    }
+    public function specialty()
+    {
+        return $this->hasMany(Specialty::class);
+    }
 }

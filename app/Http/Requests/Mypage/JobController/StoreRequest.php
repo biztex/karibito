@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Mypage\SkillController;
+namespace App\Http\Requests\Mypage\JobController;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,16 +24,14 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string | max:30',
-            'year' => 'required | integer | between:1,20',
+            'content' => 'max:3000',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'スキル名',
-            'year' => '経験年数',
+            'content' => '職務',
         ];
     }
 }

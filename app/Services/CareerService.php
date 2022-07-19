@@ -14,7 +14,7 @@ class CareerService
     public function storeUserCareer(array $params):UserCareer
     {
         $columns = ['name', 'first_year', 'first_month', 'last_year', 'last_month'];
-
+        
         $usercareer = new UserCareer;
         $usercareer->user_id = \Auth::id();
         foreach($columns as $column){

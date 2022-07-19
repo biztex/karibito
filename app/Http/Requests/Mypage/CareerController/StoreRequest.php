@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string | max:255',
+            'name' => 'required | string | max:30',
             'first_year' => 'required | integer | min:1970 | max:2099',
             'first_month' => 'required | integer | between:1,12',
             'last_year' => 'required_with:last_month| nullable | integer | min:1970 | max:2099',

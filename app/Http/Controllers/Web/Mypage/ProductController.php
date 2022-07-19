@@ -67,7 +67,11 @@ class ProductController extends Controller
           $this->product_service->storeImage($request, $product->id);
         });
 
-        return redirect()->route('service_thanks');
+        $product_id = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->pluck('id')->first();
+        $base_url = config('app.url');
+        $url = "$base_url/product/$product_id";
+
+        return redirect()->route('service_thanks')->with(['url' => $url]);
     }
 
     /**

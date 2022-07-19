@@ -94,7 +94,11 @@ class JobRequestController extends Controller
 
         $this->job_request_service->storeJobRequest($request->all());
 
-        return redirect()->route('service_thanks');
+        $product_id = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->pluck('id')->first();
+        $base_url = config('app.url');
+        $url = "$base_url/product/$product_id";
+
+        return redirect()->route('job_request_thanks')->with(['url' => $url]);
     }
 
     /**
@@ -226,7 +230,7 @@ class JobRequestController extends Controller
 
     /**
      * プレビュー画面から投稿
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function storePreview(StoreRequest $request)
@@ -243,7 +247,7 @@ class JobRequestController extends Controller
 
     /**
      * 既存リクエスト、編集からプレビュー表示
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editPreview(StoreRequest $request, JobRequest $job_request)
@@ -267,7 +271,7 @@ class JobRequestController extends Controller
 
     /**
      * プレビュー画面から投稿
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updatePreview(StoreRequest $request, JobRequest $job_request)

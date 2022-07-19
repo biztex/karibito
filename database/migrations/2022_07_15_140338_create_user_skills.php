@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('user_skills', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->comment('タイトル')->nullable();
-            $table->text('content')->comment('詳細')->nullable();
-            $table->boolean('is_important')->default(0)->comment('重要なお知らせ 0.重要ではない 1.重要');
-            $table->softDeletes();
+            $table->foreignId('user_id')->constrained();
+            $table->string('name')->comment('スキル名');
+            $table->integer('year')->comment('年数');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('user_skills');
     }
 };

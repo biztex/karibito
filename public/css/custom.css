@@ -17,7 +17,7 @@
 		.btnMenu{ display:block; }
 		#gNavi{ ~~~~~~
 
-	page.css 4095あたり、
+	page.css 4191あたり、
 		@media screen and (max-width: 860px) {　
 									　 ↓
 		@media screen and (max-width: 767px) {
@@ -691,7 +691,7 @@
 }
 
 #wrapper {
-	position: relative; 
+	position: relative;
 	overflow: hidden;
 	width:100%;
 	min-height:100vh;
@@ -700,6 +700,10 @@
 }
 
 @media screen and (max-width: 767px) {
+	#wrapper {
+		padding-top: 50px;
+	}
+
 	.linkdel input{
 		width: 100px;
 	    height: 25px;
@@ -863,6 +867,27 @@
 	.careerCreate .mypageEditInput select {
 		width: 100%;
 	}
+}
+.taRResume {
+    text-align: right;
+	font-size: 11px;
+}
+.specialtyBtnCustom span,
+.specialtyBtnCustom a{
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	padding: 5px 10px;
+	font-size: 1.2rem;
+	border-radius: 20px;
+	background-color: #fff;
+	color: #158ACC;
+}
+.specialtyBtnCustom img{margin-right: 4px}
+.specialtyItem + .specialtyItem{
+	border-top: 1px solid #CCCCCC;
+	padding-top: 25px;
+	margin-top: 25px;
 }
 #side .functeBtns .cancel {
     height: 36px;
