@@ -42,7 +42,7 @@
                 @endif
             @endif
             @if($chatroom->status > 2 && $chatroom->status < 5)
-                <input type="submit" class="" value="キャンセル申請をする">
+                <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
             @endif
         </div>
 

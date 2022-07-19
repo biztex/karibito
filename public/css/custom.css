@@ -864,3 +864,9 @@
 		width: 100%;
 	}
 }
+#side .functeBtns .cancel {
+    height: 36px;
+    color: #313131;
+    font-size: 1.4rem;
+    font-weight: 300;
+}
