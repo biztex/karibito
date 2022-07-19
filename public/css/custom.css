@@ -696,7 +696,8 @@
 	width:100%;
 	min-height:100vh;
 	z-index: 2;
-	/* padding-top: 125px; */
+	padding-top: 125px;
+	/* トップがおかしくなったのでまた戻した。何か不具合があるかも */
 }
 
 @media screen and (max-width: 767px) {
