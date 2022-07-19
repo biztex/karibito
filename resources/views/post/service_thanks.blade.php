@@ -36,10 +36,10 @@
 						<h3>SNSやメールでチケットをシェアする</h3>
 						<div class="sns">
                             <div id="fb-root"></div>
-							<a href="http://www.facebook.com/share.php?u=google.com" target="_blank"><img src="img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
-							<a href="https://social-plugins.line.me/lineit/share?url=google.com" target="_blank"><img src="img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
-							<a href="https://twitter.com/share?url=google.com&text=Googleです&hashtags=カリビト" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
-							<a href="mailto:?subject=件名&body=本文" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
+							<a href="http://www.facebook.com/share.php?u={{ session('url') }}"><img src="img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
+							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
+							<a href="https://twitter.com/share?url={{ session('url') }}&text=カリビトの案件をシェア&hashtags=karibito" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
+							<a href="mailto:?subject=カリビトの案件をシェア&body=本文" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
 						</div>
 						<form>
 							<table>
