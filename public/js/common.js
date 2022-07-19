@@ -391,3 +391,34 @@ function ophiddenFile(){
 	}
 
 }
+
+$(function(){
+	$('.tabSelectArea').each(function(){
+		var $this = $(this),
+			 $links = $this.find('.tabSelectLinks'),
+			 $box = $this.find('.tabSelectBox');
+		$links.change(function(){
+			var target = $(this).val();
+			$box.removeClass('is-active');
+			$(target).addClass('is-active');
+		});
+	});
+
+	$('.templateOpen').click(function(){
+		$('.templatePopup').addClass('is-open');
+	});
+
+	$('.templateOverlay,.templateClose').click(function(){
+		$('.templatePopup').removeClass('is-open');
+	});
+
+	$('.templateOverlay,.templateClose').click(function(){
+		$('.templatePopup').removeClass('is-open');
+	});
+
+	$('.templateInput').click(function(){
+		var text = $('.templateBox.is-active').find('textarea').val();
+		$('.templateText').val(text);
+		$('.templatePopup').removeClass('is-open');
+	});
+});

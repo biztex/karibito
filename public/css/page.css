@@ -107,7 +107,9 @@
 .recommendCates .cate07{background-image:url(../img/top/ico_cate07.png);}
 .recommendCates .cate08{background-image:url(../img/top/ico_cate08.png);}
 
-
+.recommendList + .recommendList {
+	margin-top: 50px;
+}
 .recommendList .cases{
 	margin-bottom:30px;
 	padding-bottom:16px;
@@ -117,8 +119,12 @@
 }
 .recommendList .list .item{
 	border:1px solid #DDDDDD;
-	margin:0 10px 0 0;
-	max-width:192px;
+	margin:0 10px 0 0; 
+	width:192px !important;
+}
+
+.recommendList .list.noImage .item {
+	width: 240px !important;
 }
 .recommendList .list .item .level{
 	margin-bottom:8px;
@@ -132,12 +138,23 @@
 .recommendList .list .slick-slide:nth-of-type(2) .level{background-image:url(../img/common/ico_level_silver.svg);}
 .recommendList .list .slick-slide:nth-of-type(3) .level{background-image:url(../img/common/ico_level_copper.svg);}
 .recommendList .list .slick-slide .level:after{
-	content:"人気No." counter(sectioncounter);
+	content:"人気No." counter(sectioncounter); 
 	counter-increment:sectioncounter;
 }
 .recommendList .list .img{
 	overflow:hidden;
 	position:relative;
+	width: 100%;
+	padding-top: 59.375%;
+}
+.recommendList .list .img img{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	object-fit: cover;
 }
 .recommendList .list .favorite{
 	display: none;
@@ -145,14 +162,16 @@
 	left:10px;
 	top:10px;
 	padding:5px 10px 5px 25px;
-	background:url(../img/common/ico_heart.svg)no-repeat 10px center #E3E3E3;
+	background:url(../img/common/ico_heart.svg)no-repeat 10px center #E3E3E3; 
 	border-radius:60px;
 	border:0;
 	font-size:1rem;
 }
 .recommendList .list .info{
 	padding:10px 10px 15px;
+	box-sizing: border-box;
 }
+
 .recommendList .list .breadcrumb{
 	color:#666666;
 	font-size:1rem;
@@ -190,7 +209,7 @@
 	text-align: center;
 	line-height: 23px;
 	padding: 0 5px;
-	color:#fff;
+	color:#fff; 
 	margin-right: 4px;
 
 }
@@ -201,7 +220,7 @@
 	text-align: center;
 	padding: 0 5px;
 	line-height: 23px;
-	color:#fff;
+	color:#fff; 
 }
 .recommendList .list .aboutUser{
 	margin-top: 7px;
@@ -218,7 +237,7 @@
 }
 .recommendList .list .identity{margin:6px 0}
 .evaluate img{display: none;}
-.evaluate{
+.evaluate{ 
 	height: 15px;
 	background: url(../img/common/evaluate.svg)no-repeat;
 	background-size: auto 100%;
@@ -244,6 +263,37 @@
 	background-size: auto;
 }
 
+.recommendList .list .aboutInfo {
+	margin:13px 0;
+}
+
+.recommendList .list .aboutInfo dl {
+	border-bottom: 1px solid #DDDDDD;
+	display: flex;
+	padding: 9px 0;
+}
+
+.recommendList .list .aboutInfo dl dt {
+	width: 70px;
+}
+
+.recommendList .list .aboutInfo dl dt span {
+	display: inline-flex;
+	background: #EFEFEF;
+	font-size: 13px;
+	line-height: 1.769;
+	justify-content: center;
+	align-items: center;
+	padding: 0 5px;
+}
+
+.recommendList .list .aboutInfo dl dd {
+	width: calc(100% - 70px);
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 1.5;
+}
+
 .recommendList .list .evaluate span,
 #side .seller .evaluate span{
 	padding-left:24px;
@@ -258,17 +308,20 @@
 .recommendList .list .evaluate .middle,
 #side .seller .evaluate .middle {background-image:url(../img/common/ico_like_middle.png);}
 .recommendList .list .evaluate .bottom,
-#side .seller .evaluate .bottom{background-image:url(../img/common/ico_like_no.png);}
+#side .seller .evaluate .bottom{background-image:url(../img/common/ico_like_no.png);} 
 
 .recommendList.style2 .list .item{ border:0;}
 .recommendList.style2 .list .img{ border-radius:0px;}
-.recommendList.style2 .list .info{ padding:10px 0 0;}
+.recommendList.style2 .list .info{ padding:10px 0 0;} 
 .recommendList.style2 .list .info{
 	border: 1px solid #DDDDDD;
+}
+.recommendList.style2 .list .img + .info {
 	border-top:0;
 }
 .recommendList.style2 .list .info,
 .recommendList .list .info{padding:7px 8px 13px;}
+
 .rankSelect{margin-bottom:30px;}
 .rankSelect select{
 	padding:0 20px;
@@ -471,7 +524,10 @@
 		background-size:56px;
 		font-size:0.8rem;
 	}
-
+	.recommendList + .recommendList {
+		margin-top: 25px;
+	}
+	
 	.recommendList .cases {
 		margin-bottom: 15px;
 		padding-bottom: 8px;
@@ -479,16 +535,18 @@
 	.recommendList .list{
 		display: block;
 		margin-left:0;
-	}
+	} 
 	.recommendList .list .item{
-		margin:0 9px 0 0;
-		max-width:168px;
+		margin:0 9px 0 0; 
+		width:168px !important;
+	}
+	.recommendList .list.noImage .item {
+		width: 168px !important;
 	}
 	.recommendList.style2 .list .img{border-radius:0;}
 	.recommendList.style2 .list .info{
 		border: 1px solid #DDDDDD;
-		border-top:0;
-	}
+	} 
 	.recommendList.style2 .list .info,
 	.recommendList .list .info{padding:7px 6px;}
 	.recommendList .list .breadcrumb{font-size:0.9rem;}
@@ -522,17 +580,40 @@
 	.recommendList .list .evaluate span{
 		padding-left:17px;
 		background-size:13px;
-		font-size:0.9rem;
+		font-size:0.9rem; 
 	}
-	.recommendList .slick-list{overflow:visible;}
-	.cateTit span{
-		padding:5px 13px 4px;
-		font-size:1.5rem;
+	.recommendList .slick-list{overflow:visible;}  
+	.cateTit span{ 
+		padding:5px 13px 4px; 
+		font-size:1.5rem; 
 	}
 	.recommendList .cateTit {margin-bottom:12px;}
 	.recommendList .cateTit span{
-		padding:5px 11px 4px;
+		padding:5px 11px 4px; 
 		font-size:1.8rem;
+	}
+
+	.recommendList .list .aboutInfo {
+		margin:12px 0;
+	}
+
+	.recommendList .list .aboutInfo dl {
+		padding: 9px 0;
+	}
+
+	.recommendList .list .aboutInfo dl dt {
+		width: 60px;
+	}
+
+	.recommendList .list .aboutInfo dl dt span {
+		font-size: 12px;
+		line-height: 1.666;
+		padding: 0 4px;
+	}
+
+	.recommendList .list .aboutInfo dl dd {
+		width: calc(100% - 60px);
+		font-size: 13px;
 	}
 
 	.searchCateBox{padding:20px 14px;}
