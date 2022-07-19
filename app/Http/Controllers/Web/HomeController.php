@@ -12,9 +12,19 @@ use App\Models\User;
 use App\Models\MProductCategory;
 use App\Libraries\Age;
 use Illuminate\Support\Facades\Auth;
+use App\Services\HomeService;
 
 class HomeController extends Controller
 {
+
+
+    private $home_service;
+
+    public function __construct(HomeService $home_service)
+    {
+        $this->home_service = $home_service;
+    }
+
     /**
      * トップ画面を表示する
      *
@@ -24,26 +34,20 @@ class HomeController extends Controller
     {
 
         // 公開&&下書きでない
-        $products = Product::publish()->orderBy('created_at','desc')->paginate(10);
-        foreach($products as $product)
-        {
-            $product_category_id[] = $product->mProductChildCategory->mProductCategory->id;
-        }
-        $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->paginate(9);
+        $products = $this->home_service->paginateProduct(10);
 
-        $job_requests = JobRequest::publish()->orderBy('created_at','desc')->paginate(10);
-        foreach($job_requests as $job_request)
-        {
-            $job_category_id[] = $job_request->mProductChildCategory->mProductCategory->id;
-        }
-        $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->paginate(9);
+        $product_category_ranks = $this->home_service->getProductCategoryRanks(9);
 
-        $news_list = News::orderBy('created_at','desc')->where('is_important', 0)->paginate(5);
+        $job_requests = $this->home_service->paginateJobRequest(10);
 
-        $important_news_list = News::orderBy('created_at','desc')->where('is_important', 1)->paginate(3);
+        $job_category_ranks = $this->home_service->getJobRequestCategoryRanks(9);
 
-        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list','important_news_list'));
+        $news_list = $this->home_service->paginateNewsList(5);
 
+        $important_news_list = $this->home_service->paginateImportantNewsList(3);
 
+        $diff_date_time = $this->home_service->getDiffDateTime();
+
+        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list','important_news_list','diff_date_time'));
     }
 }
