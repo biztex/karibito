@@ -41,7 +41,9 @@
                     <a href="{{route('chatroom.complete', $chatroom->id)}}" class="orange">作業完了報告をする</a>
                 @endif
             @endif
-            <input type="submit" class="" value="キャンセル申請をする">
+            @if($chatroom->status > 2 && $chatroom->status < 5)
+                <input type="submit" class="" value="キャンセル申請をする">
+            @endif
         </div>
 
     </div>
