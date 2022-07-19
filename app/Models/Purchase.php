@@ -19,7 +19,7 @@ class Purchase extends Model
     {
         return $this->morphOne(ChatroomMessage::class, 'reference');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -43,4 +43,13 @@ class Purchase extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasedCancel()
+    {
+        return $this->hasMany(PurchasedCancel::class);
+    }
+
 }
