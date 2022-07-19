@@ -1,70 +1,35 @@
-<x-support-layout>
-    <article>
-        <div id="contents" class="bg-white">
-            <div class="supportWrap supportDetail detailStyle">
-                <div class="inner inner04">
-                    <div class="supportTop">
-                        <div class="search">
-                            <input type="text" placeholder="Search"><input type="submit" class="btn" value="">
+{{-- <x-support-layout> --}}
+    <x-app>
+    <div id="wrapper" class="st2 bg04 bg-customer-gray">
+        <header>
+            <div id="header" class="">
+                <div id="headerLinks">
+                    <div class="inner">
+                        <div class="item">
+                            <h1 id="headerLogo"><a href="{{ route('home') }}"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
                         </div>
+                        <p class="custTit">CUSTOMER SUPPORT</p>
                     </div>
-                    <div class="title">
-                        <h2 class="hdM">{{$news->title}}</h2>
-                        <span class="">{{date('Y/m/d', strtotime($news->created_at))}}</span>
-{{--                        TODO 必要であればデザイン修正--}}
-                        <p class="sub pre-wrap break-word">{{$news->content}}</p>
-{{--                        <p class="hd01">禁止行為の一例</p>--}}
-{{--                        <div class="example">--}}
-{{--                            <p class="hd02">ダミーテキスト・ダミーテキスト・ダミーテキスト</p>--}}
-{{--                            <ul>--}}
-{{--                                <li>--}}
-{{--                                    <p>ダミーテキストダミーテキストダミーテキストダミーテキスト</p>--}}
-{{--                                    <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>--}}
-{{--                                </li>--}}
-{{--                                <li>--}}
-{{--                                    <p>ダミーテキストダミーテキストダミーテキストダミーテキスト</p>--}}
-{{--                                    <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                        <div class="example">--}}
-{{--                            <p class="hd02">ダミーテキスト・ダミーテキスト・ダミーテキスト</p>--}}
-{{--                            <ul>--}}
-{{--                                <li>--}}
-{{--                                    <p>ダミーテキストダミーテキストダミーテキストダミーテキスト</p>--}}
-{{--                                    <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-                    </div>
-                    <div class="optional">
-                        <p class="hdM">最新の質問</p>
-                        <ul class="toggleWrapPC">
-                            <li>
-                                <p class="quest toggleBtn"><span>仕事にエントリーするには？</span><span class="more">回答を見る</span></p>
-                                <p class="answer toggleBox">仕事にエントリーするには仕事にエントリーするには仕事にエントリーするには仕事にエントリーするには仕事にエントリーするには仕事にエントリーするには</p>
-                            </li>
-                            <li>
-                                <p class="quest toggleBtn"><span>領収書の発行方法は？</span><span class="more">回答を見る</span></p>
-                                <p class="answer toggleBox">領収書の発行方法は領収書の発行方法は領収書の発行方法は領収書の発行方法は領収書の発行方法は領収書の発行方法は領収書の発行方法は</p>
-                            </li>
-                            <li>
-                                <p class="quest toggleBtn"><span>本契約後の金額変更方法は？</span><span class="more">回答を見る</span></p>
-                                <p class="answer toggleBox">本契約後の金額変更方法は本契約後の金額変更方法は本契約後の金額変更方法は本契約後の金額変更方法は本契約後の金額変更方法は</p>
-                            </li>
-                            <li>
-                                <p class="quest toggleBtn"><span>報酬の受け取り方は？</span><span class="more">回答を見る</span></p>
-                                <p class="answer toggleBox">報酬の受け取り方は報酬の受け取り方は報酬の受け取り方は報酬の受け取り方は報酬の受け取り方は報酬の受け取り方は報酬の受け取り方は</p>
-                            </li>
-                            <li>
-                                <p class="quest toggleBtn"><span>決済方法は？</span><span class="more">回答を見る</span></p>
-                                <p class="answer toggleBox">決済方法は決済方法は決済方法は決済方法は決済方法は決済方法は決済方法は決済方法は決済方法は決済方法は</p>
-                            </li>
-                        </ul>
+                </div><!-- /.headLinks -->
+            </div><!-- /#header -->
+        </header>
+        <article>
+            <div id="contents">
+                <div class="supportNewsWrap">
+                    <div class="inner">
+                        <div class="supportNewsDetail">
+                            <h2 class="title">{{$news->title}}</h2>
+                            <p class="date">{{date('Y/m/d', strtotime($news->created_at))}}</p>
+                            <div class="message">
+                                <p>{{$news->content}}</p>
+                            </div>
+                        </div>
+                        <div class="supportNewsBtn"><a href="javascript:history.back();">一覧へ戻る</a></div>
                     </div>
                 </div>
-            </div>
+            </div><!-- /#contents -->
+        </article>
+    </div><!-- /#wrapper -->
 
-        </div><!-- /#contents -->
-    </article>
-</x-support-layout>
+{{-- </x-support-layout> --}}
+</x-app>
