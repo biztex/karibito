@@ -265,7 +265,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('{purchase}/confirm', 'confirm')->name('confirm'); //確認画面
         Route::post('{purchase}/', 'back')->name('back'); //確認画面から入力画面へ戻る
         Route::post('{purchase}/store', 'store')->name('store'); //キャンセル申請作成
-        Route::get('{purchase}/complete', 'complete')->name('complete'); //申請完了画面
+        Route::get('{purchase}/send', 'send')->name('send'); //申請完了画面
+        Route::get('{purchased_cancel}/show', 'show')->name('show'); //申請内容画面
+        Route::post('{purchased_cancel}/approval', 'approval')->name('approval'); //キャンセル承認
+        Route::get('{purchased_cancel}/approval', 'complete')->name('complete'); //キャンセル承認画面
+        Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
+        
     });
 
 

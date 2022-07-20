@@ -33,7 +33,7 @@
 						<p>キャンセルの申請を承認いたしました。<br>相手の方に承認の連絡が届きます。<br>今回のお取引はキャンセルとなりました。<br>取引相手との連絡は、カリビトチャットで可能です。<br>報酬等につきましては、直接取引相手様とお願いいたします。</p>
 					</div>
 					<div class="functeBtns">
-						<a href="{{ route('chatroom.show', $purchase->chatroom_id) }}">やりとりページへ戻る</a>
+						<a href="{{ route('chatroom.show', $purchased_cancel->purchase->chatroom_id) }}">やりとりページへ戻る</a>
 					</div>
 				</div>
 			</div>

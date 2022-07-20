@@ -36,17 +36,15 @@
 						@error('reason1')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<ul class="cancelRea checkChoice">
 							@if( old('purchase_id') == null && $request->purchase_id == null )
-							<li><label><input type="checkbox" name="reason1" checked>{{App\Models\PurchasedCancel::REASON[1]}}</label></li>
-								@for($i=2; $i<7; $i++)
-									<li><label><input type="checkbox" name="reason{{$i}}" @if(($request['reason'.$i]) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[$i]}}</label></li>
-								@endfor
-								@else
-
-								@for($i=1; $i<7; $i++)
-									<li><label><input type="checkbox" name="reason{{$i}}" @if(old('reason'.$i, $request['reason'.$i]) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[$i]}}</label></li>
-								@endfor
-								
+								<li><label><input type="checkbox" name="reason1" checked>{{App\Models\PurchasedCancel::REASON[1]}}</label></li>
+							@else
+								<li><label><input type="checkbox" name="reason1" @if(old('reason1', $request['reason1']) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[1]}}</label></li>								
 							@endif
+								<li><label><input type="checkbox" name="reason2" @if(old('reason2', $request['reason2']) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[2]}}</label></li>								
+								<li><label><input type="checkbox" name="reason3" @if(old('reason3', $request['reason3']) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[3]}}</label></li>								
+								<li><label><input type="checkbox" name="reason4" @if(old('reason4', $request['reason4']) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[4]}}</label></li>								
+								<li><label><input type="checkbox" name="reason5" @if(old('reason5', $request['reason5']) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[5]}}</label></li>								
+								<li><label><input type="checkbox" name="reason6" @if(old('reason6', $request['reason6']) == "on")checked @endif>{{App\Models\PurchasedCancel::REASON[6]}}</label></li>								
 						</ul>
 						<div class="evaluation">
 							<div class="write">
