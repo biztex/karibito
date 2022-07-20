@@ -27,6 +27,14 @@ class PurchasedCancel extends Model
     ]; 
    
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function chatroomMessage()
+    {
+        return $this->morphMany(ChatroomMessage::class, 'reference');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function purchase()
