@@ -73,7 +73,7 @@
 
 				                        <div class="indexTab tabWrap wMax">
                                             @if (($products->isEmpty()) && ($user->jobRequest->isEmpty()))
-                                                <p class="wMax">投稿がありません。</p>
+                                                <p>投稿がありません。</p>
                                             @else
                                                 <ul class="tabLink">
                                                     <li><a class="is_active" href="#tab_box01">提供</a></li>
@@ -81,7 +81,7 @@
                                                 </ul>
                                                 <div class="tabBox is_active" id="tab_box01">
                                                     @if($products->isEmpty())
-                                                        <p class="">投稿がありません。</p>
+                                                        <p>投稿がありません。</p>
                                                     @else
                                                     <div class="recommendList style2 ">
                                                         <div class="list sliderSP02">
@@ -124,7 +124,7 @@
 
                                                 <div class="tabBox" id="tab_box02">
                                                     @if($job_request->isEmpty())
-                                                        <p class="wMax">投稿がありません。</p>
+                                                        <p>投稿がありません。</p>
                                                     @else
                                                     <div class="recommendList style2 ">
                                                         <div class="list sliderSP02">
