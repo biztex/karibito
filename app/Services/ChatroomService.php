@@ -4,12 +4,13 @@ namespace App\Services;
 
 use  App\Models\Product;
 use  App\Models\JobRequest;
+use  App\Models\Chatroom;
 
 
 class ChatroomService
 {
     // 新規チャット(提供)
-    public function startChatroomProduct(Product $product)
+    public function startChatroomProduct(Product $product): Chatroom
     {
         $users = [
             'seller_user_id' => $product->user_id,
@@ -20,7 +21,7 @@ class ChatroomService
         return $chatroom;
     }
     // 新規チャット(リクエスト)
-    public function startChatroomJobRequest(JobRequest $job_request)
+    public function startChatroomJobRequest(JobRequest $job_request): Chatroom
     {
         $users = [
             'seller_user_id' => \Auth::id(),
@@ -31,98 +32,40 @@ class ChatroomService
         return $chatroom;
     }
 
-    // 通常メッセージ
-    public function storeChatroomMessage(array $request, $chatroom)
-    {
-        if(isset($request['file_path'])){
-            $message = [
-                'user_id' => \Auth::id(),
-                'text' => $request['text'],
-                'file_name' => $request['file_name'],
-                'file_path' => $request['file_path']->store('file_paths','public')];
-        } else {
-            $message = [
-                'user_id' => \Auth::id(),
-                'text' => $request['text'],
-                'file_name' => $request['file_name'],
-            ];
-        }
-
-        $chatroom->chatroomMessage()->create($message);
-    }
-
-    // 提案 chatroom message テーブル
-    public function storeProposalMessage($proposal, $chatroom)
-    {
-        $message = [
-            'chatroom_id' => $chatroom->id,
-            'user_id' => \Auth::id(),
-            'text' => '掲載内容の提案をしました',
-        ];
-        $proposal->chatroomMessage()->create($message);
-    }
-
-    // 購入 chatroom message テーブル
-    public function storePurchaseMessage($purchase, $chatroom)
-    {
-        $message = [
-            'chatroom_id' => $chatroom->id,
-            'user_id' => \Auth::id(),
-            'text' => '商品を購入しました',
-        ];
-        $purchase->chatroomMessage()->create($message);
-    }
-
-    // 作業完了報告
-    public function storeCompleteMessage($chatroom)
-    {
-        $message = [
-            'user_id' => \Auth::id(),
-            'text' => '作業報告が完了しました',
-            'is_complete_message' => 1,
-        ];
-        $chatroom->chatroomMessage()->create($message);
-    }
-
-    // 評価
-    public function storeEvaluationMessage($evaluation, $chatroom)
-    {
-        $message = [
-            'chatroom_id' => $chatroom->id,
-            'user_id' => \Auth::id(),
-            'text' => '評価が完了しました'
-        ];
-        $evaluation->chatroomMessage()->create($message);
-    }
-
     // ステータスを 2:契約 に変更
-    public function statusChangeContract($chatroom)
+    public function statusChangeContract(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => 2])->save();
     }
 
     // ステータスを 3:作業 に変更
-    public function statusChangeWork($proposal)
+    public function statusChangeWork(Chatroom $chatroom)
     {
-        $proposal->chatroom->fill(['status' => 3])->save();
+        $chatroom->fill(['status' => 3])->save();
     }
 
     // ステータスを 4:購入者評価 に変更
-    public function statusChangeBuyerEvaluation($chatroom)
+    public function statusChangeBuyerEvaluation(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => 4])->save();
     }
 
     // ステータスを 5:出品者評価 に変更
-    public function statusChangeSellerEvaluation($chatroom)
+    public function statusChangeSellerEvaluation(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => 5])->save();
     }
 
     // ステータスを 6:完了 に変更
-    public function statusChangeComplete($chatroom)
+    public function statusChangeComplete(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => 6])->save();
+    }
+
+    // ステータスを 7:キャンセル に変更
+    public function statusChangeCanceled(Chatroom $chatroom)
+    {
+        $chatroom->fill(['status' => 7])->save();
     }
 
 }
