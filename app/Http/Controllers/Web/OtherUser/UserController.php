@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Libraries\Age;
+use App\Models\JobRequest;
 
 class UserController extends Controller
 {
@@ -31,8 +32,9 @@ class UserController extends Controller
     public function mypage(User $user)
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $job_request = JobRequest::where('user_id', $user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $age = Age::group($user->userProfile->birthday);
 
-        return view('other-user.mypage', compact('user','products', 'age'));
+        return view('other-user.mypage', compact('user','products', 'age', 'job_request'));
     }
 }
