@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chatroom;
+use App\Models\ChatroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\Proposal;
@@ -116,6 +117,8 @@ class ChatroomController extends Controller
         } else {
             $partner = $chatroom->sellerUser;
         }
+
+        $this->chatroom_message_service->isView($chatroom);
 
         return view('chatroom.show', compact('chatroom', 'partner'));
     }

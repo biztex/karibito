@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use  App\Models\Chatroom;
+use  App\Models\ChatroomMessage;
 use  App\Models\Proposal;
 use  App\Models\Evaluation;
 use  App\Models\Purchase;
@@ -106,5 +107,11 @@ class ChatroomMessageService
             'text' => 'キャンセル申請に異議を申し立てました',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
+    }
+
+    // 既読
+    public function isView($chatroom)
+    {
+        ChatroomMessage::where('chatroom_id', $chatroom->id)->partner()->update(['is_view' => 1]);
     }
 }
