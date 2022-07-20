@@ -31,12 +31,19 @@
 						<p>キャンセル理由</p>
 					</div>
 					<div class="cancelRea">
-						<p class="reason">誤って重複購入してしまった</p>
-						<p>ダミーテキストはいりますダミーテキストはいりますダミーテキストはいりますダミーテキストはいりますダミーテキストはいりますダミーテキストはいりますダミーテキストはいりますダミーテキストはいりますダミーテキストはいりますダミーテキストはいります<br>ダミーテキストはいります</p>
+						<p class="reason">
+							@for($i=1; $i<7; $i++)
+								@if($purchased_cancel['reason'.$i] === 1){{ App\Models\PurchasedCancel::REASON[$i] }}<br/>@endif
+							@endfor
+						</p>
+						<p>{!! nl2br(e($purchased_cancel->text)) !!}</p>
 					</div>
 					<div class="functeBtns">
-						<input type="submit" class="blue" value="キャンセル手続きに進む">
-						<input type="submit" value="キャンセル手続きに進む">
+						<form action="" method="">
+						@csrf
+							<input type="submit" formaction="{{ route('cancel.approval', $purchased_cancel->id) }}" formmethod="post" class="blue" value="キャンセル申請を承認する">
+							<input type="submit" formaction="{{ route('cancel.objection', $purchased_cancel->id) }}" formmethod="get" value="異議を申し立てる">
+						</form>
 					</div>
 				</div>
 			</div>

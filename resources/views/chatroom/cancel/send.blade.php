@@ -33,7 +33,7 @@
 						<p>キャンセルの申請をしました。<br>相手の方がキャンセルに「合意」を選択した場合、または3日以内に相手が「異議申し立て」を<br>選択しなかった場合に、キャンセルが成立します。</p>
 					</div>
 					<div class="functeBtns">
-						<input type="submit" value="やりとりページへ戻る">
+						<a href="{{ route('chatroom.show', $purchase->chatroom_id) }}">やりとりページへ戻る</a>
 					</div>
 				</div>
 			</div>
