@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Models\Specialty;
 use App\Http\Requests\UserProfile\StoreRequest;
 use Carbon\Carbon;
 
@@ -128,5 +129,21 @@ class UserProfileService
         $user->tel = $new_tel;
         $user->save();
         return $user;
+    }
+
+    /**
+     * 得意分野登録
+     */
+    public function updateSpecialty(array $request)
+    {
+        \Auth::user()->specialty()->delete();
+        if(isset($request['content'])){
+            foreach($request['content'] as $value){
+                if($value !== null){
+                    $content = ['content' => $value];
+                    \Auth::user()->specialty()->create($content);
+                }
+            }
+        }
     }
 }

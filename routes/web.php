@@ -25,6 +25,7 @@ use App\Http\Controllers\Web\Mypage\CareerController;
 use App\Http\Controllers\Web\Mypage\JobController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
+use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\ProductChatroomController;
@@ -159,6 +160,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 商品登録
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
+        Route::get('/index/{category}', 'showCategory')->name('show.category');
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
             Route::post('{product}/update', 'update')->name('update');
@@ -295,6 +297,10 @@ Route::post('contact', [ContactController::class, 'sendSupportMail']);
 Route::get('', [HomeController::class, 'index'])->name('home');
 Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
+
+//サービス一覧
+Route::get('product/index/{category}', [OtherUserProductController::class, 'index'])->name('product.index');
+
 
 // --管理者画面-----------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
