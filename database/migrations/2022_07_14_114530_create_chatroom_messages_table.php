@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('chatroom_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chatroom_id')->constrained()->cascadeOnDelete()->comment('サービスやり取りID');
-            $table->foreignId('user_id')->constrained('users')->comment('コメントユーザーID');
+            $table->foreignId('chatroom_id')->comment('サービスやり取りID')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->comment('コメントユーザーID')->constrained('users');
             $table->text('text')->comment('本文')->nullable();
             $table->string('file_name')->comment('画像名')->nullable();
             $table->string('file_path')->comment('画像ファイルパス')->nullable();

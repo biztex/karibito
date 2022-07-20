@@ -28,6 +28,7 @@ use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
+use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\ProductChatroomController;
 
 use App\Http\Controllers\Web\HomeController;
@@ -260,6 +261,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('purchase/{proposal}/confirm','purchaseConfirm')->name('purchase.confirm'); // 確認画面
         Route::post('purchased/{proposal}','purchased')->name('purchased');
     });
+    // キャンセル
+    Route::prefix('cancel')->controller(CancelController::class)->name('cancel.')->group(function () {
+        Route::get('{purchase}', 'create')->name('create'); //申請入力画面
+        Route::post('{purchase}/confirm', 'confirm')->name('confirm'); //確認画面
+        Route::post('{purchase}/', 'back')->name('back'); //確認画面から入力画面へ戻る
+        Route::post('{purchase}/store', 'store')->name('store'); //キャンセル申請作成
+        Route::get('{purchase}/complete', 'complete')->name('complete'); //申請完了画面
+    });
+
 
 });
 // 提供・リクエストの詳細ページ

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chatroom_id')->constrained()->cascadeOnDelete()->comment('サービスやり取りID');
-            $table->foreignId('user_id')->constrained('users')->comment('提案したユーザーID');
+            $table->foreignId('chatroom_id')->comment('サービスやり取りID')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->comment('提案したユーザーID')->constrained('users');
             $table->integer('price')->comment('提供価格')->nullable();
             $table->boolean('is_purchase')->default(0)->comment('購入フラグ(0.未購入,1.購入)');
             $table->softDeletes();
