@@ -28,7 +28,10 @@ class PurchasedCancelService
 
     public function changeStatusComplete(PurchasedCancel $purchased_cancel)
     {
-        $purchased_cancel->fill(['status' => 2])->save();
+        $purchased_cancel->fill([
+            'status' => 2,
+            'cancel_date' => now()            
+            ])->save();
     }
 
     public function changeStatusObjection(PurchasedCancel $purchased_cancel)
