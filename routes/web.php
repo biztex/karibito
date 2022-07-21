@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\JobRequestController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
@@ -271,7 +273,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('{purchased_cancel}/approval', 'approval')->name('approval'); //キャンセル承認
         Route::get('{purchased_cancel}/approval', 'complete')->name('complete'); //キャンセル承認画面
         Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
-        
+
     });
 
 
@@ -326,6 +328,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard');
         Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
+        Route::resource('/products',ProductController::class,['only' => ['index']]);
+        Route::resource('/job_requests',JobRequestController::class,['only' => ['index']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 
