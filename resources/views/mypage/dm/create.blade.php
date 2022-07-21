@@ -38,7 +38,8 @@
 										<textarea name="text" placeholder="依頼する入力してください">{{ old('text') }}</textarea>
 										<input type="hidden" name="to_user_id" value="{{ $to_user_id }}">
 									</div>
-
+									<p class="taR">3000</p>
+									
 									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
 									<div class="btns">

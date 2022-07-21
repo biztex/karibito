@@ -48,7 +48,7 @@
 											@endif
 										</div>
 									</div>
-									<p class="time">既読 {{date('Y年m月d日 G:i', strtotime($message->created_at))}}</p>
+									<p class="time">@if($message->user_id === Auth::id() && $message->is_view === 1) 既読 @endif {{date('Y年m月d日 G:i', strtotime($message->created_at))}}</p>
 								</li>
 								@endforeach
 								</ul>
@@ -60,7 +60,7 @@
 									<div class="evaluation">
 										<textarea name="text" placeholder="依頼する入力してください">{{ old('text') }}</textarea>
 									</div>
-
+									<p class="taR">3000</p>
 									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
 									<div class="btns">
