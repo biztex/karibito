@@ -111,9 +111,10 @@ class ChatroomController extends Controller
      */
     public function show(Chatroom $chatroom)
     {
-
-        if(PurchasedCancel::cancelStatus($chatroom->purchase->id)->isCancelRequest() && $chatroom->isCancelRequest()){
+        if($chatroom->isCancelRequest() && $chatroom->purchase->purchasedCancel->isEmpty()){
             $cancel_request = true;
+        } elseif ($chatroom->isCancelRequest() && PurchasedCancel::cancelStatus($chatroom->purchase->id)->isCancelRequest()){
+                $cancel_request = true;
         } else {
             $cancel_request = false;
         }
