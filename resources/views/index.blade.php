@@ -76,7 +76,7 @@
 									</ul>
 								</div>
 								<div class="recommendCates">
-									<h2 class="hdM">おすすめのカテゴリー<a href="#" class="more">もっと見る</a></h2>
+									<h2 class="hdM">おすすめのカテゴリー</h2>
 									<ul>
 										<li><a href="#" class="cate01">家事</a></li>
 										<li><a href="#" class="cate02">修理組み立て</a></li>
@@ -89,13 +89,10 @@
 									</ul>
 								</div>
 								<div class="recommendList style2">
-									<h2 class="hdM">おすすめのお仕事<a href="#" class="more">もっと見る</a></h2>
+									<h2 class="hdM">おすすめのお仕事</h2>
 									<div class="list sliderSP">
 										@foreach($products as $product)
 										<div class="item">
-
-											
-
 											<a href="{{ route('product.show',$product->id) }}" class="img imgBox">
 											@if(isset($product->productImage[0]))
 											<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
@@ -105,7 +102,6 @@
 											<button class="favorite">お気に入り</button>
 											@endif
 											</a>
-											
 
 											<div class="infoTop">
 											<div>
@@ -133,9 +129,6 @@
 															<p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
 														</div>
 													</div>
-													@if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-													<p class="check"><a href="#">本人確認済み</a></p>
-													@endif
 													<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 												</div>
 											</div>
@@ -189,9 +182,6 @@
 																		<p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
 																	</div>
 																</div>
-																@if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-																<p class="check"><a href="#">本人確認済み</a></p>
-																@endif
 																<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 															</div>
 														</div>
@@ -246,7 +236,7 @@
 									</ul>
 								</div>
 								<div class="recommendCates">
-									<h2 class="hdM">おすすめのカテゴリー<a href="#" class="more">もっと見る</a></h2>
+									<h2 class="hdM">おすすめのカテゴリー</h2>
 									<ul>
 										<li><a href="#" class="cate01">家事</a></li>
 										<li><a href="#" class="cate02">修理組み立て</a></li>
@@ -259,7 +249,7 @@
 									</ul>
 								</div>
 								<div class="recommendList style2">
-									<h2 class="hdM">おすすめのお仕事<a href="#" class="more">もっと見る</a></h2>
+									<h2 class="hdM">おすすめのお仕事</h2>
 									<div class="list sliderSP">
 										@foreach($job_requests as $job_request)
 										<div class="item">
@@ -297,9 +287,6 @@
 															<p>({{ App\Models\UserProfile::GENDER[$job_request->user->userProfile->gender] }}/{{ $job_request->user->userProfile->birthday }} / {{ $job_request->user->userProfile->prefecture->name }})</p>
 														</div>
 													</div>
-													@if($job_request->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-													<p class="check"><a href="#">本人確認済み</a></p>
-													@endif
 													<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 												</div>
 											</div>
@@ -347,9 +334,6 @@
 																	<p>({{ App\Models\UserProfile::GENDER[$job_request->user->userProfile->gender] }}/{{ $job_request->user->userProfile->birthday }} / {{ $job_request->user->userProfile->prefecture->name }})</p>
 																</div>
 															</div>
-															@if($job_request->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-															<p class="check"><a href="#">本人確認済み</a></p>
-															@endif
 															<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 														</div>
 													</div>
