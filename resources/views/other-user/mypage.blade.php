@@ -31,7 +31,11 @@
 										<div class="mypageP01">
 											<p>{{$user->name}}</p>
 											<div class="blogDtOtherBtn">
-												<a href="#">メッセージを送る</a>
+												@if(empty($dmrooms))
+												<a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
+												@else
+												<a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
+												@endif
 												<a href="#" class="followA">フォローする</a>
 											</div>
 										</div>

@@ -25,10 +25,12 @@ use App\Http\Controllers\Web\Mypage\CareerController;
 use App\Http\Controllers\Web\Mypage\JobController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
+use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\ProductChatroomController;
+use App\Http\Controllers\Web\DmroomController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -160,6 +162,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 商品登録
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
+        // Route::get('/index/{category}', 'showCategory')->name('show.category');
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
             Route::post('{product}/update', 'update')->name('update');
@@ -265,7 +268,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('{purchase}/confirm', 'confirm')->name('confirm'); //確認画面
         Route::post('{purchase}/', 'back')->name('back'); //確認画面から入力画面へ戻る
         Route::post('{purchase}/store', 'store')->name('store'); //キャンセル申請作成
-        Route::get('{purchase}/complete', 'complete')->name('complete'); //申請完了画面
+        Route::get('{purchase}/send', 'send')->name('send'); //申請完了画面
+        Route::get('{purchased_cancel}/show', 'show')->name('show'); //申請内容画面
+        Route::post('{purchased_cancel}/approval', 'approval')->name('approval'); //キャンセル承認
+        Route::get('{purchased_cancel}/approval', 'complete')->name('complete'); //キャンセル承認画面
+        Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
+        
     });
 
 
@@ -305,6 +313,11 @@ Route::post('contact', [ContactController::class, 'sendSupportMail']);
 Route::get('', [HomeController::class, 'index'])->name('home');
 Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
+
+//サービス一覧
+Route::get('product/index/category/{category}', [OtherUserProductController::class, 'index'])->name('product.category.index');
+Route::get('product/index/category/show/{child_category}', [OtherUserProductController::class, 'show'])->name('product.category.index.show');
+
 
 // --管理者画面-----------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -359,5 +372,8 @@ Route::prefix('user')->name('user.')->group(function () {
 
 
 // DM画面組込まで
-Route::view('/dm','mypage.dm.index')->name('dm.index');
-Route::view('/dm/show','mypage.dm.show');
+Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
+Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->name('dm.show');
+Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
+Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->name('dm.create');
+Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');

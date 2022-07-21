@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Dmroom;
 use App\Libraries\Age;
 use App\Models\JobRequest;
 
@@ -34,7 +35,9 @@ class UserController extends Controller
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $job_request = JobRequest::where('user_id', $user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $age = Age::group($user->userProfile->birthday);
+        $id = $user->id;
+        $dmrooms = Dmroom::where('to_user_id','=', $user->id)->first();
 
-        return view('other-user.mypage', compact('user','products', 'age', 'job_request'));
+        return view('other-user.mypage', compact('user','products', 'age','dmrooms', 'job_request'));
     }
 }
