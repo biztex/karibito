@@ -24,7 +24,7 @@
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Karibito</a>
+			<a class="navbar-brand" href="{{ route('admin.dashboard') }}">Karibito</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -34,6 +34,8 @@
 				<a class="nav-item nav-link active" href="{{ route('admin.users.index') }}">Users</a>
 				<!-- @if(\Auth::guard('admin')->user()->role == 1)<a class="nav-item nav-link" href="{{ route('admin.index') }}">Admin</a>@endif -->
 				<a class="nav-item nav-link active" href="{{ route('admin.news.index') }}">News</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.products.index') }}">Products</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.job_requests.index') }}">JobRequests</a>
 				<a class="nav-item nav-link" href="{{ route('admin.logout') }}">LOGOUT</a>
 				</div>
 			</div>
