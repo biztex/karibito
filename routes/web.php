@@ -29,6 +29,7 @@ use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\ProductChatroomController;
+use App\Http\Controllers\Web\DmroomController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -364,5 +365,8 @@ Route::prefix('user')->name('user.')->group(function () {
 
 
 // DM画面組込まで
-Route::view('/dm','mypage.dm.index')->name('dm.index');
-Route::view('/dm/show','mypage.dm.show');
+Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
+Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->name('dm.show');
+Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
+Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->name('dm.create');
+Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');
