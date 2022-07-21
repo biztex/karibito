@@ -48,7 +48,14 @@ class UpdateRequest extends FormRequest
             'address' => 'nullable | max:255',
             'introduction' => 'nullable | max:3000 | string',
             'icon' => 'nullable | max:20480 | file | image | mimes:png,jpg',
-            'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg'
+            'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg',
+            'content.*' => 'max:10'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'content.*.max' => '10文字以下で指定してください。'
         ];
     }
 }

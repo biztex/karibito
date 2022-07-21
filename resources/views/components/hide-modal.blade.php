@@ -221,37 +221,47 @@
 							<div class="specialtyBox">
 								<div class="specialtyItem">
 									<div class="clone">
-										<dl>
-											<dt>得意分野</dt>
-											<dd>
-												<select class="short">
-													<option selected="" disabled="">選択してください</option>
-													<option>家の掃除</option>
-													<option>料理代行</option>
-													<option>パソコン修理</option>
-													<option>高齢者のお世話</option>
-													<option>写真撮影代行</option>
-													<option>ロゴデザイン</option>
-												</select>
-											</dd>
-										</dl>
-										<dl>
-											<dt>得意分野詳細</dt>
-											<dd>
-												<input type="text" name="">
-											</dd>
-										</dl>
+										<div class="cloneCustomArea">
+										@if(old('content'))
+											@foreach(old('content') as $key => $value)
+												<dl class="specialtyForm">
+												<dt>得意分野</dt>
+												@error('content.'.$key)<div class="alert alert-danger">{{ $message }}</div>@enderror
+												<dd>
+													<input type="text" name="content[]" value="{{ $value }}">
+												</dd>
+											</dl>
+											@endforeach
+										@elseif(Auth::user()->specialty->isNotEmpty())
+											@foreach(Auth::user()->specialty as $specialty)
+												<dl class="specialtyForm">
+													<dt>得意分野</dt>
+													<dd>
+														<input type="text" name="content[]" value="{{ $specialty->content }}">
+													</dd>
+												</dl>
+											@endforeach
+										@else
+											<dl class="specialtyForm">
+												<dt>得意分野</dt>
+												<dd>
+													<input type="text" name="content[]" value="">
+												</dd>
+											</dl>
+										@endif
 									</div>
-									<p class="specialtyBtn"><span><img src="/img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
-								</div>
+										<p class="specialtyBtnCustom"><span><img src="/img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
+									</div>
+								</div><p class="taRResume">＊得意分野は１０個まで追加できます。</p>
 							</div>
-							<dl>
-									@error('introduction')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-								<dt>自己紹介</dt>
-								<dd><textarea name="introduction">{{old('introduction',$user_profile->introduction)}}</textarea></dd>
-							</dl>
+							
+								<dl>
+										@error('introduction')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									<dt>自己紹介</dt>
+									<dd><textarea name="introduction">{{old('introduction',$user_profile->introduction)}}</textarea></dd>
+								</dl>
 						</div>
 					</div>
 					<div class="fancyPersonBtn">

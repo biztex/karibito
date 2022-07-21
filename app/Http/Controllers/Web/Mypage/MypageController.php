@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\UserProfile;
 use App\Models\Prefecture;
+use App\Models\Specialty;
 
 class MypageController extends Controller
 {
@@ -29,6 +30,9 @@ class MypageController extends Controller
             $age = '不明';
         }
 
-        return view('mypage.profile.mypage', compact('age', 'user_notifications'));
+        $specialty = Specialty::Where('user_id',Auth::id());
+        $specialties = $specialty->get();
+
+        return view('mypage.profile.mypage', compact('age', 'user_notifications', 'specialties'));
     }
 }

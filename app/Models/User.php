@@ -125,4 +125,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Dmroom::class);
     }
+    public function specialty()
+    {
+        return $this->hasMany(Specialty::class);
+    }
 }
