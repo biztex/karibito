@@ -15,6 +15,11 @@
 
         @include('chatroom.message.worked')
 
+    <!-- キャンセル -->
+    @elseif($message->reference_type === 'App\Models\PurchasedCancel')
+
+        @include('chatroom.message.cancel')
+
     <!-- 評価完了-->
     @elseif($message->reference_type === 'App\Models\Evaluation')
 
