@@ -82,6 +82,18 @@ class Chatroom extends Model
     }
 
     /**
+     * キャンセル申請可能ステータス
+     * 
+     */
+    public function isCancelRequest()
+    {
+        if ($this->status === 3 || $this->status === 4) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function reference()

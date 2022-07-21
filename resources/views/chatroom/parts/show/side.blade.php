@@ -41,7 +41,7 @@
                     <a href="{{route('chatroom.complete', $chatroom->id)}}" class="orange">作業完了報告をする</a>
                 @endif
             @endif
-            @if($chatroom->status > 2 && $chatroom->status < 5)
+            @if($cancel_request === true)
                 <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
             @endif
         </div>

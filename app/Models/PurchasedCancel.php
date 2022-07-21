@@ -27,6 +27,55 @@ class PurchasedCancel extends Model
     ]; 
    
     /**
+     * 対象のチャットルームの最終キャンセル申請ステータス
+     */
+    public function scopeCancelStatus($query, $purchase_id)
+    {
+        return $query->where('purchase_id', $purchase_id)->latest('updated_at')->first();
+    }
+
+    // キャンセル：申請中
+    public function isApplying()
+    {
+        if($this->cancelStatus($this->purchase_id)->status === 1){
+            return true;
+        }
+        return false;
+    }
+
+    // キャンセル：成立
+    public function isCanceled()
+    {
+        if($this->cancelStatus($this->purchase_id)->status === 2){
+            return true;
+        }
+        return false;
+    }
+
+    // キャンセル：異議申し立て
+    public function isObjected()
+    {
+        if($this->cancelStatus($this->purchase_id)->status === 3){
+            return true;
+        }
+        return false;
+    }
+
+     /**
+     * キャンセル申請可能かどうか
+     * 申請中・成立ではない状態
+     *
+     * @return boolean
+     */
+    public function isCancelRequest()
+    {
+        if (!$this->isApplying($this->purchase_id) && !$this->isCanceled($this->purchase_id)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function chatroomMessage()
