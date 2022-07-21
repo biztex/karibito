@@ -219,7 +219,7 @@
 								<h2>サービス一覧</h2>
 								<ul class="links">
 								@foreach($categories as $category)
-									<li><a href="product/index/{{ $category->id }}">{{ $category->name }}</a></li>
+									<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
 								@endforeach
 								</ul>
 								<h2>ガイド</h2>
@@ -379,7 +379,7 @@
 							<h2>サービス一覧</h2>
 								<ul class="links">
 								@foreach($categories as $category)
-									<li><a href="#">{{ $category->name }}</a></li>
+								<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
 								@endforeach
 								</ul>
 								<h2>ガイド</h2>

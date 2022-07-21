@@ -161,7 +161,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 商品登録
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
-        Route::get('/index/{category}', 'showCategory')->name('show.category');
+        // Route::get('/index/{category}', 'showCategory')->name('show.category');
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
             Route::post('{product}/update', 'update')->name('update');
@@ -309,7 +309,8 @@ Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.sho
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
 
 //サービス一覧
-Route::get('product/index/{category}', [OtherUserProductController::class, 'index'])->name('product.index');
+Route::get('product/index/category/{category}', [OtherUserProductController::class, 'index'])->name('product.category.index');
+Route::get('product/index/category/show/{child_category}', [OtherUserProductController::class, 'show'])->name('product.category.index.show');
 
 
 // --管理者画面-----------------------------------------------------------------------------

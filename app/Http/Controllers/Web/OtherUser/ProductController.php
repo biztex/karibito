@@ -3,29 +3,12 @@
 namespace App\Http\Controllers\Web\OtherUser;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\JobRequest;
 use App\Models\MProductCategory;
-use App\Services\HomeService;
-
+use App\Models\MProductChildCategory;
 
 class ProductController extends Controller
 {
-
-    private $home_service;
-
-    public function __construct(HomeService $home_service)
-    {
-        $this->home_service = $home_service;
-    }
-
-
-    public function getProducts($i) //イラン
-    {
-        $products = $this->home_service->paginateProduct($i);
-        return $products;
-    }
 
         /**
      * Show the form for creating a new resource.
@@ -34,36 +17,27 @@ class ProductController extends Controller
      */
     public function index(MProductCategory $category)
     {
-        $products = Product::publish()->where('id',$category->id)->orderBy('created_at','desc');
+        $products = Product::publish()->where('category_id',$category->id)->orderBy('created_at','desc')->paginate(10);
+
+        $product_ranks = Product::publish()->where('category_id',$category->id)->orderBy('created_at','desc')->paginate(10);
 
         $child_categories = $category->mProductChildCategory; //子カテゴリーとれてる
 
-        // $product_ranks = Product::where('id',$category);
+        $parent_category_flg = 1;
 
-        // $products = $this->paginateProduct(10);
-        // foreach($products as $product)
-        // {
-        //     $product_category_id[] = $product->mProductChildCategory->mProductCategory->id;
-        // }
-        // $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->paginate(10); カテゴリーを取ってる
-
-        // dd($products);
-
-        // $product_category_ranks = Product::where('category_id', $id);
-        // dd($product_category_ranks);
-
-        // $product_category_ranks = $this->home_service->getProductCategoryRanks(9);
-        // dd($product_category_ranks);
-
-        return view('product.index', compact('products', 'category', 'child_categories'));
+        return view('product.index', compact('products', 'product_ranks', 'category', 'child_categories', 'parent_category_flg'));
     }
 
-    // public function getProductCategoryRanks($i)
-    // {
-    //     $products = $this->getProduct(10);
+    public function show(MProductChildCategory $child_category)
+    {
+        $products = Product::publish()->where('category_id',$child_category->id)->orderBy('created_at','desc')->paginate(10);
 
-    //     $product_category_ranks = $this->home_service->getProductCategoryRanks(9);
+        $all_child_categories = $child_category->mProductCategory->mProductChildCategory; //親かて、コレクション
 
-    //     return $product_category_ranks;
-    // }
+        $child_category_id = $child_category->id;
+
+        $parent_category_flg = 0;
+
+        return view('product.index', compact('products', 'all_child_categories', 'child_category', 'child_category_id', 'parent_category_flg'));
+    }
 }
