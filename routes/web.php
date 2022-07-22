@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\JobRequestController;
+use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
@@ -338,6 +339,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
         Route::resource('/products',ProductController::class,['only' => ['index']]);
         Route::resource('/job_requests',JobRequestController::class,['only' => ['index']]);
+        Route::resource('/m_commission_rates',MCommissionRateController::class,['only' => ['index', 'store']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 
