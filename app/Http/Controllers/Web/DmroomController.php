@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dmroom;
+use App\Models\DmroomMessage;
 use App\Models\User;
 use App\Http\Requests\Mypage\DmroomController\MessageRequest;
 
@@ -93,6 +94,8 @@ class DmroomController extends Controller
      */
     public function show(Dmroom $dmroom)
     {
+        DmroomMessage::where('dmroom_id', $dmroom->id)->where('user_id', '<>', \Auth::id())->update(['is_view' => 1]);
+
         return view('mypage.dm.show',compact('dmroom'));
     }
 
