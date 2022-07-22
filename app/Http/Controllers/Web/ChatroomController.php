@@ -15,7 +15,6 @@ use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
 use App\Http\Requests\ProductChatroom\MessageRequest;
-use App\Models\PurchasedCancel;
 
 class ChatroomController extends Controller
 {
@@ -111,15 +110,6 @@ class ChatroomController extends Controller
      */
     public function show(Chatroom $chatroom)
     {
-        if($chatroom->isCancelRequest() && $chatroom->purchase->purchasedCancel->isEmpty()){
-            $cancel_request = true;
-        } elseif ($chatroom->isCancelRequest() && PurchasedCancel::cancelStatus($chatroom->purchase->id)->isCancelRequest()){
-                $cancel_request = true;
-        } else {
-            $cancel_request = false;
-        }
-
-
         if($chatroom->seller_user_id === \Auth::id()){
             $partner = $chatroom->buyerUser;
         } else {
@@ -128,7 +118,7 @@ class ChatroomController extends Controller
 
         $this->chatroom_message_service->isView($chatroom);
 
-        return view('chatroom.show', compact('chatroom', 'partner', 'cancel_request'));
+        return view('chatroom.show', compact('chatroom', 'partner'));
     }
 
     /**
