@@ -23,7 +23,6 @@ class HomeController extends Controller
     public function __construct(HomeService $home_service)
     {
         $this->home_service = $home_service;
-        Product::factory(5)->create();
     }
 
     /**
