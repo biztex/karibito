@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :keyword="$keyword ?? ''">
 {{-- <article> --}}
     <div id="breadcrumb">
         <div class="inner">
@@ -238,15 +238,15 @@
                         <li><a href="#">カタログ</a></li>
                         <li><a href="#">その他デザイン</a></li> --}}
                     </ul>
+                    <form method="get" class="contactForm" enctype="multipart/form-data" action="{{ route('product.search') }}">
                     <h2 class="cate cate03">並べ替え</h2>
                     <div class="checkboxChoice">
-                        <label><input type=radio name=並べ替え>ランキングの高い順</label>
-                        <label><input type=radio name=並べ替え>お気に入りの多い順</label>
-                        <label><input type=radio name=並べ替え>新着順</label>
+                        <label><input type="radio" name="sort" value="1" @if (isset($sort) && $sort === '1') checked @endif>ランキングの高い順</label>
+                        <label><input type="radio" name="sort" value="2" @if (isset($sort) && $sort === '2') checked @endif>お気に入りの多い順</label>
+                        <label><input type="radio" name="sort" value="3" @if (isset($sort) && $sort === '3') checked @endif>新着順</label>
                     </div>
                     {{-- ボタン作る --}}
                     <h2 class="cate cate04">絞り込み</h2>
-                    <form method="get" class="contactForm" enctype="multipart/form-data" action="{{ route('product.search') }}">
                         <div>
                             <table class="search">
                             <tr>

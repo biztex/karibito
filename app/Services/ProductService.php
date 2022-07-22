@@ -306,11 +306,16 @@ class ProductService
         $is_online = $request->is_online;
         $age_period = $request->age_period;
         $sort = $request->sort;
-
-        // dd($request->keyword);
+        $keyword = $request->keyword;
 
 
         $query = Product::publish();
+        if ($keyword) {
+            $query->where(function(Builder $query) use($keyword) {
+                $query->where('title', 'LIKE', "%{$keyword}%");
+            });
+        }
+
 
         if (!is_null($age_period)) {
             $now_year = date('Y');
@@ -367,10 +372,10 @@ class ProductService
             if ($sort == 1) { //ランキングの高い順
                 $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
             } elseif ($sort == 2) { //お気に入りの多い順
-                    $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
-                } elseif ($sort == 3) { //新着順
-                    $query->orderBy('created_at','desc');
-                }
+                $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
+            } elseif ($sort == 3) { //新着順
+                $query->orderBy('created_at','desc');
+            }
         } else {
             $query->latest();
         }

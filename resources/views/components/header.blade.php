@@ -1,4 +1,4 @@
-<header> 
+<header>
     <div id="header">
         <div id="headerLinks">
             <div class="inner">
@@ -8,12 +8,13 @@
                     <div class="searchBox">
                         <select class="searchSelect">
                             <option>サービス</option>
-                            <option>リクエストを探す</option>
+                            <option>リクエスト</option>
                         </select>
-                        <form method="post">
+                        <form method="get">
                             <div class="search">
-                                <input type="text" name="keyword" placeholder="キーワードを入力して検索">
-                                <input type="submit" class="btn" value="" name="keyword" formaction="{{ route('product.search') }}">
+                                <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+                                <input type="submit" class="btn" formaction="{{ route('product.search') }}">
+                                <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
                             </div>
                         </form>
                     </div>
@@ -148,11 +149,11 @@
                     <div class="searchBox">
                         <select class="searchSelect">
                             <option>サービス</option>
-                            <option>リクエストを探す</option>
+                            <option>リクエスト</option>
                         </select>
                         <div class="search">
                             <form action="{{ route('product.search') }}">
-                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="" formaction="{{ route('product.search') }}"> 
+                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" formaction="{{ route('product.search') }}">
                             {{-- 携帯版 --}}
                             {{-- <input type="submit" formaction="{{ route('product.search') }}" value="検索する"> --}}
                         </div>
@@ -161,9 +162,9 @@
                 </div>
                 <div class="searchWrapCont">
                     <ul class="searchWrapUl01">
-                        <li><a href="#">サービスを探す</a></li>
-                        <li><a href="#">リクエストを探す</a></li>
-                        <li><a href="#">ブログを探す</a></li>
+                        <li><a> サービスを探す</a></li>
+                        <li><a>リクエストを探す</a></li>
+                        <li><a>ブログを探す</a></li>
                     </ul>
                     <div class="searchWrapItem">
                         <p class="searchWrapHd"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p>
@@ -349,7 +350,7 @@
                 <div class="flexBox">
                     <div class="left">
                         <div class="findLink">
-                            <a href="#" class="findLinkA">サービスを探す</a>
+                            <a class="findLinkA">サービスを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
                                 @foreach($categories as $category)
@@ -368,7 +369,7 @@
                             </div>
                         </div>
                         <div class="findLink">
-                            <a href="#" class="findLinkA">リクエストを探す</a>
+                            <a class="findLinkA">リクエストを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
                                 @foreach($categories as $category)
@@ -387,7 +388,7 @@
                             </div>
                         </div>
                         <div class="findLink">
-                            <a href="#" class="findLinkA">ブログを探す</a>
+                            <a class="findLinkA">ブログを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
                                 @foreach($categories as $category)
