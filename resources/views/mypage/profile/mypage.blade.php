@@ -65,12 +65,9 @@
 							<div class="mypageProud">
 								<p class="mypageHd01">得意分野</p>
 								<ul class="mypageProudUl">
-									<li>家の掃除</li>
-									<li>料理代行</li>
-									<li>パソコン修理</li>
-									<li>高齢者のお世話</li>
-									<li>写真撮影代行</li>
-									<li>ロゴデザイン</li>
+									@foreach($specialties as $specialty)
+									<li>{{ $specialty->content }}</li>
+									@endforeach
 								</ul>
 							</div>
 						</div>
