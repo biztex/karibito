@@ -36,6 +36,7 @@
 				<a class="nav-item nav-link active" href="{{ route('admin.news.index') }}">News</a>
 				<a class="nav-item nav-link active" href="{{ route('admin.products.index') }}">Products</a>
 				<a class="nav-item nav-link active" href="{{ route('admin.job_requests.index') }}">JobRequests</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.m_commission_rates.index') }}">手数料</a>
 				<a class="nav-item nav-link" href="{{ route('admin.logout') }}">LOGOUT</a>
 				</div>
 			</div>
