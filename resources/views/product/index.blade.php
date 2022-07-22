@@ -2,25 +2,29 @@
 {{-- <article> --}}
     <div id="breadcrumb">
         <div class="inner">
-            <a href="{{ route('home') }}">ホーム</a>　&gt;　
-            @if ($parent_category_flg === 1)
-                <a href="{{ route('product.category.index', $category->id) }}">{{$category->name}}</a>
-            @elseif ($parent_category_flg === 0)
-                <a href="{{ route('product.category.index', $child_category->mProductCategory->id) }}">{{$child_category->mProductCategory->name}}</a>　&gt;　
-                <a href="">{{$child_category->name}}</a>
+            <a href="{{ route('home') }}">ホーム</a>　&gt;
+            @if (isset($parent_category_flg))
+                @if ($parent_category_flg === 1)
+                    <a href="{{ route('product.category.index', $category->id) }}">{{$category->name}}</a>
+                @elseif ($parent_category_flg === 0)
+                    <a href="{{ route('product.category.index', $child_category->mProductCategory->id) }}">{{$child_category->mProductCategory->name}}</a>　&gt;　
+                    <a href="">{{$child_category->name}}</a>
+                @endif
             @else
-                <h2>検索結果一覧</h2>
-            @endif
+                <a>検索結果一覧</a>
+            @endif　
         </div>
     </div>
 
     <article>
         <div id="teaser">
             <div class="inner">
-                @if ($parent_category_flg === 1)
-                    <h2>{{$category->name}}</h2>
-                @elseif ($parent_category_flg === 0)
-                    <h2>{{$child_category->mProductCategory->name}}</h2>
+                @if (isset($parent_category_flg))
+                    @if ($parent_category_flg === 1)
+                        <h2>{{$category->name}}</h2>
+                    @elseif ($parent_category_flg === 0)
+                        <h2>{{$child_category->mProductCategory->name}}</h2>
+                    @endif
                 @else
                     <h2>検索結果一覧</h2>
                 @endif
@@ -30,33 +34,37 @@
 
         <div id="contents">
             <div class="inner clearfix">
-                <div class="titleStyle mt40 mb50">
-                    {{-- <p class="sub">{{$category->detail}}仮、説明文が入る</p> --}}
-                    <p class="sub"></p>デザイン制作から印刷まで依頼ができるサービスです。チラシ、名刺、封筒、個展の案内状、ポストカードのデザイン、<br>商品を入れるパッケージや箱のデザインサービスも揃っています。<br>ノベルティや趣味で使うステッカーやシール、クリアファイルなどもデザイン制作から印刷まで依頼できます。</p>
-                </div>
+                @if (isset($parent_category_flg))
+                    <div class="titleStyle mt40 mb50">
+                        {{-- <p class="sub">{{$category->detail}}仮、説明文が入る</p> --}}
+                        <p class="sub"></p>デザイン制作から印刷まで依頼ができるサービスです。チラシ、名刺、封筒、個展の案内状、ポストカードのデザイン、<br>商品を入れるパッケージや箱のデザインサービスも揃っています。<br>ノベルティや趣味で使うステッカーやシール、クリアファイルなどもデザイン制作から印刷まで依頼できます。</p>
+                    </div>
+                @endif
                 <div id="main">
                     <div class="cateList">
-                        <h2 class="hdM">カテゴリ一覧</h2>
-                        <div class="list sliderSP02">
-                            @if ($parent_category_flg === 1)
-                                @foreach ($child_categories as $child_category)
-                                {{-- dbに画像と詳細の文言を記入 --}}
-                                    <div class="item">
-                                        <a href="{{ route('product.category.index.show', $child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$child_category['name']}}">{{$child_category['name']}}</a>
-                                    </div>
-                                @endforeach
-                            @elseif ($parent_category_flg === 0)
-                                @foreach ($all_child_categories as $all_child_category)
-                                {{-- dbに画像と詳細の文言を記入 --}}
-                                    <div class="item">
-                                        <a href="{{ route('product.category.index.show', $all_child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$all_child_category->name}}">{{$all_child_category['name']}}</a>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
+                        @if (isset($parent_category_flg))
+                            <h2 class="hdM">カテゴリ一覧</h2>
+                            <div class="list sliderSP02">
+                                @if ($parent_category_flg === 1)
+                                    @foreach ($child_categories as $child_category)
+                                    {{-- dbに画像と詳細の文言を記入 --}}
+                                        <div class="item">
+                                            <a href="{{ route('product.category.index.show', $child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$child_category['name']}}">{{$child_category['name']}}</a>
+                                        </div>
+                                    @endforeach
+                                @elseif ($parent_category_flg === 0)
+                                    @foreach ($all_child_categories as $all_child_category)
+                                    {{-- dbに画像と詳細の文言を記入 --}}
+                                        <div class="item">
+                                            <a href="{{ route('product.category.index.show', $all_child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$all_child_category->name}}">{{$all_child_category['name']}}</a>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        @endif
                     </div>
 
-                    @if ($parent_category_flg === 1)
+                    @if (isset($parent_category_flg) && $parent_category_flg === 1)
                         <div class="recommendList style2">
                             <h2 class="hdM">ランキング一覧</h2>
                             <div class="list sliderSP">
@@ -94,9 +102,6 @@
                                                         <p>({{ App\Models\UserProfile::GENDER[$product_rank->user->userProfile->gender] }}/{{ $product_rank->user->userProfile->birthday }} / {{ $product_rank->user->userProfile->prefecture->name }})</p>
                                                     </div>
                                                 </div>
-                                                @if($product_rank->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-                                                    <p class="check"><a href="#">本人確認済み</a></p>
-                                                @endif
                                                 <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
                                             </div>
                                         </div>
@@ -106,8 +111,8 @@
                         </div>
                     @endif
 
-                    {{-- @if () 検索時のみ表示する --}}
-                        {{-- <div class="recommendList style2">
+                    @if (!isset($parent_category_flg))
+                        <div class="recommendList style2">
                             <h2 class="hdM">おすすめのお仕事</h2>
                             <div class="list sliderSP">
                                 <div class="item">
@@ -138,8 +143,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
-                    {{-- @endif --}}
+                        </div>
+                    @endif
 
                     <div class="recommendList style2">
                         <p class="cases">{{$products->total()}}件中
@@ -206,21 +211,25 @@
                 </div><!-- /#main -->
                 <aside id="side" class="pc">
                     <h2 class="cate cate02">
-                        @if ($parent_category_flg === 1)
-                            {{$category->name}}から探す</h2>
-                        @elseif ($parent_category_flg === 0)
-                            {{$child_category->mProductCategory->name}}から探す</h2>
+                        @if (isset($parent_category_flg))
+                            @if ($parent_category_flg === 1)
+                                {{$category->name}}から探す</h2>
+                            @elseif ($parent_category_flg === 0)
+                                {{$child_category->mProductCategory->name}}から探す</h2>
+                            @endif
                         @endif
                     <ul class="links">
-                        @if ($parent_category_flg === 1)
-                            @foreach ($child_categories as $child_category)
-                                <li><a href="show/{{ $child_category->id }}">{{$child_category->name}}</a></li>
-                            @endforeach
-                        @elseif ($parent_category_flg === 0)
-                            @foreach ($all_child_categories as $all_child_category)
-                                {{-- <li><a href="show/{{ $all_child_category->id }}">{{$all_child_category->name}}</a></li> --}}
-                                <li><a href="{{route('product.category.index.show', $all_child_category->id) }}">{{$all_child_category->name}}</a></li>
-                            @endforeach
+                        @if (isset($parent_category_flg))
+                            @if ($parent_category_flg === 1)
+                                @foreach ($child_categories as $child_category)
+                                    <li><a href="show/{{ $child_category->id }}">{{$child_category->name}}</a></li>
+                                @endforeach
+                            @elseif ($parent_category_flg === 0)
+                                @foreach ($all_child_categories as $all_child_category)
+                                    {{-- <li><a href="show/{{ $all_child_category->id }}">{{$all_child_category->name}}</a></li> --}}
+                                    <li><a href="{{route('product.category.index.show', $all_child_category->id) }}">{{$all_child_category->name}}</a></li>
+                                @endforeach
+                            @endif
                         @endif
                         {{-- <li><a href="#">チラシ・DM</a></li>
                         <li><a href="#">名刺</a></li>
@@ -237,44 +246,63 @@
                     </div>
                     {{-- ボタン作る --}}
                     <h2 class="cate cate04">絞り込み</h2>
-                    <div>
-                        <table class="search">
-                        <tr>
-                            <th>エリア</th>
-                            <td>
-                                <select name="prefecture_id">
-                                    <option value="">-</option>
-                                    @foreach($prefectures as $prefecture)
-                                        <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
-                                    @endforeach
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>金額</th>
-                            <td class="elements"><input type="text" placeholder="指定なし">~<input type="text" placeholder="指定なし"></td>
-                        </tr>
-                        <tr>
-                            <th>仕事体系</th>
-                            <td>
-                                <select name="is_online">
-                                    <option value="">-</option>
-                                    <option value="{{App\Models\Product::OFFLINE}}">対面</option>
-                                    <option value="{{App\Models\Product::ONLINE}}">非対面</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>年代</th>
-                            <td>
-                                <select>
-                                    <option>-</option>
-                                    <option>1</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                    </div>
+                    <form method="get" class="contactForm" enctype="multipart/form-data" action="{{ route('product.search') }}">
+                        <div>
+                            <table class="search">
+                            <tr>
+                                <th>エリア</th>
+                                <td>
+                                    <select name="prefecture_id">
+                                        <option value="">-</option>
+                                        @foreach($prefectures as $prefecture)
+                                            <option value="{{ $prefecture->id }}" @if(isset($prefecture_id) && $prefecture_id == $prefecture->id) selected @endif>{{ $prefecture->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>金額</th>
+                                <td class="elements"><input type="text" name="low_price" placeholder="指定なし" @if(isset($low_price)) value="{{$low_price}}" @endif>~<input type="text" name="high_price" placeholder="指定なし" @if(isset($high_price)) value="{{$high_price}}" @endif></td>
+                            </tr>
+                            <tr>
+                                <th>仕事体系</th>
+                                <td>
+                                    <select name="is_online">
+                                        <option value="">-</option>
+                                        <option value="{{App\Models\Product::OFFLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::OFFLINE) selected @endif>対面</option>
+                                        <option value="{{App\Models\Product::ONLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::ONLINE) selected @endif>非対面</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>年代</th>
+                                <td>
+                                    <select name="age_period">
+                                        <option value="">-</option>
+                                        @foreach(App\Libraries\Age::AGE_PERIOD as $key => $value)
+                                            <option value="{{ $key }}" @if (isset($age_period) && $age_period == $key) selected @endif>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        @if (isset($parent_category_flg))
+                            @if ($parent_category_flg === 1)
+                                <input type="hidden" name="parent_category_flg" value="1">
+                                <input type="hidden" name="parent_category_id" value="{{ $category->id}}">
+                            @elseif ($parent_category_flg === 0)
+                                <input type="hidden" name="parent_category_flg" value="0">
+                                <input type="hidden" name="parent_category_id" value="{{ $child_category->mProductCategory->id}}">
+                                {{-- 連続で検索するとカテゴリーがなくなる --}}
+                                <input type="hidden" name="child_category_id" value="{{ $child_category->id}}">
+                            @endif
+                        @endif
+                        {{-- <a href="{{ route('product.search') }}" class="">検索する</a> --}}
+                            <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
+                        </div>
+                    </form>
                     <h2 class="cate cate05">その他サービスから探す</h2>
                     <ul class="other">
                         <ul class="other">
@@ -282,25 +310,6 @@
                                 <li><a href="{{route('product.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
                             @endforeach
                         </ul>
-                        {{-- <li><a href="#" class="other01">家事</a></li>
-                        <li><a href="#" class="other02">修理組み立て</a></li>
-                        <li><a href="#" class="other03">ペット</a></li>
-                        <li><a href="#" class="other04">高齢者向け</a></li>
-                        <li><a href="#" class="other05">乗り物</a></li>
-                        <li><a href="#" class="other06">引越し</a></li>
-                        <li><a href="#" class="other07">趣味・習い事</a></li>
-                        <li><a href="#" class="other08">美容・ファッション</a></li>
-                        <li><a href="#" class="other09">写真動作制作</a></li>
-                        <li><a href="#" class="other10">その他</a></li>
-                        <li><a href="#" class="other11">インテリア</a></li>
-                        <li><a href="#" class="other12">デザイン</a></li>
-                        <li><a href="#" class="other13">パソコン</a></li>
-                        <li><a href="#" class="other14">ビジネスサポート</a></li>
-                        <li><a href="#" class="other15">冠婚葬祭</a></li>
-                        <li><a href="#" class="other16">料理</a></li>
-                        <li><a href="#" class="other17">恋愛・結婚</a></li>
-                        <li><a href="#" class="other18">体験・アクティビティ</a></li>
-                        <li><a href="#" class="other19">出張サービス</a></li> --}}
                     </ul>
                 </aside><!-- /#side -->
             </div><!--inner-->

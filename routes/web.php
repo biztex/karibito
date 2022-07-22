@@ -319,6 +319,7 @@ Route::get('news', [NewsController::class, 'index'])->name('news.index');
 //サービス一覧
 Route::get('product/index/category/{category}', [OtherUserProductController::class, 'index'])->name('product.category.index');
 Route::get('product/index/category/show/{child_category}', [OtherUserProductController::class, 'show'])->name('product.category.index.show');
+Route::get('product/index/keyword/search', [OtherUserProductController::class, 'search'])->name('product.search');
 
 
 // --管理者画面-----------------------------------------------------------------------------
