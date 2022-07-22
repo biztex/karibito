@@ -305,6 +305,10 @@ class ProductService
         $high_price = $request->high_price;
         $is_online = $request->is_online;
         $age_period = $request->age_period;
+        $sort = $request->sort;
+
+        dd($request->keyword);
+
 
         $query = Product::publish();
 
@@ -314,20 +318,15 @@ class ProductService
             $year -= $age_period * 10;
             $up_year = $year + 10;
 
-            if ($age_period == 1)
-            {
+            if ($age_period == 1) {
                 $query->whereHas('user.userProfile', function (Builder $query) use($year){
                     $query->whereYear('birthday', '>', $year);
                 });
-            }
-            elseif($age_period == 7)
-            {
+            } elseif($age_period == 7) {
                 $query->whereHas('user.userProfile', function (Builder $query) use($up_year){
                     $query->whereYear('birthday', '<', $up_year);
                 });
-            }
-            else
-            {
+            } else {
                 $query->whereHas('user.userProfile', function (Builder $query) use($year, $up_year){
                     $query->whereYear('birthday', '>', $year);
                     $query->whereYear('birthday', '<', $up_year);
@@ -362,8 +361,18 @@ class ProductService
             $query->where('is_online', $is_online);
         }
 
+        if (!empty($sort)) {
+            if ($sort == 1) { //ランキングの高い順
+                $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
+            } elseif ($sort == 2) { //お気に入りの多い順
+                    $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
+                } elseif ($sort == 3) { //新着順
+                    $query->orderBy('created_at','desc');
+                }
+        } else {
+            $query->latest();
+        }
+
         return $query->paginate(40);
     }
-
-
 }

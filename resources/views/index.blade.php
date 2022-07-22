@@ -78,8 +78,9 @@
 								<div class="recommendCates">
 									<h2 class="hdM">おすすめのカテゴリー</h2>
 									<ul>
-										<li><a href="#" class="cate01">家事</a></li>
-										<li><a href="#" class="cate02">修理組み立て</a></li>
+										{{-- 後でやる --}}
+										<li><a href="{{route('product.category.index', 1) }}" class="cate01">家事</a></li>
+										<li><a href="{{route('product.category.index', 2) }}" class="cate02">修理組み立て</a></li>
 										<li><a href="#" class="cate03">料理</a></li>
 										<li><a href="#" class="cate04">ペット</a></li>
 										<li><a href="#" class="cate05">乗り物</a></li>

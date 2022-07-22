@@ -23,6 +23,7 @@ class HomeController extends Controller
     public function __construct(HomeService $home_service)
     {
         $this->home_service = $home_service;
+        Product::factory(5)->create();
     }
 
     /**
@@ -32,7 +33,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         // 公開&&下書きでない
         $products = $this->home_service->paginateProduct(10);
 

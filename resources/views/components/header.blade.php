@@ -8,14 +8,14 @@
                     <div class="searchBox">
                         <select class="searchSelect">
                             <option>サービス</option>
-                            <option>家電</option>
                             <option>リクエストを探す</option>
-                            <option>ペット</option>
-                            <option>高齢者向け</option>
                         </select>
-                        <div class="search">
-                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="">
-                        </div>
+                        <form method="post">
+                            <div class="search">
+                                <input type="text" name="keyword" placeholder="キーワードを入力して検索">
+                                <input type="submit" class="btn" value="" name="keyword" formaction="{{ route('product.search') }}">
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="item">
@@ -148,13 +148,13 @@
                     <div class="searchBox">
                         <select class="searchSelect">
                             <option>サービス</option>
-                            <option>家電</option>
                             <option>リクエストを探す</option>
-                            <option>ペット</option>
-                            <option>高齢者向け</option>
                         </select>
                         <div class="search">
-                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="">
+                            <form action="{{ route('product.search') }}">
+                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="" formaction="{{ route('product.search') }}"> 
+                            {{-- 携帯版 --}}
+                            {{-- <input type="submit" formaction="{{ route('product.search') }}" value="検索する"> --}}
                         </div>
                     </div>
                     <div class="searchClose"><img src="/img/common/search_close.svg" alt=""></div>

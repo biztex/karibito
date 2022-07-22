@@ -30,8 +30,8 @@ class ProductFactory extends Factory
             'number_of_day'  => $this->faker->numberBetween(1, 100),
             'is_call'        => $this->faker->boolean,
             'number_of_sale' => $this->faker->randomElement([0, 99]),
-            'is_draft'       => $this->faker->boolean,
-            'status'         => $this->faker->numberBetween(1, 2),
+            'is_draft'       => 0,
+            'status'         => 1,
         ];
     }
 }
