@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\AdditionalOption;
 use App\Models\Admin;
 use App\Models\JobRequest;
+use App\Models\MCommissionRate;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductQuestion;
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
     private const SEEDERS = [
         PrefectureSeeder::class,
         MProductCategorySeeder::class,
-        MProductChildCategorySeeder::class
+        MProductChildCategorySeeder::class,
+        MCommissionRateSeeder::class,
     ];
 
     /**
