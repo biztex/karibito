@@ -1,6 +1,6 @@
 <!-- 作業報告メッセージ -->
 <!-- 購入者 評価前 -->
-@if($chatroom->status === 4)
+@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
     <!-- 購入者側の時 相手を評価するボタン-->
     @if($message->user_id !== Auth::id()) 
         <li>
