@@ -21,7 +21,7 @@ class ProductController extends Controller
         $this->product_service = $product_service;
     }
 
-        /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
@@ -55,7 +55,6 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $products = $this->product_service->searchProducts($request);
-
         $prefecture_id = $request->prefecture_id;
         $low_price = $request->low_price;
         $high_price = $request->high_price;

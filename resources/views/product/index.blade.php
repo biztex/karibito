@@ -246,8 +246,7 @@
                     </div>
                     {{-- ボタン作る --}}
                     <h2 class="cate cate04">絞り込み</h2>
-                    <form method="post" class="contactForm" enctype="multipart/form-data">
-                        @csrf
+                    <form method="get" class="contactForm" enctype="multipart/form-data" action="{{ route('product.search') }}">
                         <div>
                             <table class="search">
                             <tr>
@@ -270,8 +269,8 @@
                                 <td>
                                     <select name="is_online">
                                         <option value="">-</option>
-                                        <option value="{{App\Models\Product::OFFLINE}}" @if(isset($is_online)) (!is_null($is_online)) && $is_online == App\Models\Product::OFFLINE) selected @endif>対面</option>
-                                        <option value="{{App\Models\Product::ONLINE}}" @if(isset($is_online)) $is_online == App\Models\Product::ONLINE selected @endif>非対面</option>
+                                        <option value="{{App\Models\Product::OFFLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::OFFLINE) selected @endif>対面</option>
+                                        <option value="{{App\Models\Product::ONLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::ONLINE) selected @endif>非対面</option>
                                     </select>
                                 </td>
                             </tr>
@@ -300,6 +299,7 @@
                                 <input type="hidden" name="child_category_id" value="{{ $child_category->id}}">
                             @endif
                         @endif
+                        {{-- <a href="{{ route('product.search') }}" class="">検索する</a> --}}
                             <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
                         </div>
                     </form>

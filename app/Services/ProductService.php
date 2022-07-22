@@ -318,12 +318,12 @@ class ProductService
             {
                 $query->whereHas('user.userProfile', function (Builder $query) use($year){
                     $query->whereYear('birthday', '>', $year);
-                });
+                }); //見直す
             }
             elseif($age_period == 7)
             {
                 $query->whereHas('user.userProfile', function (Builder $query) use($up_year){
-                    $query->whereYear('birthday', '<', $up_year);
+                    $query->whereYear('birthday', '<=', $up_year);
                 });
             }
             else
@@ -349,11 +349,11 @@ class ProductService
         }
 
         if (!empty($low_price)) {
-            $query->where('price', '>', $low_price);
+            $query->where('price', '>=', $low_price);
         }
 
         if (!empty($high_price)) {
-            $query->where('price', '<', $high_price);
+            $query->where('price', '<=', $high_price);
         }
 
         if ($is_online === '0') {
