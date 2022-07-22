@@ -14,7 +14,6 @@
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
                                 <input type="submit" class="btn" formaction="{{ route('product.search') }}">
-                                <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
                             </div>
                         </form>
                     </div>
@@ -151,12 +150,13 @@
                             <option>サービス</option>
                             <option>リクエスト</option>
                         </select>
-                        <div class="search">
-                            <form action="{{ route('product.search') }}">
-                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" formaction="{{ route('product.search') }}">
-                            {{-- 携帯版 --}}
-                            {{-- <input type="submit" formaction="{{ route('product.search') }}" value="検索する"> --}}
-                        </div>
+                        <form method="get">
+                            <div class="search">
+                                <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+                                <input type="submit" class="btn" formaction="{{ route('product.search') }}">
+                                <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
+                            </div>
+                        </form>
                     </div>
                     <div class="searchClose"><img src="/img/common/search_close.svg" alt=""></div>
                 </div>
