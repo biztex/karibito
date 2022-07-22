@@ -31,15 +31,21 @@
 										<div class="mypageP01">
 											<p>{{$user->name}}</p>
 											<div class="blogDtOtherBtn">
-												<a href="#">メッセージを送る</a>
+												@if(empty($dmrooms))
+												<a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
+												@else
+												<a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
+												@endif
 												<a href="#" class="followA">フォローする</a>
 											</div>
 										</div>
-										<!-- <p class="mypageP02">最終ログイン：8時間前</p> -->
+										<p class="mypageP02">最終ログイン：8時間前</p>
 										<p class="mypageP03">({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$age}}/ {{$user->userProfile->prefecture->name}}) </p>
 										<p class="mypageP04 check">
-                                            <a href="#">本人確認済み</a>
-                                            <!-- <a href="#">機密保持契約(NDA) 可能</a> -->
+                                            @if ($user->userProfile->is_identify)
+                                                <a href="#">本人確認済み</a>
+                                            @endif
+                                            <a href="#">機密保持契約(NDA) 可能</a>
                                         </p>
 										<p class="mypageP05"></p>
 										<div class="mypageP06">
@@ -56,12 +62,9 @@
 								<div class="mypageProud">
 									<p class="mypageHd01">得意分野</p>
 									<ul class="mypageProudUl">
-										<li>家の掃除</li>
-										<li>料理代行</li>
-										<li>パソコン修理</li>
-										<li>高齢者のお世話</li>
-										<li>写真撮影代行</li>
-										<li>ロゴデザイン</li>
+                                        @foreach ($user->specialty as $specialty)
+                                            <li>{{ $specialty->content }}</li>
+                                        @endforeach
 									</ul>
 								</div>
 							</div>
@@ -71,48 +74,115 @@
 								<p class="mypageHd02"><span>現在の出品サービス一覧</span>@if($products->isNotEmpty())<a href="{{ route('user.publication', $user->id) }}" class="more">出品サービスをもっと見る</a>@endif</p>
 								<div class="recommendList style2 ">
 									<div class="list sliderSP02">
-                                    @if($products->isEmpty())
-                                        <p>投稿がありません。</p>
-                                    @else
-                                    @foreach($products as $product)
-                                        <div class="item">
-											<a href="{{ route('product.show',$product->id) }}" class="img imgBox" data-img="{{asset('/storage/'.$product->productImage[0]->path)}}">
-												<img src="/img/common/img_270x160.png" alt="" style="width:190px; height:113px;">
-												<button class="favorite">お気に入り</button>
-											</a>
-											<div class="info" style="width:190px; height:255px;">
-												<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
-												<div class="draw">
-													<p class="price" style="width:100%;"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
-												</div>
-												<div class="single">
-													<a href="#">{{ App\Models\Product::IS_ONLINE[$product->is_online] }}</a>
-												</div>
-												<div class="aboutUser">
-													<div class="user">
-							                            @if(null !== $user->userProfile->icon)
-														    <p class="ico"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
-                                                        @else
-														    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                        @endif
-														<div class="introd">
-															<p class="name">{{$product->user->name}}</p>
-															<p>({{\App\Models\UserProfile::GENDER[$product->user->userProfile->gender]}}/ {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>
-														</div>
-													</div>
-													<p class="check"><a href="#">本人確認済み</a></p>
-													<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
-												</div>
-											</div>
-										</div>
-                                    @endforeach
-                                    @endif								
+
+				                        <div class="indexTab tabWrap wMax">
+                                            @if (($products->isEmpty()) && ($user->jobRequest->isEmpty()))
+                                                <p>投稿がありません。</p>
+                                            @else
+                                                <ul class="tabLink">
+                                                    <li><a class="is_active" href="#tab_box01">提供</a></li>
+                                                    <li><a href="#tab_box02">リクエスト</a></li>
+                                                </ul>
+                                                <div class="tabBox is_active" id="tab_box01">
+                                                    @if($products->isEmpty())
+                                                        <p>投稿がありません。</p>
+                                                    @else
+                                                    <div class="recommendList style2 ">
+                                                        <div class="list sliderSP02">
+                                                        @foreach($products as $product)
+                                                            <div class="item">
+                                                                <a href="{{ route('product.show',$product->id) }}" class="img imgBox" data-img="{{asset('/storage/'.$product->productImage[0]->path)}}">
+                                                                    <img src="/img/common/img_270x160.png" alt="" style="width:190px; height:113px;">
+                                                                    <button class="favorite">お気に入り</button>
+                                                                </a>
+                                                                <div class="info" style="width:190px; height:255px;">
+                                                                    <div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+                                                                    <div class="draw">
+                                                                        <p class="price" style="width:100%;"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+                                                                    </div>
+                                                                    <div class="single">
+                                                                        <a href="#">{{ App\Models\Product::IS_ONLINE[$product->is_online] }}</a>
+                                                                    </div>
+                                                                    <div class="aboutUser">
+                                                                        <div class="user">
+                                                                            @if(null !== $user->userProfile->icon)
+                                                                                <p class="ico"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
+                                                                            @else
+                                                                                <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                                                            @endif
+                                                                            <div class="introd">
+                                                                                <p class="name">{{$product->user->name}}</p>
+                                                                                <p>({{\App\Models\UserProfile::GENDER[$product->user->userProfile->gender]}}/ {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="check"><a href="#">本人確認済み</a></p>
+                                                                        <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                </div>
+
+                                                <div class="tabBox" id="tab_box02">
+                                                    @if($job_request->isEmpty())
+                                                        <p>投稿がありません。</p>
+                                                    @else
+                                                    <div class="recommendList style2 ">
+                                                        <div class="list sliderSP02">
+                                                        @foreach($job_request as $request)
+                                                            <div class="item">
+                                                                <div class="info">
+                                                                    <div class="breadcrumb"><a href="#">{{ $request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $request->mProductChildCategory->name }}</span></div>
+                                                                    <div class="draw">
+                                                                        <p class="price" style="width:100%;"><font>{{ $request->title }}</font></p>
+                                                                    </div>
+                                                                    <div class="aboutInfo">
+                                                                        <dl>
+                                                                            <dt><span>予算</span></dt>
+                                                                            <dd>{{ number_format($request->price) }}円</dd>
+                                                                        </dl>
+                                                                        <dl>
+                                                                            <dt><span>提案数</span></dt>
+                                                                            <dd>0</dd>
+                                                                        </dl>
+                                                                        <dl>
+                                                                            <dt><span>募集期限</span></dt>
+                                                                            <dd>{{ $request->application_deadline }}</dd>
+                                                                        </dl>
+                                                                    </div>
+                                                                    <div class="aboutUser">
+                                                                        <div class="user">
+                                                                            @if(null !== $user->userProfile->icon)
+                                                                                <p class="ico"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
+                                                                            @else
+                                                                                <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                                                            @endif
+                                                                            <div class="introd">
+                                                                                <p class="name">{{$request->user->name}}</p>
+                                                                                <p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$age}}/ {{$request->user->userProfile->prefecture->name}})</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="check"><a href="#">本人確認済み</a></p>
+                                                                        <div class="evaluate three"><img src="img/common/evaluate.svg" alt=""></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                        </div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<!-- <div class="mypageSec04">
+						<div class="mypageSec04">
 							<div class="inner">
 								<p class="mypageHd02"><span>スキル・経歴・職務</span><a href="#" class="more">スキル・経歴・職務を編集する</a></p>
 								<div class="mypageItem">
@@ -122,9 +192,9 @@
 											<dt>スキル詳細</dt>
 											<dd>
 												<ul class="mypageUl03">
-													<li><span>Illustrator</span>経験：15年</li>
-													<li><span>Photoshop</span>経験：15年</li>
-													<li><span>Excel</span>経験：15年</li>
+                                                    @foreach ($user->userSkills as $skill)
+                                                        <li><span>{{ $skill->name }}</span>経験：{{ $skill->year }}年</li>
+                                                    @endforeach
 												</ul>
 											</dd>
 										</dl>
@@ -134,31 +204,27 @@
 									<p class="mypageHd03">経歴</p>
 									<div class="mypageBox">
 										<ul class="mypageUl03">
-											<li>
-												<dl class="mypageDl02">
-													<dt>経歴名</dt>
-													<dd><span>アパレルメーカー アパレルデザイナー</span></dd>
-												</dl>
-												<dl class="mypageDl02">
-													<dt>在籍期間</dt>
-													<dd>2012年 4月 〜 2016年 3月</dd>
-												</dl>
-											</li>
-											<li>
-												<dl class="mypageDl02">
-													<dt>経歴名</dt>
-													<dd><span>デザイン事務所 デザイナー</span></dd>
-												</dl>
-												<dl class="mypageDl02">
-													<dt>在籍期間</dt>
-													<dd>2016年 4月 〜 現在</dd>
-												</dl>
-											</li>
+                                            @if ($user->userCareers->isEmpty())
+                                                <p>経歴なし</p>
+                                            @else
+                                                @foreach ($user->userCareers as $userCareer)
+                                                    <li>
+                                                        <dl class="mypageDl02">
+                                                            <dt>経歴名</dt>
+                                                            <dd><span>{{ $userCareer->name }}</span></dd>
+                                                        </dl>
+                                                        <dl class="mypageDl02">
+                                                            <dt>在籍期間</dt>
+                                                            <dd>{{ $userCareer->first_year }}年 {{ $userCareer->first_month }}月 〜 {{ $userCareer->last_year }}年 {{ $userCareer->last_month }}月</dd>
+                                                        </dl>
+                                                    </li>
+                                                @endforeach
+                                            @endif
 										</ul>
 									</div>
 								</div>
 							</div>
-						</div> -->
+						</div>
 						<!-- <div class="mypageSec05">
 							<div class="inner">
 								<p class="mypageHd02"><span>ポートフォリオ</span><a href="#" class="more">ポートフォリオを編集する</a></p>
@@ -493,7 +559,7 @@
 									</div>
 								</div>
 							</div>
-						</div> -->
+						</div>
 
 					</div>
 				</div><!-- /#main -->

@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\JobRequestController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
@@ -30,6 +32,7 @@ use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\ProductChatroomController;
+use App\Http\Controllers\Web\DmroomController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -272,7 +275,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('{purchased_cancel}/approval', 'approval')->name('approval'); //キャンセル承認
         Route::get('{purchased_cancel}/approval', 'complete')->name('complete'); //キャンセル承認画面
         Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
-        
+
     });
 
 
@@ -316,7 +319,7 @@ Route::get('news', [NewsController::class, 'index'])->name('news.index');
 //サービス一覧
 Route::get('product/index/category/{category}', [OtherUserProductController::class, 'index'])->name('product.category.index');
 Route::get('product/index/category/show/{child_category}', [OtherUserProductController::class, 'show'])->name('product.category.index.show');
-Route::post('product/index/category/search', [OtherUserProductController::class, 'search'])->name('product.search');
+Route::get('product/index/keyword/search', [OtherUserProductController::class, 'search'])->name('product.search');
 
 
 // --管理者画面-----------------------------------------------------------------------------
@@ -333,6 +336,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard');
         Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
+        Route::resource('/products',ProductController::class,['only' => ['index']]);
+        Route::resource('/job_requests',JobRequestController::class,['only' => ['index']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 
@@ -372,5 +377,8 @@ Route::prefix('user')->name('user.')->group(function () {
 
 
 // DM画面組込まで
-Route::view('/dm','mypage.dm.index')->name('dm.index');
-Route::view('/dm/show','mypage.dm.show');
+Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
+Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->name('dm.show');
+Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
+Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->name('dm.create');
+Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');

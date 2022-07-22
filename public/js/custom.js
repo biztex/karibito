@@ -131,9 +131,9 @@ $(function () {
 	$('.specialtyBtnCustom').click(function (){
 		let number_js_specialtyForm = $(".cloneCustomArea").children(".specialtyForm").length;
 			if(number_js_specialtyForm < 9){
-				$('.cloneCustomArea').append('<dl class="specialtyForm"><dt>得意分野</dt><dd><input type="text" name="content[]" value=""></dd></dl>');
+				$('.cloneCustomArea').append('<dl class="specialtyForm"><input type="text" name="content[]" value=""></dd></dl>');
 			} else if(number_js_specialtyForm < 10){
-				$('.cloneCustomArea').append('<dl class="specialtyForm"><dt>得意分野</dt><dd><input type="text" name="content[]" value=""></dd></dl>');
+				$('.cloneCustomArea').append('<dl class="specialtyForm"><input type="text" name="content[]" value=""></dd></dl>');
 				$('.specialtyBtnCustom').remove();
 			}
 	});

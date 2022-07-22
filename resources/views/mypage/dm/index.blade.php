@@ -3,81 +3,48 @@
 	<x-parts.post-button/>
 	<article>
 	<x-parts.flash-msg/>
-
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="subPagesWrap">
 						<p class="subPagesHd">DM</p>
 						<div class="">
+							@if(empty($dmroom_users[0]))
+								<p class="name">DMはありません。</p>
+							@else
 							<ul class="mypageUl02 friendsUl02">
+								@foreach($dmroom_users as $dmroom_user)
 								<li>
-									<a href="dm_detail.html">
+									<a href="{{ route('dm.show', $dmroom_user->id) }}">
 										<div class="user">
-											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+										@if($dmroom_user->from_user_id === Auth::id())
+											@if($dmroom_user->toUser->userProfile->icon === null)
+												<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+											@else
+												<p class="ico"><img src="{{ asset('/storage/'.$dmroom_user->toUser->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover; border-radius: 50%;"></p>
+											@endif
 											<div class="introd">
-												<p class="name">購入者の名前</p>
+												<p class="name">{{ $dmroom_user->toUser->name }}</p>
 											</div>
+										@else
+											@if($dmroom_user->fromUser->userProfile->icon === null)
+												<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+											@else
+												<p class="ico"><img src="{{ asset('/storage/'.$dmroom_user->fromUser->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover; border-radius: 50%;"></p>
+											@endif
+											<div class="introd">
+												<p class="name">{{ $dmroom_user->fromUser->name }}</p>
+											</div>
+										@endif
 										</div>
-										<p class="time">0時間前</p>
+											<p class="time">{{ App\Libraries\DiffDateTime::dmTime($dmroom_user->dmroomMessages->last()->created_at->format("Y/m/d H:i:s")) }}</p>
+										
 									</a>
 								</li>
-								<li>
-									<a href="dm_detail.html">
-										<div class="user">
-											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-											<div class="introd">
-												<p class="name">クリエイター名</p>
-											</div>
-										</div>
-										<p class="time">0時間前</p>
-									</a>
-								</li>
-								<li>
-									<a href="dm_detail.html">
-										<div class="user">
-											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-											<div class="introd">
-												<p class="name">クリエイター名</p>
-											</div>
-										</div>
-										<p class="time">0時間前</p>
-									</a>
-								</li>
-								<li>
-									<a href="dm_detail.html">
-										<div class="user">
-											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-											<div class="introd">
-												<p class="name">クリエイター名</p>
-											</div>
-										</div>
-										<p class="time">0時間前</p>
-									</a>
-								</li>
-								<li>
-									<a href="dm_detail.html">
-										<div class="user">
-											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-											<div class="introd">
-												<p class="name">クリエイター名</p>
-											</div>
-										</div>
-										<p class="time">0時間前</p>
-									</a>
-								</li>
-								<li>
-									<a href="dm_detail.html">
-										<div class="user">
-											<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-											<div class="introd">
-												<p class="name">クリエイター名</p>
-											</div>
-										</div>
-										<p class="time">0時間前</p>
-									</a>
-								</li>
+								@endforeach
 							</ul>
+							{{ $dmroom_users->links() }}
+							@endif
 						</div>
 					</div>
 				</div><!-- /#main -->

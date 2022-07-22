@@ -1,5 +1,5 @@
 <x-other-user.layout>
-<body id="estimate" class="dm-page-show">
+<body id="estimate" class="dm-page">
 	<x-parts.post-button/>
 	<article>
 	<x-parts.flash-msg/>
@@ -27,40 +27,19 @@
 									<p class="note">※返信は3日以内にお願いします</p>
 								</div>
 								<ul class="communicate">
-								@foreach($dmroom->dmroomMessages as $message)
-								<li>
-									<div class="img">
-										@if(null !== $message->user->userProfile->icon)
-											<p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
-										@else
-											<p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
-										@endif
-										<div class="info">
-											<p class="name">{{$message->user->name}}</p>
-
-											<p class="chatroom-text break-word">{!! $message->text !!}</p>
-											@if($message->file_name !== null)
-												<p class="chatroom-text break-word"><a href="{{ asset('/storage/'.$message->file_path) }}" download="{{ $message->file_name }}"  style="display: inline-flex; vertical-align: center;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
-													<path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-												</svg>{{ $message->file_name }}
-												</a></p>
-											@endif
-										</div>
-									</div>
-									<p class="time">@if($message->user_id === Auth::id() && $message->is_view === 1) 既読 @endif {{date('Y年m月d日 G:i', strtotime($message->created_at))}}</p>
-								</li>
-								@endforeach
+									
 								</ul>
 							</div>
-							<form action="{{ route('dm.message', $dmroom->id) }}" method="POST" enctype="multipart/form-data">
+							<form action="{{ route('dm.store') }}" method="POST" enctype="multipart/form-data">
 							@csrf
 								<div class="item">
 									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="evaluation">
 										<textarea name="text" placeholder="依頼する入力してください">{{ old('text') }}</textarea>
+										<input type="hidden" name="to_user_id" value="{{ $to_user_id }}">
 									</div>
 									<p class="taR">3000</p>
+									
 									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
 									<div class="btns">

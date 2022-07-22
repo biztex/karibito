@@ -35,13 +35,13 @@
 
         <div class="functeBtns">
             @if($chatroom->seller_user_id === Auth::id())
-                @if($chatroom->status === 1)
+                @if($chatroom->status === App\Models\Chatroom::STATUS_START)
                     <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
-                @elseif($chatroom->status === 3)
+                @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
                     <a href="{{route('chatroom.complete', $chatroom->id)}}" class="orange">作業完了報告をする</a>
                 @endif
             @endif
-            @if($chatroom->status > 2 && $chatroom->status < 5)
+            @if($chatroom->isCancelable())
                 <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
             @endif
         </div>
