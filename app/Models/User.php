@@ -103,7 +103,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * 通知設定
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function notificationSetting()
+    public function userNotificationSetting()
     {
         return $this->hasOne(UserNotificationSetting::class);
     }

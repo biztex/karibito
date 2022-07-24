@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductQuestion;
 use App\Models\User;
+use App\Models\UserNotificationSetting;
 use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
 
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
             // 開発ログイン用
             User::factory()
                 ->has(UserProfile::factory()->approved()->count(1)) // 承認済み
+                ->has(UserNotificationSetting::factory()->count(1)) // 通知設定
                 ->has(
                     Product::factory()                    // サービス投稿
                         ->has(ProductImage::factory()->count(3)) // 画像
