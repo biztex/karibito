@@ -45,7 +45,7 @@
 								</div>
 								<ul class="loginFormBtn">
 									<li><input type="submit" class="submit" value="ログイン"></li>
-                                    @if(in_array(config('app.env'), ['local', 'development', 'stage']))
+                                    @if(\App\Enums\Environment::isEnableEasyLogin())
                                         {{-- ローカル環境専用 --}}
                                         <li>
                                             <a href="{{ route('developerLogin') }}">開発者ログイン(ローカル環境のみ)</a>
