@@ -48,7 +48,7 @@
                                     @if(\App\Enums\Environment::isEnableEasyLogin())
                                         {{-- ローカル環境専用 --}}
                                         <li>
-                                            <a href="{{ route('developerLogin') }}">開発者ログイン(ローカル環境のみ)</a>
+                                            <a href="{{ route('developerLogin') }}">簡易ログイン(確認環境のみ)</a>
                                         </li>
                                     @endif
 								</ul>
