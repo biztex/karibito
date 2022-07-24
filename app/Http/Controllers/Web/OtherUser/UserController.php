@@ -20,9 +20,10 @@ class UserController extends Controller
     public function publication(User $user)
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $job_requests = JobRequest::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $age = Age::group($user->userProfile->birthday);
 
-        return view('other-user.publication', compact('user','products', 'age'));
+        return view('other-user.publication', compact('user','products','job_requests', 'age'));
     }
 
     /**
