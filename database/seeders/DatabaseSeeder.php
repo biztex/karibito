@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // 指定の開発環境のみ実行
-        if (\in_array(config('app.env'), ['local', 'development'], true)) {
+        if (\in_array(config('app.env'), ['local', 'development', 'stage'], true)) {
             // 開発ログイン用
             User::factory()
                 ->has(UserProfile::factory()->approved()->count(1)) // 承認済み
