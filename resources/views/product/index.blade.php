@@ -111,7 +111,7 @@
                         </div>
                     @endif
 
-                    @if (!isset($parent_category_flg))
+                    {{-- @if (!isset($parent_category_flg)) まだおすすめの決め方が決まっていない
                         <div class="recommendList style2">
                             <h2 class="hdM">おすすめのお仕事</h2>
                             <div class="list sliderSP">
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
                     <div class="recommendList style2">
                         <p class="cases">{{$products->total()}}件中
