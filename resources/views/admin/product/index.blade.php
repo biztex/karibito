@@ -37,14 +37,18 @@
                                     <tr>
                                         <td class="px-2">{{ $product->id }}</td>
                                         <td class="px-2">{{ $product->mProductChildCategory?->name }}</td>
-                                        <td class="px-2"><a href="{{ route('product.show', $product->id) }}" target="_blank">{{  $product->title  }}</a></td>
+                                        @if (($product->status == 2) || ($product->is_draft == 1))
+                                            <td class="px-2">{{  $product->title  }}</td>
+                                        @else
+                                            <td class="px-2"><a href="{{ route('product.show', $product->id) }}" target="_blank">{{  $product->title  }}</a></td>
+                                        @endif
                                         <td class="px-2"><a href="{{ route('user.mypage', $product->user->id) }}" target="_blank">{{ $product->user->name }}</a></td>
                                         <td class="px-2">{{ App\Models\Product::IS_ONLINE[$product->is_online] ?? "" }}</td>
                                         <td class="px-2">{{ $product->prefecture?->name }}</td>
                                         @if ($product->is_draft == 1)
                                             <td class="px-2">{{ App\Models\Product::DRAFT_STATUS[$product->is_draft] }}</td>
                                         @else
-                                            <td class="px-2">{{ App\Models\Product::PUBLIC_STATUS[$product->status] }}</td>
+                                            <td class="px-2">{{ App\Models\Product::SALES_STATUS[$product->status] }}</td>
                                         @endif
                                         <td class="px-2">{{ $product->created_at }}</td>
                                         <td class="px-2">{{ $product->updated_at }}</td>

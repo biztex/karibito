@@ -57,15 +57,6 @@ class Product extends Model
         self::IS_DRAFT => '下書き',
     ];
 
-    const NOT_PUBLIC = 1;
-
-    const IS_PUBLIC = 2;
-
-    const PUBLIC_STATUS = [
-        self::NOT_PUBLIC => '非公開',
-        self::IS_PUBLIC => '公開',
-    ];
-
     /**
      * 自分の提供のみ取得
      *
