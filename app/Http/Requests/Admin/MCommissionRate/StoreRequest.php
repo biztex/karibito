@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'rate' => 'required | integer | min:1 | max:100',
+            'rate' => 'required | integer | min:0 | max:100',
         ];
     }
     public function attributes()
