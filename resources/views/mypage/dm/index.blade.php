@@ -37,8 +37,7 @@
 											</div>
 										@endif
 										</div>
-											<p class="time">{{ App\Libraries\DiffDateTime::dmTime($dmroom_user->dmroomMessages->last()->created_at->format("Y/m/d H:i:s")) }}</p>
-										
+											<p class="time">{{ $dmroom_user->dmroomMessages->last()->created_at->diffForHumans() }}</p>
 									</a>
 								</li>
 								@endforeach

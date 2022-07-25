@@ -63,7 +63,9 @@
 								<p class="mypageIntroTxt">{!! nl2br(e($user_profile->introduction)) !!}</p>
 							</div>
 							<div class="mypageProud">
+								@if($specialties->isNotEmpty())
 								<p class="mypageHd01">得意分野</p>
+								@endif
 								<ul class="mypageProudUl">
 									@foreach($specialties as $specialty)
 									<li>{{ $specialty->content }}</li>
