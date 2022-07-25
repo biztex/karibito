@@ -273,7 +273,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
         
     });
-
+    // DM
+    Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
+    Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
+    Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
+    Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->name('dm.create');
+    Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');
 
 });
 // 提供・リクエストの詳細ページ
@@ -363,10 +368,3 @@ Route::prefix('user')->name('user.')->group(function () {
 });
 
 
-
-// DM画面組込まで
-Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
-Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->name('dm.show');
-Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
-Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->name('dm.create');
-Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');

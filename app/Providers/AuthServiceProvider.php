@@ -10,6 +10,7 @@ use App\Models\UserNotification;
 use App\Models\UserSkill;
 use App\Models\UserCareer;
 use App\Models\UserJob;
+use App\Models\Dmroom;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -73,6 +74,11 @@ class AuthServiceProvider extends ServiceProvider
         // 自分の職務
         Gate::define('my.job', function (User $user, Userjob $user_job) {
             return $user->id ===  $user_job->user_id;
+        });
+
+        // DM一覧・自分のDM
+        Gate::define('my.dm', function (User $user, Dmroom $dmroom) {
+            return $user->id === $dmroom->from_user_id || $user->id === $dmroom->to_user_id ;
         });
     }
 }

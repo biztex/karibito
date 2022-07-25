@@ -11,13 +11,13 @@
 							<div class="user">
 								<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
 								<div class="info">
-									<p class="name">購入者の名前</p>
+									<p class="name">{{ $user->name }}</p>
 								</div>
 							</div>
 							<p class="login">最終ログイン：オンライン中</p>
 						</div>
 					</div>
-					<h2 class="hdM">チャット<a href="#" class="more st2">契約後のキャンセルについて</a></h2>
+					<h2 class="hdM">DM</h2>
 					<div class="subPagesTab">
 						<div class="chatPages">
 							<div class="item">
@@ -36,7 +36,7 @@
 									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="evaluation">
 										<textarea name="text" placeholder="依頼する入力してください">{{ old('text') }}</textarea>
-										<input type="hidden" name="to_user_id" value="{{ $to_user_id }}">
+										<input type="hidden" name="to_user_id" value="{{ $user->id }}">
 									</div>
 									<p class="taR">3000</p>
 									

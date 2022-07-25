@@ -19,7 +19,7 @@ class DmroomController extends Controller
     public function index(Dmroom $dmroom)
     {
         $dmroom_users = Dmroom::where('from_user_id', \Auth::id())->orWhere('to_user_id', \Auth::id())->paginate(10);
-        
+
         return view('mypage.dm.index',compact('dmroom_users','dmroom'));
     }
 
@@ -28,11 +28,9 @@ class DmroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(User $user)
+    public function create(User $user, Dmroom $dmroom)
     {
-        $to_user_id = $user->id;
-
-        return view('mypage.dm.create',compact('to_user_id'));
+        return view('mypage.dm.create',compact('dmroom','user'));
     }
 
     /**
