@@ -77,6 +77,7 @@
                                         </a>
                                         <div class="info">
                                             <div class="breadcrumb">
+                                                {{-- カテゴリのaタグ --}}
                                                 <a href="#">{{ $product_rank->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
                                                 <span>{{ $product_rank->mProductChildCategory->name }}</span>
                                             </div>
@@ -102,7 +103,7 @@
                                                         <p>({{ App\Models\UserProfile::GENDER[$product_rank->user->userProfile->gender] }}/{{ $product_rank->user->userProfile->birthday }} / {{ $product_rank->user->userProfile->prefecture->name }})</p>
                                                     </div>
                                                 </div>
-                                                <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
+                                                {{-- <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div> --}}
                                             </div>
                                         </div>
                                     </div>
