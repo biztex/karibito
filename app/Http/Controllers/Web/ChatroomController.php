@@ -15,6 +15,7 @@ use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
 use App\Http\Requests\ChatroomController\MessageRequest;
+use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
 
 class ChatroomController extends Controller
@@ -138,12 +139,12 @@ class ChatroomController extends Controller
 
     /**
      * 提案
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProposalRequest $request
      * @param \App\Models\Chatroom $chatroom
      * 
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function proposal(Request $request, Chatroom $chatroom)
+    public function proposal(ProposalRequest $request, Chatroom $chatroom)
     {
         \DB::transaction(function () use ($request, $chatroom) {
             $proposal = $this->proposal_service->storeProposal($request->all(), $chatroom);
