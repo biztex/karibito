@@ -364,7 +364,7 @@ Route::prefix('sample')->group(function () {
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/publication',[OtherUserController::class, 'publication'])->name('publication');
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
-
+    Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
 });
 
 
