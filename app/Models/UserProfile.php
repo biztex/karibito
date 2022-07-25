@@ -32,6 +32,16 @@ class UserProfile extends Model
         self::IS_IDENTIFY =>'承認済',
         self::NOT_IDENTIFY =>'未',
     ];
+
+
+    const CAN_CALL = 1;
+
+    const CANNOT_CALL = 0;
+    
+    const CALL_STATUS = [
+        self::CAN_CALL => '待機中',
+        self::CANNOT_CALL => '対応不可'
+    ];
     
     protected function getBirthdayAttribute($birthday)
     {
