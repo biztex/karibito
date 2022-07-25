@@ -20,7 +20,6 @@ class JobRequestController extends Controller
     public function __construct(JobRequestService $job_request_service, HomeService $home_service)
     {
         $this->job_request_service = $job_request_service;
-        $this->home_service = $home_service;
     }
 
     /**
@@ -34,14 +33,11 @@ class JobRequestController extends Controller
 
         $job_request_ranks = JobRequest::publish()->where('category_id',$category->id)->orderBy('created_at','desc')->paginate(10);
 
-        $diff_date_time = $this->home_service->getDiffDateTime();
-        // dd($diff_date_time);
-
         $child_categories = $category->mProductChildCategory; //子カテゴリーとれてる
 
         $parent_category_flg = 1;
 
-        return view('job_request.index', compact('job_requests', 'job_request_ranks', 'category', 'child_categories', 'parent_category_flg', 'diff_date_time'));
+        return view('job_request.index', compact('job_requests', 'job_request_ranks', 'category', 'child_categories', 'parent_category_flg'));
     }
 
     public function show(MProductChildCategory $child_category)

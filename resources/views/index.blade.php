@@ -271,7 +271,7 @@
 														</dl>
 														<dl>
 															<dt><span>募集期限</span></dt>
-															<dd>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</dd>
+															<dd>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</dd>
 														</dl>
 													</div>
 												</a>
@@ -319,7 +319,7 @@
 															</dl>
 															<dl>
 																<dt><span>募集期限</span></dt>
-																<dd>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</dd>
+																<dd>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</dd>
 															</dl>
 														</div>
 														<div class="aboutUser">

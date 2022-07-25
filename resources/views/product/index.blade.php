@@ -78,7 +78,7 @@
                                         <div class="info">
                                             <div class="breadcrumb">
                                                 {{-- カテゴリのaタグ --}}
-                                                <a href="#">{{ $product_rank->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+                                                <span>{{ $product_rank->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
                                                 <span>{{ $product_rank->mProductChildCategory->name }}</span>
                                             </div>
                                             <div class="draw">
@@ -86,9 +86,9 @@
                                             </div>
                                             <div class="single">
                                                 @if($product_rank->is_online == App\Models\Product::OFFLINE)
-                                                    <a href="#">対面</a>
+                                                    <a>対面</a>
                                                 @else
-                                                    <a href="#">非対面</a>
+                                                    <a>非対面</a>
                                                 @endif
                                             </div>
                                             <div class="aboutUser">
@@ -112,7 +112,7 @@
                         </div>
                     @endif
 
-                    @if (!isset($parent_category_flg))
+                    {{-- @if (!isset($parent_category_flg))
                         <div class="recommendList style2">
                             <h2 class="hdM">おすすめのお仕事</h2>
                             <div class="list sliderSP">
@@ -145,7 +145,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
                     <div class="recommendList style2">
                         <p class="cases">{{$products->total()}}件中
@@ -162,7 +162,7 @@
                                     </a>
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+                                            <span>{{ $product->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
                                             <span>{{ $product->mProductChildCategory->name }}</span>
                                         </div>
                                         <div class="draw">

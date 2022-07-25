@@ -5,8 +5,6 @@ namespace App\Services;
 use App\Models\JobRequest;
 use App\Http\Requests\JobRequest\StoreRequest;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Libraries\DiffDateTime;
-
 
 class JobRequestService
 {
@@ -25,7 +23,7 @@ class JobRequestService
             $job_request->is_draft = JobRequest::NOT_DRAFT;
             $job_request->status = JobRequest::STATUS_PUBLISH;
             $job_request->save();
-    
+
         return $job_request;
     }
 
@@ -60,7 +58,7 @@ class JobRequestService
             $job_request->is_draft = JobRequest::IS_DRAFT;
             $job_request->status = JobRequest::STATUS_PRIVATE;
             $job_request->save();
-    
+
         return $job_request;
     }
 
@@ -166,14 +164,29 @@ class JobRequestService
         return $query->paginate(40);
     }
 
-    public function getDiffDateTime()
-    {
-        $job_request = JobRequest::publish()->orderBy('created_at','desc')->paginate(10);
-        $day1 = now();
-        $day2 = $job_request['application_deadline'];
-        $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
+    // public function getDiffDateTime($job_requests) 多分使わない、消す
+    // {
+    //     // dd($job_requests);
+    //     // $year = 2022;
+    //     // $year = Carbon::year();
+    //     // $month = 7;
+    //     // $day = 26;
+    //     $year = date('Y');
+    //     $month = date('m');
+    //     $day = date('j') + 1; //明日の00:00分まで（日付が変わる時）
+    //     $day2 = Carbon::createMidnightDate($year, $month, $day);
+    //     // $job_request = JobRequest::publish()->orderBy('created_at','desc')->paginate(10);
+    //     // $day1 = date('Y-m-d', strtotime('+1 day'));
+    //     // $day1 = now();
+    //     // dd($day2);
+    //     // foreach($job_requests as $job_request) {
+    //     // }
+    //     $day1 = $job_requests['application_deadline'];
+    //     $diff_date_time = $day2->diff($day1);
+    //     // dd($diff_date_time);
+    //     // $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
 
-        return $diff_date_time;
-    }
+    //     return array ($diff_date_time);
+    // }
 
 }

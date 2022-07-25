@@ -63,7 +63,6 @@
                         @endif
 					</div>
 
-
 					@if (isset($parent_category_flg) && $parent_category_flg === 1)
 						<div class="recommendList style2">
 							<h2 class="hdM">ランキング一覧</h2>
@@ -94,9 +93,9 @@
 													</tr>
 													<tr>
 														<th><span class="th">募集期限</span></th>
-														{{-- <td>{{ $diff_date_time->days }}日と{{ $diff_date_time['hours'] }}時間</td> --}}
+														<td>{{ $job_request_rank->deadline_day }}日と{{ $job_request_rank->deadline_hour }}時間</td>
 														{{-- 修正する --}}
-														<td>{{ $job_request_rank->application_deadline }}</td>
+														{{-- <td>{{ $job_request_rank->application_deadline }}</td> --}}
 													</tr>
 												</table>
 											</div>
@@ -122,7 +121,7 @@
 						</div>
 					@endif
 
-					@if (!isset($parent_category_flg))
+					{{-- @if (!isset($parent_category_flg))
 						<div class="recommendList style2">
 							<h2 class="hdM">おすすめのお仕事</h2>
 							<div class="list sliderSP st3">
@@ -163,12 +162,12 @@
 								</div>
 							</div>
 						</div>
-					@endif
+					@endif --}}
 
 					<div class="recommendList style2">
 						<p class="cases">{{$job_requests->total()}}件中
 							{{  ($job_requests->currentPage() -1) * $job_requests->perPage() + 1}} - {{ (($job_requests->currentPage() -1) * $job_requests->perPage() + 1) + (count($job_requests) -1)  }}件の表示
-                            <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$job_requests->total() . '件中' . $job_requests->firstItem() . '-' . $job_requests->lastItem()}}件）</h3>
+                            {{-- <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$job_requests->total() . '件中' . $job_requests->firstItem() . '-' . $job_requests->lastItem()}}件）</h3> --}}
 						</p>
 						<div class="list sliderSP02 st3">
 							@foreach( $job_requests as $job_request)
@@ -195,8 +194,7 @@
 												</tr>
 												<tr>
 													<th><span class="th">募集期限</span></th>
-													{{-- <td>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</td> --}}
-													<td>{{ $job_request->application_deadline }}</td>
+													<td>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</td>
 												</tr>
 											</table>
 										</div>
@@ -221,7 +219,7 @@
 						</div>
 					</div>
 					<div class=wp-pagenavi>
-						<span class="current">1</span>
+						{{-- <span class="current">1</span>
 						<a href="#">2</a>
 						<a href="#">3</a>
 						<a href="#">4</a>
@@ -229,7 +227,7 @@
 						<a href="#">6</a>
 						<a href="#">7</a>
 						...
-						<a href="#" class="nextpostslink">次へ</a>
+						<a href="#" class="nextpostslink">次へ</a> --}}
 						{{ $job_requests->links() }}
 					</div>
 				</div><!-- /#main -->
