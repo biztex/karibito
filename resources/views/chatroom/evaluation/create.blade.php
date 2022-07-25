@@ -32,7 +32,7 @@
 					<form action="" method="post">
 					@csrf
 						<div class="cancelRea">
-							<p class="reason checkChoice"><label><input type="checkbox" checked>契約完了を確認しました</label></p>
+							<p class="reason checkChoice"><label><input type="checkbox">契約完了を確認しました</label></p>
 							<div class="radioChoice rate">
 								<label class="good">良かった<input type="radio" name="star" checked value="{{App\Models\Evaluation::GOOD}}"></label>
 								<label class="usually">普通<input type="radio" name="star" value="{{App\Models\Evaluation::USUALLY}}"></label>
