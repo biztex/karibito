@@ -92,12 +92,12 @@
 											<input type="hidden" name="is_news" value="0">
 											<input type="hidden" name="is_promo" value="0">
 											<div class="labelBox">
-												<label><input type="checkbox" name="is_like" value="1" @if(Auth::user()->notificationSetting->is_like === 1)checked @endif>いいね！</label>
-												<label><input type="checkbox" name="is_posting" value="1" @if (Auth::user()->notificationSetting->is_posting === 1)checked @endif>フォロー中の方の掲載</label>
-												<label><input type="checkbox" name="is_fav" value="1" @if (Auth::user()->notificationSetting->is_fav === 1)checked @endif>お気に入りの再掲載</label>
-												<label><input type="checkbox" name="is_arrival" value="1" @if (Auth::user()->notificationSetting->is_arrival === 1)checked @endif>保存した検索条件の新着</label>
-												<label><input type="checkbox" name="is_news" value="1" @if (Auth::user()->notificationSetting->is_news === 1)checked @endif>お知らせ・ニュース</label>
-												<label><input type="checkbox" name="is_promo" value="1" @if (Auth::user()->notificationSetting->is_promo === 1)checked @endif>プロモーション</label>
+												<label><input type="checkbox" name="is_like" value="1" @if(Auth::user()->userNotificationSetting->is_like === 1)checked @endif>いいね！</label>
+												<label><input type="checkbox" name="is_posting" value="1" @if (Auth::user()->userNotificationSetting->is_posting === 1)checked @endif>フォロー中の方の掲載</label>
+												<label><input type="checkbox" name="is_fav" value="1" @if (Auth::user()->userNotificationSetting->is_fav === 1)checked @endif>お気に入りの再掲載</label>
+												<label><input type="checkbox" name="is_arrival" value="1" @if (Auth::user()->userNotificationSetting->is_arrival === 1)checked @endif>保存した検索条件の新着</label>
+												<label><input type="checkbox" name="is_news" value="1" @if (Auth::user()->userNotificationSetting->is_news === 1)checked @endif>お知らせ・ニュース</label>
+												<label><input type="checkbox" name="is_promo" value="1" @if (Auth::user()->userNotificationSetting->is_promo === 1)checked @endif>プロモーション</label>
 											</div>
 										</dd>
 										<input class="blue-button mt20" type="submit" value="変更する">

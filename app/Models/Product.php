@@ -51,14 +51,14 @@ class Product extends Model
     const NOT_DRAFT = 0;
 
     const IS_DRAFT = 1;
-    
+
     const DRAFT_STATUS = [
         self::NOT_DRAFT => '下書きでない',
         self::IS_DRAFT => '下書き',
     ];
 
     const NOT_PUBLIC = 1;
-    
+
     const IS_PUBLIC = 2;
 
     const PUBLIC_STATUS = [
@@ -169,7 +169,7 @@ class Product extends Model
      */
     public function prefecture()
     {
-        return $this->hasOne(Prefecture::class);
+        return $this->belongsTo(Prefecture::class);
     }
 
     /**

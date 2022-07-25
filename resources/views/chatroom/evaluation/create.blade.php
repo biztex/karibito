@@ -44,9 +44,9 @@
 							<textarea name="text"></textarea>
 						</div>
 						<div class="functeBtns">
-							@if($chatroom->status === 4)
+							@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
 								<input type="submit" class="red" value="評価を投稿する" formaction="{{route('chatroom.buyer.evaluation', $chatroom->id)}}">
-							@elseif($chatroom->status === 5)
+							@elseif($chatroom->status === App\Models\Chatroom::STATUS_SELLER_EVALUATION)
 								<input type="submit" class="red" value="評価を投稿する" formaction="{{route('chatroom.seller.evaluation', $chatroom->id)}}">
 							@endif
 						</div>
