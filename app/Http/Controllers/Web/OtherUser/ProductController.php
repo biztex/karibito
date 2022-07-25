@@ -60,12 +60,9 @@ class ProductController extends Controller
         $high_price = $request->high_price;
         $is_online = $request->is_online;
         $age_period = $request->age_period;
-        // $all_child_categories = $child_category->mProductCategory->mProductChildCategory; //親かて、コレクション
+        $sort = $request->sort;
+        $keyword = $request->keyword;
 
-        // $child_category_id = $child_category->id;
-
-        // $parent_category_flg = 0;
-
-        return view('product.index', compact('products', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period'));
+        return view('product.index', compact('products', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword'));
     }
 }

@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :keyword="$keyword ?? ''">
 {{-- <article> --}}
     <div id="breadcrumb">
         <div class="inner">
@@ -49,14 +49,14 @@
                                     @foreach ($child_categories as $child_category)
                                     {{-- dbに画像と詳細の文言を記入 --}}
                                         <div class="item">
-                                            <a href="{{ route('product.category.index.show', $child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$child_category['name']}}">{{$child_category['name']}}</a>
+                                            <a href="{{ route('product.category.index.show', $child_category->id) }}"><img src="img/service/img_service01.png" srcset="/img/service/img_service01@2x.png" alt="{{$child_category['name']}}">{{$child_category['name']}}</a>
                                         </div>
                                     @endforeach
                                 @elseif ($parent_category_flg === 0)
                                     @foreach ($all_child_categories as $all_child_category)
                                     {{-- dbに画像と詳細の文言を記入 --}}
                                         <div class="item">
-                                            <a href="{{ route('product.category.index.show', $all_child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$all_child_category->name}}">{{$all_child_category['name']}}</a>
+                                            <a href="{{ route('product.category.index.show', $all_child_category->id) }}"><img src="img/service/img_service01.png" srcset="/img/service/img_service02@2x.png" alt="{{$all_child_category->name}}">{{$all_child_category['name']}}</a>
                                         </div>
                                     @endforeach
                                 @endif
@@ -111,7 +111,7 @@
                         </div>
                     @endif
 
-                    @if (!isset($parent_category_flg))
+                    {{-- @if (!isset($parent_category_flg)) まだおすすめの決め方が決まっていない
                         <div class="recommendList style2">
                             <h2 class="hdM">おすすめのお仕事</h2>
                             <div class="list sliderSP">
@@ -144,12 +144,12 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
                     <div class="recommendList style2">
                         <p class="cases">{{$products->total()}}件中
                             {{  ($products->currentPage() -1) * $products->perPage() + 1}} - {{ (($products->currentPage() -1) * $products->perPage() + 1) + (count($products) -1)  }}件の表示
-                            <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$products->total() . '件中' . $products->firstItem() . '-' . $products->lastItem()}}件）</h3>
+                            {{-- <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$products->total() . '件中' . $products->firstItem() . '-' . $products->lastItem()}}件）</h3> --}}
                         </p>
                         <div class="list sliderSP02">
                             @foreach( $products as $product)
@@ -169,9 +169,9 @@
                                         </div>
                                         <div class="single">
                                             @if($product->is_online == App\Models\Product::OFFLINE)
-                                                <a href="#">対面</a>
+                                                <a>対面</a>
                                             @else
-                                                <a href="#">非対面</a>
+                                                <a>非対面</a>
                                             @endif
                                         </div>
                                         <div class="aboutUser">
@@ -186,9 +186,9 @@
                                                     <p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
                                                 </div>
                                             </div>
-                                            @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
+                                            {{-- @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
                                                 <p class="check"><a href="#">本人確認済み</a></p>
-                                            @endif
+                                            @endif --}}
                                             <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
                                         </div>
                                     </div>
@@ -196,7 +196,7 @@
                             @endforeach
                         </div>
                         <div class=wp-pagenavi>
-                            <span class="current">1</span>
+                            {{-- <span class="current">1</span>
                             <a href="#">2</a>
                             <a href="#">3</a>
                             <a href="#">4</a>
@@ -204,7 +204,7 @@
                             <a href="#">6</a>
                             <a href="#">7</a>
                             ...
-                            <a href="#" class="nextpostslink">次へ</a>
+                            <a href="#" class="nextpostslink">次へ</a> --}}
                             {{ $products->links() }}
                         </div>
                     </div>
@@ -238,70 +238,68 @@
                         <li><a href="#">カタログ</a></li>
                         <li><a href="#">その他デザイン</a></li> --}}
                     </ul>
-                    <h2 class="cate cate03">並べ替え</h2>
-                    <div class="checkboxChoice">
-                        <label><input type=radio name=並べ替え>ランキングの高い順</label>
-                        <label><input type=radio name=並べ替え>お気に入りの多い順</label>
-                        <label><input type=radio name=並べ替え>新着順</label>
-                    </div>
-                    {{-- ボタン作る --}}
-                    <h2 class="cate cate04">絞り込み</h2>
-                    <form method="get" class="contactForm" enctype="multipart/form-data" action="{{ route('product.search') }}">
+                    <form method="get" class="" enctype="multipart/form-data" action="{{ route('product.search') }}">
+                        <h2 class="cate cate03">並べ替え</h2>
+                        <div class="checkboxChoice">
+                            <label><input type="radio" name="sort" value="1" @if (isset($sort) && $sort === '1') checked @endif>ランキングの高い順</label>
+                            <label><input type="radio" name="sort" value="2" @if (isset($sort) && $sort === '2') checked @endif>お気に入りの多い順</label>
+                            <label><input type="radio" name="sort" value="3" @if (isset($sort) && $sort === '3') checked @endif>新着順</label>
+                        </div>
+                        <h2 class="cate cate04">絞り込み</h2>
                         <div>
                             <table class="search">
-                            <tr>
-                                <th>エリア</th>
-                                <td>
-                                    <select name="prefecture_id">
-                                        <option value="">-</option>
-                                        @foreach($prefectures as $prefecture)
-                                            <option value="{{ $prefecture->id }}" @if(isset($prefecture_id) && $prefecture_id == $prefecture->id) selected @endif>{{ $prefecture->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>金額</th>
-                                <td class="elements"><input type="text" name="low_price" placeholder="指定なし" @if(isset($low_price)) value="{{$low_price}}" @endif>~<input type="text" name="high_price" placeholder="指定なし" @if(isset($high_price)) value="{{$high_price}}" @endif></td>
-                            </tr>
-                            <tr>
-                                <th>仕事体系</th>
-                                <td>
-                                    <select name="is_online">
-                                        <option value="">-</option>
-                                        <option value="{{App\Models\Product::OFFLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::OFFLINE) selected @endif>対面</option>
-                                        <option value="{{App\Models\Product::ONLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::ONLINE) selected @endif>非対面</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>年代</th>
-                                <td>
-                                    <select name="age_period">
-                                        <option value="">-</option>
-                                        @foreach(App\Libraries\Age::AGE_PERIOD as $key => $value)
-                                            <option value="{{ $key }}" @if (isset($age_period) && $age_period == $key) selected @endif>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                        @if (isset($parent_category_flg))
-                            @if ($parent_category_flg === 1)
-                                <input type="hidden" name="parent_category_flg" value="1">
-                                <input type="hidden" name="parent_category_id" value="{{ $category->id}}">
-                            @elseif ($parent_category_flg === 0)
-                                <input type="hidden" name="parent_category_flg" value="0">
-                                <input type="hidden" name="parent_category_id" value="{{ $child_category->mProductCategory->id}}">
-                                {{-- 連続で検索するとカテゴリーがなくなる --}}
-                                <input type="hidden" name="child_category_id" value="{{ $child_category->id}}">
+                                <tr>
+                                    <th>エリア</th>
+                                    <td>
+                                        <select name="prefecture_id">
+                                            <option value="">-</option>
+                                            @foreach($prefectures as $prefecture)
+                                                <option value="{{ $prefecture->id }}" @if(isset($prefecture_id) && $prefecture_id == $prefecture->id) selected @endif>{{ $prefecture->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>金額</th>
+                                    <td class="elements"><input type="text" name="low_price" placeholder="指定なし" @if(isset($low_price)) value="{{$low_price}}" @endif>~<input type="text" name="high_price" placeholder="指定なし" @if(isset($high_price)) value="{{$high_price}}" @endif></td>
+                                </tr>
+                                <tr>
+                                    <th>仕事体系</th>
+                                    <td>
+                                        <select name="is_online">
+                                            <option value="">-</option>
+                                            <option value="{{App\Models\Product::OFFLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::OFFLINE) selected @endif>対面</option>
+                                            <option value="{{App\Models\Product::ONLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::ONLINE) selected @endif>非対面</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>年代</th>
+                                    <td>
+                                        <select name="age_period">
+                                            <option value="">-</option>
+                                            @foreach(App\Libraries\Age::AGE_PERIOD as $key => $value)
+                                                <option value="{{ $key }}" @if (isset($age_period) && $age_period == $key) selected @endif>
+                                                    {{ $value }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                            @if (isset($parent_category_flg))
+                                @if ($parent_category_flg === 1)
+                                    <input type="hidden" name="parent_category_flg" value="1">
+                                    <input type="hidden" name="parent_category_id" value="{{ $category->id}}">
+                                @elseif ($parent_category_flg === 0)
+                                    <input type="hidden" name="parent_category_flg" value="0">
+                                    <input type="hidden" name="parent_category_id" value="{{ $child_category->mProductCategory->id}}">
+                                    {{-- 連続で検索するとカテゴリーがなくなる --}}
+                                    <input type="hidden" name="child_category_id" value="{{ $child_category->id}}">
+                                @endif
                             @endif
-                        @endif
-                        {{-- <a href="{{ route('product.search') }}" class="">検索する</a> --}}
-                            <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
                         </div>
+                        <input type="submit" class="mb20" formaction="{{ route('product.search') }}" value="検索する">
                     </form>
                     <h2 class="cate cate05">その他サービスから探す</h2>
                     <ul class="other">

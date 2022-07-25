@@ -1,7 +1,7 @@
 <x-app>
     <body>
         <div id="wrapper">
-            <x-header/>
+            <x-header :keyword="$keyword ?? ''"/>
                 {{$slot}}
             <x-footer/>
         </div>

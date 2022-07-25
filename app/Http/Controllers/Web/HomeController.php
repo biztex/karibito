@@ -32,7 +32,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         // 公開&&下書きでない
         $products = $this->home_service->paginateProduct(10);
 

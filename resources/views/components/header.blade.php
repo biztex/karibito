@@ -1,4 +1,4 @@
-<header> 
+<header>
     <div id="header">
         <div id="headerLinks">
             <div class="inner">
@@ -8,14 +8,14 @@
                     <div class="searchBox">
                         <select class="searchSelect">
                             <option>サービス</option>
-                            <option>家電</option>
-                            <option>リクエストを探す</option>
-                            <option>ペット</option>
-                            <option>高齢者向け</option>
+                            <option>リクエスト</option>
                         </select>
-                        <div class="search">
-                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="">
-                        </div>
+                        <form method="get">
+                            <div class="search">
+                                <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+                                <input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="item">
@@ -148,22 +148,23 @@
                     <div class="searchBox">
                         <select class="searchSelect">
                             <option>サービス</option>
-                            <option>家電</option>
-                            <option>リクエストを探す</option>
-                            <option>ペット</option>
-                            <option>高齢者向け</option>
+                            <option>リクエスト</option>
                         </select>
-                        <div class="search">
-                            <input type="text" placeholder="キーワードを入力して検索"><input type="submit" class="btn" value="">
-                        </div>
+                        <form method="get">
+                            <div class="search">
+                                <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+                                <input type="submit" class="btn" formaction="{{ route('product.search') }}">
+                                <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
+                            </div>
+                        </form>
                     </div>
                     <div class="searchClose"><img src="/img/common/search_close.svg" alt=""></div>
                 </div>
                 <div class="searchWrapCont">
                     <ul class="searchWrapUl01">
-                        <li><a href="#">サービスを探す</a></li>
-                        <li><a href="#">リクエストを探す</a></li>
-                        <li><a href="#">ブログを探す</a></li>
+                        <li><a> サービスを探す</a></li>
+                        <li><a>リクエストを探す</a></li>
+                        <li><a>ブログを探す</a></li>
                     </ul>
                     <div class="searchWrapItem">
                         <p class="searchWrapHd"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p>
@@ -349,7 +350,7 @@
                 <div class="flexBox">
                     <div class="left">
                         <div class="findLink">
-                            <a href="#" class="findLinkA">サービスを探す</a>
+                            <a class="findLinkA">サービスを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
                                 @foreach($categories as $category)
@@ -368,7 +369,7 @@
                             </div>
                         </div>
                         <div class="findLink">
-                            <a href="#" class="findLinkA">リクエストを探す</a>
+                            <a class="findLinkA">リクエストを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
                                 @foreach($categories as $category)
@@ -387,7 +388,7 @@
                             </div>
                         </div>
                         <div class="findLink">
-                            <a href="#" class="findLinkA">ブログを探す</a>
+                            <a class="findLinkA">ブログを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
                                 @foreach($categories as $category)
