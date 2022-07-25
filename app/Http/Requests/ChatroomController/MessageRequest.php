@@ -25,7 +25,7 @@ class MessageRequest extends FormRequest
     {
         return [
             'text' => 'required_without_all:file_name,file_path, | max:3000',
-            'file_path' => 'max:20480 '
+            'file_path' => 'nullable | file | max:20480'
         ];
     }
 
@@ -34,6 +34,7 @@ class MessageRequest extends FormRequest
       return [
         'text.required_without_all' => 'メッセージもしくは添付資料を指定してください。',
         'text.max' => '3000文字以下で指定してください。',
+        'file_path.file' => '添付できる資料はファイルを指定してください。',
         'file_path.max' => '添付できる資料は20MBまでです。',
       ];
     }
