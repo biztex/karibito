@@ -14,7 +14,7 @@ use App\Services\ChatroomMessageService;
 use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
-use App\Http\Requests\ProductChatroom\MessageRequest;
+use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
 
 class ChatroomController extends Controller

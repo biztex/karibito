@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\ProductChatroom;
+namespace App\Http\Requests\ChatroomController;
 
 use Illuminate\Foundation\Http\FormRequest;
 
