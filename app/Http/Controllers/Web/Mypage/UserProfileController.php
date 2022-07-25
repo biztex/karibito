@@ -7,6 +7,7 @@ use App\Models\UserProfile;
 use App\Models\Prefecture;
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
+use App\Http\Requests\UserProfile\UpdateCanCallRequest;
 
 use App\Services\UserProfileService;
 
@@ -124,4 +125,17 @@ class UserProfileController extends Controller
     // {
     //     //
     // }
+
+    
+    /**
+     * Display the specified resource.
+     * @param UpdateCanCallRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateCanCall(UpdateCanCallRequest $request)
+    {
+        $this->user_profile_service->updateCanCall($request->all());
+        return back();
+    }
 }

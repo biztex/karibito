@@ -97,6 +97,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+        Route::post('can_call',[UserProfileController::class, 'updateCanCall'])->name('can_call.update');
 
          // スキル・経歴・職務
         Route::middleware(['can:my.skill,user_skill', 'can:identify'])->group(function () {
