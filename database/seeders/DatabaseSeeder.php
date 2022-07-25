@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Environment;
 use App\Models\AdditionalOption;
 use App\Models\Admin;
 use App\Models\JobRequest;
@@ -9,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductQuestion;
 use App\Models\User;
+use App\Models\UserNotificationSetting;
 use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +20,8 @@ class DatabaseSeeder extends Seeder
     private const SEEDERS = [
         PrefectureSeeder::class,
         MProductCategorySeeder::class,
-        MProductChildCategorySeeder::class
+        MProductChildCategorySeeder::class,
+        MCommissionRateSeeder::class,
     ];
 
     /**
@@ -39,10 +42,11 @@ class DatabaseSeeder extends Seeder
         }
 
         // 指定の開発環境のみ実行
-        if (\in_array(config('app.env'), ['local', 'development'], true)) {
+        if (Environment::isEnableEasyLogin()) {
             // 開発ログイン用
             User::factory()
                 ->has(UserProfile::factory()->approved()->count(1)) // 承認済み
+                ->has(UserNotificationSetting::factory()->count(1)) // 通知設定
                 ->has(
                     Product::factory()                    // サービス投稿
                         ->has(ProductImage::factory()->count(3)) // 画像

@@ -11,14 +11,22 @@ class Chatroom extends Model
 
     protected $guarded = ['id'];
 
+    const STATUS_START = 1;
+    const STATUS_PROPOSAL = 2;
+    const STATUS_WORK = 3;
+    const STATUS_BUYER_EVALUATION = 4;
+    const STATUS_SELLER_EVALUATION = 5;
+    const STATUS_COMPLETE = 6;
+    const STATUS_CANCELED = 7;
+
     const STATUS = [
-        1 => 'チャット開始',
-        2 => '契約',
-        3 => '作業',
-        4 => '購入者評価',
-        5 => '出品者評価',
-        6 => '完了',
-        7 => 'キャンセル'
+        self::STATUS_START => 'チャット開始',
+        self::STATUS_PROPOSAL => '契約',
+        self::STATUS_WORK => '作業',
+        self::STATUS_BUYER_EVALUATION => '購入者評価',
+        self::STATUS_SELLER_EVALUATION => '出品者評価',
+        self::STATUS_COMPLETE => '完了',
+        self::STATUS_CANCELED => 'キャンセル'
     ];
 
     /**
@@ -30,7 +38,7 @@ class Chatroom extends Model
      */
     public function scopeActive($query)
     {
-        return $query->whereIn('status', [1,2,3,4,5]);
+        return $query->whereIn('status', [self::STATUS_START, self::STATUS_PROPOSAL, self::STATUS_WORK, self::STATUS_BUYER_EVALUATION, self::STATUS_SELLER_EVALUATION]);
     }
 
     /**
@@ -42,7 +50,7 @@ class Chatroom extends Model
      */
     public function scopeInActive($query)
     {
-        return $query->whereIn('status', [6,7]);
+        return $query->whereIn('status', [self::STATUS_COMPLETE, self::STATUS_CANCELED]);
     }
 
     /**
@@ -79,6 +87,17 @@ class Chatroom extends Model
     public function scopeJobRequest($query)
     {
         return $query->loginUser()->where('reference_type', 'App\Models\JobRequest');
+    }
+
+    /**
+     * キャンセル申請可能判断
+     * @return bool
+     */
+    public function isCancelable(): bool
+    {
+        if($this->purchase === null || !in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION])) return false;
+        
+        return $this->purchase->isCancelable();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Purchase extends Model
 {
@@ -11,6 +12,21 @@ class Purchase extends Model
 
     protected $guarded = ['id'];
 
+
+    /**
+     * キャンセル申請可能状況判断
+     * @return bool
+     */
+    public function isCancelable(): bool
+    {
+        if ($this->purchasedCancel->isEmpty()){
+            return true;
+        } elseif ($this->purchasedCancel->sortBy('updated_at')->last()->status === PurchasedCancel::STATUS_OBJECTION){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne

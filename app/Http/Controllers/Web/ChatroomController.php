@@ -16,7 +16,6 @@ use App\Services\PurchaseService;
 use App\Services\EvaluationService;
 use App\Http\Requests\ProductChatroom\MessageRequest;
 
-
 class ChatroomController extends Controller
 {
     private $chatroom_service;
@@ -111,7 +110,6 @@ class ChatroomController extends Controller
      */
     public function show(Chatroom $chatroom)
     {
-       
         if($chatroom->seller_user_id === \Auth::id()){
             $partner = $chatroom->buyerUser;
         } else {

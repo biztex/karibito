@@ -354,11 +354,11 @@
                                 <ul class="findSubLinkUl">
                                 @foreach($categories as $category)
                                     <li class="findSubLinkLi">
-                                        <a href="#">{{$category->name}}</a>
+                                        <a href="{{route('product.category.index', $category->id) }}">{{$category->name}}</a>
                                         <div class="findThirdLink">
                                             <ul class="findThirdLinkUl">
                                             @foreach($category->mProductChildCategory as $child_category)
-                                                <li><a href="#">{{$child_category->name}}</a></li>
+                                                <li><a href="{{route('product.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
                                             @endforeach
                                             </ul>
                                         </div>

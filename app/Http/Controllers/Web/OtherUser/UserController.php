@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Dmroom;
 use App\Libraries\Age;
+use App\Models\JobRequest;
 
 class UserController extends Controller
 {
@@ -19,9 +20,10 @@ class UserController extends Controller
     public function publication(User $user)
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $job_requests = JobRequest::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $age = Age::group($user->userProfile->birthday);
 
-        return view('other-user.publication', compact('user','products', 'age'));
+        return view('other-user.publication', compact('user','products','job_requests', 'age'));
     }
 
     /**
@@ -32,10 +34,11 @@ class UserController extends Controller
     public function mypage(User $user)
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $job_request = JobRequest::where('user_id', $user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $age = Age::group($user->userProfile->birthday);
         $id = $user->id;
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->first();
 
-        return view('other-user.mypage', compact('user','products', 'age','dmrooms'));
+        return view('other-user.mypage', compact('user','products', 'age','dmrooms', 'job_request'));
     }
 }

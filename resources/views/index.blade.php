@@ -24,14 +24,14 @@
 			<div class="seaServices">
 				<div class="inner">
 					<h2 class="hdM"><img class="ico" src="/img/common/ico_folder.svg" alt="">条件からサービスを探す</h2>
-					<div class="cate">
+					{{-- <div class="cate">
 						<a href="#" class="cate cate01">カテゴリーから探す</a>
 						<a href="#" class="cate cate02">エリアから探す</a>
 						<a href="#" class="cate cate03">日付から探す</a>
 						<a href="#" class="cate cate04">金額から探す</a>
-					</div>
+					</div> --}}
 					<div class="search"><input type="text" placeholder="サービス名・エリア名など"><input type="submit" class="btn" value=""></div>
-					<div class="recommend pc">
+					{{-- <div class="recommend pc">
 						<span>おすすめ：</span>
 						<a href="#">画像・写真加工</a>
 						<a href="#">インテリアデザイン</a>
@@ -39,7 +39,7 @@
 						<a href="#">画像・写真加工</a>
 						<a href="#">インテリアデザイン</a>
 						<a href="#">資料・企画書作成</a>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 			<div class="indexNotice">
@@ -94,35 +94,34 @@
 										@foreach($products as $product)
 										<div class="item">
 											<a href="{{ route('product.show',$product->id) }}" class="img imgBox">
-											@if(isset($product->productImage[0]))
-											<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
-											<button class="favorite">お気に入り</button>
-											@else
-											<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-											<button class="favorite">お気に入り</button>
-											@endif
+												@if(isset($product->productImage[0]))
+													<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+													<button class="favorite">お気に入り</button>
+												@else
+													<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+													<button class="favorite">お気に入り</button>
+												@endif
 											</a>
-
 											<div class="infoTop">
-											<div>
-												<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
-												<div class="draw">
-													<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+												<div>
+													<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+													<div class="draw">
+														<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+													</div>
+													<div class="single">
+														@if($product->is_online == App\Models\Product::OFFLINE)
+														<a href="#">対面</a>
+														@else
+														<a href="#">非対面</a>
+														@endif
+													</div>
 												</div>
-												<div class="single">
-													@if($product->is_online == App\Models\Product::OFFLINE)
-													<a href="#">対面</a>
-													@else
-													<a href="#">非対面</a>
-													@endif
-												</div>
-                                            </div>
 												<div class="aboutUser">
 													<div class="user">
-								                        @if(empty($product->user->userProfile->icon))
-														<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+														@if(empty($product->user->userProfile->icon))
+															<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 														@else
-														<p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+															<p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
 														@endif
 														<div class="introd">
 															<p class="name">{{ $product->user->name }}</p>
@@ -145,13 +144,13 @@
 												@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
 													<div class="item">
 														<a href="{{route('product.show',$product->id)}}" class="img imgBox">
-														@if(isset($product->productImage[0]))
-											               <p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
-											               <button class="favorite">お気に入り</button>
-											            @else
-											               <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-											               <button class="favorite">お気に入り</button>
-											            @endif
+															@if(isset($product->productImage[0]))
+																<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+																<button class="favorite">お気に入り</button>
+															@else
+																<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+																<button class="favorite">お気に入り</button>
+															@endif
 														</a>
 														<div class="infoTop">
 														<div>
@@ -212,7 +211,7 @@
 								<h2>サービス一覧</h2>
 								<ul class="links">
 								@foreach($categories as $category)
-									<li><a href="#">{{ $category->name }}</a></li>
+									<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
 								@endforeach
 								</ul>
 								<h2>ガイド</h2>
@@ -364,7 +363,7 @@
 							<h2>サービス一覧</h2>
 								<ul class="links">
 								@foreach($categories as $category)
-									<li><a href="#">{{ $category->name }}</a></li>
+								<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
 								@endforeach
 								</ul>
 								<h2>ガイド</h2>

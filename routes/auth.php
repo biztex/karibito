@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Environment;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -21,7 +22,7 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
 
     // ローカル環境専用
-    if (in_array(config('app.env'), ['local', 'development'], true)) {
+    if (Environment::isEnableEasyLogin()) {
         // 開発用自動ログイン
         Route::get('developerLogin', function () {
             \Auth::loginUsingId(1);

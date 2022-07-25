@@ -46,7 +46,7 @@ class NewsService
             $user_notification = new UserNotification;
             $user_notification->user_id = $user_id->id;
 
-            if(empty($user_id->notificationSetting->is_news)) {
+            if(empty($user_id->userNotificationSetting->is_news)) {
                 $user_notification->is_notification = 0;
             } else {
                 $user_notification->is_notification = 1;
