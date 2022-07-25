@@ -37,14 +37,18 @@
                                     <tr>
                                         <td class="px-2">{{ $job_request->id }}</td>
                                         <td class="px-2">{{ $job_request->mProductChildCategory?->name }}</td>
-                                        <td class="px-2"><a href="{{ route('job_request.show', $job_request->id) }}" target="_blank">{{  $job_request->title  }}</a></td>
+                                        @if (($job_request->status == 2) || ($job_request->is_draft == 1))
+                                            <td class="px-2">{{  $job_request->title  }}</td>
+                                        @else
+                                            <td class="px-2"><a href="{{ route('job_request.show', $job_request->id) }}" target="_blank">{{  $job_request->title  }}</a></td>
+                                        @endif
                                         <td class="px-2"><a href="{{ route('user.mypage', $job_request->user->id) }}" target="_blank">{{ $job_request->user->name }}</a></td>
                                         <td class="px-2">{{ App\Models\Product::IS_ONLINE[$job_request->is_online] ?? "" }}</td>
                                         <td class="px-2">{{ $job_request->prefecture?->name }}</td>
                                         @if ($job_request->is_draft == 1)
                                             <td class="px-2">{{ App\Models\Product::DRAFT_STATUS[$job_request->is_draft] }}</td>
                                         @else
-                                            <td class="px-2">{{ App\Models\Product::PUBLIC_STATUS[$job_request->status] }}</td>
+                                            <td class="px-2">{{ App\Models\Product::SALES_STATUS[$job_request->status] }}</td>
                                         @endif
                                         <td class="px-2">{{ $job_request->created_at }}</td>
                                         <td class="px-2">{{ $job_request->updated_at }}</td>
