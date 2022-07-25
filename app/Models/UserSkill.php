@@ -20,6 +20,11 @@ class UserSkill extends Model
         return $query->where('user_id',\Auth::id());
     }
 
+    public function scopeGetUser($query, $user)
+    {
+        return $query->where('user_id', $user);
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

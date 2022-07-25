@@ -13,7 +13,7 @@
                         <form method="get">
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
-                                <input type="submit" class="btn" formaction="{{ route('product.search') }}">
+                                <input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
                             </div>
                         </form>
                     </div>

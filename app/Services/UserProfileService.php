@@ -146,4 +146,9 @@ class UserProfileService
             }
         }
     }
+
+    public function updateCanCall(array $request)
+    {
+        \Auth::user()->userProfile->fill(['can_call' => $request['can_call']])->save();
+    }
 }

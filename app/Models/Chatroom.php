@@ -101,6 +101,15 @@ class Chatroom extends Model
     }
 
     /**
+     * キャンセル申請可能判断
+     * @return bool
+     */
+    public function canCall(): bool
+    {
+        return in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION]) ? true : false;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function reference()

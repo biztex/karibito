@@ -9,15 +9,33 @@
 					<div class="friendsTop">
 						<div class="sellerTop">
 							<div class="user">
-								<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+								<p class="head">
+									@if($dmroom->from_user_id === Auth::id())
+										@if($dmroom->toUser->userProfile->icon === null)
+											<p class="icoNoImg"><img src="/img/mypage/no_image.jpg" alt=""></p>
+										@else
+											<p class="icoDm"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></p>
+										@endif
+									@else
+										@if($dmroom->fromUser->userProfile->icon === null)
+											<p class="icoNoImg"><img src="/img/mypage/no_image.jpg" alt=""></p>
+										@else
+											<p class="icoDm"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></p>
+										@endif
+									@endif
+								</p>
 								<div class="info">
-									<p class="name">購入者の名前</p>
+									@if($dmroom->from_user_id === \Auth::id())
+										<p class="name" style="margin-left:10px;">{{ $dmroom->toUser->name }}</p>
+									@elseif($dmroom->to_user_id === \Auth::id())
+										<p class="name" style="margin-left:10px;">{{ $dmroom->fromUser->name }}</p>
+									@endif
 								</div>
 							</div>
 							<p class="login">最終ログイン：オンライン中</p>
 						</div>
 					</div>
-					<h2 class="hdM">チャット<a href="#" class="more st2">契約後のキャンセルについて</a></h2>
+					<h2 class="hdM">DM</h2>
 					<div class="subPagesTab">
 						<div class="chatPages">
 							<div class="item">

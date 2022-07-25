@@ -14,7 +14,9 @@ use App\Services\ChatroomMessageService;
 use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
-use App\Http\Requests\ProductChatroom\MessageRequest;
+use App\Http\Requests\ChatroomController\MessageRequest;
+use App\Http\Requests\ChatroomController\ProposalRequest;
+use App\Http\Requests\ChatroomController\EvaluationRequest;
 
 class ChatroomController extends Controller
 {
@@ -137,12 +139,12 @@ class ChatroomController extends Controller
 
     /**
      * 提案
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProposalRequest $request
      * @param \App\Models\Chatroom $chatroom
      * 
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function proposal(Request $request, Chatroom $chatroom)
+    public function proposal(ProposalRequest $request, Chatroom $chatroom)
     {
         \DB::transaction(function () use ($request, $chatroom) {
             $proposal = $this->proposal_service->storeProposal($request->all(), $chatroom);
@@ -220,12 +222,12 @@ class ChatroomController extends Controller
 
     /**
      * 購入者評価
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EvaluationRequest $request
      * @param \App\Models\Chatroom $chatroom
      * 
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function buyerEvaluation(Request $request, Chatroom $chatroom)
+    public function buyerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
@@ -238,12 +240,12 @@ class ChatroomController extends Controller
 
     /**
      * 出品者評価
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EvaluationRequest $request
      * @param \App\Models\Chatroom $chatroom
      * 
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function sellerEvaluation(Request $request, Chatroom $chatroom)
+    public function sellerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);

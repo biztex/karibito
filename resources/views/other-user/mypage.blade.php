@@ -4,7 +4,7 @@
 			<ul>
 				<li><a href="#" class="is_active">ホーム</a></li>
 				<li><a href="#">評価</a></li>
-				<li><a href="#">スキル・経歴</a></li>
+				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
 				<li><a href="#">ポートフォリオ</a></li>
 				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
@@ -59,7 +59,8 @@
 										<p>{!! nl2br(e($user->userProfile->introduction)) !!}</p>
 									</div>
 								</div>
-								<div class="mypageProud">
+                                @if (!$user->specialty->isEmpty())
+                                <div class="mypageProud">
 									<p class="mypageHd01">得意分野</p>
 									<ul class="mypageProudUl">
                                         @foreach ($user->specialty as $specialty)
@@ -67,6 +68,7 @@
                                         @endforeach
 									</ul>
 								</div>
+                                @endif
 							</div>
 						</div>
 						<div class="otherMypageSec01">
@@ -95,7 +97,7 @@
                                                                     <img src="/img/common/img_270x160.png" alt="" style="width:190px; height:113px;">
                                                                     <button class="favorite">お気に入り</button>
                                                                 </a>
-                                                                <div class="info" style="width:190px; height:255px;">
+                                                                <div class="infoTop" style="width:190px;">
                                                                     <div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
                                                                     <div class="draw">
                                                                         <p class="price" style="width:100%;"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
@@ -103,6 +105,7 @@
                                                                     <div class="single">
                                                                         <a href="#">{{ App\Models\Product::IS_ONLINE[$product->is_online] }}</a>
                                                                     </div>
+
                                                                     <div class="aboutUser">
                                                                         <div class="user">
                                                                             @if(null !== $user->userProfile->icon)
@@ -115,7 +118,9 @@
                                                                                 <p>({{\App\Models\UserProfile::GENDER[$product->user->userProfile->gender]}}/ {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>
                                                                             </div>
                                                                         </div>
-                                                                        <p class="check"><a href="#">本人確認済み</a></p>
+                                                                        @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
+                                                                            <p class="check"><a href="#">本人確認済み</a></p>
+                                                                        @endif
                                                                         <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
                                                                     </div>
                                                                 </div>
@@ -184,9 +189,16 @@
 
 						<div class="mypageSec04">
 							<div class="inner">
-								<p class="mypageHd02"><span>スキル・経歴・職務</span><a href="#" class="more">スキル・経歴・職務を編集する</a></p>
+                                @if (\Auth::id() === $user->id)
+                                    <p class="mypageHd02"><span>スキル・経歴・職務</span><a href="#" class="more">スキル・経歴・職務を編集する</a></p>
+                                @else
+                                    <p class="mypageHd02"><span>スキル・経歴・職務</span><a href="#" class="more">スキル・経歴をもっと見る</a></p>
+                                @endif
 								<div class="mypageItem">
 									<p class="mypageHd03">スキル</p>
+                                    @if ($user->userSkills->isEmpty())
+                                        <p>スキルの登録がありません。</p>
+                                    @else
 									<div class="mypageBox">
 										<dl class="mypageDl02">
 											<dt>スキル詳細</dt>
@@ -199,29 +211,30 @@
 											</dd>
 										</dl>
 									</div>
+                                    @endif
 								</div>
 								<div class="mypageItem">
 									<p class="mypageHd03">経歴</p>
+                                    @if ($user->userCareers->isEmpty())
+                                        <p>経歴の登録がありません。</p>
+                                    @else
 									<div class="mypageBox">
 										<ul class="mypageUl03">
-                                            @if ($user->userCareers->isEmpty())
-                                                <p>経歴なし</p>
-                                            @else
-                                                @foreach ($user->userCareers as $userCareer)
-                                                    <li>
-                                                        <dl class="mypageDl02">
-                                                            <dt>経歴名</dt>
-                                                            <dd><span>{{ $userCareer->name }}</span></dd>
-                                                        </dl>
-                                                        <dl class="mypageDl02">
-                                                            <dt>在籍期間</dt>
-                                                            <dd>{{ $userCareer->first_year }}年 {{ $userCareer->first_month }}月 〜 {{ $userCareer->last_year }}年 {{ $userCareer->last_month }}月</dd>
-                                                        </dl>
-                                                    </li>
-                                                @endforeach
-                                            @endif
+                                            @foreach ($user->userCareers as $userCareer)
+                                                <li>
+                                                    <dl class="mypageDl02">
+                                                        <dt>経歴名</dt>
+                                                        <dd><span>{{ $userCareer->name }}</span></dd>
+                                                    </dl>
+                                                    <dl class="mypageDl02">
+                                                        <dt>在籍期間</dt>
+                                                        <dd>{{ $userCareer->first_year }}年 {{ $userCareer->first_month }}月 〜 {{ $userCareer->last_year }}年 {{ $userCareer->last_month }}月</dd>
+                                                    </dl>
+                                                </li>
+                                            @endforeach
 										</ul>
 									</div>
+                                    @endif
 								</div>
 							</div>
 						</div>
