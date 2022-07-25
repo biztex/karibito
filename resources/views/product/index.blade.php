@@ -49,14 +49,14 @@
                                     @foreach ($child_categories as $child_category)
                                     {{-- dbに画像と詳細の文言を記入 --}}
                                         <div class="item">
-                                            <a href="{{ route('product.category.index.show', $child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$child_category['name']}}">{{$child_category['name']}}</a>
+                                            <a href="{{ route('product.category.index.show', $child_category->id) }}"><img src="img/service/img_service01.png" srcset="/img/service/img_service01@2x.png" alt="{{$child_category['name']}}">{{$child_category['name']}}</a>
                                         </div>
                                     @endforeach
                                 @elseif ($parent_category_flg === 0)
                                     @foreach ($all_child_categories as $all_child_category)
                                     {{-- dbに画像と詳細の文言を記入 --}}
                                         <div class="item">
-                                            <a href="{{ route('product.category.index.show', $all_child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$all_child_category->name}}">{{$all_child_category['name']}}</a>
+                                            <a href="{{ route('product.category.index.show', $all_child_category->id) }}"><img src="img/service/img_service01.png" srcset="/img/service/img_service02@2x.png" alt="{{$all_child_category->name}}">{{$all_child_category['name']}}</a>
                                         </div>
                                     @endforeach
                                 @endif
@@ -149,7 +149,7 @@
                     <div class="recommendList style2">
                         <p class="cases">{{$products->total()}}件中
                             {{  ($products->currentPage() -1) * $products->perPage() + 1}} - {{ (($products->currentPage() -1) * $products->perPage() + 1) + (count($products) -1)  }}件の表示
-                            <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$products->total() . '件中' . $products->firstItem() . '-' . $products->lastItem()}}件）</h3>
+                            {{-- <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$products->total() . '件中' . $products->firstItem() . '-' . $products->lastItem()}}件）</h3> --}}
                         </p>
                         <div class="list sliderSP02">
                             @foreach( $products as $product)
@@ -169,9 +169,9 @@
                                         </div>
                                         <div class="single">
                                             @if($product->is_online == App\Models\Product::OFFLINE)
-                                                <a href="#">対面</a>
+                                                <a>対面</a>
                                             @else
-                                                <a href="#">非対面</a>
+                                                <a>非対面</a>
                                             @endif
                                         </div>
                                         <div class="aboutUser">
@@ -186,9 +186,9 @@
                                                     <p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
                                                 </div>
                                             </div>
-                                            @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
+                                            {{-- @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
                                                 <p class="check"><a href="#">本人確認済み</a></p>
-                                            @endif
+                                            @endif --}}
                                             <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
                                         </div>
                                     </div>
@@ -196,7 +196,7 @@
                             @endforeach
                         </div>
                         <div class=wp-pagenavi>
-                            <span class="current">1</span>
+                            {{-- <span class="current">1</span>
                             <a href="#">2</a>
                             <a href="#">3</a>
                             <a href="#">4</a>
@@ -204,7 +204,7 @@
                             <a href="#">6</a>
                             <a href="#">7</a>
                             ...
-                            <a href="#" class="nextpostslink">次へ</a>
+                            <a href="#" class="nextpostslink">次へ</a> --}}
                             {{ $products->links() }}
                         </div>
                     </div>
