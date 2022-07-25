@@ -65,8 +65,9 @@
                                 <p>希望報酬額</p>
                                 <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
                             </div>
+                            @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <p class="th">提供価格</p>
-                            <p class="budget"><input type="text" name="price" placeholder="0" autofocus></p>
+                            <p class="budget"><input type="text" name="price" placeholder="0" autofocus value="{{old('price')}}"></p>
                         </li>
                     </ul>
                 </div>

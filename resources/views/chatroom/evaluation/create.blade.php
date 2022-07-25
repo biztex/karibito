@@ -32,16 +32,20 @@
 					<form action="" method="post">
 					@csrf
 						<div class="cancelRea">
-							<p class="reason checkChoice"><label><input type="checkbox" checked>契約完了を確認しました</label></p>
+							@error('checkbox')<div class="alert alert-danger" style="text-align:center">{{ $message }}</div>@enderror
+							<p class="reason checkChoice"><label><input type="checkbox" name="checkbox" required>契約完了を確認しました</label></p>
+
+							@error('star')<div class="alert alert-danger" style="text-align:center">{{ $message }}</div>@enderror
 							<div class="radioChoice rate">
-								<label class="good">良かった<input type="radio" name="star" checked value="{{App\Models\Evaluation::GOOD}}"></label>
-								<label class="usually">普通<input type="radio" name="star" value="{{App\Models\Evaluation::USUALLY}}"></label>
-								<label class="pity">残念だった<input type="radio" name="star" value="{{App\Models\Evaluation::PITY}}"></label>
+								<label class="good">良かった<input type="radio" name="star" @if(old('star') == App\Models\Evaluation::GOOD || old('star') === null) checked @endif value="{{App\Models\Evaluation::GOOD}}"></label>
+								<label class="usually">普通<input type="radio" name="star" @if(old('star') == App\Models\Evaluation::USUALLY) checked @endif value="{{App\Models\Evaluation::USUALLY}}"></label>
+								<label class="pity">残念だった<input type="radio" name="star" @if(old('star') == App\Models\Evaluation::PITY) checked @endif value="{{App\Models\Evaluation::PITY}}"></label>
 							</div>
 						</div>
 						<div class="evaluation">
+							@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 							<p>評価のコメントを記入しましょう</p>
-							<textarea name="text"></textarea>
+							<textarea name="text">{{ old('text') }}</textarea>
 						</div>
 						<div class="functeBtns">
 							@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
