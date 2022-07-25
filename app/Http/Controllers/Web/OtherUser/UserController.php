@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Dmroom;
+use App\Models\UserSkill;
+use App\Models\UserCareer;
+use App\Models\UserJob;
 use App\Libraries\Age;
 use App\Models\JobRequest;
 
@@ -40,5 +43,16 @@ class UserController extends Controller
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->first();
 
         return view('other-user.mypage', compact('user','products', 'age','dmrooms', 'job_request'));
+    }
+
+    public function skills(User $user, Dmroom $dmroom)
+    {
+        $skills = UserSkill::getUser($user->id)->get();
+        $careers = UserCareer::getUser($user->id)->get();
+        $jobs = UserJob::getUser($user->id)->first();
+        $age = Age::group($user->userProfile->birthday);
+        $dmrooms = Dmroom::where('to_user_id','=', $user->id)->first();
+
+        return view('other-user.skills', compact('skills','careers','jobs','user', 'age', 'dmrooms'));
     }
 }

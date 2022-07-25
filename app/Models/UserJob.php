@@ -13,4 +13,9 @@ class UserJob extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeGetUser($query, $user)
+    {
+        return $query->where('user_id', $user);
+    }
 }
