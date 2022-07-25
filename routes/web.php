@@ -29,6 +29,7 @@ use App\Http\Controllers\Web\Mypage\JobController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
+use App\Http\Controllers\Web\OtherUser\JobRequestController as OtherUserJobRequestController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
@@ -327,6 +328,11 @@ Route::get('news', [NewsController::class, 'index'])->name('news.index');
 Route::get('product/index/category/{category}', [OtherUserProductController::class, 'index'])->name('product.category.index');
 Route::get('product/index/category/show/{child_category}', [OtherUserProductController::class, 'show'])->name('product.category.index.show');
 Route::get('product/index/keyword/search', [OtherUserProductController::class, 'search'])->name('product.search');
+
+// リクエスト一覧
+Route::get('job_request/index/category/{category}', [OtherUserJobRequestController::class, 'index'])->name('job_request.category.index');
+Route::get('job_request/index/category/show/{child_category}', [OtherUserJobRequestController::class, 'show'])->name('job_request.category.index.show');
+Route::get('job_request/index/keyword/search', [OtherUserJobRequestController::class, 'search'])->name('job_request.search');
 
 
 // --管理者画面-----------------------------------------------------------------------------

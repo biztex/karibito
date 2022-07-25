@@ -77,7 +77,8 @@
                                         </a>
                                         <div class="info">
                                             <div class="breadcrumb">
-                                                <a href="#">{{ $product_rank->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+                                                {{-- カテゴリのaタグ --}}
+                                                <span>{{ $product_rank->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
                                                 <span>{{ $product_rank->mProductChildCategory->name }}</span>
                                             </div>
                                             <div class="draw">
@@ -85,9 +86,9 @@
                                             </div>
                                             <div class="single">
                                                 @if($product_rank->is_online == App\Models\Product::OFFLINE)
-                                                    <a href="#">対面</a>
+                                                    <a>対面</a>
                                                 @else
-                                                    <a href="#">非対面</a>
+                                                    <a>非対面</a>
                                                 @endif
                                             </div>
                                             <div class="aboutUser">
@@ -102,7 +103,7 @@
                                                         <p>({{ App\Models\UserProfile::GENDER[$product_rank->user->userProfile->gender] }}/{{ $product_rank->user->userProfile->birthday }} / {{ $product_rank->user->userProfile->prefecture->name }})</p>
                                                     </div>
                                                 </div>
-                                                <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
+                                                {{-- <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -161,7 +162,7 @@
                                     </a>
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+                                            <span>{{ $product->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
                                             <span>{{ $product->mProductChildCategory->name }}</span>
                                         </div>
                                         <div class="draw">
