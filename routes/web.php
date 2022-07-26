@@ -23,6 +23,7 @@ use App\Http\Controllers\Web\Mypage\ResumeController;
 use App\Http\Controllers\Web\Mypage\SkillController;
 use App\Http\Controllers\Web\Mypage\CareerController;
 use App\Http\Controllers\Web\Mypage\JobController;
+use App\Http\Controllers\Web\Mypage\EvaluationController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\NewsController;
@@ -366,5 +367,5 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
     Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
 });
-
+Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 

@@ -27,7 +27,7 @@
 									<dl class="mypageDl02">
 										<dt>スキル詳細</dt>
 										<dd>
-											<ul class="mypageUl03">
+											<ul class="mypageUl03" style="word-wrap: break-word;">
 												@foreach($skills as $skill)
 													<li><span>{{ $skill->name }}</span>経験：{{ $skill->year }}年</li>
 												@endforeach
@@ -42,7 +42,7 @@
 									<ul class="mypageUl03">
 										@foreach($careers as $career)
 											<li>
-												<dl class="mypageDl02">
+												<dl class="mypageDl02" style="word-wrap: break-word;">
 													<dt>経歴名</dt>
 													<dd><span>{{ $career->name }}</span></dd>
 												</dl>
