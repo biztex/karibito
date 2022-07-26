@@ -10,11 +10,23 @@ use App\Models\Dmroom;
 use App\Models\UserSkill;
 use App\Models\UserCareer;
 use App\Models\UserJob;
+use App\Models\Evaluation;
 use App\Libraries\Age;
+
+use App\Services\EvaluationService;
+
 use App\Models\JobRequest;
+
 
 class UserController extends Controller
 {
+    private $evaluation_service;
+
+    public function __construct(EvaluationService $evaluation_service)
+    {
+        $this->evaluation_service = $evaluation_service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,5 +66,15 @@ class UserController extends Controller
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->first();
 
         return view('other-user.skills', compact('skills','careers','jobs','user', 'age', 'dmrooms'));
+    }
+
+    public function evaluation(User $user)
+    {
+        $age = Age::group($user->userProfile->birthday);
+
+        $evaluations = $this->evaluation_service->getEvaluations($user->id);
+        $counts = $this->evaluation_service->countEvaluations($user->id);
+
+        return view('other-user.evaluation', compact('user', 'age','evaluations', 'counts'));
     }
 }

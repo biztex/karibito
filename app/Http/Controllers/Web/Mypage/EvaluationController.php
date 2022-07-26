@@ -4,20 +4,23 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\Evaluation;
+use App\Services\EvaluationService;
 
 class EvaluationController extends Controller
 {
+    private $evaluation_service;
+
+    public function __construct(EvaluationService $evaluation_service)
+    {
+        $this->evaluation_service = $evaluation_service;
+    }
     public function show()
     {
-        $good_evaluations = Evaluation::whereStar(5)->where('target_user_id', \Auth::id())->paginate(10);
-        $bad_evaluations = Evaluation::whereStar(1)->where('target_user_id', \Auth::id())->paginate(10);
-        $normal_evaluations = Evaluation::whereStar(2.5)->where('target_user_id', \Auth::id())->paginate(10);
-        $count_good = Evaluation::whereStar(5)->where('target_user_id', \Auth::id())->count();
-        $count_bad= Evaluation::whereStar(1)->where('target_user_id', \Auth::id())->count();
-        $count_normal = Evaluation::whereStar(2.5)->where('target_user_id', \Auth::id())->count();
-        
-        
-        return view('mypage.evaluation.evaluation', compact('good_evaluations','bad_evaluations','normal_evaluations', 'count_good', 'count_normal', 'count_bad'));
+        $evaluations = $this->evaluation_service->getEvaluations(\Auth::id());
+        $counts = $this->evaluation_service->countEvaluations(\Auth::id());
+
+        return view('mypage.evaluation.evaluation', compact('evaluations', 'counts'));
     }
 }

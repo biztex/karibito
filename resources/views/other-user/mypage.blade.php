@@ -3,7 +3,7 @@
 		<div class="inner">
 			<ul>
 				<li><a href="#" class="is_active">ホーム</a></li>
-				<li><a href="#">評価</a></li>
+				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
 				<li><a href="#">ポートフォリオ</a></li>
 				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
