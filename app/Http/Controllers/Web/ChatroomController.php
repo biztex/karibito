@@ -41,10 +41,10 @@ class ChatroomController extends Controller
      */
     public function index()
     {
-        $active_product_chatrooms = Chatroom::active()->product()->paginate(10);
-        $inactive_product_chatrooms = Chatroom::inActive()->product()->paginate(10);
+        $active_chatrooms = Chatroom::active()->paginate(10);
+        $inactive_chatrooms = Chatroom::inActive()->paginate(10);
 
-        return view('chatroom.index', compact('active_product_chatrooms','inactive_product_chatrooms'));
+        return view('chatroom.index', compact('active_chatrooms','inactive_chatrooms'));
     }
 
     /**
