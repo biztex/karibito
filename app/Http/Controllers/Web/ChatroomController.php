@@ -197,9 +197,9 @@ class ChatroomController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function purchaseConfirm(Proposal $proposal)
+    public function purchaseConfirm(Request $request, Proposal $proposal)
     {
-        return view('chatroom.purchase.confirm',compact('proposal'));
+        return view('chatroom.purchase.confirm',compact('request', 'proposal'));
     }
 
     /**

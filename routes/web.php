@@ -267,7 +267,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // 支払い
         Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
-        Route::get('purchase/{proposal}/confirm','purchaseConfirm')->name('purchase.confirm'); // 確認画面
+        Route::post('purchase/{proposal}','purchaseConfirm')->name('purchase.confirm'); // 確認画面
         Route::post('purchased/{proposal}','purchased')->name('purchased');
     });
     // キャンセル

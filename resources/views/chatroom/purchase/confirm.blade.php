@@ -37,24 +37,28 @@
 								<tr>
 									<td>
 										<div class="cont">
-											<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+											@if(isset($proposal->chatroom->reference->productImage[0]))
+												<p class="img"><img src="{{ asset('/storage/'.$proposal->chatroom->reference->productImage[0]->path)}}" alt="" style="width: 75px;height: 62.5px;object-fit: cover;"></p>
+											@else
+												<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+											@endif
 											<div class="info">
-												<p>ダミータイトル・ダミータイトルだ…ダミータイトル・ダミータイトル・ダミータイトル・ダミータイトル・</p>
+												<p>{{ $proposal->chatroom->reference->title }}</p>
 												<p class="link"><a href="#">機密保持契約(NDA)</a></p>
 											</div>
 										</div>
 									</td>
-									<td>¥10,000</td>
+									<td>¥{!! number_format($proposal->price) !!}</td>
 								</tr>
 								<tr>
 									<td><big>商品代金</big><br>手数料<br><font class="colorRed">500円割引クーポン(合計3,000円以上のサービスでご利用可能)／2022年02月08日まで</font></td>
-									<td><big>¥10,000</big><br>¥500<br><font class="colorRed">¥-500</font></td>
+									<td><big>¥{!! number_format($proposal->price) !!}</big><br>¥500<br><font class="colorRed">¥-500</font></td>
 								</tr>
 							</tbody>
 							<tfoot>
 								<tr>
 									<td>合計</td>
-									<td>¥10,500</td>
+									<td>¥{!! number_format($proposal->price + 500 - 500) !!}</td>
 								</tr>
 							</tfoot>
 						</table>
@@ -66,19 +70,19 @@
 								<table>
 									<tr>
 										<th>カード番号</th>
-										<td>1234567890123456</td>
+										<td>{{ $request->card_number }}</td>
 									</tr>
 									<tr>
 										<th>有効期限</th>
-										<td>22年/4月</td>
+										<td>{{ date("yy",strtotime($request->year)) }}年/{{ $request->month }}月</td>
 									</tr>
 									<tr>
 										<th>カード名義</th>
-										<td>dummy text</td>
+										<td>{{ $request->card_name }}</td>
 									</tr>
 									<tr>
 										<th>セキュリティコード</th>
-										<td>123</td>
+										<td>{{ $request->security_code }}</td>
 									</tr>
 								</table>
 							</div>
