@@ -288,18 +288,26 @@
                                     </td>
                                 </tr>
                             </table>
+                            {{-- 検索ではない時 --}}
                             @if (isset($parent_category_flg))
                                 @if ($parent_category_flg === 1)
                                     <input type="hidden" name="parent_category_flg" value="1">
-                                    <input type="hidden" name="parent_category_id" value="{{ $category->id}}">
+                                    <input type="hidden" name="parent_category_id" value="{{ $category->id }}">
                                 @elseif ($parent_category_flg === 0)
                                     <input type="hidden" name="parent_category_flg" value="0">
-                                    <input type="hidden" name="parent_category_id" value="{{ $child_category->mProductCategory->id}}">
+                                    <input type="hidden" name="parent_category_id" value="{{ $child_category->mProductCategory->id }}">
                                     {{-- 連続で検索するとカテゴリーがなくなる --}}
-                                    <input type="hidden" name="child_category_id" value="{{ $child_category->id}}">
+                                    <input type="hidden" name="child_category_id" value="{{ $child_category->id }}">
                                 @endif
                             @endif
                         </div>
+
+                        {{-- 検索の時 --}}
+                        @if (isset($child_category_id))
+                            <input type="hidden" name="child_category_id" value="{{$child_category_id}}">
+                        @elseif (isset($parent_category_id))
+                            <input type="hidden" name="parent_category_id" value="{{$parent_category_id}}">
+                        @endif
                         <input type="submit" class="mb20" formaction="{{ route('product.search') }}" value="検索する">
                     </form>
                     <h2 class="cate cate05">その他サービスから探す</h2>

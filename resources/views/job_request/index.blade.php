@@ -315,7 +315,13 @@
 									<input type="hidden" name="child_category_id" value="{{ $child_category->id}}">
 								@endif
 							@endif
-							{{-- <a href="{{ route('product.search') }}" class="">検索する</a> --}}
+
+							{{-- 検索の時 --}}
+							@if (isset($child_category_id))
+								<input type="hidden" name="child_category_id" value="{{$child_category_id}}">
+							@elseif (isset($parent_category_id))
+								<input type="hidden" name="parent_category_id" value="{{$parent_category_id}}">
+							@endif
 							<input type="submit" formaction="{{ route('job_request.search') }}" value="検索する">
 						</div>
 					</form>
