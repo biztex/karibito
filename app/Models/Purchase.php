@@ -19,9 +19,9 @@ class Purchase extends Model
      */
     public function isCancelable(): bool
     {
-        if ($this->purchasedCancel->isEmpty()){
+        if ($this->purchasedCancels->isEmpty()){
             return true;
-        } elseif ($this->purchasedCancel->sortBy('updated_at')->last()->status === PurchasedCancel::STATUS_OBJECTION){
+        } elseif ($this->purchasedCancels->sortBy('updated_at')->last()->status === PurchasedCancel::STATUS_OBJECTION){
             return true;
         }else{
             return false;
@@ -63,7 +63,7 @@ class Purchase extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchasedCancel()
+    public function purchasedCancels()
     {
         return $this->hasMany(PurchasedCancel::class);
     }

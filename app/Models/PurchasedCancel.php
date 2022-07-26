@@ -34,7 +34,7 @@ class PurchasedCancel extends Model
      */
     public function chatroomMessage()
     {
-        return $this->morphMany(ChatroomMessage::class, 'reference');
+        return $this->morphOne(ChatroomMessage::class, 'reference');
     }
 
     /**

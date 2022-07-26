@@ -29,7 +29,7 @@ class ChatroomMessageService
             ];
         }
 
-        $chatroom->chatroomMessage()->create($message);
+        $chatroom->chatroomMessages()->create($message);
     }
 
     // 提案 chatroom message テーブル
@@ -62,7 +62,7 @@ class ChatroomMessageService
             'text' => '作業報告が完了しました',
             'is_complete_message' => 1,
         ];
-        $chatroom->chatroomMessage()->create($message);
+        $chatroom->chatroomMessages()->create($message);
     }
 
     // 評価

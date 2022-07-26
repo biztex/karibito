@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'reason1' => 'required_without_all:reason2,reason3,reason4,reason5,reason6',
-            'text' => 'required | max:3000'
+            'text' => 'required | min:30 | max:3000'
         ];
     }
 

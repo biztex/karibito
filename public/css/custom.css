@@ -254,12 +254,12 @@
 	.input_a {
 		margin-bottom: 30px;
 	}
-	.stepUl li + li .stepDot:before {
+	#register .stepUl li + li .stepDot:before {
 		width: 150px;
 	}
 }
 @media screen and (max-width: 320px){
-	.stepUl li + li .stepDot:before {
+	#register .stepUl li + li .stepDot:before {
 		width: 120px;
 	}
 }

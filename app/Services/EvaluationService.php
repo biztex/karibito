@@ -21,7 +21,7 @@ class EvaluationService
             'star' => $request['star'],
             'text' => $request['text']
         ];
-        $evaluation = $chatroom->evaluation()->create($evaluation);
+        $evaluation = $chatroom->evaluations()->create($evaluation);
         return $evaluation;
     }
 

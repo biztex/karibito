@@ -136,7 +136,7 @@ class Chatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function chatroomMessage()
+    public function chatroomMessages()
     {
         return $this->hasMany(ChatroomMessage::class);
     }
@@ -144,9 +144,9 @@ class Chatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function proposal()
+    public function proposals()
     {
-        return $this->hasOne(Proposal::class);
+        return $this->hasMany(Proposal::class);
     } 
 
     /**
@@ -160,7 +160,7 @@ class Chatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function evaluation()
+    public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
     }   
