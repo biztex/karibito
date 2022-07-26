@@ -83,6 +83,7 @@ $(function () {
 	if (hash == "#job-request" || hash == "#usually" || hash == "#inactive") {
 
 
+
 		$('#box02').trigger('click');
 	} else if (hash == "#pity") {
 		$('#box03').trigger('click');
