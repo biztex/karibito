@@ -366,6 +366,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/publication',[OtherUserController::class, 'publication'])->name('publication');
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
     Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
+    Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
 });
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 

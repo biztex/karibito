@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Evaluation;
 
 class EvaluationService
 {
@@ -22,5 +23,23 @@ class EvaluationService
         ];
         $evaluation = $chatroom->evaluation()->create($evaluation);
         return $evaluation;
+    }
+
+    public function getEvaluations($user_id)
+    {
+        $evaluations['good'] = Evaluation::goodStar($user_id)->orderBy('created_at','desc')->paginate(10);
+        $evaluations['pity'] = Evaluation::pityStar($user_id)->orderBy('created_at','desc')->paginate(10);
+        $evaluations['usually'] = Evaluation::usuallyStar($user_id)->orderBy('created_at','desc')->paginate(10);
+
+        return $evaluations;
+    }
+
+    public function countEvaluations($user_id)
+    {
+        $counts['good'] = Evaluation::goodStar($user_id)->count();
+        $counts['pity'] = Evaluation::pityStar($user_id)->count();
+        $counts['usually']  = Evaluation::usuallyStar($user_id)->count();
+
+        return $counts;
     }
 }
