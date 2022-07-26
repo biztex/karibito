@@ -79,7 +79,7 @@ $(function () {
 	// リクエストのページリンククリック時、リンク先でもリクエストを自動的に表示する
 	// URLのハッシュ値が #job-request の場合
 	var hash = $(location).prop('hash');
-	if (hash == "#job-request") {
+	if (hash == "#job-request" || hash == "#inactive") {
 		$('#box02').trigger('click');
 	}
 
