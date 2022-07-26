@@ -1,4 +1,4 @@
-@foreach($chatroom->chatroomMessage as $message)
+@foreach($chatroom->chatroomMessages as $message)
     
     <!-- 提案 -->
     @if($message->reference_type === 'App\Models\Proposal')
