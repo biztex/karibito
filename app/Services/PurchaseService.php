@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\Chatroom;
+use App\Models\Proposal;
 
 class PurchaseService
 {
-    public function storePurchase(Chatroom $chatroom)
+    public function storePurchase(Proposal $proposal)
     {
+        $chatroom = $proposal->chatroom;
         $column = [
-            'proposal_id' => $chatroom->proposal->id,
+            'proposal_id' => $proposal->id,
             'buyer_user_id' => \Auth::id(),
         ];
         $purchase = $chatroom->purchase()->create($column);

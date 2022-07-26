@@ -11,7 +11,7 @@ class ProposalService
             'user_id' => \Auth::id(),
             'price' => $request['price']
         ];
-        $proposal = $chatroom->proposal()->create($proposal);
+        $proposal = $chatroom->proposals()->create($proposal);
         return $proposal;
     }
 

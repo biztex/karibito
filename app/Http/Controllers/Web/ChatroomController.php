@@ -212,7 +212,7 @@ class ChatroomController extends Controller
     {
         \DB::transaction(function () use ($proposal) {
             $this->proposal_service->purchasedProposal($proposal);
-            $purchase = $this->purchase_service->storePurchase($proposal->chatroom);
+            $purchase = $this->purchase_service->storePurchase($proposal);
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
         });

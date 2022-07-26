@@ -35,7 +35,7 @@
 
         <div class="functeBtns">
             @if($chatroom->seller_user_id === Auth::id())
-                @if($chatroom->status === App\Models\Chatroom::STATUS_START)
+                @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
                     <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
                 @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
                     <a href="{{route('chatroom.complete', $chatroom->id)}}" class="orange">作業完了報告をする</a>

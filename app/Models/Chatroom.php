@@ -144,9 +144,9 @@ class Chatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function proposal()
+    public function proposals()
     {
-        return $this->hasOne(Proposal::class);
+        return $this->hasMany(Proposal::class);
     } 
 
     /**

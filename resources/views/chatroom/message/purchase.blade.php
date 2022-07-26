@@ -7,7 +7,7 @@
             <p>{{$message->text}}</p>
             <div class="proposeBuy">
                 <p class="tit">{{$chatroom->reference->title}}</p>
-                <p>提供価格：¥{{ number_format($chatroom->proposal->price) }}</p>
+                <p>提供価格：¥{{ number_format($chatroom->purchase->proposal->price) }}</p>
             </div>
         </div>
     </div>
