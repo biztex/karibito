@@ -41,8 +41,8 @@ class ChatroomController extends Controller
      */
     public function index()
     {
-        $active_chatrooms = Chatroom::active()->paginate(10);
-        $inactive_chatrooms = Chatroom::inActive()->paginate(10);
+        $active_chatrooms = Chatroom::active()->orderBy('created_at','desc')->paginate(10);
+        $inactive_chatrooms = Chatroom::inActive()->orderBy('created_at','desc')->paginate(10);
 
         return view('chatroom.index', compact('active_chatrooms','inactive_chatrooms'));
     }
@@ -54,8 +54,8 @@ class ChatroomController extends Controller
      */
     public function active()
     {
-        $active_product_chatrooms = Chatroom::active()->product()->paginate(10);
-        $active_job_request_chatrooms = Chatroom::active()->jobRequest()->paginate(10);
+        $active_product_chatrooms = Chatroom::active()->product()->orderBy('created_at','desc')->paginate(10);
+        $active_job_request_chatrooms = Chatroom::active()->jobRequest()->orderBy('created_at','desc')->paginate(10);
 
         return view('mypage.chatroom.active', compact('active_product_chatrooms','active_job_request_chatrooms'));
     }
@@ -67,8 +67,8 @@ class ChatroomController extends Controller
      */
     public function inactive()
     {
-        $inactive_product_chatrooms = Chatroom::inActive()->product()->paginate(10);
-        $inactive_job_request_chatrooms = Chatroom::inActive()->jobRequest()->paginate(10);
+        $inactive_product_chatrooms = Chatroom::inActive()->product()->orderBy('created_at','desc')->paginate(10);
+        $inactive_job_request_chatrooms = Chatroom::inActive()->jobRequest()->orderBy('created_at','desc')->paginate(10);
 
         return view('mypage.chatroom.inactive', compact('inactive_product_chatrooms','inactive_job_request_chatrooms'));
     }
