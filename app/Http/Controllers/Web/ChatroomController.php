@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chatroom;
-use App\Models\ChatroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\Proposal;
@@ -14,8 +13,9 @@ use App\Services\ChatroomMessageService;
 use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
-use App\Http\Requests\ProductChatroom\MessageRequest;
-
+use App\Http\Requests\ChatroomController\MessageRequest;
+use App\Http\Requests\ChatroomController\ProposalRequest;
+use App\Http\Requests\ChatroomController\EvaluationRequest;
 
 class ChatroomController extends Controller
 {
@@ -41,10 +41,36 @@ class ChatroomController extends Controller
      */
     public function index()
     {
-        $active_product_chatrooms = Chatroom::active()->product()->get();
-        $inactive_product_chatrooms = Chatroom::inActive()->product()->get();
+        $active_chatrooms = Chatroom::active()->paginate(10);
+        $inactive_chatrooms = Chatroom::inActive()->paginate(10);
 
-        return view('chatroom.index', compact('active_product_chatrooms','inactive_product_chatrooms'));
+        return view('chatroom.index', compact('active_chatrooms','inactive_chatrooms'));
+    }
+
+    /**
+     * やりとり進行中一覧画面
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function active()
+    {
+        $active_product_chatrooms = Chatroom::active()->product()->paginate(10);
+        $active_job_request_chatrooms = Chatroom::active()->jobRequest()->paginate(10);
+
+        return view('mypage.chatroom.active', compact('active_product_chatrooms','active_job_request_chatrooms'));
+    }
+
+    /**
+     * やりとり進行中一覧画面
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function inactive()
+    {
+        $inactive_product_chatrooms = Chatroom::inActive()->product()->paginate(10);
+        $inactive_job_request_chatrooms = Chatroom::inActive()->jobRequest()->paginate(10);
+
+        return view('mypage.chatroom.inactive', compact('inactive_product_chatrooms','inactive_job_request_chatrooms'));
     }
 
     /**
@@ -111,7 +137,6 @@ class ChatroomController extends Controller
      */
     public function show(Chatroom $chatroom)
     {
-       
         if($chatroom->seller_user_id === \Auth::id()){
             $partner = $chatroom->buyerUser;
         } else {
@@ -139,12 +164,12 @@ class ChatroomController extends Controller
 
     /**
      * 提案
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProposalRequest $request
      * @param \App\Models\Chatroom $chatroom
      * 
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function proposal(Request $request, Chatroom $chatroom)
+    public function proposal(ProposalRequest $request, Chatroom $chatroom)
     {
         \DB::transaction(function () use ($request, $chatroom) {
             $proposal = $this->proposal_service->storeProposal($request->all(), $chatroom);
@@ -222,12 +247,12 @@ class ChatroomController extends Controller
 
     /**
      * 購入者評価
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EvaluationRequest $request
      * @param \App\Models\Chatroom $chatroom
      * 
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function buyerEvaluation(Request $request, Chatroom $chatroom)
+    public function buyerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
@@ -240,12 +265,12 @@ class ChatroomController extends Controller
 
     /**
      * 出品者評価
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EvaluationRequest $request
      * @param \App\Models\Chatroom $chatroom
      * 
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function sellerEvaluation(Request $request, Chatroom $chatroom)
+    public function sellerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);

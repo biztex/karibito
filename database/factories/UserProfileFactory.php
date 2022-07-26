@@ -44,8 +44,8 @@ class UserProfileFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'identification_path' => null,
-                'is_identify'         => 0,
+                'identification_path' => $this->faker->imageUrl,
+                'is_identify'         => 1,
             ];
         });
     }

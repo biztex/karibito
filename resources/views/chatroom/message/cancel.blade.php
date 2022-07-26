@@ -1,6 +1,6 @@
 <!-- キャンセルメッセージ -->
 <!-- 申請中 -->
-@if($message->reference->status === 1)
+@if($message->reference->status === App\Models\PurchasedCancel::STATUS_APPLYING)
     <!-- 申請者の時 -->
     @if($message->user_id === Auth::id())
         <li>
@@ -34,7 +34,7 @@
     @endif
 
 <!-- 成立 -->
-@elseif($message->reference->status === 2)
+@elseif($message->reference->status === App\Models\PurchasedCancel::STATUS_CANCELED)
     @if($message->text === 'キャンセル申請をしました')
         <!-- 申請者の時 -->
         @if($message->user_id === Auth::id())

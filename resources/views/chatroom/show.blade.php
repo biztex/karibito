@@ -50,3 +50,13 @@
         </div><!-- /#contents -->
     </article>
 </x-layout>
+<script>
+	$(function(){
+
+        if (@json($errors->has('price'))) {
+            $('.fancybox').trigger('click');
+            $('html').addClass('fancybox-margin fancybox-lock');
+        };
+
+    });
+</script>

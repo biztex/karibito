@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\AdditionalOption;
+use App\Models\MProductChildCategory;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductQuestion;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ProductService
 {
@@ -297,5 +299,98 @@ class ProductService
         }
     }
 
+    public function searchProducts(object $request)
+    {
+        $prefecture_id = $request->prefecture_id;
+        $low_price = $request->low_price;
+        $high_price = $request->high_price;
+        $is_online = $request->is_online;
+        $age_period = $request->age_period;
+        $sort = $request->sort;
+        $keyword = $request->keyword;
+        $parent_category_id = $request->parent_category_id;
+        $child_category_id = $request->child_category_id;
 
+
+        $query = Product::publish();
+        if ($keyword) {
+            $query->where(function(Builder $query) use($keyword) {
+                $query->where('title', 'LIKE', "%{$keyword}%");
+            });
+        }
+
+        if (!is_null($age_period)) {
+            $now_year = date('Y');
+            $year = $now_year - 9;
+            $year -= $age_period * 10;
+            $up_year = $year + 10;
+
+            if ($age_period == 1) {
+                $query->whereHas('user.userProfile', function (Builder $query) use($year){
+                    $query->whereYear('birthday', '>', $year);
+                }); //見直す
+            }
+            elseif($age_period == 7)
+            {
+                $query->whereHas('user.userProfile', function (Builder $query) use($up_year){
+                    $query->whereYear('birthday', '<=', $up_year);
+                });
+            } else {
+                $query->whereHas('user.userProfile', function (Builder $query) use($year, $up_year){
+                    $query->whereYear('birthday', '>', $year);
+                    $query->whereYear('birthday', '<', $up_year);
+                });
+            }
+        }
+
+        if(isset($request->parent_category_flg)) { //子カテゴリ、または親カテゴリから検索した場合
+            if($request->parent_category_flg === '1') {
+                $parent_category_id = $request->parent_category_id;
+                $child_categories = MProductChildCategory::where('parent_category_id', $parent_category_id)->pluck('id')->toArray();
+                $query->whereIn('category_id', $child_categories);
+            } elseif($request->parent_category_flg === '0') {
+                $category_id = $request->child_category_id;
+                $query->where('category_id', $category_id);
+            }
+        } else { //キーワードで検索した時、または検索してから再度検索した時
+            if(isset($parent_category_id)) {
+                $child_categories = MProductChildCategory::where('parent_category_id', $parent_category_id)->pluck('id')->toArray();
+                $query->whereIn('category_id', $child_categories);
+            } elseif(isset($child_category_id)) {
+                $query->where('category_id', $child_category_id);
+            }
+        }
+
+        if (!empty($prefecture_id)) {
+            $query->where('prefecture_id', $prefecture_id);
+        }
+
+        if (!empty($low_price)) {
+            $query->where('price', '>=', $low_price);
+        }
+
+        if (!empty($high_price)) {
+            $query->where('price', '<=', $high_price);
+        }
+
+        if ($is_online === '0') {
+            $query->where('is_online', $is_online);
+        } elseif ($is_online === '1') {
+            $query->where('is_online', $is_online);
+        }
+
+        if (!empty($sort)) {
+            if ($sort == 1) { //ランキングの高い順
+                $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
+            } elseif ($sort == 2) { //お気に入りの多い順
+                $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
+            } elseif ($sort == 3) { //新着順
+                $query->orderBy('created_at','desc');
+            }
+        } else {
+            $query->latest();
+        }
+
+        return $query->paginate(40);
+    }
 }

@@ -1,6 +1,6 @@
 <!-- 評価完了メッセージ-->
 <!-- 提供者評価前-->
-@if($chatroom->status === 5)
+@if($chatroom->status === App\Models\Chatroom::STATUS_SELLER_EVALUATION)
 
     <!-- 購入者側の時 -->
     @if($message->user_id === Auth::id())
@@ -36,7 +36,7 @@
     @endif
 
 <!-- 両者評価完了後 -->
-@elseif($chatroom->status === 6)
+@elseif($chatroom->status === App\Models\Chatroom::STATUS_COMPLETE)
     @if($message->user_id === $chatroom->seller_user_id)
         <li>
             <div class="img">
