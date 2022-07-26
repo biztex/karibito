@@ -32,7 +32,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         // 公開&&下書きでない
         $products = $this->home_service->paginateProduct(10);
 
@@ -46,8 +45,6 @@ class HomeController extends Controller
 
         $important_news_list = $this->home_service->paginateImportantNewsList(3);
 
-        $diff_date_time = $this->home_service->getDiffDateTime();
-
-        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list','important_news_list','diff_date_time'));
+        return view('index', compact('products','job_requests','product_category_ranks','job_category_ranks','news_list','important_news_list'));
     }
 }

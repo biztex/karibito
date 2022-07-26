@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\JobRequestController;
+use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
@@ -26,6 +29,8 @@ use App\Http\Controllers\Web\Mypage\JobController;
 use App\Http\Controllers\Web\Mypage\EvaluationController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
+use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
+use App\Http\Controllers\Web\OtherUser\JobRequestController as OtherUserJobRequestController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
@@ -94,6 +99,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
         Route::get('identification',[IdentificationController::class, 'index']);
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+        Route::post('can_call',[UserProfileController::class, 'updateCanCall'])->name('can_call.update');
 
          // スキル・経歴・職務
         Route::middleware(['can:my.skill,user_skill', 'can:identify'])->group(function () {
@@ -162,6 +168,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 商品登録
     Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
+        // Route::get('/index/{category}', 'showCategory')->name('show.category');
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
             Route::post('{product}/update', 'update')->name('update');
@@ -240,6 +247,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // やり取り（提供・リクエスト共用版）
     Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
         Route::get('','index')->name('index');
+        Route::get('active','active')->name('active');
+        Route::get('inactive','inactive')->name('inactive');
         Route::get('new/product/{product}','newProduct')->name('new.product'); // productからのnew room
         Route::get('new/job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestからのnew room
 
@@ -272,7 +281,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('{purchased_cancel}/approval', 'approval')->name('approval'); //キャンセル承認
         Route::get('{purchased_cancel}/approval', 'complete')->name('complete'); //キャンセル承認画面
         Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
-        
+
     });
     // DM
     Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
@@ -318,6 +327,17 @@ Route::get('', [HomeController::class, 'index'])->name('home');
 Route::get('index/news/{news}', [NewsController::class, 'show'])->name('news.show');
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
 
+//サービス一覧
+Route::get('product/index/category/{category}', [OtherUserProductController::class, 'index'])->name('product.category.index');
+Route::get('product/index/category/show/{child_category}', [OtherUserProductController::class, 'show'])->name('product.category.index.show');
+Route::get('product/index/keyword/search', [OtherUserProductController::class, 'search'])->name('product.search');
+
+// リクエスト一覧
+Route::get('job_request/index/category/{category}', [OtherUserJobRequestController::class, 'index'])->name('job_request.category.index');
+Route::get('job_request/index/category/show/{child_category}', [OtherUserJobRequestController::class, 'show'])->name('job_request.category.index.show');
+Route::get('job_request/index/keyword/search', [OtherUserJobRequestController::class, 'search'])->name('job_request.search');
+
+
 // --管理者画面-----------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -332,6 +352,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard');
         Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
+        Route::resource('/products',ProductController::class,['only' => ['index']]);
+        Route::resource('/job_requests',JobRequestController::class,['only' => ['index']]);
+        Route::resource('/m_commission_rates',MCommissionRateController::class,['only' => ['index', 'store']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 

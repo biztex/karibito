@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Libraries\DiffDateTime;
+
 
 class JobRequest extends Model
 {
@@ -40,7 +43,7 @@ class JobRequest extends Model
     const OFFLINE = 0;
 
     const ONLINE = 1;
-    
+
     const IS_ONLINE = [
         self::ONLINE => '非対面',
         self::OFFLINE => '対面',
@@ -55,6 +58,17 @@ class JobRequest extends Model
     public function scopeLoginUsers($query)
     {
         return $query->where('user_id',\Auth::id());
+    }
+
+    /**
+     * 特定ユーザーの提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeGetUser($query, $user)
+    {
+        return $query->where('user_id', $user);
     }
 
     /**
@@ -115,7 +129,7 @@ class JobRequest extends Model
         return $this->belongsTo(Prefecture::class);
     }
 
-     /**
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function jobRequestChatroom()
@@ -129,5 +143,41 @@ class JobRequest extends Model
     public function chatroom()
     {
         return $this->morphMany(Chatroom::class, 'reference');
+    }
+
+    /**
+     * 締切まで後何日を取得
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function deadlineDay(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value, $attributes) {
+                $day1 = now();
+                $day2 = $attributes['application_deadline'];
+                $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
+
+                return $diff_date_time['days'];
+        }
+        );
+    }
+
+    /**
+     * * 締切まで後何日かを取得
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function deadlineHour(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value, $attributes) {
+            $day1 = now();
+            $day2 = $attributes['application_deadline'];
+            $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
+
+            return $diff_date_time['hours'];
+            }
+        );
     }
 }

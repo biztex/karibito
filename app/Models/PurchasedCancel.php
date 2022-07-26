@@ -11,10 +11,13 @@ class PurchasedCancel extends Model
 
     protected $guarded = ['id'];
 
+    const STATUS_APPLYING = 1;
+    const STATUS_CANCELED = 2;
+    const STATUS_OBJECTION = 3;
     const STATUS = [
-        1 => '申請中',
-        2 => '成立',
-        3 => '異議申し立て'
+        self::STATUS_APPLYING => '申請中',
+        self::STATUS_CANCELED => '成立',
+        self::STATUS_OBJECTION => '異議申し立て'
     ];
 
     const REASON = [
@@ -25,7 +28,7 @@ class PurchasedCancel extends Model
         5 => 'スケジュールの折り合いがつかなくなった',
         6 => 'その他トラブル'
     ]; 
-   
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */

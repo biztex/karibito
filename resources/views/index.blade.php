@@ -24,14 +24,14 @@
 			<div class="seaServices">
 				<div class="inner">
 					<h2 class="hdM"><img class="ico" src="/img/common/ico_folder.svg" alt="">条件からサービスを探す</h2>
-					<div class="cate">
+					{{-- <div class="cate">
 						<a href="#" class="cate cate01">カテゴリーから探す</a>
 						<a href="#" class="cate cate02">エリアから探す</a>
 						<a href="#" class="cate cate03">日付から探す</a>
 						<a href="#" class="cate cate04">金額から探す</a>
-					</div>
+					</div> --}}
 					<div class="search"><input type="text" placeholder="サービス名・エリア名など"><input type="submit" class="btn" value=""></div>
-					<div class="recommend pc">
+					{{-- <div class="recommend pc">
 						<span>おすすめ：</span>
 						<a href="#">画像・写真加工</a>
 						<a href="#">インテリアデザイン</a>
@@ -39,7 +39,7 @@
 						<a href="#">画像・写真加工</a>
 						<a href="#">インテリアデザイン</a>
 						<a href="#">資料・企画書作成</a>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 			<div class="indexNotice">
@@ -78,14 +78,15 @@
 								<div class="recommendCates">
 									<h2 class="hdM">おすすめのカテゴリー</h2>
 									<ul>
-										<li><a href="#" class="cate01">家事</a></li>
-										<li><a href="#" class="cate02">修理組み立て</a></li>
-										<li><a href="#" class="cate03">料理</a></li>
-										<li><a href="#" class="cate04">ペット</a></li>
-										<li><a href="#" class="cate05">乗り物</a></li>
-										<li><a href="#" class="cate06">引越し</a></li>
-										<li><a href="#" class="cate07">美容</a></li>
-										<li><a href="#" class="cate08">デザイン</a></li>
+										{{-- 後でやる --}}
+										<li><a href="{{route('product.category.index', 1) }}" class="cate01">家事</a></li>
+										<li><a href="{{route('product.category.index', 2) }}" class="cate02">修理組み立て</a></li>
+										<li><a href="{{route('product.category.index', 16) }}" class="cate03">料理</a></li>
+										<li><a href="{{route('product.category.index', 3) }}" class="cate04">ペット</a></li>
+										<li><a href="{{route('product.category.index', 5) }}" class="cate05">乗り物</a></li>
+										<li><a href="{{route('product.category.index', 6) }}" class="cate06">引越し</a></li>
+										<li><a href="{{route('product.category.index', 8) }}" class="cate07">美容</a></li>
+										<li><a href="{{route('product.category.index', 12) }}" class="cate08">デザイン</a></li>
 									</ul>
 								</div>
 								<div class="recommendList style2">
@@ -94,35 +95,34 @@
 										@foreach($products as $product)
 										<div class="item">
 											<a href="{{ route('product.show',$product->id) }}" class="img imgBox">
-											@if(isset($product->productImage[0]))
-											<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
-											<button class="favorite">お気に入り</button>
-											@else
-											<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-											<button class="favorite">お気に入り</button>
-											@endif
+												@if(isset($product->productImage[0]))
+													<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+													<button class="favorite">お気に入り</button>
+												@else
+													<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+													<button class="favorite">お気に入り</button>
+												@endif
 											</a>
-
 											<div class="infoTop">
-											<div>
-												<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
-												<div class="draw">
-													<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+												<div>
+													<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+													<div class="draw">
+														<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+													</div>
+													<div class="single">
+														@if($product->is_online == App\Models\Product::OFFLINE)
+														<a href="#">対面</a>
+														@else
+														<a href="#">非対面</a>
+														@endif
+													</div>
 												</div>
-												<div class="single">
-													@if($product->is_online == App\Models\Product::OFFLINE)
-													<a href="#">対面</a>
-													@else
-													<a href="#">非対面</a>
-													@endif
-												</div>
-                                            </div>
 												<div class="aboutUser">
 													<div class="user">
-								                        @if(empty($product->user->userProfile->icon))
-														<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+														@if(empty($product->user->userProfile->icon))
+															<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
 														@else
-														<p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+															<p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
 														@endif
 														<div class="introd">
 															<p class="name">{{ $product->user->name }}</p>
@@ -145,13 +145,13 @@
 												@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
 													<div class="item">
 														<a href="{{route('product.show',$product->id)}}" class="img imgBox">
-														@if(isset($product->productImage[0]))
-											               <p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
-											               <button class="favorite">お気に入り</button>
-											            @else
-											               <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-											               <button class="favorite">お気に入り</button>
-											            @endif
+															@if(isset($product->productImage[0]))
+																<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+																<button class="favorite">お気に入り</button>
+															@else
+																<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+																<button class="favorite">お気に入り</button>
+															@endif
 														</a>
 														<div class="infoTop">
 														<div>
@@ -212,7 +212,7 @@
 								<h2>サービス一覧</h2>
 								<ul class="links">
 								@foreach($categories as $category)
-									<li><a href="#">{{ $category->name }}</a></li>
+									<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
 								@endforeach
 								</ul>
 								<h2>ガイド</h2>
@@ -238,14 +238,14 @@
 								<div class="recommendCates">
 									<h2 class="hdM">おすすめのカテゴリー</h2>
 									<ul>
-										<li><a href="#" class="cate01">家事</a></li>
-										<li><a href="#" class="cate02">修理組み立て</a></li>
-										<li><a href="#" class="cate03">料理</a></li>
-										<li><a href="#" class="cate04">ペット</a></li>
-										<li><a href="#" class="cate05">乗り物</a></li>
-										<li><a href="#" class="cate06">引越し</a></li>
-										<li><a href="#" class="cate07">美容</a></li>
-										<li><a href="#" class="cate08">デザイン</a></li>
+										<li><a href="{{route('job_request.category.index', 1) }}" class="cate01">家事</a></li>
+										<li><a href="{{route('job_request.category.index', 2) }}" class="cate02">修理組み立て</a></li>
+										<li><a href="{{route('job_request.category.index', 16) }}" class="cate03">料理</a></li>
+										<li><a href="{{route('job_request.category.index', 3) }}" class="cate04">ペット</a></li>
+										<li><a href="{{route('job_request.category.index', 5) }}" class="cate05">乗り物</a></li>
+										<li><a href="{{route('job_request.category.index', 6) }}" class="cate06">引越し</a></li>
+										<li><a href="{{route('job_request.category.index', 8) }}" class="cate07">美容</a></li>
+										<li><a href="{{route('job_request.category.index', 12) }}" class="cate08">デザイン</a></li>
 									</ul>
 								</div>
 								<div class="recommendList style2">
@@ -271,7 +271,7 @@
 														</dl>
 														<dl>
 															<dt><span>募集期限</span></dt>
-															<dd>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</dd>
+															<dd>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</dd>
 														</dl>
 													</div>
 												</a>
@@ -319,7 +319,7 @@
 															</dl>
 															<dl>
 																<dt><span>募集期限</span></dt>
-																<dd>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</dd>
+																<dd>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</dd>
 															</dl>
 														</div>
 														<div class="aboutUser">
@@ -364,7 +364,7 @@
 							<h2>サービス一覧</h2>
 								<ul class="links">
 								@foreach($categories as $category)
-									<li><a href="#">{{ $category->name }}</a></li>
+								<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
 								@endforeach
 								</ul>
 								<h2>ガイド</h2>

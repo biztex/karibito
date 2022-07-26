@@ -35,13 +35,13 @@
 
         <div class="functeBtns">
             @if($chatroom->seller_user_id === Auth::id())
-                @if($chatroom->status === 1)
+                @if($chatroom->status === App\Models\Chatroom::STATUS_START)
                     <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
-                @elseif($chatroom->status === 3)
+                @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
                     <a href="{{route('chatroom.complete', $chatroom->id)}}" class="orange">作業完了報告をする</a>
                 @endif
             @endif
-            @if($chatroom->status > 2 && $chatroom->status < 5)
+            @if($chatroom->isCancelable())
                 <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
             @endif
         </div>
@@ -65,8 +65,9 @@
                                 <p>希望報酬額</p>
                                 <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
                             </div>
+                            @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <p class="th">提供価格</p>
-                            <p class="budget"><input type="text" name="price" placeholder="0" autofocus></p>
+                            <p class="budget"><input type="text" name="price" placeholder="0" autofocus value="{{old('price')}}"></p>
                         </li>
                     </ul>
                 </div>
