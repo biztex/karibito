@@ -30,7 +30,15 @@
 						<a href="#" class="cate cate03">日付から探す</a>
 						<a href="#" class="cate cate04">金額から探す</a>
 					</div> --}}
-					<div class="search"><input type="text" placeholder="サービス名・エリア名など"><input type="submit" class="btn" value=""></div>
+					{{-- <div class="search">
+						<input type="text" placeholder="サービス名・エリア名など"><input type="submit" class="btn" value="">
+					</div> --}}
+					<form method="get">
+						<div class="search">
+							<input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+							<input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
+						</div>
+					</form>
 					{{-- <div class="recommend pc">
 						<span>おすすめ：</span>
 						<a href="#">画像・写真加工</a>
@@ -92,70 +100,23 @@
 								<div class="recommendList style2">
 									<h2 class="hdM">おすすめのお仕事</h2>
 									<div class="list sliderSP">
-										@foreach($products as $product)
-										<div class="item">
-											<a href="{{ route('product.show',$product->id) }}" class="img imgBox">
-												@if(isset($product->productImage[0]))
-													<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
-													<button class="favorite">お気に入り</button>
-												@else
-													<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-													<button class="favorite">お気に入り</button>
-												@endif
-											</a>
-											<div class="infoTop">
-												<div>
-													<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
-													<div class="draw">
-														<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
-													</div>
-													<div class="single">
-														@if($product->is_online == App\Models\Product::OFFLINE)
-														<a href="#">対面</a>
-														@else
-														<a href="#">非対面</a>
-														@endif
-													</div>
-												</div>
-												<div class="aboutUser">
-													<div class="user">
-														@if(empty($product->user->userProfile->icon))
-															<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-														@else
-															<p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-														@endif
-														<div class="introd">
-															<p class="name">{{ $product->user->name }}</p>
-															<p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
-														</div>
-													</div>
-													<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
-												</div>
-											</div>
-										</div>
-										@endforeach
-									</div>
-								</div>
-								<div class="recommendList style2">
-									<h2 class="hdM">カテゴリ別ランキング</h2>
-									@foreach( $product_category_ranks as  $val)
-										<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
-										<div class="list sliderSP">
+										@if (!isset($products))
+											<h2>現在、おすすめのお仕事は登録されていません。</h2>
+										@else
 											@foreach($products as $product)
-												@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
-													<div class="item">
-														<a href="{{route('product.show',$product->id)}}" class="img imgBox">
-															@if(isset($product->productImage[0]))
-																<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
-																<button class="favorite">お気に入り</button>
-															@else
-																<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
-																<button class="favorite">お気に入り</button>
-															@endif
-														</a>
-														<div class="infoTop">
+												<div class="item">
+													<a href="{{ route('product.show',$product->id) }}" class="img imgBox">
+														@if(isset($product->productImage[0]))
+															<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+															<button class="favorite">お気に入り</button>
+														@else
+															<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+															<button class="favorite">お気に入り</button>
+														@endif
+													</a>
+													<div class="infoTop">
 														<div>
-															<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+															<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
 															<div class="draw">
 																<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
 															</div>
@@ -166,32 +127,86 @@
 																<a href="#">非対面</a>
 																@endif
 															</div>
-
-
-
 														</div>
-															<div class="aboutUser">
-																<div class="user">
-																	@if(empty($product->user->userProfile->icon))
+														<div class="aboutUser">
+															<div class="user">
+																@if(empty($product->user->userProfile->icon))
 																	<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-																	@else
+																@else
 																	<p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-																	@endif
-																	<div class="introd">
-																		<p class="name">{{ $product->user->name }}</p>
-																		<p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
-																	</div>
+																@endif
+																<div class="introd">
+																	<p class="name">{{ $product->user->name }}</p>
+																	<p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
 																</div>
-																<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 															</div>
+															<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 														</div>
 													</div>
-												@endif
+												</div>
 											@endforeach
-										</div>
-									@endforeach
+										@endif
+									</div>
 								</div>
-								<div class="otherBtn"><a href="#">その他カテゴリ別ランキングをみる</a></div>
+								<div class="recommendList style2">
+									<h2 class="hdM">カテゴリ別ランキング</h2>
+									@if (!isset($product_category_ranks))
+										<h2>現在、カテゴリ別ランキングはありません。</h2>
+									@else
+										@foreach($product_category_ranks as  $val)
+											<div class="js-hide_product_categories @if ($loop->index >= 10) hide @endif"> {{-- div追加した（岩上）よくなかったら消します。 --}}
+												<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
+												<div class="list sliderSP">
+													@foreach($products as $product)
+														@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
+															<div class="item">
+																<a href="{{route('product.show',$product->id)}}" class="img imgBox">
+																	@if(isset($product->productImage[0]))
+																		<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
+																		<button class="favorite">お気に入り</button>
+																	@else
+																		<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+																		<button class="favorite">お気に入り</button>
+																	@endif
+																</a>
+																<div class="infoTop">
+																	<div>
+																		<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+																		<div class="draw">
+																			<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+																		</div>
+																		<div class="single">
+																			@if($product->is_online == App\Models\Product::OFFLINE)
+																				<a href="#">対面</a>
+																			@else
+																				<a href="#">非対面</a>
+																			@endif
+																		</div>
+																	</div>
+																	<div class="aboutUser">
+																		<div class="user">
+																			@if(empty($product->user->userProfile->icon))
+																			<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+																			@else
+																			<p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+																			@endif
+																			<div class="introd">
+																				<p class="name">{{ $product->user->name }}</p>
+																				<p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
+																			</div>
+																		</div>
+																		<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
+																	</div>
+																</div>
+															</div>
+														@endif
+													@endforeach
+												</div>
+											</div>
+										@endforeach
+									@endif
+								</div>
+								<div class="otherBtn"><a href="javascript:;" class="js-productOtherBtn">その他カテゴリ別ランキングをみる</a></div>
 								<div class="newsList mt60">
 									<h2 class="hdM">カリビトからのお知らせ<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
@@ -251,62 +266,17 @@
 								<div class="recommendList style2">
 									<h2 class="hdM">おすすめのお仕事</h2>
 									<div class="list sliderSP">
-										@foreach($job_requests as $job_request)
-										<div class="item">
-											<p class="level"></p>
-											<div class="info">
-												<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
-												<a href="{{ route('job_request.show',$job_request->id)}}">
-													<div class="draw">
-														<p class="price">{{ $job_request->title }}</font></p>
-													</div>
-													<div class="aboutInfo">
-														<dl>
-															<dt><span>予算</span></dt>
-															<dd>{{ number_format($job_request->price) }}円〜</dd>
-														</dl>
-														<dl>
-															<dt><span>提案数</span></dt>
-															<dd>0</dd>
-														</dl>
-														<dl>
-															<dt><span>募集期限</span></dt>
-															<dd>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</dd>
-														</dl>
-													</div>
-												</a>
-												<div class="aboutUser">
-													<div class="user">
-														@if(empty($job_request->user->userProfile->icon))
-														<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-														@else
-														<p class="ico"><img src="{{asset('/storage/'.$job_request->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-														@endif
-														<div class="introd">
-															<p class="name">{{ $job_request->user->name }}</p>
-															<p>({{ App\Models\UserProfile::GENDER[$job_request->user->userProfile->gender] }}/{{ $job_request->user->userProfile->birthday }} / {{ $job_request->user->userProfile->prefecture->name }})</p>
-														</div>
-													</div>
-													<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
-												</div>
-											</div>
-										</div>
-										@endforeach
-									</div>
-								</div>
-								<div class="recommendList style2">
-									<h2 class="hdM">カテゴリ別ランキング</h2>
-									@foreach( $job_category_ranks as  $val)
-										<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
-										<div class="list sliderSP">
+										@if (!isset($job_requests))
+											<h2>現在、おすすめのお仕事は登録されていません。</h2>
+										@else
 											@foreach($job_requests as $job_request)
-												@if($job_request->mProductChildCategory->mProductCategory->name === $val->name)
-												<div class="item">
-													<p class="level"></p>
-													<div class="info">
-														<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
+											<div class="item">
+												<p class="level"></p>
+												<div class="info">
+													<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
+													<a href="{{ route('job_request.show',$job_request->id)}}">
 														<div class="draw">
-															<p class="price"><font>{{ $job_request->title }}</font></p>
+															<p class="price">{{ $job_request->title }}</font></p>
 														</div>
 														<div class="aboutInfo">
 															<dl>
@@ -322,28 +292,84 @@
 																<dd>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</dd>
 															</dl>
 														</div>
-														<div class="aboutUser">
-															<div class="user">
-																@if(empty($job_request->user->userProfile->icon))
-																<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-																@else
-																<p class="ico"><img src="{{asset('/storage/'.$job_request->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-																@endif
-																<div class="introd">
-																	<p class="name">{{ $job_request->user->name }}</p>
-																	<p>({{ App\Models\UserProfile::GENDER[$job_request->user->userProfile->gender] }}/{{ $job_request->user->userProfile->birthday }} / {{ $job_request->user->userProfile->prefecture->name }})</p>
-																</div>
+													</a>
+													<div class="aboutUser">
+														<div class="user">
+															@if(empty($job_request->user->userProfile->icon))
+															<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+															@else
+															<p class="ico"><img src="{{asset('/storage/'.$job_request->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+															@endif
+															<div class="introd">
+																<p class="name">{{ $job_request->user->name }}</p>
+																<p>({{ App\Models\UserProfile::GENDER[$job_request->user->userProfile->gender] }}/{{ $job_request->user->userProfile->birthday }} / {{ $job_request->user->userProfile->prefecture->name }})</p>
 															</div>
-															<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 														</div>
+														<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
 													</div>
 												</div>
-												@endif
+											</div>
 											@endforeach
-										</div>
-									@endforeach
+										@endif
+									</div>
 								</div>
-								<div class="otherBtn"><a href="#">その他カテゴリ別ランキングをみる</a></div>
+								<div class="recommendList style2">
+									<h2 class="hdM">カテゴリ別ランキング</h2>
+									{{-- @dd($job_category_ranks) --}}
+									@if (!isset($job_category_ranks))
+										<h2>現在、カテゴリ別ランキングはありません。</h2>
+									@else
+										@foreach($job_category_ranks as  $val)
+											<div class="js-hide_job_request_categories @if ($loop->index >= 10) hide @endif"> {{-- div追加した（岩上）よくなかったら消します。 --}}
+												<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
+												<div class="list sliderSP">
+													@foreach($job_requests as $job_request)
+														@if($job_request->mProductChildCategory->mProductCategory->name === $val->name)
+															<div class="item">
+																<p class="level"></p>
+																<div class="info">
+																	<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
+																	<div class="draw">
+																		<p class="price"><font>{{ $job_request->title }}</font></p>
+																	</div>
+																	<div class="aboutInfo">
+																		<dl>
+																			<dt><span>予算</span></dt>
+																			<dd>{{ number_format($job_request->price) }}円〜</dd>
+																		</dl>
+																		<dl>
+																			<dt><span>提案数</span></dt>
+																			<dd>0</dd>
+																		</dl>
+																		<dl>
+																			<dt><span>募集期限</span></dt>
+																			<dd>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</dd>
+																		</dl>
+																	</div>
+																	<div class="aboutUser">
+																		<div class="user">
+																			@if(empty($job_request->user->userProfile->icon))
+																				<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+																			@else
+																				<p class="ico"><img src="{{asset('/storage/'.$job_request->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+																			@endif
+																			<div class="introd">
+																				<p class="name">{{ $job_request->user->name }}</p>
+																				<p>({{ App\Models\UserProfile::GENDER[$job_request->user->userProfile->gender] }}/{{ $job_request->user->userProfile->birthday }} / {{ $job_request->user->userProfile->prefecture->name }})</p>
+																			</div>
+																		</div>
+																		<div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
+																	</div>
+																</div>
+															</div>
+														@endif
+													@endforeach
+												</div>
+											</div>
+										@endforeach
+									@endif
+									<div class="otherBtn"><a href="javascript:;" class="js-jobRequestOtherBtn">その他カテゴリ別ランキングをみる</a></div>
+								</div>
 								<div class="newsList mt60">
 									<h2 class="hdM">カリビトからのお知らせ<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a></h2>
 									<div class=box>
@@ -361,11 +387,11 @@
 								</div>
 							</div><!-- /#main -->
 							<aside id="side" class="pc">
-							<h2>サービス一覧</h2>
+								<h2>サービス一覧</h2>
 								<ul class="links">
-								@foreach($categories as $category)
-								<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
-								@endforeach
+									@foreach($categories as $category)
+										<li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
+									@endforeach
 								</ul>
 								<h2>ガイド</h2>
 								<ul class="links">
@@ -382,3 +408,21 @@
 		</div><!-- /#contents -->
 	</article>
 </x-layout>
+<script type="text/javascript">
+	$(function(){
+		showProductRank();
+		showJobRequestRank();
+	})
+
+	function showProductRank(){
+		$('.js-productOtherBtn').on('click', function () {
+			$(".js-hide_product_categories").removeClass('hide');
+		}
+	)}
+
+	function showJobRequestRank(){
+		$('.js-jobRequestOtherBtn').on('click', function () {
+			$(".js-hide_job_request_categories").removeClass('hide');
+		}
+	)}
+</script>

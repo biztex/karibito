@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\MProductCategory;
-use App\Libraries\DiffDateTime;
 
 class HomeService
 {
@@ -49,16 +48,6 @@ class HomeService
 
         return $job_category_ranks;
     }
-
-    // public function getDiffDateTime() 多分使わない、消す
-    // {
-    //     $job_request = $this->paginateJobRequest(10);
-    //     $day1 = now();
-    //     $day2 = $job_request['application_deadline'];
-    //     $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
-
-    //     return $diff_date_time;
-    // }
 
     public function paginateNewsList($i)
     {

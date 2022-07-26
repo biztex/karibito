@@ -5,18 +5,18 @@
                 <div class="item">
                     <h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO" style="min-width:93px;"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
                     <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p>
-                    <div class="searchBox">
-                        <select class="searchSelect">
-                            <option>サービス</option>
-                            <option>リクエスト</option>
-                        </select>
-                        <form method="get">
+                    <form method="get">
+                        <div class="searchBox">
+                            <select name="search_service" class="searchSelect">
+                                <option value="1">サービス</option>
+                                <option value="2">リクエスト</option>　{{-- どうやるかわからない。値によってroute先を変えたい--}}
+                            </select>
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
                                 <input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="item">
                     @auth
@@ -32,67 +32,68 @@
                     <nav id="gNavi">
                         <ul class="navUl02 pc">
                             <li><a href="{{ route('support') }}" class="nav01">サポート</a></li>
-                            @auth
-                            <li class="navLink">
-                                <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ<span>{{ $not_view_user_notifications->count() }}</span></a>
-                                {{-- ない場合は0で表示されている --}}
-                                <div class="navBox">
-                                    <p class="navMessageHd">メッセージ</p>
-                                    <div class="navMessageUl">
-                                        @if(isset($not_view_user_notifications[0]))
-                                            @foreach ($not_view_user_notifications as $not_view_user_notification)
-                                                @if ($not_view_user_notification->is_view === 0)
-                                                    <a href="{{route('user_notification.show', $not_view_user_notification->id)}}">
-                                                        <dl>
-                                                            <dt><img src="/img/common/img_message01.png" alt=""></dt>
-                                                            <dd>
-                                                                <p class="txt">{{$not_view_user_notification->title}}</p>
-                                                                <p class="time">{{$not_view_user_notification->created_at->diffForHumans()}}</p>
-                                                            </dd>
-                                                        </dl>
-                                                    </a>
-                                                @endif
-                                            @endforeach
-                                        @else
+                                @auth
+                                    <li class="navLink">
+                                        <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ
+                                            <span>@if ($not_view_user_notifications->count() > 0) {{$not_view_user_notifications->count()}}@endif</span>
+                                        </a>
+                                        <div class="navBox">
+                                            <p class="navMessageHd">メッセージ</p>
                                             <div class="navMessageUl">
-                                                <p class="noMessage">現在、メッセージの通知はありません。</p>
+                                                @if(isset($not_view_user_notifications[0]))
+                                                    @foreach ($not_view_user_notifications as $not_view_user_notification)
+                                                        @if ($not_view_user_notification->is_view === 0)
+                                                            <a href="{{route('user_notification.show', $not_view_user_notification->id)}}">
+                                                                <dl>
+                                                                    <dt><img src="/img/common/img_message01.png" alt=""></dt>
+                                                                    <dd>
+                                                                        <p class="txt">{{$not_view_user_notification->title}}</p>
+                                                                        <p class="time">{{$not_view_user_notification->created_at->diffForHumans()}}</p>
+                                                                    </dd>
+                                                                </dl>
+                                                            </a>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <div class="navMessageUl">
+                                                        <p class="noMessage">現在、メッセージの通知はありません。</p>
+                                                    </div>
+                                                @endif
                                             </div>
-                                        @endif
-                                    </div>
-                                    <p class="navMessageLink"><a href="{{ route('user_notification.index') }}">すべて見る</a></p>
-                                </div>
-                            </li>
-                            <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
-                            <li><a href="#" class="nav02">お気に入り</a></li>
-                            <li class="navLink">
-                                    @if(empty($user_profile->icon))
-                                        <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
-                                    @else
-                                        <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
-                                    @endif
-                                <div class="navBox navMypageBox">
-                                    <dl class="navMypageDl">
-                                        @if(empty($user_profile->icon))
-                                            <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
-                                        @else
-                                            <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
-                                        @endif
-                                            <dd>{{\Auth::user()->name}}</dd>
-                                    </dl>
-                                    @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
-                                        <div class="navMypageUl">
-                                            <a href="{{ route('mypage') }}">マイページ</a>
-                                            @can('identify')
-                                                <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                            @endcan
-                                            <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
-                                            <a href="#">設定</a>
+                                            <p class="navMessageLink"><a href="{{ route('user_notification.index') }}">すべて見る</a></p>
                                         </div>
-                                    @endif
-                                    <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
-                                </div>
-                            </li>
-                        @endauth
+                                    </li>
+                                    <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
+                                    <li><a href="#" class="nav02">お気に入り</a></li>
+                                    <li class="navLink">
+                                            @if(empty($user_profile->icon))
+                                                <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                                            @else
+                                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
+                                            @endif
+                                        <div class="navBox navMypageBox">
+                                            <dl class="navMypageDl">
+                                                @if(empty($user_profile->icon))
+                                                    <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
+                                                @else
+                                                    <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
+                                                @endif
+                                                    <dd>{{\Auth::user()->name}}</dd>
+                                            </dl>
+                                            @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
+                                                <div class="navMypageUl">
+                                                    <a href="{{ route('mypage') }}">マイページ</a>
+                                                    @can('identify')
+                                                        <a href="{{ route('publication') }}">掲載内容一覧</a>
+                                                    @endcan
+                                                    <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
+                                                    <a href="#">設定</a>
+                                                </div>
+                                            @endif
+                                            <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
+                                        </div>
+                                    </li>
+                                @endauth
                         </ul>
                         <div class="sp">
                             @auth
@@ -153,7 +154,7 @@
                         <form method="get">
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
-                                <input type="submit" class="btn" formaction="{{ route('product.search') }}">
+                                <input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
                                 <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
                             </div>
                         </form>
@@ -169,177 +170,17 @@
                     <div class="searchWrapItem">
                         <p class="searchWrapHd"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p>
                         <ul class="searchItemUl">
-                            <li>
-                                <a href="#"><img src="/img/common/search_item01.svg" alt="">家電</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item02.svg" alt="">リクエストを探す</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item03.svg" alt="">ペット</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item04.svg" alt="">高齢者向け</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item05.svg" alt="">乗り物</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item06.svg" alt="">引越し</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item07.svg" alt="">趣味・習い事</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item08.svg" alt="">美容・ファッション</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item09.svg" alt="">写真動作制作</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item10.svg" alt="">その他</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item11.svg" alt="">インテリア</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item12.svg" alt="">デザイン</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item13.svg" alt="">パソコン</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item14.svg" alt="">ビジネスサポート</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item15.svg" alt="">冠婚葬祭</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item16.svg" alt="">料理</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item17.svg" alt="">恋愛・結婚</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item18.svg" alt="">体験・アクティビティ</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><img src="/img/common/search_item19.svg" alt="">出張サービス</a>
-                                <span class="span"></span>
-                                <ul class="searchSubUl">
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                    <li><a href="#">小カテゴリー</a></li>
-                                </ul>
-                            </li>
+                            @foreach($categories as $category)
+                                <li>
+                                    <a href="{{route('product.category.index', $category->id) }}"><img src="/img/common/search_item{{$loop->iteration}}.svg" alt="">{{$category->name}}</a>
+                                    <span class="span"></span>
+                                    <ul class="searchSubUl">
+                                        @foreach($category->mProductChildCategory as $child_category)
+                                            <li><a href="{{route('product.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -387,7 +228,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="findLink">
+                        {{-- <div class="findLink">
                             <a class="findLinkA">ブログを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
@@ -405,7 +246,7 @@
                                 @endforeach
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     @can('identify')
                     <div class="right">
