@@ -23,7 +23,7 @@
 							<div class="inner">
 								<dl class="mypageDl01">
 							        @if(null !== $user->userProfile->icon)
-                                        <dt><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></dt>
+                                        <dt><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt="" style="height:132px;"></dt>
                                     @else
 									    <dt><img src="/img/mypage/no_image.jpg" alt=""></dt>
                                     @endif

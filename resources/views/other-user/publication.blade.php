@@ -62,7 +62,7 @@
 								<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 120px;height: 120px;object-fit: cover;"></a>
 							@endif
 							<!-- <p class="login">最終ログイン：8時間前</p> -->
-							<p class="introd"><span>{{$user->userProfile->name}}</span><br>({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$age}}/ {{$user->userProfile->prefecture->name}})</p>
+							<p class="introd"><span>{{$user->name}}</span><br>({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$age}}/ {{$user->userProfile->prefecture->name}})</p>
 							<!-- <div class="evaluate three"></div> -->
 							<p class="check"><a href="#">本人確認済み</a></p>
 							<!-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> -->
