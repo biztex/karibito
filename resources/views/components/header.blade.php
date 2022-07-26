@@ -161,11 +161,11 @@
                     <div class="searchClose"><img src="/img/common/search_close.svg" alt=""></div>
                 </div>
                 <div class="searchWrapCont">
-                    <ul class="searchWrapUl01">
+                    {{-- <ul class="searchWrapUl01">
                         <li><a> サービスを探す</a></li>
                         <li><a>リクエストを探す</a></li>
                         <li><a>ブログを探す</a></li>
-                    </ul>
+                    </ul> --}}
                     <div class="searchWrapItem">
                         <p class="searchWrapHd"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p>
                         <ul class="searchItemUl">

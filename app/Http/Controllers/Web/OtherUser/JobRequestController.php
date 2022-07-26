@@ -63,7 +63,9 @@ class JobRequestController extends Controller
         $age_period = $request->age_period;
         $sort = $request->sort;
         $keyword = $request->keyword;
+        $parent_category_id = $request->parent_category_id;
+        $child_category_id = $request->child_category_id;
 
-        return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword'));
+        return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id'));
     }
 }

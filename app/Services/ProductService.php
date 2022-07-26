@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AdditionalOption;
+use App\Models\MProductChildCategory;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductQuestion;
@@ -307,6 +308,8 @@ class ProductService
         $age_period = $request->age_period;
         $sort = $request->sort;
         $keyword = $request->keyword;
+        $parent_category_id = $request->parent_category_id;
+        $child_category_id = $request->child_category_id;
 
 
         $query = Product::publish();
@@ -315,7 +318,6 @@ class ProductService
                 $query->where('title', 'LIKE', "%{$keyword}%");
             });
         }
-
 
         if (!is_null($age_period)) {
             $now_year = date('Y');
@@ -343,11 +345,20 @@ class ProductService
 
         if(isset($request->parent_category_flg)) { //子カテゴリ、または親カテゴリから検索した場合
             if($request->parent_category_flg === '1') {
-                $category_id = $request->parent_category_id; //商品の子カテゴリに、親カテゴリが当てはめられる
+                $parent_category_id = $request->parent_category_id;
+                $child_categories = MProductChildCategory::where('parent_category_id', $parent_category_id)->pluck('id')->toArray();
+                $query->whereIn('category_id', $child_categories);
             } elseif($request->parent_category_flg === '0') {
                 $category_id = $request->child_category_id;
+                $query->where('category_id', $category_id);
             }
-            $query->where('category_id', $category_id);
+        } else { //キーワードで検索した時、または検索してから再度検索した時
+            if(isset($parent_category_id)) {
+                $child_categories = MProductChildCategory::where('parent_category_id', $parent_category_id)->pluck('id')->toArray();
+                $query->whereIn('category_id', $child_categories);
+            } elseif(isset($child_category_id)) {
+                $query->where('category_id', $child_category_id);
+            }
         }
 
         if (!empty($prefecture_id)) {
