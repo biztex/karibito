@@ -246,6 +246,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // やり取り（提供・リクエスト共用版）
     Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
         Route::get('','index')->name('index');
+        Route::get('active','active')->name('active');
+        Route::get('inactive','inactive')->name('inactive');
         Route::get('new/product/{product}','newProduct')->name('new.product'); // productからのnew room
         Route::get('new/job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestからのnew room
 

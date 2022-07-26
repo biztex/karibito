@@ -13,7 +13,7 @@
 					<div class="subPagesTab st2 tabWrap">
 						<ul class="tabLink">
 							<li><a href="#tab_box01" class="is_active">進行中のやりとり</a></li>
-							<li><a href="#tab_box02" class="">過去のやりとり</a></li>
+							<li><a href="#tab_box02" class="" id="box02">過去のやりとり</a></li>
 						</ul>
 						
 						<div class="tabBox is_active" id="tab_box01">
@@ -93,6 +93,7 @@
 									@endforeach
 								@endif
 							</ul>
+							{{ $active_product_chatrooms->links() }}
 						</div><!-- #tab_box01-->
 
 						<div class="tabBox" id="tab_box02">
@@ -172,6 +173,7 @@
 									@endforeach
 								@endif
 							</ul>
+							{{ $inactive_product_chatrooms->fragment('inactive')->links() }}
 						</div><!-- #tab_box02-->
 					</div>
 				</div><!--inner-->

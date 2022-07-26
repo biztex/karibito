@@ -21,8 +21,8 @@
                 <ul class="sideUl01">
                     <li><a href="{{ route('mypage') }}" class="">マイページ</a></li>
                     <li><a href="/sample/favorite" class="">お気に入り</a></li>
-                    <li><a href="#" class="">進行中の取引</a></li>
-                    <li><a href="/sample/past" class="">過去の取引</a></li>
+                    <li><a href="{{ route('chatroom.active') }}" class="">進行中の取引</a></li>
+                    <li><a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a></li>
                     <li><a href="/sample/payment_history" class="">決済履歴</a></li>
                     <li><a href="/sample/point_history" class="">ポイント取得・利用履歴</a></li>
                     <li><a href="/sample/friends" class="">フォロー・フォロワー</a></li>
