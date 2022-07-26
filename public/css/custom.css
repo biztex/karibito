@@ -926,3 +926,6 @@
 	object-fit: cover;
 	border-radius: 50%;
 }
+.subPagesTab .tabLink li a{
+	padding: 10px;
+}
