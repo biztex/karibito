@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div id="contents">
+		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
 					<ul class="stepUl">
