@@ -178,7 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
-
+        Olssonm\VeryBasicAuth\VeryBasicAuthServiceProvider::class,
     ],
 
     /*
