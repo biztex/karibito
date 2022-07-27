@@ -80,5 +80,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('my.dm', function (User $user, Dmroom $dmroom) {
             return $user->id === $dmroom->from_user_id || $user->id === $dmroom->to_user_id ;
         });
+
+        // dm/create 自分のdmroomを作らせない
+        Gate::define('not.create.dm', function (User $user, $to_user) {
+            return $user->id !== $to_user->id;
+        });
     }
 }

@@ -287,7 +287,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
     Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
     Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
-    Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->name('dm.create');
+    Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create');
     Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');
 
 });
