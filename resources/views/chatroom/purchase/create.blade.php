@@ -8,24 +8,9 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					<ul class="stepUl">
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">チャット開始</p>
-						</li>
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">契約</p>
-						</li>
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">作業</p>
-						</li>
-						<li>
-							<p class="stepDot"></p>
-							<p class="stepTxt">評価</p>
-						</li>
-					</ul>
+
+					<x-parts.chatroom-step :value="$proposal->chatroom"/>
+
 					<h2 class="subPagesHd">お支払い手続き</h2>
 					<div class="payment">
 						<table>
@@ -68,7 +53,10 @@
 						<div class="coupons">
 							<div class="checkbox">
 								<p class="checkChoice"><label><input type="checkbox">クーポンの利用する</label></p>
-								<p class="number"><input type="text" name="number" value="{{ old('number') }}"></p>
+								<div class="pointInput mt12">
+									<p class="mr18"><input type="text" value="{{ old('number') }}"></p>
+									<p class="adoptionBtn"><input type="button" value="適用"></p>
+								</div>
 								<p class="detail">500円割引クーポン(合計3,000円以上のサービスでご利用可能)／2022年02月08日まで</p>
 								<div class="warnNotes">
 									<p class="danger">ご注意！</p>
@@ -81,6 +69,10 @@
 									<li><label><input type="radio" name="point_use" value="0" @if(old('point_use') == 0 || old('point_use') === null) checked @endif>利用しない</label></li>
 									<li><label><input type="radio" name="point_use" value="1" @if(old('point_use') == 1) checked @endif >利用する</label>
 										<p class="point">利用可能ポイント：000P</p>
+										<div class="pointInput mt12">
+											<p><input type="text" value="1000"></p>
+											<p class="adoptionBtn"><input type="button" value="適用"></p>
+										</div>
 									</li>
 								</ul>
 							</div>
@@ -132,9 +124,16 @@
 										</tr>
 										<tr>
 											<th>セキュリティコード</th>
-											<td>
-												<input type="text" class="small" name="security_code">
+											<td class="creditCode">
+												<input type="text" class="small">
 												<a href="#" class="link">▶セキュリティコードとは？</a>
+												<div class="creditCodeBox">
+													<p>セキュリティコードの場所</p>
+													<div class="creditCodeImg">
+														<img src="/img/cart_buy/security_guide_3.png" alt="">
+													</div>
+													<p>※カードの裏に記載されている<br>3桁のコードをご記入ください。</p>
+												</div>
 											</td>
 										</tr>
 									</table>
