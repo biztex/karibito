@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\TextFormatService;
+use App\Libraries\TextFormat;
 
 class ProductChatroomMessage extends Model
 {
@@ -48,11 +48,11 @@ class ProductChatroomMessage extends Model
     // メッセージはリンク生成する
     public function getTextAttribute($value)
     {
-        $textFormatService = new TextFormatService();
+        $textFormat = new TextFormat();
         if ($value === null) {
             return null;
         } else {
-            return $textFormatService->generateLinkFromSentence($value);
+            return $textFormat->generateLinkFromSentence($value);
         }
     }
     
