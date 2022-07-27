@@ -116,15 +116,15 @@
 													</a>
 													<div class="infoTop">
 														<div>
-															<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+															<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<a href="">{{ $product->mProductChildCategory->name }}</a></div> {{-- 親カテゴリだけaタグなのか--}}
 															<div class="draw">
 																<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
 															</div>
 															<div class="single">
 																@if($product->is_online == App\Models\Product::OFFLINE)
-																<a href="#">対面</a>
+																	<a href="">対面</a>
 																@else
-																<a href="#">非対面</a>
+																	<a>非対面</a>
 																@endif
 															</div>
 														</div>
@@ -155,7 +155,7 @@
 									@else
 										@foreach($product_category_ranks as  $val)
 											<div class="js-hide_product_categories @if ($loop->index >= 10) hide @endif"> {{-- div追加した（岩上）よくなかったら消します。 --}}
-												<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
+												<h3 class="cateTit"><span>{{ $val->name }}</span><a href="{{route('product.category.index', $val->id) }}" class="more">{{ $val->name }}から探す</a></h3>
 												<div class="list sliderSP">
 													@foreach($products as $product)
 														@if( $product->mProductChildCategory->mProductCategory->name === $val->name)
@@ -171,15 +171,15 @@
 																</a>
 																<div class="infoTop">
 																	<div>
-																		<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+																		<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>{{-- 親カテゴリだけaタグなのか--}}
 																		<div class="draw">
 																			<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
 																		</div>
 																		<div class="single">
 																			@if($product->is_online == App\Models\Product::OFFLINE)
-																				<a href="#">対面</a>
+																				<a>対面</a>
 																			@else
-																				<a href="#">非対面</a>
+																				<a>非対面</a>
 																			@endif
 																		</div>
 																	</div>
@@ -321,7 +321,7 @@
 									@else
 										@foreach($job_category_ranks as  $val)
 											<div class="js-hide_job_request_categories @if ($loop->index >= 10) hide @endif"> {{-- div追加した（岩上）よくなかったら消します。 --}}
-												<h3 class="cateTit"><span>{{ $val->name }}</span><a href="#" class="more">{{ $val->name }}から探す</a></h3>
+												<h3 class="cateTit"><span>{{ $val->name }}</span><a href="{{route('job_request.category.index', $val->id) }}" class="more">{{ $val->name }}から探す</a></h3>
 												<div class="list sliderSP">
 													@foreach($job_requests as $job_request)
 														@if($job_request->mProductChildCategory->mProductCategory->name === $val->name)
