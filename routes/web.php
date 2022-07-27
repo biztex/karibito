@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\JobRequestController;
 use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\KaribitoSurveyController as AdminKaribitoSurveyController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
@@ -36,6 +37,7 @@ use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\ProductChatroomController;
 use App\Http\Controllers\Web\DmroomController;
+use App\Http\Controllers\Web\KaribitoSurveyController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -393,3 +395,6 @@ Route::prefix('user')->name('user.')->group(function () {
 });
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
+// アンケート
+Route::get('survey', [KaribitoSurveyController::class, 'create'])->name('survey.create');
+Route::post('survey', [KaribitoSurveyController::class, 'store'])->name('survey.store');
