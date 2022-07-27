@@ -1,4 +1,4 @@
-<x-layout :keyword="$keyword ?? ''">
+<x-layout :keyword="$keyword ?? ''" :serviceflg="$service_flg ?? ''">
 {{-- <article> --}}
     <div id="breadcrumb">
         <div class="inner">
@@ -308,7 +308,13 @@
                         @elseif (isset($parent_category_id))
                             <input type="hidden" name="parent_category_id" value="{{$parent_category_id}}">
                         @endif
-                        <input type="submit" class="mb20" formaction="{{ route('product.search') }}" value="検索する">
+                        @if (isset($keyword))
+                            <input type="hidden" name="keyword" value="{{$keyword}}">
+                        @endif
+                        @if (!isset($service_flg))
+                            <input type="hidden" name="service_flg" value="1">
+                        @endif
+                        <input type="submit" class="blue-button mb20" style="margin-left: 0" formaction="{{ route('product.search') }}" value="検索する">
                     </form>
                     <h2 class="cate cate05">その他サービスから探す</h2>
                     <ul class="other">

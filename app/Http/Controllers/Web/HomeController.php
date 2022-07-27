@@ -35,11 +35,15 @@ class HomeController extends Controller
         // 公開&&下書きでない
         $products = $this->home_service->paginateProduct(10);
 
-        $product_category_ranks = $this->home_service->getProductCategoryRanks(9);
+        // $product_category_ranks = $this->home_service->getProductCategoryRanks(9);
+
+        $product_category_ranks = MProductCategory::all();
 
         $job_requests = $this->home_service->paginateJobRequest(10);
 
-        $job_category_ranks = $this->home_service->getJobRequestCategoryRanks(9);
+        // $job_category_ranks = $this->home_service->getJobRequestCategoryRanks(9);
+
+        $job_category_ranks = MProductCategory::all();
 
         $news_list = $this->home_service->paginateNewsList(5);
 
