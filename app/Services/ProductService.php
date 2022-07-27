@@ -9,9 +9,13 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductQuestion;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Traits\ProductSearchTrait;
+
 
 class ProductService
 {
+    use ProductSearchTrait;
+
     /**
      * 新規商品投稿
      */
@@ -302,7 +306,6 @@ class ProductService
 
     public function searchProducts(object $request)
     {
-        $service_flg = $request->service_flg;
         $prefecture_id = $request->prefecture_id;
         $low_price = $request->low_price;
         $high_price = $request->high_price;
@@ -313,41 +316,14 @@ class ProductService
         $parent_category_id = $request->parent_category_id;
         $child_category_id = $request->child_category_id;
 
-
-        if ($service_flg === '1') { //プロダクトの時
-            $query = Product::publish();
-        } elseif ($service_flg === '2') { //リクエストの時
-            $query = JobRequest::publish();
-        }
+        $query = Product::publish();
 
         if ($keyword) {
-            $query->where(function(Builder $query) use($keyword) {
-                $query->where('title', 'LIKE', "%{$keyword}%");
-            });
+            $query = $this->searchByKeyword($query, $keyword);
         }
 
         if (!is_null($age_period)) {
-            $now_year = date('Y');
-            $year = $now_year - 9;
-            $year -= $age_period * 10;
-            $up_year = $year + 10;
-
-            if ($age_period == 1) {
-                $query->whereHas('user.userProfile', function (Builder $query) use($year){
-                    $query->whereYear('birthday', '>', $year);
-                }); //要注意
-            }
-            elseif($age_period == 7)
-            {
-                $query->whereHas('user.userProfile', function (Builder $query) use($up_year){
-                    $query->whereYear('birthday', '<=', $up_year);
-                });
-            } else {
-                $query->whereHas('user.userProfile', function (Builder $query) use($year, $up_year){
-                    $query->whereYear('birthday', '>', $year);
-                    $query->whereYear('birthday', '<', $up_year);
-                });
-            }
+            $query = $this->searchByAgePeriod($query, $age_period);
         }
 
         if(isset($request->parent_category_flg)) { //子カテゴリ、または親カテゴリから検索した場合

@@ -37,8 +37,6 @@
                                         <td class="text-nowrap px-2">
                                             @if($news->is_important === 1)
                                                 <p class="">◯</p>
-                                            {{-- @else
-                                                <p class="btn btn-outline-danger">重要ではない</p> --}}
                                             @endif
                                         </td>
                                         <td class="text-nowrap px-2">

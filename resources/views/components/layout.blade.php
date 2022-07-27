@@ -1,7 +1,7 @@
 <x-app>
     <body>
         <div id="wrapper">
-            <x-header :keyword="$keyword ?? ''" :service_flg="$service_flg ?? ''"/> {{-- 2個渡せない --}}
+            <x-header :keyword="$keyword ?? ''" :serviceflg="$serviceflg ?? ''"/>{{--ケバブにすると次で変数が受け取れない、--}}
                 {{$slot}}
             <x-footer/>
         </div>

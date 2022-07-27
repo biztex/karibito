@@ -1,4 +1,4 @@
-<x-layout :keyword="$keyword ?? ''" :service_flg="$service_flg ?? ''">
+<x-layout :keyword="$keyword ?? ''" :serviceflg="$service_flg ?? ''">
 	<div id="breadcrumb">
 		<div class="inner">
 			<a href="{{ route('home') }}">ホーム</a>　&gt;
@@ -325,7 +325,10 @@
 							@if (isset($keyword))
 								<input type="hidden" name="keyword" value="{{$keyword}}">
 							@endif
-							<input type="submit" class="blue-button mb20" style="margin-left: 0" formaction="{{ route('job_request.search') }}" value="検索する">
+							@if (!isset($service_flg))
+								<input type="hidden" name="service_flg" value="2">
+							@endif
+							<input type="submit" class="blue-button mb20" style="margin-left: 0" formaction="{{ route('product.search') }}" value="検索する">
 						</div>
 					</form>
 					<h2 class="cate cate05">その他サービスから探す</h2>

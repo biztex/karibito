@@ -1,4 +1,4 @@
-<x-layout :keyword="$keyword ?? ''" :service_flg="$service_flg ?? ''">
+<x-layout :keyword="$keyword ?? ''" :serviceflg="$service_flg ?? ''">
 {{-- <article> --}}
     <div id="breadcrumb">
         <div class="inner">
@@ -310,6 +310,9 @@
                         @endif
                         @if (isset($keyword))
                             <input type="hidden" name="keyword" value="{{$keyword}}">
+                        @endif
+                        @if (!isset($service_flg))
+                            <input type="hidden" name="service_flg" value="1">
                         @endif
                         <input type="submit" class="blue-button mb20" style="margin-left: 0" formaction="{{ route('product.search') }}" value="検索する">
                     </form>

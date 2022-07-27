@@ -6,9 +6,12 @@ use App\Models\JobRequest;
 use App\Http\Requests\JobRequest\StoreRequest;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\MProductChildCategory;
+use App\Traits\ProductSearchTrait;
 
 class JobRequestService
 {
+    use ProductSearchTrait;
+
     /**
      * 新規リクエスト投稿
      */
@@ -93,35 +96,13 @@ class JobRequestService
         $child_category_id = $request->child_category_id;
 
         $query = JobRequest::publish();
+
         if ($keyword) {
-            $query->where(function(Builder $query) use($keyword) {
-                $query->where('title', 'LIKE', "%{$keyword}%");
-            });
+            $query = $this->searchByKeyword($query, $keyword);
         }
 
-
         if (!is_null($age_period)) {
-            $now_year = date('Y');
-            $year = $now_year - 9;
-            $year -= $age_period * 10;
-            $up_year = $year + 10;
-
-            if ($age_period == 1) {
-                $query->whereHas('user.userProfile', function (Builder $query) use($year){
-                    $query->whereYear('birthday', '>', $year);
-                }); //見直す
-            }
-            elseif($age_period == 7)
-            {
-                $query->whereHas('user.userProfile', function (Builder $query) use($up_year){
-                    $query->whereYear('birthday', '<=', $up_year);
-                });
-            } else {
-                $query->whereHas('user.userProfile', function (Builder $query) use($year, $up_year){
-                    $query->whereYear('birthday', '>', $year);
-                    $query->whereYear('birthday', '<', $up_year);
-                });
-            }
+            $query = $this->searchByAgePeriod($query, $age_period);
         }
 
         if(isset($request->parent_category_flg)) { //子カテゴリ、または親カテゴリから検索した場合
