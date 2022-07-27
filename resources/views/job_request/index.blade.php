@@ -1,4 +1,4 @@
-<x-layout :keyword="$keyword ?? ''">
+<x-layout :keyword="$keyword ?? ''" :service_flg="$service_flg ?? ''">
 	<div id="breadcrumb">
 		<div class="inner">
 			<a href="{{ route('home') }}">ホーム</a>　&gt;

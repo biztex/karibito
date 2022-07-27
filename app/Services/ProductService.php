@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AdditionalOption;
+use App\Models\JobRequest;
 use App\Models\MProductChildCategory;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -301,6 +302,7 @@ class ProductService
 
     public function searchProducts(object $request)
     {
+        $service_flg = $request->service_flg;
         $prefecture_id = $request->prefecture_id;
         $low_price = $request->low_price;
         $high_price = $request->high_price;
@@ -312,7 +314,12 @@ class ProductService
         $child_category_id = $request->child_category_id;
 
 
-        $query = Product::publish();
+        if ($service_flg === '1') { //プロダクトの時
+            $query = Product::publish();
+        } elseif ($service_flg === '2') { //リクエストの時
+            $query = JobRequest::publish();
+        }
+
         if ($keyword) {
             $query->where(function(Builder $query) use($keyword) {
                 $query->where('title', 'LIKE', "%{$keyword}%");
@@ -328,7 +335,7 @@ class ProductService
             if ($age_period == 1) {
                 $query->whereHas('user.userProfile', function (Builder $query) use($year){
                     $query->whereYear('birthday', '>', $year);
-                }); //見直す
+                }); //要注意
             }
             elseif($age_period == 7)
             {

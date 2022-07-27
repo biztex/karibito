@@ -7,9 +7,9 @@
                     <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p>
                     <form method="get">
                         <div class="searchBox">
-                            <select name="search_service" class="searchSelect">
-                                <option value="1">サービス</option>
-                                <option value="2">リクエスト</option>　{{-- どうやるかわからない。値によってroute先を変えたい--}}
+                            <select name="service_flg" class="searchSelect">
+                                <option value="1" @if (isset($service_flg) && ($service_flg === '1')) selected @endif>サービス</option>
+                                <option value="2" @if (isset($service_flg) && ($service_flg === '2')) selected @endif>リクエスト</option>
                             </select>
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
