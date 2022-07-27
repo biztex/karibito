@@ -1,5 +1,3 @@
-<!--　使用例 <x-parts.product-detail :product="$product"/> -->
-
 <div class="item">
     <a href="{{route('product.show',$product->id)}}" class="img imgBox">
         @if(isset($product->productImage[0]))
