@@ -10,16 +10,20 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\AdditionalOption;
+use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
+use App\Services\EvaluationService;
 
 class ProductController extends Controller
 {
     private $product_service;
+    private $evaluation_service;
 
-    public function __construct(ProductService $product_service)
+    public function __construct(ProductService $product_service, EvaluationService $evaluation_service)
     {
         $this->product_service = $product_service;
+        $this->evaluation_service = $evaluation_service;
     }
 
     /**
@@ -83,16 +87,15 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $user = User::find($product->user_id);
-
-        $all_products = Product::all();
-        if ($product->user->userProfile->birthday !== NULL){
-            $age = Age::group($product->user->userProfile->birthday);
-        } else {
-            $age = '不明';
-        }
+        $all_products = Product::getUser($product->user_id)->orderBy('created_at', 'desc')->get();
+        
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
-        return view('product.show', compact('user','product', 'age', 'all_products','additional_options'));
+
+        $evaluations = Evaluation::evaluationTargetUser($product->user_id)->get();
+
+        $evaluation_counts = $this->evaluation_service->countEvaluations($product->user_id);
+
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts'));
     }
 
     /**
