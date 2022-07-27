@@ -90,7 +90,7 @@ class ProductController extends Controller
         
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
 
-        $evaluations = $this->evaluation_service->getTargetServiceEvaluations($product);
+        $evaluations = $this->evaluation_service->getProductEvaluations($product);
 
         $evaluation_counts = $this->evaluation_service->countEvaluations($product->user_id);
 

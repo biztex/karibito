@@ -44,14 +44,13 @@ class EvaluationService
         return $counts;
     }
 
-    public function getTargetServiceEvaluations($value): array
+    public function getProductEvaluations(Product $product): array
     {
         $evaluations = [];
-
-        foreach($value->chatrooms as $chatroom){
+        foreach($product->chatrooms as $chatroom){
             if($chatroom->evaluations->isNotEmpty()){
                 foreach($chatroom->evaluations as $evaluation){
-                    if($evaluation->target_user_id === $value->user_id){
+                    if($evaluation->target_user_id === $product->user_id){
                         array_push($evaluations, $evaluation);
                     }
                 }
