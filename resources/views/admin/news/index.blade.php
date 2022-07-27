@@ -23,7 +23,7 @@
                             <thead class="text-secondary">
                             <tr>
                                 <th scope="col" class="text-nowrap">投稿日</th>
-{{--                                <th scope="col" class="text-nowrap">公開状況</th>--}}
+                                <th scope="col" class="text-nowrap">重要なお知らせ</th>
                                 <th scope="col" class="text-nowrap">タイトル</th>
 {{--                                <th scope="col" class="text-nowrap">詳細</th>--}}
                                 <th scope="col" class="text-nowrap">編集</th>
@@ -34,13 +34,13 @@
                                 @foreach($news_list as $news)
                                     <tr>
                                         <td class="text-nowrap px-2">{{ $news->created_at->format('Y/m/d') }}</td>
-    {{--                                    <td class="text-nowrap px-2">--}}
-    {{--                                        @if($news->is_release === 1)--}}
-    {{--                                            <p class="btn btn-outline-info" href="">公開中</p>--}}
-    {{--                                        @else--}}
-    {{--                                            <p class="btn btn-outline-danger" href="">非公開</p>--}}
-    {{--                                        @endif--}}
-    {{--                                    </td>--}}
+                                        <td class="text-nowrap px-2">
+                                            @if($news->is_important === 1)
+                                                <p class="">◯</p>
+                                            {{-- @else
+                                                <p class="btn btn-outline-danger">重要ではない</p> --}}
+                                            @endif
+                                        </td>
                                         <td class="text-nowrap px-2">
                                             <a href="{{ route('admin.news.show', $news->id) }}">{{ $news->title }}</a>
                                         </td>
