@@ -2,12 +2,11 @@
 
 <div class="item">
     <a href="{{route('product.show',$product->id)}}" class="img imgBox">
-        
         @if(isset($product->productImage[0]))
             <p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;"></p>
             <button class="favorite">お気に入り</button>
         @else
-            <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+            <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
             <button class="favorite">お気に入り</button>
         @endif
     </a>

@@ -87,7 +87,7 @@ class Product extends Model
      */
     public function scopeGetUser($query, $user)
     {
-        return $query->where('user_id', $user);
+        return $query->publish()->where('user_id', $user);
     }
 
     /**
