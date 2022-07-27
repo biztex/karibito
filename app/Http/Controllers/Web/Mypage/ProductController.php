@@ -10,7 +10,6 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\AdditionalOption;
-use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
@@ -91,7 +90,7 @@ class ProductController extends Controller
         
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
 
-        $evaluations = Evaluation::evaluationTargetUser($product->user_id)->get();
+        $evaluations = $this->evaluation_service->getTargetServiceEvaluations($product);
 
         $evaluation_counts = $this->evaluation_service->countEvaluations($product->user_id);
 

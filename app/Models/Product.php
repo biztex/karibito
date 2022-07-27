@@ -182,7 +182,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function chatroom()
+    public function chatrooms()
     {
         return $this->morphMany(Chatroom::class, 'reference');
     }

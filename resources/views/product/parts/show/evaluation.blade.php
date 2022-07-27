@@ -1,9 +1,7 @@
 <div class="clientEvaluate">
     <h2 class="hdM">依頼者からの評価</h2>
-    <div class="box">
-        @if($evaluations->isEmpty())
-            <p>評価はまだありません。</p>
-        @else
+    @if(!empty($evaluations))
+        <div class="box">
             <div class="ftBox">
                 @foreach($evaluations as $value)
                     <li>
@@ -29,11 +27,10 @@
                     </li>
                 @endforeach
             </div>
-        @endif
-
-        <ul>Data loading, please wait...</ul>
-        @if(count($evaluations) > 5)
-            <div class="go"><a href="javascript:;" onClick="moreload.loadMore();" class="more">もっと見る</a></div>
-        @endif
-    </div>
+            <ul>Data loading, please wait...</ul>
+            @if(count($evaluations) > 5)
+                <div class="go"><a href="javascript:;" onClick="moreload.loadMore();" class="more">もっと見る</a></div>
+            @endif
+        </div>
+    @endif
 </div>
