@@ -1,7 +1,8 @@
 <?php
-namespace App\Services;
 
-class TextFormatService
+namespace App\Libraries;
+
+class TextFormat
 {
     /**
      * URLを<a>タグで囲む
@@ -11,7 +12,7 @@ class TextFormatService
      * @param string $text
      * @return string
      */
-    public function generateLinkFromSentence($text)
+    public static function generateLinkFromSentence($text)
     {
         $pattern = '/((?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:@&=+$,%#]+)/';
         // 別タブで開きたいと要望あり

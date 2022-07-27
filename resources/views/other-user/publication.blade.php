@@ -3,7 +3,7 @@
 		<div class="inner">
 			<ul>
 				<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
-				<li><a href="#">評価</a></li>
+				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
 				<li><a href="#">ポートフォリオ</a></li>
 				<li><a href="#" class="is_active">出品サービス</a></li>
@@ -99,7 +99,7 @@
 								<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 120px;height: 120px;object-fit: cover;"></a>
 							@endif
 							<!-- <p class="login">最終ログイン：8時間前</p> -->
-							<p class="introd"><span>{{$user->userProfile->name}}</span><br>({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$age}}/ {{$user->userProfile->prefecture->name}})</p>
+							<p class="introd"><span>{{$user->name}}</span><br>({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$age}}/ {{$user->userProfile->prefecture->name}})</p>
 							<!-- <div class="evaluate three"></div> -->
 							<p class="check"><a href="#">本人確認済み</a></p>
 							<!-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> -->

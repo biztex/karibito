@@ -254,12 +254,12 @@
 	.input_a {
 		margin-bottom: 30px;
 	}
-	.stepUl li + li .stepDot:before {
+	#register .stepUl li + li .stepDot:before {
 		width: 150px;
 	}
 }
 @media screen and (max-width: 320px){
-	.stepUl li + li .stepDot:before {
+	#register .stepUl li + li .stepDot:before {
 		width: 120px;
 	}
 }
@@ -547,7 +547,13 @@
     pointer-events: none;
  }
 
- #past #side div:nth-of-type(2) ul li:nth-of-type(4) a {
+ #chatroom-active #side div:nth-of-type(2) ul li:nth-of-type(3) a {
+    color: #333333;
+    background-color: #FCAA00;
+    pointer-events: none;
+ }
+
+ #chatroom-inactive #side div:nth-of-type(2) ul li:nth-of-type(4) a {
     color: #333333;
     background-color: #FCAA00;
     pointer-events: none;
@@ -919,4 +925,7 @@
 	height: 50px;
 	object-fit: cover;
 	border-radius: 50%;
+}
+.subPagesTab .tabLink li a{
+	padding: 10px;
 }

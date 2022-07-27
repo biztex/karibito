@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chatroom;
-use App\Models\ChatroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\Proposal;
@@ -42,10 +41,36 @@ class ChatroomController extends Controller
      */
     public function index()
     {
-        $active_product_chatrooms = Chatroom::active()->product()->get();
-        $inactive_product_chatrooms = Chatroom::inActive()->product()->get();
+        $active_chatrooms = Chatroom::active()->orderBy('created_at','desc')->paginate(10);
+        $inactive_chatrooms = Chatroom::inActive()->orderBy('created_at','desc')->paginate(10);
 
-        return view('chatroom.index', compact('active_product_chatrooms','inactive_product_chatrooms'));
+        return view('chatroom.index', compact('active_chatrooms','inactive_chatrooms'));
+    }
+
+    /**
+     * やりとり進行中一覧画面
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function active()
+    {
+        $active_product_chatrooms = Chatroom::active()->product()->orderBy('created_at','desc')->paginate(10);
+        $active_job_request_chatrooms = Chatroom::active()->jobRequest()->orderBy('created_at','desc')->paginate(10);
+
+        return view('mypage.chatroom.active', compact('active_product_chatrooms','active_job_request_chatrooms'));
+    }
+
+    /**
+     * やりとり進行中一覧画面
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function inactive()
+    {
+        $inactive_product_chatrooms = Chatroom::inActive()->product()->orderBy('created_at','desc')->paginate(10);
+        $inactive_job_request_chatrooms = Chatroom::inActive()->jobRequest()->orderBy('created_at','desc')->paginate(10);
+
+        return view('mypage.chatroom.inactive', compact('inactive_product_chatrooms','inactive_job_request_chatrooms'));
     }
 
     /**
@@ -172,9 +197,9 @@ class ChatroomController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function purchaseConfirm(Proposal $proposal)
+    public function purchaseConfirm(Request $request, Proposal $proposal)
     {
-        return view('chatroom.purchase.confirm',compact('proposal'));
+        return view('chatroom.purchase.confirm',compact('request', 'proposal'));
     }
 
     /**
@@ -187,7 +212,7 @@ class ChatroomController extends Controller
     {
         \DB::transaction(function () use ($proposal) {
             $this->proposal_service->purchasedProposal($proposal);
-            $purchase = $this->purchase_service->storePurchase($proposal->chatroom);
+            $purchase = $this->purchase_service->storePurchase($proposal);
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
         });

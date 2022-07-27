@@ -26,6 +26,7 @@ use App\Http\Controllers\Web\Mypage\ResumeController;
 use App\Http\Controllers\Web\Mypage\SkillController;
 use App\Http\Controllers\Web\Mypage\CareerController;
 use App\Http\Controllers\Web\Mypage\JobController;
+use App\Http\Controllers\Web\Mypage\EvaluationController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
@@ -246,6 +247,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // やり取り（提供・リクエスト共用版）
     Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
         Route::get('','index')->name('index');
+        Route::get('active','active')->name('active');
+        Route::get('inactive','inactive')->name('inactive');
         Route::get('new/product/{product}','newProduct')->name('new.product'); // productからのnew room
         Route::get('new/job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestからのnew room
 
@@ -264,7 +267,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // 支払い
         Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
-        Route::get('purchase/{proposal}/confirm','purchaseConfirm')->name('purchase.confirm'); // 確認画面
+        Route::post('purchase/{proposal}','purchaseConfirm')->name('purchase.confirm'); // 確認画面
         Route::post('purchased/{proposal}','purchased')->name('purchased');
     });
     // キャンセル
@@ -284,7 +287,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
     Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
     Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
-    Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->name('dm.create');
+    Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create');
     Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');
 
 });
@@ -386,6 +389,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/publication',[OtherUserController::class, 'publication'])->name('publication');
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
     Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
+    Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
 });
-
+Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
