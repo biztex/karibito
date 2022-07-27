@@ -55,9 +55,9 @@ class CancelController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function confirm(StoreRequest $request)
+    public function confirm(StoreRequest $request, Purchase $purchase)
     {
-        return view('chatroom.cancel.confirm', compact('request'));
+        return view('chatroom.cancel.confirm', compact('request', 'purchase'));
     }
 
     /**
