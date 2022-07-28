@@ -8,24 +8,9 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					<ul class="stepUl">
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">チャット開始</p>
-						</li>
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">契約</p>
-						</li>
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">作業</p>
-						</li>
-						<li>
-							<p class="stepDot"></p>
-							<p class="stepTxt">評価</p>
-						</li>
-					</ul>
+					
+					<x-parts.chatroom-step :value="$purchase->chatroom"/>
+
 					<div class="cancelTitle">
 						<h2>キャンセルの申請が完了いたしました</h2>
 					</div>

@@ -16,7 +16,7 @@ class ChatroomService
             'seller_user_id' => $product->user_id,
             'buyer_user_id' => \Auth::id(),
         ];
-        $chatroom = $product->chatroom()->create($users);
+        $chatroom = $product->chatrooms()->create($users);
         
         return $chatroom;
     }
@@ -27,7 +27,7 @@ class ChatroomService
             'seller_user_id' => \Auth::id(),
             'buyer_user_id' => $job_request->user_id,
         ];
-        $chatroom = $job_request->chatroom()->create($users);
+        $chatroom = $job_request->chatrooms()->create($users);
         
         return $chatroom;
     }

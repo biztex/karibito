@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Evaluation;
+use App\Models\Product;
 
 class EvaluationService
 {
@@ -41,5 +42,20 @@ class EvaluationService
         $counts['usually']  = Evaluation::usuallyStar($user_id)->count();
 
         return $counts;
+    }
+
+    public function getProductEvaluations(Product $product): array
+    {
+        $evaluations = [];
+        foreach($product->chatrooms as $chatroom){
+            if($chatroom->evaluations->isNotEmpty()){
+                foreach($chatroom->evaluations as $evaluation){
+                    if($evaluation->target_user_id === $product->user_id){
+                        array_push($evaluations, $evaluation);
+                    }
+                }
+            };   
+        }
+        return $evaluations;
     }
 }

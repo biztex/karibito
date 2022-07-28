@@ -92,39 +92,9 @@
                                                     <div class="recommendList style2 ">
                                                         <div class="list sliderSP02">
                                                         @foreach($products as $product)
-                                                            <div class="item">
-                                                                <a href="{{ route('product.show',$product->id) }}" class="img imgBox" data-img="{{asset('/storage/'.$product->productImage[0]->path)}}">
-                                                                    <img src="/img/common/img_270x160.png" alt="" style="width:190px; height:113px;">
-                                                                    <button class="favorite">お気に入り</button>
-                                                                </a>
-                                                                <div class="infoTop" style="width:190px;">
-                                                                    <div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
-                                                                    <div class="draw">
-                                                                        <p class="price" style="width:100%;"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
-                                                                    </div>
-                                                                    <div class="single">
-                                                                        <a href="#">{{ App\Models\Product::IS_ONLINE[$product->is_online] }}</a>
-                                                                    </div>
-
-                                                                    <div class="aboutUser">
-                                                                        <div class="user">
-                                                                            @if(null !== $user->userProfile->icon)
-                                                                                <p class="ico"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
-                                                                            @else
-                                                                                <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                                            @endif
-                                                                            <div class="introd">
-                                                                                <p class="name">{{$product->user->name}}</p>
-                                                                                <p>({{\App\Models\UserProfile::GENDER[$product->user->userProfile->gender]}}/ {{$age}}/ {{$product->user->userProfile->prefecture->name}})</p>
-                                                                            </div>
-                                                                        </div>
-                                                                        @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-                                                                            <p class="check"><a href="#">本人確認済み</a></p>
-                                                                        @endif
-                                                                        <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            
+															<x-parts.product-detail :product="$product"/>
+															
                                                         @endforeach
                                                         </div>
                                                     </div>
