@@ -12,18 +12,24 @@
 					<x-parts.chatroom-step :value="$chatroom"/>
 
 					<div class="cancelTitle">
-						<h2>評価をお願いします</h2>
+						<h2>評価が完了しました</h2>
 					</div>
 					<div class="cancelRea">
 						<p class="reason">契約者からの評価が終わると取引完了となります。<br>しばらくお待ちください。</p>
 					</div>
-					<div class="cancelRea st2">
-						<p class="reason">カリビトアプリを利用してみていかがだったでしょうか？<br>カリビトへの評価をお願いします。</p>
-						<p class="logo"><img src="/img/cart_buy/logo.svg" alt=""></p>
-						<div class="functeBtns">
-							<input type="submit" class="red" value="評価を投稿する">
+					@if($survey->isEmpty())
+						<div class="cancelRea st2">
+							<p class="reason">カリビトアプリを利用してみていかがだったでしょうか？<br>カリビトへの評価をお願いします。</p>
+							<p class="logo"><img src="/img/cart_buy/logo.svg" alt=""></p>
+							<div class="functeBtns">
+								<a href="{{ route('survey.create',$chatroom) }}" class="red">評価を投稿する</a>
+							</div>
 						</div>
-					</div>
+					@else
+						<div class="functeBtns">
+							<a href="{{ route('chatroom.show', $chatroom->id); }}" class="red">チャットに戻る</a>
+						</div>
+					@endif
 				</div>
 			</div>
 		</div><!-- /#contents -->

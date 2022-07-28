@@ -14,7 +14,7 @@
 						<h3><span>カリビトアンケート</span></h3>
 						<p>カリビトアンケートをご利用いただき誠にありがとうございます。<br>本アプリにつきまして改善点などご要望等ございましたら<br>下記よりご連絡ください。<br>今後ともどうぞよろしくお願い致します。</p>
 					</div>
-                    <form action="{{ route('survey.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('survey.store', $chatroom) }}" method="POST" enctype="multipart/form-data">
 					@csrf
                         <div class="evaluation">
                             <!-- star選択素材がなかったので仮で作ってます -->
@@ -31,7 +31,9 @@
                             <p class="stars">カリビトを５つ星で評価ください。<img src="img/cancel/ico_5stars.svg" alt=""></p>
                             <div class="write">
                                 <p>評価コメントを記入しましょう</p>
-                                <textarea name="comment"></textarea>
+                                @error('comment')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                <textarea name="comment">{{ old('comment') }}</textarea>
+                                <input type="hidden" name="chatroom_id" value="{{ $chatroom->id }}">
                             </div>
                         </div>
                         <div class="functeBtns">

@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'exists.session.facebookid' => \App\Http\Middleware\ExistsSessionFacebookId::class,
         'null.user.profile' => \App\Http\Middleware\NullUserProfile::class,
         'exist.user.profile' => \App\Http\Middleware\ExistUserProfile::class,
+        'already.answered.kiribito_survey' => \App\Http\Middleware\AlreadyAnsweredKiribitoSurvey::class,
 
     ];
 }

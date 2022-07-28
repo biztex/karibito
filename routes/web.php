@@ -396,5 +396,5 @@ Route::prefix('user')->name('user.')->group(function () {
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
 // アンケート
-Route::get('survey', [KaribitoSurveyController::class, 'create'])->name('survey.create');
-Route::post('survey', [KaribitoSurveyController::class, 'store'])->name('survey.store');
+Route::get('survey/{chatroom}', [KaribitoSurveyController::class, 'create'])->name('survey.create');
+Route::post('survey/{chatroom}', [KaribitoSurveyController::class, 'store'])->middleware('already.answered.kiribito_survey')->name('survey.store');
