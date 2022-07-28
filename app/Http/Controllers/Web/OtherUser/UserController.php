@@ -52,7 +52,7 @@ class UserController extends Controller
         $job_request = JobRequest::where('user_id', $user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $age = Age::group($user->userProfile->birthday);
         $id = $user->id;
-        $dmrooms = Dmroom::where('to_user_id','=', $user->id)->first();
+        $dmrooms = Dmroom::where('to_user_id','=', $user->id)->where('from_user_id', '=', \Auth::id())->first();
 
         return view('other-user.mypage', compact('user','products', 'age','dmrooms', 'job_request'));
     }

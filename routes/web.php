@@ -357,6 +357,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/products',ProductController::class,['only' => ['index']]);
         Route::resource('/job_requests',JobRequestController::class,['only' => ['index']]);
         Route::resource('/m_commission_rates',MCommissionRateController::class,['only' => ['index', 'store']]);
+        Route::resource('/survey',AdminKaribitoSurveyController::class,['only' => ['index']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 
@@ -397,4 +398,4 @@ Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation
 
 // アンケート
 Route::get('survey/{chatroom}', [KaribitoSurveyController::class, 'create'])->name('survey.create');
-Route::post('survey/{chatroom}', [KaribitoSurveyController::class, 'store'])->middleware('already.answered.kiribito_survey')->name('survey.store');
+Route::post('survey/{chatroom}', [KaribitoSurveyController::class, 'store'])->middleware('already.answered.karibito_survey')->name('survey.store');
