@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\KaribitoSurvey;
 
-class AlreadyAnsweredKiribitoSurvey
+class AlreadyAnsweredKaribitoSurvey
 {
     /**
      * Handle an incoming request.
