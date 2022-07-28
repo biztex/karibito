@@ -15,7 +15,11 @@
 						<h2>評価をお願いします</h2>
 					</div>
 					<div class="cancelRea">
-						<p class="reason">契約者からの評価が終わると取引完了となります。<br>しばらくお待ちください。</p>
+						@if($chatroom->status === App\Models\Chatroom::STATUS_SELLER_EVALUATION)
+							<p class="reason">契約者からの評価が終わると取引完了となります。<br>しばらくお待ちください。</p>
+						@else
+							<p class="reason">取引が完了しました。</p>
+						@endif
 					</div>
 					<div class="cancelRea st2">
 						<p class="reason">カリビトアプリを利用してみていかがだったでしょうか？<br>カリビトへの評価をお願いします。</p>

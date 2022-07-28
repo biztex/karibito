@@ -11,6 +11,10 @@ use App\Models\UserSkill;
 use App\Models\UserCareer;
 use App\Models\UserJob;
 use App\Models\Dmroom;
+use App\Models\Chatroom;
+use App\Models\Proposal;
+use App\Models\Purchase;
+use App\Models\PurchasedCancel;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -84,6 +88,98 @@ class AuthServiceProvider extends ServiceProvider
         // dm/create 自分のdmroomを作らせない
         Gate::define('not.create.dm', function (User $user, $to_user) {
             return $user->id !== $to_user->id;
+        });
+
+        // Productからやりとり
+        // 自分のサービスからは交渉へ進めない
+        Gate::define('start.chatroom.product', function (User $user, Product $product) {
+            return $user->id !== $product->user_id ;
+        });
+
+        // JobRequestからやりとり
+        // 自分のサービスからは交渉へ進めない
+        Gate::define('start.chatroom.job.request', function (User $user, JobRequest $job_request) {
+            return $user->id !== $job_request->user_id ;
+        });
+
+        // 自分のやりとり
+        // 購入者か提供者が自分でないとアクセスできない
+        Gate::define('my.chatroom', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->buyer_user_id || $user->id === $chatroom->seller_user_id ;
+        });        
+
+        // やり取りでの提案
+        Gate::define('proposal', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->seller_user_id && ($chatroom->status === Chatroom::STATUS_START || $chatroom->status === Chatroom::STATUS_PROPOSAL) ;
+        });
+
+        // やり取りでの購入
+        Gate::define('purchase', function (User $user, Proposal $proposal) {
+            return $user->id === $proposal->chatroom->buyer_user_id 
+                && $proposal->chatroom->status === Chatroom::STATUS_PROPOSAL 
+                && !$proposal->purchase()->exists();
+        });
+
+        // やり取りでの購入完了画面
+        Gate::define('purchased', function (User $user, Proposal $proposal) {
+            return $user->id === $proposal->chatroom->buyer_user_id 
+                && $proposal->chatroom->status === Chatroom::STATUS_WORK 
+                && $proposal->purchase()->exists();
+        });
+
+        // やり取りでの作業完了
+        Gate::define('worked', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->seller_user_id && $chatroom->status === Chatroom::STATUS_WORK ;
+        });
+
+        // やりとり購入者評価
+        Gate::define('buyer.evaluation', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->buyer_user_id 
+                && $chatroom->status === Chatroom::STATUS_BUYER_EVALUATION 
+                && !$chatroom->evaluations()->exists();
+        });
+
+        // やり取り提供者評価
+        Gate::define('seller.evaluation', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->seller_user_id 
+                && $chatroom->status === Chatroom::STATUS_SELLER_EVALUATION 
+                && $chatroom->evaluations( function($query, $user, $chatroom){
+                                                $query->where([
+                                                    ['chatroom_id', '=', $chatroom->id],
+                                                    ['user_id', '=', $user->id],
+                                                ])->exists();
+                                            });
+        });
+
+        // やり取り評価完了画面
+        Gate::define('chatroom.evaluation.complete', function (User $user, Chatroom $chatroom) {
+            return ( $user->id === $chatroom->buyer_user_id && ( $chatroom->status === Chatroom::STATUS_SELLER_EVALUATION || $chatroom->status === Chatroom::STATUS_COMPLETE )) 
+                || ( $user->id === $chatroom->seller_user_id && $chatroom->status === Chatroom::STATUS_COMPLETE );
+        });
+
+        // やり取りキャンセル可能ステータス
+        Gate::define('cancelable', function (User $user, Purchase $purchase) {
+            return $purchase->chatroom->isCancelable() ;
+        });
+
+        // やり取りキャンセル申請完了画面
+        Gate::define('cancel.send', function (User $user, PurchasedCancel $purchased_cancel) {
+            return $user->id === $purchased_cancel->user_id && $purchased_cancel->status === PurchasedCancel::STATUS_APPLYING;
+        });
+
+        // やり取りキャンセル申請中
+        Gate::define('cancel.applying', function (User $user, PurchasedCancel $purchased_cancel) {
+            return $user->id !== $purchased_cancel->user_id 
+                && ($user->id === $purchased_cancel->purchase->chatroom->buyer_user_id || $user->id === $purchased_cancel->purchase->chatroom->seller_user_id) 
+                && $purchased_cancel->status === PurchasedCancel::STATUS_APPLYING;
+        });
+
+        // やり取りキャンセル成立
+        Gate::define('canceled', function (User $user, PurchasedCancel $purchased_cancel) {
+            return $user->id !== $purchased_cancel->user_id 
+                && ($user->id === $purchased_cancel->purchase->chatroom->buyer_user_id || $user->id === $purchased_cancel->purchase->chatroom->seller_user_id)
+                && $purchased_cancel->status === PurchasedCancel::STATUS_CANCELED 
+                && $purchased_cancel->purchase->chatroom->status === Chatroom::STATUS_CANCELED;
         });
     }
 }

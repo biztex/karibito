@@ -177,9 +177,10 @@ class ChatroomController extends Controller
             $this->chatroom_service->statusChangeContract($chatroom);
         });
 
-        return back();
+        return redirect()->route('chatroom.getProposal', $chatroom);
     }
 
+    public function getProposal(Chatroom $chatroom){ return redirect()->route('chatroom.show', $chatroom); }
     /**
      * 購入画面
      * @param \App\Models\Proposal $proposal
@@ -240,7 +241,7 @@ class ChatroomController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function evaluation(Chatroom $chatroom)
+    public function getBuyerEvaluation(Chatroom $chatroom)
     {
         return view('chatroom.evaluation.create', compact('chatroom'));
     }
@@ -261,6 +262,17 @@ class ChatroomController extends Controller
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);
+    }
+
+    /**
+     * 評価画面
+     * @param \App\Models\Chatroom $chatroom
+     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function getSellerEvaluation(Chatroom $chatroom)
+    {
+        return view('chatroom.evaluation.create', compact('chatroom'));
     }
 
     /**

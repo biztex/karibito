@@ -12,6 +12,7 @@ class Purchase extends Model
 
     protected $guarded = ['id'];
 
+    const IS_CANCEL = 1;
 
     /**
      * キャンセル申請可能状況判断
