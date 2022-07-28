@@ -8,7 +8,7 @@
         'user'              => 'admin',
 
         // Password
-        'password'          => 'basic777',
+        'password'          => 'basic',
 
         // Environments where the middleware is active. Use "*" to protect all envs
         'envs'              => [
