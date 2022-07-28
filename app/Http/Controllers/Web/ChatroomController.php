@@ -7,6 +7,7 @@ use App\Models\Chatroom;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\Proposal;
+use App\Models\KaribitoSurvey;
 use Illuminate\Http\Request;
 use App\Services\ChatroomService;
 use App\Services\ChatroomMessageService;
@@ -289,7 +290,9 @@ class ChatroomController extends Controller
      */
     public function evaluationComplete(Chatroom $chatroom)
     {
-        return view('chatroom.evaluation.complete', compact('chatroom'));
+        $survey = KaribitoSurvey::where('user_id', \Auth::id())->get();
+        
+        return view('chatroom.evaluation.complete', compact('chatroom','survey'));
     }
 
 }
