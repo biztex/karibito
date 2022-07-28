@@ -8,7 +8,8 @@
                     <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
                         <li class="breadcrumb-item active" aria-current="page">job_request一覧
-                            <form action="{{ route('admin.search') }}" class="mt-2 d-flex" method="GET">
+                            <form action="{{ route('admin.job_request.search') }}" class="mt-2 d-flex" method="GET">
+                                @csrf
                                 <input class="form-control" type="text" name="search" value="{{ $request->search ?? "" }}">
                                 <button class="btn btn-secondary btn-block w-25 ml-2" type="submit">検索</button>
                             </form>
