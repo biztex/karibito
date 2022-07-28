@@ -13,6 +13,7 @@
                             </select>
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+                                <input type="hidden" name="search_flg" value="1">
                                 <input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
                             </div>
                         </div>

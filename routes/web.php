@@ -337,7 +337,7 @@ Route::get('product/index/keyword/search', [OtherUserProductController::class, '
 // リクエスト一覧
 Route::get('job_request/index/category/{category}', [OtherUserJobRequestController::class, 'index'])->name('job_request.category.index');
 Route::get('job_request/index/category/show/{child_category}', [OtherUserJobRequestController::class, 'show'])->name('job_request.category.index.show');
-Route::get('job_request/index/keyword/search', [OtherUserJobRequestController::class, 'search'])->name('job_request.search');
+// Route::get('job_request/index/keyword/search', [OtherUserJobRequestController::class, 'search'])->name('job_request.search');
 
 
 // --管理者画面-----------------------------------------------------------------------------

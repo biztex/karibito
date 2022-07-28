@@ -35,6 +35,7 @@
 					</div> --}}
 					<form method="get">
 						<div class="search">
+							<input type="hidden" name="service_flg" value="1">
 							<input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
 							<input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
 						</div>
@@ -86,7 +87,6 @@
 								<div class="recommendCates">
 									<h2 class="hdM">おすすめのカテゴリー</h2>
 									<ul>
-										{{-- 後でやる --}}
 										<li><a href="{{route('product.category.index', 1) }}" class="cate01">家事</a></li>
 										<li><a href="{{route('product.category.index', 2) }}" class="cate02">修理組み立て</a></li>
 										<li><a href="{{route('product.category.index', 16) }}" class="cate03">料理</a></li>
@@ -116,7 +116,12 @@
 													</a>
 													<div class="infoTop">
 														<div>
-															<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<a href="">{{ $product->mProductChildCategory->name }}</a></div> {{-- 親カテゴリだけaタグなのか--}}
+															<div class="breadcrumb">
+																<a href="{{ route('product.category.index',$product->mProductChildCategory->mProductCategory->id) }}">
+																	{{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;
+																<a href="{{ route('product.category.index.show',$product->mProductChildCategory->id)}}">
+																	{{ $product->mProductChildCategory->name }}</a>
+															</div>
 															<div class="draw">
 																<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
 															</div>
@@ -171,7 +176,9 @@
 																</a>
 																<div class="infoTop">
 																	<div>
-																		<div class="breadcrumb"><a href="#">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>{{-- 親カテゴリだけaタグなのか--}}
+																		<div class="breadcrumb">
+																			<a href="{{ route('product.category.index',$product->mProductChildCategory->mProductCategory->id) }}">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('product.category.index.show',$product->mProductChildCategory->id)}}">{{ $product->mProductChildCategory->name }}</a>
+																		</div>
 																		<div class="draw">
 																			<p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
 																		</div>
@@ -273,7 +280,7 @@
 											<div class="item">
 												<p class="level"></p>
 												<div class="info">
-													<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
+													<div class="breadcrumb"><a href="{{ route('job_request.category.index',$job_request->mProductChildCategory->mProductCategory->id) }}">{{ $job_request->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show',$job_request->mProductChildCategory->id)}}">{{ $job_request->mProductChildCategory->name }}</a></div>
 													<a href="{{ route('job_request.show',$job_request->id)}}">
 														<div class="draw">
 															<p class="price">{{ $job_request->title }}</font></p>
@@ -328,7 +335,9 @@
 															<div class="item">
 																<p class="level"></p>
 																<div class="info">
-																	<div class="breadcrumb"><a href="#">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
+																	<div class="breadcrumb">
+																		<a href="{{ route('job_request.category.index',$job_request->mProductChildCategory->mProductCategory->id) }}">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show',$job_request->mProductChildCategory->id)}}">{{ $job_request->mProductChildCategory->name }}</a>
+																	</div>
 																	<div class="draw">
 																		<p class="price"><font>{{ $job_request->title }}</font></p>
 																	</div>

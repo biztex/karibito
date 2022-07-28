@@ -19,6 +19,23 @@ trait ProductSearchTrait
     }
 
     /**
+     * 親カテゴリーが一致するものを取得するするときに使う
+     */
+    public function searchByParentCategory(Builder $query, int $category_id):Builder
+    {
+        $child_categories = MProductChildCategory::where('parent_category_id', $category_id)->pluck('id')->toArray();
+        $query->whereIn('category_id', $child_categories);
+    }
+
+    /**
+     * 子カテゴリが一致するものを取得するときに使う
+     */
+    public function searchByChildCategory(Builder $query, int $category_id):Builder
+    {
+        $query->where('category_id', $category_id);
+    }
+
+    /**
      * 年代で検索するときに使う
      */
     public function searchByAgePeriod(Builder $query, int $age_period):Builder

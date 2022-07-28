@@ -32,7 +32,7 @@ class HomeService
 
     public function paginateJobRequest($i)
     {
-        $job_requests = JobRequest::publish()->orderBy('created_at','desc')->paginate($i);
+        $job_requests = JobRequest::display()->orderBy('created_at','desc')->paginate($i);
 
         return $job_requests;
     }
