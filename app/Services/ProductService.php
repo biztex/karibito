@@ -328,19 +328,15 @@ class ProductService
 
         if(isset($request->parent_category_flg)) { //子カテゴリ、または親カテゴリから検索した場合
             if($request->parent_category_flg === '1') {
-                $parent_category_id = $request->parent_category_id;
-                $child_categories = MProductChildCategory::where('parent_category_id', $parent_category_id)->pluck('id')->toArray();
-                $query->whereIn('category_id', $child_categories);
+                $query = $this->searchByParentCategory($query, $request->parent_category_id);
             } elseif($request->parent_category_flg === '0') {
-                $category_id = $request->child_category_id;
-                $query->where('category_id', $category_id);
+                $query = $this->searchByChildCategory($query, $request->child_category_id);
             }
-        } else { //キーワードで検索した時、または検索してから再度検索した時
+        } else { //キーワード検索の時、または検索してから再度検索した時
             if(isset($parent_category_id)) {
-                $child_categories = MProductChildCategory::where('parent_category_id', $parent_category_id)->pluck('id')->toArray();
-                $query->whereIn('category_id', $child_categories);
+                $query = $this->searchByParentCategory($query, $request->parent_category_id);
             } elseif(isset($child_category_id)) {
-                $query->where('category_id', $child_category_id);
+                $query = $this->searchByChildCategory($query, $request->child_category_id);
             }
         }
 

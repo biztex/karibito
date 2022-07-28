@@ -19,15 +19,7 @@
     <article>
         <div id="teaser">
             <div class="inner">
-                @if (isset($parent_category_flg))
-                    @if ($parent_category_flg === 1)
-                        <h2>{{$category->name}}</h2>
-                    @elseif ($parent_category_flg === 0)
-                        <h2>{{$child_category->mProductCategory->name}}</h2>
-                    @endif
-                @else
-                    <h2>検索結果一覧</h2>
-                @endif
+                <h2>{{$title}}</h2>
             </div>
         </div><!-- /.teaser -->
         <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -77,9 +69,10 @@
                                         </a>
                                         <div class="info">
                                             <div class="breadcrumb">
-                                                {{-- カテゴリのaタグ --}}
-                                                <span>{{ $product_rank->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
-                                                <span>{{ $product_rank->mProductChildCategory->name }}</span>
+                                                <a href="{{ route('product.category.index',$product_rank->mProductChildCategory->mProductCategory->id)}}">
+                                                    {{ $product_rank->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+                                                <a href="{{ route('product.category.index.show',$product_rank->mProductChildCategory->id)}}">
+                                                    {{ $product_rank->mProductChildCategory->name }}</a>
                                             </div>
                                             <div class="draw">
                                                 <p class="price"><font>{{ $product_rank->title }}</font><br>{{ number_format($product_rank->price) }}円</p>
@@ -162,8 +155,9 @@
                                     </a>
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <span>{{ $product->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
-                                            <span>{{ $product->mProductChildCategory->name }}</span>
+                                            <a href="{{ route('product.category.index',$product->mProductChildCategory->mProductCategory->id)}}">
+                                                {{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+                                            <a href="{{ route('product.category.index.show',$product->mProductChildCategory->id)}}">{{ $product->mProductChildCategory->name }}</a>
                                         </div>
                                         <div class="draw">
                                             <p class="price"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
@@ -311,9 +305,7 @@
                         @if (isset($keyword))
                             <input type="hidden" name="keyword" value="{{$keyword}}">
                         @endif
-                        @if (!isset($service_flg))
-                            <input type="hidden" name="service_flg" value="1">
-                        @endif
+                        <input type="hidden" name="service_flg" value="1">
                         <input type="submit" class="blue-button mb20" style="margin-left: 0" formaction="{{ route('product.search') }}" value="検索する">
                     </form>
                     <h2 class="cate cate05">その他サービスから探す</h2>

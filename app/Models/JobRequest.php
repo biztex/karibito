@@ -49,6 +49,31 @@ class JobRequest extends Model
         self::OFFLINE => '対面',
     ];
 
+
+    // 表示するもののみのスコープを作成する
+
+    /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeDisplay($query)
+    {
+        return $query->inDeadline()->publish();
+    }
+
+    /**
+     * 自分の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInDeadline($query)
+    {
+        return $query->where('application_deadline', ">=", today());
+    }
+
     /**
      * 自分の提供のみ取得
      *

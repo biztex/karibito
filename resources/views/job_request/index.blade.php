@@ -7,7 +7,7 @@
                     <a href="{{ route('job_request.category.index', $category->id) }}">{{$category->name}}</a>
                 @elseif ($parent_category_flg === 0)
                     <a href="{{ route('job_request.category.index', $child_category->mProductCategory->id) }}">{{$child_category->mProductCategory->name}}</a>　&gt;　
-                    <a href="">{{$child_category->name}}</a>
+                    <a href="{{ route('job_request.category.index.show', $child_category->id) }}">{{$child_category->name}}</a>
                 @endif
             @else
                 <a>検索結果一覧</a>
@@ -18,15 +18,7 @@
 	<article>
 		<div id="teaser">
 			<div class="inner">
-				@if (isset($parent_category_flg))
-                    @if ($parent_category_flg === 1)
-                        <h2>{{$category->name}}</h2>
-                    @elseif ($parent_category_flg === 0)
-                        <h2>{{$child_category->mProductCategory->name}}</h2>
-                    @endif
-                @else
-                    <h2>検索結果一覧</h2>
-                @endif
+				<h2>{{$title}}</h2>
 			</div>
 		</div><!-- /.teaser -->
 		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -66,39 +58,41 @@
 					@if (isset($parent_category_flg) && $parent_category_flg === 1)
 						<div class="recommendList style2">
 							<h2 class="hdM">ランキング一覧</h2>
-							<div class="list sliderSP st3">
+							<div class="list sliderSP"> {{--st3クラスを消した。横幅がおかしかったため--}}
 								@foreach( $job_request_ranks as $job_request_rank)
 									<div class="item">
 										<p class="level"></p>
 										<div class="info biggerlink">
 											<div class="breadcrumb">
-												<span>{{ $job_request_rank->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
-												<span>{{ $job_request_rank->mProductChildCategory->name }}</span>
+												<a href="{{ route('job_request.category.index', $job_request_rank->mProductChildCategory->mProductCategory->id) }}">
+													{{ $job_request_rank->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+												<a href="{{ route('job_request.category.index.show', $job_request_rank->mProductChildCategory->id) }}">
+													{{ $job_request_rank->mProductChildCategory->name }}</a>
 											</div>
-											<div class="draw">
-												<p class="price">
-													<a href="{{route('job_request.show',$job_request_rank->id)}}">{{ $job_request_rank->title }}</a>
-												</p>
-											</div>
-											<div class="budget">
-												<table>
-													<tr>
-														<th><span class="th">予算</span></th>
-														<td>{{ number_format($job_request_rank->price) }}円〜</td>
-													</tr>
-													<tr>
-														<th><span class="th">提案数</span></th>
-														<td>0</td>
-														{{-- まだわからない --}}
-													</tr>
-													<tr>
-														<th><span class="th">募集期限</span></th>
-														<td>{{ $job_request_rank->deadline_day }}日と{{ $job_request_rank->deadline_hour }}時間</td>
-														{{-- 修正する --}}
-														{{-- <td>{{ $job_request_rank->application_deadline }}</td> --}}
-													</tr>
-												</table>
-											</div>
+											<a href="{{route('job_request.show',$job_request_rank->id)}}">
+												<div class="draw">
+													<p class="price">{{ $job_request_rank->title }}</p>
+												</div>
+												<div class="budget">
+													<table>
+														<tr>
+															<th><span class="th">予算</span></th>
+															<td>{{ number_format($job_request_rank->price) }}円〜</td>
+														</tr>
+														<tr>
+															<th><span class="th">提案数</span></th>
+															<td>0</td>
+															{{-- まだわからない --}}
+														</tr>
+														<tr>
+															<th><span class="th">募集期限</span></th>
+															<td>{{ $job_request_rank->deadline_day }}日と{{ $job_request_rank->deadline_hour }}時間</td>
+															{{-- 修正する --}}
+															{{-- <td>{{ $job_request_rank->application_deadline }}</td> --}}
+														</tr>
+													</table>
+												</div>
+											</a>
 											<div class="aboutUser">
 												<div class="user">
 													@if(empty($job_request_rank->user->userProfile->icon))
@@ -169,13 +163,15 @@
 							{{  ($job_requests->currentPage() -1) * $job_requests->perPage() + 1}} - {{ (($job_requests->currentPage() -1) * $job_requests->perPage() + 1) + (count($job_requests) -1)  }}件の表示
                             {{-- <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$job_requests->total() . '件中' . $job_requests->firstItem() . '-' . $job_requests->lastItem()}}件）</h3> --}}
 						</p>
-						<div class="list sliderSP02 st3">
+						<div class="list sliderSP02">　{{--st3クラスを消した。横幅がおかしかったため--}}
 							@foreach( $job_requests as $job_request)
 								<div class="item">
 									<div class="info biggerlink">
 										<div class="breadcrumb">
-											<span>{{ $job_request->mProductChildCategory->mProductCategory->name }}</span>&emsp;＞&emsp;
-											<span>{{ $job_request->mProductChildCategory->name }}</span>
+											<a href="{{ route('job_request.category.index', $job_request->mProductChildCategory->mProductCategory->id) }}">
+												{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
+											<a href="{{ route('job_request.category.index.show', $job_request->mProductChildCategory->id) }}">
+												{{ $job_request->mProductChildCategory->name }}</a>
 										</div>
 										<div class="draw">
 											<p class="price">
@@ -219,15 +215,6 @@
 						</div>
 					</div>
 					<div class=wp-pagenavi>
-						{{-- <span class="current">1</span>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-						<a href="#">6</a>
-						<a href="#">7</a>
-						...
-						<a href="#" class="nextpostslink">次へ</a> --}}
 						{{ $job_requests->links() }}
 					</div>
 				</div><!-- /#main -->
@@ -255,7 +242,7 @@
                             @endif
                         @endif
 					</ul>
-					<form method="get" class="" enctype="multipart/form-data" action="{{ route('job_request.search') }}">
+					<form method="get" class="" enctype="multipart/form-data" action="{{ route('product.search') }}">
 						<h2 class="cate cate03">並べ替え</h2>
 						<div class="checkboxChoice">
 							<label><input type="radio" name="sort" value="1" @if (isset($sort) && $sort === '1') checked @endif>ランキングの高い順</label>
@@ -325,9 +312,7 @@
 							@if (isset($keyword))
 								<input type="hidden" name="keyword" value="{{$keyword}}">
 							@endif
-							@if (!isset($service_flg))
-								<input type="hidden" name="service_flg" value="2">
-							@endif
+							<input type="hidden" name="service_flg" value="2">
 							<input type="submit" class="blue-button mb20" style="margin-left: 0" formaction="{{ route('product.search') }}" value="検索する">
 						</div>
 					</form>
