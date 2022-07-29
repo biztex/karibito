@@ -93,7 +93,7 @@
                                                         <div class="list sliderSP02">
                                                         @foreach($products as $product)
                                                             
-															<x-parts.product-detail :product="$product"/>
+															<x-parts.product-item :product="$product"/>
 															
                                                         @endforeach
                                                         </div>

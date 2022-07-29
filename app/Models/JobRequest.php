@@ -60,7 +60,7 @@ class JobRequest extends Model
      */
     public function scopeDisplay($query)
     {
-        return $query->inDeadline()->publish();
+        return $query->inDeadline()->otherUsers();
     }
 
     /**
@@ -83,6 +83,17 @@ class JobRequest extends Model
     public function scopeLoginUsers($query)
     {
         return $query->where('user_id',\Auth::id());
+    }
+
+     /**
+     * 自分の以外の提供のみ取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOtherUsers($query)
+    {
+        return $query->publish()->where('user_id','<>',\Auth::id());
     }
 
     /**

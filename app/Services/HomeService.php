@@ -11,25 +11,41 @@ use App\Models\MProductCategory;
 class HomeService
 {
 
+    // おすすめ10件で使用
     public function paginateProduct($i)
     {
-        $products = Product::publish()->orderBy('created_at','desc')->paginate($i); // 公開&&下書きでない
+        $products = Product::otherUsers()->orderBy('created_at','desc')->paginate($i);
 
         return $products;
     }
 
-    public function getProductCategoryRanks($i)
+    // カテゴリー別で使用 (全ての自分以外の公開・下書きでないもの)
+    public function publishProducts()
     {
-        $products = $this->paginateProduct(10);
+        $products = Product::otherUsers()->orderBy('created_at','desc')->get(); // 公開&&下書きでない
+
+        return $products;
+    }
+
+    // カテゴリー別のカテゴリー9件
+    // 公開のproductが存在するカテゴリー全て取得
+    // 順番(最初に表示される9件)は確認中
+    public function getProductCategoryRanks()
+    {
+        $products = $this->publishProducts();
+
+        $product_category_id = [];
         foreach($products as $product)
         {
             $product_category_id[] = $product->mProductChildCategory->mProductCategory->id;
         }
-        $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->paginate($i);
+        // $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->paginate($i);
+        $product_category_ranks = MProductCategory::whereIn('id',$product_category_id)->orderBy('created_at','desc')->get();
 
         return $product_category_ranks;
     }
 
+    // おすすめ10件で使用
     public function paginateJobRequest($i)
     {
         $job_requests = JobRequest::display()->orderBy('created_at','desc')->paginate($i);
@@ -37,14 +53,28 @@ class HomeService
         return $job_requests;
     }
 
-    public function getJobRequestCategoryRanks($i)
+    // カテゴリー別で使用 (全ての自分以外の公開・下書きでないもの)
+    public function publishJobRequests()
     {
-        $job_requests = $this->paginateJobRequest(10);
+        $job_requests = JobRequest::display()->orderBy('created_at','desc')->get();
+
+        return $job_requests;
+    }
+
+    // カテゴリー別のカテゴリー9件
+    // 公開のjob_requestが存在するカテゴリー全て取得
+    // 順番(最初に表示される9件)は確認中
+    public function getJobRequestCategoryRanks()
+    {
+        $job_requests = $this->publishJobRequests();
+
+        $job_category_id = [];
         foreach($job_requests as $job_request)
         {
             $job_category_id[] = $job_request->mProductChildCategory->mProductCategory->id;
         }
-        $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->paginate($i);
+        // $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->paginate($i);
+        $job_category_ranks = MProductCategory::whereIn('id', $job_category_id)->orderBy('created_at','desc')->get();
 
         return $job_category_ranks;
     }
