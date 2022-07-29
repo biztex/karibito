@@ -2,7 +2,26 @@
     <div class="container my-5">
 
     <x-admin.flash_msg/>
-       
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb border bg-white shadow-sm">
+{{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
+            <li class="breadcrumb-item active" aria-current="page">User一覧
+                <form action="{{ route('admin.user.search') }}" class="mt-2" method="get">
+                    @csrf
+                    <div class="d-flex">
+                        <input class="form-control col-4" type="text" name="search" value="{{ $request->search ?? "" }}">
+                        <button class="btn btn-secondary btn-block col-2 ml-2 content-end" type="submit">検索</button>
+                    </div>
+                    <div class="mt-2 ml-2">
+                        <label for="is_approve">未承認：</label>
+                        <input type="checkbox" id="is_approve" name="is_approve" value="1" {{ $request->is_approve ?? "" == 1 ? 'checked' : "" }}>
+                    </div>
+                </form>
+                <div>※ユーザー名に部分一致で検索 / チェックを付けて検索で未承認のみ表示</div>
+            </li>
+        </ol>
+    </nav>
+
     <table class="table table-sm table-hover">
         <thead>
             <tr>
@@ -14,7 +33,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user) 
+            @foreach($users as $user)
                 <tr>
                 <a href="{{ route('admin.users.show',$user->user_id) }}"><th scope="row">{{ $user->user_id }}</th></a>
                 <td>{{ $user->first_name.' '.$user->last_name }}</td>
@@ -77,10 +96,10 @@
                 </div>
                 </tr>
             @endforeach
-            {{ $users->links() }} 
+            {{ $users->links() }}
         </tbody>
     </table>
-    {{ $users->links() }} 
+    {{ $users->links() }}
 
     </div>
 </x-admin.app>
