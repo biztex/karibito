@@ -15,7 +15,7 @@
 						<h2>この取引を本当にキャンセルしますか？</h2>
 						<p>キャンセル理由</p>
 					</div>
-					<form action="" method="post">
+					<form id="form" action="" method="post">
 						@csrf
 						<input type="hidden" name="purchase_id" value="{{$request->purchase_id}}">
 
@@ -37,8 +37,8 @@
 							<p class="note">※キャンセル申請をするとマイページにキャンセル申請の数が表示されます</p>
 						</div>
 						<div class="functeBtns">
-							<input type="submit" formaction="{{ route('cancel.store' ,$purchase->id) }}" class="blue" value="上記内容でキャンセルを申請する">
-							<input type="submit" formaction="{{ route('cancel.back' ,$purchase->id) }}"value="内容を修正する">
+							<input type="submit" formaction="{{ route('cancel.store' ,$purchase->id) }}" class="blue loading-disabled" value="上記内容でキャンセルを申請する">
+							<input type="submit" formaction="{{ route('cancel.back' ,$purchase->id) }}" class="loading-disabled" value="内容を修正する">
 						</div>
 					</form>
 				</div>
