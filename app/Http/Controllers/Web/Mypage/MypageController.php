@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserProfile;
 use App\Models\Prefecture;
 use App\Models\Specialty;
+use App\Models\Product;
 
 class MypageController extends Controller
 {
@@ -23,6 +24,7 @@ class MypageController extends Controller
     {
         $user_profile = UserProfile::firstWhere('user_id',Auth::id());
         $user_notifications = UserNotification::latest()->where('user_id', \Auth::id())->paginate(5);
+        $products = Product::latest()->where('user_id', \Auth::id())->paginate(5);
 
         if ($user_profile->birthday !== NULL){
             $age = Age::group($user_profile->birthday);
@@ -33,6 +35,6 @@ class MypageController extends Controller
         $specialty = Specialty::Where('user_id',Auth::id());
         $specialties = $specialty->get();
 
-        return view('mypage.profile.mypage', compact('age', 'user_notifications', 'specialties'));
+        return view('mypage.profile.mypage', compact('age', 'user_notifications', 'specialties', 'products'));
     }
 }

@@ -21,9 +21,7 @@
                         <form action="{{ route('admin.cancel.limit.account', $user->user_id) }}" method="post">
                         <input type="submit" name="is_ban" value="利用制限を解除する">
                     @endif
-                        {{-- @dd($user->user->is_ban) --}}
                         @csrf
-                    </form>
                     <div class="meta-wrap">
                         <p class="meta">
                             @if(!empty($user->identification_path))
