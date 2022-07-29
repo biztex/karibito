@@ -3,22 +3,22 @@
 namespace App\Services;
 
 use App\Models\KaribitoSurvey;
+use App\Models\Chatroom;
 
 class KaribitoSurveyService
 {
     /**
      *  アンケートを登録
      */
-    public function storeSurvey(array $params):KaribitoSurvey
+    public function storeSurvey(array $params, Chatroom $chatroom):KaribitoSurvey
     {
-        $columns = ['star', 'comment'];
+        $columns = [
+            'user_id' => \Auth::id(),
+            'star' => $params['star'], 
+            'comment' => $params['comment'], 
+        ];
 
-        $survey = new KaribitoSurvey();
-        $survey->user_id = \Auth::id();
-        foreach($columns as $column){
-            $survey->$column = $params[$column];
-        }
-        $survey->save();
+        $survey = $chatroom->reference->karibitoSurvey()->create($columns);
 
         return $survey;
     }

@@ -187,4 +187,11 @@ class Product extends Model
         return $this->morphMany(Chatroom::class, 'reference');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function karibitoSurvey()
+    {
+        return $this->morphMany(KaribitoSurvey::class, 'reference');
+    }
 }
