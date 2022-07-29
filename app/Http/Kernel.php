@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'null.user.profile' => \App\Http\Middleware\NullUserProfile::class,
         'exist.user.profile' => \App\Http\Middleware\ExistUserProfile::class,
         'already.answered.karibito_survey' => \App\Http\Middleware\AlreadyAnsweredKaribitoSurvey::class,
+        'is_ban' => \App\Http\Middleware\BanAccount::class,
 
     ];
 }

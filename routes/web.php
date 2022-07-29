@@ -174,14 +174,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
             Route::get('{product}/edit', 'edit')->name('edit');
             Route::post('{product}/update', 'update')->name('update');
-            Route::post('post/{product}/edit', 'postEdit')->name('post.edit');
+            Route::post('post/{product}/edit', 'postEdit')->name('post.edit')->middleware('is_ban');
             Route::delete('{product}','destroy')->name('destroy');
             Route::post('edit/{product}/preview','editPreview')->name('edit.preview');
             Route::post('{product}/preview','updatePreview')->name('update.preview');
             Route::post('{product}/draft','updateDraft')->name('update.draft');
         });
         Route::middleware('can:identify')->group(function () {
-            Route::get('create', 'create')->name('create');
+            Route::get('create', 'create')->name('create')->middleware('is_ban');
             Route::post('post/create', 'postCreate')->name('post.create');
             Route::post('store', 'store')->name('store');
             Route::post('draft', 'storeDraft')->name('store.draft');
@@ -194,7 +194,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // リクエスト
     Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
         Route::middleware(['can:my.job.request,job_request', 'can:identify'])->group(function () {
-            Route::get('{job_request}/edit','edit')->name('edit');
+            Route::get('{job_request}/edit','edit')->name('edit')->middleware('is_ban');
             Route::post('{job_request}/update','update')->name('update');
             Route::post('post/{job_request}/edit', 'postEdit')->name('post.edit');
             Route::delete('{job_request}','destroy')->name('destroy');
@@ -203,7 +203,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('{job_request}/draft','updateDraft')->name('update.draft');
         });
         Route::middleware('can:identify')->group(function () {
-            Route::get('create','create')->name('create');
+            Route::get('create','create')->name('create')->middleware('is_ban');
             Route::post('post/create', 'postCreate')->name('post.create');
             Route::post('store','store')->name('store');
             Route::post('draft','storeDraft')->name('store.draft');
@@ -264,7 +264,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::middleware('can:my.chatroom,chatroom')->group(function () {
             Route::get('{chatroom}', 'show')->name('show');
-            Route::post('{chatroom}', 'message')->name('message'); //通常メッセージ            
+            Route::post('{chatroom}', 'message')->name('message')->middleware('is_ban'); //通常メッセージ
         });
 
         Route::middleware('can:proposal,chatroom')->group(function () {
@@ -322,7 +322,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dm/show/{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
     Route::post('/dm',[DmroomController::class,'store'])->name('dm.store');
     Route::get('/dm/create/{user}',[DmroomController::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create');
-    Route::post('/dm/{dmroom}',[DmroomController::class,'message'])->name('dm.message');
+    Route::post('/dm/{dmroom}',[DmroomController::class,'message'])->name('dm.message')->middleware('is_ban');
 
 });
 // 提供・リクエストの詳細ページ
