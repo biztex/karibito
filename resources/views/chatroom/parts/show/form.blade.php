@@ -1,5 +1,5 @@
 <!-- 入力エリア -->
-<form action="{{ route('chatroom.message', $chatroom->id) }}" method="POST" enctype="multipart/form-data">
+<form id="form" action="{{ route('chatroom.message', $chatroom->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="item">
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -15,7 +15,7 @@
                 <input type="file" name="file_path" id="file_path" style="display:none;">
                 <input type="hidden" name="file_name" value="">
 
-                <a href="javascript:;" class="templateOpen">定型分を使う</a>
+                <a href="javascript:;" class="templateOpen">定型文を使う</a>
 
             </div>
             <div class="about mt25">
@@ -26,7 +26,7 @@
                 <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
             </div>
             <div class="functeBtns">
-                <input type="submit" class="orange" value="送信する">
+                <input type="submit" class="orange loading-disabled" value="送信する">
             </div>
         </div>
     </form>
@@ -45,16 +45,16 @@
         </div>
         <div class="templateBox tabSelectBox is-active" id="template01">
             <textarea readonly>
-                お世話になっております。
-                一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。
+お世話になっております。
+一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。
 
-                このたびは、●●●●についてお問い合わせいただき
-                誠にありがとうございます。
+このたびは、●●●●についてお問い合わせいただき
+誠にありがとうございます。
 
-                ご請求いただいた資料は、本日郵送にてお送りいたします。
-                今週中にはお手元に届くかと存じます。
+ご請求いただいた資料は、本日郵送にてお送りいたします。
+今週中にはお手元に届くかと存じます。
 
-                ご確認よろしくお願いいたします。
+ご確認よろしくお願いいたします。
             </textarea>
         </div>
         <div class="templateBox tabSelectBox" id="template02">

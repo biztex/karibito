@@ -6,6 +6,7 @@
 				<a href="{{route('home')}}">ホーム</a>　>　<span>チャット</span>
 			</div>
 		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
         <div id="contents">
 			<div class="cancelWrap">
 				<div class="inner02">

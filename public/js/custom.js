@@ -27,7 +27,7 @@ $(function () {
 
 	// 身分証登録ポップアップ閉じるボタン
 	$('.pop_close').on('click', function () {
-		$('.unregisteredP').fadeOut(400);
+		$('.js-unregisteredP').fadeOut(400);
 	})
 
 
@@ -135,7 +135,7 @@ $(function () {
 
 	};
 	// 得意分野追加ボタン
-	$('.specialtyBtnCustom').click(function (){
+	$('.specialtyBtnCustom').click(function () {
 		let number_js_specialtyForm = $(".cloneCustomArea").children(".specialtyForm").length;
 			if(number_js_specialtyForm < 9){
 				$('.cloneCustomArea').append('<dl class="specialtyForm"><input type="text" name="content[]" value=""></dd></dl>');
@@ -144,5 +144,17 @@ $(function () {
 				$('.specialtyBtnCustom').remove();
 			}
 	});
+
+	// 2重送信防止
+	// 適用したいformにid='form' , 送信ボタンにclass='loading-disabled'を指定
+	var flag = false;
+	$('.loading-disabled').on('click', function () {
+		if(flag == false){
+			$('#form').submit();
+			flag = true;
+		} else {
+			$(this).prop('disabled', true);
+		}
+	})
 
 });

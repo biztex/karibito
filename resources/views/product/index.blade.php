@@ -15,6 +15,7 @@
             @endif　
         </div>
     </div>
+    <x-parts.ban-msg/>
 
     <article>
         <div id="teaser">
@@ -290,7 +291,6 @@
                                 @elseif ($parent_category_flg === 0)
                                     <input type="hidden" name="parent_category_flg" value="0">
                                     <input type="hidden" name="parent_category_id" value="{{ $child_category->mProductCategory->id }}">
-                                    {{-- 連続で検索するとカテゴリーがなくなる --}}
                                     <input type="hidden" name="child_category_id" value="{{ $child_category->id }}">
                                 @endif
                             @endif

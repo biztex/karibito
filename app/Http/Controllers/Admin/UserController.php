@@ -8,9 +8,17 @@ use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\Prefecture;
 use App\Libraries\Age;
+use App\Services\AdminUserSearchService;
 
 class UserController extends Controller
 {
+    private $user_search;
+
+    public function __construct(AdminUserSearchService $user_search)
+    {
+        $this->user_search = $user_search;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +27,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = UserProfile::orderBy('updated_at','desc')->paginate(50);
+        $users = UserProfile::orderBy('id', 'desc')->paginate(50);
 
         return view('admin.user.index',compact('users'));
     }
@@ -118,5 +126,38 @@ class UserController extends Controller
         $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの本人確認の承認を取り消しました！";
         return back()->with('flash_msg',$flash_msg);
 
+    }
+
+    /**
+     * 利用制限をする
+     */
+    public function limitAccount($id)
+    {
+        $user = User::firstWhere('id',$id);
+        $user->fill(['is_ban' => 1])->save();
+
+        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用を制限しました！";
+        return back()->with('flash_msg',$flash_msg);
+    }
+    /**
+     * 利用制限をする
+     */
+    public function cancelLimitAccount($id)
+    {
+        $user = User::firstWhere('id',$id);
+        $user->fill(['is_ban' => 0])->save();
+
+        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用制限を解除しました！";
+        return back()->with('flash_msg',$flash_msg);
+    }
+
+    /**
+     * ユーザー検索
+     */
+    public function search(Request $request)
+    {
+        $users = $this->user_search->searchUser($request);
+
+        return  view('admin.user.index', compact('users', 'request'));
     }
 }

@@ -9,7 +9,7 @@
 		<div id="contents">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					<p class="logoTit"><img src="img/cancel/logo_ttl.svg" alt="LOGO"></p>
+					<p class="logoTit"><img src="/img/cancel/logo_ttl.svg" alt="LOGO"></p>
 					<div class="questionnaire">
 						<h3><span>カリビトアンケート</span></h3>
 						<p>カリビトアンケートをご利用いただき誠にありがとうございます。<br>本アプリにつきまして改善点などご要望等ございましたら<br>下記よりご連絡ください。<br>今後ともどうぞよろしくお願い致します。</p>
@@ -28,7 +28,7 @@
                                 </select>
                             </div>
                             <p class="scroe"><span>アンケートを送信いただけますと<br>もれなくカリビトポイント<big>50PT</big>プレゼント！</span></p>
-                            <p class="stars">カリビトを５つ星で評価ください。<img src="img/cancel/ico_5stars.svg" alt=""></p>
+                            <p class="stars">カリビトを５つ星で評価ください。<img src="/img/cancel/ico_5stars.svg" alt=""></p>
                             <div class="write">
                                 <p>評価コメントを記入しましょう</p>
                                 @error('comment')<div class="alert alert-danger">{{ $message }}</div>@enderror

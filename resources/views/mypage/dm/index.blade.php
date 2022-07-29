@@ -1,7 +1,9 @@
 <x-other-user.layout>
 <body id="estimate" class="dm-page">
 	<x-parts.post-button/>
+	<x-parts.ban-msg/>
 	<article>
+		{{-- パンクズがない --}}
 	<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">

@@ -15,6 +15,16 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+
+    const NOT_BAN = 0;
+
+    const IS_BAN = 1;
+
+    const BAN = [
+        self::IS_BAN => '制限中',
+        self::NOT_BAN => '制限なし',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

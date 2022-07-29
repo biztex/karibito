@@ -322,6 +322,10 @@
     justify-content: space-between;
 }
 
+.limit_acount { /**利用制限されているとき*/
+	background-color: #f55c41d8;
+}
+
 /*  身分証登録ポップアップ閉じるボタン */
 .pop_close:hover {
 	cursor: pointer;
