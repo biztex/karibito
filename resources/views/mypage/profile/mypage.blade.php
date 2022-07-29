@@ -9,29 +9,30 @@
 		</div><!-- /.breadcrumb -->
 
 		@if(empty($user_profile->identification_path))
-			<div class="unregisteredP">
+			<div class="unregisteredP js-unregisteredP">
 				<div> </div>
 				<div>△サービスの登録には身分証明書の登録が必要です。 <a href="#fancybox_register"  class="fancybox fancybox_register">登録する</a></div>
 				<div class="pop_close">×</div>
 			</div>
 		@endif
 
+		<x-parts.ban-msg/>
 		<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="mypageWrap">
-							<div class="mypageTop">
-								<form action="{{route('can_call.update')}}" method="post">
-									@csrf
-									<p>電話対応：</p>
-									<select name="can_call" onchange="submit(this.form)">
-										<option value="{{App\Models\UserProfile::CAN_CALL}}" @if($user_profile->can_call === App\Models\UserProfile::CAN_CALL) selected @endif id="can_call_send">待機中</option>
-										<option value="{{App\Models\UserProfile::CANNOT_CALL}}" @if($user_profile->can_call === App\Models\UserProfile::CANNOT_CALL) selected @endif id="can_call_send">対応不可</option>
-									</select>
-									<input type="submit" style="display:none;" id="can_call_submit">
-								</form>
-							</div>
+						<div class="mypageTop">
+							<form action="{{route('can_call.update')}}" method="post">
+								@csrf
+								<p>電話対応：</p>
+								<select name="can_call" onchange="submit(this.form)">
+									<option value="{{App\Models\UserProfile::CAN_CALL}}" @if($user_profile->can_call === App\Models\UserProfile::CAN_CALL) selected @endif id="can_call_send">待機中</option>
+									<option value="{{App\Models\UserProfile::CANNOT_CALL}}" @if($user_profile->can_call === App\Models\UserProfile::CANNOT_CALL) selected @endif id="can_call_send">対応不可</option>
+								</select>
+								<input type="submit" style="display:none;" id="can_call_submit">
+							</form>
+						</div>
 						<div class="mypageSec01">
 						<div class="mypageCover">
 							@if(!empty($user_profile->cover))

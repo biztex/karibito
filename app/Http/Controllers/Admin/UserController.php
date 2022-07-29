@@ -119,4 +119,27 @@ class UserController extends Controller
         return back()->with('flash_msg',$flash_msg);
 
     }
+
+    /**
+     * 利用制限をする
+     */
+    public function limitAccount($id)
+    {
+        $user = User::firstWhere('id',$id);
+        $user->fill(['is_ban' => 1])->save();
+
+        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用を制限しました！";
+        return back()->with('flash_msg',$flash_msg);
+    }
+    /**
+     * 利用制限をする
+     */
+    public function cancelLimitAccount($id)
+    {
+        $user = User::firstWhere('id',$id);
+        $user->fill(['is_ban' => 0])->save();
+
+        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用制限を解除しました！";
+        return back()->with('flash_msg',$flash_msg);
+    }
 }

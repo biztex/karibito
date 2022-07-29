@@ -14,7 +14,8 @@
             @endif
             </div>
         </div><!-- /.breadcrumb -->
-        
+        <x-parts.ban-msg/>
+
         <div id="contents" class="detailStyle">
             <div class="inner02 ">
                 <div class="clearfix">

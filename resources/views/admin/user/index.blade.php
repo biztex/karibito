@@ -2,7 +2,7 @@
     <div class="container my-5">
 
     <x-admin.flash_msg/>
-       
+
     <table class="table table-sm table-hover">
         <thead>
             <tr>
@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user) 
+            @foreach($users as $user)
                 <tr>
                 <a href="{{ route('admin.users.show',$user->user_id) }}"><th scope="row">{{ $user->user_id }}</th></a>
                 <td>{{ $user->first_name.' '.$user->last_name }}</td>
@@ -77,10 +77,10 @@
                 </div>
                 </tr>
             @endforeach
-            {{ $users->links() }} 
+            {{ $users->links() }}
         </tbody>
     </table>
-    {{ $users->links() }} 
+    {{ $users->links() }}
 
     </div>
 </x-admin.app>

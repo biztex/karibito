@@ -7,6 +7,8 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('member') }}">メンバー情報</a>　>　<span>会員情報</span>
 			</div>
 		</div><!-- /.breadcrumb -->
+
+		<x-parts.ban-msg/>
 		<x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">

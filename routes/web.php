@@ -360,6 +360,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/survey',AdminKaribitoSurveyController::class,['only' => ['index']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
+        Route::post('/users/{id}/is_ban',[UserController::class, 'limitAccount'])->name('limit.account');
+        Route::post('/users/{id}/not_ban',[UserController::class, 'cancelLimitAccount'])->name('cancel.limit.account');
 
         //お知らせ機能
         Route::resource('/news', AdminNewsController::class);

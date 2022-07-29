@@ -13,6 +13,7 @@
                 </div><!-- /.headLinks -->
             </div><!-- /#header -->
         </header>
+        <x-parts.ban-msg/>
     {{$slot}}
         <footer>
             <div id="footer">

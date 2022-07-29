@@ -5,6 +5,7 @@
 				<a href="index.html">ホーム</a>　>　<a href="news.html">お知らせ</a>　>　<span>事務局から個別メッセージ「ログイン通知」</span>
 			</div>
 		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div class="hide">
 			<div id="fancybox_register" class="fancyboxWrap">
