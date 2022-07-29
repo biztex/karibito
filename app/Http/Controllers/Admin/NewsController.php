@@ -19,7 +19,6 @@ class NewsController extends Controller
         $this->news_service = $news_service;
     }
 
-
     /**
      * Display a listing of the resource.
      *
