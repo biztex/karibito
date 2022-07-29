@@ -35,7 +35,7 @@
 								<div class="item">
 									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="evaluation">
-										<textarea name="text" placeholder="依頼する入力してください">{{ old('text') }}</textarea>
+										<textarea name="text" placeholder="依頼する内容を入力してください" class="templateText">{{ old('text') }}</textarea>
 										<input type="hidden" name="to_user_id" value="{{ $user->id }}">
 									</div>
 									<p class="taR">3000</p>
@@ -48,8 +48,32 @@
 										<input type="file" name="file_path" id="file_path" style="display:none;">
 										<input type="hidden" name="file_name" value="">
 
-										<a href="#">定型分を使う</a>
-										
+										<a href="javascript:;" class="templateOpen">定型分を使う</a>
+											<div class="templatePopup">
+												<div class="templateOverlay"></div>
+												<div class="templateArea tabSelectArea">
+													<div class="templateClose"></div>
+													<h2 class="templateTitle">定型文の挿入</h2>
+													<div class="templateSelect">
+														<select class="tabSelectLinks">
+															<option value="#template01">あいさつ１</option>
+															<option value="#template02">あいさつ２</option>
+															<option value="#template03">あいさつ３</option>
+														</select>
+													</div>
+													<div class="templateBox tabSelectBox is-active" id="template01">
+														<textarea readonly>お世話になっております。&#13;一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。&#13;このたびは、●●●●についてお問い合わせいただき誠にありがとうございます。&#13;ご請求いただいた資料は、本日郵送にてお送りいたします。&#13;今週中にはお手元に届くかと存じます。&#13;ご確認よろしくお願いいたします。
+														</textarea>
+													</div>
+													<div class="templateBox tabSelectBox" id="template02">
+														<textarea readonly>あいさつ２あいさつ２あいさつ２あいさつ２あいさつ２</textarea>
+													</div>
+													<div class="templateBox tabSelectBox" id="template03">
+														<textarea readonly>あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３</textarea>
+													</div>
+													<div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
+												</div>
+											</div>
 									</div>
 									<div class="about mt25">
 										<p class="tit">【資料を添付する】について</p>

@@ -86,7 +86,7 @@
 										<p class="chatroom_file_input">資料を添付する</p>
 										<input type="file" name="file_path" id="file_path" style="display:none;">
 										<input type="hidden" name="file_name" value="">
-
+										
 										<a href="javascript:;" class="templateOpen">定型分を使う</a>
 											<div class="templatePopup">
 												<div class="templateOverlay"></div>
@@ -101,17 +101,7 @@
 														</select>
 													</div>
 													<div class="templateBox tabSelectBox is-active" id="template01">
-														<textarea readonly>
-															お世話になっております。
-															一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。
-
-															このたびは、●●●●についてお問い合わせいただき
-															誠にありがとうございます。
-
-															ご請求いただいた資料は、本日郵送にてお送りいたします。
-															今週中にはお手元に届くかと存じます。
-
-															ご確認よろしくお願いいたします。
+														<textarea readonly>お世話になっております。&#13;一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。&#13;このたびは、●●●●についてお問い合わせいただき誠にありがとうございます。&#13;ご請求いただいた資料は、本日郵送にてお送りいたします。&#13;今週中にはお手元に届くかと存じます。&#13;ご確認よろしくお願いいたします。
 														</textarea>
 													</div>
 													<div class="templateBox tabSelectBox" id="template02">

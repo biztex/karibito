@@ -32,7 +32,7 @@
                                                 <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
                                             </div>
                                             <div class="info">
-                                                <p class="name">{{ $value->user->name }}<span>出品者</span></p>
+                                                <p class="name">{{ $value->user->name }}</p>
                                                 <div class="cont">
                                                     <p class="date">{{ $value->created_at->format('Y年m月d日') }}</p>
                                                     <p class="txt" style="word-wrap: break-word;">{!!nl2br($value->text)!!}</p>
@@ -55,7 +55,7 @@
                                                 <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
                                             </div>
                                             <div class="info">
-                                                <p class="name">{{ $value->user->name }}<span>出品者</span></p>
+                                                <p class="name">{{ $value->user->name }}</p>
                                                 <div class="cont">
                                                     <p class="date">{{ $value->created_at->format('Y年m月d日') }}</p>
                                                     <p class="txt" style="word-wrap: break-word;">{!!nl2br($value->text)!!}</p>
@@ -78,7 +78,7 @@
                                                 <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
                                             </div>
                                             <div class="info">
-                                                <p class="name">{{ $value->user->name }}<span>出品者</span></p>
+                                                <p class="name">{{ $value->user->name }}</p>
                                                 <div class="cont">
                                                     <p class="date">{{ $value->created_at->format('Y年m月d日') }}</p>
                                                     <p class="txt" style="word-wrap: break-word;">{!!nl2br($value->text)!!}</p>

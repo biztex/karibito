@@ -42,7 +42,6 @@
                                     </dl>
                                 </div>
                                 <div class="fancyPersonBtn">
-                                    <a href="#" class="fancyPersonCancel">キャンセル</a>
                                     <button class="fancyPersonSign">登録する</button>
                                 </div>
                             </div>

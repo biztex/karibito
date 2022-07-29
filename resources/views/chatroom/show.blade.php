@@ -8,6 +8,7 @@
             </div>
         </div><!-- /.breadcrumb -->
 
+        <x-parts.flash-msg/>
         <div id="contents" class="otherPage otherPage2">
             <div class="inner02 clearfix">
                 <div id="main">

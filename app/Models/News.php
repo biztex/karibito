@@ -22,7 +22,7 @@ class News extends Model
     // ];
 
     // メッセージはリンク生成する
-    public function getTextAttribute($value)
+    public function getContentAttribute($value)
     {
         $textFormat = new TextFormat();
         if ($value === null) {
@@ -31,5 +31,4 @@ class News extends Model
             return $textFormat->generateLinkFromSentence($value);
         }
     }
-
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\JobRequestController;
 use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\KaribitoSurveyController as AdminKaribitoSurveyController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
@@ -36,6 +37,7 @@ use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\ProductChatroomController;
 use App\Http\Controllers\Web\DmroomController;
+use App\Http\Controllers\Web\KaribitoSurveyController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -218,77 +220,109 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
 
-    Route::view('chatroom/complete/evaluation','chatroom.complete_evaluation')->name('chatroom.complete.evaluation');
+    // Route::view('chatroom/complete/evaluation','chatroom.complete_evaluation')->name('chatroom.complete.evaluation');
 
-    // やり取り画面組込中
-    Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
-        Route::get('start/{product}', 'newroom')->name('newroom');
-        Route::post('start/{product}', 'start')->name('start');
-        Route::get('{product_chatroom}', 'show')->name('show');
-        Route::post('message/{product_chatroom}', 'message')->name('message');
-        Route::post('{product_chatroom}/proposal','proposal')->name('proposal'); //提案
-        Route::post('{product_proposal}/purchese','purchess')->name('purchese'); //購入
-        Route::get('{product_chatroom}/complete','complete')->name('complete'); //作業完了
-        Route::get('{product_chatroom}/evaluation','evaluation')->name('evaluation'); //評価画面
-        Route::post('{product_chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
-        Route::post('{product_chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //出品者評価
+    // // やり取り画面組込中
+    // Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
+    //     Route::get('start/{product}', 'newroom')->name('newroom');
+    //     Route::post('start/{product}', 'start')->name('start');
+    //     Route::get('{product_chatroom}', 'show')->name('show');
+    //     Route::post('message/{product_chatroom}', 'message')->name('message');
+    //     Route::post('{product_chatroom}/proposal','proposal')->name('proposal'); //提案
+    //     Route::post('{product_proposal}/purchese','purchess')->name('purchese'); //購入
+    //     Route::get('{product_chatroom}/complete','complete')->name('complete'); //作業完了
+    //     Route::get('{product_chatroom}/evaluation','evaluation')->name('evaluation'); //評価画面
+    //     Route::post('{product_chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
+    //     Route::post('{product_chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //出品者評価
 
-        Route::get('{product}/sample', 'sample')->name('sample');
+    //     Route::get('{product}/sample', 'sample')->name('sample');
 
-        // 支払い
-        Route::get('purchese/{product_proposal}','purchese')->name('purchese');
-        Route::get('purchese/{product_proposal}/confirm','purchese_confirm')->name('purchese_confirm');
-        Route::post('purchesed/{product_proposal}','purchesed')->name('purchesed');
-        // 評価
-        Route::view('cart/buy08','chatroom.cart_buy08');
-        Route::view('cart/buy09','chatroom.cart_buy09');
-    });
+    //     // 支払い
+    //     Route::get('purchese/{product_proposal}','purchese')->name('purchese');
+    //     Route::get('purchese/{product_proposal}/confirm','purchese_confirm')->name('purchese_confirm');
+    //     Route::post('purchesed/{product_proposal}','purchesed')->name('purchesed');
+    //     // 評価
+    //     Route::view('cart/buy08','chatroom.cart_buy08');
+    //     Route::view('cart/buy09','chatroom.cart_buy09');
+    // });
 
     // やり取り（提供・リクエスト共用版）
     Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
         Route::get('','index')->name('index');
         Route::get('active','active')->name('active');
         Route::get('inactive','inactive')->name('inactive');
-        Route::get('new/product/{product}','newProduct')->name('new.product'); // productからのnew room
-        Route::get('new/job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestからのnew room
 
-        Route::post('create/product/{product}', 'createProduct')->name('create.product'); // productからのstart
-        Route::post('create/job_request/{job_request}', 'createJobRequest')->name('create.job_request'); // job_requestからのstart
+        Route::middleware('can:start.chatroom.product,product')->group(function () {
+            Route::get('product/{product}','newProduct')->name('new.product'); // productからの交渉する
+            Route::post('product/{product}', 'createProduct')->name('create.product'); // productからのstart
+        });
+        
+        Route::middleware('can:start.chatroom.job.request,job_request')->group(function () {
+            Route::get('job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestから交渉する
+            Route::post('job_request/{job_request}', 'createJobRequest')->name('create.job_request'); // job_requestからのstart
+        });
 
-        Route::get('{chatroom}', 'show')->name('show');
-        Route::post('message/{chatroom}', 'message')->name('message'); //通常メッセージ
-        Route::post('{chatroom}/proposal','proposal')->name('proposal'); //提案
-        Route::post('{proposal}/purchase','purchase')->name('purchase'); //購入
-        Route::get('{chatroom}/complete','complete')->name('complete'); //作業完了
-        Route::get('{chatroom}/evaluation','evaluation')->name('evaluation'); //評価画面
-        Route::post('{chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
-        Route::post('{chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //提供者評価
-        Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->name('evaluation.complete'); // 評価完了
+        Route::middleware('can:my.chatroom,chatroom')->group(function () {
+            Route::get('{chatroom}', 'show')->name('show');
+            Route::post('{chatroom}', 'message')->name('message'); //通常メッセージ            
+        });
+
+        Route::middleware('can:proposal,chatroom')->group(function () {
+            Route::post('{chatroom}/proposal','proposal')->name('proposal'); //提案
+            Route::get('{chatroom}/proposal','getProposal')->name('getProposal');
+        });
+
+        Route::get('{chatroom}/complete','complete')->middleware('can:worked,chatroom')->name('complete'); //作業完了
+
+        Route::middleware('can:buyer.evaluation,chatroom')->group(function () {
+            Route::get('{chatroom}/buyer_evaluation','getBuyerEvaluation')->name('get.buyer.evaluation'); //購入者価画面
+            Route::post('{chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
+        });
+
+        Route::middleware('can:seller.evaluation,chatroom')->group(function () {
+            Route::get('{chatroom}/seller_evaluation','getSellerEvaluation')->name('get.seller.evaluation'); //提供者価画面
+            Route::post('{chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //提供者評価
+        });
+        
+        Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->middleware('can:chatroom.evaluation.complete,chatroom')->name('evaluation.complete'); // 評価完了
 
         // 支払い
-        Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
-        Route::post('purchase/{proposal}','purchaseConfirm')->name('purchase.confirm'); // 確認画面
-        Route::post('purchased/{proposal}','purchased')->name('purchased');
+        Route::middleware('can:purchase,proposal')->group(function () {
+            Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
+            Route::post('purchase/{proposal}','purchaseConfirm')->name('purchase.confirm'); // 確認画面
+            Route::post('purchased/{proposal}','purchased')->name('purchased'); 
+        });
+        Route::get('purchased/{proposal}','getPurchased')->middleware('can:purchased,proposal')->name('getPurchased'); 
     });
-    // キャンセル
+
+    // やりとりキャンセル
     Route::prefix('cancel')->controller(CancelController::class)->name('cancel.')->group(function () {
-        Route::get('{purchase}', 'create')->name('create'); //申請入力画面
-        Route::post('{purchase}/confirm', 'confirm')->name('confirm'); //確認画面
-        Route::post('{purchase}/', 'back')->name('back'); //確認画面から入力画面へ戻る
-        Route::post('{purchase}/store', 'store')->name('store'); //キャンセル申請作成
-        Route::get('{purchase}/send', 'send')->name('send'); //申請完了画面
-        Route::get('{purchased_cancel}/show', 'show')->name('show'); //申請内容画面
-        Route::post('{purchased_cancel}/approval', 'approval')->name('approval'); //キャンセル承認
-        Route::get('{purchased_cancel}/approval', 'complete')->name('complete'); //キャンセル承認画面
-        Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
+        Route::middleware('can:cancelable,purchase')->group(function () {
+            Route::get('{purchase}', 'create')->name('create'); //申請入力画面
+            Route::post('{purchase}', 'store')->name('store'); //キャンセル申請作成
+            Route::post('{purchase}/back', 'back')->name('back'); //確認画面から入力画面へ戻る
+            Route::post('{purchase}/confirm', 'confirm')->name('confirm'); //確認画面
+        });
+        Route::get('{purchase}/back', 'backChatroom'); // チャットルームへredirect
+        Route::get('{purchase}/confirm', 'backChatroom'); // チャットルームへredirect
+
+        Route::get('{purchased_cancel}/send', 'send')->middleware('can:cancel.send,purchased_cancel')->name('send'); //申請完了画面
+
+        Route::middleware('can:cancel.applying,purchased_cancel')->group(function () {
+            Route::get('{purchased_cancel}/show', 'show')->name('show'); //申請内容画面
+            Route::post('{purchased_cancel}/approval', 'approval')->name('approval'); //キャンセル承認
+            Route::get('{purchased_cancel}/objection', 'objection')->name('objection'); //キャンセル異議申し立て
+        });
+
+        Route::get('{purchased_cancel}/approval', 'complete')->middleware('can:canceled,purchased_cancel')->name('complete'); //キャンセル承認画面
 
     });
     // DM
-    Route::get('/dm',[Dmroomcontroller::class,'index'])->name('dm.index');
-    Route::get('/dm/show/{dmroom}',[Dmroomcontroller::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
-    Route::post('/dm',[Dmroomcontroller::class,'store'])->name('dm.store');
-    Route::get('/dm/create/{user}',[Dmroomcontroller::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create');
-    Route::post('/dm/{dmroom}',[Dmroomcontroller::class,'message'])->name('dm.message');
+    Route::get('/dm',[DmroomController::class,'index'])->name('dm.index');
+    Route::get('/dm/show/{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
+    Route::post('/dm',[DmroomController::class,'store'])->name('dm.store');
+    Route::get('/dm/create/{user}',[DmroomController::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create');
+    Route::post('/dm/{dmroom}',[DmroomController::class,'message'])->name('dm.message');
 
 });
 // 提供・リクエストの詳細ページ
@@ -355,6 +389,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/products',ProductController::class,['only' => ['index']]);
         Route::resource('/job_requests',JobRequestController::class,['only' => ['index']]);
         Route::resource('/m_commission_rates',MCommissionRateController::class,['only' => ['index', 'store']]);
+        Route::resource('/survey',AdminKaribitoSurveyController::class,['only' => ['index']]);
         Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
         Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
 
@@ -393,3 +428,6 @@ Route::prefix('user')->name('user.')->group(function () {
 });
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
+// アンケート
+Route::get('survey/{chatroom}', [KaribitoSurveyController::class, 'create'])->name('survey.create');
+Route::post('survey/{chatroom}', [KaribitoSurveyController::class, 'store'])->middleware('already.answered.karibito_survey')->name('survey.store');
