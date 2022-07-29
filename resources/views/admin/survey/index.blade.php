@@ -26,7 +26,6 @@
                                 <th scope="col" class="text-nowrap">評価</th>
                                 <th scope="col" class="text-nowrap">入力内容</th>
                                 <th scope="col" class="text-nowrap">登録日</th>
-                                <th scope="col" class="text-nowrap">更新日</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -37,7 +36,6 @@
                                         <td class="px-2">{!! $value->star !!}</td>
                                         <td class="px-2" style="max-width:500px;">{!! $value->comment !!}</p></td>
                                         <td class="px-2">{!! $value->created_at !!}</td>
-                                        <td class="px-2">{!! $value->updated_at !!}</td>
                                     </tr>
                                 @endforeach
                                 {{ $karibito_survey->links() }}
