@@ -1,8 +1,8 @@
 <!-- 入力エリア -->
 @if($service_type === 'Product')
-    <form action="{{ route('chatroom.create.product', $service->id) }}" method="POST" enctype="multipart/form-data">
+    <form id="form" action="{{ route('chatroom.create.product', $service->id) }}" method="POST" enctype="multipart/form-data">
 @else <!-- JobRequest-->
-    <form action="{{ route('chatroom.create.job_request', $service->id) }}" method="POST" enctype="multipart/form-data">
+    <form id="form" action="{{ route('chatroom.create.job_request', $service->id) }}" method="POST" enctype="multipart/form-data">
 @endif
         @csrf
         <div class="item">
@@ -30,7 +30,7 @@
                 <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
             </div>
             <div class="functeBtns">
-                <input type="submit" class="orange" value="送信する">
+                <input type="submit" class="orange loading-disabled" value="送信する">
             </div>
         </div>
     </form>

@@ -1,5 +1,5 @@
 <!-- 入力エリア -->
-<form action="{{ route('chatroom.message', $chatroom->id) }}" method="POST" enctype="multipart/form-data">
+<form id="form" action="{{ route('chatroom.message', $chatroom->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="item">
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -26,7 +26,7 @@
                 <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
             </div>
             <div class="functeBtns">
-                <input type="submit" class="orange" value="送信する">
+                <input type="submit" class="orange loading-disabled" value="送信する">
             </div>
         </div>
     </form>

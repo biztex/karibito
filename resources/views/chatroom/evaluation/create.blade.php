@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div id="contents">
+		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
 					
@@ -14,7 +14,7 @@
 					<div class="cancelTitle">
 						<h2>評価をお願いします</h2>
 					</div>
-					<form action="" method="post">
+					<form id="form" action="" method="post">
 					@csrf
 						<div class="cancelRea">
 							@error('checkbox')<div class="alert alert-danger" style="text-align:center">{{ $message }}</div>@enderror
@@ -34,9 +34,9 @@
 						</div>
 						<div class="functeBtns">
 							@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
-								<input type="submit" class="red" value="評価を投稿する" formaction="{{route('chatroom.buyer.evaluation', $chatroom->id)}}">
+								<input type="submit" class="red loading-disabled" value="評価を投稿する" formaction="{{route('chatroom.buyer.evaluation', $chatroom->id)}}">
 							@elseif($chatroom->status === App\Models\Chatroom::STATUS_SELLER_EVALUATION)
-								<input type="submit" class="red" value="評価を投稿する" formaction="{{route('chatroom.seller.evaluation', $chatroom->id)}}">
+								<input type="submit" class="red loading-disabled" value="評価を投稿する" formaction="{{route('chatroom.seller.evaluation', $chatroom->id)}}">
 							@endif
 						</div>
 					</form>
