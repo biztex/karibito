@@ -27,7 +27,7 @@
                     <p class="name">{{$message->user->name}}</p>
                     <p>{{$message->text}}</p>
                     <div class="proposeBuy">
-                        <p class="buy"><a href="{{route('chatroom.evaluation',$chatroom->id)}}" class="red">お相手を評価する</a></p>
+                        <p class="buy"><a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">お相手を評価する</a></p>
                     </div>
                 </div>
             </div>

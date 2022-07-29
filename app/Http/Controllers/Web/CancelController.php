@@ -10,6 +10,7 @@ use App\Models\PurchasedCancel;
 use App\Services\ChatroomService;
 use App\Services\ChatroomMessageService;
 use App\Services\PurchasedCancelService;
+use App\Services\PurchaseService;
 
 
 class CancelController extends Controller
@@ -17,12 +18,14 @@ class CancelController extends Controller
     private $chatroom_service;
     private $chatroom_message_service;
     private $purchased_cancel_service;
+    private $purchase_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, PurchasedCancelService $purchased_cancel_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, PurchasedCancelService $purchased_cancel_service, PurchaseService $purchase_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
         $this->purchased_cancel_service = $purchased_cancel_service;
+        $this->purchase_service = $purchase_service;
     }
 
     /**
@@ -69,11 +72,12 @@ class CancelController extends Controller
      */
     public function store(StoreRequest $request, Purchase $purchase)
     {
-        \DB::transaction(function () use ($request, $purchase) {
+        $purchased_cancel = \DB::transaction(function () use ($request, $purchase) {
             $purchased_cancel = $this->purchased_cancel_service->storePurchasedCancel($request->all(), $purchase);
             $this->chatroom_message_service->storePurchasedCancelMessage($purchased_cancel, $purchase->chatroom);
+            return $purchased_cancel;
         });
-        return redirect()->route('cancel.send', $purchase->id);
+        return redirect()->route('cancel.send', $purchased_cancel->id);
     }
 
     /**
@@ -82,9 +86,9 @@ class CancelController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function send(Purchase $purchase)
+    public function send(PurchasedCancel $purchased_cancel)
     {
-        return view('chatroom.cancel.send', compact('purchase'));
+        return view('chatroom.cancel.send', compact('purchased_cancel'));
     }
 
     /**
@@ -108,6 +112,7 @@ class CancelController extends Controller
     {
         \DB::transaction(function () use ($purchased_cancel) {
             $this->purchased_cancel_service->changeStatusComplete($purchased_cancel);
+            $this->purchase_service->isCancel($purchased_cancel->purchase);
             $this->chatroom_message_service->storePurchasedCancelApprovalMessage($purchased_cancel);
             $this->chatroom_service->statusChangeCanceled($purchased_cancel->purchase->chatroom);
         });
@@ -138,5 +143,16 @@ class CancelController extends Controller
             $this->chatroom_message_service->storePurchasedCancelObjectionMessage($purchased_cancel);
         });
         return redirect()->route('chatroom.show', $purchased_cancel->purchase->chatroom_id);
+    }
+
+    /**
+     * back / confirm にgetでアクセスされたときチャットルームに飛ばす
+     * @param \App\Models\PurchasedCancel $purchased_cancel
+     * 
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function backChatroom(Purchase $purchase)
+    {
+        return redirect()->route('chatroom.show', $purchase->chatroom->id);
     }
 }

@@ -38,7 +38,7 @@ class Chatroom extends Model
      */
     public function scopeActive($query)
     {
-        return $query->whereIn('status', [self::STATUS_START, self::STATUS_PROPOSAL, self::STATUS_WORK, self::STATUS_BUYER_EVALUATION, self::STATUS_SELLER_EVALUATION]);
+        return $query->loginUser()->whereIn('status', [self::STATUS_START, self::STATUS_PROPOSAL, self::STATUS_WORK, self::STATUS_BUYER_EVALUATION, self::STATUS_SELLER_EVALUATION]);
     }
 
     /**
@@ -50,7 +50,7 @@ class Chatroom extends Model
      */
     public function scopeInActive($query)
     {
-        return $query->whereIn('status', [self::STATUS_COMPLETE, self::STATUS_CANCELED]);
+        return $query->loginUser()->whereIn('status', [self::STATUS_COMPLETE, self::STATUS_CANCELED]);
     }
 
     /**
