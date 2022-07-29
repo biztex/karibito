@@ -109,9 +109,12 @@ class ChatroomController extends Controller
      */
     public function createProduct(MessageRequest $request, Product $product)
     {
-        $chatroom = $this->chatroom_service->startChatroomProduct($product);
-        $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+        $chatroom = \DB::transaction(function () use ($request, $product) {
+            $chatroom = $this->chatroom_service->startChatroomProduct($product);
+            $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
 
+            return $chatroom;
+        });
         return redirect()->route('chatroom.show', $chatroom->id);
     }
 
@@ -124,9 +127,12 @@ class ChatroomController extends Controller
      */
     public function createJobRequest(MessageRequest $request, JobRequest $job_request)
     {
-        $chatroom = $this->chatroom_service->startChatroomJobRequest($job_request);
-        $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
-
+        $chatroom = \DB::transaction(function () use ($request, $job_request) {
+            $chatroom = $this->chatroom_service->startChatroomJobRequest($job_request);
+            $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+            
+            return $chatroom;
+        });
         return redirect()->route('chatroom.show', $chatroom->id);
     }
 

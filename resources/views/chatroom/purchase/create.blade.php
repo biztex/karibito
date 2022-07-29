@@ -48,7 +48,7 @@
 							</tfoot>
 						</table>
 					</div>
-					<form action="{{ route('chatroom.purchase.confirm', $proposal->id) }}" method="post">
+					<form id="form" action="{{ route('chatroom.purchase.confirm', $proposal->id) }}" method="post">
 					@csrf
 						<div class="coupons">
 							<div class="checkbox">
@@ -141,7 +141,7 @@
 								</div>
 							</div>
 							<div class="functeBtns">
-								<input type="submit" class="orange full" value="確認する">
+								<input type="submit" class="orange full loading-disabled" value="確認する">
 							</div>
 						</div>
 					</form>

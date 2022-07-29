@@ -24,10 +24,10 @@
 						<p>{!! nl2br(e($purchased_cancel->text)) !!}</p>
 					</div>
 					<div class="functeBtns">
-						<form action="" method="">
+						<form id="form" action="" method="">
 						@csrf
-							<input type="submit" formaction="{{ route('cancel.approval', $purchased_cancel->id) }}" formmethod="post" class="blue" value="キャンセル申請を承認する">
-							<input type="submit" formaction="{{ route('cancel.objection', $purchased_cancel->id) }}" formmethod="get" value="異議を申し立てる">
+							<input type="submit" formaction="{{ route('cancel.approval', $purchased_cancel->id) }}" formmethod="post" class="blue loading-disabled" value="キャンセル申請を承認する">
+							<input type="submit" formaction="{{ route('cancel.objection', $purchased_cancel->id) }}" formmethod="get" class="loading-disabled" value="異議を申し立てる">
 						</form>
 					</div>
 				</div>

@@ -38,7 +38,10 @@
                 @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
                     <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
                 @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
-                    <a href="{{route('chatroom.complete', $chatroom->id)}}" class="orange">作業完了報告をする</a>
+                    <form id="form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
+                        @csrf
+                        <input type="submit" class="orange loading-disabled" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" value="作業完了報告をする">
+                    </form>
                 @endif
             @endif
             @if($chatroom->isCancelable())
@@ -51,7 +54,7 @@
 
 <div class="hide"><!-- #fancybox_proposal -->
     <div id="fancybox_proposal" class="fancyboxWrap">
-        <form action="{{ route('chatroom.proposal', $chatroom->id) }}" method="POST">
+        <form id="form" action="{{ route('chatroom.proposal', $chatroom->id) }}" method="POST">
         @csrf
             <p class="fancyboxHd">掲載内容の提案</p>
             <div class="fancyboxCont">
@@ -73,7 +76,7 @@
                 </div>
             </div>
             <div class="functeBtns">
-                <input type="submit" class="orange" value="この内容で商品を提案する">
+                <input type="submit" class="orange loading-disabled" value="この内容で商品を提案する">
             </div>
         </form>
     </div>

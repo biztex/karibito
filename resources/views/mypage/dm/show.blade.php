@@ -87,7 +87,7 @@
 										<input type="file" name="file_path" id="file_path" style="display:none;">
 										<input type="hidden" name="file_name" value="">
 										
-										<a href="javascript:;" class="templateOpen">定型分を使う</a>
+										<a href="javascript:;" class="templateOpen">定型文を使う</a>
 											<div class="templatePopup">
 												<div class="templateOverlay"></div>
 												<div class="templateArea tabSelectArea">

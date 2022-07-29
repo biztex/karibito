@@ -48,41 +48,41 @@
 							</tfoot>
 						</table>
 					</div>
-					<div class="coupons">
-						<div class="method">
-							<p class="tit">お支払い方法</p>
-							<div class="credit">
-								<table>
-									<tr>
-										<th>カード番号</th>
-										<td>{{ $request->card_number }}</td>
-									</tr>
-									<tr>
-										<th>有効期限</th>
-										<td>{{ date("yy",strtotime($request->year)) }}年/{{ $request->month }}月</td>
-									</tr>
-									<tr>
-										<th>カード名義</th>
-										<td>{{ $request->card_name }}</td>
-									</tr>
-									<tr>
-										<th>セキュリティコード</th>
-										<td>{{ $request->security_code }}</td>
-									</tr>
-								</table>
+					<form id="form" action="{{route('chatroom.purchased', $proposal->id)}}" method="post">
+					@csrf
+						<div class="coupons">
+							<div class="method">
+								<p class="tit">お支払い方法</p>
+								<div class="credit">
+									<table>
+										<tr>
+											<th>カード番号</th>
+											<td>{{ $request->card_number }}</td>
+										</tr>
+										<tr>
+											<th>有効期限</th>
+											<td>{{ date("yy",strtotime($request->year)) }}年/{{ $request->month }}月</td>
+										</tr>
+										<tr>
+											<th>カード名義</th>
+											<td>{{ $request->card_name }}</td>
+										</tr>
+										<tr>
+											<th>セキュリティコード</th>
+											<td>{{ $request->security_code }}</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<div class="warnNotes mt50">
+								<p class="danger">ご注意！</p>
+								<p>※他のクーポンと併用はできません。</p>
+							</div>
+							<div class="functeBtns">
+								<input type="submit" class="orange full loading-disabled" value="確定する">
 							</div>
 						</div>
-						<div class="warnNotes mt50">
-							<p class="danger">ご注意！</p>
-							<p>※他のクーポンと併用はできません。</p>
-						</div>
-						<div class="functeBtns">
-							<form action="{{route('chatroom.purchased', $proposal->id)}}" method="post">
-							@csrf
-								<input type="submit" class="orange full" value="確定する">
-							</form>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
