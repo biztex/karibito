@@ -15,7 +15,7 @@
 						<h2>この取引を本当にキャンセルしますか？</h2>
 						<p>※キャンセルの場合は理由を下記の中からお選びください。</p>
 					</div>
-					<form action="" method="">
+					<form id="form" action="" method="">
 					@csrf
 						<input type="hidden" name="purchase_id" value="{{$purchase->id}}">
 						@error('reason1')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -45,7 +45,7 @@
 							<p class="note">※キャンセル申請をするとマイページにキャンセル申請の数が表示されます</p>
 						</div>
 						<div class="functeBtns">
-							<input type="submit" formaction="{{ route('cancel.confirm', $purchase->id) }}" formmethod="post" class="blue" value="キャンセル手続きに進む">
+							<input type="submit" formaction="{{ route('cancel.confirm', $purchase->id) }}" formmethod="post" class="blue loading-disabled" value="キャンセル手続きに進む">
 							<input type="submit" formaction="{{ route('chatroom.show', $purchase->chatroom->id) }}" formmethod="get" value="戻る">
 						</div>
 					</form>
