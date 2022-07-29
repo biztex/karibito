@@ -7,13 +7,20 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
-                        <li class="breadcrumb-item active" aria-current="page">product一覧</li>
+                        <li class="breadcrumb-item active" aria-current="page">product一覧
+                            <form action="{{ route('admin.product.search') }}" class="mt-2 d-flex" method="GET">
+                                @csrf
+                                <input class="form-control" type="text" name="search" value="{{ $request->search ?? "" }}">
+                                <button class="btn btn-secondary btn-block w-25 ml-2" type="submit">検索</button>
+                            </form>
+                            <div class="mt-2">※商品名かユーザー名に部分一致で検索</div>
+                        </li>
                     </ol>
                 </nav>
                 <div class="card shadow-sm mb-5">
                     <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
                         <h5 class="text-white mb-0">
-                            <i class="fas fa-info mr-2"></i>product一覧
+                            product一覧
                         </h5>
                     </div>
 
