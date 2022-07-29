@@ -19,6 +19,7 @@
                         <div class="evaluation">
                             <p class="scroe"><span>アンケートを送信いただけますと<br>もれなくカリビトポイント<big>50PT</big>プレゼント！</span></p>
                             <p class="stars">カリビトを５つ星で評価ください</p>
+                            @error('star')<div class="alert alert-danger" style="text-align:center">{{ $message }}</div>@enderror
                             <div class="rate-form">
                                 <input id="star5" type="radio" name="star" value="5">
                                 <label for="star5">★</label>
