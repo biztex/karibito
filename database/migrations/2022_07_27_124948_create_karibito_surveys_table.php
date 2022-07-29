@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('karibito_surveys', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique();
+            $table->foreignId('user_id')->constrained();
             $table->integer('star')->comment('5段階評価');
             $table->text('comment')->comment('コメント')->nullable();
             $table->morphs('reference');
