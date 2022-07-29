@@ -64,6 +64,19 @@ class JobRequest extends Model
     }
 
     /**
+     * 制限されているユーザーの商品以外を取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNotBan($query)
+    {
+        $ban_user_ids = User::where('is_ban' ,1)->pluck('id')->toArray();;
+
+        return $query->where('user_id', "!=", $ban_user_ids);
+    }
+
+    /**
      * 自分の提供のみ取得
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
@@ -115,7 +128,7 @@ class JobRequest extends Model
      */
     public function scopePublish($query)
     {
-        return $query->notDraft()->where('status',self::STATUS_PUBLISH);
+        return $query->notDraft()->notBan()->where('status',self::STATUS_PUBLISH);
     }
 
     /**

@@ -80,9 +80,9 @@
                                             </div>
                                             <div class="single">
                                                 @if($product_rank->is_online == App\Models\Product::OFFLINE)
-                                                    <a>対面</a>
+                                                    <span>対面</span>
                                                 @else
-                                                    <a>非対面</a>
+                                                    <span>非対面</span>
                                                 @endif
                                             </div>
                                             <div class="aboutUser">
