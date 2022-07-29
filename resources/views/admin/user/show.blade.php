@@ -14,6 +14,15 @@
                     <h6 class="mb-0">ユーザー名</h6>
                     <h3><a href="#">{{ $user->user->name }}</a></h3>
                     <span><i class="bi bi-envelope"> Email</i>：{{ $user->user->email }}</span>
+                    @if ($user->user->is_ban === 0)
+                        <form action="{{ route('admin.limit.account', $user->user_id) }}" method="post">
+                        <input type="submit" id="js-limit_alert" name="is_ban" value="利用を制限する">
+                    @elseif ($user->user->is_ban === 1)
+                        <form action="{{ route('admin.cancel.limit.account', $user->user_id) }}" method="post">
+                        <input type="submit" name="is_ban" value="利用制限を解除する">
+                    @endif
+                    @csrf
+                    </form>
                     <div class="meta-wrap">
                         <p class="meta">
                         @if(!empty($user->identification_path))
