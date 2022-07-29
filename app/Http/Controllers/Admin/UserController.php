@@ -9,6 +9,8 @@ use App\Models\UserProfile;
 use App\Models\Prefecture;
 use App\Libraries\Age;
 use App\Services\AdminUserSearchService;
+use App\Mail\Admin\NotifyBanMail;
+use App\Mail\Admin\CancelNotifyBanMail;
 
 class UserController extends Controller
 {
@@ -137,10 +139,14 @@ class UserController extends Controller
         $user->fill(['is_ban' => 1])->save();
 
         $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用を制限しました！";
+
+        \Mail::to($user->email)->send(new NotifyBanMail($user));
+
         return back()->with('flash_msg',$flash_msg);
     }
+
     /**
-     * 利用制限をする
+     * 利用制限を解除する
      */
     public function cancelLimitAccount($id)
     {
@@ -148,6 +154,9 @@ class UserController extends Controller
         $user->fill(['is_ban' => 0])->save();
 
         $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用制限を解除しました！";
+
+        \Mail::to($user->email)->send(new CancelNotifyBanMail($user));
+
         return back()->with('flash_msg',$flash_msg);
     }
 

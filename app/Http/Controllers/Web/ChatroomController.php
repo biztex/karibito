@@ -308,7 +308,10 @@ class ChatroomController extends Controller
      */
     public function evaluationComplete(Chatroom $chatroom)
     {
-        $survey = KaribitoSurvey::where('user_id', \Auth::id())->get();
+        $survey = KaribitoSurvey::where([
+            ['user_id',\Auth::id()],
+            ['chatroom_id', $chatroom->id],
+        ])->get();
         
         return view('chatroom.evaluation.complete', compact('chatroom','survey'));
     }

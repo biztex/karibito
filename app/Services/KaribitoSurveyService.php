@@ -16,6 +16,7 @@ class KaribitoSurveyService
             'user_id' => \Auth::id(),
             'star' => $params['star'], 
             'comment' => $params['comment'], 
+            'chatroom_id' => $params['chatroom_id'],
         ];
 
         $survey = $chatroom->reference->karibitoSurvey()->create($columns);

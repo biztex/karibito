@@ -1,4 +1,4 @@
-@if(Auth::user()->is_ban === 1)
+@if(!empty(Auth::user()->is_ban) && Auth::user()->is_ban === 1)
     <div class="unregisteredP limit_acount">
         <div> </div>
         <div>現在当アカウントは利用制限されています。

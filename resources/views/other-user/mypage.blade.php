@@ -31,12 +31,14 @@
 										<div class="mypageP01">
 											<p>{{$user->name}}</p>
 											<div class="blogDtOtherBtn">
+                                            @if (\Auth::id() !== $user->id)
 												@if(empty($dmrooms))
 												<a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
 												@else
 												<a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
 												@endif
 												<a href="#" class="followA">フォローする</a>
+                                            @endif
 											</div>
 										</div>
 										<p class="mypageP02">最終ログイン：8時間前</p>
@@ -92,9 +94,11 @@
                                                     <div class="recommendList style2 ">
                                                         <div class="list sliderSP02">
                                                         @foreach($products as $product)
+
                                                             
 															<x-parts.product-item :product="$product"/>
 															
+
                                                         @endforeach
                                                         </div>
                                                     </div>
