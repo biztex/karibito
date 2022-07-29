@@ -103,9 +103,11 @@
 							<!-- <div class="evaluate three"></div> -->
 							<p class="check"><a href="#">本人確認済み</a></p>
 							<!-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> -->
-							<div class="blogDtOtherBtn">
+                            @if (\Auth::id() !== $user->id)
+							    <div class="blogDtOtherBtn">
 								<a href="#" class="followA">フォローする</a>
 								<a href="#">メッセージを送る</a>
+                            @endif
 							</div>
 						</div>
 					</aside>
