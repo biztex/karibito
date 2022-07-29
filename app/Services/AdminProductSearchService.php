@@ -7,11 +7,11 @@ use App\Models\Product;
 class AdminProductSearchService
 {
     /**
-     * お問い合わせ完了メール送信
+     * productの検索
      */
     public function searchJobRequest($request)
     {
-        $sql = Product::orderBy('id');
+        $sql = Product::orderBy('id', 'desc');
 
         $sql->orWhere('title', 'LIKE', "%$request->search%")
             ->orWhereHas('user', function ($q) use ($request){
