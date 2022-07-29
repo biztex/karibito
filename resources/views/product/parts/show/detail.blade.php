@@ -1,7 +1,7 @@
 <div class="title">
     <div class="fun">
         <div class="single">
-            <a href="#" tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</a>
+            <span tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</span>
         </div>
         <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
     </div>
