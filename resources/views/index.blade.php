@@ -1,6 +1,7 @@
 <x-layout>
 <x-parts.flash-msg/>
 <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
+<x-parts.ban-msg/>
 	<article>
 		<div id="mainVisual">
 			<div class="main">

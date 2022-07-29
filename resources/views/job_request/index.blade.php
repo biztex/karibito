@@ -14,6 +14,7 @@
             @endif
 		</div>
 	</div><!-- /.breadcrumb -->
+	<x-parts.ban-msg/>
 
 	<article>
 		<div id="teaser">

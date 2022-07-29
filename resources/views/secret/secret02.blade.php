@@ -7,6 +7,7 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 
+		<x-parts.ban-msg/>
 		<x-parts.flash-msg />
 
 		<div id="contents" class="otherPage">

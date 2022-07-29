@@ -2,6 +2,7 @@
     <div class="container my-5">
 
     <x-admin.flash_msg/>
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}

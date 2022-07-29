@@ -27,7 +27,7 @@ $(function () {
 
 	// 身分証登録ポップアップ閉じるボタン
 	$('.pop_close').on('click', function () {
-		$('.unregisteredP').fadeOut(400);
+		$('.js-unregisteredP').fadeOut(400);
 	})
 
 
