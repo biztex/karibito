@@ -18,7 +18,11 @@ class AlreadyAnsweredKaribitoSurvey
     public function handle(Request $request, Closure $next)
     {
         
-        $survey = KaribitoSurvey::firstWhere('user_id',\Auth::id());
+        $survey = KaribitoSurvey::firstWhere([
+            ['user_id',\Auth::id()],
+            ['reference_id', $request->reference_id],
+            ['reference_type', $request->reference_type],
+        ]);
         if($survey){
             return redirect()->route('chatroom.show', $request->chatroom_id)->with('flash_msg','アンケートは回答済みです。');
         };

@@ -34,6 +34,8 @@
                                 @error('comment')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <textarea name="comment">{{ old('comment') }}</textarea>
                                 <input type="hidden" name="chatroom_id" value="{{ $chatroom->id }}">
+                                <input type="hidden" name="reference_id" value="{{ $chatroom->reference_id }}">
+                                <input type="hidden" name="reference_type" value="{{ $chatroom->reference_type }}">
                             </div>
                         </div>
                         <div class="functeBtns">
