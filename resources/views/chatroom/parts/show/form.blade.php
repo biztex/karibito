@@ -15,7 +15,7 @@
                 <input type="file" name="file_path" id="file_path" style="display:none;">
                 <input type="hidden" name="file_name" value="">
 
-                <a href="javascript:;" class="templateOpen">定型分を使う</a>
+                <a href="javascript:;" class="templateOpen">定型文を使う</a>
 
             </div>
             <div class="about mt25">
@@ -45,16 +45,16 @@
         </div>
         <div class="templateBox tabSelectBox is-active" id="template01">
             <textarea readonly>
-                お世話になっております。
-                一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。
+お世話になっております。
+一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。
 
-                このたびは、●●●●についてお問い合わせいただき
-                誠にありがとうございます。
+このたびは、●●●●についてお問い合わせいただき
+誠にありがとうございます。
 
-                ご請求いただいた資料は、本日郵送にてお送りいたします。
-                今週中にはお手元に届くかと存じます。
+ご請求いただいた資料は、本日郵送にてお送りいたします。
+今週中にはお手元に届くかと存じます。
 
-                ご確認よろしくお願いいたします。
+ご確認よろしくお願いいたします。
             </textarea>
         </div>
         <div class="templateBox tabSelectBox" id="template02">
