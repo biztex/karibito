@@ -385,6 +385,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard');
+        Route::get('/users/search',[UserController::class, 'search'])->name('user.search');
         Route::resource('/users',UserController::class,['only' => ['index', 'show']]);
         Route::resource('/products',ProductController::class,['only' => ['index']]);
         Route::get('/products/search',[ProductController::class, 'search'])->name('product.search');
