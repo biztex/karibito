@@ -26,7 +26,8 @@
         <thead>
             <tr>
             <th scope="col">user_id</th>
-            <th scope="col">Name</th>
+            <th scope="col">ニックネーム</th>
+            <th scope="col">氏名(姓 名)</th>
             <th scope="col">本人確認</th>
             <th scope="col">身分証明証</th>
             <th scope="col"></th>
@@ -36,6 +37,7 @@
             @foreach($users as $user)
                 <tr>
                 <a href="{{ route('admin.users.show',$user->user_id) }}"><th scope="row">{{ $user->user_id }}</th></a>
+                <td>{{ $user->user->name }}</td>
                 <td>{{ $user->first_name.' '.$user->last_name }}</td>
                 <td>{{ App\Models\UserProfile::IDENTIFY[$user->is_identify] }}</td>
 
