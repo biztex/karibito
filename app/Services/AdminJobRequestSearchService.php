@@ -7,11 +7,11 @@ use App\Models\JobRequest;
 class AdminJobRequestSearchService
 {
     /**
-     * お問い合わせ完了メール送信
+     * job_requestの検索
      */
     public function searchJobRequest($request)
     {
-        $sql = JobRequest::orderBy('id');
+        $sql = JobRequest::orderBy('id', 'desc');
 
         $sql->orWhere('title', 'LIKE', "%$request->search%")
             ->orWhereHas('user', function ($q) use ($request){
