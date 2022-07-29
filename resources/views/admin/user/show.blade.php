@@ -12,7 +12,7 @@
                 @endif
                 <div class="text text-2 pl-md-4">
                     <h6 class="mb-0">ユーザー名</h6>
-                    <h3><a href="#">{{ $user->user->name }}</a></h3>
+                    <h3><a href="{{ route('user.mypage', $user->id) }}">{{ $user->user->name }}</a></h3>
                     <span><i class="bi bi-envelope"> Email</i>：{{ $user->user->email }}</span>
                     @if ($user->user->is_ban === 0)
                         <form action="{{ route('admin.limit.account', $user->user_id) }}" method="post">
@@ -54,7 +54,7 @@
     </div>
 
 
-                 <!-- Modal -->
+                <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -65,7 +65,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    
+
                     @if(empty($user->zip))
                         <p class="m-0">郵便番号が登録されていません。</p>
                     @else

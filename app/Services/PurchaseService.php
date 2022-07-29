@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Proposal;
+use App\Models\Purchase;
 
 class PurchaseService
 {
@@ -15,6 +16,14 @@ class PurchaseService
         ];
         $purchase = $chatroom->purchase()->create($column);
         return $purchase;
+    }
+
+    public function isCancel(Purchase $purchase)
+    {
+        $purchase->fill([
+            'is_cancel' => Purchase::IS_CANCEL,
+            'cancel_date' => now()    
+            ])->save();
     }
 
 }
