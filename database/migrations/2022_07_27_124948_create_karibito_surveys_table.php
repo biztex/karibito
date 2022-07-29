@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->unique();
             $table->integer('star')->comment('5段階評価');
             $table->text('comment')->comment('コメント')->nullable();
+            $table->morphs('reference');
             $table->timestamps();
         });
     }

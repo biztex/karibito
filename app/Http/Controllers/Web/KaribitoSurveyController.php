@@ -25,7 +25,7 @@ class KaribitoSurveyController extends Controller
 
     public function store(StoreRequest $request, Chatroom $chatroom)
     {
-        $karibito_survey_service = $this->karibito_survey_service->storeSurvey($request->all());
+        $karibito_survey_service = $this->karibito_survey_service->storeSurvey($request->all(),$chatroom);
 
         return redirect()->route('chatroom.show', $chatroom->id)->with('flash_msg','アンケートに回答しました！');
     }

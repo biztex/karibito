@@ -171,6 +171,14 @@ class JobRequest extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function karibitoSurvey()
+    {
+        return $this->morphMany(KaribitoSurvey::class, 'reference');
+    }
+
+    /**
      * 締切まで後何日を取得
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
