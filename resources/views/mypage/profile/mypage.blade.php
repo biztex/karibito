@@ -108,7 +108,7 @@
 							</ul>
 						</div>
 						<div class="mypageSec03">
-							<p class="mypageHd02">出品サービス<a href="#" class="more">出品サービスを編集する</a></p>
+							<p class="mypageHd02">出品サービス<a href="#" class="more">出品サービスを編集する</a></p> {{--確認中--}}
 							<div class="box">
 								<p class="title">出品サービス</p>
 								<p class="txt">カリビトは、知識・スキル・経験を売り買いできるオンラインマーケットです。<br>あなたの ”得意” や ”経験” を必要としている人がきっといます。<br>カリビトで出品してみませんか？</p>

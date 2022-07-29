@@ -21,7 +21,7 @@
                             <h2 class="title">{{$news->title}}</h2>
                             <p class="date">{{date('Y/m/d', strtotime($news->created_at))}}</p>
                             <div class="message">
-                                <p>{{$news->content}}</p>
+                                <p>{!!$news->content!!}</p>
                             </div>
                         </div>
                         <div class="supportNewsBtn"><a href="javascript:history.back();">一覧へ戻る</a></div>

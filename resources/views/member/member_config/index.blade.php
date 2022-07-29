@@ -55,10 +55,13 @@
 							<div class="memberConfigItem">
 								<h3 class="memberConfigHd">各種認証申請</h3>
 								<dl class="memberConfigDl">
-									<dt>本人確認	</dt>
+									<dt>本人確認</dt>
 									<dd>
-										<span class="status_span">未承認</span>
-										<a class="configLink" href="#">申請する</a>
+										<span class="status_span">@if(Auth::user()->userProfile->is_identify === 1)承認@elseif (Auth::user()->userProfile->is_identify === 0)未承認@endif</span>
+										@if(Auth::user()->userProfile->is_identify === 0)
+										<a href="#fancybox_register"  class="fancybox fancybox_register">申請する</a>
+										@endif
+										{{-- @dd(Auth::user()->userProfile->is_identify) --}}
 									</dd>
 								</dl>
 								<dl class="memberConfigDl">

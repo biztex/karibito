@@ -6,13 +6,13 @@
         <div class="col-md-12">
             <div class="blog-entry ftco-animate d-md-flex fadeInUp ftco-animated">
                 @if(empty($user->icon))
-                        <img src="/img/mypage/no_image.jpg" class="rounded-circle" style="width: 140px;height: 140px;object-fit: cover;">
-                    @else
-                        <img src="{{ asset('/storage/'.$user->icon) }}" class="rounded-circle" style="width: 140px;height: 140px;object-fit: cover;">
+                    <img src="/img/mypage/no_image.jpg" class="rounded-circle" style="width: 140px;height: 140px;object-fit: cover;">
+                @else
+                    <img src="{{ asset('/storage/'.$user->icon) }}" class="rounded-circle" style="width: 140px;height: 140px;object-fit: cover;">
                 @endif
                 <div class="text text-2 pl-md-4">
                     <h6 class="mb-0">ユーザー名</h6>
-                    <h3><a href="#">{{ $user->user->name }}</a></h3>
+                    <h3><a href="{{ route('user.mypage', $user->id) }}">{{ $user->user->name }}</a></h3>
                     <span><i class="bi bi-envelope"> Email</i>：{{ $user->user->email }}</span>
                     <div class="meta-wrap">
                         <p class="meta">
@@ -22,9 +22,8 @@
                                 <span class="badge badge-pill badge-primary">承認済</span>
                             @else
                                 <span class="badge badge-pill badge-secondary">未承認</span>
-                        @endif</p>
+                            @endif</p>
                         @endif
-                        
                         </p>
                     </div>
                 </div>
@@ -43,7 +42,7 @@
     </div>
 
 
-                 <!-- Modal -->
+                <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
