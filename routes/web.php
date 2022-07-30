@@ -422,6 +422,12 @@ Route::prefix('sample')->group(function () {
     Route::view('past', 'sample.past');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
+
+    // サンプル決済画面
+    Route::view('payment', 'sample.payment');
+    Route::post('payment/createCharge', [\App\Http\Controllers\Sample\PaymentController::class, 'createCharge'])->name('sample.createCharge'); // 決済実行客登録
+    Route::post('payment/createCard', [\App\Http\Controllers\Sample\PaymentController::class, 'createCard'])->name('sample.createCard'); // クレカ登録
+    Route::get('payment/getCardList', [\App\Http\Controllers\Sample\PaymentController::class, 'getCardList'])->name('sample.getCardList'); // クレカ一覧取得
 });
 
 // 該当ユーザーの各ページ
