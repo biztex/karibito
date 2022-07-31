@@ -14,10 +14,10 @@
                     <h6 class="mb-0">ユーザー名</h6>
                     <h3><a href="{{ route('user.mypage', $user->id) }}">{{ $user->user->name }}</a></h3>
                     <span><i class="bi bi-envelope"> Email</i>：{{ $user->user->email }}</span>
-                    @if ($user->user->is_ban === 0)
+                    @if ($user->is_ban === 0)
                         <form action="{{ route('admin.limit.account', $user->user_id) }}" method="post">
                         <input type="submit" id="js-limit_alert" name="is_ban" value="利用を制限する">
-                    @elseif ($user->user->is_ban === 1)
+                    @elseif ($user->is_ban === 1)
                         <form action="{{ route('admin.cancel.limit.account', $user->user_id) }}" method="post">
                         <input type="submit" name="is_ban" value="利用制限を解除する">
                     @endif
@@ -43,7 +43,7 @@
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">氏名</span>：{{ $user->first_name." ".$user->last_name }}</p></li>
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">Facebook id</span>：@if(isset($user->user->facebook_id)) ○ @endif</p><p class="mb-0 mr-4"><span class="font-weight-bold">Google id</span>：@if(isset($user->user->google_id)) ○ @endif</p></li>
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">性別</span>：{{App\Models\UserProfile::GENDER[$user->gender] ?? ''}}</p></li>
-            <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">制限</span>：@if ($user->user->is_ban == App\Models\User::NOT_BAN) 制限なし @elseif ($user->user->is_ban == App\Models\User::IS_BAN) 制限中@endif</p></li>
+            <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">制限</span>：@if ($user->is_ban == App\Models\UserProfile::NOT_BAN) 制限なし @elseif ($user->is_ban == App\Models\UserProfile::IS_BAN) 制限中@endif</p></li>
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">生年月日</span>：{{ $user->birthday }}</p><p class="mb-0 mr-4"><span class="font-weight-bold">年齢</span>：@if(isset($user->birthday)){{ $now_age }}歳@else未設定@endif</p><span class="font-weight-bold">年代</span>：{{ $age }}</p></li>
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">郵便番号</span>：〒{{ substr($user->zip, 0, 3).'-'.substr($user->zip, 3, 7) }}</p><p class="mb-0 mr-4"><span class="font-weight-bold">都道府県</span>：{{ $user->prefecture?->name }}</p></li>
             <li class="list-group-item"><span class="font-weight-bold">住所</span>：{{ $user->address }}</li>

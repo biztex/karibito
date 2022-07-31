@@ -16,6 +16,8 @@
                     <div class="mt-2 ml-2">
                         <label for="is_approve">未承認：</label>
                         <input type="checkbox" id="is_approve" name="is_approve" value="1" {{ $request->is_approve ?? "" == 1 ? 'checked' : "" }}>
+                        <label for="is_ban">制限：</label>
+                        <input type="checkbox" id="is_ban" name="is_ban" value="1" {{ $request->is_ban ?? "" == 1 ? 'checked' : "" }}>
                     </div>
                 </form>
                 <div>※ユーザー名に部分一致で検索 / チェックを付けて検索で未承認のみ表示</div>
@@ -31,6 +33,8 @@
             <th scope="col">氏名(姓 名)</th>
             <th scope="col">本人確認</th>
             <th scope="col">身分証明証</th>
+            <th scope="col">制限</th>
+            <th scope="col" class="text-nowrap" style="min-width: 250px">メモ</th>
             <th scope="col"></th>
             </tr>
         </thead>
@@ -49,6 +53,40 @@
                 @else
                     <td><button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{ $user->user_id }}">身分証明証</button></td>
                 @endif
+                <td>{{ App\Models\UserProfile::BAN[$user->is_ban] }}</td>
+                <td class="text-wrap px-2" style="max-width: 100px">
+                    {{ $user->user->memo }}
+                    <!-- Button trigger modal -->
+                    <button type="button"class="btn btn-info btn-sm" data-toggle="modal" data-target="#memoModalCenter{{ $user->user_id }}">
+                        <i class="fas fa-edit" style="color: #fff;"></i>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="memoModalCenter{{ $user->user_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form action="{{ route('admin.user.updateMemo', $user->user_id) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">メモ編集</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @include('components.form.edit_textarea', ['name' => 'memo', 'value' => $user->user->memo,'required' => false, 'placeholder' => '', 'cols' => 30, 'rows' => 3])
+                                        @include('components.form.error', ['name' => 'memo'])
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                                        <button type="submit" class="btn btn-primary">保存</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
 
                 <td><a href="{{ route('admin.users.show',$user->user_id) }}" class="btn btn-outline-primary btn-sm" >詳細</a></td>
 

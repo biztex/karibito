@@ -400,8 +400,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //お知らせ機能
         Route::resource('/news', AdminNewsController::class);
+        ///メモの編集
+        Route::put('user/{userId}/update/memo', [UserController::class, 'updateMemo'])->name('user.updateMemo');
     });
-
 });
 
 // 未着手
