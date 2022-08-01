@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use App\Http\Controllers\Web\Mypage\ChangeTelController;
+use App\Http\Controllers\Web\Mypage\ChangeCardController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -44,6 +45,7 @@ use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
+use App\Http\Controllers\Web\Mypage\PortfolioController;
 
 // 管理者用
 
@@ -119,7 +121,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('job_create',[JobController::class, 'store'])->name('store.job');
         Route::post('job_update',[JobController::class, 'update'])->name('update.job');
         Route::view('resume_edit','resume_edit')->name('resume_edit');
-
+        // ポートフォリオ
+        Route::resource('portfolio', PortfolioController::class);
 
         // お知らせ一覧表示(UserNotification)
         Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
@@ -147,6 +150,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(ChangeTelController::class)->name('tel.')->group(function () {
                 Route::get('tel', 'edit')->name('edit');
                 Route::post('tel', 'update')->name('update');
+            });
+
+            // クレジットカード
+            Route::controller(ChangeCardController::class)->name('card.')->group(function () {
+                Route::get('card', 'edit')->name('edit');
             });
 
 
@@ -256,7 +264,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('product/{product}','newProduct')->name('new.product')->middleware('is_ban'); // productからの交渉する
             Route::post('product/{product}', 'createProduct')->name('create.product')->middleware('is_ban'); // productからのstart
         });
-        
+
         Route::middleware('can:start.chatroom.job.request,job_request')->group(function () {
             Route::get('job_request/{job_request}','newJobRequest')->name('new.job_request')->middleware('is_ban'); // job_requestから交渉する
             Route::post('job_request/{job_request}', 'createJobRequest')->name('create.job_request')->middleware('is_ban'); // job_requestからのstart
@@ -283,16 +291,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('{chatroom}/seller_evaluation','getSellerEvaluation')->name('get.seller.evaluation'); //提供者価画面
             Route::post('{chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //提供者評価
         });
-        
+
         Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->middleware('can:chatroom.evaluation.complete,chatroom')->name('evaluation.complete'); // 評価完了
 
         // 支払い
         Route::middleware('can:purchase,proposal')->group(function () {
             Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
             Route::post('purchase/{proposal}','purchaseConfirm')->name('purchase.confirm'); // 確認画面
-            Route::post('purchased/{proposal}','purchased')->name('purchased'); 
+            Route::post('purchased/{proposal}','purchased')->name('purchased');
         });
-        Route::get('purchased/{proposal}','getPurchased')->middleware('can:purchased,proposal')->name('getPurchased'); 
+        Route::get('purchased/{proposal}','getPurchased')->middleware('can:purchased,proposal')->name('getPurchased');
     });
 
     // やりとりキャンセル
@@ -423,6 +431,12 @@ Route::prefix('sample')->group(function () {
     Route::view('past', 'sample.past');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
+
+    // サンプル決済画面
+    Route::view('payment', 'sample.payment');
+    Route::post('payment/createCharge', [\App\Http\Controllers\Sample\PaymentController::class, 'createCharge'])->name('sample.createCharge'); // 決済実行客登録
+    Route::post('payment/createCard', [\App\Http\Controllers\Sample\PaymentController::class, 'createCard'])->name('sample.createCard'); // クレカ登録
+    Route::get('payment/getCardList', [\App\Http\Controllers\Sample\PaymentController::class, 'getCardList'])->name('sample.getCardList'); // クレカ一覧取得
 });
 
 // 該当ユーザーの各ページ

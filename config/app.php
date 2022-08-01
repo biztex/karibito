@@ -179,6 +179,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Olssonm\VeryBasicAuth\VeryBasicAuthServiceProvider::class,
+
+        // 独自Provider
+        \App\Providers\PaymentServiceProvider::class,
     ],
 
     /*

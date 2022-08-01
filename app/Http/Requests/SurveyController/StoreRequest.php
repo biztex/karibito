@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required|max:3000',
+            'comment' => 'max:3000',
             'star' => 'required | integer | between:1,5',
         ];
     }
@@ -32,8 +32,8 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'comment.required' => '評価コメントは必ず入力してください。',
             'comment.max' => '評価コメントは3000文字以内で入力してください。',
+            'star.required' => '必ず星を選択して評価してください。'
         ];
     }
 }

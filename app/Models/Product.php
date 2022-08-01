@@ -90,7 +90,7 @@ class Product extends Model
      */
     public function scopeOtherUsers($query)
     {
-        return $query->where('user_id','<>', \Auth::id());
+        return $query->publish()->where('user_id','<>', \Auth::id());
     }
 
     /**

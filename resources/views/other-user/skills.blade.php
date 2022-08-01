@@ -79,13 +79,15 @@
 						<!-- <div class="evaluate three"></div> -->
 						<p class="check"><a href="#">本人確認済み</a></p>
 						<!-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> -->
-						<div class="blogDtOtherBtn">
+                        @if (\Auth::id() !== $user->id)
+						    <div class="blogDtOtherBtn">
 							<a href="#" class="followA">フォローする</a>
 							@if(empty($dmrooms))
 								<a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
 							@else
 								<a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
 							@endif
+                        @endif
 						</div>
 					</div>
 				</aside><!-- /#side -->

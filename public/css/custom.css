@@ -933,3 +933,55 @@
 .subPagesTab .tabLink li a{
 	padding: 10px;
 }
+/* アンケート評価５つ星 */
+.rate-form {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+  }
+  .rate-form input[type=radio] {
+	display: none;
+  }
+  .rate-form label {
+	position: relative;
+	padding: 0 5px;
+	color: #ccc;
+	cursor: pointer;
+	font-size: 52px;
+  }
+  .rate-form label:hover {
+	color: #ffcc00;
+  }
+  .rate-form label:hover ~ label {
+	color: #ffcc00;
+  }
+  .rate-form input[type=radio]:checked ~ label {
+	color: #ffcc00;
+  }
+.configEditTable {
+	display: flex;
+	margin-top: 10px;
+}
+.configEditTable:first-child {
+	margin:0;
+}
+.configEditDeleteBtn {
+	align-items: center;
+	color: #fff;
+	background: #158ACC;
+	border-radius: 3px;
+	width: 50px;
+	max-width: 100%;
+	height: 32px;
+	margin: auto 0;
+	border: none;
+}
+.creditCode input[class=small] {
+	border: 1px solid #DDDDDD;
+	background-color: #fff;
+    border-radius: 3px;
+    font-size: 1.4rem;
+	width: 74px;
+    height: 40px;
+    padding: 0 10px;
+}
