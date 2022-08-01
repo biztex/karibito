@@ -40,9 +40,6 @@
                     <p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/ {{ $product->user->userProfile->birthday }}/ {{ $product->user->userProfile->prefecture->name }})</p>
                 </div>
             </div>
-            @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-                <p class="check"><a href="#">本人確認済み</a></p>
-            @endif
             <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
         </div>
     </div>
