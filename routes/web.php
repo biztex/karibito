@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use App\Http\Controllers\Web\Mypage\ChangeTelController;
+use App\Http\Controllers\Web\Mypage\ChangeCardController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -147,6 +148,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(ChangeTelController::class)->name('tel.')->group(function () {
                 Route::get('tel', 'edit')->name('edit');
                 Route::post('tel', 'update')->name('update');
+            });
+
+            // クレジットカード
+            Route::controller(ChangeCardController::class)->name('card.')->group(function () {
+                Route::get('card', 'edit')->name('edit');
             });
 
 
