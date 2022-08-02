@@ -1,4 +1,5 @@
 <x-layout>
+<x-parts.post-button/>
     <article>
         <div id="breadcrumb">
             <div class="inner">

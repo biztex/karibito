@@ -54,6 +54,11 @@
 	} */
 /* コメントアウトしている間のみヘッダーフッター調整 */
 
+@media screen and (max-width: 766px){
+	#contents {
+		margin-bottom: 35px;
+	}
+}
 #mypage .sidePerson {
 	display: none;
 }
@@ -697,7 +702,13 @@
     flex-flow: column;
     justify-content:space-between;
 	width: 192px;
-	height: 260px;
+	height: 234px;
+}
+@media screen and (max-width: 766px){
+	.infoTop{
+		width: 168px;
+		height: 200px;
+	}
 }
 
 .recommendList .cateTit {
