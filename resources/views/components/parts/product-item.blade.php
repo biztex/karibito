@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="aboutUser">
-            <div class="user">
+            <div class="user" style="margin-bottom:6px;">
                 @if(empty($product->user->userProfile->icon))
                     <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
                 @else
@@ -40,7 +40,9 @@
                     <p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/ {{ $product->user->userProfile->birthday }}/ {{ $product->user->userProfile->prefecture->name }})</p>
                 </div>
             </div>
-            <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
+
+            <x-parts.evaluation-star :star='$product->user->avg_star'/>
+
         </div>
     </div>
 </div>
