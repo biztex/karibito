@@ -19,3 +19,8 @@
 .bg-customer-gray {
     background-color: #F7F7F7;
 }
+
+/*画像の高さを100% + 中央に表示*/
+.h-100 {
+    height: 100%;
+}
