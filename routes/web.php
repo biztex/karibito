@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use App\Http\Controllers\Web\Mypage\ChangeTelController;
+use App\Http\Controllers\Web\Mypage\ChangeCardController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -149,6 +150,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(ChangeTelController::class)->name('tel.')->group(function () {
                 Route::get('tel', 'edit')->name('edit');
                 Route::post('tel', 'update')->name('update');
+            });
+
+            // クレジットカード
+            Route::controller(ChangeCardController::class)->name('card.')->group(function () {
+                Route::get('card', 'edit')->name('edit');
             });
 
 
@@ -424,6 +430,12 @@ Route::prefix('sample')->group(function () {
     Route::view('past', 'sample.past');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
+
+    // サンプル決済画面
+    Route::view('payment', 'sample.payment');
+    Route::post('payment/createCharge', [\App\Http\Controllers\Sample\PaymentController::class, 'createCharge'])->name('sample.createCharge'); // 決済実行客登録
+    Route::post('payment/createCard', [\App\Http\Controllers\Sample\PaymentController::class, 'createCard'])->name('sample.createCard'); // クレカ登録
+    Route::get('payment/getCardList', [\App\Http\Controllers\Sample\PaymentController::class, 'getCardList'])->name('sample.getCardList'); // クレカ一覧取得
 });
 
 // 該当ユーザーの各ページ

@@ -3,7 +3,9 @@
     <x-admin.flash_msg/>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
+
+            <x-admin.side_menu/>
+            <div class="col-md-10 ml-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}

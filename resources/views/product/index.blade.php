@@ -1,4 +1,5 @@
 <x-layout :keyword="$keyword ?? ''" :serviceflg="$service_flg ?? ''">
+<x-parts.post-button/>
 {{-- <article> --}}
     <div id="breadcrumb">
         <div class="inner">
@@ -15,6 +16,7 @@
             @endif　
         </div>
     </div>
+
     <x-parts.ban-msg/>
 
     <article>
@@ -23,7 +25,6 @@
                 <h2>{{$title}}</h2>
             </div>
         </div><!-- /.teaser -->
-        <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
         <div id="contents">
             <div class="inner clearfix">
@@ -61,46 +62,8 @@
                         <div class="recommendList style2">
                             <h2 class="hdM">ランキング一覧</h2>
                             <div class="list sliderSP">
-                                @foreach( $product_ranks as $product_rank)
-                                    <div class="item">
-                                        <p class="level"></p>
-                                        <a href="{{route('product.show',$product_rank->id)}}" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
-                                            <img src="{{ asset('storage/'.$product_rank->path) }}" alt="">
-                                            {{-- <button class="favorite">お気に入り</button> --}}
-                                        </a>
-                                        <div class="info">
-                                            <div class="breadcrumb">
-                                                <a href="{{ route('product.category.index',$product_rank->mProductChildCategory->mProductCategory->id)}}">
-                                                    {{ $product_rank->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
-                                                <a href="{{ route('product.category.index.show',$product_rank->mProductChildCategory->id)}}">
-                                                    {{ $product_rank->mProductChildCategory->name }}</a>
-                                            </div>
-                                            <div class="draw">
-                                                <p class="price"><font>{{ $product_rank->title }}</font><br>{{ number_format($product_rank->price) }}円</p>
-                                            </div>
-                                            <div class="single">
-                                                @if($product_rank->is_online == App\Models\Product::OFFLINE)
-                                                    <span>対面</span>
-                                                @else
-                                                    <span>非対面</span>
-                                                @endif
-                                            </div>
-                                            <div class="aboutUser">
-                                                <div class="user">
-                                                    @if(empty($product_rank->user->userProfile->icon))
-                                                        <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                    @else
-                                                        <p class="ico"><img src="{{asset('/storage/'.$product_rank->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-                                                    @endif
-                                                    <div class="introd">
-                                                        <p class="name">{{ $product_rank->user->name }}</p>
-                                                        <p>({{ App\Models\UserProfile::GENDER[$product_rank->user->userProfile->gender] }}/{{ $product_rank->user->userProfile->birthday }} / {{ $product_rank->user->userProfile->prefecture->name }})</p>
-                                                    </div>
-                                                </div>
-                                                {{-- <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div> --}}
-                                            </div>
-                                        </div>
-                                    </div>
+                                @foreach( $product_ranks as $value)
+                                    <x-parts.product-item :product='$value'/>
                                 @endforeach
                             </div>
                         </div>
@@ -148,47 +111,7 @@
                         </p>
                         <div class="list sliderSP02">
                             @foreach( $products as $product)
-                                <div class="item">
-                                    <p class="level"></p>
-                                    <a href="{{route('product.show',$product->id)}}" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
-                                        <img src="{{ asset('storage/'.$product->path) }}" alt="">
-                                        {{-- <button class="favorite">お気に入り</button> --}}
-                                    </a>
-                                    <div class="info">
-                                        <div class="breadcrumb">
-                                            <a href="{{ route('product.category.index',$product->mProductChildCategory->mProductCategory->id)}}">
-                                                {{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
-                                            <a href="{{ route('product.category.index.show',$product->mProductChildCategory->id)}}">{{ $product->mProductChildCategory->name }}</a>
-                                        </div>
-                                        <div class="draw">
-                                            <p class="price"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
-                                        </div>
-                                        <div class="single">
-                                            @if($product->is_online == App\Models\Product::OFFLINE)
-                                                <span>対面</span>
-                                            @else
-                                                <span>非対面</span>
-                                            @endif
-                                        </div>
-                                        <div class="aboutUser">
-                                            <div class="user">
-                                                @if(empty($product->user->userProfile->icon))
-                                                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                @else
-                                                    <p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-                                                @endif
-                                                <div class="introd">
-                                                    <p class="name">{{ $product->user->name }}</p>
-                                                    <p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/{{ $product->user->userProfile->birthday }} / {{ $product->user->userProfile->prefecture->name }})</p>
-                                                </div>
-                                            </div>
-                                            {{-- @if($product->user->userProfile->is_identify == App\Models\UserProfile::IS_IDENTIFY)
-                                                <p class="check"><a href="#">本人確認済み</a></p>
-                                            @endif --}}
-                                            <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <x-parts.product-item :product='$product'/>
                             @endforeach
                         </div>
                         <div class=wp-pagenavi>

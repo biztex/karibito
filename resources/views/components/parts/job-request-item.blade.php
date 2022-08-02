@@ -1,10 +1,15 @@
 <div class="item">
     <!-- <p class="level"></p> topのみ -->
     <div class="info">
-        <div class="breadcrumb"><a href="{{ route('job_request.category.index',$value->mProductChildCategory->mProductCategory->id) }}">{{ $value->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show',$value->mProductChildCategory->id)}}">{{ $value->mProductChildCategory->name }}</a></div>
+        <div class="breadcrumb">
+            <a href="{{ route('job_request.category.index',$value->mProductChildCategory->mProductCategory->id) }}">
+                {{ $value->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;
+            <a href="{{ route('job_request.category.index.show',$value->mProductChildCategory->id)}}">
+                {{ $value->mProductChildCategory->name }}</a>
+        </div>
         <a href="{{ route('job_request.show',$value->id)}}">
             <div class="draw">
-                <p class="price">{{ $value->title }}</font></p>
+                <p class="price" style="width:100%;">{{ $value->title }}</font></p>
             </div>
             <div class="aboutInfo">
                 <dl>
@@ -33,7 +38,9 @@
                     <p>({{ App\Models\UserProfile::GENDER[$value->user->userProfile->gender] }} /{{ $value->user->userProfile->birthday }}/ {{ $value->user->userProfile->prefecture->name }})</p>
                 </div>
             </div>
-            <div class="evaluate three"><img src="/img/common/evaluate.svg" alt=""></div>
+
+            <x-parts.evaluation-star :star='$value->user->avg_star'/>
+
         </div>
     </div>
 </div>

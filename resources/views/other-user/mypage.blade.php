@@ -51,7 +51,7 @@
                                         </p>
 										<p class="mypageP05"></p>
 										<div class="mypageP06">
-											<div class="evaluate three"></div>
+											<x-parts.evaluation-star :star='$user->avg_star'/>
 										</div>
 									</dd>
 								</dl>
@@ -145,7 +145,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <p class="check"><a href="#">本人確認済み</a></p>
-                                                                        <div class="evaluate three"><img src="img/common/evaluate.svg" alt=""></div>
+																		<x-parts.evaluation-star :star='$user->avg_star'/>
                                                                     </div>
                                                                 </div>
                                                             </div>
