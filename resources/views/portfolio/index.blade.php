@@ -270,41 +270,19 @@
                                     <p class="mypageHd02"><span>ポートフォリオ</span></p>
                                     <ul class="mypagePortfolioUl02">
                                         <li class="editLi">
-                                            <a href="portfolio_edit.html">
+                                            <a href="{{ route('portfolio.create') }}">
                                                 <p class="imgP"><img src="img/mypage/edit_portfolio.jpg" alt=""></p>
-                                                <p class="editP">編集する</p>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="portfolio_edit.html">
-                                                <p class="imgP"><img src="img/mypage/img_portfolio01.jpg" alt=""></p>
-                                                <p class="editP">編集する</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio_edit.html">
-                                                <p class="imgP"><img src="img/mypage/img_portfolio01.jpg" alt=""></p>
-                                                <p class="editP">編集する</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio_edit.html">
-                                                <p class="imgP"><img src="img/mypage/img_portfolio01.jpg" alt=""></p>
-                                                <p class="editP">編集する</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio_edit.html">
-                                                <p class="imgP"><img src="img/mypage/img_portfolio01.jpg" alt=""></p>
-                                                <p class="editP">編集する</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio_edit.html">
-                                                <p class="imgP"><img src="img/mypage/img_portfolio01.jpg" alt=""></p>
-                                                <p class="editP">編集する</p>
-                                            </a>
-                                        </li>
+                                        @foreach ($portfolios as $portfolio)
+                                            <li>
+                                                <a href="portfolio_edit.html">
+                                                    <p class="imgP h-100 align-content-center">
+                                                        <img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
+                                                    <p class="editP align-bottom pt-5">編集する</p>
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
