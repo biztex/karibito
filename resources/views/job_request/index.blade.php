@@ -1,4 +1,5 @@
 <x-layout :keyword="$keyword ?? ''" :serviceflg="$service_flg ?? ''">
+<x-parts.post-button/>
 	<div id="breadcrumb">
 		<div class="inner">
 			<a href="{{ route('home') }}">ホーム</a>　&gt;
@@ -22,7 +23,6 @@
 				<h2>{{$title}}</h2>
 			</div>
 		</div><!-- /.teaser -->
-		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 
 		<div id="contents">
 			<div class="inner clearfix">
@@ -60,57 +60,8 @@
 						<div class="recommendList style2">
 							<h2 class="hdM">ランキング一覧</h2>
 							<div class="list sliderSP"> {{--st3クラスを消した。横幅がおかしかったため--}}
-								@foreach( $job_request_ranks as $job_request_rank)
-									<div class="item">
-										<p class="level"></p>
-										<div class="info biggerlink">
-											<div class="breadcrumb">
-												<a href="{{ route('job_request.category.index', $job_request_rank->mProductChildCategory->mProductCategory->id) }}">
-													{{ $job_request_rank->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
-												<a href="{{ route('job_request.category.index.show', $job_request_rank->mProductChildCategory->id) }}">
-													{{ $job_request_rank->mProductChildCategory->name }}</a>
-											</div>
-											<a href="{{route('job_request.show',$job_request_rank->id)}}">
-												<div class="draw">
-													<p class="price">{{ $job_request_rank->title }}</p>
-												</div>
-												<div class="budget">
-													<table>
-														<tr>
-															<th><span class="th">予算</span></th>
-															<td>{{ number_format($job_request_rank->price) }}円〜</td>
-														</tr>
-														<tr>
-															<th><span class="th">提案数</span></th>
-															<td>0</td>
-															{{-- まだわからない --}}
-														</tr>
-														<tr>
-															<th><span class="th">募集期限</span></th>
-															<td>{{ $job_request_rank->deadline_day }}日と{{ $job_request_rank->deadline_hour }}時間</td>
-															{{-- 修正する --}}
-															{{-- <td>{{ $job_request_rank->application_deadline }}</td> --}}
-														</tr>
-													</table>
-												</div>
-											</a>
-											<div class="aboutUser">
-												<div class="user">
-													@if(empty($job_request_rank->user->userProfile->icon))
-														<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-													@else
-														<p class="ico"><img src="{{asset('/storage/'.$job_request_rank->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-													@endif
-													<div class="introd">
-														<p class="name">{{ $job_request_rank->user->name }}</p>
-														<p>({{ App\Models\UserProfile::GENDER[$job_request_rank->user->userProfile->gender] }}/{{ $job_request_rank->user->userProfile->birthday }} / {{ $job_request_rank->user->userProfile->prefecture->name }})</p>
-													</div>
-												{{-- <p class="check"><span>本人確認済み</span></p>
-												<div class="evaluate three"><img src="img/common/evaluate.svg" alt=""></div> --}}
-												</div>
-											</div>
-										</div>
-									</div>
+								@foreach( $job_request_ranks as $value)
+									<x-parts.job-request-item :value='$value'/>
 								@endforeach
 							</div>
 						</div>
@@ -165,53 +116,8 @@
                             {{-- <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$job_requests->total() . '件中' . $job_requests->firstItem() . '-' . $job_requests->lastItem()}}件）</h3> --}}
 						</p>
 						<div class="list sliderSP02">　{{--st3クラスを消した。横幅がおかしかったため--}}
-							@foreach( $job_requests as $job_request)
-								<div class="item">
-									<div class="info biggerlink">
-										<div class="breadcrumb">
-											<a href="{{ route('job_request.category.index', $job_request->mProductChildCategory->mProductCategory->id) }}">
-												{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;
-											<a href="{{ route('job_request.category.index.show', $job_request->mProductChildCategory->id) }}">
-												{{ $job_request->mProductChildCategory->name }}</a>
-										</div>
-										<div class="draw">
-											<p class="price">
-												<a href="{{route('job_request.show',$job_request->id)}}">{{ $job_request->title }}</a>
-											</p>
-										</div>
-										<div class="budget">
-											<table>
-												<tr>
-													<th><span class="th">予算</span></th>
-													<td>{{ number_format($job_request->price) }}円〜</td>
-												</tr>
-												<tr>
-													<th><span class="th">提案数</span></th>
-													<td>0</td>
-												</tr>
-												<tr>
-													<th><span class="th">募集期限</span></th>
-													<td>{{ $job_request->deadline_day }}日と{{ $job_request->deadline_hour }}時間</td>
-												</tr>
-											</table>
-										</div>
-										<div class="aboutUser">
-											<div class="user">
-												@if(empty($job_request_rank->user->userProfile->icon))
-													<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-												@else
-													<p class="ico"><img src="{{asset('/storage/'.$job_request_rank->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
-												@endif
-												<div class="introd">
-													<p class="name">{{ $job_request->user->name }}</p>
-													<p>({{ App\Models\UserProfile::GENDER[$job_request->user->userProfile->gender] }}/{{ $job_request->user->userProfile->birthday }} / {{ $job_request->user->userProfile->prefecture->name }})</p>
-												</div>
-											{{-- <p class="check"><span>本人確認済み</span></p>
-											<div class="evaluate three"><img src="img/common/evaluate.svg" alt=""></div> --}}
-											</div>
-										</div>
-									</div>
-								</div>
+							@foreach( $job_requests as $value)
+								<x-parts.job-request-item :value='$value'/>
 							@endforeach
 						</div>
 					</div>
