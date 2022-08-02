@@ -22,6 +22,7 @@
                         <input type="submit" name="is_ban" value="利用制限を解除する">
                     @endif
                         @csrf
+                        </form>
                     <div class="meta-wrap">
                         <p class="meta">
                             @if(!empty($user->identification_path))
@@ -48,7 +49,41 @@
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">郵便番号</span>：〒{{ substr($user->zip, 0, 3).'-'.substr($user->zip, 3, 7) }}</p><p class="mb-0 mr-4"><span class="font-weight-bold">都道府県</span>：{{ $user->prefecture?->name }}</p></li>
             <li class="list-group-item"><span class="font-weight-bold">住所</span>：{{ $user->address }}</li>
             <li class="list-group-item"><span class="font-weight-bold">自己紹介</span><br>{!! nl2br(e($user->introduction)) !!}</li>
+            <li class="list-group-item"><span class="font-weight-bold">メモ</span>
+                <button type="button" class="btn btn-info btn-sm" id="js-memo_btn" data-toggle="modal" data-target="#memoModalCenter{{ $user->user_id }}">
+                    編集
+                </button>
+                <br>{!! nl2br(e($user->user->memo)) !!}
+            </li>
         </ul>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="memoModalCenter{{ $user->user_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.user.updateMemo', $user->user_id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">メモ編集</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                        @include('components.form.edit_textarea', ['name' => 'memo', 'value' => $user->user->memo,'required' => false, 'placeholder' => '', 'cols' => 30, 'rows' => 3])
+                        @include('components.form.error', ['name' => 'memo'])
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
 
@@ -111,4 +146,10 @@ $('#js-limit_alert').click(function() {
         return false;
     }
 });
+$(function(){
+		// バリデーションエラーの際、モーダルを最初から表示する
+        if (@json($errors->has('memo'))){
+            $('#js-memo_btn').trigger('click');
+        }
+    });
 </script>

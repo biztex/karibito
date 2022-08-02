@@ -57,38 +57,8 @@
                             <td><button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{ $user->user_id }}">身分証明証</button></td>
                         @endif
                         <td>{{ App\Models\UserProfile::BAN[$user->is_ban] }}</td>
-                        <td class="text-wrap px-2" style="max-width: 100px">{{ $user->user->memo }}
-                            <!-- Button trigger modal -->
-                            <button type="button"class="btn btn-info btn-sm" data-toggle="modal" data-target="#memoModalCenter{{ $user->user_id }}">
-                                <i class="fas fa-edit" style="color: #fff;"></i>
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="memoModalCenter{{ $user->user_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <form action="{{ route('admin.user.updateMemo', $user->user_id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalCenterTitle">メモ編集</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                @include('components.form.edit_textarea', ['name' => 'memo', 'value' => $user->user->memo,'required' => false, 'placeholder' => '', 'cols' => 30, 'rows' => 3])
-                                                @include('components.form.error', ['name' => 'memo'])
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                                                <button type="submit" class="btn btn-primary">保存</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
+                        <td class="text-wrap px-2" style="max-width: 100px">{{mb_substr($user->user->memo, 0, 50)}}
+                        <!-- Button trigger modal -->
 
                         <td><a href="{{ route('admin.users.show',$user->user_id) }}" class="btn btn-outline-primary btn-sm" >詳細</a></td>
 
