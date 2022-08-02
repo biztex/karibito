@@ -29,7 +29,7 @@ class NewsController extends Controller
     {
         $news_list = $this->news_service->paginate(5);
 
-        return view('Admin.news.index', compact('news_list'));
+        return view('admin.news.index', compact('news_list'));
     }
 
     /**
@@ -64,7 +64,7 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return view('Admin.news.show', compact('news'));
+        return view('admin.news.show', compact('news'));
     }
 
     /**
@@ -75,7 +75,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        return view('Admin.news.edit', compact('news',));
+        return view('admin.news.edit', compact('news',));
     }
 
     /**
