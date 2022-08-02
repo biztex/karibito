@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_ban')->default(0)->comment('0.制限なし 1.制限あり')->after('password');
+            $table->text('memo')->comment('メモ')->nullable()->after('password');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_ban');
+            $table->dropColumn('memo');
         });
     }
 };

@@ -21,6 +21,10 @@ class AdminUserSearchService
             $sql->where('is_identify', UserProfile::NOT_IDENTIFY);
         }
 
+        if ($request->is_ban) {
+            $sql->where('is_ban', UserProfile::IS_BAN);
+        }
+
         return $sql->paginate(50)->appends($request->query());
     }
 }

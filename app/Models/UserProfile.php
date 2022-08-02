@@ -42,7 +42,16 @@ class UserProfile extends Model
         self::CAN_CALL => '待機中',
         self::CANNOT_CALL => '対応不可'
     ];
-    
+
+    const NOT_BAN = 0;
+
+    const IS_BAN = 1;
+
+    const BAN = [
+        self::IS_BAN => '制限あり',
+        self::NOT_BAN => '制限なし',
+    ];
+
     protected function getBirthdayAttribute($birthday)
     {
         $day = date("Ymd",strtotime($birthday));
