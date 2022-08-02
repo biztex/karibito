@@ -66,7 +66,7 @@
 										<!-- <a href="#">機密保持契約(NDA) 可能</a></p> -->
 									<p class="mypageP05"><a href="{{ route('evaluation') }}" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
-										<div class="evaluate three"></div><a href="#">(3.0)</a>
+                            			<x-parts.evaluation-star :star='Auth::user()->avg_star'/><p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">{{ number_format(Auth::user()->avg_star,1) }}</a>)</p>
 									</div>
 								</dd>
 						</dl>
