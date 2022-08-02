@@ -51,6 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+
+    protected $appends = ['avg_star'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -109,6 +112,11 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    public function getAvgStarAttribute()
+    {
+        return $this->attributes['avg_star'] = $this->evaluations->avg('star');
+    }
+
     /**
      * 通知設定
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -127,16 +135,24 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(UserCareer::class);
     }
+
     public function userJob()
     {
         return $this->hasMany(UserJob::class);
     }
+    
     public function dmroom()
     {
         return $this->hasMany(Dmroom::class);
     }
+
     public function specialty()
     {
         return $this->hasMany(Specialty::class);
+    }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class, 'target_user_id');
     }
 }

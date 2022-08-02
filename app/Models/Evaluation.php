@@ -18,7 +18,7 @@ class Evaluation extends Model
     const PITY = 1;
 
     // 対象ユーザーの評価のみ取得
-    public function scopeEvaluationTargetUser($query, $user_id)
+    public function scopeTargetUser($query, $user_id)
     {
         return $query->where('target_user_id',$user_id);
     }
@@ -26,19 +26,19 @@ class Evaluation extends Model
      // 対象ユーザーの「よかった」の評価のみ取得
      public function scopeGoodStar($query, $user_id)
      {
-         return $query->evaluationTargetUser($user_id)->where('star',self::GOOD);
+         return $query->targetUser($user_id)->where('star',self::GOOD);
      }
 
      // 対象ユーザーの「普通」の評価のみ取得
      public function scopeUsuallyStar($query, $user_id)
      {
-         return $query->evaluationTargetUser($user_id)->where('star',self::USUALLY);
+         return $query->targetUser($user_id)->where('star',self::USUALLY);
      }
 
      // 対象ユーザーの「残念」の評価のみ取得
      public function scopePityStar($query, $user_id)
      {
-         return $query->evaluationTargetUser($user_id)->where('star',self::PITY);
+         return $query->targetUser($user_id)->where('star',self::PITY);
      }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
