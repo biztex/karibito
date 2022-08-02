@@ -21,7 +21,7 @@
                         <input type="submit" class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
                     </div>
                 </form>
-            @elseif($product->user_id !== Auth::id())
+            @else
                 <div class="functeBtns">
                     <a href="{{ route('chatroom.new.product', $product->id ) }}" class="orange full">交渉画面へ進む</a>
                 </div>
@@ -29,18 +29,8 @@
         </div>
         <p class="specialtyBtn"><span>この情報をシェアする</span></p>
     </div>
-    <div class="box seller">
-        <h3>スキル出品者</h3>
-            @if(empty($product->user->userProfile->icon))
-                <a href="{{ route('user.mypage', $product->user) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
-            @else
-                <a href="{{ route('user.mypage', $product->user) }}" class="head"><img src={{asset('/storage/'.$product->user->userProfile->icon) }} alt=""></a>
-            @endif
-        <!-- <p class="login">最終ログイン：8時間前</p> -->
-        <p class="introd"><a href="{{ route('user.mypage', $product->user) }}" class="name">{{$product->user->name}}</a><br>({{App\Models\UserProfile::GENDER[$product->user->userProfile->gender]}} / {{$product->user->userProfile->birthday}}/ {{$product->user->userProfile->prefecture->name}})</p>
-        <!-- <div class="evaluate three"></div> -->
-        @if($product->user->userProfile->is_identify = 1)
-            <p class="check"><a href="#">本人確認済み</a></p>
-        @endif
-    </div>
+
+    <x-parts.box-seller :user='$product->user'/>
+
+    
 </aside>
