@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use App\Http\Controllers\Web\Mypage\ChangeTelController;
-use App\Http\Controllers\Web\Mypage\ChangeCardController;
+use App\Http\Controllers\Web\Mypage\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -153,8 +153,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             });
 
             // クレジットカード
-            Route::controller(ChangeCardController::class)->name('card.')->group(function () {
-                Route::get('card', 'edit')->name('edit');
+            Route::controller(PaymentController::class)->name('card.')->group(function () {
+                Route::get('card', 'create')->name('create'); //クレカ登録
+                Route::post('card', 'createCard')->name('store'); //クレカ登録
             });
 
 
