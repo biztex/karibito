@@ -82,7 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Override to send for password reset notification.
      *
      * @param string $token
-     * 
+     *
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -140,7 +140,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Specialty::class);
     }
-
+    public function portfolios()
+    {
+        return $this->hasMany(Portfolio::class);
+    }
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class, 'target_user_id');
