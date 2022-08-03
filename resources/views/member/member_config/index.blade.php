@@ -79,7 +79,7 @@
 								<dl class="memberConfigDl">
 									<dt>クレジットカード</dt>
 									<dd>
-										<a class="configLink" href="{{ route('member_config.card.edit') }}">変更する</a>
+										<a class="configLink" href="{{ route('member_config.card.create') }}">変更する</a>
 									</dd>
 								</dl>
 							</div>

@@ -156,6 +156,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(PaymentController::class)->name('card.')->group(function () {
                 Route::get('card', 'create')->name('create'); //クレカ登録
                 Route::post('card', 'createCard')->name('store'); //クレカ登録
+                Route::get('card/{card_id}', 'destroy')->name('destroy');
             });
 
 

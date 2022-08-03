@@ -67,11 +67,36 @@ class PayjpPayment implements Payment
      */
     public function createCard(string $customer_id, string $token) 
     {
-        $cus = Customer::retrieve($customer_id);
-        $cus->cards->create(array(
-                "card" => $token,
-        ));
+        $customer = Customer::retrieve($customer_id);
+        $customer->cards->create([
+            "card" => $token,
+        ]);
+
     }
 
-    public function getCardList(string $customer_id, int $limit, int $offset): array {}
+    /**
+     * クレカ一覧取得
+     * @param string $customer_id
+     * @param int $limit
+     * @param int $offset
+     * @return array $cards->data
+     */
+    public function getCardList(string $customer_id, int $limit, int $offset): array 
+    {
+        $cards = Customer::retrieve($customer_id)->cards->all(array("limit"=>$limit, "offset"=>$offset));
+        return $cards->data;
+    }
+
+    /**
+     * クレカ削除
+     * @param string $customer_id
+     * @param string $card_id
+     * @return void
+     */
+    public function destroyCard(string $customer_id, string $card_id)
+    {
+        $customer = Customer::retrieve($customer_id);
+        $card = $customer->cards->retrieve($card_id);
+        $card->delete();
+    }
 }

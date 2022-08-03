@@ -11,35 +11,26 @@
 							<h2 class="subPagesHd">クレジットカード</h2>
 							<div class="configEditBox">
 								<div class="configEditList">
-									<h3 class="mypageEditHd">現在のカード情報</h3>
-									<div class="configEditTable">
-										<table>
-											<tr>
-												<th>カード番号</th>
-												<td>************007</td>
-											</tr>
-											<tr>
-												<th>カード名義人</th>
-												<td>〇〇〇〇〇〇〇〇</td>
-											</tr>
-										</table>
-                                        <button class="configEditDeleteBtn">削除</button>
-									</div>
-
-                                    <div class="configEditTable">
-										<table>
-											<tr>
-												<th>カード番号</th>
-												<td>************007</td>
-											</tr>
-											<tr>
-												<th>カード名義人</th>
-												<td>〇〇〇〇〇〇〇〇</td>
-											</tr>
-										</table>
-                                        <button class="configEditDeleteBtn">削除</button>
-									</div>
+									@if(!empty($cards))
+										<h3 class="mypageEditHd">現在のカード情報</h3>
+										@foreach($cards as $card)
+											<div class="configEditTable">
+												<table>
+													<tr>
+														<th>カード番号</th>
+														<td>************{{ $card['last4'] }}</td>
+													</tr>
+													<tr>
+														<th>カード名義人</th>
+														<td>{{ $card['name'] }}</td>
+													</tr>
+												</table>
+												<a href="{{ route('member_config.card.destroy', $card['id']) }}" class="configEditDeleteBtn">削除</a>
+											</div>
+										@endforeach
+									@endif
 								</div>
+								
 								<script src="https://js.pay.jp/v2/pay.js"></script>
 								<style>
 									/* 必要に応じてフォームの外側のデザインを用意します */

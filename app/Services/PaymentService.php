@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Libraries\Payment\Payment;
+use Dotenv\Util\Str;
 
 class PaymentService
 {
@@ -68,11 +69,22 @@ class PaymentService
 
     /**
      * クレカ一覧取得
-     * @return array
+     * @return array $cards
      */
-    // public function getCardList(): array
-    // {
-    //     $customer_id = 'cus_000000000000000000000'; // DBから取得
-    //     return $this->payment->getCardList($customer_id, 10, 1);
-    // }
+    public function getCardList(): array
+    {
+        $cards = $this->payment->getCardList(\Auth::user()->payjp_customer_id, 10, 0);
+        return $cards;
+    }
+
+    /**
+     * クレカ削除
+     * @param string $customer_id
+     * @param string $card_id
+     * @return void
+     */
+    public function destroyCard(string $customer_id, string $card_id)
+    {
+        $this->payment->destroyCard($customer_id, $card_id);
+    }
 }

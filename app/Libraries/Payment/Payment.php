@@ -44,7 +44,15 @@ interface Payment
      * @param string $customer_id
      * @param int $limit
      * @param int $offset
-     * @return array
+     * @return array $cards
      */
     public function getCardList(string $customer_id, int $limit, int $offset): array;
+
+    /**
+     * クレカ削除
+     * @param string $customer_id
+     * @param string $card_id
+     * @return void
+     */
+    public function destroyCard(string $customer_id, string $card_id);
 }

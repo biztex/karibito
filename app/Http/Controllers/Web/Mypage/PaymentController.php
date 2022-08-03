@@ -21,7 +21,12 @@ class PaymentController extends Controller
 
     public function create()
     {
-        return view('member.member_config.card');
+        if(\Auth::user()->payjp_customer_id === null) {
+            $cards = null;
+        } else {
+            $cards = $this->payment_service->getCardList();
+        }
+        return view('member.member_config.card', compact('cards'));
     }
 
     /**
@@ -39,8 +44,16 @@ class PaymentController extends Controller
             } else {
                 $customer_id = $this->payment_service->getCustomer();
             }
-
             $this->payment_service->createCard($customer_id, $request->all());
+        });
+        return back();
+    }
+
+    public function destroy($card_id)
+    {
+        \DB::transaction(function () use ($card_id) {
+            $customer_id = $this->payment_service->getCustomer();
+            $this->payment_service->destroyCard($customer_id, $card_id);
         });
         return back();
     }
