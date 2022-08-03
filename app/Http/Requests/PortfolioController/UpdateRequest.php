@@ -5,7 +5,7 @@ namespace App\Http\Requests\PortfolioController;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'path' => 'required | max:20480 | file | image | mimes:png,jpg',
+            'path' => 'max:20480 | file | image | mimes:png,jpg', //画像は既に保存されているのでUpdateの場合はrequiredを削除
             'category_id' => 'required | integer | exists:m_product_child_categories,id',
             'title' => 'required | string | max:30',
             'detail' => 'required | string | max:3000 ',
