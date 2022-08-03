@@ -19,9 +19,9 @@ class BanAccount
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
+        $user_profile = Auth::user()->userProfile;
 
-        if($user->is_ban == 1) {
+        if($user_profile->is_ban == 1) {
             return redirect(RouteServiceProvider::HOME);
         }
         return $next($request);

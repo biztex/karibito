@@ -15,16 +15,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-
-    const NOT_BAN = 0;
-
-    const IS_BAN = 1;
-
-    const BAN = [
-        self::IS_BAN => '制限中',
-        self::NOT_BAN => '制限なし',
-    ];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -92,7 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Override to send for password reset notification.
      *
      * @param string $token
-     * 
+     *
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -150,9 +140,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Specialty::class);
     }
-
+    public function portfolios()
+    {
+        return $this->hasMany(Portfolio::class);
+    }
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class, 'target_user_id');
     }
+
 }
