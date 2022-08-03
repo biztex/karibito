@@ -48,4 +48,11 @@ class PortfolioController extends Controller
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを更新しました！');
     }
+
+    public function destroy(Portfolio $portfolio)
+    {
+        $portfolio->delete();
+
+        return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを削除しました！');
+    }
 }

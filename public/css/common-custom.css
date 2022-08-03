@@ -20,7 +20,13 @@
     background-color: #F7F7F7;
 }
 
-/*画像の高さを100% + 中央に表示*/
-.h-100 {
-    height: 100%;
+/* ポートフォリオの削除ボタン */
+.delete {
+    font-family: "メイリオ",Meiryo,'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','ＭＳ Ｐゴシック',Verdana,Arial,Helvetica,sans-serif;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #158ACC;
+    text-align: center;
 }
