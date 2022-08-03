@@ -29,7 +29,7 @@
                     <li><a href="{{ route('user_notification.index') }}" class="">お知らせ</a></li>
                     <li><a href="/sample/faq" class="">カリビト知恵袋</a></li>
                     <li><a href="{{ route('secret01') }}" class="">マッチングする秘訣</a></li>
-                    <li><a href="#" class="">クーポン</a></li>
+                    <li><a href="{{ route('coupon.index') }}" class="">クーポン</a></li>
                     <li><a href="{{ route('dm.index') }}" class="">DM</a></li>
                     <li><a href="{{ route('member_config.index') }}" class="">会員情報</a></li>
                     <li><a href="{{ route('showWithdrawForm') }}" class="">退会</a></li>
