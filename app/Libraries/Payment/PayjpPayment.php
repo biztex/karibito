@@ -6,7 +6,7 @@ use Payjp\Charge;
 use Payjp\Payjp;
 use Payjp\Customer;
 
-class PayjpPayment implements Payment
+class PayjpPayment implements PaymentInterface
 {
     public function __construct()
     {

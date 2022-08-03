@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
  * スタブ(ダミーデータ)の決済クラス
  * 決済が使えない環境やテストでも使用できます
  */
-class StubPayment implements Payment
+class StubPayment implements PaymentInterface
 {
     /**
      * 決済の実行

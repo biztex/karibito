@@ -2,21 +2,21 @@
 
 namespace App\Services;
 
-use App\Libraries\Payment\Payment;
+use App\Libraries\Payment\PaymentInterface;
 use Dotenv\Util\Str;
 
 class PaymentService
 {
-    private readonly Payment $payment;
+    private readonly PaymentInterface $payment_interface;
 
     /**
      * $paymentのインスタンスはenvに設定されている内容によって変化する
      * App\Providers\PaymentServiceProvider参照
-     * @param Payment $payment
+     * @param PaymentInterface $payment_interface
      */
-    public function __construct(Payment $payment)
+    public function __construct(PaymentInterface $payment_interface)
     {
-        $this->payment = $payment;
+        $this->payment_interface = $payment_interface;
     }
 
     /**
@@ -25,7 +25,7 @@ class PaymentService
      */
     public function createCustomer(): string
     {
-        $customer_id = $this->payment->createCustomer(\Auth::user()->email, \Auth::user()->name);
+        $customer_id = $this->payment_interface->createCustomer(\Auth::user()->email, \Auth::user()->name);
         
         return $customer_id;
     }
@@ -36,7 +36,7 @@ class PaymentService
      */
     public function getCustomer(): string
     {
-        $customer_id = $this->payment->getCustomer(\Auth::user()->payjp_customer_id);
+        $customer_id = $this->payment_interface->getCustomer(\Auth::user()->payjp_customer_id);
 
         return $customer_id;
     }
@@ -49,7 +49,7 @@ class PaymentService
      */
     public function createCard(string $customer_id, array $params)
     {
-        $card_id = $this->payment->createCard($customer_id, $params['createCustomer-payjp-token']);
+        $card_id = $this->payment_interface->createCard($customer_id, $params['createCustomer-payjp-token']);
     }
 
 
@@ -61,7 +61,7 @@ class PaymentService
      */
     // public function createCharge(array $params)
     // {
-    //     $charge_id = $this->payment->createCharge($params['payjp-token'], 3000);
+    //     $charge_id = $this->payment_interface->createCharge($params['payjp-token'], 3000);
     //     dump($charge_id);
     // }
 
@@ -73,7 +73,7 @@ class PaymentService
      */
     public function getCardList(): array
     {
-        $cards = $this->payment->getCardList(\Auth::user()->payjp_customer_id, 10, 0);
+        $cards = $this->payment_interface->getCardList(\Auth::user()->payjp_customer_id, 10, 0);
         return $cards;
     }
 
@@ -85,6 +85,6 @@ class PaymentService
      */
     public function destroyCard(string $customer_id, string $card_id)
     {
-        $this->payment->destroyCard($customer_id, $card_id);
+        $this->payment_interface->destroyCard($customer_id, $card_id);
     }
 }

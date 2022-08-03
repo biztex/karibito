@@ -5,7 +5,7 @@ namespace App\Libraries\Payment;
 /**
  * 決済の実装
  */
-interface Payment
+interface PaymentInterface
 {
     /**
      * 決済の実行
