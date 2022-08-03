@@ -1,10 +1,10 @@
 <x-layout>
-<x-parts.post-button/>
+    <x-parts.post-button/>
     <article>
         <body id="portfolio">
             <div id="breadcrumb">
                 <div class="inner">
-                    <a href="{{ route('home') }}">ホーム</a>　>　<span>ポートフォリオ</span>
+                    <a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('portfolio.index') }}">ポートフォリオ</a>　>　<span>{{ $portfolio->title }}</span>
                 </div>
             </div><!-- /.breadcrumb -->
             <x-parts.flash-msg/>
@@ -268,24 +268,87 @@
                             <div class="mypageWrap">
                                 <div class="mypageSec05">
                                     <p class="mypageHd02"><span>ポートフォリオ</span></p>
-                                    <ul class="mypagePortfolioUl02">
-                                        <li class="editLi">
-                                            <a href="{{ route('portfolio.create') }}">
-                                                <p class="imgP"><img src="img/mypage/edit_portfolio.jpg" alt=""></p>
-                                            </a>
-                                        </li>
-                                        @foreach ($portfolios as $portfolio)
-                                            <li>
-                                                <a href="{{ route('portfolio.edit', $portfolio) }}">
-                                                    <p class="imgP"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
-                                                    <p class="editP">編集する</p>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
                                 </div>
                             </div>
-
+                            <div class="mypageWrap">
+                                <div class="mypageSec05">
+                                    <form action="{{ route('portfolio.update', $portfolio) }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PATCH')
+                                        <div class="mypageEditBox">
+                                            <div class="mypageEditList">
+                                                <p class="mypageEditHd">画像</p>
+                                                @error('path')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                <div class="mypageEditInput">
+                                                    <input id='showSrc' type='text' />
+                                                    <input id="showButton" type='button' value=''  OnClick='javascript:$("#hiddenFile").click();'/>
+                                                    <input name="path" id='hiddenFile' type='file' accept="image/*" OnChange='ophiddenFile();' />
+                                                </div>
+                                            </div>
+                                            <div class="mypageEditList">
+                                                <p class="mypageEditHd">登録中の画像</p>
+                                                <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="" style="width: 25%;">
+                                            </div>
+                                            <div class="mypageEditList">
+                                                <p class="mypageEditHd">カテゴリ</p>
+                                                @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                <div class="mypageEditInput">
+                                                    <select class="middle_ipt" name="category_id" required>
+                                                        <option value="">選択してください</option>
+                                                        @foreach (App\Models\MProductCategory::get() as $category)
+                                                            <optgroup label="{{$category->name}}">
+                                                                @foreach ($category->mProductChildCategory as $child_category)
+                                                                    <option value="{{$child_category->id}}"
+                                                                        @if(( old('category_id', $request->category_id ?? "") == $child_category->id ) || ($portfolio->category_id == $child_category->id)) selected @endif>{{ $child_category->name }}</option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mypageEditList">
+                                                <p class="mypageEditHd">タイトル</p>
+                                                @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                <div class="mypageEditInput">
+                                                    <input type="text" name="title" placeholder="タイトルを入力してください" value="{{ old('title',$request->title ?? "") }}{{ $portfolio->title }}"required>
+                                                </div>
+                                            </div>
+                                            <div class="mypageEditList">
+                                                <p class="mypageEditHd">詳細</p>
+                                                @error('detail')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                <div class="mypageEditInput">
+                                                    <textarea name="detail" placeholder="詳細を入力してください" required>{{ old('detail',$request->detail ?? "") }}{{ $portfolio->detail }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="mypageEditList">
+                                                <p class="mypageEditHd">作成日</p>
+                                                @error('year')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                @error('month')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                <div class="mypageEditDate">
+                                                    <div class="mypageEditInput flexLine01">
+                                                        <select name="year" required>
+                                                            <option value="{{ now()->year }}" selected>{{ now()->year }}年</option>
+                                                            @for($year = 1970; $year <= now()->year - 1; $year++)
+                                                                <option value="{{ $year }}" @if(( old('year',$request->year ?? "") == $year) || ($portfolio->year == $year)) selected @endif>{{ $year }}</option>
+                                                            @endfor
+                                                        </select>
+                                                        <select name="month" required>
+                                                            <option value="12" selected>12月</option>
+                                                            @for($month = 1; $month<= 11; $month++)
+                                                                <option value="{{ $month }}"@if(( old('month', $request->month ?? "") == $month) || ($portfolio->month == $month)) selected @endif>{{ $month }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fancyPersonBtn">
+                                                <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
+                                                <button class="fancyPersonSign">変更する</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div><!-- /#main -->
                         <x-side-menu/>
                     </div>
