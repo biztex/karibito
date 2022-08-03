@@ -148,4 +148,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Evaluation::class, 'target_user_id');
     }
+
 }

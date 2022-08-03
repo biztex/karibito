@@ -984,7 +984,9 @@
 	width: 50px;
 	max-width: 100%;
 	height: 32px;
+	line-height: 32px;
 	margin: auto 0;
+	text-align: center;
 	border: none;
 }
 .creditCode input[class=small] {
@@ -995,4 +997,19 @@
 	width: 74px;
     height: 40px;
     padding: 0 10px;
+}
+.mypageEditInput input[type='tell']{
+    border: 1px solid #DDDDDD;
+    background-color: #fff;
+    border-radius: 3px;
+    font-size: 1.4rem;
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+}
+@media screen and (max-width: 767px){
+	.mypageEditInput input[type='tell'] {
+		font-size: 1.2rem;
+		height: 35px;
+	}
 }

@@ -4,8 +4,9 @@ namespace App\Libraries\Payment;
 
 use Payjp\Charge;
 use Payjp\Payjp;
+use Payjp\Customer;
 
-class PayjpPayment implements Payment
+class PayjpPayment implements PaymentInterface
 {
     public function __construct()
     {
@@ -30,9 +31,72 @@ class PayjpPayment implements Payment
         return $charge->id;
     }
 
-    public function createCustomer(string $email, string $description): string {}
+    /**
+     * 顧客登録
+     * @param string $email
+     * @param string $description
+     * @return string $customer->id
+     */
+    public function createCustomer(string $email, string $description): string 
+    {
+        $customer = Customer::create(array(
+                "email" => $email,
+                "description" => $description,
+        ));
+        return $customer->id;
+    }
 
-    public function createCard(string $customer_id, string $token): string {}
+    /**
+     * 顧客情報取得
+     * @param string $payjp_customer_id
+     * @return string $customer->id
+     */
+    public function getCustomer(string $customer_id): string
+    {
+        $customer = Customer::retrieve($customer_id);
+        
+        return $customer->id;
+    }
+    
 
-    public function getCardList(string $customer_id, int $limit, int $offset): array {}
+    /**
+     * クレカ登録
+     * @param string $customer_id
+     * @param string $token
+     * @return void
+     */
+    public function createCard(string $customer_id, string $token) 
+    {
+        $customer = Customer::retrieve($customer_id);
+        $customer->cards->create([
+            "card" => $token,
+        ]);
+
+    }
+
+    /**
+     * クレカ一覧取得
+     * @param string $customer_id
+     * @param int $limit
+     * @param int $offset
+     * @return array $cards->data
+     */
+    public function getCardList(string $customer_id, int $limit, int $offset): array 
+    {
+        $cards = Customer::retrieve($customer_id)->cards->all(array("limit"=>$limit, "offset"=>$offset));
+        return $cards->data;
+    }
+
+    /**
+     * クレカ削除
+     * @param string $customer_id
+     * @param string $card_id
+     * @return void
+     */
+    public function destroyCard(string $customer_id, string $card_id)
+    {
+        $customer = Customer::retrieve($customer_id);
+        $card = $customer->cards->retrieve($card_id);
+        $card->delete();
+    }
 }
