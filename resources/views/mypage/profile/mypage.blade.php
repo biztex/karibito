@@ -104,8 +104,8 @@
 												</dl>
 											</a>
 										</li>
-                                    @endforeach
-                                @endif
+									@endforeach
+								@endif
 							</ul>
 						</div>
 						<div class="mypageSec03">
