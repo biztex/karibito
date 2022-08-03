@@ -28,7 +28,7 @@ class StoreRequest extends FormRequest
             'path' => 'required | max:20480 | file | image | mimes:png,jpg',
             'category_id' => 'required | integer | exists:m_product_child_categories,id',
             'title' => 'required | string | max:30',
-            'detail' => 'required | string | min:30 | max:3000 ',
+            'detail' => 'required | string | max:3000 ',
             'year' => 'required | integer',
             'month' => 'required | integer'
         ];
