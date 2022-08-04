@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('content')->comment('詳細')->nullable();
             $table->integer('discount')->comment('割引金額');
             $table->integer('min_price')->comment('最低利用金額');
-            $table->date('deadline_period')->comment('有効期間');
+            $table->integer('deadline_period')->comment('有効期間');
             $table->timestamps();
         });
     }
