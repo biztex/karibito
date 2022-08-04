@@ -8,15 +8,20 @@ use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\Proposal;
 use App\Models\KaribitoSurvey;
+use App\Models\UserCoupon;
 use Illuminate\Http\Request;
 use App\Services\ChatroomService;
 use App\Services\ChatroomMessageService;
 use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
+use App\Services\PaymentService;
 use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
+use App\Models\MCommissionRate;
+use Payjp\Token;
+
 
 class ChatroomController extends Controller
 {
@@ -25,14 +30,16 @@ class ChatroomController extends Controller
     private $proposal_service;
     private $purchase_service;
     private $evaluation_service;
+    private readonly PaymentService $payment_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
         $this->proposal_service = $proposal_service;
         $this->purchase_service = $purchase_service;
         $this->evaluation_service = $evaluation_service;
+        $this->payment_service = $payment_service;
     }
 
     /**
@@ -196,7 +203,15 @@ class ChatroomController extends Controller
      */
     public function purchase(Proposal $proposal)
     {
-        return view('chatroom.purchase.create',compact('proposal'));
+        $user_coupons = UserCoupon::where([
+            ['user_id', '=', \Auth::id()],
+            ['used_at', '=', null],
+        ])
+        ->get();
+
+        $cards = $this->payment_service->getCardList();
+
+        return view('chatroom.purchase.create',compact('proposal', 'cards', 'user_coupons'));
     }
 
     /**
@@ -207,7 +222,9 @@ class ChatroomController extends Controller
      */
     public function purchaseConfirm(Request $request, Proposal $proposal)
     {
-        return view('chatroom.purchase.confirm',compact('request', 'proposal'));
+        $card = $this->payment_service->getCard($request->card_id);
+
+        return view('chatroom.purchase.confirm',compact('request', 'proposal', 'card'));
     }
 
     /**
@@ -216,11 +233,19 @@ class ChatroomController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function purchased(Proposal $proposal)
+    public function purchased(Request $request, Proposal $proposal)
     {
-        \DB::transaction(function () use ($proposal) {
+        $m_commission_rate = MCommissionRate::find(1); // クーポン後で組み込む
+        \DB::transaction(function () use ($request, $proposal, $m_commission_rate) {
+            if($request->immediate === null){
+                $payjp_charge_id = $this->payment_service->createCustomerCharge($request['card_id'], $request['customer_id'], $request['amount']);
+            } else {
+                $token = $this->payment_service->createToken($request->all());
+                $payjp_charge_id = $this->payment_service->createCharge($token, $request['amount']);
+            }
+            $payment = $this->payment_service->storePayment($payjp_charge_id, $request['amount']);
             $this->proposal_service->purchasedProposal($proposal);
-            $purchase = $this->purchase_service->storePurchase($proposal);
+            $purchase = $this->purchase_service->storePurchase($proposal, $payment, $m_commission_rate);
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
         });

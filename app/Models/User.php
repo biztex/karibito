@@ -15,16 +15,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-
-    const NOT_BAN = 0;
-
-    const IS_BAN = 1;
-
-    const BAN = [
-        self::IS_BAN => '制限中',
-        self::NOT_BAN => '制限なし',
-    ];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -50,6 +40,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    protected $appends = ['avg_star'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -109,6 +102,11 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    public function getAvgStarAttribute()
+    {
+        return $this->attributes['avg_star'] = $this->evaluations->avg('star');
+    }
+
     /**
      * 通知設定
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -127,14 +125,17 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(UserCareer::class);
     }
+
     public function userJob()
     {
         return $this->hasMany(UserJob::class);
     }
+    
     public function dmroom()
     {
         return $this->hasMany(Dmroom::class);
     }
+
     public function specialty()
     {
         return $this->hasMany(Specialty::class);
@@ -143,4 +144,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Portfolio::class);
     }
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class, 'target_user_id');
+    }
+    
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
 }

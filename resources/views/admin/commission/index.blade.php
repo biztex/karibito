@@ -3,7 +3,8 @@
     <x-admin.flash_msg/>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <x-admin.side_menu/>
+            <div class="col-md-10">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb border bg-white shadow-sm">
                         <li class="breadcrumb-item active" aria-current="page">手数料変更画面</li>

@@ -1,11 +1,11 @@
 <x-layout>
+<x-parts.post-button/>
 <article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<span>評価一覧</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>評価一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
@@ -13,7 +13,9 @@
 						<h2 class="subPagesHd">評価一覧</h2>
 						<div class="evaluationStar">
 							<span>総評</span>
-							<div class="evaluate three"></div>
+
+                            <x-parts.evaluation-star :star='Auth::user()->avg_star'/>
+
 						</div>
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">

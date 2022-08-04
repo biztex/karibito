@@ -135,12 +135,16 @@ class UserController extends Controller
      */
     public function limitAccount($id)
     {
-        $user = User::firstWhere('id',$id);
-        $user->fill(['is_ban' => 1])->save();
+        $user_profile = UserProfile::firstWhere('id',$id);
 
-        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用を制限しました！";
+        $user_profile->fill([
+            'is_ban' => 1,
+            'is_banned_at' => now()
+        ])->save();
 
-        \Mail::to($user->email)->send(new NotifyBanMail($user));
+        $flash_msg = "id:" . $user_profile->user_id . " " . $user_profile->first_name . $user_profile->last_name . "さんの利用を制限しました！";
+
+        \Mail::to($user_profile->user->email)->send(new NotifyBanMail($user_profile));
 
         return back()->with('flash_msg',$flash_msg);
     }
@@ -150,12 +154,13 @@ class UserController extends Controller
      */
     public function cancelLimitAccount($id)
     {
-        $user = User::firstWhere('id',$id);
-        $user->fill(['is_ban' => 0])->save();
+        $user_profile = UserProfile::firstWhere('id',$id);
 
-        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの利用制限を解除しました！";
+        $user_profile->fill(['is_ban' => 0])->save();
 
-        \Mail::to($user->email)->send(new CancelNotifyBanMail($user));
+        $flash_msg = "id:" . $user_profile->user_id . " " . $user_profile->first_name . $user_profile->last_name . "さんの利用制限を解除しました！";
+
+        \Mail::to($user_profile->user->email)->send(new CancelNotifyBanMail($user_profile));
 
         return back()->with('flash_msg',$flash_msg);
     }
@@ -168,5 +173,20 @@ class UserController extends Controller
         $users = $this->user_search->searchUser($request);
 
         return  view('admin.user.index', compact('users', 'request'));
+    }
+
+    /**
+     * メモを更新する
+     */
+    public function updateMemo(Request $request, $id)
+    {
+        $request->validate([
+            'memo' => 'nullable|string|max:255',
+        ]);
+        $user = User::findOrFail($id);
+        $user->memo = $request->memo;
+        $user->save();
+
+        return back()->with('status', 'メモを変更しました');
     }
 }

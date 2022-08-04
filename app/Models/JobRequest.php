@@ -71,7 +71,7 @@ class JobRequest extends Model
      */
     public function scopeNotBan($query)
     {
-        $ban_user_ids = User::where('is_ban' ,1)->pluck('id')->toArray();;
+        $ban_user_ids = UserProfile::where('is_ban' ,1)->pluck('user_id')->toArray();;
 
         return $query->where('user_id', "!=", $ban_user_ids);
     }
