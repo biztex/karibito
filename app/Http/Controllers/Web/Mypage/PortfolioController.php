@@ -7,6 +7,7 @@ use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use App\Services\PortfolioService;
 use App\Http\Requests\PortfolioController\StoreRequest;
+use App\Http\Requests\PortfolioController\UpdateRequest;
 
 class PortfolioController extends Controller
 {
@@ -34,5 +35,24 @@ class PortfolioController extends Controller
         $this->portfolio_service->storePortfolio($request);
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを登録しました！');
+    }
+
+    public function edit(Portfolio $portfolio)
+    {
+        return view('portfolio.edit', compact('portfolio'));
+    }
+
+    public function update(UpdateRequest $request, Portfolio $portfolio)
+    {
+        $this->portfolio_service->updatePortfolio($request, $portfolio);
+
+        return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを更新しました！');
+    }
+
+    public function destroy(Portfolio $portfolio)
+    {
+        $portfolio->delete();
+
+        return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを削除しました！');
     }
 }

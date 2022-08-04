@@ -321,15 +321,15 @@
                                                     <div class="mypageEditDate">
                                                         <div class="mypageEditInput flexLine01">
                                                             <select name="year" required>
-                                                                <option value="">制作年</option>
-                                                                @for($year = 1970; $year <= now()->year; $year++)
+                                                                <option value="{{ now()->year }}" selected>{{ now()->year }}年</option>
+                                                                @for($year = 1970; $year <= now()->year - 1; $year++)
                                                                     <option value="{{ $year }}" @if( old('year',$request->year ?? "") == $year) selected @endif>{{ $year }}</option>
                                                                 @endfor
                                                             </select>
                                                             <select name="month" required>
-                                                                <option value="">制作月</option>
-                                                                @for($month = 1; $month<= 12; $month++)
-                                                                    <option value="{{ $month }}" @if( old('month', $request->month ?? "") == $month) selected @endif>{{ $month }}</option>
+                                                                <option value="12" selected>12月</option>
+                                                                @for($month = 1; $month<= 11; $month++)
+                                                                    <option value="{{ $month }}"@if( old('month', $request->month ?? "") == $month) selected @endif>{{ $month }}</option>
                                                                 @endfor
                                                             </select>
                                                         </div>

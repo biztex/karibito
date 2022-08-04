@@ -3,19 +3,20 @@
 namespace App\Services\Sample;
 
 use App\Libraries\Payment\Payment;
+use App\Libraries\Payment\PaymentInterface;
 
 class PaymentService
 {
-    private readonly Payment $payment;
+    private readonly PaymentInterface $payment_interface;
 
     /**
      * $paymentのインスタンスはenvに設定されている内容によって変化する
      * App\Providers\PaymentServiceProvider参照
      * @param Payment $payment
      */
-    public function __construct(Payment $payment)
+    public function __construct(PaymentInterface $payment_interface)
     {
-        $this->payment = $payment;
+        $this->payment_interface = $payment_interface;
     }
 
     /**
@@ -25,7 +26,7 @@ class PaymentService
      */
     public function createCharge(array $params)
     {
-        $charge_id = $this->payment->createCharge($params['payjp-token'], 3000);
+        $charge_id = $this->payment_interface->createCharge($params['payjp-token'], 3000, 'jpy');
         dump($charge_id);
     }
 
@@ -36,8 +37,8 @@ class PaymentService
      */
     public function createCard(array $params)
     {
-        $customer_id = $this->payment->createCustomer();
-        $card_id = $this->payment->createCard($customer_id, $params['createCustomer-payjp-token']);
+        $customer_id = $this->payment_interface->createCustomer();
+        $card_id = $this->payment_interface->createCard($customer_id, $params['createCustomer-payjp-token']);
         dump($card_id);
     }
 
@@ -48,6 +49,6 @@ class PaymentService
     public function getCardList(): array
     {
         $customer_id = 'cus_000000000000000000000'; // DBから取得
-        return $this->payment->getCardList($customer_id, 10, 1);
+        return $this->payment_interface->getCardList($customer_id, 10, 1);
     }
 }

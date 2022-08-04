@@ -21,6 +21,16 @@ class UserProfileService
     }
 
     /**
+     * payjp 顧客id保存
+     * @param string $customer_id
+     * @return void
+     */
+    public function createPayjpCustomer($customer_id)
+    {
+        \Auth::user()->fill(['payjp_customer_id' => $customer_id])->save();
+    }
+
+    /**
      * ユーサープロフィール基本情報登録
      */
     public function storeUserProfile(array $params): UserProfile

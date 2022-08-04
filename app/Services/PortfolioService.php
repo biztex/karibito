@@ -20,4 +20,19 @@ class PortfolioService
 
         return $portfolio;
     }
+
+    /**
+     * ポートフォリオ編集
+     */
+    public function updatePortfolio($request, $portfolio)
+    {
+        //画像は変更時のみ保存する
+        if($request->path){
+            $portfolio->path =  $request->path->store('portfolio_paths', 'public');
+        }
+        $portfolio->fill($request->substitutable());
+        $portfolio->save();
+
+        return $portfolio;
+    }
 }

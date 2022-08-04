@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Libraries\Payment\PayjpPayment;
-use App\Libraries\Payment\Payment;
+use App\Libraries\Payment\PaymentInterface;
 use App\Libraries\Payment\StubPayment;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,12 +19,12 @@ class PaymentServiceProvider extends ServiceProvider
         // envにpayjpの設定の有無によってインスタンスを変更
         if(config('payjp.secret_key')){
             // あり：PayjpPaymentを注入
-            $this->app->bind(Payment::class, function ($app) {
+            $this->app->bind(PaymentInterface::class, function ($app) {
                 return new PayjpPayment();
             });
         } else {
             // なし：StubPaymentを注入
-            $this->app->singleton(Payment::class, function ($app) {
+            $this->app->singleton(PaymentInterface::class, function ($app) {
                 return new StubPayment();
             });
         }

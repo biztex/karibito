@@ -69,4 +69,20 @@ class Purchase extends Model
         return $this->hasMany(PurchasedCancel::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function mCommissionRate()
+    {
+        return $this->belongsTo(MCommissionRate::class);
+    }
+
 }
