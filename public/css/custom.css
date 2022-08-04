@@ -1026,7 +1026,7 @@
 .mypageEditHd{
 	display: flex;
 }
-.mypageEditHd span{
+.mypageEditHd span, .radioChoice span.alert, .tit span{
 	margin-left: 20px;
 	font-weight: 100;
 	color: red;
