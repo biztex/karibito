@@ -104,7 +104,7 @@
 								</ul>
 								@endif
 								<div class="credit">
-									<div class="radioChoice"><input type="radio" name="card_id" value="new">新しいカード</div>		
+									<div class="radioChoice"><input type="radio" name="card_id" value="immediate">新しいカード</div>		
 
 
 									<table>

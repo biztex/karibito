@@ -202,11 +202,7 @@ class ChatroomController extends Controller
      */
     public function purchase(Proposal $proposal)
     {
-        if(\Auth::user()->payjp_customer_id === null) {
-            $cards = null;
-        } else {
-            $cards = $this->payment_service->getCardList();
-        }
+       $cards = $this->payment_service->getCardList();
         
         return view('chatroom.purchase.create',compact('proposal', 'cards'));
     }
@@ -219,11 +215,7 @@ class ChatroomController extends Controller
      */
     public function purchaseConfirm(Request $request, Proposal $proposal)
     {
-        if($request->card_id !== 'new'){
-            $card = $this->payment_service->getCard($request->card_id);
-        } else {
-            $card = null;
-        }
+        $card = $this->payment_service->getCard($request->card_id);
 
         return view('chatroom.purchase.confirm',compact('request', 'proposal', 'card'));
     }
@@ -238,7 +230,7 @@ class ChatroomController extends Controller
     {
         $m_commission_rate = MCommissionRate::find(1); // クーポン後で組み込む
         \DB::transaction(function () use ($request, $proposal, $m_commission_rate) {
-            if($request->new === null){
+            if($request->immediate === null){
                 $payjp_charge_id = $this->payment_service->createCustomerCharge($request['card_id'], $request['customer_id'], $request['amount']);
             } else {
                 $token = $this->payment_service->createToken($request->all());

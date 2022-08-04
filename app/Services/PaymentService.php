@@ -123,11 +123,15 @@ class PaymentService
     /**
      * クレカ情報取得
      * @param string $payjp_card_id
-     * @return array $card
+     * @return mixed
      */
-    public function getCard(string $payjp_card_id): object|array
+    public function getCard(string $payjp_card_id): mixed
     {
-        $card = $this->payment_interface->getCard(\Auth::user()->payjp_customer_id, $payjp_card_id);
+        if($payjp_card_id !== 'immediate'){
+            $card = null;
+        } else {
+            $card = $this->payment_interface->getCard(\Auth::user()->payjp_customer_id, $payjp_card_id);
+        }
         return $card;
     }
 
@@ -138,7 +142,11 @@ class PaymentService
      */
     public function getCardList(): array
     {
-        $cards = $this->payment_interface->getCardList(\Auth::user()->payjp_customer_id, 10, 0);
+        if(\Auth::user()->payjp_customer_id === null) {
+            $cards = null;
+        } else {
+            $cards = $this->payment_interface->getCardList(\Auth::user()->payjp_customer_id, 10, 0);
+        }
         return $cards;
     }
 

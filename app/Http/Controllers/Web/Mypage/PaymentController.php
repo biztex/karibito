@@ -21,11 +21,7 @@ class PaymentController extends Controller
 
     public function create()
     {
-        if(\Auth::user()->payjp_customer_id === null) {
-            $cards = null;
-        } else {
-            $cards = $this->payment_service->getCardList();
-        }
+        $cards = $this->payment_service->getCardList();
         return view('member.member_config.card', compact('cards'));
     }
 
@@ -36,13 +32,9 @@ class PaymentController extends Controller
      */
     public function createCard(Request $request)
     {
-
-            
-
-            $this->payment_service->createCard($request->all());
+        $this->payment_service->createCard($request->all());
 
         \Session::put('flash_msg','クレジットカード情報を登録しました！');
-
 
         return redirect()->route('member_config.card.create');
     }

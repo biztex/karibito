@@ -58,7 +58,7 @@
 								<div class="credit">
 									@if($card === null)
 										<div class="bl_credit-card-info">
-											<input type="hidden" name="new" value="checked">
+											<input type="hidden" name="immediate" value="checked">
 											<span class="credit-card-info-number">************{{ substr($request->cc_number, -4) }}</span>
 											<input type="hidden" name="cc_number" value="{{ $request->cc_number }}">
 											
@@ -74,7 +74,7 @@
 											<span>{{ $card['name'] }}</span>
 											<input type="hidden" name="card_id" value="{{ $card['id'] }}">
 											<input type="hidden" name="customer_id" value="{{ $card['customer'] }}">
-											<input type="hidden" name="new" value="">
+											<input type="hidden" name="immediate" value="">
 										</div>
 									@endif
 									<!-- <table>
