@@ -1023,4 +1023,11 @@
 .credit-card-info-number{
 	margin-right:24px;
 }
-
+.mypageEditHd{
+	display: flex;
+}
+.mypageEditHd span{
+	margin-left: 20px;
+	font-weight: 100;
+	color: red;
+}

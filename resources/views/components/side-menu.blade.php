@@ -67,7 +67,7 @@
 	$(function(){
 
 		// バリデーションエラーの際、モーダルを最初から表示する
-        if (@json($errors->has('email'))){
+        if (@json($errors->has('email') || $errors->has('cc_name') || $errors->has('cc_number') || $errors->has('exp') || $errors->has('cvc'))){
 
         } else if (@json($errors->has('identification_path'))){
                 $('.fancybox_register').trigger('click');

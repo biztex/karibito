@@ -69,8 +69,9 @@ class PaymentService
         } else {
             $customer_id = $this->getCustomer();
         }
+        $token = $this->payment_interface->createToken($params);
 
-        $card_id = $this->payment_interface->createCard($customer_id, $params['createCustomer-payjp-token']);
+        $card_id = $this->payment_interface->createCard($customer_id, $token);
     }
 
     /**
