@@ -145,9 +145,9 @@ class PaymentService
 
     /**
      * クレカ一覧取得
-     * @return array $cards
+     * @return mixed
      */
-    public function getCardList(): array
+    public function getCardList(): mixed
     {
         if(\Auth::user()->payjp_customer_id === null) {
             $cards = null;
