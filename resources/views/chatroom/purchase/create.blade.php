@@ -54,10 +54,18 @@
 							<div class="checkbox">
 								<p class="checkChoice"><label><input type="checkbox">クーポンの利用する</label></p>
 								<div class="pointInput mt12">
-									<p class="mr18"><input type="text" value="{{ old('number') }}"></p>
-									<p class="adoptionBtn"><input type="button" value="適用"></p>
-								</div>
-								<p class="detail">500円割引クーポン(合計3,000円以上のサービスでご利用可能)／2022年02月08日まで</p>
+									<p class="mr18">
+										{{-- <input type="text" value="{{ old('number') }}"> --}}
+										<select name="user_coupon" style="padding: 10px;"> {{--仮--}}
+											<option value="">選択してください</option>
+											@foreach ($user_coupons as $user_coupon)
+												<option value="{{$user_coupon->coupon_number}}" @if(old('user_coupon.'.$user_coupon->id) == $user_coupon->id) selected @endif>{{$user_coupon->name}}:{{$user_coupon->content}}</option>
+											@endforeach
+										</select>
+									</p>
+										{{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
+									</div>
+									<p class="detail">{{$user_coupon->discount}}円割引クーポン(合計{{$user_coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($user_coupon->deadline))}}まで</p>
 								<div class="warnNotes">
 									<p class="danger">ご注意！</p>
 									<p>※他のクーポンと併用はできません。</p>
@@ -71,7 +79,7 @@
 										<p class="point">利用可能ポイント：000P</p>
 										<div class="pointInput mt12">
 											<p><input type="text" value="1000"></p>
-											<p class="adoptionBtn"><input type="button" value="適用"></p>
+											{{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
 										</div>
 									</li>
 								</ul>

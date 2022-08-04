@@ -15,7 +15,7 @@ class MCouponSeeder extends Seeder
     public function run()
     {
         $params = [
-            ['name' => 'アンケート記入いただいた皆様にプレゼント', 'content' => 'プレゼントです。', 'discount' => 100, 'min_price' => 1000, 'deadline_period' => '2022-12-22']
+            ['name' => 'アンケート記入いただいた皆様にプレゼント', 'content' => 'プレゼントです。', 'discount' => 100, 'min_price' => 1000, 'deadline_period' => '3']
         ];
         \DB::table('m_coupons')->insert($params);
     }

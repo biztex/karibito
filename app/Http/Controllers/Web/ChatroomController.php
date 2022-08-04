@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\Proposal;
 use App\Models\KaribitoSurvey;
+use App\Models\UserCoupon;
 use Illuminate\Http\Request;
 use App\Services\ChatroomService;
 use App\Services\ChatroomMessageService;
@@ -196,7 +197,12 @@ class ChatroomController extends Controller
      */
     public function purchase(Proposal $proposal)
     {
-        return view('chatroom.purchase.create',compact('proposal'));
+        $user_coupons = UserCoupon::where([
+            ['user_id', '=', \Auth::id()],
+            ['used_at', '=', null],
+        ])
+        ->get();
+        return view('chatroom.purchase.create',compact('proposal', 'user_coupons'));
     }
 
     /**
