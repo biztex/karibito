@@ -79,6 +79,7 @@
 	background-color: #158ACC;
 	color: #fff;
 	font-weight: bold;
+    cursor: pointer;
 }
 .fancyPersonPic p.img {
 	height: 140px;
