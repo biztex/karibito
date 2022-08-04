@@ -67,7 +67,7 @@
                                     </p>
                                         {{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
                                     </div>
-                                    <p class="detail">{{$user_coupon->discount}}円割引クーポン(合計{{$user_coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($user_coupon->deadline))}}まで</p>
+                                    {{-- <p class="detail">{{$user_coupon->discount}}円割引クーポン(合計{{$user_coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($user_coupon->deadline))}}まで</p> --}}
                                 <div class="warnNotes">
                                     <p class="danger">ご注意！</p>
                                     <p>※他のクーポンと併用はできません。</p>
