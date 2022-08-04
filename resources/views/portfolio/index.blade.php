@@ -279,7 +279,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <li>
-                                                <p class="imgP"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
+                                                </a><p class="imgP"><a href="{{ route('portfolio.show', $portfolio) }}"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></a></p>
                                                 <p class="editP"><a href="{{ route('portfolio.edit', $portfolio) }}">編集する</a>
                                                     <button onclick='return confirm("このポートフォリオを削除しますか？");' class="delete">削除</button>
                                                 </p>

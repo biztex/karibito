@@ -25,6 +25,15 @@ class PortfolioController extends Controller
         return view('portfolio.index', compact('portfolios'));
     }
 
+    public function show(Portfolio $portfolio)
+    {
+        $portfolio_list = Portfolio::where('user_id', \Auth::id())->get();
+        $base_url = config('app.url');
+        $url = "$base_url/portfolio/$portfolio->id";
+
+        return view('portfolio.show', compact('portfolio', 'portfolio_list', 'url'));
+    }
+
     public function create()
     {
         return view('portfolio.create');
