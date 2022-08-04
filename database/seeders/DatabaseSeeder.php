@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         MProductChildCategorySeeder::class,
         MCommissionRateSeeder::class,
         MCouponSeeder::class,
+        MPointRateSeeder::class,
     ];
 
     /**
