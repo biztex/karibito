@@ -54,25 +54,25 @@
 					
 						<div class="coupons">
 							<div class="checkbox">
-								<p class="checkChoice"><label><input type="checkbox">クーポンの利用する</label></p>
-								<div class="pointInput mt12">
-									<p class="mr18">
-										{{-- <input type="text" value="{{ old('number') }}"> --}}
-										<select name="user_coupon" style="padding: 10px;"> {{--仮--}}
-											<option value="">選択してください</option>
-											@foreach ($user_coupons as $user_coupon)
-												<option value="{{$user_coupon->coupon_number}}" @if(old('user_coupon.'.$user_coupon->id) == $user_coupon->id) selected @endif>{{$user_coupon->name}}:{{$user_coupon->content}}</option>
-											@endforeach
-										</select>
-									</p>
-										{{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
-									</div>
-									<p class="detail">{{$user_coupon->discount}}円割引クーポン(合計{{$user_coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($user_coupon->deadline))}}まで</p>
-								<div class="warnNotes">
-									<p class="danger">ご注意！</p>
-									<p>※他のクーポンと併用はできません。</p>
-								</div>
-							</div>
+                                <p class="checkChoice"><label><input type="checkbox">クーポンの利用する</label></p>
+                                <div class="pointInput mt12">
+                                    <p class="mr18">
+                                        {{-- <input type="text" value="{{ old('number') }}"> --}}
+                                        <select name="user_coupon" style="padding: 10px;"> {{--仮--}}
+                                            <option value="">選択してください</option>
+                                            @foreach ($user_coupons as $user_coupon)
+                                                <option value="{{$user_coupon->coupon_number}}" @if(old('user_coupon.'.$user_coupon->id) == $user_coupon->id) selected @endif>{{$user_coupon->name}}:{{$user_coupon->content}}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                        {{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
+                                    </div>
+                                    <p class="detail">{{$user_coupon->discount}}円割引クーポン(合計{{$user_coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($user_coupon->deadline))}}まで</p>
+                                <div class="warnNotes">
+                                    <p class="danger">ご注意！</p>
+                                    <p>※他のクーポンと併用はできません。</p>
+                                </div>
+                            </div>
 							<div class="radio">
 								<p class="tit">ポイントの利用</p>
 								<ul class="radioChoice">
@@ -87,10 +87,10 @@
 								</ul>
 							</div>
 							<div class="method">
-								<p class="tit">お支払い方法</p>
+								<p class="tit">お支払い方法@error('card_id')<span>{{ $message }}</span>@enderror</p>
 
 								<div class="radioChoice">
-									<label><input type="radio" checked>クレジット決済</label>
+									<label><input type="radio" name="payment_type" value="credit_card" checked>クレジット決済</label>
 									<div class="marks">
 										<a href="#" target="_blank"><img src="/img/cart_buy/ico_mark01.svg" alt=""></a>
 										<a href="#" target="_blank"><img src="/img/cart_buy/ico_mark02.svg" alt=""></a>
@@ -104,7 +104,7 @@
 								<ul class="radioChoice" style="display:block;">
 									@foreach($cards as $card)
 										<div class="bl_credit-card-info">
-											<input type="radio" name="card_id" value="{{ $card['id'] }}">
+											<input type="radio" name="card_id" value="{{ $card['id'] }}" @if(old('card_id') === $card['id']) checked @endif>
 											<span class="credit-card-info-number">************{{ $card['last4'] }}</span>
 											<span>{{ $card['name'] }}</span>
 										</div>
@@ -112,7 +112,8 @@
 								</ul>
 								@endif
 								<div class="credit">
-									<div class="radioChoice"><input type="radio" name="card_id" value="immediate">新しいカード</div>		
+									<div class="radioChoice"><input type="radio" name="card_id" value="immediate" @if(old('card_id') === 'immediate') checked @endif>新しいカード
+									@if($errors->has('cc_name') || $errors->has('cc_number') || $errors->has('exp') || $errors->has('cvc'))<span class="alert alert-danger">※正しい情報を入力してください</span>@endif</div>		
 
 
 									<table>
