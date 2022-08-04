@@ -10,8 +10,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::all();
-        dd($payments);
+        $payments = Payment::orderBy('id', 'desc')->paginate(50);
 
         return view('admin.payment.index', compact('payments'));
     }
