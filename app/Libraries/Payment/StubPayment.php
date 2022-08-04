@@ -11,13 +11,26 @@ use Illuminate\Support\Facades\Log;
 class StubPayment implements PaymentInterface
 {
     /**
+     * 顧客カードの決済の実行
+     * @param string $card_id
+     * @param string $customer_id
+     * @param int $amount
+     * @param string $currency
+     * @return string $charge_id
+     */
+    public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string
+    {
+        Log::info('StubPayment:決済実行完了');
+        return 'ch_' . uniqid();
+    }
+    /**
      * 決済の実行
      * @param string $token
      * @param int $amount
      * @param string $currency
      * @return string charge_id
      */
-    public function createCharge(string $token = '', int $amount = 1000, string $currency = ''): string
+    public function createCharge(string $token, int $amount, string $currency): string
     {
         Log::info('StubPayment:決済実行完了');
         return 'ch_' . uniqid();
@@ -47,6 +60,17 @@ class StubPayment implements PaymentInterface
     }
 
     /**
+     * カードトークン発行
+     * @param array $params
+     * @return string $token
+     */
+    public function createToken(array $params): string
+    {
+        Log::info('StubPayment:クレカトークン発行');
+        return 'tok_000000000000000000001';
+    }
+
+    /**
      * クレカ登録
      * @param string $customer_id
      * @param string $token
@@ -55,6 +79,27 @@ class StubPayment implements PaymentInterface
     public function createCard(string $customer_id = '', string $token = '')
     {
         Log::info('StubPayment:クレカ登録完了');
+    }
+
+    /**
+     * クレカ情報取得
+     * @param string $customer_id
+     * @param string $payjp_card_id
+     * @return array $card
+     */
+    public function getCard(string $customer_id, string $payjp_card_id): array
+    {
+        Log::info('StubPayment:クレカ情報取得');
+
+        return [
+            'id' => 'car_000000000000000000001',
+            'brand' => 'Visa',
+            'last4' => '1234',
+            'exp_year' => '2025',
+            'exp_month' => '12',
+            'name' => 'YAMADA TARO',
+            'customer' => 'cus_0000000000000000',
+        ];
     }
 
     /**
@@ -74,7 +119,8 @@ class StubPayment implements PaymentInterface
                 'last4' => '1234',
                 'exp_year' => '2025',
                 'exp_month' => '12',
-                'name' => 'YAMADA TARO'
+                'name' => 'YAMADA TARO',
+                'customer' => 'cus_0000000000000000',
             ],
             [
                 'id' => 'car_000000000000000000002',
@@ -82,7 +128,8 @@ class StubPayment implements PaymentInterface
                 'last4' => '2345',
                 'exp_year' => '2026',
                 'exp_month' => '11',
-                'name' => 'YAMADA TARO'
+                'name' => 'YAMADA TARO',
+                'customer' => 'cus_0000000000000000',
             ],
             [
                 'id' => 'car_000000000000000000003',
@@ -90,7 +137,8 @@ class StubPayment implements PaymentInterface
                 'last4' => '3456',
                 'exp_year' => '2027',
                 'exp_month' => '10',
-                'name' => 'YAMADA TARO'
+                'name' => 'YAMADA TARO',
+                'customer' => 'cus_0000000000000000',
             ],
         ];
     }

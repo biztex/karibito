@@ -36,19 +36,13 @@ class PaymentController extends Controller
      */
     public function createCard(Request $request)
     {
-        \DB::transaction(function () use ($request) {
 
-            if(\Auth::user()->payjp_customer_id === null) {
-                $customer_id = $this->payment_service->createCustomer();
-                $this->user_profile_service->createPayjpCustomer($customer_id);
-            } else {
-                $customer_id = $this->payment_service->getCustomer();
-            }
-            $this->payment_service->createCard($customer_id, $request->all());
+            
+
+            $this->payment_service->createCard($request->all());
 
         \Session::put('flash_msg','クレジットカード情報を登録しました！');
 
-        });
 
         return redirect()->route('member_config.card.create');
     }

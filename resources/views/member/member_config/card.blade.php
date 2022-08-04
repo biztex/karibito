@@ -83,7 +83,7 @@
 												<tr>
 													<th>カード番号</th>
 													<td>
-														<div class="mypageEditInput"><input type="tell" name="cardnumber" placeholder="" maxlength="19" pattern="([0-9]| )*"></div>
+														<div class="mypageEditInput"><input type="tell" name="cc_number" placeholder="" maxlength="19" pattern="([0-9]| )*"></div>
 														<p class="noticeP">例）1234567890123456</p>
 													</td>
 												</tr>
@@ -91,13 +91,13 @@
 													<th>有効期限</th>
 													<td>
 														<div class="mypageEditInput flexLine02">
-															<select name="ccmonth">
+															<select name="exp_month">
 																@for($i=1; $i<=12; $i++)
 																	<option value="{{$i}}" @if($i == old('ccmonth')) selected @endif>{{sprintf('%02d', $i)}}</option>
 																@endfor
 															</select>
 															<span class="span">/</span>
-															<select name="ccyear">
+															<select name="exp_year">
 																@for($i=2022; $i<=2030; $i++)
 																	<option value="{{$i}}" @if($i == old('ccyear')) selected @endif>{{$i}}</option>
 																@endfor
@@ -109,7 +109,7 @@
 												<tr>
 													<th>カード名義</th>
 													<td>
-														<div class="mypageEditInput"><input type="text" name="ccname" placeholder=""></div>
+														<div class="mypageEditInput"><input type="text" name="cc_name" placeholder=""></div>
 													<p class="noticeP">※カードに刻印されている表記のとおりにご選択ください。</p>
 													</td>
 												</tr>
