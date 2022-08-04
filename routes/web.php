@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\JobRequestController;
 use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\KaribitoSurveyController as AdminKaribitoSurveyController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
@@ -418,6 +419,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/news', AdminNewsController::class);
         ///メモの編集
         Route::put('user/{userId}/update/memo', [UserController::class, 'updateMemo'])->name('user.updateMemo');
+
+        // 決済一覧
+        Route::get('/payment',[AdminPaymentController::class, 'index'])->name('payment.index');
     });
 });
 
