@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\PaymentService;
 use App\Services\UserProfileService;
 use Illuminate\Http\Request;
+use App\Http\Requests\PaymentController\StoreRequest;
 
 class PaymentController extends Controller
 {
@@ -22,15 +23,16 @@ class PaymentController extends Controller
     public function create()
     {
         $cards = $this->payment_service->getCardList();
+
         return view('member.member_config.card', compact('cards'));
     }
 
     /**
      * クレジットカード登録 (顧客登録)
-     * @param Request $request
+     * @param StoreRequest $request
      * @return void
      */
-    public function createCard(Request $request)
+    public function createCard(StoreRequest $request)
     {
         $this->payment_service->createCard($request->all());
 
