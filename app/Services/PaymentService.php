@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Libraries\Payment\PaymentInterface;
+use App\Services\UserProfileService;
+use  App\Models\Payment;
 use Dotenv\Util\Str;
 
 class PaymentService
@@ -14,9 +16,10 @@ class PaymentService
      * App\Providers\PaymentServiceProvider参照
      * @param PaymentInterface $payment_interface
      */
-    public function __construct(PaymentInterface $payment_interface)
+    public function __construct(PaymentInterface $payment_interface, UserProfileService $user_profile_service)
     {
         $this->payment_interface = $payment_interface;
+        $this->user_profile_service = $user_profile_service;
     }
 
     /**
@@ -42,30 +45,96 @@ class PaymentService
     }
 
     /**
+     * カードトークン発行
+     * @param array $params
+     * @return string $token
+     */
+    public function createToken(array $params): string
+    {
+        $token = $this->payment_interface->createToken($params);
+
+        return $token;
+    }
+
+    /**
      * クレカ登録
-     * @param string $customer_id
      * @param array $params
      * @return void
      */
-    public function createCard(string $customer_id, array $params)
+    public function createCard(array $params)
     {
+        if(\Auth::user()->payjp_customer_id === null) {
+            $customer_id = $this->createCustomer();
+            $this->user_profile_service->createPayjpCustomer($customer_id);
+        } else {
+            $customer_id = $this->getCustomer();
+        }
+
         $card_id = $this->payment_interface->createCard($customer_id, $params['createCustomer-payjp-token']);
     }
 
+    /**
+     * Paymentテーブル作成
+     * @param string $payjp_charge_id
+     * @param int $amount
+     * @return Payment $payment
+     */
+    public function storePayment(string $payjp_charge_id, int $amount): Payment
+    {
+        $column = [
+            'payjp_charge_id' => $payjp_charge_id,
+            'amount' => $amount,
+        ];
+        $payment = \Auth::user()->payments()->create($column);
+
+        return $payment;
+    }
 
 
     /**
-     * 決済の実行
-     * @param array $params
-     * @return void
+     * 顧客カードの決済の実行
+     * @param string $card_id
+     * @param string $customer_id
+     * @param int $amount
+     * @return string $charge_id
      */
-    // public function createCharge(array $params)
-    // {
-    //     $charge_id = $this->payment_interface->createCharge($params['payjp-token'], 3000);
-    //     dump($charge_id);
-    // }
+    public function createCustomerCharge(string $card_id, string $customer_id, int $amount): string
+    {
+        $charge_id = $this->payment_interface->createCustomerCharge($card_id, $customer_id, $amount, 'jpy');
+
+        return $charge_id;
+    }
+
+    /**
+     * 決済の実行
+     * @param string $token
+     * @param int $amount
+     * @return string $charge_id
+     */
+    public function createCharge(string $token, int $amount): string
+    {
+        $charge_id = $this->payment_interface->createCharge($token, $amount, 'jpy');
+
+        return $charge_id;
+    }
 
     
+
+    /**
+     * クレカ情報取得
+     * @param string $payjp_card_id
+     * @return mixed
+     */
+    public function getCard(string $payjp_card_id): mixed
+    {
+        if($payjp_card_id !== 'immediate'){
+            $card = null;
+        } else {
+            $card = $this->payment_interface->getCard(\Auth::user()->payjp_customer_id, $payjp_card_id);
+        }
+        return $card;
+    }
+
 
     /**
      * クレカ一覧取得
@@ -73,7 +142,11 @@ class PaymentService
      */
     public function getCardList(): array
     {
-        $cards = $this->payment_interface->getCardList(\Auth::user()->payjp_customer_id, 10, 0);
+        if(\Auth::user()->payjp_customer_id === null) {
+            $cards = null;
+        } else {
+            $cards = $this->payment_interface->getCardList(\Auth::user()->payjp_customer_id, 10, 0);
+        }
         return $cards;
     }
 

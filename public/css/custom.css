@@ -1013,3 +1013,14 @@
 		height: 35px;
 	}
 }
+.bl_credit-card-info {
+    display: flex;
+    padding: 16px;
+    border: 1px solid #eee;
+    font-size: 13px;
+	margin: 10px auto;
+}
+.credit-card-info-number{
+	margin-right:24px;
+}
+

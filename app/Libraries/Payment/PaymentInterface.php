@@ -8,6 +8,16 @@ namespace App\Libraries\Payment;
 interface PaymentInterface
 {
     /**
+     * 顧客カードの決済の実行
+     * @param string $card_id
+     * @param string $customer_id
+     * @param int $amount
+     * @param string $currency
+     * @return string $charge_id
+     */
+    public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string;
+
+    /**
      * 決済の実行
      * @param string $token
      * @param int $amount
@@ -32,12 +42,27 @@ interface PaymentInterface
     public function getCustomer(string $customer_id): string;
     
     /**
+     * カードトークン発行
+     * @param array $params
+     * @return string $token
+     */
+    public function createToken(array $params): string;
+
+    /**
      * クレカ登録
      * @param string $customer_id
      * @param string $token
      * @return void
      */
     public function createCard(string $customer_id, string $token);
+
+    /**
+     * クレカ情報取得
+     * @param string $customer_id
+     * @param string $payjp_card_id
+     * @return array $card
+     */
+    public function getCard(string $customer_id, string $payjp_card_id): object|array;
 
     /**
      * クレカ一覧取得

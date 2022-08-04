@@ -5,6 +5,7 @@ namespace App\Libraries\Payment;
 use Payjp\Charge;
 use Payjp\Payjp;
 use Payjp\Customer;
+use Payjp\Token;
 
 class PayjpPayment implements PaymentInterface
 {
@@ -14,13 +15,33 @@ class PayjpPayment implements PaymentInterface
     }
 
     /**
+     * 顧客カードの決済の実行
+     * @param string $card_id
+     * @param string $customer_id
+     * @param int $amount
+     * @param string $currency
+     * @return string $charge_id
+     */
+    public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string
+    {
+        $charge = Charge::create(array(
+            "card" => $card_id,
+            "amount" => $amount,
+            "currency" => $currency,
+            "customer" => $customer_id
+            // "tenant" => "ten_xxx" // PAY.JP Platformでは必須
+        ));
+        return $charge->id;
+    }
+
+    /**
      * 決済の実行
      * @param string $token
      * @param int $amount
      * @param string $currency
      * @return string charge_id
      */
-    public function createCharge(string $token, int $amount, string $currency = 'jpy'): string
+    public function createCharge(string $token, int $amount, string $currency): string
     {
         $charge = Charge::create(array(
             "card" => $token,
@@ -58,6 +79,24 @@ class PayjpPayment implements PaymentInterface
         return $customer->id;
     }
     
+    /**
+     * カードトークン発行
+     * @param array $params
+     * @return string $token->id
+     */
+    public function createToken(array $params): string
+    {
+        $params = [
+            'card' => [
+                "number" => $params['cc_number'],
+                "exp_month" => $params['exp_month'],
+                "exp_year" => $params['exp_year'],
+                "name" => $params['cc_name'],
+            ]
+        ];
+        $token = Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
+        return $token->id;
+    }
 
     /**
      * クレカ登録
@@ -72,6 +111,19 @@ class PayjpPayment implements PaymentInterface
             "card" => $token,
         ]);
 
+    }
+
+    /**
+     * クレカ情報取得
+     * @param string $customer_id
+     * @param string $payjp_card_id
+     * @return array $card
+     */
+    public function getCard(string $customer_id, string $payjp_card_id): object
+    {
+        $customer = Customer::retrieve($customer_id);
+        $card = $customer->cards->retrieve($payjp_card_id);
+        return $card;
     }
 
     /**
