@@ -19,8 +19,9 @@ use App\Services\PaymentService;
 use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
+use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
+use App\Http\Requests\ChatroomController\PaymentRequest;
 use App\Models\MCommissionRate;
-use Payjp\Token;
 
 
 class ChatroomController extends Controller
@@ -216,11 +217,12 @@ class ChatroomController extends Controller
 
     /**
      * 購入確認画面
+     * @param PurchaseConfirmRequest $request
      * @param \App\Models\Proposal $proposal
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function purchaseConfirm(Request $request, Proposal $proposal)
+    public function purchaseConfirm(PurchaseConfirmRequest $request, Proposal $proposal)
     {
         $card = $this->payment_service->getCard($request->card_id);
 
@@ -229,25 +231,23 @@ class ChatroomController extends Controller
 
     /**
      * 購入完了
+     * @param PaymentRequest $request
      * @param \App\Models\Proposal $proposal
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function purchased(Request $request, Proposal $proposal)
+    public function purchased(PaymentRequest $request, Proposal $proposal)
     {
         $m_commission_rate = MCommissionRate::find(1); // クーポン後で組み込む
         \DB::transaction(function () use ($request, $proposal, $m_commission_rate) {
-            if($request->immediate === null){
-                $payjp_charge_id = $this->payment_service->createCustomerCharge($request['card_id'], $request['customer_id'], $request['amount']);
-            } else {
-                $token = $this->payment_service->createToken($request->all());
-                $payjp_charge_id = $this->payment_service->createCharge($token, $request['amount']);
-            }
+
+            $payjp_charge_id = $this->payment_service->createCharge($request->all());
             $payment = $this->payment_service->storePayment($payjp_charge_id, $request['amount']);
             $this->proposal_service->purchasedProposal($proposal);
-            $purchase = $this->purchase_service->storePurchase($proposal, $payment, $m_commission_rate);
+            $purchase = $this->purchase_service->storePurchase($proposal, $payment, $m_commission_rate); // requestのcommission id渡す
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
+
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }

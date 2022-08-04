@@ -97,11 +97,12 @@ class PaymentService
      * @param string $card_id
      * @param string $customer_id
      * @param int $amount
+     * @param string $currency
      * @return string $charge_id
      */
-    public function createCustomerCharge(string $card_id, string $customer_id, int $amount): string
+    public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string
     {
-        $charge_id = $this->payment_interface->createCustomerCharge($card_id, $customer_id, $amount, 'jpy');
+        $charge_id = $this->payment_interface->createCustomerCharge($card_id, $customer_id, $amount, $currency);
 
         return $charge_id;
     }
@@ -112,9 +113,14 @@ class PaymentService
      * @param int $amount
      * @return string $charge_id
      */
-    public function createCharge(string $token, int $amount): string
+    public function createCharge(array $params): string
     {
-        $charge_id = $this->payment_interface->createCharge($token, $amount, 'jpy');
+        if($params['immediate'] === null) {
+            $charge_id = $this->createCustomerCharge($params['card_id'], $params['customer_id'], $params['amount'], 'jpy');
+        } else {
+            $token = $this->createToken($params);
+            $charge_id = $this->payment_interface->createCharge($token, $params['amount'], 'jpy');
+        }
 
         return $charge_id;
     }
@@ -128,7 +134,7 @@ class PaymentService
      */
     public function getCard(string $payjp_card_id): mixed
     {
-        if($payjp_card_id !== 'immediate'){
+        if($payjp_card_id === 'immediate'){
             $card = null;
         } else {
             $card = $this->payment_interface->getCard(\Auth::user()->payjp_customer_id, $payjp_card_id);

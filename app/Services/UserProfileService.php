@@ -27,7 +27,9 @@ class UserProfileService
      */
     public function createPayjpCustomer($customer_id)
     {
-        \Auth::user()->fill(['payjp_customer_id' => $customer_id])->save();
+        \Auth::user()->fill([
+                'payjp_customer_id' => \Crypt::encryptString($customer_id)
+            ])->save();
     }
 
     /**
