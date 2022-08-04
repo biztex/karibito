@@ -30,6 +30,7 @@ use App\Http\Controllers\Web\Mypage\CareerController;
 use App\Http\Controllers\Web\Mypage\JobController;
 use App\Http\Controllers\Web\Mypage\EvaluationController;
 use App\Http\Controllers\Web\Mypage\CouponController;
+use App\Http\Controllers\Web\Mypage\PointController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
@@ -134,6 +135,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // クーポン
         Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
+        // ポイント履歴
+        Route::get('point', [PointController::class, 'index'])->name('point.index');
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報

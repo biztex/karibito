@@ -4,7 +4,7 @@
 		<body id="coupon">
 			<div id="breadcrumb">
 				<div class="inner">
-					<a href="{{ route('home') }}">ホーム</a>　>　<span>マッチングする秘訣</span>
+					<a href="{{ route('home') }}">ホーム</a>　>　<span>クーポン</span>
 				</div>
 			</div><!-- /.breadcrumb -->
 			<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
