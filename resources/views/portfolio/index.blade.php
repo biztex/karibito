@@ -274,7 +274,7 @@
                                                 <p class="imgP"><img src="img/mypage/edit_portfolio.jpg" alt=""></p>
                                             </a>
                                         </li>
-                                        @foreach ($portfolios as $portfolio)
+                                        @foreach ($portfolio_list as $portfolio)
                                         <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -289,7 +289,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div><!-- /#main -->
                         <x-side-menu/>
                     </div>

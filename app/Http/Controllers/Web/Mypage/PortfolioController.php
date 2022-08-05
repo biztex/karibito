@@ -20,9 +20,9 @@ class PortfolioController extends Controller
 
     public function index()
     {
-        $portfolios = Portfolio::where('user_id', \Auth::id())->get();
+        $portfolio_list = Portfolio::where('user_id', \Auth::id())->get();
 
-        return view('portfolio.index', compact('portfolios'));
+        return view('portfolio.index', compact('portfolio_list'));
     }
 
     public function show(Portfolio $portfolio)
@@ -31,7 +31,10 @@ class PortfolioController extends Controller
         $base_url = config('app.url');
         $url = "$base_url/portfolio/$portfolio->id";
 
-        return view('portfolio.show', compact('portfolio', 'portfolio_list', 'url'));
+        $prev_page = $this->portfolio_service->prevPage($portfolio, $portfolio_list);
+        $next_page = $this->portfolio_service->nextPage($portfolio, $portfolio_list);
+
+        return view('portfolio.show', compact('portfolio', 'portfolio_list', 'url', 'prev_page', 'next_page'));
     }
 
     public function create()

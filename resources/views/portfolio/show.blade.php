@@ -284,7 +284,7 @@
                                                 @if($portfolio->id == $portfolio_list[0]->id)
                                                     <div class="secretPagerPrev"><a href="{{ route('portfolio.show', collect($portfolio_list)->last()->id) }}">前へ</a></div>
                                                 @else
-                                                    <div class="secretPagerPrev"><a href="{{ route('portfolio.show', $portfolio->id - 1) }}">前へ</a></div>
+                                                    <div class="secretPagerPrev"><a href="{{ route('portfolio.show', $prev_page) }}">前へ</a></div>
                                                 @endif
                                                 <select onchange="document.location.href=this.options[this.selectedIndex].value;">
                                                     @foreach ($portfolio_list as $i => $pf)
@@ -294,7 +294,7 @@
                                                 @if ($portfolio->id == collect($portfolio_list)->last()->id)
                                                     <div class="secretPagerNext"><a href="{{ route('portfolio.show', $portfolio_list[0]->id) }}">次へ</a></div>
                                                 @else
-                                                    <div class="secretPagerNext"><a href="{{ route('portfolio.show', $portfolio->id + 1) }}">次へ</a></div>
+                                                    <div class="secretPagerNext"><a href="{{ route('portfolio.show', $next_page) }}">次へ</a></div>
                                                 @endif
                                             </div>
                                         </div>
