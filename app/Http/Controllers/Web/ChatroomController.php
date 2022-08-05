@@ -16,6 +16,7 @@ use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
 use App\Services\PaymentService;
+use App\Services\PointService;
 use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
@@ -33,7 +34,7 @@ class ChatroomController extends Controller
     private $evaluation_service;
     private readonly PaymentService $payment_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -41,6 +42,7 @@ class ChatroomController extends Controller
         $this->purchase_service = $purchase_service;
         $this->evaluation_service = $evaluation_service;
         $this->payment_service = $payment_service;
+        $this->point_service = $point_service;
     }
 
     /**
@@ -247,7 +249,7 @@ class ChatroomController extends Controller
             $purchase = $this->purchase_service->storePurchase($proposal, $payment, $m_commission_rate); // requestのcommission id渡す
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
-
+            $this->point_service->getPoint($proposal->chatroom, $request['amount']);
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }

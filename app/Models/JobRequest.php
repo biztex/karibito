@@ -203,6 +203,14 @@ class JobRequest extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function points()
+    {
+        return $this->morphMany(UserGetPoint::class, 'reference');
+    }
+
+    /**
      * 締切まで後何日を取得
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
