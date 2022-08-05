@@ -270,13 +270,13 @@
                                     <p class="portfolioDtDate">{{ $portfolio->year }}年 {{ $portfolio->month }}月</p>
                                     <div class="portfolioDtCont">
                                         <p class="portfolioDtImg"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
-                                        <p>{{ $portfolio->detail }}</p>
+                                        <p class="portfolioDtDetail">{{ $portfolio->detail }}</p>
                                     </div>
                                     <ul class="detailSns">
                                         <li><a href="http://www.facebook.com/share.php?u={{ $url }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a></li>
                                         <li><a href="https://social-plugins.line.me/lineit/share?url={{ $url }}"><img src="/img/mypage/ico_line.svg" alt=""></a></li>
-                                        <li><a href="https://twitter.com/share?url={{ $url }}&text=カリビトのポートフォリオをシェア&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a></li>
-                                        <li><a href="mailto:?subject=カリビトのポートフォリオをシェア&body=本文" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a></li>
+                                        <li><a href="https://twitter.com/share?url={{ $url }}&text={{  $portfolio->title }} %20%7C%20 {{ $portfolio->user->name }} %20%7C%20ポートフォリオ %20%7C%20 カリビト&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a></li>
+                                        <li><a href="mailto:?subject=カリビトのポートフォリオをシェア&body={{ $portfolio->title }} %20%7C%20 {{ $portfolio->user->name }} %20%7C%20ポートフォリオ %20%7C%20 カリビト {{ $url }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a></li>
                                     </ul>
                                     <div class="detialPager">
                                         <div class="secretPager">

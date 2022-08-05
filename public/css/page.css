@@ -5851,6 +5851,10 @@ select.searchSelect {
 	margin-bottom: 40px;
 }
 
+.portfolioDtDetail {
+    overflow-wrap: break-word;
+}
+
 .detailSns {
 	margin: 50px auto 30px;
 	display: flex;

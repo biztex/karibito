@@ -321,14 +321,16 @@
                                                     <div class="mypageEditDate">
                                                         <div class="mypageEditInput flexLine01">
                                                             <select name="year" required>
-                                                                <option value="1970" selected>1970年</option>
-                                                                @for($year = 1971; $year <= now()->year; $year++)
+                                                                <option value="{{ now()->year }}" selected>{{ now()->year }}年</option>
+                                                                @for($year = 1970; $year <= now()->year - 1; $year++)
+                                                                    @if(now()->year == $year) @continue @endif
                                                                     <option value="{{ $year }}" @if( old('year',$request->year ?? "") == $year) selected @endif>{{ $year }}年</option>
                                                                 @endfor
                                                             </select>
                                                             <select name="month" required>
-                                                                <option value="1" selected>1月</option>
-                                                                @for($month = 2; $month<= 12; $month++)
+                                                                <option value="{{ now()->month }}" selected>{{ now()->month }}月</option>
+                                                                @for($month =  1; $month<= 12; $month++)
+                                                                    @if(now()->month == $month) @continue @endif
                                                                     <option value="{{ $month }}"@if( old('month', $request->month ?? "") == $month) selected @endif>{{ $month }}月</option>
                                                                 @endfor
                                                             </select>
