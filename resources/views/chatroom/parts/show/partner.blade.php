@@ -4,9 +4,9 @@
         <div class="sellerTop">
             <div class="user">
                 @if(null !== $partner->userProfile->icon)
-                    <p class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt="" style="width: 50px;max-height: 50px;object-fit: cover;border-radius: 50px;"></p>
+                    <p class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></p>
                 @else
-                    <p class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                    <p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
                 @endif
                 <div class="info">
                     <p class="name">出品者・{{ $partner->name }}</p>
@@ -36,9 +36,9 @@
         <div class="sellerTop">
             <div class="user">
                 @if(null !== $partner->userProfile->icon)
-                    <p class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt="" style="width: 50px;max-height: 50px;object-fit: cover;border-radius: 50px;"></p>
+                    <p class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></p>
                 @else
-                    <p class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+                    <p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
                 @endif
                 <div class="info">
                     <p class="name">掲載者・{{ $partner->name }}</p>
