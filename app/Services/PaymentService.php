@@ -167,4 +167,30 @@ class PaymentService
     {
         $this->payment_interface->destroyCard($customer_id, $card_id);
     }
+
+    /**
+     * 全額返金
+     * @param object $payment
+     * @return void
+     */
+    public function refundPayment(Payment $payment)
+    {
+        $payment->fill([
+            'amount_refunded' => $payment->amount,
+            'refunded_at' => \Carbon\Carbon::now()
+        ])->save();
+
+        $this->refundPayjp($payment);
+    }
+
+    /**
+     * Payjp全額返金処理
+     * @param object $payment
+     * @return void
+     */
+    public function refundPayjp(Payment $payment)
+    {
+        $payjp_charge_id = $payment->payjp_charge_id;
+        $this->payment_interface->refundPayment($payjp_charge_id);
+    }
 }

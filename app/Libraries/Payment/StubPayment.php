@@ -153,4 +153,14 @@ class StubPayment implements PaymentInterface
     {
         Log::info('StubPayment:クレカ削除');
     }
+
+    /**
+     * 全額返金
+     * @param string $payjp_charge_id
+     * @return void
+     */
+    public function refundPayment(string $payjp_charge_id)
+    {
+        Log::info('StubPayment:返金');
+    }
 }
