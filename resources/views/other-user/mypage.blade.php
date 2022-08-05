@@ -95,9 +95,9 @@
                                                         <div class="list sliderSP02">
                                                         @foreach($products as $product)
 
-                                                            
+
 															<x-parts.product-item :product="$product"/>
-															
+
 
                                                         @endforeach
                                                         </div>
@@ -212,21 +212,29 @@
 								</div>
 							</div>
 						</div>
-						<!-- <div class="mypageSec05">
+						<div class="mypageSec05">
 							<div class="inner">
-								<p class="mypageHd02"><span>ポートフォリオ</span><a href="#" class="more">ポートフォリオを編集する</a></p>
-								<ul class="mypagePortfolioUl">
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-								</ul>
+                                @if (\Auth::id() === $user->id)
+                                    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
+                                @else
+                                    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p>
+                                @endif
+
+                                @if ($portfolio_list->isEmpty())
+                                        <p>ポートフォリオの登録はありません。</p>
+                                @else
+                                    <ul class="mypagePortfolioUl">
+                                        @foreach ($portfolio_list as $portfolio)
+                                            <a href="{{ route('user.portfolio.show', [$user, $portfolio]) }}">
+                                                <li>
+                                                    <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
+                                                </li>
+                                            </a>
+                                        @endforeach
+                                    </ul>
+                                @endif
 							</div>
-						</div> -->
+						</div>
 						<!-- <div class="otherMypageSec02">
 							<div class="inner">
 								<p class="mypageHd02"><span>依頼者からの評価</span><a href="#" class="more">評価をもっと見る</a></p>
