@@ -32,7 +32,6 @@
 										@elseif($val->status === App\Models\Product::STATUS_PUBLISH)
 										<div class="cont01 public02">
 										@endif
-											<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
 											@if(isset($val->productImage[0]))
 											<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
 											@else
@@ -54,7 +53,7 @@
 									@endforeach
 									@endif
 								</ul>
-								{{ $products->links() }}
+								{{ $products->fragment('')->links() }}
 							</div>
 
 							<!---------------- リクエスト ------------------>

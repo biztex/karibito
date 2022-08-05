@@ -138,6 +138,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
         // ポイント履歴
         Route::get('point', [PointController::class, 'index'])->name('point.index');
+        // 決済履歴
+        Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報

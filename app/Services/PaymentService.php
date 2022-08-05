@@ -23,6 +23,33 @@ class PaymentService
     }
 
     /**
+     * 対象ユーザーの入金一覧取得
+     * @param int $user_id
+     * @return object $deposits
+     */
+    public function getUserDeposits(int $user_id): object
+    {
+        // リファクタリング可能そう
+        $chatroom_ids = \App\Models\Chatroom::sellService($user_id)->pluck('id');
+        $payment_ids = \App\Models\Purchase::whereIn('chatroom_id',$chatroom_ids)->pluck('payment_id');
+        $deposits = Payment::whereIn('id', $payment_ids)->orderBy('id', 'desc')->paginate(20);
+
+        return $deposits;
+    }
+
+    /**
+     * 対象ユーザーの支払い一覧取得
+     * @param int $user_id
+     * @return object $withdrawals
+     */
+    public function getUserWithdrawals($user_id): object
+    {
+        $withdrawals = Payment::withdrawalUser($user_id)->orderBy('id', 'desc')->paginate(20);
+
+        return $withdrawals;
+    }
+
+    /**
      * 顧客登録
      * @return string $customer_id
      */

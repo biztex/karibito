@@ -1031,3 +1031,7 @@
 	font-weight: 100;
 	color: red;
 }
+.paymentUl01 .price {
+	width: auto;
+	margin-left:10px;
+}
