@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Services\PaymentService;
 use App\Services\UserProfileService;
+use App\Models\Chatroom;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentController\StoreRequest;
 
@@ -19,6 +21,13 @@ class PaymentController extends Controller
         $this->user_profile_service = $user_profile_service;
     }
 
+    public function index()
+    {
+        $deposits = $this->payment_service->getUserDeposits(\Auth::id());
+        $withdrawals = $this->payment_service->getUserWithdrawals(\Auth::id());
+
+        return view('mypage.payment.index', compact('deposits', 'withdrawals'));
+    }
 
     public function create()
     {
