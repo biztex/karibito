@@ -8,7 +8,16 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
-                        <li class="breadcrumb-item active" aria-current="page">決済一覧</li>
+                        <li class="breadcrumb-item active" aria-current="page">決済一覧
+                    <form action="{{ route('admin.payment.search') }}" class="mt-2" method="get">
+                        @csrf
+                        <div class="d-flex">
+                            <input class="form-control col-8" type="text" name="search" value="{{ $request->search ?? "" }}">
+                            <button class="btn btn-secondary btn-block col-4 ml-2 content-end" type="submit">検索</button>
+                        </div>
+                    </form>
+                    <div>※ユーザー名に部分一致で検索</div>
+                </li>
                     </ol>
                 </nav>
                 <div class="card shadow-sm mb-5">

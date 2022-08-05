@@ -422,6 +422,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // 決済一覧
         Route::get('/payment',[AdminPaymentController::class, 'index'])->name('payment.index');
+        Route::get('/payment/search',[AdminPaymentController::class, 'search'])->name('payment.search');
     });
 });
 
