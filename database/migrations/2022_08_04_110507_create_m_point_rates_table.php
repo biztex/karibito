@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_ban')->default(0)->comment('0.制限なし 1.制限あり')->after('password');
+        Schema::create('m_point_rates', function (Blueprint $table) {
+            $table->id();
+            $table->integer('rate')->comment('ポイント付与率(%)');
+            $table->date('effective_datetime')->comment('適用日時');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_ban');
-        });
+        Schema::dropIfExists('m_point_rates');
     }
 };

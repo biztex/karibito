@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use App\Http\Controllers\Web\Mypage\ChangeTelController;
+use App\Http\Controllers\Web\Mypage\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -28,6 +29,8 @@ use App\Http\Controllers\Web\Mypage\SkillController;
 use App\Http\Controllers\Web\Mypage\CareerController;
 use App\Http\Controllers\Web\Mypage\JobController;
 use App\Http\Controllers\Web\Mypage\EvaluationController;
+use App\Http\Controllers\Web\Mypage\CouponController;
+use App\Http\Controllers\Web\Mypage\PointController;
 
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
@@ -130,6 +133,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
         });
 
+        // クーポン
+        Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
+        // ポイント履歴
+        Route::get('point', [PointController::class, 'index'])->name('point.index');
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報
@@ -149,6 +156,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(ChangeTelController::class)->name('tel.')->group(function () {
                 Route::get('tel', 'edit')->name('edit');
                 Route::post('tel', 'update')->name('update');
+            });
+
+            // クレジットカード
+            Route::controller(PaymentController::class)->name('card.')->group(function () {
+                Route::get('card', 'create')->name('create'); //クレカ登録
+                Route::post('card', 'createCard')->name('store'); //クレカ登録
+                Route::get('card/{card_id}', 'destroy')->name('destroy');
             });
 
 
@@ -255,13 +269,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('inactive','inactive')->name('inactive');
 
         Route::middleware('can:start.chatroom.product,product')->group(function () {
-            Route::get('product/{product}','newProduct')->name('new.product'); // productからの交渉する
-            Route::post('product/{product}', 'createProduct')->name('create.product'); // productからのstart
+            Route::get('product/{product}','newProduct')->name('new.product')->middleware('is_ban'); // productからの交渉する
+            Route::post('product/{product}', 'createProduct')->name('create.product')->middleware('is_ban'); // productからのstart
         });
 
         Route::middleware('can:start.chatroom.job.request,job_request')->group(function () {
-            Route::get('job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestから交渉する
-            Route::post('job_request/{job_request}', 'createJobRequest')->name('create.job_request'); // job_requestからのstart
+            Route::get('job_request/{job_request}','newJobRequest')->name('new.job_request')->middleware('is_ban'); // job_requestから交渉する
+            Route::post('job_request/{job_request}', 'createJobRequest')->name('create.job_request')->middleware('is_ban'); // job_requestからのstart
         });
 
         Route::middleware('can:my.chatroom,chatroom')->group(function () {
@@ -270,11 +284,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         Route::middleware('can:proposal,chatroom')->group(function () {
-            Route::post('{chatroom}/proposal','proposal')->name('proposal'); //提案
+            Route::post('{chatroom}/proposal','proposal')->name('proposal')->middleware('is_ban'); //提案
             Route::get('{chatroom}/proposal','getProposal')->name('getProposal');
         });
 
-        Route::get('{chatroom}/complete','complete')->middleware('can:worked,chatroom')->name('complete'); //作業完了
+        Route::get('{chatroom}/complete','complete')->middleware('can:worked,chatroom')->name('complete')->middleware('is_ban'); //作業完了
 
         Route::middleware('can:buyer.evaluation,chatroom')->group(function () {
             Route::get('{chatroom}/buyer_evaluation','getBuyerEvaluation')->name('get.buyer.evaluation'); //購入者価画面
@@ -323,7 +337,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dm',[DmroomController::class,'index'])->name('dm.index');
     Route::get('/dm/show/{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
     Route::post('/dm',[DmroomController::class,'store'])->name('dm.store');
-    Route::get('/dm/create/{user}',[DmroomController::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create');
+    Route::get('/dm/create/{user}',[DmroomController::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create')->middleware('is_ban');
     Route::post('/dm/{dmroom}',[DmroomController::class,'message'])->name('dm.message')->middleware('is_ban');
 
 });
@@ -402,8 +416,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //お知らせ機能
         Route::resource('/news', AdminNewsController::class);
+        ///メモの編集
+        Route::put('user/{userId}/update/memo', [UserController::class, 'updateMemo'])->name('user.updateMemo');
     });
-
 });
 
 // 未着手
@@ -424,6 +439,12 @@ Route::prefix('sample')->group(function () {
     Route::view('past', 'sample.past');
     Route::view('payment_history', 'sample.payment_history');
     Route::view('point_history', 'sample.point_history');
+
+    // サンプル決済画面
+    Route::view('payment', 'sample.payment');
+    Route::post('payment/createCharge', [\App\Http\Controllers\Sample\PaymentController::class, 'createCharge'])->name('sample.createCharge'); // 決済実行客登録
+    Route::post('payment/createCard', [\App\Http\Controllers\Sample\PaymentController::class, 'createCard'])->name('sample.createCard'); // クレカ登録
+    Route::get('payment/getCardList', [\App\Http\Controllers\Sample\PaymentController::class, 'getCardList'])->name('sample.getCardList'); // クレカ一覧取得
 });
 
 // 該当ユーザーの各ページ

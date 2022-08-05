@@ -35,109 +35,11 @@
 
 				<div class="inner02">
 					<div class="clearfix">
-						<div id="main">
-							<div class="title">
-								<div class="fun">
-									<div class="single">
-										<a href="#" tabindex="0"> {{ App\Models\JobRequest::IS_ONLINE[$request->is_online] }} </a>
-									</div>
-									<!-- <a href="#" class="favorite">お気に入り(11)</a> -->
-								</div>
-								<div class="datas">
-									<span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$request->is_call] }}</span>
-									<!-- <span class="data">閲覧：1000</span> -->
-                                    @if(!is_null($request->prefecture_id))
-                                        <span class="data">エリア：{{ App\Models\Prefecture::find($request->prefecture_id)->name }}</span>
-                                    @endif
-								</div>
-							</div>
-							<div class="drawIllustration">
-								<h2 class="hdM">{{ $request->title }}</h2>
-								<table>
-									<tr>
-										<th><span class="th">予算</span></th>
-										<td><big>{{ number_format($request->price) }}円〜</big></td>
-									</tr>
-									<tr>
-										<th><span class="th">残り時間</span></th>
-										<td><big>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</big></td>
-									</tr>
-									@if(!is_null($request->required_date))
-									<tr>
-										<th><span class="th">納品希望日</span></th>
-										<td>{{ date('Y年m月d日',strtotime($request->required_date)) }}</td>
-									</tr>
-									@endif
-									<tr>
-										<th><span class="th">掲載日</span></th>
-										<td>
-                                            @if($request->created_at)
-                                                {{ date('Y年m月d日', strtotime($job_request->created_at)) }}
-                                            @else
-                                                {{ date('Y年m月d日', strtotime(today())) }}
-                                            @endif
-                                        </td>
-									</tr>
-									<tr>
-										<th><span class="th">締切日</span></th>
-										<td>{{ date('Y年m月d日',strtotime($request->application_deadline)) }}</td>
-									</tr>
-									<!-- <tr>
-										<th><span class="th">提案人数</span></th>
-										<td>20人</td>
-									</tr> -->
-								</table>
-							</div>
-							<div class="content">
-								<h2 class="hdM">サービス内容</h2>
-								<p style="overflow-wrap: break-word;">{!! nl2br(e($request->content)) !!}</p>
-							</div>
 
-						</div>
+						@include('job_request.parts.preview.main')
 
-						<aside id="side">
-							<div class="box reservate">
-								<h3>{{ number_format($request->price) }}円</h3>
-								<p class="status">応募期限</p>
-								<p class="date" style="margin-bottom:10px;height:33.5px;">{{ date('Y/m/d',strtotime($request->application_deadline)) }}</p>
-								@if(!is_null($request->required_date))
-									<p class="status">納品希望日</p>
-									<p class="date">{{ date('Y/m/d',strtotime($request->required_date)) }}</p>
-								@endif
-								<!-- <div class="calendar"><div id="datepicker"></div></div> -->
-							</div>
-							<div>
-								<div class="peace">
-									<h3>カリビト安心への取り組み</h3>
-									<p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
-								</div>
-								<div class="functeBtns">
-								@if(empty($job_request))
-									<input type="submit" class="orange_o" style="color:#EB6A1A;font-weight:700;font-size: 1.8rem;height: 55px;" formaction="{{ route('job_request.post.create') }}" value="編集画面に戻る">
-								@else
-									<input type="submit" class="orange_o" style="color:#EB6A1A;font-weight:700;font-size: 1.8rem;height: 55px;" formaction="{{ route('job_request.post.edit', $job_request->id) }}" value="編集画面に戻る">
-								@endif
-								</div>
-								<div class="functeBtns">
-									<input type="submit" name="regist" class="orange full" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">
-								</div>
-								<p class="specialtyBtn"><span>この情報をシェアする</span></p>
-							</div>
-							<div class="box seller">
-								<h3>スキル出品者</h3>
-									@if(empty($user->userProfile->icon))
-										<a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
-									@else
-										<a href="#" class="head"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></a>
-									@endif
-								<!-- <p class="login">最終ログイン：8時間前</p> -->
-								<p class="introd"><a href="#" class="name">{{ $user->name }}</a><br>({{ App\Models\UserProfile::GENDER[$user->userProfile->gender] }}/ {{ $age }} / {{ $user->userProfile->prefecture->name }})</p>
-								<!-- <div class="evaluate three"></div> -->
-								@if($user->userProfile->is_identify == 1)
-									<p class="check"><a href="#">本人確認済み</a></p>
-								@endif
-							</div>
-						</aside>
+						@include('job_request.parts.preview.side')
+						
 					</div>
 				</div><!--inner02-->
 			</form>
