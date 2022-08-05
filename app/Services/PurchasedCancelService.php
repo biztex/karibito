@@ -30,7 +30,7 @@ class PurchasedCancelService
     {
         $purchased_cancel->fill([
             'status' => PurchasedCancel::STATUS_CANCELED,
-            'cancel_date' => now()            
+            'cancel_date' => \Carbon\Carbon::now()            
             ])->save();
     }
 
