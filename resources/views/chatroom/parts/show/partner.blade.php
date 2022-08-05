@@ -10,7 +10,7 @@
                 @endif
                 <div class="info">
                     <p class="name">出品者・{{ $partner->name }}</p>
-                    <p><a href="#" class="link">職務経歴書を見る</a></p>
+                    <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
                 </div>
             </div>
             <p class="login">最終ログイン：オンライン中</p>
@@ -42,7 +42,7 @@
                 @endif
                 <div class="info">
                     <p class="name">掲載者・{{ $partner->name }}</p>
-                    <p><a href="#" class="link">職務経歴書を見る</a></p>
+                    <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
                 </div>
             </div>
             <p class="login">最終ログイン：オンライン中</p>
