@@ -1035,3 +1035,35 @@
 	width: auto;
 	margin-left:10px;
 }
+.chatPages .communicate li .img .head {
+    overflow: hidden;
+    margin-right: 20px;
+    width: 50px;
+	height: 50px;
+    border-radius: 50px;
+	object-fit: cover;
+}
+@media screen and (max-width: 767px){
+	.chatPages .communicate li .img .head {
+		margin-right: 10px;
+		width: 40px;
+		height: 40px;
+	}
+}
+.sellerTop .user .head {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50px;
+}
+@media screen and (max-width: 767px) {
+	.sellerTop .user .head {
+		width: 40px;
+		height: 40px;
+	}
+}
+.max-string {
+	color: #545454;
+	font-size: 12px;
+	text-align: right;
+}

@@ -4,7 +4,7 @@
             <div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('chatroom.index') }}">やりとり一覧</a>　>　
-                <span>チャットを開始</span>
+                <span>{{ $chatroom->reference->title }}</span>
             </div>
         </div><!-- /.breadcrumb -->
 
