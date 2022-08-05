@@ -24,7 +24,7 @@
                                 <tr>
                                     <th scope="col" class="text-nowrap">id</th>
                                     <th scope="col" class="text-nowrap">user_id</th>
-                                    <th scope="col" class="text-nowrap">Payjp決済ID</th>
+                                    <th scope="col" class="text-nowrap">ユーザー名</th>
                                     <th scope="col" class="text-nowrap">決済金額</th>
                                     <th scope="col" class="text-nowrap">決済完了日</th>
                                     <th scope="col" class="text-nowrap">返金金額</th>
@@ -37,12 +37,12 @@
                                     <tr>
                                         <td class="px-2">{!! $value->id !!}</td>
                                         <td class="px-2"><a href="{{ route('admin.users.show',$value->user_id) }}">{!! $value->user_id !!}</a></td>
-                                        <td class="px-2">{!! $value->payjp_charge_id !!}</td>
+                                        <td class="px-2"><a href="{{ route('admin.users.show',$value->user_id) }}">{!! $value->user->name !!}</a></td>
                                         <td class="px-2">¥{!! number_format($value->amount) !!}</p></td>
-                                        <td class="px-2">{!! $value->created_at !!}</td>
-                                        <td class="px-2">@if($value->refunded_amount !== null)¥{!! number_format($value->refunded_amount) !!}@endif</td>
-                                        <td class="px-2">{!! $value->refunded_at !!}</td>
-                                        <td class="px-2">{!! $value->refunded_failed_at !!}</td>
+                                        <td class="px-2" style="max-width:35px">{!! $value->created_at !!}</td>
+                                        <td class="px-2" style="color:red;">@if($value->amount_refunded !== null)¥{!! number_format($value->amount_refunded) !!}@endif</td>
+                                        <td class="px-2" style="color:red;max-width:35px">{!! $value->refunded_at !!}</td>
+                                        <td class="px-2" style="color:red;max-width:35px">{!! $value->refunded_failed_at !!}</td>
                                     </tr>
                                 @endforeach
                                 {{ $payments->links() }}
