@@ -23,7 +23,7 @@ use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
 use App\Models\MCommissionRate;
-
+use App\Services\CouponService;
 
 class ChatroomController extends Controller
 {
@@ -32,9 +32,11 @@ class ChatroomController extends Controller
     private $proposal_service;
     private $purchase_service;
     private $evaluation_service;
+    private $point_service;
+    private $coupon_service;
     private readonly PaymentService $payment_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service, CouponService $coupon_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -43,6 +45,7 @@ class ChatroomController extends Controller
         $this->evaluation_service = $evaluation_service;
         $this->payment_service = $payment_service;
         $this->point_service = $point_service;
+        $this->coupon_service = $coupon_service;
     }
 
     /**
@@ -206,15 +209,11 @@ class ChatroomController extends Controller
      */
     public function purchase(Proposal $proposal)
     {
-        $user_coupons = UserCoupon::where([
-            ['user_id', '=', \Auth::id()],
-            ['used_at', '=', null],
-        ])
-        ->get();
-
         $cards = $this->payment_service->getCardList();
+        $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
+        $user_has_coupons = $this->coupon_service->showCoupon(); //期限が切れていないクーポンを取得
 
-        return view('chatroom.purchase.create',compact('proposal', 'cards', 'user_coupons'));
+        return view('chatroom.purchase.create',compact('proposal', 'cards', 'user_has_coupons', 'user_has_point'));
     }
 
     /**

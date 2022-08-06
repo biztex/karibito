@@ -3,9 +3,17 @@
 namespace App\Http\Requests\ChatroomController;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Services\PointService;
 
 class PurchaseConfirmRequest extends FormRequest
 {
+
+    private $point_service;
+
+    public function __construct(PointService $point_service)
+    {
+        $this->point_service = $point_service;
+    }
     protected function prepareForValidation()
     {
         if( $this->card_id !== 'immediate' ) {
@@ -36,6 +44,8 @@ class PurchaseConfirmRequest extends FormRequest
      */
     public function rules()
     {
+        $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
+
         return [
             'payment_type' => 'required',
             'card_id' => 'required | string',
@@ -45,7 +55,9 @@ class PurchaseConfirmRequest extends FormRequest
             'exp_year' => 'required_if:card_id,immediate | nullable ',
             'exp_month' => 'required_if:card_id,immediate | nullable ',
             'exp' => 'required_if:card_id,immediate | nullable | after:last month',
-            'amount' => 'required | integer | min:500 | max:9990000'
+            'amount' => 'required | integer | min:500 | max:9990000',
+            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable",
+            'point_use' => "required_unless:user_use_point,null | required_if:point_use, 0" //ポイントを利用しないにチェックしているのにポイントを入力している人にエラーを出したい。
         ];
     }
 

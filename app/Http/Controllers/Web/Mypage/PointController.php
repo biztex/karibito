@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserCoupon;
+use App\Models\UserGetPoint;
 
 class PointController extends Controller
 {
@@ -15,13 +16,13 @@ class PointController extends Controller
      */
     public function index()
     {
-        // $user_coupons = UserCoupon::where([
-        //     ['user_id', '=', \Auth::id()],
-        //     ['used_at', '=', null],
-        // ])
-        // ->get();
+        $today = date('Y-m-d');
+        $user_get_points = UserGetPoint::where([
+            ['user_id', '=', \Auth::id()],
+            ['deadline', '>=', $today],
+        ])
+        ->get();
 
-        // return view('mypage.coupon.index', compact('user_coupons'));
-        return view('mypage.point.index');
+        return view('mypage.point.index', compact('user_get_points'));
     }
 }
