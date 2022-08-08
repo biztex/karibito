@@ -61,9 +61,8 @@ class PurchaseConfirmRequest extends FormRequest
             'exp' => 'required_if:card_id,immediate | nullable | after:last month',
             'amount' => 'required | integer | min:500 | max:9990000',
             'coupon_discount' => "between | nullable",
-            $coupon_min_price => "between:0,{$user_has_point} | nullable",
-            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable",
-            'point_use' => "required_unless:user_use_point,null | required_if:point_use, 0" //ポイントを利用しないにチェックしているのにポイントを入力している人にエラーを出したい。
+            'point_use' => 'required',
+            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable"
         ];
     }
 
