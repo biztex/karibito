@@ -1120,3 +1120,13 @@
 		width: 128px;
 	}
 }
+#side .seller .head img {
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
+}
+.mypageDl01 dt img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+}
