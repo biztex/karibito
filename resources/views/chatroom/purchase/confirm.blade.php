@@ -8,7 +8,7 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					
+
 					<x-parts.chatroom-step :value="$proposal->chatroom"/>
 
 					<h2 class="subPagesHd">お支払い手続き</h2>
@@ -38,20 +38,38 @@
 										<td>¥{!! number_format($proposal->price) !!}</td>
 									</tr>
 									<tr>
-										<td><big>商品代金</big><br>手数料<br><font class="colorRed">500円割引クーポン(合計3,000円以上のサービスでご利用可能)／2022年02月08日まで</font></td>
-										<td><big>¥{!! number_format($proposal->price) !!}</big><br>¥500<br><font class="colorRed">¥-500</font></td>
+										<td>
+											<big>商品代金</big>
+											@if ($request->point_use === 1)
+												<br>ポイント利用<br>
+											@endif
+											<br>手数料<br>
+											<font class="colorRed">500円割引クーポン(合計3,000円以上のサービスでご利用可能)／2022年02月08日まで</font>
+										</td>
+										<td>
+											<big>¥{!! number_format($proposal->price) !!}</big>
+											@if ($request->point_use === 1)
+												<br><font class="colorRed">−¥{!! number_format($request->user_use_point) !!}</font><br>
+											@endif
+											<br>¥500<br>
+											<font class="colorRed">¥-500</font>
+										</td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<td>合計</td>
-										<td>¥{!! number_format($proposal->price + 500 - 500) !!}</td>
+										@if ($request->point_use === 1) {{--ー利用するを選択していない場合は表示しない、使えないようにする--}}
+											<td>¥{!! number_format($proposal->price + 500 - $request->user_use_point) !!}</td>
+										@else
+											<td>¥{!! number_format($proposal->price + 500) !!}</td>
+										@endif
 										<input type="hidden" name="amount" value="{{ $request->amount }}">
 									</tr>
 								</tfoot>
 							</table>
 						</div>
-					
+
 						<div class="coupons">
 							<div class="method">
 								<p class="tit">お支払い方法</p>
@@ -61,7 +79,7 @@
 											<input type="hidden" name="immediate" value="checked">
 											<span class="credit-card-info-number">************{{ substr($request->cc_number, -4) }}</span>
 											<input type="hidden" name="cc_number" value="{{ $request->cc_number }}">
-											
+
 											<span>{{ $request->cc_name }}</span>
 											<input type="hidden" name="cc_name" value="{{ $request->cc_name }}">
 
