@@ -52,10 +52,10 @@
 										<td>
 											<big>¥{!! number_format($proposal->price) !!}</big>
 											@if ($request->user_use_point)
-												<br><font class="colorRed">−¥{!! number_format($request->user_use_point) !!}</font><br>
+												<br><font class="colorRed">¥-{!! number_format($request->user_use_point) !!}</font><br>
 											@endif
 											@if ($request->coupon_discount)
-												<br><font class="colorRed">−¥{!! number_format($request->coupon_discount) !!}</font><br>
+												<br><font class="colorRed">¥-{!! number_format($request->coupon_discount) !!}</font><br>
 											@endif
 											<br>¥500<br>
 											<font class="colorRed">¥-500</font>

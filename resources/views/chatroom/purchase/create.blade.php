@@ -58,10 +58,10 @@
                                 <div class="pointInput mt12">
                                     <p class="mr18">
                                         {{-- <input type="text" value="{{ old('number') }}"> --}}
-                                        <select name="coupon_discount" style="padding: 10px;"> {{--仮--}}
+                                        <select name="coupon_number" style="padding: 10px;"> {{--仮--}}
                                             <option value="">選択してください</option>
                                             @foreach ($user_has_coupons as $user_has_coupon)
-                                                <option value="{{$user_has_coupon->discount}}" @if(old('user_coupon.'.$user_has_coupon->id) == $user_has_coupon->id) selected @endif>{{$user_has_coupon->name}}:{{$user_has_coupon->content}}</option>
+                                                <option value="{{$user_has_coupon->coupon_number}}" @if(old('user_coupon.'.$user_has_coupon->id) == $user_has_coupon->id) selected @endif>{{$user_has_coupon->name}}:{{$user_has_coupon->content}}</option>
                                             @endforeach
                                         </select>
                                     </p>
