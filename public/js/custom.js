@@ -80,7 +80,7 @@ $(function () {
 	// URLのハッシュ値が #job-request の場合
 	var hash = $(location).prop('hash');
 
-	if (hash == "#job-request" || hash == "#usually" || hash == "#inactive") {
+	if (hash == "#job-request" || hash == "#usually" || hash == "#inactive" || hash == "#withdrawal") {
 
 
 

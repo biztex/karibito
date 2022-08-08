@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\JobRequestController;
 use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\KaribitoSurveyController as AdminKaribitoSurveyController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
@@ -137,6 +138,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
         // ポイント履歴
         Route::get('point', [PointController::class, 'index'])->name('point.index');
+        // 決済履歴
+        Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報
@@ -418,6 +421,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/news', AdminNewsController::class);
         ///メモの編集
         Route::put('user/{userId}/update/memo', [UserController::class, 'updateMemo'])->name('user.updateMemo');
+
+        // 決済一覧
+        Route::get('/payment',[AdminPaymentController::class, 'index'])->name('payment.index');
+        Route::get('/payment/search',[AdminPaymentController::class, 'search'])->name('payment.search');
     });
 });
 

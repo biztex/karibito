@@ -124,7 +124,11 @@
 										@foreach ($products as $product)
 											<li>
 												<div class="cont01">
-													<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt=""></p>
+													@if(isset($val->productImage[0]))
+														<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+													@else
+														<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+													@endif
 													<div class="info">
 														<div class="breadcrumb">
 															<a href="{{ route('product.category.index',$product->mProductChildCategory->mProductCategory->id) }}">

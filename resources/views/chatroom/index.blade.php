@@ -3,7 +3,7 @@
     <x-parts.post-button/>
         <div id="breadcrumb">
 			<div class="inner">
-				<a href="{{route('home')}}">ホーム</a>　>　<span>チャット</span>
+				<a href="{{route('home')}}">ホーム</a>　>　<span>やり取り一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.ban-msg/>

@@ -70,11 +70,11 @@ class Purchase extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function payment()
     {
-        return $this->hasOne(Payment::class);
+        return $this->belongsTo(Payment::class);
     }
 
     /**
