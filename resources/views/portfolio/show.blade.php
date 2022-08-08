@@ -4,7 +4,7 @@
             <body id="portfolio">
                 <div id="breadcrumb">
                     <div class="inner">
-                        <a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('portfolio.index') }}">ポートフォリオ</a>　>　<span>新規作成</span>
+                        <a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('portfolio.index') }}">ポートフォリオ</a>　>　<span>{{ $portfolio->title }}</span>
                     </div>
                 </div><!-- /.breadcrumb -->
                 <x-parts.flash-msg/>
@@ -265,85 +265,40 @@
                     <div id="contents" class="otherPage">
                         <div class="inner02 clearfix">
                             <div id="main">
-                                <div class="mypageWrap">
-                                    <div class="mypageSec05">
-                                        <p class="mypageHd02"><span>ポートフォリオ</span></p>
+                                <div class="portfolioDtWrap">
+                                    <h2 class="portfolioDtHd">{{ $portfolio->title }}</h2>
+                                    <p class="portfolioDtDate">{{ $portfolio->year }}年 {{ $portfolio->month }}月</p>
+                                    <div class="portfolioDtCont">
+                                        <p class="portfolioDtImg"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
+                                        <p class="portfolioDtDetail">{{ $portfolio->detail }}</p>
                                     </div>
-                                </div>
-                                <div class="mypageWrap">
-                                    <div class="mypageSec05">
-                                        <form action="{{ route('portfolio.store') }}" method="post" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="mypageEditBox">
-                                                <div class="mypageEditList">
-                                                    <p class="mypageEditHd">画像</p>
-                                                    @error('path')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                    <div class="mypageEditInput">
-                                                        <input id='showSrc' type='text' />
-                                                        <input id="showButton" type='button' value=''  OnClick='javascript:$("#hiddenFile").click();'/>
-                                                        <input name="path" id='hiddenFile' type='file' accept="image/*" OnChange='ophiddenFile();' />
-                                                    </div>
-                                                </div>
-                                                <div class="mypageEditList">
-                                                    <p class="mypageEditHd">カテゴリ</p>
-                                                    @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                    <div class="mypageEditInput">
-                                                        <select class="middle_ipt" name="category_id" required>
-                                                            <option value="">選択してください</option>
-                                                            @foreach (App\Models\MProductCategory::get() as $category)
-                                                                <optgroup label="{{$category->name}}">
-                                                                    @foreach ($category->mProductChildCategory as $child_category)
-                                                                        <option value="{{$child_category->id}}" @if( old('category_id', $request->category_id ?? "") == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
-                                                                    @endforeach
-                                                                </optgroup>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="mypageEditList">
-                                                    <p class="mypageEditHd">タイトル</p>
-                                                    @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                    <div class="mypageEditInput">
-                                                        <input type="text" name="title" placeholder="タイトルを入力してください" value="{{ old('title',$request->title ?? "") }}" required>
-                                                    </div>
-                                                </div>
-                                                <div class="mypageEditList">
-                                                    <p class="mypageEditHd">詳細</p>
-                                                    @error('detail')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                    <div class="mypageEditInput">
-                                                        <textarea name="detail" placeholder="詳細を入力してください" required>{{ old('detail',$request->detail ?? "") }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="mypageEditList">
-                                                    <p class="mypageEditHd">作成日</p>
-                                                    @error('year')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                    @error('month')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                                    <div class="mypageEditDate">
-                                                        <div class="mypageEditInput flexLine01">
-                                                            <select name="year" required>
-                                                                <option value="{{ now()->year }}" selected>{{ now()->year }}年</option>
-                                                                @for($year = 1970; $year <= now()->year - 1; $year++)
-                                                                    @if(now()->year == $year) @continue @endif
-                                                                    <option value="{{ $year }}" @if( old('year',$request->year ?? "") == $year) selected @endif>{{ $year }}年</option>
-                                                                @endfor
-                                                            </select>
-                                                            <select name="month" required>
-                                                                <option value="{{ now()->month }}" selected>{{ now()->month }}月</option>
-                                                                @for($month =  1; $month<= 12; $month++)
-                                                                    @if(now()->month == $month) @continue @endif
-                                                                    <option value="{{ $month }}"@if( old('month', $request->month ?? "") == $month) selected @endif>{{ $month }}月</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="fancyPersonBtn">
-                                                    <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
-                                                    <button class="fancyPersonSign">登録する</button>
-                                                </div>
+                                    <ul class="detailSns">
+                                        <li><a href="http://www.facebook.com/share.php?u={{ $url }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a></li>
+                                        <li><a href="https://social-plugins.line.me/lineit/share?url={{ $url }}"><img src="/img/mypage/ico_line.svg" alt=""></a></li>
+                                        <li><a href="https://twitter.com/share?url={{ $url }}&text={{  $portfolio->title }} %20%7C%20 {{ $portfolio->user->name }} %20%7C%20ポートフォリオ %20%7C%20 カリビト&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a></li>
+                                        <li><a href="mailto:?subject=カリビトのポートフォリオをシェア&body={{ $portfolio->title }} %20%7C%20 {{ $portfolio->user->name }} %20%7C%20ポートフォリオ %20%7C%20 カリビト {{ $url }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a></li>
+                                    </ul>
+                                    @if (count($portfolio_list) > 1)
+                                        <div class="detialPager">
+                                            <div class="secretPager">
+                                                @if($portfolio->id == $portfolio_list[0]->id)
+                                                    <div class="secretPagerPrev"><a href="{{ route('portfolio.show', collect($portfolio_list)->last()->id) }}">前へ</a></div>
+                                                @else
+                                                    <div class="secretPagerPrev"><a href="{{ route('portfolio.show', $prev_page) }}">前へ</a></div>
+                                                @endif
+                                                <select onchange="document.location.href=this.options[this.selectedIndex].value;">
+                                                    @foreach ($portfolio_list as $i => $pf)
+                                                        <option value="{{ route('portfolio.show', $pf) }}" @if($portfolio->id == $pf->id) selected @endif>{{ $i + 1}}/{{ count($portfolio_list) }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($portfolio->id == collect($portfolio_list)->last()->id)
+                                                    <div class="secretPagerNext"><a href="{{ route('portfolio.show', $portfolio_list[0]->id) }}">次へ</a></div>
+                                                @else
+                                                    <div class="secretPagerNext"><a href="{{ route('portfolio.show', $next_page) }}">次へ</a></div>
+                                                @endif
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div><!-- /#main -->
                             <x-side-menu/>

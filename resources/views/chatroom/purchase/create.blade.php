@@ -63,8 +63,8 @@
                                         {{-- <input type="text" value="{{ old('number') }}"> --}}
                                         <select name="user_coupon" style="padding: 10px;"> {{--仮--}}
                                             <option value="">選択してください</option>
-                                            @foreach ($user_coupons as $user_coupon)
-                                                <option value="{{$user_coupon->coupon_number}}" @if(old('user_coupon.'.$user_coupon->id) == $user_coupon->id) selected @endif>{{$user_coupon->name}}:{{$user_coupon->content}}</option>
+                                            @foreach ($user_has_coupons as $user_has_coupon)
+                                                <option value="{{$user_has_coupon->coupon_number}}" @if(old('user_coupon.'.$user_has_coupon->id) == $user_has_coupon->id) selected @endif>{{$user_has_coupon->name}}:{{$user_has_coupon->content}}</option>
                                             @endforeach
                                         </select>
                                     </p>
@@ -77,13 +77,14 @@
                                 </div>
                             </div>
 							<div class="radio">
-								<p class="tit">ポイントの利用</p>
+								<p class="tit">ポイントの利用@error('user_use_point')<span>{{ $message }}</span>@enderror</p>
 								<ul class="radioChoice">
+									@error('point_use')<span>{{ $message }}</span>@enderror
 									<li><label><input type="radio" name="point_use" value="0" @if(old('point_use') == 0 || old('point_use') === null) checked @endif>利用しない</label></li>
 									<li><label><input type="radio" name="point_use" value="1" @if(old('point_use') == 1) checked @endif >利用する</label>
-										<p class="point">利用可能ポイント：000P</p>
+										<p class="point">利用可能ポイント：{{$user_has_point}}P</p>
 										<div class="pointInput mt12">
-											<p><input type="text" value="1000"></p>
+											<p><input type="text" value="{{ old('user_use_point')}}" name="user_use_point"></p>
 											{{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
 										</div>
 									</li>
@@ -116,7 +117,7 @@
 								@endif
 								<div class="credit">
 									<div class="radioChoice"><input type="radio" name="card_id" value="immediate" @if(old('card_id') === 'immediate') checked @endif>新しいカード
-									@if($errors->has('cc_name') || $errors->has('cc_number') || $errors->has('exp') || $errors->has('cvc'))<span class="alert alert-danger">※正しい情報を入力してください</span>@endif</div>		
+									@if($errors->has('cc_name') || $errors->has('cc_number') || $errors->has('exp') || $errors->has('cvc'))<span class="alert alert-danger">※正しい情報を入力してください</span>@endif</div>
 
 
 									<table>
@@ -171,6 +172,7 @@
 								</div>
 							</div>
 							<div class="functeBtns">
+								<input type="hidden" class="" value="{{$user_has_point}}">
 								<input type="submit" class="orange full loading-disabled" value="確認する">
 							</div>
 						</div>

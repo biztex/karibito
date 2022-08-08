@@ -99,6 +99,7 @@
 	background-color: #158ACC;
 	color: #fff;
 	font-weight: bold;
+    cursor: pointer;
 }
 .fancyPersonPic p.img {
 	height: 140px;
@@ -984,6 +985,7 @@
   .rate-form input[type=radio]:checked ~ label {
 	color: #ffcc00;
   }
+  
 .configEditTable {
 	display: flex;
 	margin-top: 10px;
@@ -1082,6 +1084,7 @@
 	font-size: 12px;
 	text-align: right;
 }
+
 .favoriteUl01.exchangeChat .img img {
     object-fit: cover;
     height: 100px;
