@@ -2,7 +2,7 @@
     @if($value->reference_type === 'App\Models\Product')
         <div class="cont01">
             @if(isset($value->reference->productImage[0]))
-                <p class="img"><img src="{{ asset('/storage/'.$value->reference->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+                <p class="img"><img src="{{ asset('/storage/'.$value->reference->productImage[0]->path)}}" alt=""></p>
             @else
                 <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
             @endif
@@ -35,9 +35,9 @@
         @if($value->buyerUser->id === Auth::id())
             <div class="user">
                 @if(null !== $value->sellerUser->userProfile->icon)
-                    <p class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt="" style="width: 40px;max-height: 40px;object-fit: cover;border-radius: 50px;"></p>
+                    <p class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></p>
                 @else
-                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt="" style="width: 40px;height: 40px;object-fit: cover;"></p>
+                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
                 @endif
                 <div class="introd">
                         <p class="name">{{$value->sellerUser->name}}</p>
@@ -48,9 +48,9 @@
         @else
             <div class="user">
                 @if(null !== $value->buyerUser->userProfile->icon)
-                    <p class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt="" style="width: 40px;max-height: 40px;object-fit: cover;border-radius: 50px;"></p>
+                    <p class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></p>
                 @else
-                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt="" style="width: 40px;height: 40px;object-fit: cover;"></p>
+                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
                 @endif
                 <div class="introd">
                     <p class="name">{{$value->buyerUser->name}}</p>

@@ -279,12 +279,14 @@
                         <p class="linkTxt">ホーム</p>
                     </a>
                 </div>
-                <div class="spFixedItem">
-                    <a href="{{ route('product.index') }}" class="spFixedLink">
-                        <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
-                        <p class="linkTxt">投稿</p>
-                    </a>
-                </div>
+                @can('identify')
+                    <div class="spFixedItem">
+                        <a href="{{ route('product.index') }}" class="spFixedLink">
+                            <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
+                            <p class="linkTxt">投稿</p>
+                        </a>
+                    </div>
+                @endcan
                 <div class="spFixedItem">
                     <a href="{{ route('chatroom.index') }}" class="spFixedLink">
                         <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>

@@ -1050,7 +1050,7 @@
 		height: 40px;
 	}
 }
-.sellerTop .user .head {
+.sellerTop .user .head img {
 	width: 50px;
 	height: 50px;
 	object-fit: cover;
@@ -1066,4 +1066,57 @@
 	color: #545454;
 	font-size: 12px;
 	text-align: right;
+}
+.favoriteUl01.exchangeChat .img img {
+    object-fit: cover;
+    height: 100px;
+	width: 100px;
+    width: 100%;
+}
+.favoriteUl01 .user .ico img {
+    width: 40px;
+	height: 40px;
+    object-fit: cover;
+	border-radius: 50px;
+    margin-right: 10px;
+}
+
+.chatPages .communicate li .img .head img {
+    overflow: hidden;
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 767px) {
+	.chatPages .communicate li .img .head img {
+		margin-right: 10px;
+		width: 40px;
+		height: 40px;
+	}
+}
+@media screen and (max-width: 767px){
+	#create .spFixed {
+		display: none;
+	}
+
+	#create .stepUl li+li .stepDot:before,
+	#created .stepUl li+li .stepDot:before {
+		width: 150px;
+	}
+}
+@media screen and (max-width: 370px){
+
+	#create .stepUl li+li .stepDot:before,
+	#created .stepUl li+li .stepDot:before {
+		width: 145px;
+	}
+}
+@media screen and (max-width: 354px){
+	#create .stepUl li+li .stepDot:before,
+	#created .stepUl li+li .stepDot:before {
+		width: 128px;
+	}
 }
