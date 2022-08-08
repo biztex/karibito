@@ -12,19 +12,20 @@ use App\Models\UserCareer;
 use App\Models\UserJob;
 use App\Models\Evaluation;
 use App\Libraries\Age;
-
 use App\Services\EvaluationService;
-
+use App\Services\PortfolioService;
 use App\Models\JobRequest;
-
+use App\Models\Portfolio;
 
 class UserController extends Controller
 {
     private $evaluation_service;
+    private $portfolio_service;
 
-    public function __construct(EvaluationService $evaluation_service)
+    public function __construct(EvaluationService $evaluation_service, PortfolioService $portfolio_service)
     {
         $this->evaluation_service = $evaluation_service;
+        $this->portfolio_service = $portfolio_service;
     }
 
     /**
@@ -50,11 +51,12 @@ class UserController extends Controller
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $job_request = JobRequest::where('user_id', $user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
+        $portfolio_list = Portfolio::where('user_id', $user->id)->get();
         $age = Age::group($user->userProfile->birthday);
         $id = $user->id;
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->where('from_user_id', '=', \Auth::id())->first();
 
-        return view('other-user.mypage', compact('user','products', 'age','dmrooms', 'job_request'));
+        return view('other-user.mypage', compact('user','products', 'age','dmrooms', 'job_request', 'portfolio_list'));
     }
 
     public function skills(User $user, Dmroom $dmroom)
@@ -76,5 +78,24 @@ class UserController extends Controller
         $counts = $this->evaluation_service->countEvaluations($user->id);
 
         return view('other-user.evaluation', compact('user', 'age','evaluations', 'counts'));
+    }
+
+    public function portfolio(User $user)
+    {
+        $portfolio_list = Portfolio::where('user_id', $user->id)->get();
+
+        return view('other-user.portfolio.index', compact('user', 'portfolio_list'));
+    }
+
+    public function portfolioShow(User $user, Portfolio $portfolio)
+    {
+        $portfolio_list = Portfolio::where('user_id', $user->id)->get();
+        $base_url = config('app.url');
+        $url = "$base_url/user/$user->id/portfolio/$portfolio->id";
+
+        $prev_page = $this->portfolio_service->prevPage($portfolio, $portfolio_list);
+        $next_page = $this->portfolio_service->nextPage($portfolio, $portfolio_list);
+
+        return view('other-user.portfolio.show', compact('user', 'portfolio', 'portfolio_list', 'url', 'prev_page', 'next_page'));
     }
 }
