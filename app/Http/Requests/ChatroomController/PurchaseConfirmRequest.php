@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\ChatroomController;
 
+use App\Models\UserCoupon;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Services\PointService;
 
@@ -44,7 +45,10 @@ class PurchaseConfirmRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->user_coupon);
+        $coupon_min_price = UserCoupon::where('coupon_number', $this->user_coupon)->pluck('min_price')->first(); //クーポンを利用できる最小金額
         $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
+        // dd($coupon_min_price);
 
         return [
             'payment_type' => 'required',
@@ -56,6 +60,7 @@ class PurchaseConfirmRequest extends FormRequest
             'exp_month' => 'required_if:card_id,immediate | nullable ',
             'exp' => 'required_if:card_id,immediate | nullable | after:last month',
             'amount' => 'required | integer | min:500 | max:9990000',
+            // 'coupon_discount' => "min:{$user_has_point > $coupon_min_price } | nullable",
             'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable",
             'point_use' => "required_unless:user_use_point,null | required_if:point_use, 0" //ポイントを利用しないにチェックしているのにポイントを入力している人にエラーを出したい。
         ];
