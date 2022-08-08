@@ -309,4 +309,5 @@
             </div>
         @endauth
     </div><!-- /#header -->
+	<x-hide-modal/>
 </header>

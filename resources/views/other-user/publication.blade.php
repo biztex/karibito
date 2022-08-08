@@ -93,6 +93,5 @@
 					@include('other-user.parts.side')
 				</div><!--inner-->
 			</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-other-user.layout>

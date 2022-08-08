@@ -552,6 +552,5 @@
 				</div><!-- /#main -->
 			</div><!--inner-->
 		</div><!-- /#contents -->
-        <x-hide-modal/>
 	</article>
 </x-other-user.layout>

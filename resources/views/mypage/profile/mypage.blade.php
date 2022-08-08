@@ -165,7 +165,6 @@
 			</div><!--inner-->
 
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</body>
 </article>
 </x-layout>

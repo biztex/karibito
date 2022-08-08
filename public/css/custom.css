@@ -59,7 +59,22 @@
 		margin-bottom: 35px;
 	}
 }
-#mypage .sidePerson {
+#mypage .sidePerson,
+#chatroom-active .sidePerson,
+#chatroom-inactive .sidePerson,
+#payment .sidePerson,
+#point .sidePerson,
+#news .sidePerson,
+#coupon .sidePerson,
+.dm-page .sidePerson,
+#member .sidePerson,
+#member-page .sidePerson,
+#withdraw .sidePerson,
+#portfolio .sidePerson,
+#resume .sidePerson,
+#publication .sidePerson,
+#draft .sidePerson
+ {
 	display: none;
 }
 #mypage
@@ -1129,4 +1144,28 @@
     width: 140px;
     height: 140px;
     object-fit: cover;
+}
+.sidePersonPic .img img{
+	width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+@media screen and (min-width: 767px) {
+	.registerHd_confirm {
+		font-size: 2.4rem;
+	}
+}
+
+.registerHd_confirm {
+	margin-top: 40px;
+}
+
+.add_mt20 {
+	margin-top: 20px;
+}
+
+@media screen and (max-width: 767px) {
+	.registerHd_confirm {
+		margin-top: 20px;
+	}
 }

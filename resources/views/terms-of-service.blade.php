@@ -19,6 +19,5 @@
                 </div>
             </div>
         </div>
-		<x-hide-modal/>
 	</article>
 </x-layout>

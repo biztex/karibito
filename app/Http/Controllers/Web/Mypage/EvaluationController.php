@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Models\Evaluation;
 use App\Services\EvaluationService;
 
 class EvaluationController extends Controller
@@ -21,6 +19,6 @@ class EvaluationController extends Controller
         $evaluations = $this->evaluation_service->getEvaluations(\Auth::id());
         $counts = $this->evaluation_service->countEvaluations(\Auth::id());
 
-        return view('mypage.evaluation.evaluation', compact('evaluations', 'counts'));
+        return view('mypage.evaluation.index', compact('evaluations', 'counts'));
     }
 }

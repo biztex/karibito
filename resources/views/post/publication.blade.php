@@ -1,5 +1,5 @@
 <x-layout>
-<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
+<x-parts.post-button/>
 	<article>
 	<body id="publication">
 		<div id="breadcrumb">
@@ -90,6 +90,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-layout>
