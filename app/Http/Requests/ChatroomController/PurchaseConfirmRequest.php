@@ -56,8 +56,8 @@ class PurchaseConfirmRequest extends FormRequest
             'exp_month' => 'required_if:card_id,immediate | nullable ',
             'exp' => 'required_if:card_id,immediate | nullable | after:last month',
             'amount' => 'required | integer | min:500 | max:9990000',
-            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable",
-            'point_use' => "required_unless:user_use_point,null | required_if:point_use, 0" //ポイントを利用しないにチェックしているのにポイントを入力している人にエラーを出したい。
+            'point_use' => 'required',
+            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable"
         ];
     }
 
