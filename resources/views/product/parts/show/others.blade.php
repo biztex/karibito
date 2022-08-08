@@ -30,7 +30,7 @@
                                 @endif
                                 <div class="introd">
                                     <p class="name">{{$value->user->name}}</p>
-                                    <p>({{App\Models\UserProfile::GENDER[$value->user->userProfile->gender]}}/ {{$value->user->userProfile->birthday}}/ {{$value->user->userProfile->prefecture->name}})</p>
+                                    <p>({{App\Models\UserProfile::GENDER[$value->user->userProfile->gender]}}/ {{$value->user->userProfile->age}}/ {{$value->user->userProfile->prefecture->name}})</p>
                                 </div>
                             </div>
                             <div class="evaluates">

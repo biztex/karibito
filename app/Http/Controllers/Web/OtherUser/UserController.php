@@ -36,9 +36,8 @@ class UserController extends Controller
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $job_requests = JobRequest::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
-        $age = Age::group($user->userProfile->birthday);
 
-        return view('other-user.publication', compact('user','products','job_requests', 'age'));
+        return view('other-user.publication', compact('user','products','job_requests'));
     }
 
     /**
@@ -50,11 +49,10 @@ class UserController extends Controller
     {
         $products = Product::getUser($user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $job_request = JobRequest::where('user_id', $user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
-        $age = Age::group($user->userProfile->birthday);
         $id = $user->id;
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->where('from_user_id', '=', \Auth::id())->first();
 
-        return view('other-user.mypage', compact('user','products', 'age','dmrooms', 'job_request'));
+        return view('other-user.mypage', compact('user','products', 'dmrooms', 'job_request'));
     }
 
     public function skills(User $user, Dmroom $dmroom)
@@ -62,19 +60,16 @@ class UserController extends Controller
         $skills = UserSkill::getUser($user->id)->get();
         $careers = UserCareer::getUser($user->id)->get();
         $jobs = UserJob::getUser($user->id)->first();
-        $age = Age::group($user->userProfile->birthday);
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->first();
 
-        return view('other-user.skills', compact('skills','careers','jobs','user', 'age', 'dmrooms'));
+        return view('other-user.skills', compact('skills','careers','jobs','user', 'dmrooms'));
     }
 
     public function evaluation(User $user)
     {
-        $age = Age::group($user->userProfile->birthday);
-
         $evaluations = $this->evaluation_service->getEvaluations($user->id);
         $counts = $this->evaluation_service->countEvaluations($user->id);
 
-        return view('other-user.evaluation', compact('user', 'age','evaluations', 'counts'));
+        return view('other-user.evaluation', compact('user', 'evaluations', 'counts'));
     }
 }

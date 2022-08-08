@@ -42,7 +42,7 @@
 											</div>
 										</div>
 										<p class="mypageP02">最終ログイン：8時間前</p>
-										<p class="mypageP03">({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$age}}/ {{$user->userProfile->prefecture->name}}) </p>
+										<p class="mypageP03">({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$user->userProfile->age}}/ {{$user->userProfile->prefecture->name}}) </p>
 										<p class="mypageP04 check">
                                             @if ($user->userProfile->is_identify)
                                                 <a href="#">本人確認済み</a>
@@ -141,7 +141,7 @@
                                                                             @endif
                                                                             <div class="introd">
                                                                                 <p class="name">{{$request->user->name}}</p>
-                                                                                <p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$age}}/ {{$request->user->userProfile->prefecture->name}})</p>
+                                                                                <p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$request->user->userProfile->age}}/ {{$request->user->userProfile->prefecture->name}})</p>
                                                                             </div>
                                                                         </div>
                                                                         <p class="check"><a href="#">本人確認済み</a></p>
