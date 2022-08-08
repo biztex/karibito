@@ -1,5 +1,5 @@
 <x-layout>
-    <x-parts.post-button/>{{--投稿ボタンの読み込み--}}
+    <x-parts.post-button/>
         <article>
             <x-parts.flash-msg/>
             <div id="contents" class="otherPage">
@@ -43,5 +43,4 @@
                 </div><!--inner-->
             </div><!-- /#contents -->
         </article>
-    <x-hide-modal/>
 </x-layout>

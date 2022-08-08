@@ -31,7 +31,11 @@
                                         @foreach($evaluations['good'] as $value)
                                         <li>
                                             <div class="img">
-                                                <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+                                                @if(null !== $value->user->userProfile->icon)
+                                                    <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+                                                @else
+                                                    <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                                @endif
                                             </div>
                                             <div class="info">
                                                 <p class="name">{{ $value->user->name }}</p>
@@ -54,7 +58,11 @@
                                         @foreach($evaluations['usually'] as $value)
                                         <li>
                                             <div class="img">
-                                                <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+                                                @if(null !== $value->user->userProfile->icon)
+                                                    <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+                                                @else
+                                                    <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                                @endif
                                             </div>
                                             <div class="info">
                                                 <p class="name">{{ $value->user->name }}</p>
@@ -77,7 +85,11 @@
                                         @foreach($evaluations['pity'] as $value)
                                         <li>
                                             <div class="img">
-                                                <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+                                                @if(null !== $value->user->userProfile->icon)
+                                                    <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+                                                @else
+                                                    <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                                @endif
                                             </div>
                                             <div class="info">
                                                 <p class="name">{{ $value->user->name }}</p>

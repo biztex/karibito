@@ -4,7 +4,7 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>ポイント履歴</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>決済履歴</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents" class="otherPage">
@@ -68,8 +68,6 @@
 
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</div><!-- /#wrapper -->
-</body>
 </article>
 </x-layout>

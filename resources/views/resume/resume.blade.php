@@ -88,6 +88,5 @@
                 <x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-layout>
