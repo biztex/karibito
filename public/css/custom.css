@@ -59,7 +59,22 @@
 		margin-bottom: 35px;
 	}
 }
-#mypage .sidePerson {
+#mypage .sidePerson,
+#chatroom-active .sidePerson,
+#chatroom-inactive .sidePerson,
+#payment .sidePerson,
+#point .sidePerson,
+#news .sidePerson,
+#coupon .sidePerson,
+.dm-page .sidePerson,
+#member .sidePerson,
+#member-page .sidePerson,
+#withdraw .sidePerson,
+#portfolio .sidePerson,
+#resume .sidePerson,
+#publication .sidePerson,
+#draft .sidePerson
+ {
 	display: none;
 }
 #mypage
@@ -84,6 +99,7 @@
 	background-color: #158ACC;
 	color: #fff;
 	font-weight: bold;
+    cursor: pointer;
 }
 .fancyPersonPic p.img {
 	height: 140px;
@@ -969,6 +985,7 @@
   .rate-form input[type=radio]:checked ~ label {
 	color: #ffcc00;
   }
+  
 .configEditTable {
 	display: flex;
 	margin-top: 10px;
@@ -1030,4 +1047,128 @@
 	margin-left: 20px;
 	font-weight: 100;
 	color: red;
+}
+.paymentUl01 .price {
+	width: auto;
+	margin-left:10px;
+}
+.chatPages .communicate li .img .head {
+    overflow: hidden;
+    margin-right: 20px;
+    width: 50px;
+	height: 50px;
+    border-radius: 50px;
+	object-fit: cover;
+}
+@media screen and (max-width: 767px){
+	.chatPages .communicate li .img .head {
+		margin-right: 10px;
+		width: 40px;
+		height: 40px;
+	}
+}
+.sellerTop .user .head img {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50px;
+}
+@media screen and (max-width: 767px) {
+	.sellerTop .user .head {
+		width: 40px;
+		height: 40px;
+	}
+}
+.max-string {
+	color: #545454;
+	font-size: 12px;
+	text-align: right;
+}
+
+.favoriteUl01.exchangeChat .img img {
+    object-fit: cover;
+    height: 100px;
+	width: 100px;
+    width: 100%;
+}
+.favoriteUl01 .user .ico img {
+    width: 40px;
+	height: 40px;
+    object-fit: cover;
+	border-radius: 50px;
+    margin-right: 10px;
+}
+
+.chatPages .communicate li .img .head img {
+    overflow: hidden;
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 767px) {
+	.chatPages .communicate li .img .head img {
+		margin-right: 10px;
+		width: 40px;
+		height: 40px;
+	}
+}
+@media screen and (max-width: 767px){
+	#create .spFixed {
+		display: none;
+	}
+
+	#create .stepUl li+li .stepDot:before,
+	#created .stepUl li+li .stepDot:before {
+		width: 150px;
+	}
+}
+@media screen and (max-width: 370px){
+
+	#create .stepUl li+li .stepDot:before,
+	#created .stepUl li+li .stepDot:before {
+		width: 145px;
+	}
+}
+@media screen and (max-width: 354px){
+	#create .stepUl li+li .stepDot:before,
+	#created .stepUl li+li .stepDot:before {
+		width: 128px;
+	}
+}
+#side .seller .head img {
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
+}
+.mypageDl01 dt img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+}
+.sidePersonPic .img img{
+	width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+@media screen and (min-width: 767px) {
+	.registerHd_confirm {
+		font-size: 2.4rem;
+	}
+}
+
+.registerHd_confirm {
+	margin-top: 40px;
+}
+
+.add_mt20 {
+	margin-top: 20px;
+}
+
+@media screen and (max-width: 767px) {
+	.registerHd_confirm {
+		margin-top: 20px;
+	}
 }

@@ -10,22 +10,6 @@
 
                             <p style="text-align: center;margin-bottom:10px;">{{session('status')}}</p>
 
-							<style>
-								@media screen and (min-width: 767px) {
-									.registerHd_confirm {
-										font-size: 2.4rem;
-									}
-								}
-								.registerHd_confirm {
-									margin-top: 40px;
-								}
-
-								@media screen and (max-width: 767px) {
-									.registerHd_confirm {
-										margin-top: 20px;
-									}
-								}
-							</style>
 							<div class="contactBox">
                                 <form method="POST" action="{{ route('admin.password.email') }}">
                                     @csrf

@@ -5,7 +5,7 @@
 				<li><a href="#" class="is_active">ホーム</a></li>
 				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				<li><a href="#">ポートフォリオ</a></li>
+				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
 				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
 			</ul>
@@ -42,7 +42,7 @@
 											</div>
 										</div>
 										<p class="mypageP02">最終ログイン：8時間前</p>
-										<p class="mypageP03">({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$age}}/ {{$user->userProfile->prefecture->name}}) </p>
+										<p class="mypageP03">({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$user->userProfile->age}}/ {{$user->userProfile->prefecture->name}}) </p>
 										<p class="mypageP04 check">
                                             @if ($user->userProfile->is_identify)
                                                 <a href="#">本人確認済み</a>
@@ -95,9 +95,9 @@
                                                         <div class="list sliderSP02">
                                                         @foreach($products as $product)
 
-                                                            
+
 															<x-parts.product-item :product="$product"/>
-															
+
 
                                                         @endforeach
                                                         </div>
@@ -141,7 +141,7 @@
                                                                             @endif
                                                                             <div class="introd">
                                                                                 <p class="name">{{$request->user->name}}</p>
-                                                                                <p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$age}}/ {{$request->user->userProfile->prefecture->name}})</p>
+                                                                                <p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$request->user->userProfile->age}}/ {{$request->user->userProfile->prefecture->name}})</p>
                                                                             </div>
                                                                         </div>
                                                                         <p class="check"><a href="#">本人確認済み</a></p>
@@ -212,21 +212,29 @@
 								</div>
 							</div>
 						</div>
-						<!-- <div class="mypageSec05">
+						<div class="mypageSec05">
 							<div class="inner">
-								<p class="mypageHd02"><span>ポートフォリオ</span><a href="#" class="more">ポートフォリオを編集する</a></p>
-								<ul class="mypagePortfolioUl">
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-									<li><a href="#"><img src="/img/mypage/img_portfolio01.jpg" alt=""></a></li>
-								</ul>
+                                @if (\Auth::id() === $user->id)
+                                    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
+                                @else
+                                    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p>
+                                @endif
+
+                                @if ($portfolio_list->isEmpty())
+                                        <p>ポートフォリオの登録はありません。</p>
+                                @else
+                                    <ul class="mypagePortfolioUl">
+                                        @foreach ($portfolio_list as $portfolio)
+                                            <a href="{{ route('user.portfolio.show', [$user, $portfolio]) }}">
+                                                <li>
+                                                    <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
+                                                </li>
+                                            </a>
+                                        @endforeach
+                                    </ul>
+                                @endif
 							</div>
-						</div> -->
+						</div>
 						<!-- <div class="otherMypageSec02">
 							<div class="inner">
 								<p class="mypageHd02"><span>依頼者からの評価</span><a href="#" class="more">評価をもっと見る</a></p>
@@ -552,6 +560,5 @@
 				</div><!-- /#main -->
 			</div><!--inner-->
 		</div><!-- /#contents -->
-        <x-hide-modal/>
 	</article>
 </x-other-user.layout>

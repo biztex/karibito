@@ -1,9 +1,13 @@
-<x-other-user.layout>
+<x-layout>
 <body id="estimate" class="dm-page">
 	<x-parts.post-button/>
 	<x-parts.ban-msg/>
 	<article>
-		{{-- パンクズがない --}}
+		<div id="breadcrumb">
+			<div class="inner">
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>DM</span>
+			</div>
+		</div><!-- /.breadcrumb -->
 	<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
@@ -52,7 +56,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
-	</body>
-</article>
+	</article>
 </x-layout>

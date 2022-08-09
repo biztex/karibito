@@ -138,6 +138,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
         // ポイント履歴
         Route::get('point', [PointController::class, 'index'])->name('point.index');
+        // 決済履歴
+        Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
         // メンバー情報
         Route::view('member', 'member.index')->name('member');
         // 会員情報
@@ -422,6 +424,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // 決済一覧
         Route::get('/payment',[AdminPaymentController::class, 'index'])->name('payment.index');
+        Route::get('/payment/search',[AdminPaymentController::class, 'search'])->name('payment.search');
     });
 });
 
@@ -457,6 +460,8 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
     Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
     Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
+    Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
+    Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
 });
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 

@@ -5,7 +5,7 @@
 				<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
 				<li><a href="#" class="is_active">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				<li><a href="#">ポートフォリオ</a></li>
+				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
 				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
 			</ul>
@@ -37,7 +37,11 @@
                                     @foreach($evaluations['good'] as $value)
                                     <li>
                                         <div class="img">
-                                            <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+                                            @if(null !== $value->user->userProfile->icon)
+                                                <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+                                            @else
+                                                <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                            @endif
                                         </div>
                                         <div class="info">
                                             <p class="name">{{ $value->user->name }}</p>
@@ -60,10 +64,14 @@
                                     @foreach($evaluations['usually'] as $value)
                                     <li>
                                         <div class="img">
-                                            <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+                                            @if(null !== $value->user->userProfile->icon)
+                                                <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+                                            @else
+                                                <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                            @endif
                                         </div>
                                         <div class="info">
-                                            <p class="name">{{ $value->user->name }}></p>
+                                            <p class="name">{{ $value->user->name }}</p>
                                             <div class="cont">
                                                 <p class="date">{{ $value->created_at->format('Y年m月d日') }}</p>
                                                 <p class="txt" style="word-wrap: break-word;">{!!nl2br($value->text)!!}</p>
@@ -83,7 +91,11 @@
                                     @foreach($evaluations['pity'] as $value)
                                     <li>
                                         <div class="img">
-                                            <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+                                            @if(null !== $value->user->userProfile->icon)
+                                                <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+                                            @else
+                                                <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                            @endif
                                         </div>
                                         <div class="info">
                                             <p class="name">{{ $value->user->name }}</p>
@@ -104,6 +116,5 @@
 				@include('other-user.parts.side')
 			</div><!--inner-->
 		</div><!-- /#contents -->
-        <x-hide-modal/>
 	</article>
 </x-other-user.layout>

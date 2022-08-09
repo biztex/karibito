@@ -5,7 +5,7 @@
 				<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
 				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				<li><a href="#">ポートフォリオ</a></li>
+				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
 				<li><a href="#" class="is_active">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
 			</ul>
@@ -93,6 +93,5 @@
 					@include('other-user.parts.side')
 				</div><!--inner-->
 			</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-other-user.layout>

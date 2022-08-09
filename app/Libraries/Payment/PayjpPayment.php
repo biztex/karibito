@@ -151,4 +151,15 @@ class PayjpPayment implements PaymentInterface
         $card = $customer->cards->retrieve($card_id);
         $card->delete();
     }
+
+    /**
+     * 全額返金
+     * @param string $payjp_charge_id
+     * @return void
+     */
+    public function refundPayment(string $payjp_charge_id)
+    {
+        $ch = Charge::retrieve($payjp_charge_id);
+        $ch->refund();
+    }
 }

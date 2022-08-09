@@ -26,7 +26,7 @@ class PurchaseService
     {
         $purchase->fill([
             'is_cancel' => Purchase::IS_CANCEL,
-            'cancel_date' => now()    
+            'cancel_date' => \Carbon\Carbon::now()    
             ])->save();
     }
 

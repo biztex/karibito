@@ -9,7 +9,11 @@
 					<div class="friendsTop">
 						<div class="sellerTop">
 							<div class="user">
-								<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+								@if(null !== $user->userProfile->icon)
+									<p  class="head"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
+								@else
+									<p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+								@endif
 								<div class="info">
 									<p class="name">{{ $user->name }}</p>
 								</div>
@@ -99,7 +103,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
-	</body>
-</article>
+	</article>
 </x-layout>

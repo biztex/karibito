@@ -274,12 +274,12 @@
                                                 <p class="imgP"><img src="img/mypage/edit_portfolio.jpg" alt=""></p>
                                             </a>
                                         </li>
-                                        @foreach ($portfolios as $portfolio)
+                                        @foreach ($portfolio_list as $portfolio)
                                         <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <li>
-                                                <p class="imgP"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
+                                                </a><p class="imgP"><a href="{{ route('portfolio.show', $portfolio) }}"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></a></p>
                                                 <p class="editP"><a href="{{ route('portfolio.edit', $portfolio) }}">編集する</a>
                                                     <button onclick='return confirm("このポートフォリオを削除しますか？");' class="delete">削除</button>
                                                 </p>
@@ -289,7 +289,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div><!-- /#main -->
                         <x-side-menu/>
                     </div>

@@ -26,15 +26,9 @@ class MypageController extends Controller
         $user_notifications = UserNotification::latest()->where('user_id', \Auth::id())->paginate(5);
         $products = Product::latest()->where('user_id', \Auth::id())->paginate(5);
 
-        if ($user_profile->birthday !== NULL){
-            $age = Age::group($user_profile->birthday);
-        } else {
-            $age = '不明';
-        }
-
         $specialty = Specialty::Where('user_id',Auth::id());
         $specialties = $specialty->get();
 
-        return view('mypage.profile.mypage', compact('age', 'user_notifications', 'specialties', 'products'));
+        return view('mypage.profile.mypage', compact('user_notifications', 'specialties', 'products'));
     }
 }

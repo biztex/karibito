@@ -18,22 +18,30 @@ class Age
     /**
      * $birthday : 2020-01-01
      */
-    public static function int_birthday(string|int|null $birthday): int
+    public static function int_birthday(string|int|null $birthday): int|null
     {
-        $int_birthday = (int) str_replace("-","",$birthday);
+        if($birthday === null) {
+            $int_birthday = null;
+        } else {
+            $int_birthday = (int) str_replace("-","",$birthday);
+        }
         return $int_birthday;
     }
 
     /**
      * $birthday : 2020-01-01 → 20200101
      */
-    public static function nowAge(string|int|null $birthday): float
+    public static function nowAge(string|int|null $birthday): float|null
     { 
-        $int_birthday = self::int_birthday($birthday);
-        $now = (int) date('Ymd');
-        $now_age = floor(($now - $int_birthday) / 10000);
+        if($birthday === null) {
+            return null;
+        } else {
+            $int_birthday = self::int_birthday($birthday);
+            $now = (int) date('Ymd');
+            $now_age = floor(($now - $int_birthday) / 10000);
 
-        return $now_age;
+            return $now_age;
+        }
     }
 
     /**
@@ -45,6 +53,8 @@ class Age
         $now_age = self::nowAge($birthday);
         if($now_age < 0 || $now_age > 150 || empty($now_age)){
             $age = '不明';
+        }elseif($now_age < 10){
+            $age = '10歳未満';
         }elseif($now_age < 20){
             $age = '10代';
         }elseif($now_age < 30){

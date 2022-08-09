@@ -1,4 +1,5 @@
 <x-support-layout>
+    <body id="news">
     <div id="wrapper" class="st2 bg02">
         <article>
             <div id="contents">

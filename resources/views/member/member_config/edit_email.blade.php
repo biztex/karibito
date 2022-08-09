@@ -1,6 +1,6 @@
 <x-layout>
 <body id="member-page">
-<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
+<x-parts.post-button/>
 	<article>
 		<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
@@ -40,6 +40,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-layout>

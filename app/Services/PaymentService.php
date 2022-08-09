@@ -23,6 +23,33 @@ class PaymentService
     }
 
     /**
+     * 対象ユーザーの入金一覧取得
+     * @param int $user_id
+     * @return object $deposits
+     */
+    public function getUserDeposits(int $user_id): object
+    {
+        // リファクタリング可能そう
+        $chatroom_ids = \App\Models\Chatroom::sellService($user_id)->pluck('id');
+        $payment_ids = \App\Models\Purchase::whereIn('chatroom_id',$chatroom_ids)->pluck('payment_id');
+        $deposits = Payment::whereIn('id', $payment_ids)->orderBy('id', 'desc')->paginate(20);
+
+        return $deposits;
+    }
+
+    /**
+     * 対象ユーザーの支払い一覧取得
+     * @param int $user_id
+     * @return object $withdrawals
+     */
+    public function getUserWithdrawals($user_id): object
+    {
+        $withdrawals = Payment::withdrawalUser($user_id)->orderBy('id', 'desc')->paginate(20);
+
+        return $withdrawals;
+    }
+
+    /**
      * 顧客登録
      * @return string $customer_id
      */
@@ -166,5 +193,31 @@ class PaymentService
     public function destroyCard(string $customer_id, string $card_id)
     {
         $this->payment_interface->destroyCard($customer_id, $card_id);
+    }
+
+    /**
+     * 全額返金
+     * @param object $payment
+     * @return void
+     */
+    public function refundPayment(Payment $payment)
+    {
+        $payment->fill([
+            'amount_refunded' => $payment->amount,
+            'refunded_at' => \Carbon\Carbon::now()
+        ])->save();
+
+        $this->refundPayjp($payment);
+    }
+
+    /**
+     * Payjp全額返金処理
+     * @param object $payment
+     * @return void
+     */
+    public function refundPayjp(Payment $payment)
+    {
+        $payjp_charge_id = $payment->payjp_charge_id;
+        $this->payment_interface->refundPayment($payjp_charge_id);
     }
 }
