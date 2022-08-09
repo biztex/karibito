@@ -41,7 +41,7 @@ class PaymentController extends Controller
      * @param StoreRequest $request
      * @return void
      */
-    public function createCard(StoreRequest $request)
+    public function store(StoreRequest $request)
     {
         $this->payment_service->createCard($request->all());
 
