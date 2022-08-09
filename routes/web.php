@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use App\Http\Controllers\Web\Mypage\ChangeTelController;
 use App\Http\Controllers\Web\Mypage\PaymentController;
+use App\Http\Controllers\Web\Mypage\BankAccountController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -39,7 +40,6 @@ use App\Http\Controllers\Web\OtherUser\JobRequestController as OtherUserJobReque
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
-use App\Http\Controllers\Web\ProductChatroomController;
 use App\Http\Controllers\Web\DmroomController;
 use App\Http\Controllers\Web\KaribitoSurveyController;
 
@@ -163,9 +163,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             // クレジットカード
             Route::controller(PaymentController::class)->name('card.')->group(function () {
-                Route::get('card', 'create')->name('create'); //クレカ登録
-                Route::post('card', 'createCard')->name('store'); //クレカ登録
-                Route::get('card/{card_id}', 'destroy')->name('destroy');
+                Route::get('card', 'create')->name('create');
+                Route::post('card', 'store')->name('store');
+                Route::delete('card/{card_id}', 'destroy')->name('destroy');
+                Route::get('card/{id}', function () {return redirect()->route('member_config.card.create');});
+            });
+
+            // 振込口座
+            Route::controller(BankAccountController::class)->name('bank.')->group(function () {
+                Route::get('bank', 'edit')->name('edit');
+                Route::post('bank', 'update')->name('update');
+                Route::delete('bank', 'destroy')->name('destroy');
             });
 
 
@@ -238,32 +246,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret04','secret.secret04')->name('secret04');
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
-
-    // Route::view('chatroom/complete/evaluation','chatroom.complete_evaluation')->name('chatroom.complete.evaluation');
-
-    // // やり取り画面組込中
-    // Route::prefix('chatroom/product')->controller(ProductChatroomController::class)->name('chatroom.product.')->group(function () {
-    //     Route::get('start/{product}', 'newroom')->name('newroom');
-    //     Route::post('start/{product}', 'start')->name('start');
-    //     Route::get('{product_chatroom}', 'show')->name('show');
-    //     Route::post('message/{product_chatroom}', 'message')->name('message');
-    //     Route::post('{product_chatroom}/proposal','proposal')->name('proposal'); //提案
-    //     Route::post('{product_proposal}/purchese','purchess')->name('purchese'); //購入
-    //     Route::get('{product_chatroom}/complete','complete')->name('complete'); //作業完了
-    //     Route::get('{product_chatroom}/evaluation','evaluation')->name('evaluation'); //評価画面
-    //     Route::post('{product_chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価
-    //     Route::post('{product_chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //出品者評価
-
-    //     Route::get('{product}/sample', 'sample')->name('sample');
-
-    //     // 支払い
-    //     Route::get('purchese/{product_proposal}','purchese')->name('purchese');
-    //     Route::get('purchese/{product_proposal}/confirm','purchese_confirm')->name('purchese_confirm');
-    //     Route::post('purchesed/{product_proposal}','purchesed')->name('purchesed');
-    //     // 評価
-    //     Route::view('cart/buy08','chatroom.cart_buy08');
-    //     Route::view('cart/buy09','chatroom.cart_buy09');
-    // });
+    
 
     // やり取り（提供・リクエスト共用版）
     Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
@@ -425,6 +408,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // 決済一覧
         Route::get('/payment',[AdminPaymentController::class, 'index'])->name('payment.index');
         Route::get('/payment/search',[AdminPaymentController::class, 'search'])->name('payment.search');
+        Route::post('/payment',[AdminPaymentController::class, 'download'])->name('payment.download');
     });
 });
 
@@ -460,8 +444,6 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
     Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
     Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
-    Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
-    Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
 });
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
