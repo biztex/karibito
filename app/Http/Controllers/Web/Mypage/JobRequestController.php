@@ -94,11 +94,10 @@ class JobRequestController extends Controller
 
         $this->job_request_service->storeJobRequest($request->all());
 
-        $product_id = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->pluck('id')->first();
-        $base_url = config('app.url');
-        $url = "$base_url/product/$product_id";
+        $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->job_request_service->getURL($job_request->id);
 
-        return redirect()->route('job_request_thanks')->with(['url' => $url]);
+        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
     /**
@@ -151,7 +150,10 @@ class JobRequestController extends Controller
 
         $this->job_request_service->updateJobRequest($request->all(), $job_request);
 
-        return redirect()->route('service_thanks');
+        $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->job_request_service->getURL($job_request->id);
+
+        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
     /**
@@ -242,7 +244,10 @@ class JobRequestController extends Controller
         }
         $this->job_request_service->storeJobRequest($request->all());
 
-        return redirect()->route('service_thanks');
+        $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->job_request_service->getURL($job_request->id);
+
+        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
     /**
@@ -278,6 +283,9 @@ class JobRequestController extends Controller
     {
         $this->job_request_service->updateJobRequest($request->all(), $job_request);
 
-        return redirect()->route('service_thanks');
+        $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->job_request_service->getURL($job_request->id);
+
+        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 }
