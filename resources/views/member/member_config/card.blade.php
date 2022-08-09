@@ -25,7 +25,10 @@
 														<td>{{ $card['name'] }}</td>
 													</tr>
 												</table>
-												<a href="{{ route('member_config.card.destroy', $card['id']) }}" class="configEditDeleteBtn">削除</a>
+												<form action="{{ route('member_config.card.destroy', $card['id']) }}" method="post" class="configEditDeleteBtn">
+													@csrf @method('delete')
+													<button type="submit" onclick='return confirm("削除してもよろしいですか？");'>削除</button>
+												</form>
 											</div>
 										@endforeach
 									@endif

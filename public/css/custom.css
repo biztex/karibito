@@ -993,7 +993,7 @@
 .configEditTable:first-child {
 	margin:0;
 }
-.configEditDeleteBtn {
+.configEditDeleteBtn, .configEditDeleteBtn button {
 	align-items: center;
 	color: #fff;
 	background: #158ACC;
@@ -1005,6 +1005,9 @@
 	margin: auto 0;
 	text-align: center;
 	border: none;
+}
+.configEditDeleteBtn button:hover{
+	cursor: pointer;
 }
 .creditCode input[class=small] {
 	border: 1px solid #DDDDDD;
