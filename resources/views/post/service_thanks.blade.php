@@ -38,8 +38,8 @@
                             <div id="fb-root"></div>
 							<a href="http://www.facebook.com/share.php?u={{ session('url') }}"><img src="img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
 							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
-							<a href="https://twitter.com/share?url={{ session('url') }}&text=カリビトの案件をシェア&hashtags=karibito" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
-							<a href="mailto:?subject=カリビトの案件をシェア&body=本文" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
+							<a href="https://twitter.com/share?url={{ session('url') }}&text={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア&hashtags=karibito" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
+							<a href="mailto:?subject=カリビトのリクエストをシェア&body={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア {{  session('url') }}" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
 						</div>
 						<form>
 							<table>
