@@ -2,10 +2,19 @@
 
 namespace App\Http\Requests\ChatroomController;
 
+use App\Models\UserCoupon;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Services\PointService;
 
 class PaymentRequest extends FormRequest
 {
+    private $point_service, $coupon_service;
+
+    public function __construct(PointService $point_service, UserCoupon $coupon_service)
+    {
+        $this->point_service = $point_service;
+        $this->coupon_service = $coupon_service;
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,8 +32,12 @@ class PaymentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
-    }
+        $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
+        // $use_coupon_discount = $this->coupon_service->getCouponDiscount($this->coupon_number);
+
+            return [
+                'user_use_point' => "max:{$user_has_point} | nullable"
+                // 'coupon_discount' => "same:{$use_coupon_discount} | nullable" うまくいかない
+            ];
+        }
 }

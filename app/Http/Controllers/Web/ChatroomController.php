@@ -226,8 +226,9 @@ class ChatroomController extends Controller
     public function purchaseConfirm(PurchaseConfirmRequest $request, Proposal $proposal)
     {
         $card = $this->payment_service->getCard($request->card_id);
+        $coupon_discount = $this->coupon_service->getCouponDiscount($request->coupon_number);
 
-        return view('chatroom.purchase.confirm',compact('request', 'proposal', 'card'));
+        return view('chatroom.purchase.confirm',compact('request', 'proposal', 'card', 'coupon_discount'));
     }
 
     /**
@@ -249,6 +250,7 @@ class ChatroomController extends Controller
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
             $this->point_service->getPoint($proposal->chatroom, $request['amount']);
+            $this->point_service->usedPoint($proposal->chatroom, $request['user_use_point']);
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }

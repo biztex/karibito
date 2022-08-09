@@ -27,7 +27,7 @@ trait UserHasPointTrait
             ['deleted_at', '=', null],
         ])->get()->sum('point'); //期限切れではないポイントの合計を取得
 
-        $user_has_point = $user_get_point + $user_use_point;
+        $user_has_point = $user_get_point - $user_use_point;
 
         return $user_has_point;
     }

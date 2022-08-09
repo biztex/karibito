@@ -54,23 +54,25 @@
 								</tfoot>
 							</table>
 						</div>
-					
+
 						<div class="coupons">
 							<div class="checkbox">
-                                <p class="checkChoice"><label><input type="checkbox">クーポンの利用する</label></p>
+                                <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1">クーポンの利用する</label></p>@error('amount')<span>{{ $message }}</span>@enderror
                                 <div class="pointInput mt12">
                                     <p class="mr18">
                                         {{-- <input type="text" value="{{ old('number') }}"> --}}
-                                        <select name="user_coupon" style="padding: 10px;"> {{--仮--}}
+                                        <select name="coupon_number" style="padding: 10px;"> {{--仮--}}
                                             <option value="">選択してください</option>
                                             @foreach ($user_has_coupons as $user_has_coupon)
-                                                <option value="{{$user_has_coupon->coupon_number}}" @if(old('user_coupon.'.$user_has_coupon->id) == $user_has_coupon->id) selected @endif>{{$user_has_coupon->name}}:{{$user_has_coupon->content}}</option>
+                                                <option value="{{$user_has_coupon->coupon_number}}" @if(old('user_coupon.'.$user_has_coupon->id) == $user_has_coupon->id) selected @endif>{{$user_has_coupon->name}}:{{$user_has_coupon->content}}
+												</option>
                                             @endforeach
                                         </select>
                                     </p>
                                         {{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
                                     </div>
                                     {{-- <p class="detail">{{$user_coupon->discount}}円割引クーポン(合計{{$user_coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($user_coupon->deadline))}}まで</p> --}}
+									{{-- 最低利用金額などはこっちでやる、仕様未決定のため、一旦飛ばす --}}
                                 <div class="warnNotes">
                                     <p class="danger">ご注意！</p>
                                     <p>※他のクーポンと併用はできません。</p>
@@ -172,7 +174,9 @@
 								</div>
 							</div>
 							<div class="functeBtns">
-								<input type="hidden" class="" value="{{$user_has_point}}">
+								{{-- <input type="hidden" class="" value="{{$user_has_point}}"> --}}
+								{{-- @dd($proposal->chatroom->id) --}}
+								<input type="hidden" class="" name="chatroom_id" value="{{$proposal->chatroom->id}}">
 								<input type="submit" class="orange full loading-disabled" value="確認する">
 							</div>
 						</div>

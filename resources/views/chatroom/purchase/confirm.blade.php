@@ -40,16 +40,22 @@
 									<tr>
 										<td>
 											<big>商品代金</big>
-											@if ($request->point_use === 1)
+											@if ($request->point_use === '1' && !is_null($request->user_use_point))
 												<br>ポイント利用<br>
+											@endif
+											@if ($request->coupon_use === '1' && !is_null($coupon_discount))
+												<br>クーポン利用<br>
 											@endif
 											<br>手数料<br>
 											<font class="colorRed">500円割引クーポン(合計3,000円以上のサービスでご利用可能)／2022年02月08日まで</font>
 										</td>
 										<td>
 											<big>¥{!! number_format($proposal->price) !!}</big>
-											@if ($request->point_use === 1)
-												<br><font class="colorRed">−¥{!! number_format($request->user_use_point) !!}</font><br>
+											@if ($request->point_use === '1' && !is_null($request->user_use_point))
+												<br><font class="colorRed">¥-{!! number_format($request->user_use_point) !!}</font><br>
+											@endif
+											@if ($request->coupon_use === '1' && !is_null($coupon_discount))
+												<br><font class="colorRed">¥-{!! number_format($coupon_discount) !!}</font><br>
 											@endif
 											<br>¥500<br>
 											<font class="colorRed">¥-500</font>
@@ -59,12 +65,19 @@
 								<tfoot>
 									<tr>
 										<td>合計</td>
-										@if ($request->point_use === 1) {{--ー利用するを選択していない場合は表示しない、使えないようにする--}}
+										@if ($request->point_use === '1' && $request->coupon_use === '1')
+											<td>¥{!! number_format($proposal->price + 500 - $request->user_use_point - $coupon_discount) !!}</td>
+										@elseif ($request->point_use === '1')
 											<td>¥{!! number_format($proposal->price + 500 - $request->user_use_point) !!}</td>
+										@elseif ($request->coupon_use === '1')
+											<td>¥{!! number_format($proposal->price + 500 - $coupon_discount) !!}</td>
 										@else
 											<td>¥{!! number_format($proposal->price + 500) !!}</td>
 										@endif
 										<input type="hidden" name="amount" value="{{ $request->amount }}">
+										<input type="hidden" name="user_use_point" value="{{ $request->user_use_point }}">
+										<input type="hidden" name="coupon_discount" value="{{ $coupon_discount }}">
+										<input type="hidden" name="coupon_number" value="{{ $request->coupon_number }}">
 									</tr>
 								</tfoot>
 							</table>

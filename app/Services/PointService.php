@@ -8,6 +8,7 @@ use App\Models\UserGetPoint;
 use App\Models\MPointRate;
 use App\Models\Product;
 use App\Models\Proposal;
+use App\Models\UserUsePoint;
 use App\Traits\UserHasPointTrait;
 
 class PointService
@@ -16,7 +17,7 @@ class PointService
 
     public function showPoint()
     {
-        return $user_has_point = $this->userHasPoint();
+        return $this->userHasPoint();
     }
 
     public function getPoint(Chatroom $chatroom, int $amount)
@@ -34,5 +35,21 @@ class PointService
             'deadline' => $deadline,
         ];
         $service->points()->create($get_point);
+    }
+
+    public function usedPoint(Chatroom $chatroom, int $point)
+    {
+        if($chatroom->reference_type === 'App\Models\Product') {
+            $service_title = Product::where('id', '=', $chatroom->reference_id)->pluck('title')->first();
+        } elseif($chatroom->reference_type === 'App\Models\JobRequest') {
+            $service_title = JobRequest::where('id', '=', $chatroom->reference_id)->pluck('title')->first();
+        }
+
+        $use_point = UserUsePoint::create([
+            'user_id' => \Auth::id(),
+            'name' => $service_title,
+            'point' => $point,
+        ]);
+        return $use_point;
     }
 }
