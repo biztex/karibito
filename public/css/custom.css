@@ -640,7 +640,11 @@
     color: #333333;
     background-color: #FCAA00;
  }
-
+ #portfolio #side div:nth-of-type(3) ul li:nth-of-type(2) a {
+    color: #333333;
+    background-color: #FCAA00;
+    pointer-events: none;
+ }
 
  .checkGuide.more{
 	float:none;
@@ -970,7 +974,7 @@
   .rate-form input[type=radio]:checked ~ label {
 	color: #ffcc00;
   }
-  
+
 .configEditTable {
 	display: flex;
 	margin-top: 10px;
