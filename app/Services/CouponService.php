@@ -9,7 +9,6 @@ use App\Models\UserCoupon;
 use App\Models\MPointRate;
 use App\Models\Product;
 use App\Models\Proposal;
-use App\Traits\UserHasPointTrait;
 
 class CouponService
 {
@@ -21,5 +20,16 @@ class CouponService
         ])
         ->get();
         return $user_coupons;
+    }
+
+    public function getCouponDiscount($coupon_number)
+    {
+        $discount = UserCoupon::where([
+            ['user_id', '=', \Auth::id()],
+            ['used_at', '=', null],
+            ['coupon_number', '=', $coupon_number],
+        ])
+        ->pluck('discount')->first();
+        return $discount;
     }
 }

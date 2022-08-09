@@ -15,7 +15,7 @@
 						<h2 class="subPagesHd">ポイント履歴</h2>
 						<div class="pointTop">
 							<div class="txt"><img src="img/point/icon_logo.svg" alt="">ポイント</div>
-							<div class="point">P1230</div>
+							<div class="point">P{{$user_has_point}}</div>
 						</div>
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">
@@ -42,102 +42,20 @@
 							</div>
 							<div class="tabBox" id="tab_box02">
 								<ul class="pointUl01">
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">P200</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">-P90</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">P100</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">-P90</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">P100</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">-P90</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">P100</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<dl class="cont">
-												<dt><img src="img/point/img_point01.png" alt=""></dt>
-												<dd>
-													<p class="date">2021年7月26日　13:43</p>
-													<p class="txt">カリビトトライアルキャンペーン</p>
-												</dd>
-											</dl>
-											<p class="point">-P90</p>
-										</a>
-									</li>
+									@foreach ($user_use_points as $user_use_point)
+										<li>
+											<a href="#">
+												<dl class="cont">
+													<dt><img src="img/point/img_point01.png" alt=""></dt>
+													<dd>
+														<p class="date">{{ date("Y年n月j日 H:i",strtotime($user_use_point->created_at)) }}</p>
+														<p class="txt">{{$user_use_point->name}}</p>
+													</dd>
+												</dl>
+												<p class="point">P{{$user_use_point->point}}</p>
+											</a>
+										</li>
+									@endforeach
 								</ul>
 							</div>
 						</div>
