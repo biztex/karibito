@@ -387,6 +387,7 @@
 
 @endauth
 </x-app>
+@if(isset($errors))
 <script>
 	$(function(){
 
@@ -403,3 +404,4 @@
 		}
 	})
 </script>
+@endif
