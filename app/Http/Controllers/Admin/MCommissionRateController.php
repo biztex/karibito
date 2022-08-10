@@ -18,8 +18,8 @@ class MCommissionRateController extends Controller
 
    public function index()
    {
-       $m_commission_rate = MCommissionRate::orderBy('created_at', 'desc')->first();
-       $rate_list = MCommissionRate::orderBy('created_at', 'desc')->get();
+       $m_commission_rate = MCommissionRate::nowRate();
+       $rate_list = MCommissionRate::orderBy('effective_datetime', 'desc')->get();
 
        return view('admin.commission.index', compact('m_commission_rate', 'rate_list'));
    }

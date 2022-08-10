@@ -140,13 +140,13 @@ class PaymentService
      * @param int $amount
      * @return string $charge_id
      */
-    public function createCharge(array $params): string
+    public function createCharge(array $params, int $amount): string
     {
         if($params['immediate'] === null) {
-            $charge_id = $this->createCustomerCharge($params['card_id'], $params['customer_id'], $params['amount'], 'jpy');
+            $charge_id = $this->createCustomerCharge($params['card_id'], $params['customer_id'], $amount, 'jpy');
         } else {
             $token = $this->createToken($params);
-            $charge_id = $this->payment_interface->createCharge($token, $params['amount'], 'jpy');
+            $charge_id = $this->payment_interface->createCharge($token, $amount, 'jpy');
         }
 
         return $charge_id;
