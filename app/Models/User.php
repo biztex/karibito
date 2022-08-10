@@ -159,4 +159,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(BankAccount::class);
     }
 
+    public function sellerChatrooms()
+    {
+        return $this->hasMany(Chatroom::class, 'seller_user_id');
+    }
 }
