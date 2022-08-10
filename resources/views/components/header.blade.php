@@ -147,19 +147,19 @@
             </div>
             <div class="searchWrapSp">
                 <div class="searchWrapTop">
-                    <div class="searchBox">
-                        <select class="searchSelect">
-                            <option>サービス</option>
-                            <option>リクエスト</option>
-                        </select>
-                        <form method="get">
+                    <form method="get">
+                        <div class="searchBox">
+                            <select name="service_flg" class="searchSelect">
+                                <option value="1" @if (isset($serviceflg) && ($serviceflg === '1')) selected @endif>サービス</option>
+                                <option value="2" @if (isset($serviceflg) && ($serviceflg === '2')) selected @endif>リクエスト</option>
+                            </select>
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+                                <input type="hidden" name="search_flg" value="1">
                                 <input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
-                                <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                     <div class="searchClose"><img src="/img/common/search_close.svg" alt=""></div>
                 </div>
                 <div class="searchWrapCont">
