@@ -201,6 +201,7 @@ class ChatroomController extends Controller
     }
 
     public function getProposal(Chatroom $chatroom){ return redirect()->route('chatroom.show', $chatroom); }
+
     /**
      * 購入画面
      * @param \App\Models\Proposal $proposal
@@ -212,8 +213,9 @@ class ChatroomController extends Controller
         $cards = $this->payment_service->getCardList();
         $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
         $user_has_coupons = $this->coupon_service->showCoupon(); //期限が切れていないクーポンを取得
+        $commission = $this->purchase_service->getCommission($proposal); 
 
-        return view('chatroom.purchase.create',compact('proposal', 'cards', 'user_has_coupons', 'user_has_point'));
+        return view('chatroom.purchase.create',compact('proposal', 'cards', 'user_has_coupons', 'user_has_point', 'commission'));
     }
 
     /**
@@ -226,9 +228,9 @@ class ChatroomController extends Controller
     public function purchaseConfirm(PurchaseConfirmRequest $request, Proposal $proposal)
     {
         $card = $this->payment_service->getCard($request->card_id);
-        $coupon_discount = $this->coupon_service->getCouponDiscount($request->coupon_number);
+        $amount = $this->purchase_service->getConfirmAmount($proposal, $request->all());
 
-        return view('chatroom.purchase.confirm',compact('request', 'proposal', 'card', 'coupon_discount'));
+        return view('chatroom.purchase.confirm',compact('request', 'proposal', 'card', 'amount'));
     }
 
     /**
@@ -240,17 +242,17 @@ class ChatroomController extends Controller
      */
     public function purchased(PaymentRequest $request, Proposal $proposal)
     {
-        $m_commission_rate = MCommissionRate::find(1); // クーポン後で組み込む
-        \DB::transaction(function () use ($request, $proposal, $m_commission_rate) {
-
-            $payjp_charge_id = $this->payment_service->createCharge($request->all());
-            $payment = $this->payment_service->storePayment($payjp_charge_id, $request['amount']);
+        
+        \DB::transaction(function () use ($request, $proposal) {
+            $amount = $this->purchase_service->getFinalAmount($proposal, $request->all());
+            $payjp_charge_id = $this->payment_service->createCharge($request->all(), $amount['total']);
+            $payment = $this->payment_service->storePayment($payjp_charge_id, $amount['total']);
             $this->proposal_service->purchasedProposal($proposal);
-            $purchase = $this->purchase_service->storePurchase($proposal, $payment, $m_commission_rate); // requestのcommission id渡す
+            $purchase = $this->purchase_service->storePurchase($proposal, $payment);
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
-            $this->point_service->getPoint($proposal->chatroom, $request['amount']);
-            $this->point_service->usedPoint($proposal->chatroom, $request['user_use_point']);
+            $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 取得ポイントは手数料含めるか確認
+            $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }

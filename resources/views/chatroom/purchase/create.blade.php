@@ -42,14 +42,13 @@
 									</tr>
 									<tr>
 										<td><big>商品代金</big><br>手数料</td>
-										<td><big>¥{!! number_format($proposal->price) !!}</big><br>¥500</td>
+										<td><big>¥{!! number_format($proposal->price) !!}</big><br>¥{!! number_format($commission) !!}</td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<td>合計</td>
-										<td>¥{!! number_format($proposal->price + 500) !!}</td>
-										<input type="hidden" name="amount" value="{{ $proposal->price + 500 }}">
+										<td>¥{!! number_format($proposal->price + $commission) !!}</td>
 									</tr>
 								</tfoot>
 							</table>
@@ -57,27 +56,28 @@
 
 						<div class="coupons">
 							<div class="checkbox">
-                                <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1">クーポンの利用する</label></p>@error('amount')<span>{{ $message }}</span>@enderror
+								@error('coupon_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1" @if(old('coupon_use') == 1) checked @endif>クーポンを利用する</label></p>
                                 <div class="pointInput mt12">
                                     <p class="mr18">
-                                        {{-- <input type="text" value="{{ old('number') }}"> --}}
-                                        <select name="coupon_number" style="padding: 10px;"> {{--仮--}}
+                                        <select name="coupon_number" style="padding: 10px;">
                                             <option value="">選択してください</option>
-                                            @foreach ($user_has_coupons as $user_has_coupon)
-                                                <option value="{{$user_has_coupon->coupon_number}}" @if(old('user_coupon.'.$user_has_coupon->id) == $user_has_coupon->id) selected @endif>{{$user_has_coupon->name}}:{{$user_has_coupon->content}}
-												</option>
+                                            @foreach ($user_has_coupons as $coupon)
+                                                <option value="{{$coupon->coupon_number}}" @if(old('coupon_number') == $coupon->coupon_number) selected @endif>{{$coupon->name}}:{{$coupon->content}}</option>
                                             @endforeach
                                         </select>
                                     </p>
-                                        {{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
+                                        <!-- <p class="adoptionBtn"><input type="button" value="適用"></p> -->
                                     </div>
-                                    {{-- <p class="detail">{{$user_coupon->discount}}円割引クーポン(合計{{$user_coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($user_coupon->deadline))}}まで</p> --}}
-									{{-- 最低利用金額などはこっちでやる、仕様未決定のため、一旦飛ばす --}}
+                                    <!-- <p class="detail">{{$coupon->discount}}円割引クーポン(合計{{$coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($coupon->deadline))}}まで</p> -->
+									<!-- 最低利用金額などはこっちでやる、仕様未決定のため、一旦飛ばす -->
                                 <div class="warnNotes">
                                     <p class="danger">ご注意！</p>
                                     <p>※他のクーポンと併用はできません。</p>
                                 </div>
                             </div>
+
+
 							<div class="radio">
 								<p class="tit">ポイントの利用@error('user_use_point')<span>{{ $message }}</span>@enderror</p>
 								<ul class="radioChoice">
@@ -92,17 +92,19 @@
 									</li>
 								</ul>
 							</div>
+
+
 							<div class="method">
 								<p class="tit">お支払い方法@error('card_id')<span>{{ $message }}</span>@enderror</p>
 
 								<div class="radioChoice">
 									<label><input type="radio" name="payment_type" value="credit_card" checked>クレジット決済</label>
 									<div class="marks">
-										<a href="#" target="_blank"><img src="/img/cart_buy/ico_mark01.svg" alt=""></a>
-										<a href="#" target="_blank"><img src="/img/cart_buy/ico_mark02.svg" alt=""></a>
-										<a href="#" target="_blank"><img src="/img/cart_buy/ico_mark03.svg" alt=""></a>
-										<a href="#" target="_blank"><img src="/img/cart_buy/ico_mark04.svg" alt=""></a>
-										<a href="#" target="_blank"><img src="/img/cart_buy/ico_mark05.svg" alt=""></a>
+										<img src="/img/cart_buy/ico_mark01.svg" alt="">
+										<img src="/img/cart_buy/ico_mark02.svg" alt="">
+										<img src="/img/cart_buy/ico_mark03.svg" alt="">
+										<img src="/img/cart_buy/ico_mark04.svg" alt="">
+										<img src="/img/cart_buy/ico_mark05.svg" alt="">
 									</div>
 								</div>
 
@@ -110,7 +112,7 @@
 								<ul class="radioChoice" style="display:block;">
 									@foreach($cards as $card)
 										<div class="bl_credit-card-info">
-											<input type="radio" name="card_id" value="{{ $card['id'] }}" @if(old('card_id') === $card['id']) checked @endif>
+											<input type="radio" name="card_id" value="{{ $card['id'] }}" @if(old('card_id', $cards[0]['id']) === $card['id']) checked @endif>
 											<span class="credit-card-info-number">************{{ $card['last4'] }}</span>
 											<span>{{ $card['name'] }}</span>
 										</div>
@@ -174,8 +176,6 @@
 								</div>
 							</div>
 							<div class="functeBtns">
-								{{-- <input type="hidden" class="" value="{{$user_has_point}}"> --}}
-								{{-- @dd($proposal->chatroom->id) --}}
 								<input type="hidden" class="" name="chatroom_id" value="{{$proposal->chatroom->id}}">
 								<input type="submit" class="orange full loading-disabled" value="確認する">
 							</div>

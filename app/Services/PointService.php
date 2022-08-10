@@ -37,19 +37,19 @@ class PointService
         $service->points()->create($get_point);
     }
 
-    public function usedPoint(Chatroom $chatroom, int $point)
+    public function usedPoint(Chatroom $chatroom, int|null $point)
     {
-        if($chatroom->reference_type === 'App\Models\Product') {
-            $service_title = Product::where('id', '=', $chatroom->reference_id)->pluck('title')->first();
-        } elseif($chatroom->reference_type === 'App\Models\JobRequest') {
-            $service_title = JobRequest::where('id', '=', $chatroom->reference_id)->pluck('title')->first();
-        }
+        if($point === null){
+            return null;
+        }else{
+            $service_title = $chatroom->reference->title;
 
-        $use_point = UserUsePoint::create([
-            'user_id' => \Auth::id(),
-            'name' => $service_title,
-            'point' => $point,
-        ]);
-        return $use_point;
+            $use_point = UserUsePoint::create([
+                'user_id' => \Auth::id(),
+                'name' => $service_title,
+                'point' => $point,
+            ]);
+            return $use_point;
+        }
     }
 }
