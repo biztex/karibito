@@ -7,6 +7,7 @@
                 <a href="{{ route('product.index') }}">投稿する</a>
             </div>
         </div><!-- /.breadcrumb -->
+        <x-parts.ban-msg/>
         <div class="btnFixed">
             <!-- <a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a> -->
         </div>

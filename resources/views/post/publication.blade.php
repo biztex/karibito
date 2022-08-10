@@ -7,7 +7,9 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載内容一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-        <x-parts.flash-msg/>
+		<x-parts.ban-msg/>
+		<x-parts.post-button/>
+		<x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">

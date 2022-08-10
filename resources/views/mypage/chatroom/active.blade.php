@@ -6,6 +6,7 @@
                 <a href="{{ route('home') }}">ホーム</a>　>　<span>進行中の取引</span>
             </div>
         </div><!-- /.breadcrumb -->		
+        <x-parts.ban-msg/>
         <x-parts.post-button/>
         <div id="contents" class="otherPage">
             <div class="inner02 clearfix">
