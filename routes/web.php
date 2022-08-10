@@ -395,10 +395,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/job_requests/search',[JobRequestController::class, 'search'])->name('job_request.search');
         Route::resource('/m_commission_rates',MCommissionRateController::class,['only' => ['index', 'store']]);
         Route::resource('/survey',AdminKaribitoSurveyController::class,['only' => ['index']]);
-        Route::post('/users/{id}/is_identify',[UserController::class, 'approve'])->name('approve');
-        Route::post('/users/{id}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
-        Route::post('/users/{id}/is_ban',[UserController::class, 'limitAccount'])->name('limit.account');
-        Route::post('/users/{id}/not_ban',[UserController::class, 'cancelLimitAccount'])->name('cancel.limit.account');
+        Route::post('/users/{user}/is_identify',[UserController::class, 'approve'])->name('approve');
+        Route::post('/users/{user}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
+        Route::post('/users/{user}/is_ban',[UserController::class, 'limitAccount'])->name('limit.account');
+        Route::post('/users/{user}/not_ban',[UserController::class, 'cancelLimitAccount'])->name('cancel.limit.account');
 
         //お知らせ機能
         Route::resource('/news', AdminNewsController::class);
