@@ -2,6 +2,8 @@
 namespace App\Traits;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Models\MProductChildCategory;
+
 
 /**
  * サービスとリクエストでの検索用のトレイト
@@ -24,7 +26,7 @@ trait ProductSearchTrait
     public function searchByParentCategory(Builder $query, int $category_id):Builder
     {
         $child_categories = MProductChildCategory::where('parent_category_id', $category_id)->pluck('id')->toArray();
-        $query->whereIn('category_id', $child_categories);
+        return $query->whereIn('category_id', $child_categories);
     }
 
     /**
@@ -32,7 +34,7 @@ trait ProductSearchTrait
      */
     public function searchByChildCategory(Builder $query, int $category_id):Builder
     {
-        $query->where('category_id', $category_id);
+        return $query->where('category_id', $category_id);
     }
 
     /**

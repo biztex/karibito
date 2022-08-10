@@ -9,17 +9,23 @@
                     <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
                         <li class="breadcrumb-item active" aria-current="page">決済一覧
-                    <form action="{{ route('admin.payment.search') }}" class="mt-2" method="get">
-                        @csrf
-                        <div class="d-flex">
-                            <input class="form-control col-8" type="text" name="search" value="{{ $request->search ?? "" }}">
-                            <button class="btn btn-secondary btn-block col-4 ml-2 content-end" type="submit">検索</button>
-                        </div>
-                    </form>
-                    <div>※ユーザー名に部分一致で検索</div>
-                </li>
+                            <form action="{{ route('admin.payment.search') }}" class="mt-2" method="get">
+                                @csrf
+                                <div class="d-flex">
+                                    <input class="form-control col-8" type="text" name="search" value="{{ $request->search ?? "" }}">
+                                    <button class="btn btn-secondary btn-block col-4 ml-2" type="submit">検索</button>
+                                </div>
+                            </form>
+                            <div>※ユーザー名に部分一致で検索</div>
+                        </li>
                     </ol>
                 </nav>
+                <div class="d-flex justify-content-end">
+                    <form action="{{ route('admin.payment.download') }}" class="mt-2" method="post">
+                        @csrf
+                            <button class="btn btn-secondary" type="submit">振込用CSV出力</button>
+                    </form>
+                </div>
                 <div class="card shadow-sm mb-5">
                     <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
                         <h5 class="text-white mb-0">

@@ -7,6 +7,8 @@
                     <a href="{{ route('home') }}">ホーム</a>　>　<span>ポートフォリオ</span>
                 </div>
             </div><!-- /.breadcrumb -->
+            <x-parts.ban-msg/>
+            <x-parts.post-button/>
             <x-parts.flash-msg/>
             <article>
                 <div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>

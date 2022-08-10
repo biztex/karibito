@@ -164,4 +164,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserCoupon::class);
     }
 
+    public function sellerChatrooms()
+    {
+        return $this->hasMany(Chatroom::class, 'seller_user_id');
+    }
+
 }

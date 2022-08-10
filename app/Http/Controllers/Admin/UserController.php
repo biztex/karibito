@@ -133,7 +133,7 @@ class UserController extends Controller
      */
     public function limitAccount($id)
     {
-        $user_profile = UserProfile::firstWhere('id',$id);
+        $user_profile = UserProfile::firstWhere('user_id',$id);
 
         $user_profile->fill([
             'is_ban' => 1,
@@ -152,7 +152,7 @@ class UserController extends Controller
      */
     public function cancelLimitAccount($id)
     {
-        $user_profile = UserProfile::firstWhere('id',$id);
+        $user_profile = UserProfile::firstWhere('user_id',$id);
 
         $user_profile->fill(['is_ban' => 0])->save();
 

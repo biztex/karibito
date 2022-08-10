@@ -7,6 +7,8 @@
 				<a href="index.html">ホーム</a>　>　<span>ポイント履歴</span>
 			</div>
 		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
+		<x-parts.post-button/>
 		<div class="btnFixed"><a href="#"><img src="img/common/btn_fix.svg" alt="投稿"></a></div>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">

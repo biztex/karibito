@@ -7,18 +7,26 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>クーポン</span>
 			</div>
 		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
+		<x-parts.post-button/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="subPagesWrap">
 						<h2 class="subPagesHd">クーポン</h2>
 						<div class="couponBox">
-							<dl class="couponHd">
-								<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
-								<dd>ご利用いただけるクーポンが発行されました。</dd>
-							</dl>
+							@if ($user_coupons->isNotEmpty())
+								<dl class="couponHd">
+									<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
+									<dd>ご利用いただけるクーポンが発行されました。</dd>
+								</dl>
+							@endif
 							<div class="couponCont">
-								<p class="couponNotice">会計時にクーポン番号を入力してください。</p>
+								@if ($user_coupons->isNotEmpty())
+									<p class="couponNotice">会計時にクーポン番号を入力してください。</p>
+								@else
+									<p class="">現在クーポンはまだありません。</p>
+								@endif
 								@foreach ($user_coupons as $user_coupon)
 									<div class="couponItem">
 										<dl class="couponDl">

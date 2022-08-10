@@ -7,6 +7,8 @@
 				<a href="index.html">ホーム</a>　>　<span>スキル・経歴</span>
 			</div>
 		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
+		<x-parts.post-button/>
         <x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">

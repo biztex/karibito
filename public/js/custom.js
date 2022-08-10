@@ -157,4 +157,19 @@ $(function () {
 		}
 	})
 
+	// トップページ
+	// カテゴリをもっと見るボタン
+
+		$('.js-productOtherBtn').on('click', function () {
+			$(".js-hide_product_categories").removeClass('hide');
+            $(this).closest('.otherBtn').hide();
+		}
+	)
+
+		$('.js-jobRequestOtherBtn').on('click', function () {
+			$(".js-hide_job_request_categories").removeClass('hide');
+            $(this).closest('.otherBtn').hide();
+		}
+	)
+
 });

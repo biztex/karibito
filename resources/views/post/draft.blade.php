@@ -9,6 +9,8 @@
                 <a href="{{ route('draft') }}">下書き一覧</a>
 			</div>
 		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
+		<x-parts.post-button/>
 		<x-parts.flash-msg />
 
 		<div id="contents" class="otherPage">
