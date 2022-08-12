@@ -224,14 +224,14 @@
 										<div class="cloneCustomArea">
 											<p style="font-weight:bold">得意分野</p>
 										@if(old('content'))
-											@foreach(old('content') as $key => $value)
+											{{-- @foreach(old('content') as $key => $value)
 												<dl class="specialtyForm">
 												@error('content.'.$key)<div class="alert alert-danger">{{ $message }}</div>@enderror
 												<dd>
 													<input type="text" name="content[]" value="{{ $value }}">
 												</dd>
 											</dl>
-											@endforeach
+											@endforeach --}}
 										@elseif(Auth::user()->specialty->isNotEmpty())
 											@foreach(Auth::user()->specialty as $specialty)
 												<dl class="specialtyForm">

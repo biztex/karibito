@@ -1,4 +1,5 @@
 <x-layout>
+    <body id="member-page">
     <x-parts.post-button/>
         <article>
             <x-parts.flash-msg/>
@@ -22,10 +23,10 @@
                                         <dl class="configEditDl01">
                                             <dt>電話番号</dt>
                                             <dd>
-                                                @error('tel')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
                                                 <div class="mypageEditInput">
+                                                    @error('tel')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                     <input type="tel" name="tel" autocomplete="tel" value="{{ old('tel') }}" required>
                                                     <p class="noticeP">※電話番号はハイフンなしで入力してください。</p>
                                                 </div>

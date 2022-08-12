@@ -110,9 +110,6 @@
                                 <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                 <div class="navMypageUl link01">
                                     <a href="{{ route('mypage') }}">マイページ</a>
-                                    @can('identify')
-                                        <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                    @endcan
                                     <a href="#">お気に入り</a>
                                     @can('identify')
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
@@ -169,7 +166,7 @@
                         <li><a>ブログを探す</a></li>
                     </ul> --}}
                     <div class="searchWrapItem">
-                        <p class="searchWrapHd"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p>
+                        <p class="searchWrapHd" style="margin-top: 10px;"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p> {{--仮でスタイルを入れています。問題なければそのまま--}}
                         <ul class="searchItemUl">
                             @foreach($categories as $category)
                                 <li>

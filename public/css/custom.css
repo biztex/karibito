@@ -1018,7 +1018,7 @@
     height: 40px;
     padding: 0 10px;
 }
-.mypageEditInput input[type='tell']{
+.mypageEditInput input[type='tel']{
     border: 1px solid #DDDDDD;
     background-color: #fff;
     border-radius: 3px;
@@ -1028,7 +1028,7 @@
     padding: 0 10px;
 }
 @media screen and (max-width: 767px){
-	.mypageEditInput input[type='tell'] {
+	.mypageEditInput input[type='tel'] {
 		font-size: 1.2rem;
 		height: 35px;
 	}

@@ -53,8 +53,10 @@ class UserController extends Controller
         $portfolio_list = Portfolio::where('user_id', $user->id)->get();
         $id = $user->id;
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->where('from_user_id', '=', \Auth::id())->first();
+        $evaluations = $this->evaluation_service->getEvaluations($user->id);
+        $counts = $this->evaluation_service->countEvaluations($user->id);
 
-        return view('other-user.mypage', compact('user','products', 'dmrooms', 'job_request', 'portfolio_list'));
+        return view('other-user.mypage', compact('user','products', 'dmrooms', 'job_request', 'portfolio_list', 'evaluations', 'counts'));
     }
 
     public function skills(User $user, Dmroom $dmroom)

@@ -19,7 +19,7 @@
                                 <h5 class="text-white mb-0">ニュース登録</h5>
                             </div>
                             <div class="card-body pt-5 pb-3 px-5">
-                                <form method="POST" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('admin.news.store') }}" id="form" enctype="multipart/form-data">
                                     @csrf
 
                                     @if ($errors->any())
@@ -61,7 +61,7 @@
 
                                     <div class="form-group row mt-5 mb-0">
                                         <div class="col-md-6 offset-md-3 text-center">
-                                            <button type="submit" class="btn btn-outline-info btn-block rounded-pill shadow-sm mb-4">
+                                            <button type="submit" class="btn btn-outline-info btn-block rounded-pill shadow-sm mb-4 loading-disabled">
                                                 登録
                                                 <i class="fa fa-check-circle ml-2"></i>
                                             </button>
