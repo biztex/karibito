@@ -5,7 +5,7 @@
 				<li><a href="#" class="is_active">ホーム</a></li>
 				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
+				{{-- <li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li> --}}
 				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
 			</ul>
@@ -76,90 +76,90 @@
 						<div class="otherMypageSec01">
 							<div class="inner">
 								<p class="mypageHd02"><span>現在の出品サービス一覧</span>@if($products->isNotEmpty())<a href="{{ route('user.publication', $user->id) }}" class="more">出品サービスをもっと見る</a>@endif</p>
-								<div class="recommendList style2 ">
-									<div class="list sliderSP02">
+								{{-- <div class="recommendList style2 ">
+									<div class="list sliderSP02"> --}}
 
-				                        <div class="indexTab tabWrap wMax">
+										<div class="indexTab tabWrap wMax">
                                             @if (($products->isEmpty()) && ($user->jobRequest->isEmpty()))
                                                 <p>投稿がありません。</p>
                                             @else
                                                 <ul class="tabLink">
-                                                    <li><a class="is_active" href="#tab_box01">提供</a></li>
+                                                    <li><a href="#tab_box01" class="is_active">提供</a></li>
                                                     <li><a href="#tab_box02">リクエスト</a></li>
                                                 </ul>
                                                 <div class="tabBox is_active" id="tab_box01">
                                                     @if($products->isEmpty())
                                                         <p>投稿がありません。</p>
                                                     @else
-                                                    <div class="recommendList style2 ">
-                                                        <div class="list sliderSP02">
-                                                        @foreach($products as $product)
+														<div class="recommendList style2 ">
+															<div class="list sliderSP02">
+															@foreach($products as $product)
 
 
-															<x-parts.product-item :product="$product"/>
+																<x-parts.product-item :product="$product"/>
 
 
-                                                        @endforeach
-                                                        </div>
-                                                    </div>
-                                                    @endif
-                                                </div>
+															@endforeach
+															</div>
+														</div>
+													@endif
+												</div>
 
                                                 <div class="tabBox" id="tab_box02">
                                                     @if($job_request->isEmpty())
                                                         <p>投稿がありません。</p>
                                                     @else
-                                                    <div class="recommendList style2 ">
-                                                        <div class="list sliderSP02">
-                                                        @foreach($job_request as $request)
-                                                            <div class="item">
-                                                                <div class="info">
-                                                                    <div class="breadcrumb"><a href="#">{{ $request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $request->mProductChildCategory->name }}</span></div>
-                                                                    <div class="draw">
-                                                                        <p class="price" style="width:100%;"><font>{{ $request->title }}</font></p>
-                                                                    </div>
-                                                                    <div class="aboutInfo">
-                                                                        <dl>
-                                                                            <dt><span>予算</span></dt>
-                                                                            <dd>{{ number_format($request->price) }}円</dd>
-                                                                        </dl>
-                                                                        <dl>
-                                                                            <dt><span>提案数</span></dt>
-                                                                            <dd>0</dd>
-                                                                        </dl>
-                                                                        <dl>
-                                                                            <dt><span>募集期限</span></dt>
-                                                                            <dd>{{ $request->application_deadline }}</dd>
-                                                                        </dl>
-                                                                    </div>
-                                                                    <div class="aboutUser">
-                                                                        <div class="user">
-                                                                            @if(null !== $user->userProfile->icon)
-                                                                                <p class="ico"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
-                                                                            @else
-                                                                                <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                                            @endif
-                                                                            <div class="introd">
-                                                                                <p class="name">{{$request->user->name}}</p>
-                                                                                <p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$request->user->userProfile->age}}/ {{$request->user->userProfile->prefecture->name}})</p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <p class="check"><a href="#">本人確認済み</a></p>
-																		<x-parts.evaluation-star :star='$user->avg_star'/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                        </div>
-                                                    </div>
+														<div class="recommendList style2 ">
+															<div class="list sliderSP02">
+																@foreach($job_request as $request)
+																	<div class="item">
+																		<div class="info">
+																			<div class="breadcrumb"><a href="#">{{ $request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $request->mProductChildCategory->name }}</span></div>
+																			<div class="draw">
+																				<p class="price" style="width:100%;"><font>{{ $request->title }}</font></p>
+																			</div>
+																			<div class="aboutInfo">
+																				<dl>
+																					<dt><span>予算</span></dt>
+																					<dd>{{ number_format($request->price) }}円</dd>
+																				</dl>
+																				<dl>
+																					<dt><span>提案数</span></dt>
+																					<dd>0</dd>
+																				</dl>
+																				<dl>
+																					<dt><span>募集期限</span></dt>
+																					<dd>{{ $request->application_deadline }}</dd>
+																				</dl>
+																			</div>
+																			<div class="aboutUser">
+																				<div class="user">
+																					@if(null !== $user->userProfile->icon)
+																						<p class="ico"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
+																					@else
+																						<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+																					@endif
+																					<div class="introd">
+																						<p class="name">{{$request->user->name}}</p>
+																						<p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$request->user->userProfile->age}}/ {{$request->user->userProfile->prefecture->name}})</p>
+																					</div>
+																				</div>
+																				<p class="check"><a href="#">本人確認済み</a></p>
+																				<x-parts.evaluation-star :star='$user->avg_star'/>
+																			</div>
+																		</div>
+																	</div>
+																@endforeach
+															</div>
+														</div>
                                                     @endif
                                                 </div>
                                             @endif
                                         </div>
 									</div>
-								</div>
+									{{-- </div>
+								</div> --}}
 							</div>
-						</div>
 
 						<div class="mypageSec04">
 							<div class="inner">
@@ -217,7 +217,7 @@
                                 @if (\Auth::id() === $user->id)
                                     <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
                                 @else
-                                    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p>
+                                    {{-- <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p> --}}
                                 @endif
 
                                 @if ($portfolio_list->isEmpty())
@@ -235,7 +235,7 @@
                                 @endif
 							</div>
 						</div>
-						<!-- <div class="otherMypageSec02">
+						{{-- <div class="otherMypageSec02">
 							<div class="inner">
 								<p class="mypageHd02"><span>依頼者からの評価</span><a href="#" class="more">評価をもっと見る</a></p>
 								<div class="evaluationStar">
@@ -262,64 +262,9 @@
 													</div>
 												</div>
 											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>購入者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-														<p class="txt">センスの良いものを提供して頂きました。</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
 										</ul>
 									</div>
+
 									<div class="tabBox " id="tab_box02">
 										<ul class="evaluationUl01">
 											<li>
@@ -334,108 +279,9 @@
 													</div>
 												</div>
 											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>購入者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-														<p class="txt">センスの良いものを提供して頂きました。</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
 										</ul>
 									</div>
+
 									<div class="tabBox " id="tab_box03">
 										<ul class="evaluationUl01">
 											<li>
@@ -450,113 +296,13 @@
 													</div>
 												</div>
 											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>購入者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-														<p class="txt">センスの良いものを提供して頂きました。</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="img">
-													<p class="head"><img src="/img/service/ico_head.png" alt=""></p>
-												</div>
-												<div class="info">
-													<p class="name">クリエイター名<span>出品者</span></p>
-													<div class="cont">
-														<p class="date">2021年7月26日</p>
-													</div>
-												</div>
-											</li>
 										</ul>
 									</div>
-								</div>
-							</div>
-						</div>
 
-					</div>
+								</div>
+							</div> inner
+						</div>評価 --}}
+					</div><!-- otherMypageWrap -->
 				</div><!-- /#main -->
 			</div><!--inner-->
 		</div><!-- /#contents -->
