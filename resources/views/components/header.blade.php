@@ -274,7 +274,7 @@
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
-                    <a href="{{ route('home') }}}}" class="spFixedLink">
+                    <a href="{{ route('home') }}" class="spFixedLink">
                         <p class="linkIcon"><img src="/img/common/icon_spfixed01.svg" alt=""></p>
                         <p class="linkTxt">ホーム</p>
                     </a>
@@ -294,8 +294,8 @@
                     </a>
                 </div>
                 <div class="spFixedItem">
-                    <a href="#" class="spFixedLink">
-                        <span class="newSpan">1</span>
+                    <a href="{{ route('user_notification.index') }}" class="spFixedLink">
+                        <span class="newSpan">@if ($not_view_user_notifications->count() > 0) {{$not_view_user_notifications->count()}}@endif</span>
                         <p class="linkIcon"><img src="/img/common/ico_message.svg" alt=""></p>
                         <p class="linkTxt">お知らせ</p>
                     </a>
@@ -310,4 +310,3 @@
         @endauth
     </div><!-- /#header -->
 	<x-hide-modal/>
-</header>

@@ -7,12 +7,12 @@
                 <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
             @endif
             <div class="info">
-                <div class="breadcrumb"><a href="#" tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
+                <div class="breadcrumb"><a tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
                 <div class="draw">
                     <p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
                 </div>
                 <div class="single">
-                    <a href="#" tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</a>
+                    <span tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</span>
                 </div>
             </div>
         </div>
@@ -20,12 +20,12 @@
         <div class="cont01">
             <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
             <div class="info">
-                <div class="breadcrumb"><a href="#" tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
+                <div class="breadcrumb"><a tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
                 <div class="draw">
                     <p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
                 </div>
                 <div class="single">
-                    <a href="#" tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</a>
+                    <span tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</span>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
     <div class="title">
         <div class="fun">
             <div class="single">
-                <a href="#" tabindex="0"> {{ App\Models\JobRequest::IS_ONLINE[$job_request->is_online] }} </a>
+                <a tabindex="0"> {{ App\Models\JobRequest::IS_ONLINE[$job_request->is_online] }} </a>
             </div>
             <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
         </div>

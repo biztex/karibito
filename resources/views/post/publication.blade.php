@@ -45,7 +45,7 @@
 													<p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<a href="#" tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</a>
+													<span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
 												</div>
 											</div>
 											<p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
@@ -74,7 +74,7 @@
 													<p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+													<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 												</div>
 											</div>
 											<p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>

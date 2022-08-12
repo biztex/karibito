@@ -51,7 +51,7 @@
 													</div>
 													<div class="single">
 														@if(null !== ($val->is_online))
-														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+														<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 														@endif
 													</div>
 												</div>
@@ -93,7 +93,7 @@
 													</div>
 													<div class="single">
 														@if(null !== ($val->is_online))
-														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+														<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 														@endif
 													</div>
 												</div>
