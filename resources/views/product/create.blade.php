@@ -193,7 +193,7 @@
                                 </div>
                             @endif
                         </div>
-                        <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="/img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
 
                         <div class="formQuestionsArea">
                             @if((old('question_title') || old('answer')))
@@ -262,7 +262,7 @@
                                 </div>
                             @endif
                         </div>
-                        <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="/img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
 
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
