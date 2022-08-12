@@ -46,7 +46,7 @@
                                     @endif
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <a href="#" tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
+                                            <a tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
                                             <span>@if(!is_null($val->category_id)){{$val->mProductChildCategory->name}}@endif</span>
                                         </div>
                                         <div class="draw">
@@ -55,7 +55,7 @@
                                             </p>
                                         </div>
                                         <div class="single">
-                                            <a href="#" tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</a>
+                                            <span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
                                         </div>
                                     </div>
                                     <p class="link"><a href="{{ route('product.show', $val->id) }}">詳細見る</a></p>
@@ -87,7 +87,7 @@
                                             </p>
                                         </div>
                                         <div class="single">
-                                            <a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+                                            <span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
                                         </div>
                                     </div>
                                     <p class="link"><a href="{{ route('job_request.show', $val->id) }}">詳細見る</a></p>

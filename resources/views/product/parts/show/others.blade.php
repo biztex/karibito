@@ -19,7 +19,7 @@
                             <p class="price"><font>{{$value->title}}</font><br>{{ number_format($value->price) }}円</p>
                         </div>
                         <div class="single">
-                            <a href="#">{{App\Models\Product::IS_ONLINE[$value->is_online]}}</a>
+                            <span>{{App\Models\Product::IS_ONLINE[$value->is_online]}}</span>
                         </div>
                         <div class="aboutUser">
                             <div class="user">

@@ -11,7 +11,7 @@
                 <p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
             </div>
             <div class="single">
-                <a href="#" tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</a>
+                <a tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</a>
             </div>
         </div>
         <p class="link"><a href="{{ route('chatroom.show', $value->id)  }}">チャット</a></p>
