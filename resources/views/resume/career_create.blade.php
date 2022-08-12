@@ -17,7 +17,7 @@
 								<p class="mypageHd03">経歴</p>
 								<div class="mypageBox">
 									<div class="mypageEditBox">
-										<form method="post" enctype="multipart/form-data">
+										<form method="post" id="form" enctype="multipart/form-data">
 										@csrf
 											<div class="mypageEditList">
 												<p class="mypageEditHd">経歴名</p>
@@ -38,13 +38,13 @@
 															<select name="first_year" required>
 																<option value="">選択してください</option>
 																@for($year = 1970; $year<= now()->year; $year++)
-																	<option value="{{$year}}" @if(old('first_year') == $year) selected @endif>{{$year}}</option>
+																	<option value="{{$year}}" @if(old('first_year') == $year) selected @endif>{{$year}}年</option>
 																@endfor
 															</select>
 															<select name="first_month" required>
 																<option value="">選択してください</option>
 																@for($month = 1; $month <= 12; $month++)
-																<option value='{{ $month }}' @if(old('first_month') == $month) selected @endif>{{ $month }}</option>
+																<option value='{{ $month }}' @if(old('first_month') == $month) selected @endif>{{ $month }}月</option>
 																@endfor
 															</select>
 														</div>
@@ -56,13 +56,13 @@
 															<select name="last_year">
 																<option value="">選択してください</option>
 																@for($year = 1970; $year<= now()->year; $year++)
-																	<option value="{{$year}}" @if(old('last_year') == $year) selected @endif>{{$year}}</option>;
+																	<option value="{{$year}}" @if(old('last_year') == $year) selected @endif>{{$year}}年</option>;
 																@endfor
 															</select>
 															<select name="last_month">
 																<option value="">選択してください</option>
 																@for($month = 1; $month <= 12; $month++)
-																<option value='{{ $month }}' @if(old('last_month') == $month) selected @endif>{{ $month }}</option>
+																<option value='{{ $month }}' @if(old('last_month') == $month) selected @endif>{{ $month }}月</option>
 																@endfor
 															</select>
 														</div>
@@ -71,7 +71,7 @@
 											</div>
 											<div class="fancyPersonBtn">
                                                 <a href="{{ route('resume.show') }}" class="fancyPersonCancel">キャンセル</a>
-                                                <input type="submit" class="fancyPersonSign" formaction="{{ route('store.career') }}" value="登録する">
+                                                <input type="submit" class="fancyPersonSign loading-disabled" formaction="{{ route('store.career') }}" value="登録する">
                                             </div>
 										</form>
 									</div>

@@ -13,7 +13,7 @@
 					<div class="mypageWrap">
 						<div class="mypageSec04">
 							<p class="mypageHd02"><span>スキル・経歴</span></p>
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="post" id="form" enctype="multipart/form-data">
                             @csrf
                                 <div class="mypageItem">
                                     <p class="mypageHd03">スキル</p>
@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="fancyPersonBtn">
                                                 <a href="{{ route('resume.show') }}" class="fancyPersonCancel">キャンセル</a>
-                                                <input type="submit" class="fancyPersonSign" formaction="{{ route('store.skill') }}" value="登録する">
+                                                <input type="submit" class="fancyPersonSign loading-disabled" formaction="{{ route('store.skill') }}" value="登録する">
                                             </div>
                                         </div>
                                     </div>

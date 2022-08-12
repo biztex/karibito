@@ -13,7 +13,7 @@
 			<div class="cancelWrap">
 				<div class="inner inner05">
 					<h2 class="subPagesHd">サービスをリクエストする<p class="checkGuideOriginal" target="_blank"><a href="{{ route('support') }}">カリビト安心サポートをご確認ください</a></p></h2>
-					<form class="contactForm" method="POST">
+					<form class="contactForm" id="form" method="POST">
 						@csrf
 
 
@@ -108,9 +108,9 @@
 
 
 						<div class="functeBtns">
-							<input type="submit" class="full" style="color:white;" formaction="{{ route('job_request.preview') }}" value="プレビュー画面を見る">
-							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.store') }}" value="サービス提供を開始">
-							<input type="submit" class="full green_o" formaction="{{ route('job_request.store.draft') }}" value="下書きとして保存">
+							<input type="submit" class="full loading-disabled" style="color:white;" formaction="{{ route('job_request.preview') }}" value="プレビュー画面を見る">
+							<input type="submit"  class="full green loading-disabled" style="color:white;" formaction="{{ route('job_request.store') }}" value="サービス提供を開始">
+							<input type="submit" class="full green_o loading-disabled" formaction="{{ route('job_request.store.draft') }}" value="下書きとして保存">
 						</div>
 					</form>
 				</div>

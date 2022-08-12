@@ -23,45 +23,57 @@
 							<p class="mypageHd02"><span>スキル・経歴・職務</span></p>
 							<div class="mypageItem">
 								<p class="mypageHd03">スキル</p>
-								<div class="mypageBox">
-									<dl class="mypageDl02">
-										<dt>スキル詳細</dt>
-										<dd>
-											<ul class="mypageUl03" style="word-wrap: break-word;">
-												@foreach($skills as $skill)
-													<li><span>{{ $skill->name }}</span>経験：{{ $skill->year }}年</li>
-												@endforeach
-											</ul>
-										</dd>
-									</dl>
-								</div>
+								@if ($skills->isEmpty())
+                                        <p>スキルの登録がありません。</p>
+                                @else
+									<div class="mypageBox">
+										<dl class="mypageDl02">
+											<dt>スキル詳細</dt>
+											<dd>
+												<ul class="mypageUl03" style="word-wrap: break-word;">
+													@foreach($skills as $skill)
+														<li><span>{{ $skill->name }}</span>経験：{{ $skill->year }}年</li>
+													@endforeach
+												</ul>
+											</dd>
+										</dl>
+									</div>
+								@endif
 							</div>
 							<div class="mypageItem">
 								<p class="mypageHd03">経歴</p>
-								<div class="mypageBox">
-									<ul class="mypageUl03">
-										@foreach($careers as $career)
-											<li>
-												<dl class="mypageDl02" style="word-wrap: break-word;">
-													<dt>経歴名</dt>
-													<dd><span>{{ $career->name }}</span></dd>
-												</dl>
-												<dl class="mypageDl02">
-													<dt>在籍期間</dt>
-													<dd>{{ $career->first_year }}年 {{ $career->first_month }}月 〜 {{ $career->last_year }}年 {{ $career->last_month }}月</dd>
-												</dl>
-											</li>
-										@endforeach
-									</ul>
-								</div>
+								@if ($user->userCareers->isEmpty())
+                                    <p>経歴の登録がありません。</p>
+                                @else
+									<div class="mypageBox">
+										<ul class="mypageUl03">
+											@foreach($careers as $career)
+												<li>
+													<dl class="mypageDl02" style="word-wrap: break-word;">
+														<dt>経歴名</dt>
+														<dd><span>{{ $career->name }}</span></dd>
+													</dl>
+													<dl class="mypageDl02">
+														<dt>在籍期間</dt>
+														<dd>{{ $career->first_year }}年 {{ $career->first_month }}月 〜 {{ $career->last_year }}年 {{ $career->last_month }}月</dd>
+													</dl>
+												</li>
+											@endforeach
+										</ul>
+									</div>
+								@endif
 							</div>
 							<div class="mypageItem">
 								<p class="mypageHd03">職務</p>
-								<div class="mypageBox">
-									<div class="mypageDuties" style="word-wrap: break-word;">
-										<p>@if(!is_null($jobs)){!!nl2br($jobs->content)!!}@endif</p>
+								@if (is_null($jobs))
+                                        <p>経歴の登録がありません。</p>
+                                @else
+									<div class="mypageBox">
+										<div class="mypageDuties" style="word-wrap: break-word;">
+											<p>{!!nl2br($jobs->content)!!}</p>
+										</div>
 									</div>
-								</div>
+								@endif
 							</div>
 						</div>
 					</div>

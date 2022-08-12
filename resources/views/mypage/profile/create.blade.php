@@ -21,7 +21,7 @@
 								</li>
 							</ul>
 							<div class="contactBox">
-								<form action="{{ route('user_profile.store') }}" method="post" enctype="multipart/form-data" name="form1">
+								<form action="{{ route('user_profile.store') }}" method="post" id="form" enctype="multipart/form-data" name="form1">
 									@csrf
 									<div class="labelCategory">
 										<p>ニックネーム（24字以内）</p>
@@ -70,7 +70,7 @@
 											</div>
 									</div>
 									<ul class="loginFormBtn">
-										<li><input type="submit" class="submit" value="登録"></li>
+										<li><input type="submit" class="submit loading-disabled" value="登録"></li>
 									</ul>
 								</form>
 							</div>

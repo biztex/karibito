@@ -18,7 +18,7 @@
                 <form method="post" action="{{ route('product.destroy', $product->id ) }}">
                     @csrf @method('delete')
                     <div class="functeBtns">
-                        <input type="submit" class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
+                        <input type="submit" onclick='return confirm("削除してもよろしいですか？");' class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
                     </div>
                 </form>
             @else

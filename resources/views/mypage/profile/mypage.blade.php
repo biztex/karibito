@@ -61,7 +61,7 @@
 									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$user_profile->age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
 									<p class="mypageP04 check">
 										@if($user_profile->is_identify == 1)
-											<a href="#">本人確認済み</a>
+											<a>本人確認済み</a>
 										@endif
 										<!-- <a href="#">機密保持契約(NDA) 可能</a></p> -->
 									<p class="mypageP05"><a href="{{ route('evaluation') }}" class="more">過去の評価を詳しく見る</a></p>
