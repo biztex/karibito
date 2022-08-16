@@ -1,7 +1,12 @@
 <x-layout>
-    <body id="member-page">
+    <body id="setting-page">
     <x-parts.post-button/>
         <article>
+            <div id="breadcrumb">
+                <div class="inner">
+                    <a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('setting.index') }}">会員情報</a>　>　<span>電話番号変更</span>
+                </div>
+            </div><!-- /.breadcrumb -->
             <x-parts.flash-msg/>
             <div id="contents" class="otherPage">
                 <div class="inner02 clearfix">
@@ -9,7 +14,7 @@
                         <div class="configEditWrap">
                             <div class="configEditItem">
                                 <h2 class="subPagesHd">電話番号の登録</h2>
-                                <form method="POST" action="{{ route('member_config.tel.update') }}">
+                                <form method="POST" action="{{ route('setting.tel.update') }}">
                                     @csrf
                                     <div class="configEditBox">
                                         @if (Auth::user()->tel)

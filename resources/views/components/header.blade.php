@@ -88,7 +88,7 @@
                                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
                                                     @endcan
                                                     <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
-                                                    <a href="{{ route('member_config.index') }}">設定</a>
+                                                    <a href="{{ route('setting.index') }}">設定</a>
                                                 </div>
                                             @endif
                                             <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
@@ -125,7 +125,7 @@
                                 <a href="{{ route('guide') }}">ご利用ガイド</a>
                                 <a href="#">カリビトQ&A</a>
                                 <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
-                                <a href="{{ route('member_config.index') }}">設定</a>
+                                <a href="{{ route('setting.index') }}">設定</a>
                                 <a href="{{ route('contact') }}">お問い合わせ</a>
                             </div>
                             @auth

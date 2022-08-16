@@ -20,7 +20,7 @@ class BankAccountController extends Controller
     public function edit()
     {
         $bank = \Auth::user()->bankAccount;
-        return view('member.member_config.bank', compact('bank'));
+        return view('setting.bank', compact('bank'));
     }
 
     public function update(UpdateRequest $request)

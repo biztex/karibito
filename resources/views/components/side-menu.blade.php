@@ -31,7 +31,7 @@
                     <li><a href="{{ route('secret01') }}" class="">マッチングする秘訣</a></li>
                     <li><a href="{{ route('coupon.index') }}" class="">クーポン</a></li>
                     <li><a href="{{ route('dm.index') }}" class="">DM</a></li>
-                    <li><a href="{{ route('member') }}" class="">会員情報</a></li>
+                    <li><a href="{{ route('setting.index') }}" class="">会員情報</a></li>
                     <li><a href="{{ route('showWithdrawForm') }}" class="">退会</a></li>
                 </ul>
             </div>

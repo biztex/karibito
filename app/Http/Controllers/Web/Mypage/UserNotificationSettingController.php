@@ -24,6 +24,6 @@ class UserNotificationSettingController extends Controller
         $id = Auth::user()->userNotificationSetting->id;
         $this->notification_setting_service->updateSetting($request->all(), $id);
 
-        return redirect()->route('member_config.index')->with('flash_msg', 'お知らせ受信の設定を変更しました。');
+        return redirect()->route('setting.index')->with('flash_msg', 'お知らせ受信の設定を変更しました。');
     }
 }

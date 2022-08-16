@@ -1,10 +1,10 @@
 <x-layout>
-<body id="member-page">
+<body id="setting">
 <x-parts.post-button/>
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('member') }}">メンバー情報</a>　>　<span>会員情報</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>会員情報</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 
@@ -32,14 +32,14 @@
 								<dl class="memberConfigDl">
 									<dt>メールアドレス</dt>
 									<dd>
-										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('member_config.email.edit') }}">変更する</a>
+										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('setting.email.edit') }}">変更する</a>
 									</dd>
 								</dl>
 								@can('exist.password')
 									<dl class="memberConfigDl">
 										<dt>パスワード</dt>
 										<dd>
-											<a class="configLink" href="{{ route('member_config.password.edit') }}">変更する</a>
+											<a class="configLink" href="{{ route('setting.password.edit') }}">変更する</a>
 										</dd>
 									</dl>
 								@endcan
@@ -47,9 +47,9 @@
 									<dt>電話番号</dt>
 									<dd>
                                         @if (Auth::user()->tel)
-                                            {{ Auth::user()->tel }}　<a class="configLink" href="{{ route('member_config.tel.edit') }}">変更する</a>
+                                            {{ Auth::user()->tel }}　<a class="configLink" href="{{ route('setting.tel.edit') }}">変更する</a>
                                         @else
-                                            <a class="configLink" href="{{ route('member_config.tel.edit') }}">登録する</a>
+                                            <a class="configLink" href="{{ route('setting.tel.edit') }}">登録する</a>
                                         @endif
 									</dd>
 								</dl>
@@ -79,7 +79,7 @@
 								<dl class="memberConfigDl">
 									<dt>クレジットカード</dt>
 									<dd>
-										<a class="configLink" href="{{ route('member_config.card.create') }}">変更する</a>
+										<a class="configLink" href="{{ route('setting.card.create') }}">変更する</a>
 									</dd>
 								</dl>
 							</div>
@@ -87,7 +87,7 @@
 								<h3 class="memberConfigHd">お知らせ機能</h3>
 								<dl class="memberConfigDl">
 									<dt>お知らせ受信を設定</dt>
-									<form class="" method="post" action="{{ route('member_config.notification.update') }}" enctype="multipart/form-data">
+									<form class="" method="post" action="{{ route('setting.notification.update') }}" enctype="multipart/form-data">
 										@csrf @method("PUT")
 										<dd>
 											<input type="hidden" name="is_like" value="0">

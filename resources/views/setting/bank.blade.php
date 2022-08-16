@@ -1,7 +1,12 @@
 <x-layout>
-<body id="member-page">
+<body id="setting-page">
 <x-parts.post-button/>
 	<article>
+		<div id="breadcrumb">
+                <div class="inner">
+				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('setting.index') }}">会員情報</a>　>　<span>振込口座情報</span>
+			</div>
+		</div><!-- /.breadcrumb -->
 		<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
@@ -44,14 +49,14 @@
 														<td>{{ Crypt::decryptString($bank->number) }}</td>
 													</tr>
 												</table>
-												<form action="{{ route('member_config.bank.destroy') }}" method="post" class="configEditDeleteBtn">
+												<form action="{{ route('setting.bank.destroy') }}" method="post" class="configEditDeleteBtn">
 													@csrf @method('delete')
 													<button type="submit" onclick='return confirm("削除してもよろしいですか？");'>削除</button>
 												</form>
 											</div>
 									</div>
 								@endif
-								<form id="form" action="{{ route('member_config.bank.update') }}" method="post">
+								<form id="form" action="{{ route('setting.bank.update') }}" method="post">
 									@csrf
 									<div class="configEditList">
 									@if($bank === null)

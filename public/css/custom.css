@@ -67,8 +67,8 @@
 #news .sidePerson,
 #coupon .sidePerson,
 .dm-page .sidePerson,
-#member .sidePerson,
-#member-page .sidePerson,
+#setting .sidePerson,
+#setting-page .sidePerson,
 #withdraw .sidePerson,
 #portfolio .sidePerson,
 #resume .sidePerson,
@@ -614,12 +614,12 @@
     pointer-events: none;
  }
 
- #member #side div:nth-of-type(2) ul li:nth-of-type(13) a {
+ #setting #side div:nth-of-type(2) ul li:nth-of-type(13) a {
     color: #333333;
     background-color: #FCAA00;
     pointer-events: none;
  }
- #member-page #side div:nth-of-type(2) ul li:nth-of-type(13) a {
+ #setting-page #side div:nth-of-type(2) ul li:nth-of-type(13) a {
     color: #333333;
     background-color: #FCAA00;
  }
@@ -710,6 +710,11 @@
 }
 .recommendList.style2 .list .info {
     border: 1px solid #DDDDDD;
+	width: 168px;
+	height: 320px;
+	display:flex;
+	flex-flow: column;
+	justify-content:space-between;
 }
 .infoTop{
 	border: 1px solid #DDDDDD;
@@ -1076,11 +1081,25 @@
 	object-fit: cover;
 	border-radius: 50px;
 }
+
+.aboutUser .user .ico img {
+	width: 35px;
+	height: 35px;
+    object-fit: cover;
+	border-radius: 50px;
+}
+
 @media screen and (max-width: 767px) {
 	.sellerTop .user .head {
 		width: 40px;
 		height: 40px;
 	}
+
+	.aboutUser .user .ico img {
+		width: 26px;
+		height: 26px;
+	}
+	
 }
 .max-string {
 	color: #545454;
