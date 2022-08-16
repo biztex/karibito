@@ -95,9 +95,7 @@
 															<div class="list sliderSP02">
 															@foreach($products as $product)
 
-
 																<x-parts.product-item :product="$product"/>
-
 
 															@endforeach
 															</div>
@@ -111,46 +109,10 @@
                                                     @else
 														<div class="recommendList style2 ">
 															<div class="list sliderSP02">
-																@foreach($job_request as $request)
-																	<div class="item">
-																		<div class="info">
-																			<div class="breadcrumb"><a href="{{ route('job_request.category.index',$request->mProductChildCategory->mProductCategory->id) }}">{{ $request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show',$request->mProductChildCategory->id)}}">{{ $request->mProductChildCategory->name }}</a></div>
-																			<a href="{{ route('job_request.show',$request->id)}}">
-																				<div class="draw">
-																					<p class="price" style="width:100%;"><font>{{ $request->title }}</font></p>
-																				</div>
-																			</a>
-																			<div class="aboutInfo">
-																				<dl>
-																					<dt><span>予算</span></dt>
-																					<dd>{{ number_format($request->price) }}円</dd>
-																				</dl>
-																				<dl>
-																					<dt><span>提案数</span></dt>
-																					<dd>0</dd>
-																				</dl>
-																				<dl>
-																					<dt><span>募集期限</span></dt>
-																					<dd>{{ $request->application_deadline }}</dd>
-																				</dl>
-																			</div>
-																			<div class="aboutUser">
-																				<div class="user">
-																					@if(null !== $user->userProfile->icon)
-																						<p class="ico"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
-																					@else
-																						<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-																					@endif
-																					<div class="introd">
-																						<p class="name">{{$request->user->name}}</p>
-																						<p>({{\App\Models\UserProfile::GENDER[$request->user->userProfile->gender]}}/ {{$request->user->userProfile->age}}/ {{$request->user->userProfile->prefecture->name}})</p>
-																					</div>
-																				</div>
-																				<p class="check"><a>本人確認済み</a></p>
-																				<x-parts.evaluation-star :star='$user->avg_star'/>
-																			</div>
-																		</div>
-																	</div>
+																@foreach($job_request as $value)
+
+																	<x-parts.job-request-item :value="$value"/>
+
 																@endforeach
 															</div>
 														</div>

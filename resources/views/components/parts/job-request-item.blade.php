@@ -14,7 +14,7 @@
             <div class="aboutInfo">
                 <dl>
                     <dt><span>予算</span></dt>
-                    <dd>{{ number_format($value->price) }}円〜</dd>
+                    <dd style="width:100%;">{{ number_format($value->price) }}円〜</dd>
                 </dl>
                 <dl>
                     <dt><span>提案数</span></dt>
@@ -22,16 +22,17 @@
                 </dl>
                 <dl>
                     <dt><span>募集期限</span></dt>
-                    <dd>{{ $value->deadline_day }}日と{{ $value->deadline_hour }}時間</dd>
+                    <dd style="padding-left:5px;">{{ rtrim($value->diff_time, '後') }}</dd>
                 </dl>
             </div>
         </a>
+        
         <div class="aboutUser">
             <div class="user">
                 @if(empty($value->user->userProfile->icon))
                 <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
                 @else
-                <p class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+                <p class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
                 @endif
                 <div class="introd">
                     <p class="name">{{ $value->user->name }}</p>

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\JobRequest;
-use App\Http\Requests\JobRequest\StoreRequest;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\MProductChildCategory;
 use App\Traits\ProductSearchTrait;
