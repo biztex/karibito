@@ -40,6 +40,7 @@ class StoreRequest extends FormRequest
             'option_is_public.*' => 'integer',
             'question_title.*' => 'required_unless:answer.*,null| max:400',
             'answer.*' => 'required_unless:question_title.*,null| max:400',
+            'youtube_link.*' => 'nullable | string | max:255 | url',
             'base64_text.0' => 'required',
             'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
         ];

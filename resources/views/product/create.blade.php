@@ -264,6 +264,62 @@
                         </div>
                         <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="/img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
 
+
+
+                        <div class="formLinksArea">
+                            @if(old('youtube_link'))
+                                @foreach(old('youtube_link') as $k => $v)
+                                    <div class="js-youtubeForm">
+                                        <p class="th js-link">動画(YouTubeのみ) {{$k + 1}}</p>
+                                        @error('youtube_link.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="enter">
+                                                <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{$v}}">
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @elseif(collect($request->youtube_link)->isNotEmpty())
+                                @foreach($request->youtube_link as $num => $link)
+                                    <div class="js-youtubeForm">
+                                        <p class="th js-link">動画(YouTubeのみ) {{$num + 1}}</p>
+                                        @error('youtube_link.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                        <div class="td">
+                                            <div class="enter">
+                                                <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{ old('youtube_link.'.$num, $product_question) }}">
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="js-youtubeForm">
+                                    <p class="th js-link">動画(YouTubeのみ)</p>
+                                    @error('youtube_link.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    <div class="td">
+                                        <div class="enter">
+                                            <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" {{ old('title',$request->title) }}>
+                                        </div>
+                                        <div>
+                                            <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addYoutube();"><img src="/img/mypage/icon_add.svg" alt="">動画を追加</a></p>
+                        <p class="small ml-2 mb-0">対応URL形式</p>
+                        <p class="small ml-2 mb-0">https://www.youtube.com/watch?v=xxxxxxxxxx</p>
+                        <p class="small ml-2 mb-0">https://youtube/xxxxxxxxxx</p>
+
+
+
+
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
                             @error('product_pic')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -327,6 +383,7 @@
     $(function(){
         delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
         delQuestion();
+        delYoutube();
     })
     function addOption(){
         let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"><textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
@@ -356,8 +413,8 @@
         let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
 
         if(number_js_questionForm < 10) {
-        str = str.replace(/%\w+%/g, number_js_questionForm + 1);
-        $('.formQuestionsArea').append(str);
+            str = str.replace(/%\w+%/g, number_js_questionForm + 1);
+            $('.formQuestionsArea').append(str);
         }
         delQuestion();
     }
@@ -370,6 +427,29 @@
                 $(".formQuestionsArea").children(".js-questionForm").each(function(index, element){
                     $(element).find(".js-title").text("質問のタイトル" + (index + 1));
                     $(element).find(".js-answer").text("質問の回答" + (index + 1));
+                })
+            }
+        });
+    }
+
+    function addYoutube() {
+        let str = '<div class="js-youtubeForm"><p class="th js-link">動画(YouTubeのみ)%NUM%</p><div class="td">@error('js-link.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください"></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a> </div></div></div>'
+        let number_js_youtubeForm = $(".formLinksArea").children(".js-youtubeForm").length;
+
+        if(number_js_youtubeForm < 10) {
+            str = str.replace(/%\w+%/g, number_js_youtubeForm + 1);
+            $('.formLinksArea').append(str);
+        }
+        delYoutube();
+    }
+
+    function delYoutube() {
+        $('.js-deleteYoutube').click(function(){
+            let number_js_youtubeForm = $(".formLinksArea").children(".js-youtubeForm").length;
+            if (number_js_youtubeForm > 1 ) {
+                $(this).parents('.js-youtubeForm').remove(); //divだけを消す
+                $(".formLinksArea").children(".js-youtubeForm").each(function(index, element){
+                    $(element).find(".js-link").text("動画(YouTubeのみ)" + (index + 1));
                 })
             }
         });

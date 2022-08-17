@@ -64,10 +64,11 @@ class ProductController extends Controller
         }
 
         \DB::transaction(function () use ($request) {
-          $product = $this->product_service->storeProduct($request->all());
-          $this->product_service->storeAdditionalOption($request->all(), $product->id);
-          $this->product_service->storeProductQuestion($request->all(), $product->id);
-          $this->product_service->storeImage($request, $product->id);
+            $product = $this->product_service->storeProduct($request->all());
+            $this->product_service->storeAdditionalOption($request->all(), $product->id);
+            $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
+            $this->product_service->storeImage($request, $product->id);
         });
 
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
@@ -119,15 +120,16 @@ class ProductController extends Controller
     public function update(StoreRequest $request, Product $product)
     {
        // バリデーションかかれば入力画面に戻す
-       $validator = $request->getValidator();
-       if ($validator->fails()) {
-           return redirect()->route("product.edit", $request->id)->withErrors($validator)->withInput();
-       }
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("product.edit", $request->id)->withErrors($validator)->withInput();
+        }
 
         \DB::transaction(function () use ($request, $product) {
             $this->product_service->updateProduct($request->all(), $product);
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 

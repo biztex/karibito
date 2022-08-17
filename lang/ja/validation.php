@@ -242,7 +242,8 @@ return [
         'status' => '公開設定',
         'base64_text.0' => '画像1枚目',
         'paths.*' => '画像',
-        'memo' => 'メモ'
+        'memo' => 'メモ',
+        'youtube_link.*' => '動画URL'
     ],
 
 ];

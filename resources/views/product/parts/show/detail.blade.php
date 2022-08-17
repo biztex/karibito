@@ -62,3 +62,16 @@
         </ul>
     </div>
 @endif
+
+@if ($product->productLink->isNotEmpty())
+    <div class="optional">
+        <h2 class="hdM">参照動画</h2>
+        <ul class="toggleWrapPC">
+            @foreach($product->productLink as $product_link)
+                <li>
+                    <div class="cont pre-wrap break-word js-link"><a href="{!!$product_link->youtube_link!!}" target="_blank">{!!$product_link->youtube_link!!}</a></div>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
