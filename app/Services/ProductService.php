@@ -372,4 +372,12 @@ class ProductService
 
         return $query->paginate(40);
     }
+
+    public function getURL($id)
+    {
+        $base_url = config('app.url');
+        $url = "$base_url/product/$id";
+
+        return $url;
+    }
 }

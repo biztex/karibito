@@ -70,11 +70,10 @@ class ProductController extends Controller
           $this->product_service->storeImage($request, $product->id);
         });
 
-        $product_id = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->pluck('id')->first();
-        $base_url = config('app.url');
-        $url = "$base_url/product/$product_id";
+        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->product_service->getURL($product->id);
 
-        return redirect()->route('service_thanks')->with(['url' => $url]);
+        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
     /**
@@ -87,7 +86,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $all_products = Product::getUser($product->user_id)->orderBy('created_at', 'desc')->get();
-        
+
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
 
         $evaluations = $this->evaluation_service->getProductEvaluations($product);
@@ -132,7 +131,10 @@ class ProductController extends Controller
             $this->product_service->updateImage($request,$product->id);
         });
 
-        return redirect()->route('service_thanks');
+        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->product_service->getURL($product->id);
+
+        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
     /**
@@ -258,7 +260,10 @@ class ProductController extends Controller
             $this->product_service->storeImage($request, $product->id);
         });
 
-        return redirect()->route('service_thanks');
+        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->product_service->getURL($product->id);
+
+        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
     /**
@@ -276,6 +281,9 @@ class ProductController extends Controller
             $this->product_service->updateImage($request,$product->id);
         });
 
-        return redirect()->route('service_thanks');
+        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $url = $this->product_service->getURL($product->id);
+
+        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 }

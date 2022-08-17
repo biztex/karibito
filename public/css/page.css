@@ -5604,6 +5604,7 @@ select.searchSelect {
 
 .mypageEditInput input[type='text'],
 .mypageEditInput input[type='password'],
+.mypageEditInput input[type='tel'],
 .mypageEditInput input[type='button'],
 .mypageEditInput select,
 .mypageEditInput textarea {

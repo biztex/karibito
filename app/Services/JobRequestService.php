@@ -152,6 +152,14 @@ class JobRequestService
         return $query->paginate(40);
     }
 
+    public function getURL($id)
+    {
+        $base_url = config('app.url');
+        $url = "$base_url/product/$id";
+
+        return $url;
+    }
+
     // public function getDiffDateTime($job_requests) 多分使わない、消す
     // {
     //     // dd($job_requests);

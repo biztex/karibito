@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        
+
         return [
         'category_id' => 'required | integer | exists:m_product_child_categories,id',
         'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
         'application_deadline' => 'required | date | after:yesterday',
         'required_date' => 'nullable | date | after:yesterday',
         'is_online' => 'required | boolean',
-        'is_call' => 'required | boolean',           
+        'is_call' => 'required | boolean',
         ];
     }
 
@@ -46,6 +46,19 @@ class StoreRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         //
+    }
+
+    /**
+    * 項目名
+    *
+    * @return array
+    */
+    public function attributes()
+    {
+        return [
+            'after:yesterday' => '昨日',
+            'required_date' => '昨日',
+        ];
     }
 
     /**
