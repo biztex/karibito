@@ -8,11 +8,11 @@
         @endif
         <!-- <p class="login">最終ログイン：8時間前</p> -->
 
-        <p class="introd"><span>{{$user->name}}</span><br>({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{ $user->userProfile->birthday }}/ {{$user->userProfile->prefecture->name}})</p>
+        <p class="introd"><span>{{$user->name}}</span><br>({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{ $user->userProfile->age }}/ {{$user->userProfile->prefecture->name}})</p>
 
         <x-parts.evaluation-star :star='$user->avg_star'/>
 
-        <p class="check"><a href="#">本人確認済み</a></p>
+        <p class="check"><a>本人確認済み</a></p>
         <!-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> -->
         @if (\Auth::id() !== $user->id)
             <div class="blogDtOtherBtn">

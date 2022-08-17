@@ -58,10 +58,10 @@
 								<dd>
 									<p class="mypageP01">{{$user_profile->user->name}} <a href="#fancybox_person" class="fancybox fancybox_profile"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<!-- <p class="mypageP02">最終ログイン：8時間前</p> -->
-									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
+									<p class="mypageP03">({{App\Models\UserProfile::GENDER[$user_profile->gender]}} / {{$user_profile->age}} / {{$user_profile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
 									<p class="mypageP04 check">
 										@if($user_profile->is_identify == 1)
-											<a href="#">本人確認済み</a>
+											<a>本人確認済み</a>
 										@endif
 										<!-- <a href="#">機密保持契約(NDA) 可能</a></p> -->
 									<p class="mypageP05"><a href="{{ route('evaluation') }}" class="more">過去の評価を詳しく見る</a></p>
@@ -124,7 +124,11 @@
 										@foreach ($products as $product)
 											<li>
 												<div class="cont01">
-													<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt=""></p>
+													@if(isset($val->productImage[0]))
+														<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+													@else
+														<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+													@endif
 													<div class="info">
 														<div class="breadcrumb">
 															<a href="{{ route('product.category.index',$product->mProductChildCategory->mProductCategory->id) }}">
@@ -161,7 +165,6 @@
 			</div><!--inner-->
 
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</body>
 </article>
 </x-layout>

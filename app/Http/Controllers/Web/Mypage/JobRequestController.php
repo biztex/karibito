@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobRequest;
 use App\Models\Product;
 use App\Models\User;
-use App\Libraries\Age;
-use App\Libraries\DiffDateTime;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
 use App\Http\Requests\JobRequestController\DraftRequest;
@@ -63,18 +62,16 @@ class JobRequestController extends Controller
     public function postCreate(Request $request)
     {
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
 
-        return view('job_request.create',compact('request','user','age'));
+        return view('job_request.create',compact('request','user'));
     }
 
     // 編集⇒プレビュー⇒編集
     public function postEdit(Request $request, JobRequest $job_request)
     {
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
         $job_request = $request;
-        return view('job_request.edit', compact('request','job_request','user','age'));
+        return view('job_request.edit', compact('request','job_request','user'));
     }
 
     /**
@@ -111,13 +108,10 @@ class JobRequestController extends Controller
     {
         $user = User::find($job_request->user_id);
 
-        $age = Age::group($user->userProfile->birthday);
+        $date = new Carbon($job_request->application_deadline);
+        $diff_time = $date->addDay()->diffForHumans(Carbon::now());
 
-        $day1 = now();
-        $day2 = $job_request->application_deadline;
-        $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
-
-        return view('job_request.show',compact('job_request','user','age','diff_date_time'));
+        return view('job_request.show',compact('job_request','user','diff_time'));
     }
 
     /**
@@ -221,13 +215,11 @@ class JobRequestController extends Controller
 
         $user = \Auth::user();
 
-        $age = Age::group($user->userProfile->birthday);
+        $date = new Carbon($request->application_deadline);
+        $diff_time = $date->addDay()->diffForHumans(Carbon::now());
 
-        $day1 = now();
-        $day2 = $request->application_deadline;
-        $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
 
-        return view('job_request.preview',compact('request','user','age','diff_date_time'));
+        return view('job_request.preview',compact('request','user','diff_time'));
     }
 
     /**
@@ -265,13 +257,10 @@ class JobRequestController extends Controller
 
         $user = \Auth::user();
 
-        $age = Age::group($user->userProfile->birthday);
+        $date = new Carbon($request->application_deadline);
+        $diff_time = $date->addDay()->diffForHumans(Carbon::now());
 
-        $day1 = now();
-        $day2 = $request->application_deadline;
-        $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
-
-        return view('job_request.preview',compact('request','user','age','job_request','diff_date_time'));
+        return view('job_request.preview',compact('request','user','job_request','diff_time'));
     }
 
     /**

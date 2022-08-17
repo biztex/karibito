@@ -52,12 +52,16 @@ class UserProfile extends Model
         self::NOT_BAN => '制限なし',
     ];
 
-    protected function getBirthdayAttribute($birthday)
+    protected $appends = ['age','now_age'];
+
+    protected function getAgeAttribute()
     {
-        $day = date("Ymd",strtotime($birthday));
-        
-        $birthday = Age::group($day);
-        return ucfirst($birthday);
+        return $this->attributes['age'] = Age::group($this->birthday);
+    }
+
+    protected function getNowAgeAttribute()
+    {
+        return $this->attributes['now_age'] = Age::nowAge($this->birthday);
     }
 
 

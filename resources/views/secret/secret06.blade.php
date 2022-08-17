@@ -1,5 +1,5 @@
 <x-layout>
-<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
+<x-parts.post-button/>
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
@@ -24,7 +24,7 @@
 						<div class="secretPager">
 							<div class="secretPagerPrev"><a href="{{ route('secret05') }}">前へ</a></div>
 							<select onchange="document.location.href=this.options[this.selectedIndex].value;">
-							<option value="{{ route('secret01') }}">1/6</option>
+								<option value="{{ route('secret01') }}">1/6</option>
 								<option value="{{ route('secret02') }}">2/6</option>
 								<option value="{{ route('secret03') }}">3/6</option>
 								<option value="{{ route('secret04') }}">4/6</option>
@@ -38,6 +38,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-layout>

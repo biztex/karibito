@@ -1,5 +1,5 @@
 <x-layout>
-<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
+<x-parts.post-button/>
 	<article>
 	<body id="publication">
 		<div id="breadcrumb">
@@ -7,7 +7,9 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>掲載内容一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
-        <x-parts.flash-msg/>
+		<x-parts.ban-msg/>
+		<x-parts.post-button/>
+		<x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
@@ -32,7 +34,6 @@
 										@elseif($val->status === App\Models\Product::STATUS_PUBLISH)
 										<div class="cont01 public02">
 										@endif
-											<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
 											@if(isset($val->productImage[0]))
 											<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
 											@else
@@ -44,7 +45,7 @@
 													<p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<a href="#" tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</a>
+													<span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
 												</div>
 											</div>
 											<p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
@@ -54,7 +55,7 @@
 									@endforeach
 									@endif
 								</ul>
-								{{ $products->links() }}
+								{{ $products->fragment('')->links() }}
 							</div>
 
 							<!---------------- リクエスト ------------------>
@@ -73,7 +74,7 @@
 													<p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
 												</div>
 												<div class="single">
-													<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+													<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 												</div>
 											</div>
 											<p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
@@ -91,6 +92,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-layout>

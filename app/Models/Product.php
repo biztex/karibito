@@ -208,4 +208,12 @@ class Product extends Model
     {
         return $this->morphMany(KaribitoSurvey::class, 'reference');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function points()
+    {
+        return $this->morphMany(UserGetPoint::class, 'reference');
+    }
 }

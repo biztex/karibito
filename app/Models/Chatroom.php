@@ -100,8 +100,15 @@ class Chatroom extends Model
         return $this->purchase->isCancelable();
     }
 
+    // 対象のユーザーが出品者のチャットルーム
+    // 入金一覧取得の際に使用
+    public function scopeSellService($query, $user_id)
+    {
+        return $query->loginUser()->where('seller_user_id', $user_id);
+    }
+
     /**
-     * キャンセル申請可能判断
+     * 電話対応
      * @return bool
      */
     public function canCall(): bool

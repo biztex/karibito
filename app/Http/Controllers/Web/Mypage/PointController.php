@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Web\Mypage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserCoupon;
+use App\Models\UserGetPoint;
+use App\Models\UserUsePoint;
+use App\Services\PointService;
 
 class PointController extends Controller
 {
+    private $point_service;
+
+    public function __construct(PointService $point_service)
+    {
+        $this->point_service = $point_service;
+    }
     /**
      * Display the specified resource.
      *
@@ -15,13 +24,19 @@ class PointController extends Controller
      */
     public function index()
     {
-        // $user_coupons = UserCoupon::where([
-        //     ['user_id', '=', \Auth::id()],
-        //     ['used_at', '=', null],
-        // ])
-        // ->get();
+        $today = date('Y-m-d');
+        $user_get_points = UserGetPoint::where([
+            ['user_id', '=', \Auth::id()],
+            ['deadline', '>=', $today],
+        ])
+        ->get();
+        $user_use_points = UserUsePoint::where([
+            ['user_id', '=', \Auth::id()],
+            ['deleted_at', '=', null],
+        ])
+        ->get();
+        $user_has_point = $this->point_service->showPoint();
 
-        // return view('mypage.coupon.index', compact('user_coupons'));
-        return view('mypage.point.index');
+        return view('mypage.point.index', compact('user_has_point', 'user_get_points', 'user_use_points'));
     }
 }

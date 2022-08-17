@@ -13,7 +13,7 @@
             <div class="cancelWrap">
                 <div class="inner inner05">
                     <h2 class="subPagesHd">サービスを提供する<p class="checkGuideOriginal" target="_blank"><a href="{{ route('support') }}">カリビト安心サポートをご確認ください</a></p></h2>
-                    <form method="post" class="contactForm" enctype="multipart/form-data">
+                    <form method="post" id="form"  class="contactForm" enctype="multipart/form-data">
                         @csrf
                         <p class="th">カテゴリ<span class="must">必須</span></p>
                             @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -193,7 +193,7 @@
                                 </div>
                             @endif
                         </div>
-                        <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addOption();"><img src="/img/mypage/icon_add.svg" alt="">有料オプションを追加</a></p>
 
                         <div class="formQuestionsArea">
                             @if((old('question_title') || old('answer')))
@@ -262,7 +262,7 @@
                                 </div>
                             @endif
                         </div>
-                        <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
+                        <p class="specialtyBtn"><a href="javascript:;" onclick="addQuestion();"><img src="/img/mypage/icon_add.svg" alt="">よくある質問を追加</a></p>
 
                         <p class="th">画像投稿<span class="must">必須</span></p>
                         <div class="td">
@@ -313,9 +313,9 @@
                             </select>
                         </div>
                         <div class="functeBtns">
-                            <input type="submit" class="full" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
-                            <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
-                            <input type="submit" class="full green_o" formaction="{{ route('product.store.draft') }}" value="下書きとして保存">
+                            <input type="submit" class="full loading-disabled" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
+                            <input type="submit" class="full green loading-disabled" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を開始">
+                            <input type="submit" class="full green_o loading-disabled" formaction="{{ route('product.store.draft') }}" value="下書きとして保存">
                         </div>
                     </form>
                 </div>

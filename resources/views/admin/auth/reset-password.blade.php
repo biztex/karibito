@@ -7,27 +7,6 @@
 					<div id="main">
 						<div class="loginWrap">
 							<h2 class="registerHd registerHd_confirm">パスワード再設定</h2>
-							<style>
-								@media screen and (min-width: 767px) {
-									.registerHd_confirm {
-										font-size: 2.4rem;
-									}
-								}
-
-								.registerHd_confirm {
-									margin-top: 40px;
-								}
-
-								.add_mt20 {
-									margin-top: 20px;
-								}
-
-								@media screen and (max-width: 767px) {
-									.registerHd_confirm {
-										margin-top: 20px;
-									}
-								}
-							</style>
 							<div class="contactBox">
 								<form method="POST" action="{{ route('admin.password.update') }}">
             						@csrf					

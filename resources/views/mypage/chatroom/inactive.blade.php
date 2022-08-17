@@ -6,7 +6,8 @@
                     <a href="{{ route('home') }}">ホーム</a>　>　<span>過去の取引</span>
                 </div>
             </div><!-- /.breadcrumb -->		
-	        <x-parts.post-button/>
+            <x-parts.ban-msg/>
+            <x-parts.post-button/>
             <div id="contents" class="otherPage">
                 <div class="inner02 clearfix">
                     <div id="main">
@@ -51,7 +52,6 @@
                     <x-side-menu/>
                 </div><!--inner-->
             </div><!-- /#contents -->
-		<x-hide-modal/>
 	</body>
 </article>
 </x-layout>

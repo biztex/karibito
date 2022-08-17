@@ -9,6 +9,8 @@
                 <a href="{{ route('draft') }}">下書き一覧</a>
 			</div>
 		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
+		<x-parts.post-button/>
 		<x-parts.flash-msg />
 
 		<div id="contents" class="otherPage">
@@ -49,7 +51,7 @@
 													</div>
 													<div class="single">
 														@if(null !== ($val->is_online))
-														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+														<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 														@endif
 													</div>
 												</div>
@@ -91,7 +93,7 @@
 													</div>
 													<div class="single">
 														@if(null !== ($val->is_online))
-														<a href="#" tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</a>
+														<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 														@endif
 													</div>
 												</div>

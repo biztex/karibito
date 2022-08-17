@@ -211,26 +211,23 @@ class ProductController extends Controller
         }
 
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
 
-        return view('product.preview',compact('request','user','age'));
+        return view('product.preview',compact('request','user'));
     }
 
     public function postCreate(Request $request)
     {
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
 
-        return view('product.create',compact('request','user','age'));
+        return view('product.create',compact('request','user'));
     }
 
     // 編集⇒プレビュー⇒編集
     public function postEdit(Request $request, Product $product)
     {
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
         $product = $request;
-        return view('product.edit', compact('product','user','age'));
+        return view('product.edit', compact('product','user'));
     }
 
     /**
@@ -245,9 +242,8 @@ class ProductController extends Controller
         }
 
         $user = \Auth::user();
-        $age = Age::group($user->userProfile->birthday);
 
-        return view('product.update_preview',compact('request','user','age', 'product'));
+        return view('product.update_preview',compact('request','user', 'product'));
     }
 
     /**

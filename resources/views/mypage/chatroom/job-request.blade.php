@@ -11,7 +11,7 @@
                 <p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
             </div>
             <div class="single">
-                <a href="#" tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</a>
+                <a tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</a>
             </div>
         </div>
         <p class="link"><a href="{{ route('chatroom.show', $value->id)  }}">チャット</a></p>
@@ -26,7 +26,7 @@
                 @endif
                 <div class="introd">
                         <p class="name">{{$value->sellerUser->name}}</p>
-                        <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->birthday}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
+                        <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
                 </div>
             </div>
             <x-parts.evaluation-star :star='$value->sellerUser->avg_star'/>
@@ -39,7 +39,7 @@
                 @endif
                 <div class="introd">
                     <p class="name">{{$value->buyerUser->name}}</p>
-                    <p>({{App\Models\UserProfile::GENDER[$value->buyerUser->userProfile->gender]}}/ {{$value->buyerUser->userProfile->birthday}}/ {{$value->buyerUser->userProfile->prefecture->name}})</p>
+                    <p>({{App\Models\UserProfile::GENDER[$value->buyerUser->userProfile->gender]}}/ {{$value->buyerUser->userProfile->age}}/ {{$value->buyerUser->userProfile->prefecture->name}})</p>
                 </div>
             </div>
             <x-parts.evaluation-star :star='$value->buyerUser->avg_star'/>

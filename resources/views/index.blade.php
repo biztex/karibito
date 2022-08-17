@@ -33,7 +33,7 @@
 			<div class="indexTab tabWrap">
 				<div class="inner">
 					<ul class="tabLink">
-						<li><a class="is_active" href="#tab_box01">提供</a></li>
+						<li><a href="#tab_box01"　class="is_active">提供</a></li>
 						<li><a href="#tab_box02">リクエスト</a></li>
 					</ul>
 
@@ -46,7 +46,8 @@
 		</div><!-- /#contents -->
 	</article>
 </x-layout>
-<script type="text/javascript">
+{{-- custom.jsに移動.後で消す--}}
+{{-- <script type="text/javascript">
 	$(function(){
 		showProductRank();
 		showJobRequestRank();
@@ -55,12 +56,14 @@
 	function showProductRank(){
 		$('.js-productOtherBtn').on('click', function () {
 			$(".js-hide_product_categories").removeClass('hide');
+            $(this).closest('.otherBtn').hide();
 		}
 	)}
 
 	function showJobRequestRank(){
 		$('.js-jobRequestOtherBtn').on('click', function () {
 			$(".js-hide_job_request_categories").removeClass('hide');
+            $(this).closest('.otherBtn').hide();
 		}
 	)}
-</script>
+</script> --}}

@@ -272,7 +272,8 @@
                                 </div>
                                 <div class="mypageWrap">
                                     <div class="mypageSec05">
-                                        <form action="{{ route('portfolio.store') }}" method="post" enctype="multipart/form-data">
+                                        <form action="{{ route('portfolio.store') }}" method="post" id
+                                        form enctype="multipart/form-data">
                                             @csrf
                                             <div class="mypageEditBox">
                                                 <div class="mypageEditList">
@@ -339,7 +340,7 @@
                                                 </div>
                                                 <div class="fancyPersonBtn">
                                                     <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
-                                                    <button class="fancyPersonSign">登録する</button>
+                                                    <button class="fancyPersonSign loading-disabled">登録する</button>
                                                 </div>
                                             </div>
                                         </form>

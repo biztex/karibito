@@ -48,9 +48,9 @@
                                     </form>
                                     </td>
                                 </tr>
-                                @foreach ($rate_list as $i => $rate)
+                                @foreach ($rate_list as $rate)
                                     <tr>
-                                        @if ($i == 0)
+                                        @if ($rate == $m_commission_rate)
                                             @continue
                                         @else
                                             <td class="text-nowrap px-2">{{ $rate->rate }}</td>

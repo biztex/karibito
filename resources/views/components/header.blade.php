@@ -110,9 +110,6 @@
                                 <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                 <div class="navMypageUl link01">
                                     <a href="{{ route('mypage') }}">マイページ</a>
-                                    @can('identify')
-                                        <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                    @endcan
                                     <a href="#">お気に入り</a>
                                     @can('identify')
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
@@ -147,19 +144,19 @@
             </div>
             <div class="searchWrapSp">
                 <div class="searchWrapTop">
-                    <div class="searchBox">
-                        <select class="searchSelect">
-                            <option>サービス</option>
-                            <option>リクエスト</option>
-                        </select>
-                        <form method="get">
+                    <form method="get">
+                        <div class="searchBox">
+                            <select name="service_flg" class="searchSelect">
+                                <option value="1" @if (isset($serviceflg) && ($serviceflg === '1')) selected @endif>サービス</option>
+                                <option value="2" @if (isset($serviceflg) && ($serviceflg === '2')) selected @endif>リクエスト</option>
+                            </select>
                             <div class="search">
                                 <input type="text" name="keyword" @if(isset($keyword)) value="{{$keyword}}" @endif placeholder="キーワードを入力して検索">
+                                <input type="hidden" name="search_flg" value="1">
                                 <input type="submit" class="btn" formaction="{{ route('product.search') }}" value="">
-                                <input type="submit" formaction="{{ route('product.search') }}" value="検索する">
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                     <div class="searchClose"><img src="/img/common/search_close.svg" alt=""></div>
                 </div>
                 <div class="searchWrapCont">
@@ -169,7 +166,7 @@
                         <li><a>ブログを探す</a></li>
                     </ul> --}}
                     <div class="searchWrapItem">
-                        <p class="searchWrapHd"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p>
+                        <p class="searchWrapHd" style="margin-top: 10px;"><img src="/img/common/icon_search_hd.svg" alt="">サービス一覧</p> {{--仮でスタイルを入れています。問題なければそのまま--}}
                         <ul class="searchItemUl">
                             @foreach($categories as $category)
                                 <li>
@@ -274,17 +271,19 @@
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
-                    <a href="{{ route('home') }}}}" class="spFixedLink">
+                    <a href="{{ route('home') }}" class="spFixedLink">
                         <p class="linkIcon"><img src="/img/common/icon_spfixed01.svg" alt=""></p>
                         <p class="linkTxt">ホーム</p>
                     </a>
                 </div>
-                <div class="spFixedItem">
-                    <a href="{{ route('product.index') }}" class="spFixedLink">
-                        <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
-                        <p class="linkTxt">投稿</p>
-                    </a>
-                </div>
+                @can('identify')
+                    <div class="spFixedItem">
+                        <a href="{{ route('product.index') }}" class="spFixedLink">
+                            <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
+                            <p class="linkTxt">投稿</p>
+                        </a>
+                    </div>
+                @endcan
                 <div class="spFixedItem">
                     <a href="{{ route('chatroom.index') }}" class="spFixedLink">
                         <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>
@@ -292,8 +291,8 @@
                     </a>
                 </div>
                 <div class="spFixedItem">
-                    <a href="#" class="spFixedLink">
-                        <span class="newSpan">1</span>
+                    <a href="{{ route('user_notification.index') }}" class="spFixedLink">
+                        <span class="newSpan">@if ($not_view_user_notifications->count() > 0) {{$not_view_user_notifications->count()}}@endif</span>
                         <p class="linkIcon"><img src="/img/common/ico_message.svg" alt=""></p>
                         <p class="linkTxt">お知らせ</p>
                     </a>
@@ -307,4 +306,4 @@
             </div>
         @endauth
     </div><!-- /#header -->
-</header>
+	<x-hide-modal/>

@@ -2,7 +2,7 @@
     <div class="title">
         <div class="fun">
             <div class="single">
-                <a href="#" tabindex="0"> {{ App\Models\JobRequest::IS_ONLINE[$request->is_online] }} </a>
+                <a tabindex="0"> {{ App\Models\JobRequest::IS_ONLINE[$request->is_online] }} </a>
             </div>
             <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
         </div>
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <th><span class="th">残り時間</span></th>
-                <td><big>{{ $diff_date_time['days'] }}日と{{ $diff_date_time['hours'] }}時間</big></td>
+                <td><big>{{ rtrim($diff_time, '後') }}</big></td>
             </tr>
             @if(!is_null($request->required_date))
             <tr>

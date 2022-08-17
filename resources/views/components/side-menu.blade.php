@@ -5,7 +5,7 @@
             <div class="sidePerson">
                 <div class="sidePersonPic">
                     @if(!empty($user_profile->icon))
-                        <p class="img"><img style="width: 120px;height: 120px;object-fit: cover;" src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></p>
+                        <p class="img"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt=""></p>
                     @else
                         <p class="img"><img src="/img/mypage/no_image.jpg" alt=""></p>
                     @endif
@@ -23,7 +23,7 @@
                     <li><a href="/sample/favorite" class="">お気に入り</a></li>
                     <li><a href="{{ route('chatroom.active') }}" class="">進行中の取引</a></li>
                     <li><a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a></li>
-                    <li><a href="/sample/payment_history" class="">決済履歴</a></li>
+                    <li><a href="{{ route('payment.index') }}" class="">決済履歴</a></li>
                     <li><a href="{{ route('point.index') }}" class="">ポイント取得・利用履歴</a></li>
                     <li><a href="/sample/friends" class="">フォロー・フォロワー</a></li>
                     <li><a href="{{ route('user_notification.index') }}" class="">お知らせ</a></li>
@@ -31,7 +31,7 @@
                     <li><a href="{{ route('secret01') }}" class="">マッチングする秘訣</a></li>
                     <li><a href="{{ route('coupon.index') }}" class="">クーポン</a></li>
                     <li><a href="{{ route('dm.index') }}" class="">DM</a></li>
-                    <li><a href="{{ route('member_config.index') }}" class="">会員情報</a></li>
+                    <li><a href="{{ route('member') }}" class="">会員情報</a></li>
                     <li><a href="{{ route('showWithdrawForm') }}" class="">退会</a></li>
                 </ul>
             </div>
@@ -63,21 +63,3 @@
         </aside>
     </div>
 </x-app>
-<script>
-	$(function(){
-
-		// バリデーションエラーの際、モーダルを最初から表示する
-        if (@json($errors->has('email') || $errors->has('cc_name') || $errors->has('cc_number') || $errors->has('exp') || $errors->has('cvc'))){
-
-        } else if (@json($errors->has('identification_path'))){
-                $('.fancybox_register').trigger('click');
-                $('html').addClass('fancybox-margin');
-                $('html').addClass('fancybox-lock');
-                $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
-        } else if (@json($errors->any())) {
-					$('.fancybox').trigger('click');
-                    $('html').addClass('fancybox-margin fancybox-lock');
-                    $('.fancybox-wrap').wrap('<div class="fancybox-overlay fancybox-overlay-fixed" style="width:auto; height: auto; display: block;"></div>');
-		}
-	})
-</script>

@@ -86,7 +86,7 @@
 						<p class="login">最終ログイン：8時間前</p>
 						<p class="introd"><a href="#" class="name">クリエイター名</a><br>(女性/ 20代/ 東京都)</p>
 						<div class="evaluate three"></div>
-						<p class="check"><a href="#">本人確認済み</a></p>
+						<p class="check"><a>本人確認済み</a></p>
 					</div>
 				</aside>
 				</div>

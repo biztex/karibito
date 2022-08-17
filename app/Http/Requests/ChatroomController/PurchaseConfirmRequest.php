@@ -2,10 +2,20 @@
 
 namespace App\Http\Requests\ChatroomController;
 
+use App\Models\UserCoupon;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Services\PointService;
+use App\Rules\UseCouponRule;
 
 class PurchaseConfirmRequest extends FormRequest
 {
+
+    private $point_service;
+
+    public function __construct(PointService $point_service)
+    {
+        $this->point_service = $point_service;
+    }
     protected function prepareForValidation()
     {
         if( $this->card_id !== 'immediate' ) {
@@ -14,8 +24,23 @@ class PurchaseConfirmRequest extends FormRequest
             $exp = $this->exp_year . '-' . $this->exp_month; 
         }      
 
+
+        if($this->coupon_use === null) {
+            $coupon_number = null;
+        } else {
+            $coupon_number = $this->coupon_number;
+        }
+
+        if($this->point_use == 0) {
+            $user_use_point = null;
+        } else {
+            $user_use_point = $this->user_use_point;
+        }
+
         $this->merge([
             'exp' => $exp,
+            'coupon_number' => $coupon_number,
+            'user_use_point' => $user_use_point
         ]);
     }
 
@@ -36,6 +61,10 @@ class PurchaseConfirmRequest extends FormRequest
      */
     public function rules()
     {
+        // $price = $this->proposal->price;
+        $coupon_min_price = UserCoupon::where('coupon_number', $this->coupon_number)->pluck('min_price')->first(); //クーポンを利用できる最小金額
+        $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
+
         return [
             'payment_type' => 'required',
             'card_id' => 'required | string',
@@ -45,14 +74,19 @@ class PurchaseConfirmRequest extends FormRequest
             'exp_year' => 'required_if:card_id,immediate | nullable ',
             'exp_month' => 'required_if:card_id,immediate | nullable ',
             'exp' => 'required_if:card_id,immediate | nullable | after:last month',
-            'amount' => 'required | integer | min:500 | max:9990000'
+            'coupon_use' => 'nullable |  boolean',
+            'coupon_number' => ['required_if:coupon_use,1', 'nullable', new UseCouponRule],
+            'coupon_discount' => "integer | nullable",
+            'point_use' => 'required |  boolean',
+            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable"
         ];
     }
 
     public function messages()
     {
         return [
-            'card_id.*' => '※お支払いカードを選択してください。'
+            'card_id.*' => '※お支払いカードを選択してください。',
+            'coupon_number.required_if' => '利用するクーポンを選択してください。' 
         ];
     }
 }

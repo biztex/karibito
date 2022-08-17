@@ -1,7 +1,7 @@
 <div class="title">
     <div class="fun">
         <div class="single">
-            <a href="#" tabindex="0">@if(!is_null($request->is_online)){{ App\Models\Product::IS_ONLINE[$request->is_online] }}@endif</a>
+            <span tabindex="0">@if(!is_null($request->is_online)){{ App\Models\Product::IS_ONLINE[$request->is_online] }}@endif</s>
             <input type="hidden" value="@if(!is_null($request->is_online)){{ $request->is_online }}@endif" name="is_online">
         </div>
         <!-- <a href="#" class="favorite">お気に入り(11)</a> -->

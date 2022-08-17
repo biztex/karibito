@@ -17,7 +17,7 @@
 							<ul class="mypageUl02 memberUl01">
 								<li><a href="{{ route('member_config.index') }}">プロフィール</a></li>
 								<li><a href="#">お支払い方法</a></li>
-								<li><a href="#">受取口座の登録・変更</a></li>
+								<li><a href="{{ route('member_config.bank.edit') }}">受取口座の登録・変更</a></li>
 								<li><a href="#">入出金履歴</a></li>
 								<li><a href="{{ route('member_config.email.edit') }}">メールアドレスの変更</a></li> <!--1 追加 -->
 								@can('exist.password')
@@ -30,6 +30,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
 	</article>
 </x-layout>

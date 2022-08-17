@@ -65,10 +65,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = UserProfile::with(['user', 'prefecture'])->firstWhere('user_id', $id);
-        $birthday = (int) str_replace("-","", $user->birthday);
-        $now_age = Age::nowAge($birthday);
-        $age = Age::group($birthday);
-        return view('admin.user.show',compact('user','age','now_age'));
+
+        return view('admin.user.show',compact('user'));
     }
 
     // /**
@@ -135,7 +133,7 @@ class UserController extends Controller
      */
     public function limitAccount($id)
     {
-        $user_profile = UserProfile::firstWhere('id',$id);
+        $user_profile = UserProfile::firstWhere('user_id',$id);
 
         $user_profile->fill([
             'is_ban' => 1,
@@ -154,7 +152,7 @@ class UserController extends Controller
      */
     public function cancelLimitAccount($id)
     {
-        $user_profile = UserProfile::firstWhere('id',$id);
+        $user_profile = UserProfile::firstWhere('user_id',$id);
 
         $user_profile->fill(['is_ban' => 0])->save();
 

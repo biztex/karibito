@@ -80,7 +80,7 @@ $(function () {
 	// URLのハッシュ値が #job-request の場合
 	var hash = $(location).prop('hash');
 
-	if (hash == "#job-request" || hash == "#usually" || hash == "#inactive") {
+	if (hash == "#job-request" || hash == "#usually" || hash == "#inactive" || hash == "#withdrawal") {
 
 
 
@@ -156,5 +156,20 @@ $(function () {
 			$(this).prop('disabled', true);
 		}
 	})
+
+	// トップページ
+	// カテゴリをもっと見るボタン
+
+		$('.js-productOtherBtn').on('click', function () {
+			$(".js-hide_product_categories").removeClass('hide');
+            $(this).closest('.otherBtn').hide();
+		}
+	)
+
+		$('.js-jobRequestOtherBtn').on('click', function () {
+			$(".js-hide_job_request_categories").removeClass('hide');
+            $(this).closest('.otherBtn').hide();
+		}
+	)
 
 });

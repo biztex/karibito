@@ -1,4 +1,4 @@
-<x-other-user.layout>
+<x-layout>
 <body id="estimate" class="dm-page-show">
 	<x-parts.post-button/>
 	<article>
@@ -9,21 +9,19 @@
 					<div class="friendsTop">
 						<div class="sellerTop">
 							<div class="user">
-								<p class="head">
-									@if($dmroom->from_user_id === Auth::id())
-										@if($dmroom->toUser->userProfile->icon === null)
-											<p class="icoNoImg"><img src="/img/mypage/no_image.jpg" alt=""></p>
-										@else
-											<p class="icoDm"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></p>
-										@endif
+								@if($dmroom->from_user_id === Auth::id())
+									@if($dmroom->toUser->userProfile->icon === null)
+										<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
 									@else
-										@if($dmroom->fromUser->userProfile->icon === null)
-											<p class="icoNoImg"><img src="/img/mypage/no_image.jpg" alt=""></p>
-										@else
-											<p class="icoDm"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></p>
-										@endif
+										<p class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></p>
 									@endif
-								</p>
+								@else
+									@if($dmroom->fromUser->userProfile->icon === null)
+										<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+									@else
+										<p class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></p>
+									@endif
+								@endif
 								<div class="info">
 									@if($dmroom->from_user_id === \Auth::id())
 										<p class="name" style="margin-left:10px;">{{ $dmroom->toUser->name }}</p>
@@ -49,9 +47,9 @@
 								<li>
 									<div class="img">
 										@if(null !== $message->user->userProfile->icon)
-											<p style="width: 50px;height: 50px;"  class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+											<p class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt=""></p>
 										@else
-											<p style="width: 50px;height: 50px;"  class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 50px;height: 50px;object-fit: cover;"></p>
+											<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
 										@endif
 										<div class="info">
 											<p class="name">{{$message->user->name}}</p>
@@ -138,7 +136,5 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-		<x-hide-modal/>
-	</body>
 </article>
 </x-layout>
