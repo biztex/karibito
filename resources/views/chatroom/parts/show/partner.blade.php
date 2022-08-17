@@ -15,19 +15,9 @@
             </div>
             <p class="login">最終ログイン：オンライン中</p>
         </div>
-        @if($chatroom->reference->is_call ===  1 && $chatroom->canCall())
-            <div class="tellTop">
-                <div class="support">
-                    <span class="pre">電話対応：{{App\Models\UserProfile::CALL_STATUS[$partner->userProfile->can_call]}}</span>
-                    <span class="fix">「待機中」のみ着信可能です</span>
-                </div>
-                @if($partner->userProfile->can_call === App\Models\UserProfile::CAN_CALL )
-                    <div class="functeBtns">
-                        <a href="tel:{{$partner->tel}}" class="full blue">電話をかける</a>
-                    </div>
-                @endif
-            </div>
-        @endif
+
+        @include('chatroom.parts.show.partner-tell')
+
     </div>
 
 @elseif($partner === $chatroom->buyerUser && $chatroom->reference_type === 'App\Models\JobRequest')
@@ -47,19 +37,9 @@
             </div>
             <p class="login">最終ログイン：オンライン中</p>
         </div>
-        @if($chatroom->reference->is_call === 1 && $chatroom->canCall())
-            <div class="tellTop">
-                <div class="support">
-                    <span class="pre">電話対応：{{App\Models\UserProfile::CALL_STATUS[$partner->userProfile->can_call]}}</span>
-                    <span class="fix">「待機中」のみ着信可能です</span>
-                </div>
-                @if($partner->userProfile->can_call === App\Models\UserProfile::CAN_CALL)
-                    <div class="functeBtns">
-                        <a href="tel:{{$partner->tel}}" class="full blue">電話をかける</a>
-                    </div>
-                @endif
-            </div>
-        @endif
+
+        @include('chatroom.parts.show.partner-tell')
+
     </div>
 @else
     <!-- 購入者情報 -->
@@ -73,18 +53,9 @@
             </div>
             <p class="login">最終ログイン：オンライン中</p>
         </div>
-        @if($chatroom->reference->is_call === 1 && $chatroom->canCall())
-            <div class="tellTop">
-                <div class="support">
-                    <span class="pre">電話対応：{{App\Models\UserProfile::CALL_STATUS[$partner->userProfile->can_call]}}</span>
-                    <span class="fix">「待機中」のみ着信可能です</span>
-                </div>
-                @if($partner->userProfile->can_call === App\Models\UserProfile::CAN_CALL)
-                    <div class="functeBtns">
-                        <a href="tel:{{$partner->tel}}" class="full blue">電話をかける</a>
-                    </div>
-                @endif
-            </div>
-        @endif
+
+        @include('chatroom.parts.show.partner-tell')
+
     </div>
+    
 @endif

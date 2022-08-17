@@ -1194,6 +1194,10 @@
     border-radius: 50px;
     object-fit: cover;
 }
+.sellerTop .user .head img {
+    width: 40px;
+    height: 40px;
+}
 
 @media screen and (max-width: 767px) {
 	.registerHd_confirm {
