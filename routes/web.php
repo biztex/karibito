@@ -68,12 +68,6 @@ Route::get('sample', function () {
 });
 
 // 画面組込中
-Route::view('service_preview', 'post.service_preview')->name('service_preview');
-Route::view('service_provide', 'post.service_provide')->name('service_provide');
-Route::view('service_detail', 'post.service_detail')->name('service_detail');
-Route::view('service_request', 'post.service_request')->name('service_request');
-Route::view('service_thanks', 'post.service_thanks')->name('service_thanks');
-Route::view('job_request_thanks', 'post.job_request_thanks')->name('job_request_thanks');
 Route::view('service', 'post.service')->name('service');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
@@ -141,10 +135,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // 決済履歴
         Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
         // メンバー情報
-        Route::view('member', 'member.index')->name('member');
+        Route::view('member', 'member.index')->name('member'); //このページなくなる
         // 会員情報
-        Route::prefix('member_config')->name('member_config.')->group(function () {
-            Route::view('', 'member.member_config.index')->name('index');
+        Route::prefix('setting')->name('setting.')->group(function () {
+            Route::view('', 'setting.index')->name('index');
             // メールアドレス変更
             Route::controller(ChangeEmailController::class)->name('email.')->group(function () {
                 Route::get('email', 'edit')->name('edit');
@@ -166,7 +160,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('card', 'create')->name('create');
                 Route::post('card', 'store')->name('store');
                 Route::delete('card/{card_id}', 'destroy')->name('destroy');
-                Route::get('card/{id}', function () {return redirect()->route('member_config.card.create');});
+                Route::get('card/{id}', function () {return redirect()->route('setting.card.create');});
             });
 
             // 振込口座
@@ -189,9 +183,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');
     Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
+    // 投稿ページ
+    Route::get('post', [MypageProductController::class, 'post'])->name('post');
+
     // 提供・リクエスト一覧
     Route::get('job_request',function () { return redirect()->route('publication');});
+    Route::get('product',function () { return redirect()->route('publication');});
     Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
+    
     // 提供・リクエスト 下書き一覧
     Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
 
@@ -214,7 +213,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('draft', 'storeDraft')->name('store.draft');
             Route::post('preview', 'preview')->name('preview');
             Route::post('post/store/preview', 'storePreview')->name('store.preview');
-            Route::get('/', 'index')->name('index');
+            Route::view('thanks', 'product.thanks')->name('thanks');
         });
     });
 
@@ -236,6 +235,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('draft','storeDraft')->name('store.draft');
             Route::post('preview','preview')->name('preview');
             Route::post('post/store/preview','storePreview')->name('store.preview');
+            Route::view('thanks', 'job_request.thanks')->name('thanks');
         });
     });
 
@@ -246,7 +246,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret04','secret.secret04')->name('secret04');
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
-    
+
 
     // やり取り（提供・リクエスト共用版）
     Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
@@ -444,6 +444,8 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
     Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
     Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
+    Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
+    Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
 });
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 

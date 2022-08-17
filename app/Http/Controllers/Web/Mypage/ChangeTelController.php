@@ -17,12 +17,12 @@ class ChangeTelController extends Controller
 
     public function edit()
     {
-        return view('member.member_config.edit_tel');
+        return view('setting.tel');
     }
 
     public function update(RegisterTelRequest $request)
     {
         $this->user_profile_service->updateTel(\Auth::user(), $request->tel);
-        return redirect()->route('member_config')->with('flash_msg', '電話番号を登録しました。');
+        return redirect()->route('setting')->with('flash_msg', '電話番号を登録しました。');
     }
 }

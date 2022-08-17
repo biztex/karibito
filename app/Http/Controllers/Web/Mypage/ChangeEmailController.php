@@ -15,7 +15,7 @@ class ChangeEmailController extends Controller
 
     public function edit()
     {
-        return view('member.member_config.edit_email');
+        return view('setting.email');
     }
 
     // メールアドレス変更確認メール送信
@@ -36,9 +36,9 @@ class ChangeEmailController extends Controller
         $update_email_res = $this->change_email_service->updateEmail($token);
 
         if($update_email_res){
-            return redirect()->route('member_config.index')->with('flash_msg', 'メールアドレスを更新しました！');
+            return redirect()->route('setting.index')->with('flash_msg', 'メールアドレスを更新しました！');
         } else {
-            return redirect()->route('member_config.index')->with('flash_msg', 'トークンの有効期限が切れているか、トークンが不正です。');
+            return redirect()->route('setting.index')->with('flash_msg', 'トークンの有効期限が切れているか、トークンが不正です。');
         }
     }
 }

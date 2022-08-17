@@ -29,22 +29,9 @@
                                         <p>「良かった」の評価はありません。</p>
                                     @else
                                         @foreach($evaluations['good'] as $value)
-                                        <li>
-                                            <div class="img">
-                                                @if(null !== $value->user->userProfile->icon)
-                                                    <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
-                                                @else
-                                                    <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                @endif
-                                            </div>
-                                            <div class="info">
-                                                <p class="name">{{ $value->user->name }}</p>
-                                                <div class="cont">
-                                                    <p class="date">{{ $value->created_at->format('Y年m月d日') }}</p>
-                                                    <p class="txt" style="word-wrap: break-word;">{!!nl2br($value->text)!!}</p>
-                                                </div>
-                                            </div>
-                                        </li>
+
+                                            <x-parts.evaluation :value='$value'/>
+
                                         @endforeach
                                     @endif
                                     {{ $evaluations['good']->fragment('')->links() }}
@@ -56,22 +43,9 @@
                                         <p>「普通」の評価はありません。</p>
                                     @else
                                         @foreach($evaluations['usually'] as $value)
-                                        <li>
-                                            <div class="img">
-                                                @if(null !== $value->user->userProfile->icon)
-                                                    <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
-                                                @else
-                                                    <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                @endif
-                                            </div>
-                                            <div class="info">
-                                                <p class="name">{{ $value->user->name }}</p>
-                                                <div class="cont">
-                                                    <p class="date">{{ $value->created_at->format('Y年m月d日') }}</p>
-                                                    <p class="txt" style="word-wrap: break-word;">{!!nl2br($value->text)!!}</p>
-                                                </div>
-                                            </div>
-                                        </li>
+
+                                        	<x-parts.evaluation :value='$value'/>
+
                                         @endforeach
                                     @endif
                                     {{ $evaluations['usually']->fragment('usually')->links() }}
@@ -83,22 +57,9 @@
                                         <p>「残念だった」の評価はありません。</p>
                                     @else
                                         @foreach($evaluations['pity'] as $value)
-                                        <li>
-                                            <div class="img">
-                                                @if(null !== $value->user->userProfile->icon)
-                                                    <p  class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
-                                                @else
-                                                    <p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                @endif
-                                            </div>
-                                            <div class="info">
-                                                <p class="name">{{ $value->user->name }}</p>
-                                                <div class="cont">
-                                                    <p class="date">{{ $value->created_at->format('Y年m月d日') }}</p>
-                                                    <p class="txt" style="word-wrap: break-word;">{!!nl2br($value->text)!!}</p>
-                                                </div>
-                                            </div>
-                                        </li>
+
+                                            <x-parts.evaluation :value='$value'/>
+
                                         @endforeach
                                     @endif
                                     {{ $evaluations['pity']->fragment('pity')->links() }}

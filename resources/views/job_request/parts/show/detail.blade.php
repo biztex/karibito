@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <th><span class="th">残り時間</span></th>
-                <td><big>{{ rtrim($diff_time, '後') }}</big></td>
+                <td><big>{{ rtrim($job_request->diff_time, '後') }}</big></td>
             </tr>
             @if(!is_null($job_request->required_date))
             <tr>

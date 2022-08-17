@@ -4,7 +4,7 @@
 			<div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　&gt;　
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
-                <a href="{{ route('product.index') }}">投稿する</a>　>　
+                <a href="{{ route('post') }}">投稿する</a>　>　
                 <a href="{{ route('job_request.create') }}">サービスをリクエストする</a>
 			</div>
 		</div>

@@ -6,12 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 use App\Libraries\DiffDateTime;
 
 
 class JobRequest extends Model
 {
     use HasFactory, SoftDeletes;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $guarded = [ 'id' ];
+
+    protected $appends = ['diff_time'];
 
     const STATUS_PUBLISH = 1;
 
@@ -153,13 +163,6 @@ class JobRequest extends Model
         return $query->where('is_draft', JobRequest::NOT_DRAFT);
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $guarded = [ 'id' ];
-
     // MProductChildCategoryモデルとのリレーション
     public function mProductChildCategory()
     {
@@ -210,39 +213,9 @@ class JobRequest extends Model
         return $this->morphMany(UserGetPoint::class, 'reference');
     }
 
-    /**
-     * 締切まで後何日を取得
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function deadlineDay(): Attribute
+    protected function getDiffTimeAttribute()
     {
-        return Attribute::make(
-            get: function ($value, $attributes) {
-                $day1 = now();
-                $day2 = $attributes['application_deadline'];
-                $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
-
-                return $diff_date_time['days'];
-        }
-        );
-    }
-
-    /**
-     * * 締切まで後何日かを取得
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function deadlineHour(): Attribute
-    {
-        return Attribute::make(
-            get: function ($value, $attributes) {
-            $day1 = now();
-            $day2 = $attributes['application_deadline'];
-            $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
-
-            return $diff_date_time['hours'];
-            }
-        );
+        $date = new Carbon($this->application_deadline);
+        return $this->attributes['diff_time'] = $date->addDay()->diffForHumans(Carbon::now());
     }
 }
