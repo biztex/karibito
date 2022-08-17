@@ -272,8 +272,7 @@
                                 </div>
                                 <div class="mypageWrap">
                                     <div class="mypageSec05">
-                                        <form action="{{ route('portfolio.store') }}" method="post" id
-                                        form enctype="multipart/form-data">
+                                        <form action="{{ route('portfolio.store') }}" method="post" idform enctype="multipart/form-data">
                                             @csrf
                                             <div class="mypageEditBox">
                                                 <div class="mypageEditList">
@@ -313,6 +312,13 @@
                                                     @error('detail')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     <div class="mypageEditInput">
                                                         <textarea name="detail" placeholder="詳細を入力してください" required>{{ old('detail',$request->detail ?? "") }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="mypageEditList">
+                                                    <p class="mypageEditHd">動画(Youtubeのみ)</p>
+                                                    @error('youtube_link')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                    <div class="mypageEditInput">
+                                                        <input type="text" name="youtube_link" placeholder="動画のリンクを入力してください" value="{{ old('youtube_link',$request->youtube_link ?? "") }}">
                                                     </div>
                                                 </div>
                                                 <div class="mypageEditList">

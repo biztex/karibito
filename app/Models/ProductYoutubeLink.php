@@ -17,4 +17,16 @@ class ProductYoutubeLink extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getIframeURLAttribute()
+    {
+        $youtube_link = $this->youtube_link;
+        if (strpos($youtube_link, "watch") != false) {
+            $video_id = substr($youtube_link, (strpos($youtube_link, "=")+1));
+        } else {
+            $video_id = substr($youtube_link, (strpos($youtube_link, "youtu.be/")+9));;
+        }
+        $iframe_url = 'https://www.youtube.com/embed/' . $video_id;
+        return $iframe_url;
+    }
 }
