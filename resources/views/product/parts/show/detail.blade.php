@@ -36,42 +36,42 @@
 </div>
 
 @if($additional_options->isNotEmpty())
-    <div class="optional">
-        <h2 class="hdM">オプション追加料金</h2>
-        <ul>
-            @foreach($additional_options as $additional_option)
+    <div class="content">
+        <div class="optional">
+            <h2 class="hdM">オプション追加料金</h2>
+            <ul>
+                @foreach($additional_options as $additional_option)
                     <li>
                         <span class="add">＋ {{$additional_option->name}}</span>
                         <span class="price">￥@if(!is_null($additional_option->price)){{ number_format(App\Models\AdditionalOption::OPTION_PRICE[$additional_option->price])}}@endif</span>
                     </li>
-            @endforeach
-        </ul>
+                @endforeach
+            </ul>
+        </div>
     </div>
 @endif
-
 @if($product->productQuestion->isNotEmpty())
-    <div class="optional faq">
-        <h2 class="hdM">よくあるご質問</h2>
-        <ul class="toggleWrapPC">
-            @foreach($product->productQuestion as $product_question)
-                <li>
-                    <p class="quest toggleBtn"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
-                    <p class="answer toggleBox" style="width:100%;">{{$product_question->answer}}</p>
-                </li>
-            @endforeach
-        </ul>
+    <div class="content">
+        <div class="optional faq">
+            <h2 class="hdM">よくあるご質問</h2>
+            <ul class="toggleWrapPC">
+                @foreach($product->productQuestion as $product_question)
+                    <li>
+                        <p class="quest toggleBtn"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
+                        <p class="answer toggleBox" style="width:100%;">{{$product_question->answer}}</p>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 @endif
-
-@if ($product->productLink->isNotEmpty())
-    <div class="optional">
-        <h2 class="hdM">参照動画</h2>
-        <ul class="toggleWrapPC">
+@if ($product->productLink->isNotEmpty()) {{--YouTubeの動画--}}
+    <div class="content">
+        <div class="optional">
+            <h2 class="hdM">参考動画</h2>
             @foreach($product->productLink as $product_link)
-                <li>
-                    <div class="cont pre-wrap break-word js-link"><a href="{!!$product_link->youtube_link!!}" target="_blank">{!!$product_link->youtube_link!!}</a></div>
-                </li>
+                <iframe class="" height="400" width="100%" src="{{ $product_link->iframe_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             @endforeach
-        </ul>
+        </div>
     </div>
 @endif
