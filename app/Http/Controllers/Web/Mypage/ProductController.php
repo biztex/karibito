@@ -30,12 +30,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function post()
     {
         $products = Product::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(5);
         $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(5);
 
-        return view('post.post', compact('products','job_requests'));
+        return view('post', compact('products','job_requests'));
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductController extends Controller
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
 
-        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
+        return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
     /**
@@ -136,7 +136,7 @@ class ProductController extends Controller
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
 
-        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
+        return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
     /**
@@ -265,7 +265,7 @@ class ProductController extends Controller
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
 
-        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
+        return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
     /**
@@ -286,6 +286,6 @@ class ProductController extends Controller
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
 
-        return redirect()->route('service_thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
+        return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 }

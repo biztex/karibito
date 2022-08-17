@@ -113,7 +113,7 @@
                                     <a href="#">お気に入り</a>
                                     @can('identify')
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                        <a href="{{ route('product.index') }}" class="blueBtn">投稿する</a>
+                                        <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
                                     @endcan
                                 </div>
                             @endauth
@@ -248,7 +248,7 @@
                     </div>
                     @can('identify')
                     <div class="right">
-                        <a href="{{ route('product.index') }}">投稿する</a>
+                        <a href="{{ route('post') }}">投稿する</a>
                     </div>
                     @endcan
                 </div>
@@ -278,7 +278,7 @@
                 </div>
                 @can('identify')
                     <div class="spFixedItem">
-                        <a href="{{ route('product.index') }}" class="spFixedLink">
+                        <a href="{{ route('post') }}" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
                             <p class="linkTxt">投稿</p>
                         </a>
