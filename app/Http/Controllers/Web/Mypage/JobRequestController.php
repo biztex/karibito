@@ -32,7 +32,7 @@ class JobRequestController extends Controller
         $products = Product::loginUsers()->draft()->orderBy('created_at','desc')->paginate(10);
         $job_requests = JobRequest::loginUsers()->draft()->orderBy('created_at','desc')->paginate(10);
 
-        return view('post.draft', compact('products','job_requests'));
+        return view('mypage.draft.index', compact('products','job_requests'));
     }
 
     /**
@@ -46,7 +46,7 @@ class JobRequestController extends Controller
         $products = Product::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $job_requests = JobRequest::loginUsers()->notDraft()->orderBy('created_at','desc')->paginate(10);
 
-        return view('post.publication', compact('products','job_requests'));
+        return view('mypage.publication.index', compact('products','job_requests'));
     }
 
     /**
@@ -94,7 +94,7 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
-        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
+        return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
     /**
@@ -144,7 +144,7 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
-        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
+        return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
     /**
@@ -236,7 +236,7 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
-        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
+        return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
     /**
@@ -272,6 +272,6 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
-        return redirect()->route('job_request_thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
+        return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 }

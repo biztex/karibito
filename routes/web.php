@@ -68,12 +68,6 @@ Route::get('sample', function () {
 });
 
 // 画面組込中
-Route::view('service_preview', 'post.service_preview')->name('service_preview');
-Route::view('service_provide', 'post.service_provide')->name('service_provide');
-Route::view('service_detail', 'post.service_detail')->name('service_detail');
-Route::view('service_request', 'post.service_request')->name('service_request');
-Route::view('service_thanks', 'post.service_thanks')->name('service_thanks');
-Route::view('job_request_thanks', 'post.job_request_thanks')->name('job_request_thanks');
 Route::view('service', 'post.service')->name('service');
 Route::view('request', 'post.request_list')->name('request');
 Route::view('request_detail', 'post.request_detail')->name('request_detail');
@@ -189,9 +183,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('showWithdrawForm');
     Route::post('withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 
+    // 投稿ページ
+    Route::get('post', [MypageProductController::class, 'post'])->name('post');
+
     // 提供・リクエスト一覧
     Route::get('job_request',function () { return redirect()->route('publication');});
+    Route::get('product',function () { return redirect()->route('publication');});
     Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
+    
     // 提供・リクエスト 下書き一覧
     Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
 
@@ -214,7 +213,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('draft', 'storeDraft')->name('store.draft');
             Route::post('preview', 'preview')->name('preview');
             Route::post('post/store/preview', 'storePreview')->name('store.preview');
-            Route::get('/', 'index')->name('index');
+            Route::view('thanks', 'product.thanks')->name('thanks');
         });
     });
 
@@ -236,6 +235,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('draft','storeDraft')->name('store.draft');
             Route::post('preview','preview')->name('preview');
             Route::post('post/store/preview','storePreview')->name('store.preview');
+            Route::view('thanks', 'job_request.thanks')->name('thanks');
         });
     });
 
