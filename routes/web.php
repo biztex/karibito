@@ -246,7 +246,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('secret04','secret.secret04')->name('secret04');
     Route::view('secret05','secret.secret05')->name('secret05');
     Route::view('secret06','secret.secret06')->name('secret06');
-    
+
 
     // やり取り（提供・リクエスト共用版）
     Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
@@ -444,6 +444,8 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
     Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
     Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
+    Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
+    Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
 });
 Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
