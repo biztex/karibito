@@ -268,10 +268,20 @@
                                 <div class="portfolioDtWrap">
                                     <h2 class="portfolioDtHd">{{ $portfolio->title }}</h2>
                                     <p class="portfolioDtDate">{{ $portfolio->year }}年 {{ $portfolio->month }}月</p>
-                                    <div class="portfolioDtCont">
+                                    <div class="portfolioDtCont" style="margin-bottom: 1.5rem">
                                         <p class="portfolioDtImg"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
                                         <p class="portfolioDtDetail">{{ $portfolio->detail }}</p>
                                     </div>
+                                    @if ($portfolio->portfolioLink->isNotEmpty()) {{--YouTubeの動画--}}
+                                        <div class="content">
+                                            <div class="optional">
+                                                <h2 class="hdM">参考動画</h2>
+                                                @foreach($portfolio->portfolioLink as $portfolio_link)
+                                                    <iframe class="" height="400" width="100%" src="{{ $portfolio_link->iframe_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
                                     <ul class="detailSns">
                                         <li><a href="http://www.facebook.com/share.php?u={{ $url }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a></li>
                                         <li><a href="https://social-plugins.line.me/lineit/share?url={{ $url }}"><img src="/img/mypage/ico_line.svg" alt=""></a></li>

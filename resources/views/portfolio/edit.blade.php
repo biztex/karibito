@@ -321,6 +321,58 @@
                                                 </div>
                                             </div>
                                             <div class="mypageEditList">
+                                                <div class="formLinksArea">
+                                                    @if(old('youtube_link'))
+                                                        @foreach(old('youtube_link') as $k => $v)
+                                                            <div class="js-youtubeForm">
+                                                                <p class="mypageEditHd js-link">動画(YouTubeのみ) {{$k + 1}}</p>
+                                                                @error('youtube_link.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                                <div class="td">
+                                                                    <div class="mypageEditInput">
+                                                                        <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{$v}}">
+                                                                    </div>
+                                                                    <div>
+                                                                        <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @elseif(collect($portfolio->portfolioLink)->isNotEmpty())
+                                                        @foreach($portfolio->portfolioLink as $num => $link)
+                                                            <div class="js-youtubeForm">
+                                                                <p class="mypageEditHd js-link">動画(YouTubeのみ) {{$num + 1}}</p>
+                                                                @error('youtube_link.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                                <div class="td">
+                                                                    <div class="mypageEditInput">
+                                                                        <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{ old('youtube_link.'.$num, $link->youtube_link) }}">
+                                                                    </div>
+                                                                    <div>
+                                                                        <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="js-youtubeForm">
+                                                            <p class="mypageEditHd js-link">動画(Youtubeのみ)</p>
+                                                            @error('youtube_link.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                            <div class="td">
+                                                                <div class="mypageEditInput">
+                                                                    <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{ old('youtube_link',$request->youtube_link ?? "") }}">
+                                                                </div>
+                                                                <div>
+                                                                    <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <p class="specialtyBtn"><a href="javascript:;" onclick="addYoutube();"><img src="/img/mypage/icon_add.svg" alt="">動画を追加</a></p>
+                                                <p class="small ml-2 mb-0">対応URL形式</p>
+                                                <p class="small ml-2 mb-0">https://www.youtube.com/watch?v=xxxxxxxxxx</p>
+                                                <p class="small ml-2 mb-0">https://youtube/xxxxxxxxxx</p>
+                                            </div>
+                                            <div class="mypageEditList">
                                                 <p class="mypageEditHd">作成日</p>
                                                 @error('year')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                 @error('month')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -363,9 +415,31 @@
             <script type="text/javascript" src="js/jquery.fancybox.js"></script>
             <script type="text/javascript" src="js/common.js"></script>
             <script type="text/javascript">
-            $(function(){
+                $(function(){
+                    delYoutube();
+                })
+                function addYoutube() {
+                    let str = '<div class="js-youtubeForm"><p class="mypageEditHd js-link">動画(YouTubeのみ)%NUM%</p><div class="td">@error('js-link.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="mypageEditInput"> <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください"></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a> </div></div></div>'
+                    let number_js_youtubeForm = $(".formLinksArea").children(".js-youtubeForm").length;
 
-            });
+                    if(number_js_youtubeForm < 10) {
+                        str = str.replace(/%\w+%/g, number_js_youtubeForm + 1);
+                        $('.formLinksArea').append(str);
+                    }
+                    delYoutube();
+                }
+
+                function delYoutube() {
+                    $('.js-deleteYoutube').click(function(){
+                        let number_js_youtubeForm = $(".formLinksArea").children(".js-youtubeForm").length;
+                        if (number_js_youtubeForm > 1 ) {
+                            $(this).parents('.js-youtubeForm').remove(); //divだけを消す
+                            $(".formLinksArea").children(".js-youtubeForm").each(function(index, element){
+                                $(element).find(".js-link").text("動画(YouTubeのみ)" + (index + 1));
+                            })
+                        }
+                    });
+                }
             </script>
         </body>
         <x-hide-modal/>

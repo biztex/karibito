@@ -30,7 +30,8 @@ class StoreRequest extends FormRequest
             'title' => 'required | string | max:30',
             'detail' => 'required | string | max:3000 ',
             'year' => 'required | integer',
-            'month' => 'required | integer'
+            'month' => 'required | integer',
+            'youtube_link.*' => 'nullable | string | max:255 | url'
         ];
     }
 
