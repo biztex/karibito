@@ -1,7 +1,12 @@
 <x-layout>
-<body id="member-page">
+<body id="setting-page">
 <x-parts.post-button/>
 	<article>
+		<div id="breadcrumb">
+                <div class="inner">
+				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('setting.index') }}">会員情報</a>　>　<span>クレジットカード情報</span>
+			</div>
+		</div><!-- /.breadcrumb -->
 		<x-parts.flash-msg/>
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
@@ -25,7 +30,7 @@
 														<td>{{ $card['name'] }}</td>
 													</tr>
 												</table>
-												<form action="{{ route('member_config.card.destroy', $card['id']) }}" method="post" class="configEditDeleteBtn">
+												<form action="{{ route('setting.card.destroy', $card['id']) }}" method="post" class="configEditDeleteBtn">
 													@csrf @method('delete')
 													<button type="submit" onclick='return confirm("削除してもよろしいですか？");'>削除</button>
 												</form>
@@ -33,7 +38,7 @@
 										@endforeach
 									@endif
 								</div>
-								<form id="form" action="{{ route('member_config.card.store') }}" method="post">
+								<form id="form" action="{{ route('setting.card.store') }}" method="post">
 									@csrf
 									<div class="configEditList">
 										<h3 class="mypageEditHd">新しいカード情報　@if($errors->any())<span>※正しい情報を入力してください</span>@endif</h3>

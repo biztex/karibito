@@ -141,10 +141,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // 決済履歴
         Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
         // メンバー情報
-        Route::view('member', 'member.index')->name('member');
+        Route::view('member', 'member.index')->name('member'); //このページなくなる
         // 会員情報
-        Route::prefix('member_config')->name('member_config.')->group(function () {
-            Route::view('', 'member.member_config.index')->name('index');
+        Route::prefix('setting')->name('setting.')->group(function () {
+            Route::view('', 'setting.index')->name('index');
             // メールアドレス変更
             Route::controller(ChangeEmailController::class)->name('email.')->group(function () {
                 Route::get('email', 'edit')->name('edit');
@@ -166,7 +166,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('card', 'create')->name('create');
                 Route::post('card', 'store')->name('store');
                 Route::delete('card/{card_id}', 'destroy')->name('destroy');
-                Route::get('card/{id}', function () {return redirect()->route('member_config.card.create');});
+                Route::get('card/{id}', function () {return redirect()->route('setting.card.create');});
             });
 
             // 振込口座

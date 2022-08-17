@@ -108,10 +108,7 @@ class JobRequestController extends Controller
     {
         $user = User::find($job_request->user_id);
 
-        $date = new Carbon($job_request->application_deadline);
-        $diff_time = $date->addDay()->diffForHumans(Carbon::now());
-
-        return view('job_request.show',compact('job_request','user','diff_time'));
+        return view('job_request.show',compact('job_request','user'));
     }
 
     /**

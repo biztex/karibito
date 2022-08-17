@@ -67,8 +67,8 @@
 #news .sidePerson,
 #coupon .sidePerson,
 .dm-page .sidePerson,
-#member .sidePerson,
-#member-page .sidePerson,
+#setting .sidePerson,
+#setting-page .sidePerson,
 #withdraw .sidePerson,
 #portfolio .sidePerson,
 #resume .sidePerson,
@@ -614,12 +614,12 @@
     pointer-events: none;
  }
 
- #member #side div:nth-of-type(2) ul li:nth-of-type(13) a {
+ #setting #side div:nth-of-type(2) ul li:nth-of-type(13) a {
     color: #333333;
     background-color: #FCAA00;
     pointer-events: none;
  }
- #member-page #side div:nth-of-type(2) ul li:nth-of-type(13) a {
+ #setting-page #side div:nth-of-type(2) ul li:nth-of-type(13) a {
     color: #333333;
     background-color: #FCAA00;
  }
@@ -714,6 +714,11 @@
 }
 .recommendList.style2 .list .info {
     border: 1px solid #DDDDDD;
+	width: 168px;
+	height: 320px;
+	display:flex;
+	flex-flow: column;
+	justify-content:space-between;
 }
 .infoTop{
 	border: 1px solid #DDDDDD;
@@ -1080,11 +1085,25 @@
 	object-fit: cover;
 	border-radius: 50px;
 }
+
+.aboutUser .user .ico img {
+	width: 35px;
+	height: 35px;
+    object-fit: cover;
+	border-radius: 50px;
+}
+
 @media screen and (max-width: 767px) {
 	.sellerTop .user .head {
 		width: 40px;
 		height: 40px;
 	}
+
+	.aboutUser .user .ico img {
+		width: 26px;
+		height: 26px;
+	}
+	
 }
 .max-string {
 	color: #545454;
@@ -1173,9 +1192,136 @@
 .add_mt20 {
 	margin-top: 20px;
 }
+.evaluationIcon .head img {
+	width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+.sellerTop .user .head img {
+    width: 40px;
+    height: 40px;
+}
 
 @media screen and (max-width: 767px) {
 	.registerHd_confirm {
 		margin-top: 20px;
+	}
+
+	.evaluationIcon .head img {
+		width: 40px;
+    	height: 40px;
+	}
+}
+
+.chatroomIndex #chatroomStepUl,
+#chatroomStepUl {
+	max-width: 400px;
+}
+.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+	width: 170px;
+}
+@media screen and (max-width: 434px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 165px;
+	}
+}
+@media screen and (max-width: 424px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 160px;
+	}
+}
+@media screen and (max-width: 414px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 155px;
+	}
+}
+@media screen and (max-width: 404px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 150px;
+	}
+}
+@media screen and (max-width: 394px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 145px;
+	}
+}
+@media screen and (max-width: 384px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 140px;
+	}
+}
+@media screen and (max-width: 374px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 135px;
+	}
+}
+@media screen and (max-width: 364px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 130px;
+	}
+}
+@media screen and (max-width: 354px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 125px;
+	}
+}
+@media screen and (max-width: 344px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 120px;
+	}
+}
+@media screen and (max-width: 334px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 115px;
+	}
+}
+@media screen and (max-width: 324px) {
+	.chatroomIndex #chatroomStepUl li+li .stepDot:before {
+		width: 110px;
+	}
+}
+
+#chatroomStepUl li+li .stepDot:before {
+    width: 170px;
+}
+@media screen and (max-width: 444px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 166px;
+	}
+}
+@media screen and (max-width: 416px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 160px;
+	}
+}
+@media screen and (max-width: 404px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 153px;
+	}
+}
+@media screen and (max-width: 388px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 145px;
+	}
+}
+@media screen and (max-width: 373px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 137px;
+	}
+}
+@media screen and (max-width: 356px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 129px;
+	}
+}
+@media screen and (max-width: 340px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 121px;
+	}
+}
+@media screen and (max-width: 325px) {
+	#chatroomStepUl li+li .stepDot:before {
+		width: 113px;
 	}
 }

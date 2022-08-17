@@ -33,7 +33,7 @@
                 @if(empty($product->user->userProfile->icon))
                     <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
                 @else
-                    <p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+                    <p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt=""></p>
                 @endif
                 <div class="introd">
                     <p class="name">{{ $product->user->name }}</p>

@@ -5,7 +5,7 @@
 				<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
 				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
+				{{-- <li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li> --}}
 				<li><a href="#" class="is_active">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
 			</ul>
@@ -37,7 +37,11 @@
 											@foreach($products as $product)
 											<li>
 												<div class="cont01">
+													@if(isset($product->productImage[0]))
 														<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+													@else
+														<p class="img"><img src="/img/common/img_work01@2x.jpg" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+													@endif
 													<div class="info">
 														<div class="breadcrumb"><a href="#" tabindex="0">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
 														<div class="draw">

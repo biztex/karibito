@@ -33,7 +33,7 @@ class PaymentController extends Controller
     {
         $cards = $this->payment_service->getCardList();
 
-        return view('member.member_config.card', compact('cards'));
+        return view('setting.card', compact('cards'));
     }
 
     /**
@@ -47,7 +47,7 @@ class PaymentController extends Controller
 
         \Session::put('flash_msg','クレジットカード情報を登録しました！');
 
-        return redirect()->route('member_config.card.create');
+        return redirect()->route('setting.card.create');
     }
 
     public function destroy($card_id)
@@ -59,6 +59,6 @@ class PaymentController extends Controller
         \Session::put('flash_msg','クレジットカード情報を削除しました！');
 
         });
-        return redirect()->route('member_config.card.create');
+        return redirect()->route('setting.card.create');
     }
 }

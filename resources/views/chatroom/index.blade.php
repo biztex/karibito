@@ -8,7 +8,7 @@
 		</div><!-- /.breadcrumb -->
 		<x-parts.ban-msg/>
         <div id="contents">
-			<div class="cancelWrap">
+			<div class="cancelWrap chatroomIndex">
 				<div class="inner02">
 					<h2 class="subPagesHd">やりとり</h2>
 					<div class="subPagesTab st2 tabWrap">

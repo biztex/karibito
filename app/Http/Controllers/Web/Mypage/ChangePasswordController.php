@@ -10,7 +10,7 @@ class ChangePasswordController extends Controller
 {
     public function edit()
     {
-        return view('member.member_config.edit_password');
+        return view('setting.password');
     }
 
     public function update(UpdateRequest $request)
