@@ -155,7 +155,7 @@ class JobRequestService
     public function getURL($id)
     {
         $base_url = config('app.url');
-        $url = "$base_url/product/$id";
+        $url = "$base_url/job_request/$id";
 
         return $url;
     }
