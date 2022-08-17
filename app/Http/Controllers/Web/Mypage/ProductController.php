@@ -64,10 +64,11 @@ class ProductController extends Controller
         }
 
         \DB::transaction(function () use ($request) {
-          $product = $this->product_service->storeProduct($request->all());
-          $this->product_service->storeAdditionalOption($request->all(), $product->id);
-          $this->product_service->storeProductQuestion($request->all(), $product->id);
-          $this->product_service->storeImage($request, $product->id);
+            $product = $this->product_service->storeProduct($request->all());
+            $this->product_service->storeAdditionalOption($request->all(), $product->id);
+            $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
+            $this->product_service->storeImage($request, $product->id);
         });
 
         $product_id = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->pluck('id')->first();
@@ -87,7 +88,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $all_products = Product::getUser($product->user_id)->orderBy('created_at', 'desc')->get();
-        
+
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
 
         $evaluations = $this->evaluation_service->getProductEvaluations($product);
@@ -120,15 +121,16 @@ class ProductController extends Controller
     public function update(StoreRequest $request, Product $product)
     {
        // バリデーションかかれば入力画面に戻す
-       $validator = $request->getValidator();
-       if ($validator->fails()) {
-           return redirect()->route("product.edit", $request->id)->withErrors($validator)->withInput();
-       }
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return redirect()->route("product.edit", $request->id)->withErrors($validator)->withInput();
+        }
 
         \DB::transaction(function () use ($request, $product) {
             $this->product_service->updateProduct($request->all(), $product);
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 

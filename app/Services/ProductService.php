@@ -73,6 +73,24 @@ class ProductService
         }
     }
 
+    /**
+     * 新規動画追加
+     */
+    public function storeProductLink(array $request, $id)
+    {
+        if (isset($request['youtube_link'])) {
+            foreach ($request['youtube_link'] as $index => $value) {
+                if ($request['youtube_link'][$index]){
+                    $links = [
+                        'youtube_link' => $request['youtube_link'][$index],
+                    ];
+                    $product = Product::find($id);
+                    $product->productLink()->create($links);
+                }
+            }
+        }
+    }
+
 
     /**
      * 商品編集
@@ -128,6 +146,28 @@ class ProductService
                         ];
                         $product = Product::find($product->id);
                         $product->productQuestion()->create($questions);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /**
+     * よくある質問編集
+     */
+    public function updateProductLink(array $request, $product)
+    {
+        $product->productLink()->delete();
+        if (isset($request['youtube_link'])) {
+            if ($request['youtube_link'] !== null) {
+                foreach ($request['youtube_link'] as $index => $value) {
+                    if ($request['youtube_link'][$index]) {
+                        $links = [
+                            'youtube_link' => $request['youtube_link'][$index],
+                        ];
+                        $product = Product::find($product->id);
+                        $product->productLink()->create($links);
                     }
                 }
             }
@@ -243,7 +283,7 @@ class ProductService
             foreach($old_images as $val){
                 $val->delete();
             }
-        // }s
+        // }
     }
 
 

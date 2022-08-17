@@ -156,6 +156,14 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function productLink()
+    {
+        return $this->hasMany(ProductYoutubeLink::class, 'product_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function productImage()
     {
         return $this->hasMany(ProductImage::class);

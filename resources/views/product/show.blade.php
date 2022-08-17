@@ -70,4 +70,14 @@
         }
     }
     moreload.init();
+
+	$(function(){
+		// 利用規約/プライバシーポリシー リンク別ウィンドウで開く
+		$(document).ready(function(){
+			$('.js-link').click(function(){
+			window.open(this.href,'');
+			return false;
+			});
+		});
+	});
 </script>
