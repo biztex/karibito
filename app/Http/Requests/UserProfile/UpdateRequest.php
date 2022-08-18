@@ -23,10 +23,18 @@ class UpdateRequest extends FormRequest
         } else {
             // 年、月、日の入力からdate型の誕生日を作成
             $birthday = $this->year . '-' . $this->month . '-' . $this->day;
-        }        
+        }
+        
+        $arr_content = [];
+        foreach($this['content'] as $value) {
+            if($value !== null) {
+                $arr_content[] = $value;
+            }
+        }
 
         $this->merge([
             'birthday' => $birthday,
+            'arr_content' => $arr_content,
         ]);
     }
 
@@ -49,13 +57,15 @@ class UpdateRequest extends FormRequest
             'introduction' => 'nullable | max:3000 | string',
             'icon' => 'nullable | max:20480 | file | image | mimes:png,jpg',
             'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg',
-            'content.*' => 'max:10'
+            'content.*' => 'max:10',
+            'arr_content' => 'nullable | array | max:10'
         ];
     }
     public function messages()
     {
         return [
-            'content.*.max' => '10文字以下で指定してください。'
+            'content.*.max' => '10文字以下で指定してください。',
+            'arr_content.size' => '得意分野は最大で10個まで登録できます。'
         ];
     }
 }
