@@ -130,9 +130,9 @@
 						<div class="mypageSec04">
 							<div class="inner">
                                 @if (\Auth::id() === $user->id)
-                                    <p class="mypageHd02"><span>スキル・経歴・職務</span><a href="#" class="more">スキル・経歴・職務を編集する</a></p>
+                                    <p class="mypageHd02"><span>スキル・経歴・職務</span>@if ($user->userSkills->isNotEmpty())<a href="{{ route('resume.show') }}" class="more">スキル・経歴・職務を編集する</a>@endif</p>
                                 @else
-                                    <p class="mypageHd02"><span>スキル・経歴・職務</span><a href="#" class="more">スキル・経歴をもっと見る</a></p>
+                                    <p class="mypageHd02"><span>スキル・経歴・職務</span><a href="{{ route('user.skills', $user->id) }}" class="more">スキル・経歴をもっと見る</a></p>
                                 @endif
 								<div class="mypageItem">
 									<p class="mypageHd03">スキル</p>
@@ -183,7 +183,7 @@
                                 @if (\Auth::id() === $user->id)
                                     <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
                                 @else
-                                    {{-- <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p> --}}
+                                    <p class="mypageHd02"><span>ポートフォリオ</span>@if ($portfolio_list->isNotEmpty())<a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a>@endif</p>
                                 @endif
 
                                 @if ($portfolio_list->isEmpty())
@@ -204,7 +204,11 @@
 
 						<div class="otherMypageSec02">
 							<div class="inner">
-								<p class="mypageHd02"><span>依頼者からの評価</span><a href="#" class="more">評価をもっと見る</a></p>
+								<p class="mypageHd02"><span>依頼者からの評価</span>
+									@if($evaluations['good']->isNotEmpty() || $evaluations['usually']->isNotEmpty() || $evaluations['pity']->isNotEmpty())
+										<a href="{{ route('user.evaluation', $user->id) }}" class="more">評価をもっと見る</a>
+									@endif
+								</p>
 								<div class="evaluationStar">
 									<span>総評</span>
 									<x-parts.evaluation-star :star='$user->avg_star'/>

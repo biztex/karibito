@@ -75,7 +75,7 @@
 										@foreach($job_requests as $job_request)
 										<li>
 											<div class="cont01">
-												<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+												<p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
 												<div class="info">
 													<div class="breadcrumb"><a href="{{ route('job_request.category.index', $job_request->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show', $job_request->mProductChildCategory->id)}}">{{ $job_request->mProductChildCategory->name }}</a></div>
 													<div class="draw">

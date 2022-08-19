@@ -74,7 +74,8 @@
 #resume .sidePerson,
 #publication .sidePerson,
 #draft .sidePerson,
-#user_notification .sidePerson
+#user_notification .sidePerson,
+#evaluation .sidePerson
 {
 	display: none;
 }
