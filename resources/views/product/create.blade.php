@@ -374,8 +374,20 @@
         </div>
     </article>
 </x-layout>
-<script type="text/javascript">
-    $(function(){
+<script>
+$(function(){
+
+    for (let i = 0; i < 10; i++) {
+		if (localStorage.getItem('status'+i) === "delete") {
+			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'delete')}}");
+			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
+		} else if (localStorage.getItem('status'+i) === "insert") {
+			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'insert')}}");
+			$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
+			$("#preview_product"+i).attr('src',  localStorage.getItem("pic"+i));
+		}
+	}
+
         delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
         delQuestion();
         delYoutube();

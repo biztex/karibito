@@ -152,36 +152,36 @@
                                 <div class="cloneCustomArea">
                                     <p style="font-weight:bold">得意分野</p>
                                     @error('arr_content')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                    @if(empty(old('content')))
+                                    @if(empty(old('profile_content')))
                                         @if(Auth::user()->specialty->isNotEmpty())
                                             @foreach(Auth::user()->specialty as $specialty)
                                                 <dl class="specialtyForm">
                                                     <dd>
-                                                        <input type="text" name="content[]" value="{{ $specialty->content }}">
+                                                        <input type="text" name="profile_content[]" value="{{ $specialty->content }}">
                                                     </dd>
                                                 </dl>
                                             @endforeach
                                         @else
                                             <dl class="specialtyForm">
                                                 <dd>
-                                                    <input type="text" name="content[]" value="">
+                                                    <input type="text" name="profile_content[]" value="">
                                                 </dd>
                                             </dl>
                                         @endif
                                     @else
-                                        @if(count(array_filter(old('content'))) == 0)
+                                        @if(count(array_filter(old('profile_content'))) == 0)
                                             <dl class="specialtyForm">
                                                 <dd>
-                                                    <input type="text" name="content[]" value="">
+                                                    <input type="text" name="profile_content[]" value="">
                                                 </dd>
                                             </dl>
                                         @else
-                                            @foreach(old('content') as $key => $value)
+                                            @foreach(old('profile_content') as $key => $value)
                                                 @if($value !== null)
                                                     <dl class="specialtyForm">
-                                                        @error('content.'.$key)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                        @error('profile_content.'.$key)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                         <dd>
-                                                            <input type="text" name="content[]" value="{{ $value }}">
+                                                            <input type="text" name="profile_content[]" value="{{ $value }}">
                                                         </dd>
                                                     </dl>
                                                 @endif

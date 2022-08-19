@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
         }
         
         $arr_content = [];
-        foreach($this['content'] as $value) {
+        foreach($this['profile_content'] as $value) {
             if($value !== null) {
                 $arr_content[] = $value;
             }
@@ -57,14 +57,14 @@ class UpdateRequest extends FormRequest
             'introduction' => 'nullable | max:3000 | string',
             'icon' => 'nullable | max:20480 | file | image | mimes:png,jpg',
             'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg',
-            'content.*' => 'max:10',
+            'profile_content.*' => 'max:10',
             'arr_content' => 'nullable | array | max:10'
         ];
     }
     public function messages()
     {
         return [
-            'content.*.max' => '10文字以下で指定してください。',
+            'profile_content.*.max' => '10文字以下で指定してください。',
             'arr_content.size' => '得意分野は最大で10個まで登録できます。',
             'gender.integer' => '性別が正しくありません。',
             'gender.in' => '性別が正しくありません。',

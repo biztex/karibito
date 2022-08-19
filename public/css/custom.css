@@ -74,7 +74,8 @@
 #resume .sidePerson,
 #publication .sidePerson,
 #draft .sidePerson,
-#user_notification .sidePerson
+#user_notification .sidePerson,
+#evaluation .sidePerson
 {
 	display: none;
 }
@@ -715,7 +716,7 @@
 }
 .recommendList.style2 .list .info {
     border: 1px solid #DDDDDD;
-	width: 168px;
+	width: 260px;
 	height: 320px;
 	display:flex;
 	flex-flow: column;
@@ -1346,5 +1347,10 @@
 #preview_icon {
 	width: 140px;
 	height: 140px;
+	object-fit: cover;
+}
+.navHeadSp  .navLinkA img {
+	width: 30px;
+	height: 30px;
 	object-fit: cover;
 }
