@@ -43,7 +43,7 @@
 														<p class="img"><img src="/img/common/img_work01@2x.jpg" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
 													@endif
 													<div class="info">
-														<div class="breadcrumb"><a href="#" tabindex="0">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $product->mProductChildCategory->name }}</span></div>
+														<div class="breadcrumb"><a href="{{ route('product.category.index', $product->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('product.category.index.show', $product->mProductChildCategory->id)}}">{{ $product->mProductChildCategory->name }}</a></div>
 														<div class="draw">
 															<p class="price"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
 														</div>
@@ -75,7 +75,7 @@
 												<div class="cont01">
 													<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
 													<div class="info">
-														<div class="breadcrumb"><a href="#" tabindex="0">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $job_request->mProductChildCategory->name }}</span></div>
+														<div class="breadcrumb"><a href="{{ route('job_request.category.index', $job_request->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $job_request->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show', $job_request->mProductChildCategory->id)}}">{{ $job_request->mProductChildCategory->name }}</a></div>
 														<div class="draw">
 															<p class="price"><font>{{ $job_request->title }}</font><br>{{ number_format($job_request->price) }}円</p>
 														</div>

@@ -11,7 +11,7 @@
 
             <x-parts.ban-msg/>
             <x-parts.flash-msg/>
-                
+
             <div id="contents" class="otherPage">
                 <div class="inner02 clearfix">
                     <div id="main">

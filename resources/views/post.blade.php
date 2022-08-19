@@ -42,8 +42,8 @@
                                     @endif
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <a tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
-                                            <span>@if(!is_null($val->category_id)){{$val->mProductChildCategory->name}}@endif</span>
+                                            <a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{$val->mProductChildCategory->mProductCategory->name}}</a> ＞ 
+                                            <a href="{{ route('product.category.index.show', $val->category_id) }}">{{$val->mProductChildCategory->name}}</a>
                                         </div>
                                         <div class="draw">
                                             <p class="price">
@@ -73,8 +73,8 @@
                                     <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <a href="#" tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
-                                            <span>@if(!is_null($val->category_id)){{$val->mProductChildCategory->name}}@endif</span>
+                                            <a href="{{ route('job_request.category.index', $val->category_id)}}" tabindex="0">{{$val->mProductChildCategory->mProductCategory->name}}</a> ＞ 
+                                            <a href="{{ route('job_request.category.index.show', $val->mProductChildCategory->id)}}">{{$val->mProductChildCategory->name}}</a>
                                         </div>
                                         <div class="draw">
                                             <p class="price">

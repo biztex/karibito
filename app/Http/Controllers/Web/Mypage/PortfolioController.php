@@ -67,6 +67,7 @@ class PortfolioController extends Controller
 
     public function destroy(Portfolio $portfolio)
     {
+        $portfolio->portfolioLink()->delete();
         $portfolio->delete();
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを削除しました！');
