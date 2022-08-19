@@ -33,7 +33,7 @@
 			<div class="indexTab tabWrap">
 				<div class="inner">
 					<ul class="tabLink">
-						<li><a href="#tab_box01"　class="is_active">提供</a></li>
+						<li><a href="#tab_box01" class="is_active">提供</a></li>
 						<li><a href="#tab_box02">リクエスト</a></li>
 					</ul>
 

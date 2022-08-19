@@ -66,7 +66,7 @@
 							<div class="mypageItem">
 								<p class="mypageHd03">職務</p>
 								@if (is_null($jobs))
-                                        <p>経歴の登録がありません。</p>
+                                        <p>職務の登録がありません。</p>
                                 @else
 									<div class="mypageBox">
 										<div class="mypageDuties" style="word-wrap: break-word;">

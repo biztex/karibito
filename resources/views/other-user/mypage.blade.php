@@ -181,7 +181,7 @@
                                 @if (\Auth::id() === $user->id)
                                     <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
                                 @else
-                                    {{-- <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p> --}}
+                                    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p>
                                 @endif
 
                                 @if ($portfolio_list->isEmpty())
