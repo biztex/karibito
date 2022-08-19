@@ -149,10 +149,10 @@ class UserProfileService
     public function updateSpecialty(array $request)
     {
         \Auth::user()->specialty()->delete();
-        if(isset($request['content'])){
-            foreach($request['content'] as $value){
+        if(isset($request['profile_content'])){
+            foreach($request['profile_content'] as $value){
                 if($value !== null){
-                    $content = ['content' => $value];
+                    $content = ['profile_content' => $value];
                     \Auth::user()->specialty()->create($content);
                 }
             }

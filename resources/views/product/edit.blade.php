@@ -457,12 +457,24 @@
         </div>
     </article>
 </x-layout>
-<script type="text/javascript">
-    $(function(){
-        delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
-        delQuestion();
-        delYoutube();
-    })
+<script>
+    
+$(function(){
+
+	for (let i = 0; i < 10; i++) {
+		if (localStorage.getItem('status'+i) === "delete") {
+			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'delete')}}");
+			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
+		} else if (localStorage.getItem('status'+i) === "insert") {
+			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'insert')}}");
+			$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
+			$("#preview_product"+i).attr('src',  localStorage.getItem("pic"+i));
+		}
+	}
+    
+    delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
+	delQuestion();
+	delYoutube();
     function addOption(){
         let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"><textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
         let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
@@ -470,27 +482,27 @@
         if (number_js_optionForm < 10) {
             str = str.replace(/%\w+%/g, number_js_optionForm + 1);
             $('.formOptionsArea').append(str);
+            delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
         }
-        delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
     }
 
-    function delOption() {
-        $('.js-deleteOption').click(function () {
+    function delOption(){
+        $('.js-deleteOption').on('click', function () {
             let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
-            if (number_js_optionForm > 1) {
+            if (number_js_optionForm > 1 ) {
                 $(this).parents('.js-optionForm').remove(); //divだけを消す
-                $(".formOptionsArea").children(".js-optionForm").each(function (index, element) {
+                $(".formOptionsArea").children(".js-optionForm").each(function(index, element){
                     $(element).children(".th").text("有料オプション" + (index + 1));
                 })
             }
         });
     }
 
-    function addQuestion() {
+    function addQuestion(){
         let str = '<div class="js-questionForm"><p class="th js-title">質問のタイトル%NUM%</p><div class="td">@error('question_title.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"> <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea><p class="taR">400</p></div><p class="th js-answer">質問の回答%NUM%</p>@error('answer')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="enter"><textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea> <p class="taR">400</p></div><div> <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a> </div></div></div>'
         let number_js_questionForm = $(".formQuestionsArea").children(".js-questionForm").length;
 
-        if (number_js_questionForm < 10) {
+        if(number_js_questionForm < 10) {
             str = str.replace(/%\w+%/g, number_js_questionForm + 1);
             $('.formQuestionsArea').append(str);
         }
@@ -503,8 +515,8 @@
             if (number_js_questionForm > 1 ) {
                 $(this).parents('.js-questionForm').remove(); //divだけを消す
                 $(".formQuestionsArea").children(".js-questionForm").each(function(index, element){
-                    $(element).find(".th").text("質問のタイトル" + (index + 1));
-                    $(element).find(".th").text("質問の回答" + (index + 1));
+                    $(element).find(".js-title").text("質問のタイトル" + (index + 1));
+                    $(element).find(".js-answer").text("質問の回答" + (index + 1));
                 })
             }
         });
@@ -533,25 +545,5 @@
         });
     }
 
-
-
-	$(function()  {
-    	for (let i = 0; i < 10; i++) {
-            if (localStorage.getItem('status'+i) === "delete") {
-                $("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'delete')}}");
-                $("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
-            } else if (localStorage.getItem('status'+i) === "insert") {
-                $("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'insert')}}");
-				$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
-                $("#preview_product"+i).attr('src',  localStorage.getItem("pic"+i));
-            }
-        }
-
-        if (@json($errors->has('base64_text.0'))) {
-            $("#preview_product0").attr('src', '/img/service/img_provide.jpg');
-		}
-
-
-	});
-
+})
 </script>

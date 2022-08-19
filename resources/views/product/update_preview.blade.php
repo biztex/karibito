@@ -25,7 +25,7 @@
         </div>
     </article>
 </x-layout>
-<script type="text/javascript">
+<script>
     $(function(){
         $( "#datepicker" ).datepicker();
     });
