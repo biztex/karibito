@@ -16,13 +16,13 @@
         <!-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> -->
         @if (\Auth::id() !== $user->id)
             <div class="blogDtOtherBtn">
-            <a href="#" class="followA">フォローする</a>
-            @if(empty($dmrooms))
-                <a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
-            @else
-                <a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
-            @endif
+                <a href="#" class="followA">フォローする</a>
+                @if(empty($dmrooms))
+                    <a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
+                @else
+                    <a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
+                @endif
+            </div>
         @endif
-        </div>
     </div>
 </aside><!-- /#side -->

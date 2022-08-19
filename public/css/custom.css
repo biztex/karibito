@@ -1348,3 +1348,8 @@
 	height: 140px;
 	object-fit: cover;
 }
+.navHeadSp  .navLinkA img {
+	width: 30px;
+	height: 30px;
+	object-fit: cover;
+}

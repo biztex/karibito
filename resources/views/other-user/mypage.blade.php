@@ -1,19 +1,21 @@
 <x-other-user.layout>
-	<div class="otherNav">
-		<div class="inner">
-			<ul>
-				<li><a href="#" class="is_active">ホーム</a></li>
-				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
-				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
-				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
-				<li><a href="#">ブログ</a></li>
-			</ul>
-		</div>
-	</div>
-	<x-parts.post-button/>
 	<article>
+		<div class="otherNav">
+			<div class="inner">
+				<ul>
+					<li><a href="#" class="is_active">ホーム</a></li>
+					<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
+					<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
+					<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
+					<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
+					<li><a href="#">ブログ</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<x-parts.post-button/>
         <x-parts.flash-msg/>
+		
         <div id="contents" class="oneColumnPage03 otherPage">
 			<div class="inner">
 				<div id="main">
