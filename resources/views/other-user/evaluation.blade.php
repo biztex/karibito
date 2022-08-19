@@ -5,7 +5,7 @@
 				<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
 				<li><a href="#" class="is_active">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				{{-- <li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li> --}}
+				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
 				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
 			</ul>
@@ -51,7 +51,7 @@
                                     @foreach($evaluations['usually'] as $value)
 
 							            <x-parts.evaluation :value='$value'/>
-                                    
+
                                     @endforeach
                                 @endif
                                     {{ $evaluations['usually']->fragment('usually')->links() }}
@@ -65,7 +65,7 @@
                                     @foreach($evaluations['pity'] as $value)
 
 							            <x-parts.evaluation :value='$value'/>
-                                            
+
                                     @endforeach
                                 @endif
                                     {{ $evaluations['pity']->fragment('pity')->links() }}
