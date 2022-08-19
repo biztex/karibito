@@ -7,8 +7,10 @@
 					<h2 class="title">街と人を繋げ隊！<span class="eng">MACHI TO HITO WO TSUNAGE TAI</span></h2>
 					<p>知識・スキル・経験を商品化マッチングプラットフォーム！</p>
 					<div class="btnTeams">
-						<a href="#" class="blue">サービスを探す</a>
-						<a href="#" class="yellow">サービスを投稿する</a>
+						<a href="{{ route('home') }}" class="blue">サービスを探す</a>
+						@can('identify')
+							<a href="{{ route('post') }}" class="yellow">サービスを投稿する</a>
+						@endcan
 					</div>
 				</div>
 			</div>

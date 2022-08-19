@@ -1,5 +1,5 @@
 <div class="newsList mt60">
-    <h2 class="hdM">カリビトからのお知らせ<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a></h2>
+    <h2 class="hdM">カリビトからのお知らせ@if(!empty($news_list[0]))<a href="{{ route('news.index') }}" class="more">お知らせをもっと見る</a>@endif</h2>
     <div class=box>
         @if(empty($news_list[0]))
             <div>カリビトからのお知らせがありません。</div>

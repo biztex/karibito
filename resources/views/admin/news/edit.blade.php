@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="form-group row py-1">
-                                <label for="text" class="col-md-4 col-form-label text-md-right">内容<span class="badge badge-danger ml-1">必須</span></label>
+                                <label for="text" class="col-md-4 col-form-label text-md-right">詳細<span class="badge badge-danger ml-1">必須</span></label>
                                 <div class="col-md-6">
                                     @include('components.form.edit_textarea', ['name' => 'content', 'value' => $news->content, 'required' => true, 'cols' => '', 'rows' => 10])
                                 </div>

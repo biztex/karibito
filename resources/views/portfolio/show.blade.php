@@ -14,7 +14,7 @@
                 <div class="inner02 clearfix">
                     <div id="main">
                         <div class="portfolioDtWrap">
-                            <h2 class="portfolioDtHd">{{ $portfolio->title }}</h2>
+                            <h2 class="portfolioDtHd break-word">{{ $portfolio->title }}</h2>
                             <p class="portfolioDtDate">{{ $portfolio->year }}年 {{ $portfolio->month }}月</p>
                             <div class="portfolioDtCont">
                                 <p class="portfolioDtImg"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
