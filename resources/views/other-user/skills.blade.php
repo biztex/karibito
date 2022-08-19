@@ -55,7 +55,7 @@
 													</dl>
 													<dl class="mypageDl02">
 														<dt>在籍期間</dt>
-														<dd>{{ $career->first_year }}年 {{ $career->first_month }}月 〜 {{ $career->last_year }}年 {{ $career->last_month }}月</dd>
+														<dd>{{ $career->first_year }}年 {{ $career->first_month }}月 〜 @if($career->last_year == null && $career->last_month == null)現在 @else{{ $career->last_year }}年 {{ $career->last_month }}月 @endif</dd>
 													</dl>
 												</li>
 											@endforeach
