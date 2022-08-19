@@ -65,7 +65,13 @@ class UpdateRequest extends FormRequest
     {
         return [
             'content.*.max' => '10文字以下で指定してください。',
-            'arr_content.size' => '得意分野は最大で10個まで登録できます。'
+            'arr_content.size' => '得意分野は最大で10個まで登録できます。',
+            'gender.integer' => '性別が正しくありません。',
+            'gender.in' => '性別が正しくありません。',
+            'zip.numeric' => '郵便番号は半角数字7桁で指定してください。',
+            'zip.digits' => '郵便番号は半角数字7桁で指定してください。',
+            'prefecture.integer' => '都道府県は以下より選択してください。',
+            'prefecture.exists' => '都道府県は以下より選択してください。',
         ];
     }
 }

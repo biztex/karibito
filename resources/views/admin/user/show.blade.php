@@ -1,5 +1,5 @@
 <x-admin.app>
-    <div id="contents" class="oneColumnPage02" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
+    <div id="contents" class="oneColumnPage02 mt-5" style="margin-left:25%;margin-right:25%">
     <x-admin.flash_msg/>
 
 

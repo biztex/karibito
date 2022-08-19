@@ -102,22 +102,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
         Route::post('can_call',[UserProfileController::class, 'updateCanCall'])->name('can_call.update');
 
-         // スキル・経歴・職務
-        Route::middleware(['can:my.skill,user_skill', 'can:identify'])->group(function () {
-            Route::post('skill_create/{user_skill}',[SkillController::class, 'destroy'])->name('destroy.skill');
+        // スキル・経歴・職務
+        Route::middleware('can:identify')->group(function () {
+            Route::get('resume',[ResumeController::class, 'show'])->name('resume.show');
+
+            // スキル
+            Route::get('skill',[SkillController::class, 'show'])->name('skill.show');
+            Route::post('skill',[SkillController::class, 'store'])->name('skill.store');
+            Route::post('skill/{user_skill}',[SkillController::class, 'destroy'])->middleware('can:my.skill,user_skill')->name('skill.destroy');
+            Route::get('skill/{user_skill}', function () {return redirect()->route('resume.show');});
+
+            // 経歴
+            Route::get('career',[CareerController::class, 'create'])->name('career.create');
+            Route::post('career',[CareerController::class, 'store'])->name('career.store');
+            Route::post('career/{user_career}',[CareerController::class, 'destroy'])->middleware('can:my.career,user_career')->name('career.destroy');
+            Route::get('career/{user_career}', function () {return redirect()->route('resume.show');});
+
+            // 職務
+            Route::get('job',[JobController::class, 'create'])->name('job.create');
+            Route::post('job',[JobController::class, 'store'])->name('job.store');
         });
-        Route::middleware(['can:my.career,user_career', 'can:identify'])->group(function () {
-            Route::post('career_create/{user_career}',[CareerController::class, 'destroy'])->name('destroy.career');
-        });
-        Route::get('resume',[ResumeController::class, 'show'])->name('resume.show');
-        Route::get('skill_create',[SkillController::class, 'show'])->middleware('can:identify')->name('show.skill');
-        Route::post('skill_create',[SkillController::class, 'store'])->name('store.skill');
-        Route::post('career_create',[CareerController::class, 'store'])->name('store.career');
-        Route::get('career_create',[ResumeController::class, 'careerCreate'])->middleware('can:identify')->name('resume.career_create');
-        Route::get('job_create',[ResumeController::class, 'jobCreate'])->middleware('can:identify')->name('resume.job_create');
-        Route::post('job_create',[JobController::class, 'store'])->name('store.job');
-        Route::post('job_update',[JobController::class, 'update'])->name('update.job');
-        Route::view('resume_edit','resume_edit')->name('resume_edit');
+
         // ポートフォリオ
         Route::resource('portfolio', PortfolioController::class);
 

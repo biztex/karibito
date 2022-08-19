@@ -9,6 +9,8 @@ class UserSkill extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     /**
      * 自分のスキルのみ取得
      *

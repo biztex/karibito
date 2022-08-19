@@ -46,7 +46,7 @@ class SkillController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $userskill = $this->skill_service->storeUserSkill($request->all());
+        $this->skill_service->storeUserSkill($request->all());
 
         return redirect()->route('resume.show');
     }
@@ -59,7 +59,7 @@ class SkillController extends Controller
      */
     public function show()
     {
-        return view('resume.skill_create');
+        return view('resume.skill');
     }
 
     /**
@@ -93,9 +93,8 @@ class SkillController extends Controller
      */
     public function destroy(UserSkill $user_skill)
     {
-        $id = $user_skill->id;
-        $userskill = $this->skill_service->deleteUserSkill($id);
+        $this->skill_service->deleteUserSkill($user_skill);
 
-        return redirect()->route('resume.show')->with('flash_msg','スキルを削除しました！');
+        return redirect()->route('resume.show');
     }
 }

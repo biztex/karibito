@@ -35,7 +35,7 @@ class CareerController extends Controller
      */
     public function create()
     {
-        //
+        return view('resume.career');
     }
 
     /**
@@ -46,7 +46,7 @@ class CareerController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $usercareer = $this->career_service->storeUserCareer($request->all());
+        $this->career_service->storeUserCareer($request->all());
 
         return redirect()->route('resume.show');
     }
@@ -93,9 +93,8 @@ class CareerController extends Controller
      */
     public function destroy(UserCareer $user_career)
     {
-        $id = $user_career->id;
-        $usercareer = $this->career_service->deleteUserCareer($id);
+        $this->career_service->deleteUserCareer($user_career);
 
-        return redirect()->route('resume.show')->with('flash_msg','経歴を削除しました！');
+        return redirect()->route('resume.show');
     }
 }

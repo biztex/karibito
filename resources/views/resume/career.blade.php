@@ -17,16 +17,18 @@
 								<p class="mypageHd03">経歴</p>
 								<div class="mypageBox">
 									<div class="mypageEditBox">
-										<form method="post" id="form" enctype="multipart/form-data">
+										<form action="{{ route('career.store') }}" method="post" id="form" enctype="multipart/form-data">
 										@csrf
 											<div class="mypageEditList">
 												<p class="mypageEditHd">経歴名</p>
-												@error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
-												<div class="mypageEditInput"><input type="text" name="name" value="{{ old('name') }}" placeholder="経歴名を入力してください" required></div>
-												<p class="taR">1-30</p>
+												@error('career_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												<div class="mypageEditInput"><input type="text" name="career_name" value="{{ old('career_name') }}" placeholder="経歴名を入力してください" required></div>
+												<p class="taRResume">30</p>
 											</div>
 											<div class="mypageEditList">
 												<p class="mypageEditHd">在籍期間</p>
+												@error('first')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												@error('last')<div class="alert alert-danger">{{ $message }}</div>@enderror
 												@error('first_year')<div class="alert alert-danger">{{ $message }}</div>@enderror
 												@error('first_month')<div class="alert alert-danger">{{ $message }}</div>@enderror
 												@error('last_year')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -36,13 +38,13 @@
 														<p class="mypageEditDateHd">開始</p>
 														<div class="mypageEditInput flexLine01">
 															<select name="first_year" required>
-																<option value="">選択してください</option>
+																<option value="">年</option>
 																@for($year = 1970; $year<= now()->year; $year++)
 																	<option value="{{$year}}" @if(old('first_year') == $year) selected @endif>{{$year}}年</option>
 																@endfor
 															</select>
 															<select name="first_month" required>
-																<option value="">選択してください</option>
+																<option value="">月</option>
 																@for($month = 1; $month <= 12; $month++)
 																<option value='{{ $month }}' @if(old('first_month') == $month) selected @endif>{{ $month }}月</option>
 																@endfor
@@ -54,13 +56,13 @@
 														<p class="mypageEditDateHd">終了</p>
 														<div class="mypageEditInput flexLine01">
 															<select name="last_year">
-																<option value="">選択してください</option>
+																<option value="">年</option>
 																@for($year = 1970; $year<= now()->year; $year++)
 																	<option value="{{$year}}" @if(old('last_year') == $year) selected @endif>{{$year}}年</option>;
 																@endfor
 															</select>
 															<select name="last_month">
-																<option value="">選択してください</option>
+																<option value="">月</option>
 																@for($month = 1; $month <= 12; $month++)
 																<option value='{{ $month }}' @if(old('last_month') == $month) selected @endif>{{ $month }}月</option>
 																@endfor
@@ -71,7 +73,7 @@
 											</div>
 											<div class="fancyPersonBtn">
                                                 <a href="{{ route('resume.show') }}" class="fancyPersonCancel">キャンセル</a>
-                                                <input type="submit" class="fancyPersonSign loading-disabled" formaction="{{ route('store.career') }}" value="登録する">
+                                                <input type="submit" class="fancyPersonSign loading-disabled" value="登録する">
                                             </div>
 										</form>
 									</div>

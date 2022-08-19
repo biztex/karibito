@@ -39,7 +39,7 @@ class UserProfileController extends Controller
     public function create()
     {
         $prefectures = Prefecture::all();
-        return view('mypage.profile.create',compact('prefectures'));
+        return view('auth.profile-create',compact('prefectures'));
     }
 
     /**
@@ -67,7 +67,7 @@ class UserProfileController extends Controller
     public function showComplete()
     {
         $user = UserProfile::with('user')->firstWhere('user_id',\Auth::id());
-        return view('mypage.profile.created',compact('user'));
+        return view('auth.profile-created',compact('user'));
     }
 
     // /**
