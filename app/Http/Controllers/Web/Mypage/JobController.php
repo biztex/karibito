@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Mypage\JobController\StoreRequest;
-use App\Http\Requests\Mypage\JobController\UpdateRequest;
 
-use App\Models\UserJob;
 use App\Services\JobService;
 
 class JobController extends Controller
@@ -36,7 +34,8 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        $jobs = \Auth::user()->userJob;
+        return view('resume.job', compact('jobs'));
     }
 
     /**
@@ -47,7 +46,7 @@ class JobController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $userjob = $this->job_service->storeUserJob($request->all());
+        $this->job_service->storeUserJob($request->all());
 
         return redirect()->route('resume.show');
     }
@@ -81,11 +80,9 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request)
+    public function update(Request $request)
     {
-        $userjob = $this->job_service->updateUserJob($request->all());
-
-        return redirect()->route('resume.show');
+        //
     }
 
     /**

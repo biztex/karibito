@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string | max:30',
+            'skill_name' => 'required | string | max:30',
             'year' => 'required | integer | between:1,20',
         ];
     }
@@ -32,7 +32,7 @@ class StoreRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'スキル名',
+            'skill_name' => 'スキル名',
             'year' => '経験年数',
         ];
     }
