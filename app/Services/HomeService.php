@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\News;
-use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\MProductCategory;
@@ -14,7 +13,10 @@ class HomeService
     // おすすめ10件で使用
     public function paginateProduct($i)
     {
-        $products = Product::otherUsers()->orderBy('created_at','desc')->paginate($i);
+        $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
+            ->otherUsers()
+            ->orderBy('created_at', 'desc')
+            ->paginate($i);
 
         return $products;
     }
@@ -22,7 +24,10 @@ class HomeService
     // カテゴリー別で使用 (全ての自分以外の公開・下書きでないもの)
     public function publishProducts()
     {
-        $products = Product::otherUsers()->orderBy('created_at','desc')->get(); // 公開&&下書きでない
+        $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
+            ->otherUsers()
+            ->orderBy('created_at','desc')
+            ->get(); // 公開&&下書きでない
 
         return $products;
     }
@@ -48,7 +53,10 @@ class HomeService
     // おすすめ10件で使用
     public function paginateJobRequest($i)
     {
-        $job_requests = JobRequest::display()->orderBy('created_at','desc')->paginate($i);
+        $job_requests = JobRequest::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
+            ->display()
+            ->orderBy('created_at','desc')
+            ->paginate($i);
 
         return $job_requests;
     }
@@ -56,7 +64,10 @@ class HomeService
     // カテゴリー別で使用 (全ての自分以外の公開・下書きでないもの)
     public function publishJobRequests()
     {
-        $job_requests = JobRequest::display()->orderBy('created_at','desc')->get();
+        $job_requests = JobRequest::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
+            ->display()
+            ->orderBy('created_at','desc')
+            ->get();
 
         return $job_requests;
     }
