@@ -4,13 +4,10 @@
             <div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
-                <a href="{{ route('product.index') }}">投稿する</a>
+                <a href="{{ route('post') }}">投稿する</a>
             </div>
         </div><!-- /.breadcrumb -->
         <x-parts.ban-msg/>
-        <div class="btnFixed">
-            <!-- <a href="{{ route('product.index') }}"><img src="img/common/btn_fix.svg" alt="投稿"></a> -->
-        </div>
 
         <div id="contents">
             <div class="cancelWrap">
@@ -38,16 +35,15 @@
                                 @elseif($val->status === App\Models\Product::STATUS_PUBLISH)
                                     <div class="cont01 public02">
                                 @endif
-                                    <!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
                                     @if(isset($val->productImage[0]))
-                                    <p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+                                    <p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
                                     @else
                                     <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
                                     @endif
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <a tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
-                                            <span>@if(!is_null($val->category_id)){{$val->mProductChildCategory->name}}@endif</span>
+                                            <a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{$val->mProductChildCategory->mProductCategory->name}}</a> ＞ 
+                                            <a href="{{ route('product.category.index.show', $val->category_id) }}">{{$val->mProductChildCategory->name}}</a>
                                         </div>
                                         <div class="draw">
                                             <p class="price">
@@ -57,15 +53,15 @@
                                         <div class="single">
                                             <span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
                                         </div>
+                                        <p class="link"><a href="{{ route('product.show', $val->id) }}">詳細見る</a></p>
                                     </div>
-                                    <p class="link"><a href="{{ route('product.show', $val->id) }}">詳細見る</a></p>
-
                                 </div>
                             </li>
                             @endforeach
                             <a href="{{ route('publication') }}" class="more">提供中のサービスをもっと見る</a>
                         @endif
                     </ul>
+
                     <p class="casesOffer" style="margin-top:50px;"><span>掲載中のリクエスト</span></p>
                     <ul class="favoriteUl01">
                         @if(empty($job_requests[0]))
@@ -74,12 +70,11 @@
                             @foreach($job_requests as $val)
                             <li>
                                 <div class="cont01">
-                                    <!-- リクエスト画像ないためクライアントに要確認 -->
-                                    <!-- <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p> -->
+                                    <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
                                     <div class="info">
                                         <div class="breadcrumb">
-                                            <a href="#" tabindex="0">@if(!is_null($val->category_id)){{$val->mProductChildCategory->mProductCategory->name}} @endif</a> ＞ 
-                                            <span>@if(!is_null($val->category_id)){{$val->mProductChildCategory->name}}@endif</span>
+                                            <a href="{{ route('job_request.category.index', $val->category_id)}}" tabindex="0">{{$val->mProductChildCategory->mProductCategory->name}}</a> ＞ 
+                                            <a href="{{ route('job_request.category.index.show', $val->mProductChildCategory->id)}}">{{$val->mProductChildCategory->name}}</a>
                                         </div>
                                         <div class="draw">
                                             <p class="price">
@@ -89,8 +84,8 @@
                                         <div class="single">
                                             <span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
                                         </div>
+                                        <p class="link"><a href="{{ route('job_request.show', $val->id) }}">詳細見る</a></p>
                                     </div>
-                                    <p class="link"><a href="{{ route('job_request.show', $val->id) }}">詳細見る</a></p>
 
                                 </div>
                             </li>
@@ -98,9 +93,9 @@
                             <a href="{{ route('publication').'#job-request' }}" class="more">掲載中のリクエストをもっと見る</a>
                         @endif
                     </ul>
-                </div>
-                <!--inner-->
-            </div>
+
+                </div><!--inner-->
+            </div>{{-- /.cancelWrap --}}
         </div><!-- /#contents -->
     </article>
 </x-layout>

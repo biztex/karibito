@@ -73,8 +73,9 @@
 #portfolio .sidePerson,
 #resume .sidePerson,
 #publication .sidePerson,
-#draft .sidePerson
- {
+#draft .sidePerson,
+#user_notification .sidePerson
+{
 	display: none;
 }
 #mypage
@@ -1324,4 +1325,26 @@
 	#chatroomStepUl li+li .stepDot:before {
 		width: 113px;
 	}
+}
+.cont01 .img img {
+	width: 120px;
+	height: 100px;
+	object-fit: cover;
+}
+@media screen and (max-width: 766px) {
+	.cont01 .img img {
+		width: 100px;
+		height: 83px;
+	}
+}
+.center_cam {
+	position: absolute;top:
+	50%;left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#preview_icon {
+	width: 140px;
+	height: 140px;
+	object-fit: cover;
 }

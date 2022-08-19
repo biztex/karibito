@@ -35,11 +35,11 @@
                             <li><a href="{{ route('support') }}" class="nav01">サポート</a></li>
                                 @auth
                                     <li class="navLink">
-                                        <a href="javascript:void(0);" class="nav06 navLinkA">メッセージ
+                                        <a href="javascript:void(0);" class="nav06 navLinkA">お知らせ
                                             <span>@if ($not_view_user_notifications->count() > 0) {{$not_view_user_notifications->count()}}@endif</span>
                                         </a>
                                         <div class="navBox">
-                                            <p class="navMessageHd">メッセージ</p>
+                                            <p class="navMessageHd">お知らせ</p>
                                             <div class="navMessageUl">
                                                 @if(isset($not_view_user_notifications[0]))
                                                     @foreach ($not_view_user_notifications as $not_view_user_notification)
@@ -57,7 +57,7 @@
                                                     @endforeach
                                                 @else
                                                     <div class="navMessageUl">
-                                                        <p class="noMessage">現在、メッセージの通知はありません。</p>
+                                                        <p class="noMessage">現在、お知らせはありません。</p>
                                                     </div>
                                                 @endif
                                             </div>
@@ -113,7 +113,7 @@
                                     <a href="#">お気に入り</a>
                                     @can('identify')
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                        <a href="{{ route('product.index') }}" class="blueBtn">投稿する</a>
+                                        <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
                                     @endcan
                                 </div>
                             @endauth
@@ -248,7 +248,7 @@
                     </div>
                     @can('identify')
                     <div class="right">
-                        <a href="{{ route('product.index') }}">投稿する</a>
+                        <a href="{{ route('post') }}">投稿する</a>
                     </div>
                     @endcan
                 </div>
@@ -278,7 +278,7 @@
                 </div>
                 @can('identify')
                     <div class="spFixedItem">
-                        <a href="{{ route('product.index') }}" class="spFixedLink">
+                        <a href="{{ route('post') }}" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
                             <p class="linkTxt">投稿</p>
                         </a>

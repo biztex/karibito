@@ -23,6 +23,7 @@ class ChangeTelController extends Controller
     public function update(RegisterTelRequest $request)
     {
         $this->user_profile_service->updateTel(\Auth::user(), $request->tel);
-        return redirect()->route('setting')->with('flash_msg', '電話番号を登録しました。');
+
+        return back()->with('flash_msg', '電話番号を登録しました。');
     }
 }

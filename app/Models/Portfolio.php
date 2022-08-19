@@ -20,4 +20,12 @@ class Portfolio extends Model
     {
         return $this->hasOne(MProductChildCategory::class, 'id', 'category_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function portfolioLink()
+    {
+        return $this->hasMany(PortfolioYoutubeLink::class, 'portfolio_id');
+    }
 }

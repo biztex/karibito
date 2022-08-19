@@ -22,6 +22,24 @@ class PortfolioService
     }
 
     /**
+     * 新規動画追加
+     */
+    public function storePortfolioLink(array $request, $id)
+    {
+        if (isset($request['youtube_link'])) {
+            foreach ($request['youtube_link'] as $index => $value) {
+                if ($request['youtube_link'][$index]){
+                    $links = [
+                        'youtube_link' => $request['youtube_link'][$index],
+                    ];
+                    $portfolio = Portfolio::find($id);
+                    $portfolio->portfolioLink()->create($links);
+                }
+            }
+        }
+    }
+
+    /**
      * ポートフォリオ編集
      */
     public function updatePortfolio($request, $portfolio)
@@ -35,6 +53,28 @@ class PortfolioService
 
         return $portfolio;
     }
+
+    /**
+     * 動画を編集
+     */
+    public function updatePortfolioLink(array $request, $portfolio)
+    {
+        $portfolio->portfolioLink()->delete();
+        if (isset($request['youtube_link'])) {
+            if ($request['youtube_link'] !== null) {
+                foreach ($request['youtube_link'] as $index => $value) {
+                    if ($request['youtube_link'][$index]) {
+                        $links = [
+                            'youtube_link' => $request['youtube_link'][$index],
+                        ];
+                        $portfolio = Portfolio::find($portfolio->id);
+                        $portfolio->portfolioLink()->create($links);
+                    }
+                }
+            }
+        }
+    }
+
 
     /**
      * 詳細ページのページャー前を取得する

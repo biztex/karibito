@@ -1,6 +1,6 @@
-<div class="clientEvaluate">
-    <h2 class="hdM">依頼者からの評価</h2>
-    @if(!empty($evaluations))
+@if(!empty($evaluations))
+    <div class="clientEvaluate">
+        <h2 class="hdM">依頼者からの評価</h2>
         <div class="box">
             <div class="ftBox">
                 @foreach($evaluations as $value)
@@ -32,5 +32,5 @@
                 <div class="go"><a href="javascript:;" onClick="moreload.loadMore();" class="more">もっと見る</a></div>
             @endif
         </div>
-    @endif
-</div>
+    </div>
+@endif

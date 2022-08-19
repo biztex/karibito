@@ -6,16 +6,16 @@
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
                 {{--                {{dd(url()->previous())}}--}}
                 @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create') {{--提供-完了--}}
-                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('post') }}">投稿する</a>　>　
                     <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/preview') {{--提供-プレビュー-完了--}}
-                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('post') }}">投稿する</a>　>　
                     <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/create') {{--リクエスト-完了--}}
-                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('post') }}">投稿する</a>　>　
                     <a href="{{route('job_request.create')}}">サービスをリクエストする</a>　>　
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/preview') {{--リクエスト-プレビュー-完了--}}
-                    <a href="{{ route('product.index') }}">投稿する</a>　>　
+                    <a href="{{ route('post') }}">投稿する</a>　>　
                     <a href="{{ route('product.create') }}">サービスをリクエストする</a>　>　
                 @else
                     <a href="{{route('publication')}}">掲載内容一覧</a>　>　
@@ -36,10 +36,10 @@
 						<h3>SNSやメールでチケットをシェアする</h3>
 						<div class="sns">
                             <div id="fb-root"></div>
-							<a href="http://www.facebook.com/share.php?u={{ session('url') }}"><img src="img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
-							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
-							<a href="https://twitter.com/share?url={{ session('url') }}&text={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア&hashtags=karibito" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
-							<a href="mailto:?subject=カリビトのリクエストをシェア&body={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア {{  session('url') }}" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
+							<a href="http://www.facebook.com/share.php?u={{ session('url') }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
+							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="/img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
+							<a href="https://twitter.com/share?url={{ session('url') }}&text={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
+							<a href="mailto:?subject=カリビトのリクエストをシェア&body={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア {{  session('url') }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a>
 						</div>
 						<form>
 							<table>
@@ -78,51 +78,6 @@
 				</div>
 			</div>
 
-			<div class="aboutFeatures">
-				<div class="inner">
-					<h2 class="hdM">カリビトの特徴</h2>
-					<div class="slider">
-						<div><div class="item hlg01">
-							<h3 class="tit">カリビトチャット</h3>
-							<p class="ico ico_feat01"></p>
-							<p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">検索機能</h3>
-							<p class="ico ico_feat02"></p>
-							<p>あなたの見たい情報を簡単に探せる<br>ために検索機能があります。<br>条件を入力するだけで簡単です。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">シェア機能</h3>
-							<p class="ico ico_feat03"></p>
-							<p>いいなと思った仕事をSNSを使って<br>シェアすることができます。<br>仲の良いメンバーに知らせる時に便利。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">お気に入り機能</h3>
-							<p class="ico ico_feat04"></p>
-							<p>気になる仕事や人材を<br>お気に入り登録をする事で<br>分からなくなることがありません。</p>
-						</div></div>
-						<div><div class="item hlg01">
-							<h3 class="tit">カリビトチャット</h3>
-							<p class="ico ico_feat01"></p>
-							<p>条件交渉でチャットができます。<br>また、PDFや画像ファイルを<br>送信する事も可能です。</p>
-						</div></div>
-					</div>
-				</div>
-			</div>
-			<div class="downloadWrap">
-				<div class="inner">
-					<div class="img"><img src="img/common/img_download.png" srcset="img/common/img_download.png 1x, img/common/img_download@2x.png 2x" alt=""><a href="#" target="_blank" class="logo sp"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a></div>
-					<div class="info">
-						<h2 class="tit">さあ、はじめよう！<span class="foucs">今すぐ無料ダウンロード！</span></h2>
-						<div class="links">
-							<a href="#" target="_blank" class="logo pc"><img src="img/common/ico_sns_logo.svg" alt="LOGO"></a>
-							<a href="#" target="_blank"><img src="img/common/btn_app.svg" alt="App Store"></a>
-							<a href="#" target="_blank"><img src="img/common/btn_google.svg" alt="Google"></a>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div><!-- /#contents -->
 	</article>
 </x-layout>

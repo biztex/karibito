@@ -154,7 +154,7 @@ class ProductService
 
 
     /**
-     * よくある質問編集
+     * 動画を編集
      */
     public function updateProductLink(array $request, $product)
     {

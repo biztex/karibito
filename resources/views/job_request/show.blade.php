@@ -10,16 +10,17 @@
                     <a href="{{route('publication')}}">掲載内容一覧</a>　>　
                     <a href="{{(url()->current())}}">リクエストの詳細</a>
                 @else
-{{--                    <a href="service.html">サービスを探す</a>　>　--}}
-
-                    {{--<a href="#"></a>@if(!is_null($job_request->title))  >  <span>{{ $job_request->title }}</span> @endif--}}
+					<span>リクエストを探す</span>　>　
+					<a href="{{ route('job_request.category.index', $job_request->mProductChildCategory->mProductCategory->id)}}">@if(!is_null($job_request->category_id)){{$job_request->mProductChildCategory->mProductCategory->name}} @endif</a>　>　
+					<a href="{{ route('job_request.category.index.show', $job_request->category_id)}}">@if(!is_null($job_request->category_id)){{$job_request->mProductChildCategory->name}} @endif</a>　>　
+					<span>{{$job_request->title}}</span>
                 @endif
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents" class="detailStyle">
 				<div class="inner02">
 					<div class="clearfix">
-						
+
 						@include('job_request.parts.show.detail')
 
 						@include('job_request.parts.show.side')

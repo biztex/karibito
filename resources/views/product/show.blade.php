@@ -9,9 +9,10 @@
                 <a href="{{route('publication')}}">掲載内容一覧</a>　>　
                 <a href="{{(url()->current())}}">サービス提供の詳細</a>
             @else
-                <a href="service.html">サービスを探す</a>　>　
-                <a href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a>　>　
-                <a href="#">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　<span>{{$product->title}}</span>
+                <span>サービスを探す</span>　>　
+                <a href="{{ route('product.category.index', $product->mProductChildCategory->mProductCategory->id)}}">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</>　>　
+                <a href="{{ route('product.category.index.show', $product->category_id)}}">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　
+                <span>{{$product->title}}</span>
             @endif
             </div>
         </div><!-- /.breadcrumb -->

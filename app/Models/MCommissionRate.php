@@ -14,6 +14,6 @@ class MCommissionRate extends Model
 
     public function scopeNowRate($query)
     {
-        return $query->where('effective_datetime', '<', Carbon::now())->orderBy('effective_datetime', 'desc')->first();
+        return $query->orderBy('effective_datetime', 'desc')->first();
     }
 }

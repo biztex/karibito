@@ -1,5 +1,5 @@
 <x-layout>
-<x-parts.post-button/>{{--投稿ボタンの読み込み--}}
+<x-parts.post-button/>
 	<article>
 	<body id="draft">
 		<div id="breadcrumb">
@@ -32,9 +32,8 @@
 										@foreach($products as $val)
 										<li>
 											<div class="cont01">
-												<!-- 画像1枚必須なため、ここのif分いらない。現段階で画像登録機能完了してないため入れてます -->
 												@if(isset($val->productImage[0]))
-												<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+												<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
 												@else
 												<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
 												@endif
@@ -79,7 +78,7 @@
 										@foreach($job_requests as $val)
 										<li>
 											<div class="cont01">
-												<!-- <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p> -->
+                                                <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
 												<div class="info">
 													@if(!empty($val->category_id))
 													<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>

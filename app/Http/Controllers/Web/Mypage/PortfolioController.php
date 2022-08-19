@@ -44,7 +44,10 @@ class PortfolioController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $this->portfolio_service->storePortfolio($request);
+        \DB::transaction(function () use ($request) {
+        $portfolio = $this->portfolio_service->storePortfolio($request);
+        $this->portfolio_service->storePortfolioLink($request->all(), $portfolio->id);
+        });
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを登録しました！');
     }
@@ -57,12 +60,14 @@ class PortfolioController extends Controller
     public function update(UpdateRequest $request, Portfolio $portfolio)
     {
         $this->portfolio_service->updatePortfolio($request, $portfolio);
+        $this->portfolio_service->updatePortfolioLink($request->all(), $portfolio);
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを更新しました！');
     }
 
     public function destroy(Portfolio $portfolio)
     {
+        $portfolio->portfolioLink()->delete();
         $portfolio->delete();
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを削除しました！');

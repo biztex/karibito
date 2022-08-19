@@ -34,7 +34,7 @@
                                 <td>{{ $news->title }}</td>
                             </tr>
                             <tr>
-                                <td>内容</td>
+                                <td>詳細</td>
                                 <td class="pre-wrap">{{ $news->content }}</td>
                             </tr>
                             <tr>
