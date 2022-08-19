@@ -22,13 +22,12 @@ class MypageController extends Controller
      */
     public function show()
     {
-        $user_profile = UserProfile::firstWhere('user_id',Auth::id());
         $user_notifications = UserNotification::latest()->where('user_id', \Auth::id())->paginate(5);
         $products = Product::latest()->where('user_id', \Auth::id())->paginate(5);
 
         $specialty = Specialty::Where('user_id',Auth::id());
         $specialties = $specialty->get();
 
-        return view('mypage.profile.mypage', compact('user_notifications', 'specialties', 'products'));
+        return view('mypage.show', compact('user_notifications', 'specialties', 'products'));
     }
 }

@@ -31,34 +31,23 @@
                         <a href="{{route('cover.delete')}}">カバーを削除する</a>
                         <a href="{{route('icon.delete')}}">アイコンを削除する</a>
                     </div> 
-
-                        @error('icon')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        @error('cover')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                    @error('icon')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                    @error('cover')<div class="alert alert-danger">{{ $message }}</div>@enderror
 
                 <div class="fancyPersonTable">	
                     <dl class="">
                         <dt>ニックネーム</dt>
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <dd><input type="text" name="name" value="{{old('name',\Auth::user()->name)}}"></dd>
                     </dl>
-                        <dl>
-                        
-                        </dl>
-                        <dl style="margin-bottom:0px">
-                            @if($errors->has('first_name'))
-                                <div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('first_name')}}</div>
-                            @elseif($errors->has('last_name'))
-                                <div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('last_name')}}</div>
-                            @else
-                                <!--  -->
-                            @endif
-                        </dl>
+                    <dl></dl>
+                    <dl style="margin-bottom:0px">
+                        @if($errors->has('first_name'))
+                            <div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('first_name')}}</div>
+                        @elseif($errors->has('last_name'))
+                            <div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('last_name')}}</div>
+                        @endif
+                    </dl>
 
                     @if(Auth::user()->userProfile->is_identify == 0)
                         <dl class=" inlineFlex">
@@ -79,12 +68,9 @@
                     @endif
 
                     <dl>
-                        <dt>性別</dt>
+                        <dt style="display:flex;">性別 @error('gender')<span><div class="alert alert-danger">{{ $message }}</div></span>@enderror</dt>
                         <dd>
                             <select name="gender">
-                            @error('gender')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
                                 <option disabled>選択してください</option>
                                 <option value="1" @if('1' == (int)old('gender',Auth::user()->userProfile->gender)) selected @endif>男</option>
                                 <option value="2" @if('2' == (int)old('gender',Auth::user()->userProfile->gender)) selected @endif>女</option>
@@ -94,9 +80,7 @@
                     <dl>
                         <dt>生年月日<span>(年代のみ公開されます)</span></dt>
                         @if(Auth::user()->userProfile->is_identify == 0)
-                            @error('birthday')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            @error('birthday')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <dd>
                                 <select class="year" name="year">
                                     <option value="" selected>年</option>
@@ -121,32 +105,31 @@
                                 </select>
                             </dd>
                         @else
-                                <dd>{{ date("Y年n月j日",strtotime(Auth::user()->userProfile->birthday)) }}</dd>
-                                <input type="hidden" name="year" value="{{ date("Y",strtotime(Auth::user()->userProfile->birthday)) }}">
-                                <input type="hidden" name="month" value="{{ date("n",strtotime(Auth::user()->userProfile->birthday)) }}">
-                                <input type="hidden" name="day" value="{{ date("j",strtotime(Auth::user()->userProfile->birthday)) }}">
+                            <dd>{{ date("Y年n月j日",strtotime(Auth::user()->userProfile->birthday)) }}</dd>
+                            <input type="hidden" name="year" value="{{ date("Y",strtotime(Auth::user()->userProfile->birthday)) }}">
+                            <input type="hidden" name="month" value="{{ date("n",strtotime(Auth::user()->userProfile->birthday)) }}">
+                            <input type="hidden" name="day" value="{{ date("j",strtotime(Auth::user()->userProfile->birthday)) }}">
                         @endif
                     </dl>
 
                     @if(Auth::user()->userProfile->is_identify == 0)
                         <dl>
                             <dt>住所<span>(都道府県のみ表示されます)</span></dt>
-                                @error('zip')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                            @error('zip')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <dd>
                                 <p class="addrNumber"><input class="short" type="text" name="zip" value="{{old('zip',Auth::user()->userProfile->zip)}}"></p>
+                                    
                                 <div class="addrSelect">
-                                    <select class="short" name="prefecture">
+                                @error('prefecture')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                <select class="short" name="prefecture">
                                         <option value="">選択してください</option>
                                         @foreach($prefectures as $prefecture)
                                             <option value="{{$prefecture->id}}" @if($prefecture->id == (int)old('prefecture',Auth::user()->userProfile->prefecture_id)) selected @endif>{{$prefecture->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @error('address')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+
+                                @error('address')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <p><input type="text" name="address" placeholder="市区町村" value="{{old('address',Auth::user()->userProfile->address)}}"></p>
                             </dd>
                         </dl>
@@ -162,72 +145,66 @@
                             <input type="hidden" name="address" value="{{ Auth::user()->userProfile->address }}">
                         </dl>
                     @endif
-                    <div class="specialtyBox">
 
+                    <div class="specialtyBox">
                         <div class="specialtyItem">
                             <div class="clone">
                                 <div class="cloneCustomArea">
                                     <p style="font-weight:bold">得意分野</p>
-                                @error('arr_content')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                @if(empty(old('content')))
-
-                                    @if(Auth::user()->specialty->isNotEmpty())
-                                        @foreach(Auth::user()->specialty as $specialty)
-                                            <dl class="specialtyForm">
-                                                <dd>
-                                                    <input type="text" name="content[]" value="{{ $specialty->content }}">
-                                                </dd>
-                                            </dl>
-                                        @endforeach
-                                    @else
-                                        <dl class="specialtyForm">
-                                            <dd>
-                                                <input type="text" name="content[]" value="">
-                                            </dd>
-                                        </dl>
-                                    @endif
-
-                                @else
-
-                                    @if(count(array_filter(old('content'))) == 0)
-                                        <dl class="specialtyForm">
-                                            <dd>
-                                                <input type="text" name="content[]" value="">
-                                            </dd>
-                                        </dl>
-                                    @else
-                                        @foreach(old('content') as $key => $value)
-                                            @if($value !== null)
+                                    @error('arr_content')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                    @if(empty(old('content')))
+                                        @if(Auth::user()->specialty->isNotEmpty())
+                                            @foreach(Auth::user()->specialty as $specialty)
                                                 <dl class="specialtyForm">
-                                                    @error('content.'.$key)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     <dd>
-                                                        <input type="text" name="content[]" value="{{ $value }}">
+                                                        <input type="text" name="content[]" value="{{ $specialty->content }}">
                                                     </dd>
                                                 </dl>
-                                            @endif
-                                        @endforeach
+                                            @endforeach
+                                        @else
+                                            <dl class="specialtyForm">
+                                                <dd>
+                                                    <input type="text" name="content[]" value="">
+                                                </dd>
+                                            </dl>
+                                        @endif
+                                    @else
+                                        @if(count(array_filter(old('content'))) == 0)
+                                            <dl class="specialtyForm">
+                                                <dd>
+                                                    <input type="text" name="content[]" value="">
+                                                </dd>
+                                            </dl>
+                                        @else
+                                            @foreach(old('content') as $key => $value)
+                                                @if($value !== null)
+                                                    <dl class="specialtyForm">
+                                                        @error('content.'.$key)<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                        <dd>
+                                                            <input type="text" name="content[]" value="{{ $value }}">
+                                                        </dd>
+                                                    </dl>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     @endif
-
-                                @endif
-                            </div>
+                                </div>
                                 <p class="specialtyBtnCustom"><span><img src="/img/mypage/icon_add.svg" alt="">得意分野を追加</span></p>
                             </div>
                         </div><p class="taRResume">＊得意分野は１０個まで追加できます。</p>
                     </div>
                     
-                        <dl>
-                                @error('introduction')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            <dt>自己紹介</dt>
-                            <dd><textarea name="introduction">{{old('introduction',Auth::user()->userProfile->introduction)}}</textarea></dd>
-                        </dl>
-                </div>
-            </div>
+                    <dl>
+                        @error('introduction')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                        <dt>自己紹介</dt>
+                        <dd><textarea name="introduction">{{old('introduction',Auth::user()->userProfile->introduction)}}</textarea></dd>
+                    </dl>
+                </div>{{-- /.fancyPersonTable --}}
+            </div>{{-- /.fancyboxCont --}}
             <div class="fancyPersonBtn">
                 <a href="#" class="fancyPersonCancel">キャンセル</a>
                 <button type="submit" class="fancyPersonSign">登録する</button>
             </div>
         </form>
-    </div>
+    </div>{{-- /#fancybox_person --}}
 @endauth
