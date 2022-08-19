@@ -73,8 +73,9 @@
 #portfolio .sidePerson,
 #resume .sidePerson,
 #publication .sidePerson,
-#draft .sidePerson
- {
+#draft .sidePerson,
+#user_notification .sidePerson
+{
 	display: none;
 }
 #mypage
