@@ -5,7 +5,7 @@
 				<li><a href="#" class="is_active">ホーム</a></li>
 				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
 				<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
-				{{-- <li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li> --}}
+				<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
 				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
 				<li><a href="#">ブログ</a></li>
 			</ul>
@@ -181,19 +181,21 @@
                                 @if (\Auth::id() === $user->id)
                                     <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
                                 @else
-                                    {{-- <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p> --}}
+                                    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a></p>
                                 @endif
 
                                 @if ($portfolio_list->isEmpty())
-                                        <p>ポートフォリオの登録はありません。</p>
+                                    <p>ポートフォリオの登録はありません。</p>
                                 @else
                                     <ul class="mypagePortfolioUl">
                                         @foreach ($portfolio_list as $portfolio)
-                                            <a href="{{ route('user.portfolio.show', [$user, $portfolio]) }}">
-                                                <li>
+                                        <li>
+                                            <p class="imgP">
+                                                <a href="{{ route('user.portfolio.show', [$user, $portfolio]) }}">
                                                     <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
-                                                </li>
-                                            </a>
+                                                </a>
+                                            </p>
+                                        </li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -222,7 +224,7 @@
 												@foreach($evaluations['good'] as $value)
 
 													<x-parts.evaluation :value='$value'/>
-													
+
 												@endforeach
 											@endif
 											{{ $evaluations['good']->fragment('')->links() }}
@@ -237,7 +239,7 @@
 												@foreach($evaluations['usually'] as $value)
 
 													<x-parts.evaluation :value='$value'/>
-												
+
 												@endforeach
 											@endif
 											{{ $evaluations['usually']->fragment('usually')->links() }}
@@ -252,7 +254,7 @@
 												@foreach($evaluations['pity'] as $value)
 
 													<x-parts.evaluation :value='$value'/>
-												
+
 												@endforeach
 											@endif
 											{{ $evaluations['pity']->fragment('pity')->links() }}

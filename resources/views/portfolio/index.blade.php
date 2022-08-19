@@ -277,16 +277,16 @@
                                             </a>
                                         </li>
                                         @foreach ($portfolio_list as $portfolio)
-                                        <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <li>
-                                                </a><p class="imgP"><a href="{{ route('portfolio.show', $portfolio) }}"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></a></p>
+                                        <li>
+                                            <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <p class="imgP"><a href="{{ route('portfolio.show', $portfolio) }}"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></a></p>
                                                 <p class="editP"><a href="{{ route('portfolio.edit', $portfolio) }}">編集する</a>
                                                     <button onclick='return confirm("このポートフォリオを削除しますか？");' class="delete">削除</button>
                                                 </p>
-                                            </li>
-                                        </form>
+                                            </form>
+                                        </li>
                                         @endforeach
                                     </ul>
                                 </div>
