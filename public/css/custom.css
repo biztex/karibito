@@ -1367,3 +1367,8 @@
 	flex-flow: column;
 	justify-content: space-between;
 }
+.contactForm input[type='text'],
+.contactForm input[type='number'],
+.contactForm select {
+	color: black !important;
+}
