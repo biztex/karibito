@@ -31,9 +31,9 @@
         <div class="aboutUser">
             <div class="user" style="margin-bottom:6px;">
                 @if(empty($product->user->userProfile->icon))
-                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                    <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @else
-                    <p class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt=""></p>
+                    <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt=""></a>
                 @endif
                 <div class="introd">
                     <p class="name">{{ $product->user->name }}</p>

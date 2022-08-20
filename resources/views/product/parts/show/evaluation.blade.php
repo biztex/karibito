@@ -7,9 +7,9 @@
                     <li>
                         <div class="img">
                             @if(empty($value->user->userProfile->icon))
-                                <p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                <a href="{{ route('user.mypage', $value->user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
                             @else
-                                <p class="head"><img src={{asset('/storage/'.$value->user->userProfile->icon) }} alt=""></p>
+                                <a href="{{ route('user.mypage', $value->user->id) }}" class="head"><img src={{asset('/storage/'.$value->user->userProfile->icon) }} alt=""></a>
                             @endif
 
                             @if($value->star == App\Models\Evaluation::PITY)

@@ -1089,6 +1089,12 @@
 	border-radius: 50px;
 }
 
+.cont02 .user .ico img {
+	width: 40px;
+	max-height: 40px;
+	object-fit: cover;
+	border-radius: 50px;
+}
 .aboutUser .user .ico img {
 	width: 35px;
 	height: 35px;
@@ -1354,4 +1360,10 @@
 	width: 30px;
 	height: 30px;
 	object-fit: cover;
+}
+.recommendListInfo {
+	height:	218px;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
 }

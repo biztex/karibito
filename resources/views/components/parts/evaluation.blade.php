@@ -1,9 +1,9 @@
 <li>
     <div class="evaluationIcon img">
         @if(null !== $value->user->userProfile->icon)
-            <p class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+            <a href="{{ route('user.mypage', $value->user_id) }}" class="head"><img src="{{ asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></a>
         @else
-            <p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+            <a href="{{ route('user.mypage', $value->user_id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
         @endif
     </div>
     <div class="info">
