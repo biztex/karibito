@@ -1029,7 +1029,8 @@
     height: 40px;
     padding: 0 10px;
 }
-.mypageEditInput input[type='tel']{
+.mypageEditInput input[type='tel'],
+.mypageEditInput input[type='email'] {
     border: 1px solid #DDDDDD;
     background-color: #fff;
     border-radius: 3px;
