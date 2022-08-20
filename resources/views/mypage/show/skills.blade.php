@@ -47,7 +47,7 @@
 
     <div class="mypageItem">
         <p class="mypageHd03">職務</p>
-        @if(!Auth::user()->userJob)
+        @if(!Auth::user()->userJob || Auth::user()->userJob->content === null )
             職務の登録がありません。
         @else
             <div class="mypageBox">
