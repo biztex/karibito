@@ -69,17 +69,17 @@
                                     <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
                                     <li><a href="#" class="nav02">お気に入り</a></li>
                                     <li class="navLink">
-                                            @if(empty($user_profile->icon))
+                                            @if(empty(Auth::user()->userProfile->icon))
                                                 <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
                                             @else
-                                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
+                                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.Auth::user()->userProfile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
                                             @endif
                                         <div class="navBox navMypageBox">
                                             <dl class="navMypageDl">
-                                                @if(empty($user_profile->icon))
+                                                @if(empty(Auth::user()->userProfile->icon))
                                                     <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
                                                 @else
-                                                    <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
+                                                    <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.Auth::user()->userProfile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                                 @endif
                                                     <dd>{{\Auth::user()->name}}</dd>
                                             </dl>
@@ -102,10 +102,10 @@
                         <div class="sp">
                             @auth
                                 <dl class="navMypageDl">
-                                    @if(empty($user_profile->icon))
+                                    @if(empty(Auth::user()->userProfile->icon))
                                         <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
                                         @else
-                                        <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
+                                        <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.Auth::user()->userProfile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                     @endif
                                     <dd>{{ \Auth::user()->name }}</dd>
                                 </dl>

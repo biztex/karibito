@@ -40,9 +40,9 @@
 										<li>
 											<div class="cont01">
 												@if(isset($product->productImage[0]))
-													<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+													<p class="img"><img src="{{ asset('/storage/'.$product->productImage[0]->path)}}" alt=""></p>
 												@else
-													<p class="img"><img src="/img/common/img_work01@2x.jpg" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+													<p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
 												@endif
 												<div class="info">
 													<div class="breadcrumb"><a href="{{ route('product.category.index', $product->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $product->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('product.category.index.show', $product->mProductChildCategory->id)}}">{{ $product->mProductChildCategory->name }}</a></div>

@@ -2,9 +2,9 @@
     <div class="box seller">
         <h3>スキル出品者</h3>
         @if(null !== $user->userProfile->icon)
-            <a href="#" class="head"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt="" style="width: 120px;height: 120px;object-fit: cover;"></a>
+            <a href="{{ route('user.mypage', $user->id) }}" class="head"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></a>
         @else
-            <a href="#" class="head"><img src="/img/mypage/no_image.jpg" alt="" style="width: 120px;height: 120px;object-fit: cover;"></a>
+            <a href="{{ route('user.mypage', $user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
         @endif
         <!-- <p class="login">最終ログイン：8時間前</p> -->
 

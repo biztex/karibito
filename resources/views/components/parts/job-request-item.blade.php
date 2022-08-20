@@ -1,5 +1,5 @@
 <div class="item">
-    <!-- <p class="level"></p> topのみ -->
+    {{-- <p class="level"></p> --}}
     <div class="info">
         <div class="breadcrumb">
             <a href="{{ route('job_request.category.index',$value->mProductChildCategory->mProductCategory->id) }}">
@@ -30,9 +30,9 @@
         <div class="aboutUser">
             <div class="user">
                 @if(empty($value->user->userProfile->icon))
-                <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                    <a href="{{ route('user.mypage', $value->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @else
-                <p class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></p>
+                    <a href="{{ route('user.mypage', $value->user_id) }}" class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></a>
                 @endif
                 <div class="introd">
                     <p class="name">{{ $value->user->name }}</p>

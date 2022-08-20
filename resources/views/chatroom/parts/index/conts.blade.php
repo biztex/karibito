@@ -35,9 +35,9 @@
         @if($value->buyerUser->id === Auth::id())
             <div class="user">
                 @if(null !== $value->sellerUser->userProfile->icon)
-                    <p class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></p>
+                    <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
                 @else
-                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                    <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @endif
                 <div class="introd">
                         <p class="name">{{$value->sellerUser->name}}</p>
@@ -48,9 +48,9 @@
         @else
             <div class="user">
                 @if(null !== $value->buyerUser->userProfile->icon)
-                    <p class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></p>
+                    <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
                 @else
-                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                    <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @endif
                 <div class="introd">
                     <p class="name">{{$value->buyerUser->name}}</p>
