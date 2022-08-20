@@ -13,7 +13,7 @@
 					<div class="mypageWrap">
 						<div class="mypageSec04">
 							<p class="mypageHd02"><span>スキル・経歴</span></p>
-                            <form method="post" id="form" enctype="multipart/form-data">
+                            <form action="{{ route('skill.store') }}" method="post" id="form" enctype="multipart/form-data">
                             @csrf
                                 <div class="mypageItem">
                                     <p class="mypageHd03">スキル</p>
@@ -22,9 +22,9 @@
                                             <div class="flexLine01">
                                                 <div class="mypageEditList flexLineLeft01">
                                                     <p class="mypageEditHd">スキル名</p>
-                                                    <div class="mypageEditInput"><input type="text" name="name" value="{{ old('name') }}" placeholder="スキル名を入力してください" required></div>
-                                                    <p class="taR">1-30</p>
-                                                    @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                    <div class="mypageEditInput"><input type="text" name="skill_name" value="{{ old('skill_name') }}" placeholder="スキル名を入力してください" required></div>
+                                                    <p class="taRResume">30</p>
+                                                    @error('skill_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                 </div>
                                                 <div class="mypageEditList flexLineRight01">
                                                     <p class="mypageEditHd">経験年数</p>
@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="fancyPersonBtn">
                                                 <a href="{{ route('resume.show') }}" class="fancyPersonCancel">キャンセル</a>
-                                                <input type="submit" class="fancyPersonSign loading-disabled" formaction="{{ route('store.skill') }}" value="登録する">
+                                                <input type="submit" class="fancyPersonSign loading-disabled" value="登録する">
                                             </div>
                                         </div>
                                     </div>

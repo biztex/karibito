@@ -25,18 +25,18 @@
 										<div class="user">
 										@if($dmroom_user->from_user_id === Auth::id())
 											@if($dmroom_user->toUser->userProfile->icon === null)
-												<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+												<a href="{{ route('user.mypage', $dmroom_user->toUser->id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
 											@else
-												<p class="ico"><img src="{{ asset('/storage/'.$dmroom_user->toUser->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover; border-radius: 50%;"></p>
+												<a href="{{ route('user.mypage', $dmroom_user->toUser->id) }}" class="ico"><img src="{{ asset('/storage/'.$dmroom_user->toUser->userProfile->icon) }}" alt=""></a>
 											@endif
 											<div class="introd">
 												<p class="name">{{ $dmroom_user->toUser->name }}</p>
 											</div>
 										@else
 											@if($dmroom_user->fromUser->userProfile->icon === null)
-												<p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+												<a href="{{ route('user.mypage', $dmroom_user->fromUser->id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
 											@else
-												<p class="ico"><img src="{{ asset('/storage/'.$dmroom_user->fromUser->userProfile->icon) }}" alt="" style="width: 50px;height: 50px;object-fit: cover; border-radius: 50%;"></p>
+												<a href="{{ route('user.mypage', $dmroom_user->fromUser->id) }}" class="ico"><img src="{{ asset('/storage/'.$dmroom_user->fromUser->userProfile->icon) }}" alt=""></a>
 											@endif
 											<div class="introd">
 												<p class="name">{{ $dmroom_user->fromUser->name }}</p>

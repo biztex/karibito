@@ -30,7 +30,7 @@
                                                 @error('email')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
-                                                <input type="text" name="email" placeholder="" autocomplete="email" required>
+                                                <input type="email" name="email" placeholder="" autocomplete="email" required>
                                             </div>
                                         </dd>
                                     </dl>

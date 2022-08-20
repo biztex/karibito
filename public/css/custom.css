@@ -74,7 +74,8 @@
 #resume .sidePerson,
 #publication .sidePerson,
 #draft .sidePerson,
-#user_notification .sidePerson
+#user_notification .sidePerson,
+#evaluation .sidePerson
 {
 	display: none;
 }
@@ -715,7 +716,7 @@
 }
 .recommendList.style2 .list .info {
     border: 1px solid #DDDDDD;
-	width: 168px;
+	width: 260px;
 	height: 320px;
 	display:flex;
 	flex-flow: column;
@@ -1028,7 +1029,8 @@
     height: 40px;
     padding: 0 10px;
 }
-.mypageEditInput input[type='tel']{
+.mypageEditInput input[type='tel'],
+.mypageEditInput input[type='email'] {
     border: 1px solid #DDDDDD;
     background-color: #fff;
     border-radius: 3px;
@@ -1087,6 +1089,12 @@
 	border-radius: 50px;
 }
 
+.cont02 .user .ico img {
+	width: 40px;
+	max-height: 40px;
+	object-fit: cover;
+	border-radius: 50px;
+}
 .aboutUser .user .ico img {
 	width: 35px;
 	height: 35px;
@@ -1347,4 +1355,15 @@
 	width: 140px;
 	height: 140px;
 	object-fit: cover;
+}
+.navHeadSp  .navLinkA img {
+	width: 30px;
+	height: 30px;
+	object-fit: cover;
+}
+.recommendListInfo {
+	height:	218px;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
 }

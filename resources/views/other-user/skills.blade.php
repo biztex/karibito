@@ -1,19 +1,21 @@
 <x-other-user.layout>
-	<div class="otherNav">
-		<div class="inner">
-			<ul>
-				<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
-				<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
-				<li><a href="#" class="is_active">スキル・経歴</a></li>
-				{{-- <li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li> --}}
-				<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
-				<li><a href="#">ブログ</a></li>
-			</ul>
-		</div>
-	</div>
-	<x-parts.post-button/>
 	<article>
+		<div class="otherNav">
+			<div class="inner">
+				<ul>
+					<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
+					<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
+					<li><a href="#" class="is_active">スキル・経歴</a></li>
+					{{-- <li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li> --}}
+					<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
+					<li><a href="#">ブログ</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<x-parts.post-button/>
         <x-parts.flash-msg/>
+		
         <div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
@@ -55,7 +57,7 @@
 													</dl>
 													<dl class="mypageDl02">
 														<dt>在籍期間</dt>
-														<dd>{{ $career->first_year }}年 {{ $career->first_month }}月 〜 {{ $career->last_year }}年 {{ $career->last_month }}月</dd>
+														<dd>{{ $career->first_year }}年 {{ $career->first_month }}月 〜 @if($career->last_year == null && $career->last_month == null)現在 @else{{ $career->last_year }}年 {{ $career->last_month }}月 @endif</dd>
 													</dl>
 												</li>
 											@endforeach

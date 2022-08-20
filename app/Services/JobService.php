@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\UserCareer;
-use App\Models\UserSkill;
 use App\Models\UserJob;
 
 class JobService
@@ -11,32 +9,26 @@ class JobService
     /**
      *  職務を登録
      */
-    public function storeUserJob(array $params):UserJob
+    public function storeUserJob(array $params): void
     {
-        $columns = ['content'];
+        if(!\Auth::user()->userJob)
+        {
+            $user_job = new UserJob;
+            $user_job->user_id = \Auth::id();
+            $user_job->content = $params['content'];
+            $user_job->save();
 
-        $userjob = new UserJob;
-        $userjob->user_id = \Auth::id();
-        foreach($columns as $column){
-            $userjob->$column = $params[$column];
+            \Session::put('flash_msg','職務を登録しました');
+
+        } else {
+            $user_job = \Auth::user()->userJob;
+            $user_job->content = $params['content'];
+            $user_job->save();
+            
+            \Session::put('flash_msg','職務を編集しました');
+
         }
-        $userjob->save();
 
-        return $userjob;
-    }
-
-    public function updateUserJob(array $params):UserJob
-    {
-        $id =  \Auth::id();
-        $job = UserJob::where('user_id', '=', $id)->first();
-        $columns = ['content'];
-
-        foreach($columns as $column){
-            $job->$column = $params[$column];
-        }
-        $job->save();
-
-        return $job;
     }
     
 }

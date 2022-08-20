@@ -20,7 +20,7 @@
 								</li>
 							</ul>
 							<h2 class="registerHd">{{ \Auth::user()->name }} 様<br>会員登録ありがとうございます</h2>
-							<p class="registerImg"><img src="img/login/img_register.png" alt=""></p>
+							<p class="registerImg"><img src="/img/login/img_register.png" alt=""></p>
 							<ul class="loginFormBtn">
 								<li><a href="{{ route('mypage') }}">プロフィールを登録</a></li>
 								<li><a href="{{ route('home') }}">トップページへ戻る</a></li>

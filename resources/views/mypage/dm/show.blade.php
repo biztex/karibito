@@ -11,15 +11,15 @@
 							<div class="user">
 								@if($dmroom->from_user_id === Auth::id())
 									@if($dmroom->toUser->userProfile->icon === null)
-										<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+										<a href="{{ route('user.mypage', $dmroom_user->toUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 									@else
-										<p class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></p>
+										<a href="{{ route('user.mypage', $dmroom_user->toUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></a>
 									@endif
 								@else
 									@if($dmroom->fromUser->userProfile->icon === null)
-										<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+										<a href="{{ route('user.mypage', $dmroom_user->fromUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 									@else
-										<p class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></p>
+										<a href="{{ route('user.mypage', $dmroom_user->fromUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></a>
 									@endif
 								@endif
 								<div class="info">
@@ -47,9 +47,9 @@
 								<li>
 									<div class="img">
 										@if(null !== $message->user->userProfile->icon)
-											<p class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt=""></p>
+											<a href="{{ route('user.mypage', $message->user->id) }}" class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt=""></a>
 										@else
-											<p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+											<a href="{{ route('user.mypage', $message->user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 										@endif
 										<div class="info">
 											<p class="name">{{$message->user->name}}</p>
