@@ -31,7 +31,7 @@
                                     @endif
 									<dd>
 										<div class="mypageP01">
-											<p>{{$user->name}}</p>
+											<p class="word-break ">{{$user->name}}</p>
 											<div class="blogDtOtherBtn">
                                             @if (\Auth::id() !== $user->id)
 												@if(empty($dmrooms))

@@ -18,7 +18,7 @@
                     {{ $product->mProductChildCategory->name }}</a>
             </div>
             <div class="draw">
-                <p class="price" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+                <p class="price word-break" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
             </div>
             <div class="single">
                 @if($product->is_online == App\Models\Product::OFFLINE)
@@ -36,7 +36,7 @@
                     <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt=""></a>
                 @endif
                 <div class="introd">
-                    <p class="name">{{ $product->user->name }}</p>
+                    <p class="name word-break">{{ $product->user->name }}</p>
                     <p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/ {{ $product->user->userProfile->age }}/ {{ $product->user->userProfile->prefecture->name }})</p>
                 </div>
             </div>
