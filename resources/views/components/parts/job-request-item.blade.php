@@ -9,7 +9,7 @@
         </div>
         <a href="{{ route('job_request.show',$value->id)}}">
             <div class="draw">
-                <p class="price" style="width:100%;">{{ $value->title }}</font></p>
+                <p class="price word-break" style="width:100%;">{{ $value->title }}</font></p>
             </div>
             <div class="aboutInfo">
                 <dl>
@@ -35,7 +35,7 @@
                     <a href="{{ route('user.mypage', $value->user_id) }}" class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></a>
                 @endif
                 <div class="introd">
-                    <p class="name">{{ $value->user->name }}</p>
+                    <p class="name word-break">{{ $value->user->name }}</p>
                     <p>({{ App\Models\UserProfile::GENDER[$value->user->userProfile->gender] }} /{{ $value->user->userProfile->age }}/ {{ $value->user->userProfile->prefecture->name }})</p>
                 </div>
             </div>

@@ -67,7 +67,7 @@
 									</dd>
 								</dl>
 								<dl class="memberConfigDl">
-									<dt>機密保持契約（NDA）</dt>
+									{{-- <dt>機密保持契約（NDA）</dt> --}}
 									<dd>
 										<span class="status_span">未承認</span>
 										<a class="configLink" href="#">確認する</a>

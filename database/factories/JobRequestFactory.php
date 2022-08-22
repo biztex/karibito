@@ -22,7 +22,7 @@ class JobRequestFactory extends Factory
             'user_id'              => User::factory()->has(UserProfile::factory()->approved()->count(1))->create(),
             'category_id'          => $this->faker->numberBetween(1, 161),
             'prefecture_id'        => $this->faker->numberBetween(1, 47),
-            'title'                => $this->faker->realText(50),
+            'title'                => $this->faker->realText(30),
             'content'              => $this->faker->realText(3000),
             'price'                => $this->faker->numberBetween(500, 9990000),
             'application_deadline' => $this->faker->date(),
