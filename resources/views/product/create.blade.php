@@ -20,7 +20,7 @@
                         <div class="td">
                             <select name="category_id">
                                 <option value="">選択してください</option>
-                                @foreach ($categories as $category)
+                                @foreach (App\Models\MProductCategory::all() as $category)
                                     <optgroup label="{{$category->name}}">
                                         @foreach ($category->mProductChildCategory as $child_category)
                                             <option value="{{$child_category->id}}" @if( old('category_id', $request->category_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
@@ -70,7 +70,7 @@
                         <div class="td">
                             <select name="prefecture_id">
                                 <option value="">選択してください</option>
-                                @foreach($prefectures as $prefecture)
+                                @foreach(App\Models\Prefecture::all() as $prefecture)
                                     <option value="{{ $prefecture->id }}" @if( old('prefecture_id', $request->prefecture_id) == $prefecture->id) selected @endif>{{ $prefecture->name }}</option>
                                 @endforeach
                             </select>

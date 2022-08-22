@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Models\JobRequest;
 use App\Models\Product;
+use App\Models\Prefecture;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -56,22 +57,19 @@ class JobRequestController extends Controller
      */
     public function create(Request $request)
     {
-        return view('job_request.create')->with('request',$request);
+        return view('job_request.create', compact('request'));
     }
 
     public function postCreate(Request $request)
     {
-        $user = \Auth::user();
-
-        return view('job_request.create',compact('request','user'));
+        return view('job_request.create',compact('request'));
     }
 
     // 編集⇒プレビュー⇒編集
     public function postEdit(Request $request, JobRequest $job_request)
     {
-        $user = \Auth::user();
         $job_request = $request;
-        return view('job_request.edit', compact('request','job_request','user'));
+        return view('job_request.edit', compact('request','job_request'));
     }
 
     /**

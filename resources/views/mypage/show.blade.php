@@ -24,7 +24,7 @@
 						@include('mypage.show.profile')
 						
 
-						<div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div>
+						{{-- <div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div> --}}
 
 						{{-- お知らせ --}}
 						@include('mypage.show.notification')

@@ -13,7 +13,7 @@
         <x-parts.evaluation-star :star='$user->avg_star'/>
 
         <p class="check"><a>本人確認済み</a></p>
-        <!-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> -->
+        {{-- <p class="check"><a href="#">機密保持契約(NDA) 可能</a></p> --}}
         @if (\Auth::id() !== $user->id)
             <div class="blogDtOtherBtn">
                 <a href="#" class="followA">フォローする</a>

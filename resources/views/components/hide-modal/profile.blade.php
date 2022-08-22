@@ -123,7 +123,7 @@
                                 @error('prefecture')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <select class="short" name="prefecture">
                                         <option value="">選択してください</option>
-                                        @foreach($prefectures as $prefecture)
+                                        @foreach(App\Models\Prefecture::all() as $prefecture)
                                             <option value="{{$prefecture->id}}" @if($prefecture->id == (int)old('prefecture',Auth::user()->userProfile->prefecture_id)) selected @endif>{{$prefecture->name}}</option>
                                         @endforeach
                                     </select>

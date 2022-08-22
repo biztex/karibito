@@ -29,9 +29,8 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \View::composer('*', function ($view) {
-            $view->with('prefectures', Prefecture::all())
-                ->with('categories', MProductCategory::all())
+        \View::composer(['components.header'], function ($view) {
+            $view->with('categories', MProductCategory::all())
                 // ->with('user_notifications', UserNotification::all())
                 ->with('not_view_user_notifications', UserNotification::latest()->where([['is_view', 0], ['user_id', \Auth::id()], ['is_notification', 1]])->take(5)->get()); //未読のものだけ取得
         });
