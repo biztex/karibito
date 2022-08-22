@@ -1368,11 +1368,17 @@
 	height: 30px;
 	object-fit: cover;
 }
-.recommendListInfo {
-	height:	218px;
+.moreRecommendListInfo {
+	width: 260px !important;
+	height: 203px !important;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-between;
+}
+img.moreRecommendListImg {
+	width: 260px !important;
+	height: 155px !important;
+	object-fit: cover;
 }
 .contactForm input[type='text'],
 .contactForm input[type='number'],

@@ -1,18 +1,18 @@
 <div id="">
-    <div class="recommendList style2">
+    <div class="recommendList style2 moreRecommendList">
         <h2 class="hdM">{{$product->user->name}}さんのその他の出品</h2>
         <div class="list sliderSP">
             @foreach($all_products as $value)
                 <div class="item"  style="height:372.71px">
-                    <a href="{{route('product.show',$product->id)}}" class="img imgBox">
+                    <a href="{{route('product.show',$product->id)}}" class="imgBox">
                         @if(isset($value->productImage[0]))
-                            <img src="{{ asset('/storage/'.$value->productImage[0]->path) }}" alt="" style="width: 260px;height: 154.38px;object-fit: cover;">
+                            <img class="moreRecommendListImg" src="{{ asset('/storage/'.$value->productImage[0]->path) }}" alt="" >
                         @else
-                            <img src="/img/common/img_work01@2x.jpg" alt="">
+                            <img class="moreRecommendListImg" src="/img/common/img_work01@2x.jpg" alt="">
                         @endif
                             <button class="favorite">お気に入り</button>
                     </a>
-                    <div class="info recommendListInfo">
+                    <div class="info moreRecommendListInfo">
                         <div class="breadcrumb"><a href="#">@if(!is_null($value->category_id)){{$value->mProductChildCategory->mProductCategory->name}} @endif</a>&emsp;＞&emsp;<span>@if(!is_null($value->category_id)){{$value->mProductChildCategory->name}}@endif</span></div>
                         <div class="draw">
                             <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>
@@ -29,7 +29,7 @@
                                     <a href="{{ route('user.mypage', $value->user->id) }}" class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></a>
                                 @endif
                                 <div class="introd">
-                                    <p class="name">{{$value->user->name}}</p>
+                                    <p class="name word-break">{{$value->user->name}}</p>
                                     <p>({{App\Models\UserProfile::GENDER[$value->user->userProfile->gender]}}/ {{$value->user->userProfile->age}}/ {{$value->user->userProfile->prefecture->name}})</p>
                                 </div>
                             </div>
