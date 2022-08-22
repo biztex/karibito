@@ -114,10 +114,8 @@
                                                         @endfor
                                                     </select>
                                                     <select name="month" required>
-                                                        <option value="{{ now()->month }}" selected>{{ now()->month }}月</option>
                                                         @for($month =  1; $month<= 12; $month++)
-                                                            @if(now()->month == $month) @continue @endif
-                                                            <option value="{{ $month }}"@if( old('month', $request->month ?? "") == $month) selected @endif>{{ $month }}月</option>
+                                                            <option value="{{ $month }}"@if(( old('month', $request->month ?? "") == $month) || (now()->month == $month)) selected @endif>{{ $month }}月</option>
                                                         @endfor
                                                     </select>
                                                 </div>

@@ -1,6 +1,6 @@
 <x-layout>
 <x-parts.post-button/>
-	<article>
+	<article id="secret03">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>マッチングする秘訣</span>

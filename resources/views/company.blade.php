@@ -31,9 +31,9 @@
 					<p class="logo"><img src="/img/common/logo_title.svg" alt="LOGO"></p>
 					<h2 class="title eng">MACHI TO HITO WO TSUNAGE TAI</h2>
 					<p>知識・スキル・経験を商品化マッチングプラットフォーム！</p>
-					<div class="btnTeams">
+					{{-- <div class="btnTeams">
 						<a href="#" class="blue">Our Service</a>
-					</div>
+					</div> --}}
 				</div>
 				<div class="companyStep">
 					<div class="inner">
