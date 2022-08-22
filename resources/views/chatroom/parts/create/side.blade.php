@@ -18,6 +18,7 @@
                     </div>
                 @else <!-- JobRequest -->
                     <div class="cont">
+                        <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
                         <p class="txt">{{ $service->title }}</p>
                     </div>
                     <div class="amount">
