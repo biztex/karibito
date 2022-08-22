@@ -1,4 +1,5 @@
 @auth
+@if(Auth::user()->userProfile)
 	<div class="hide">
 
 		{{-- 身分証明証提出モーダル --}}
@@ -11,5 +12,5 @@
 		@include('components.hide-modal.resume')
 			
 	</div>
-
+@endif
 @endauth

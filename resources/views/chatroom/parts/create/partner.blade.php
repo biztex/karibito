@@ -10,10 +10,10 @@
                 <div class="info">
                     @if($service_type === 'Product')
                         <p class="name">出品者・{{ $service->user->name }}</p>
+                        <p><a href="{{ route('user.skills', $service->user_id) }}" class="link">職務経歴書を見る</a></p>
                     @else <!-- JobRequest-->
                         <p class="name">掲載者・{{ $service->user->name }}</p>
                     @endif
-                    <p><a href="#" class="link">職務経歴書を見る</a></p>
                 </div>
             </div>
         <p class="login">最終ログイン：オンライン中</p>
