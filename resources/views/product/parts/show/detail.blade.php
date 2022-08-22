@@ -14,7 +14,7 @@
         <span class="data">販売数：@if(!is_null($product->number_of_sale)){{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}@endif</span>
         <span class="data">投稿日：{{$product->created_at->diffForHumans()}}
     </div>
-    <h2><span>{{$product->title}}</span></h2>
+    <h2><span class="word-break">{{$product->title}}</span></h2>
 </div>
 
 <div class="slider">
