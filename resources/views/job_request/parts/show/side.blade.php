@@ -24,6 +24,11 @@
                     <input type="submit" class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
                 </div>
             </form>
+        @elseif ($job_request->application_deadline <= today())
+            <div class="functeBtns">
+                <a tabindex="-1" class="full" style="margin-bottom: 4px">交渉画面へ進む</a>
+                <span>期限切れのリクエストです。ユーザーにDMでお問い合わせください。</span>
+            </div>
         @else
             <div class="functeBtns">
                 <a href="{{ route('chatroom.new.job_request', $job_request->id ) }}" class="orange full">交渉画面へ進む</a>

@@ -70,7 +70,8 @@ class JobRequest extends Model
      */
     public function scopeDisplay($query)
     {
-        return $query->inDeadline()->otherUsers();
+        // return $query->inDeadline()->otherUsers(); 現段階では期限切れも表示するため一旦非表示
+        return $query->otherUsers();
     }
 
     /**
