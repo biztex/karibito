@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\AdditionalOption;
+use App\Models\Chatroom;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
@@ -94,7 +95,9 @@ class ProductController extends Controller
 
         $evaluation_counts = $this->evaluation_service->countEvaluations($product->user_id);
 
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts'));
+        $chatroom_status = Chatroom::where('reference_id', $product->id)->pluck('status')->first();
+
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'chatroom_status'));
     }
 
     /**
