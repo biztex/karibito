@@ -172,7 +172,7 @@
                                     <td>
                                         <select name="prefecture_id">
                                             <option value="">-</option>
-                                            @foreach($prefectures as $prefecture)
+                                            @foreach(App\Models\Prefecture::all() as $prefecture)
                                                 <option value="{{ $prefecture->id }}" @if(isset($prefecture_id) && $prefecture_id == $prefecture->id) selected @endif>{{ $prefecture->name }}</option>
                                             @endforeach
                                         </select>
@@ -234,7 +234,7 @@
                     <h2 class="cate cate05">その他サービスから探す</h2>
                     <ul class="other">
                         <ul class="other">
-                            @foreach($categories as $category)
+                            @foreach(App\Models\MProductCategory::all() as $category)
                                 <li><a href="{{route('product.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
                             @endforeach
                         </ul>

@@ -25,7 +25,7 @@
                         <div class="td">
                             <select name="category_id">
                                 <option value="">選択してください</option>
-                                @foreach ($categories as $category)
+                                @foreach (App\Models\MProductCategory::all() as $category)
                                     <optgroup label="{{$category->name}}">
                                         @foreach ($category->mProductChildCategory as $child_category)
                                             <option value="{{$child_category->id}}" @if( old('category_id' , $product->category_id) == $child_category->id ) selected @endif>{{ $child_category->name }}</option>
@@ -76,7 +76,7 @@
                         <div class="td">
                             <select name="prefecture_id" class="">
                                 <option value="">選択してください</option>
-                                @foreach ( $prefectures as $prefecture )
+                                @foreach ( App\Models\Prefecture::all() as $prefecture )
                                     <option value="{{ $prefecture->id }}" @if( old('prefecture_id', $product->prefecture_id) == $prefecture->id ) selected @endif>{{ $prefecture->name }}</option>
                                 @endforeach
                             </select>
@@ -475,6 +475,7 @@ $(function(){
     delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
 	delQuestion();
 	delYoutube();
+})
     function addOption(){
         let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"><textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
         let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
@@ -545,5 +546,4 @@ $(function(){
         });
     }
 
-})
 </script>
