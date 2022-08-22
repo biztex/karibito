@@ -38,8 +38,7 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        $prefectures = Prefecture::all();
-        return view('auth.profile-create',compact('prefectures'));
+        return view('auth.profile-create');
     }
 
     /**

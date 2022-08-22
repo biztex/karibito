@@ -1,7 +1,7 @@
 <aside id="side" class="pc">
     <h2>サービス一覧</h2>
     <ul class="links">
-    @foreach($categories as $category)
+    @foreach(App\Models\MProductCategory::all() as $category)
         <li><a href="{{route('product.category.index', $category->id) }}">{{ $category->name }}</a></li>
     @endforeach
     </ul>
