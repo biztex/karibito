@@ -1,5 +1,5 @@
 <x-layout>
-	<article id="user_notification">
+	<article id="user_notification" class="user_notification_show">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{route('home')}}">ホーム</a>　>　<a href="{{route('user_notification.index')}}">お知らせ</a>　>　<span>{{$user_notification->title}}</span>
