@@ -18,11 +18,13 @@
                                 @csrf
                                 <div class="labelName"><input type="text" name="name" placeholder="名前" @if(\Auth::User()) value="{{ \Auth::User()->name }}" @endif required></div>
                                 <div class="labelMail"><input type="email" name="mail" placeholder="メールアドレス" @if(\Auth::User()) value="{{ \Auth::User()->email }}" @endif required></div>
-                                <div class="labelType"><select name="type">
-                                    @foreach (App\Models\ContactMailHistory::CONTACT_TYPES as $i => $option)
-                                        <option value='{{ $i }}'>{{ $option }}</option>
-                                    @endforeach
-                                </select></div>
+                                {{-- <div class="labelType">
+                                    <select name="type">
+                                        @foreach (App\Models\ContactMailHistory::CONTACT_TYPES as $i => $option)
+                                            <option value='{{ $i }}'>{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                </div> リクエストにより非表示に変更--}}
                                 <div class="labelMessage">
                                     <p>お問い合わせ内容</p>
                                     <textarea name="message" placeholder="入力してください" required></textarea>
