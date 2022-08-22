@@ -53,7 +53,7 @@
                                     @foreach($evaluations['usually'] as $value)
 
 							            <x-parts.evaluation :value='$value'/>
-                                    
+
                                     @endforeach
                                 @endif
                                     {{ $evaluations['usually']->fragment('usually')->links() }}
@@ -67,7 +67,7 @@
                                     @foreach($evaluations['pity'] as $value)
 
 							            <x-parts.evaluation :value='$value'/>
-                                            
+
                                     @endforeach
                                 @endif
                                     {{ $evaluations['pity']->fragment('pity')->links() }}

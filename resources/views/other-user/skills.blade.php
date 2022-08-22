@@ -1,4 +1,6 @@
 <x-other-user.layout>
+	<x-parts.post-button/>
+
 	<article>
 		<div class="otherNav">
 			<div class="inner">
@@ -15,7 +17,7 @@
 
 		<x-parts.post-button/>
         <x-parts.flash-msg/>
-		
+
         <div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">

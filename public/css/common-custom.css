@@ -33,3 +33,22 @@
     color: #158ACC;
     text-align: center;
 }
+
+.imgP {
+    overflow: hidden;
+    height: 246px;
+    width: 246px;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+}
+@media screen and (max-width: 768px) {
+    .imgP {
+        height: 358px;
+        width: 358px;
+    }
+}
+.imgP > a > img {
+    min-height: 100%;
+    max-width: none !important
+}
