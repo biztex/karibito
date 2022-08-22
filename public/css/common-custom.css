@@ -10,6 +10,9 @@
 .break-word {
     overflow-wrap: break-word;
 }
+.word-break {
+    word-break: break-all;
+}
 
 /*背景系*/
 .bg-white {

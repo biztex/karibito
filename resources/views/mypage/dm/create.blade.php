@@ -10,9 +10,9 @@
 						<div class="sellerTop">
 							<div class="user">
 								@if(null !== $user->userProfile->icon)
-									<p  class="head"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></p>
+									<a href="{{ route('user.mypage', $user->id) }}" class="head"><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt=""></a>
 								@else
-									<p  class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+									<a href="{{ route('user.mypage', $user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 								@endif
 								<div class="info">
 									<p class="name">{{ $user->name }}</p>

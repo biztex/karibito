@@ -2,38 +2,33 @@
 
 namespace App\Services;
 
-use App\Models\UserCareer;
 use App\Models\UserSkill;
-use App\Models\Userjob;
 
 class SkillService
 {
     /**
      *  スキルを登録
      */
-    public function storeUserSkill(array $params):UserSkill
+    public function storeUserSkill(array $params): void
     {
-        $columns = ['name', 'year'];
+        $user_skill = new UserSkill;
+        $user_skill->user_id = \Auth::id();
+        $user_skill->name = $params['skill_name'];
+        $user_skill->year = $params['year'];
+        $user_skill->save();
 
-        $userskill = new UserSkill;
-        $userskill->user_id = \Auth::id();
-        foreach($columns as $column){
-            $userskill->$column = $params[$column];
-        }
-        $userskill->save();
-
-        return $userskill;
+        \Session::put('flash_msg','スキルを登録しました');
     }
 
      /**
      *  スキルを削除
      */
-    public function deleteUserSkill($id):UserSkill
+    public function deleteUserSkill(UserSkill $user_skill): void
     {
-        $userskill = UserSkill::where('id', '=', $id)->first();
-        $userskill->delete();
+        $user_skill->delete();
+        \Session::put('flash_msg','職務を削除しました');
 
-        return $userskill;
+
     }
 
 }

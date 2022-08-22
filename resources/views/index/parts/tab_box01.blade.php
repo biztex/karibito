@@ -6,7 +6,7 @@
             @include('index.parts.tab_box.begin-guide')
 
             <!-- おすすめのカテゴリー -->
-            @include('index.parts.tab_box.recommend-category')
+            @include('index.parts.tab_box.product-recommend-category')
 
             <!-- おすすめのお仕事 -->
             @include('index.parts.tab_box.product-recommend')
@@ -17,9 +17,9 @@
 
             <!-- カリビトからのお知らせ -->
             @include('index.parts.tab_box.news')
-            
+
         </div>
-        
+
         <!-- aside -->
         @include('index.parts.tab_box.side')
 

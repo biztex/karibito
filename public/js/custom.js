@@ -1,5 +1,4 @@
 $(function () {
-	
 	// チャットルーム資料添付・送信
 
 	$(".chatroom_file_input").on('click', function () {
@@ -159,17 +158,15 @@ $(function () {
 
 	// トップページ
 	// カテゴリをもっと見るボタン
+	$('.js-productOtherBtn').on('click', function () {
+		$(".js-hide_product_categories").removeClass('hide');
+		$(this).closest('.otherBtn').hide();
+	})
 
-		$('.js-productOtherBtn').on('click', function () {
-			$(".js-hide_product_categories").removeClass('hide');
-            $(this).closest('.otherBtn').hide();
-		}
-	)
+	$('.js-jobRequestOtherBtn').on('click', function () {
+		$(".js-hide_job_request_categories").removeClass('hide');
+		$(this).closest('.otherBtn').hide();
+	})
 
-		$('.js-jobRequestOtherBtn').on('click', function () {
-			$(".js-hide_job_request_categories").removeClass('hide');
-            $(this).closest('.otherBtn').hide();
-		}
-	)
-
+	
 });

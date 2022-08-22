@@ -2,6 +2,7 @@
     <div id="header">
         <div id="headerLinks">
             <div class="inner">
+
                 <div class="item">
                     <h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO" style="min-width:93px;"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
                     <p class="searchBtnSp sp"><img src="/img/common/ico_sea.svg" alt=""></p>
@@ -19,13 +20,14 @@
                         </div>
                     </form>
                 </div>
+
                 <div class="item">
                     @auth
                         <p class="navHeadSp">
-                            @if(empty($user_profile->icon))
+                            @if(empty(Auth::user()->userProfile->icon))
                                 <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="/img/mypage/no_image.jpg" alt=""></a>
                                 @else
-                                <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 30px;height: 30px;object-fit: cover;"></a>
+                                <a href="{{ route('mypage') }}" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.Auth::user()->userProfile->icon) }}" alt=""></a>
                             @endif
                         </p>
                     @endauth
@@ -67,17 +69,17 @@
                                     <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
                                     <li><a href="#" class="nav02">お気に入り</a></li>
                                     <li class="navLink">
-                                            @if(empty($user_profile->icon))
+                                            @if(empty(Auth::user()->userProfile->icon))
                                                 <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
                                             @else
-                                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
+                                                <a href="javascript:void(0);" class="nav_mypage navLinkA"><img src="{{asset('/storage/'.Auth::user()->userProfile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a>
                                             @endif
                                         <div class="navBox navMypageBox">
                                             <dl class="navMypageDl">
-                                                @if(empty($user_profile->icon))
+                                                @if(empty(Auth::user()->userProfile->icon))
                                                     <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
                                                 @else
-                                                    <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
+                                                    <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.Auth::user()->userProfile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                                 @endif
                                                     <dd>{{\Auth::user()->name}}</dd>
                                             </dl>
@@ -96,17 +98,18 @@
                                     </li>
                                 @endauth
                         </ul>
+
                         <div class="sp">
                             @auth
                                 <dl class="navMypageDl">
-                                    @if(empty($user_profile->icon))
+                                    @if(empty(Auth::user()->userProfile->icon))
                                         <dt><a href="{{ route('mypage')}}"><img src="/img/mypage/no_image.jpg" alt=""></a></dt>
                                         @else
-                                        <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.$user_profile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
+                                        <dt><a href="{{ route('mypage')}}"><img src="{{asset('/storage/'.Auth::user()->userProfile->icon) }}" alt="" style="width: 40px;height: 40px;object-fit: cover;"></a></dt>
                                     @endif
                                     <dd>{{ \Auth::user()->name }}</dd>
                                 </dl>
-                                <!-- <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p> -->
+                                <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p>
                                 <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                 <div class="navMypageUl link01">
                                     <a href="{{ route('mypage') }}">マイページ</a>
@@ -117,6 +120,7 @@
                                     @endcan
                                 </div>
                             @endauth
+
                             <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
                                 @guest
                                     <a href="{{route('login')}}" class="log">ログイン</a>
@@ -128,20 +132,25 @@
                                 <a href="{{ route('setting.index') }}">設定</a>
                                 <a href="{{ route('contact') }}">お問い合わせ</a>
                             </div>
+
                             @auth
                                 <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
                             @endauth
+
                         </div>
                     </nav><!-- /#gNavi -->
                     <div class="overlay"></div>
+
                     <div class="fun">
                         @guest
                             <a href="{{route('login')}}" class="log">ログイン</a>
                             <a href="{{route('register')}}" class="sign">新規登録</a>
                         @endguest
                     </div>
+
                 </div>
             </div>
+
             <div class="searchWrapSp">
                 <div class="searchWrapTop">
                     <form method="get">
@@ -184,6 +193,7 @@
                 </div>
             </div>
         </div><!-- /.headLinks -->
+
         <div class="findWrap pc">
             <div class="inner">
                 <div class="flexBox">
@@ -192,18 +202,18 @@
                             <a class="findLinkA">サービスを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
-                                @foreach($categories as $category)
-                                    <li class="findSubLinkLi">
-                                        <a href="{{route('product.category.index', $category->id) }}">{{$category->name}}</a>
-                                        <div class="findThirdLink">
-                                            <ul class="findThirdLinkUl">
-                                            @foreach($category->mProductChildCategory as $child_category)
-                                                <li><a href="{{route('product.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
-                                            @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                @endforeach
+                                    @foreach($categories as $category)
+                                        <li class="findSubLinkLi">
+                                            <a href="{{route('product.category.index', $category->id) }}">{{$category->name}}</a>
+                                            <div class="findThirdLink">
+                                                <ul class="findThirdLinkUl">
+                                                    @foreach($category->mProductChildCategory as $child_category)
+                                                        <li><a href="{{route('product.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -211,18 +221,18 @@
                             <a class="findLinkA">リクエストを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
-                                @foreach($categories as $category)
-                                    <li class="findSubLinkLi">
-                                        <a href="{{route('job_request.category.index', $category->id) }}">{{$category->name}}</a>
-                                        <div class="findThirdLink">
-                                            <ul class="findThirdLinkUl">
-                                            @foreach($category->mProductChildCategory as $child_category)
-                                                <li><a href="{{route('job_request.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
-                                            @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                @endforeach
+                                    @foreach($categories as $category)
+                                        <li class="findSubLinkLi">
+                                            <a href="{{route('job_request.category.index', $category->id) }}">{{$category->name}}</a>
+                                            <div class="findThirdLink">
+                                                <ul class="findThirdLinkUl">
+                                                    @foreach($category->mProductChildCategory as $child_category)
+                                                        <li><a href="{{route('job_request.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -230,31 +240,33 @@
                             <a class="findLinkA">ブログを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
-                                @foreach($categories as $category)
-                                    <li class="findSubLinkLi">
-                                        <a href="#">{{$category->name}}</a>
-                                        <div class="findThirdLink">
-                                            <ul class="findThirdLinkUl">
-                                            @foreach($category->mProductChildCategory as $child_category)
-                                                <li><a href="#">{{$child_category->name}}</a></li>
-                                            @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                @endforeach
+                                    @foreach($categories as $category)
+                                        <li class="findSubLinkLi">
+                                            <a href="#">{{$category->name}}</a>
+                                            <div class="findThirdLink">
+                                                <ul class="findThirdLinkUl">
+                                                    @foreach($category->mProductChildCategory as $child_category)
+                                                        <li><a href="#">{{$child_category->name}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div> --}}
                     </div>
+
                     @can('identify')
-                    <div class="right">
-                        <a href="{{ route('post') }}">投稿する</a>
-                    </div>
+                        <div class="right">
+                            <a href="{{ route('post') }}">投稿する</a>
+                        </div>
                     @endcan
                 </div>
             </div>
         </div>
-        <!-- <div class="serviceLink pc">
+
+        {{-- <div class="serviceLink pc">
             <div class="inner">
                 <div class="cont">
                     <div class="box">
@@ -267,7 +279,8 @@
                     <div class="span"><img src="/img/common/icon_slink.svg" alt=""></div>
                 </div>
             </div>
-        </div> -->
+        </div> --}}
+        
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
@@ -307,3 +320,4 @@
         @endauth
     </div><!-- /#header -->
 	<x-hide-modal/>
+</header>

@@ -12,11 +12,11 @@
                         @endif
                             <button class="favorite">お気に入り</button>
                     </a>
-                    <div class="info" style="height:218px;display: flex; flex-flow: column; justify-content: space-between;">
+                    <div class="info recommendListInfo">
                         <div class="breadcrumb"><a href="#">@if(!is_null($value->category_id)){{$value->mProductChildCategory->mProductCategory->name}} @endif</a>&emsp;＞&emsp;<span>@if(!is_null($value->category_id)){{$value->mProductChildCategory->name}}@endif</span></div>
                         <div class="draw">
                             <p class="ico"><img src="/img/service/ico_color.png" alt=""></p>
-                            <p class="price"><font>{{$value->title}}</font><br>{{ number_format($value->price) }}円</p>
+                            <p class="price word-break"><font>{{$value->title}}</font><br>{{ number_format($value->price) }}円</p>
                         </div>
                         <div class="single">
                             <span>{{App\Models\Product::IS_ONLINE[$value->is_online]}}</span>
@@ -24,9 +24,9 @@
                         <div class="aboutUser">
                             <div class="user">
                                 @if(empty($value->user->userProfile->icon))
-                                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                    <a href="{{ route('user.mypage', $value->user->id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                                 @else
-                                    <p class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt="" style="border-radius:50%;width:35px;height: 35px;object-fit: cover;"></p>
+                                    <a href="{{ route('user.mypage', $value->user->id) }}" class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></a>
                                 @endif
                                 <div class="introd">
                                     <p class="name">{{$value->user->name}}</p>

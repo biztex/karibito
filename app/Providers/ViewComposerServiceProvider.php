@@ -30,8 +30,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         \View::composer('*', function ($view) {
-            $view->with('user_profile', UserProfile::firstWhere('user_id',\Auth::id()))
-                ->with('prefectures', Prefecture::all())
+            $view->with('prefectures', Prefecture::all())
                 ->with('categories', MProductCategory::all())
                 // ->with('user_notifications', UserNotification::all())
                 ->with('not_view_user_notifications', UserNotification::latest()->where([['is_view', 0], ['user_id', \Auth::id()], ['is_notification', 1]])->take(5)->get()); //未読のものだけ取得

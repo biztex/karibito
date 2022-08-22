@@ -4,9 +4,9 @@
         <div class="sellerTop">
             <div class="user">
                 @if(null !== $partner->userProfile->icon)
-                    <p class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></p>
+                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
                 @else
-                    <p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @endif
                 <div class="info">
                     <p class="name">出品者・{{ $partner->name }}</p>
@@ -26,9 +26,9 @@
         <div class="sellerTop">
             <div class="user">
                 @if(null !== $partner->userProfile->icon)
-                    <p class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></p>
+                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
                 @else
-                    <p class="head"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @endif
                 <div class="info">
                     <p class="name">掲載者・{{ $partner->name }}</p>
@@ -46,7 +46,11 @@
     <div class="friendsTop">
         <div class="sellerTop">
             <div class="user">
-                <p class="head"><img src="/img/service/ico_head.png" alt=""></p>
+                @if(null !== $partner->userProfile->icon)
+                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
+                @else
+                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                @endif
                 <div class="info">
                     <p class="name">{{$partner->name}}</p>
                 </div>

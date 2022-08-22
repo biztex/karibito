@@ -16,6 +16,21 @@ class StoreRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if($this->first_year != null && $this->first_month != null){
+            $first = $this->first_year . '-' . $this->first_month;
+            $this->merge(['first' => $first,]);
+        }
+
+        if($this->last_year != null && $this->last_month != null){
+            $last = $this->last_year . '-' . $this->last_month;
+            $this->merge(['last' => $last]);       
+       }     
+
+        
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,22 +39,26 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string | max:30',
-            'first_year' => 'required | integer | min:1970 | max:2099',
-            'first_month' => 'required | integer | between:1,12',
-            'last_year' => 'required_with:last_month| nullable | integer | min:1970 | max:2099',
-            'last_month' => 'required_with:last_year| nullable | integer | between:1,12',
+            'career_name' => 'required | string | max:30',
+            'first' => 'required | date',
+            'last' => 'nullable | date | after_or_equal:first',
+            // 'first_year' => 'required | integer | min:1970 | max:2099',
+            // 'first_month' => 'required | integer | between:1,12',
+            'last_year' => 'required_with:last_month',
+            'last_month' => 'required_with:last_year',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '経歴名',
-            'first_year' => '開始の年',
-            'first_month' => '開始の月',
-            'last_year' => '終了の年',
-            'last_month' => '終了の月',
+            'career_name' => '経歴名',
+            'first' => '開始年月',
+            'last' => '終了年月',
+            'first_year' => '開始年',
+            'first_month' => '開始月',
+            'last_year' => '終了年',
+            'last_month' => '終了月',
         ];
     }
 }

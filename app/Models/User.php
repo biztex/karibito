@@ -128,7 +128,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function userJob()
     {
-        return $this->hasMany(UserJob::class);
+        return $this->hasOne(UserJob::class);
     }
     
     public function dmroom()

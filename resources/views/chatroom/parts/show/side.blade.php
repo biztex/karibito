@@ -21,6 +21,7 @@
         @else
             <div class="publicate">
                 <div class="cont">
+                    <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
                     <p class="txt">{{ $chatroom->reference->title }}</p>
                 </div>
                 <div class="amount">

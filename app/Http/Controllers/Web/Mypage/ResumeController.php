@@ -4,10 +4,6 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-
-use App\Models\UserSkill;
-use App\Services\ResumeService;
 
 class ResumeController extends Controller
 {
@@ -22,22 +18,22 @@ class ResumeController extends Controller
         //
     }
 
-    public function skillCreate()
-    {
-        return view('resume.skill_create');
-    }
+    // public function skillCreate()
+    // {
+    //     return view('resume.skill_create');
+    // }
 
 
-    public function careerCreate()
-    {
-        return view('resume.career_create');
-    }
+    // public function careerCreate()
+    // {
+    //     return view('resume.career_create');
+    // }
 
-    public function jobCreate()
-    {
-        $jobs = \Auth::user()->userJob->first();
-        return view('resume.job_create', compact('jobs'));
-    }
+    // public function jobCreate()
+    // {
+    //     $jobs = \Auth::user()->userJob;
+    //     return view('resume.job_create', compact('jobs'));
+    // }
     /**
      * Show the form for creating a new resource.
      *
@@ -66,12 +62,8 @@ class ResumeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {
-        $skills = \Auth::user()->userSkills;
-        $careers = \Auth::user()->userCareers;
-        $jobs = \Auth::user()->userJob->first();
-        
-        return view('resume.resume', compact('skills', 'careers','jobs'));
+    {        
+        return view('resume.show');
     }
 
     /**

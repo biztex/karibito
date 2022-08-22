@@ -3,37 +3,34 @@
 namespace App\Services;
 
 use App\Models\UserCareer;
-use App\Models\UserSkill;
-use App\Models\Userjob;
 
 class CareerService
 {
     /**
      *  経歴を登録
      */
-    public function storeUserCareer(array $params):UserCareer
+    public function storeUserCareer(array $params): void
     {
-        $columns = ['name', 'first_year', 'first_month', 'last_year', 'last_month'];
+        $columns = ['first_year', 'first_month', 'last_year', 'last_month'];
         
-        $usercareer = new UserCareer;
-        $usercareer->user_id = \Auth::id();
+        $user_career = new UserCareer;
+        $user_career->user_id = \Auth::id();
+        $user_career->name = $params['career_name'];
         foreach($columns as $column){
-            $usercareer->$column = $params[$column];
+            $user_career->$column = $params[$column];
         }
-        $usercareer->save();
-
-        return $usercareer;
+        $user_career->save();
+        \Session::put('flash_msg','経歴を登録しました');
     }
 
      /**
      *  経歴を削除
      */
-    public function deleteUserCareer($id):UserCareer
+    public function deleteUserCareer(UserCareer $user_career): void
     {
-        $usercareer = UserCareer::where('id', '=', $id)->first();
-        $usercareer->delete();
+        $user_career->delete();
+        \Session::put('flash_msg','経歴を削除しました');
 
-        return $usercareer;
     }
 
 }

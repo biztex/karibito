@@ -1,6 +1,7 @@
 <x-layout>
 <x-parts.post-button/>
 <article>
+	<body id="evaluation">
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　<span>評価一覧</span>
