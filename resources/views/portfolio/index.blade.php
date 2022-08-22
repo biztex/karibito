@@ -43,6 +43,20 @@
                     <x-side-menu/>
                 </div>
             </div><!-- /#contents -->
+            </article>
+            <script type="text/javascript" src="js/jquery.min.js"></script>
+            <script type="text/javascript" src="js/jquery.matchHeight-min.js"></script>
+            <script type="text/javascript" src="js/jquery.biggerlink.min.js"></script>
+            <script type="text/javascript" src="js/slick.js"></script>
+            <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+            <script type="text/javascript" src="js/jquery.ui.datepicker-ja.min.js"></script>
+            <script type="text/javascript" src="js/jquery.fancybox.js"></script>
+            <script type="text/javascript" src="js/common.js"></script>
+            <script type="text/javascript">
+            $(function(){
+
+            });
+            </script>
         </body>
         <x-hide-modal/>
     </article>

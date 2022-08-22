@@ -63,7 +63,7 @@
 											<div>
 												<select name="prefecture" class="@error('prefecture') is-invalid @enderror" required>
 													<option value="">選択してください</option>
-													@foreach ( $prefectures as $prefecture )
+													@foreach ( App\Model\Prefecture::all() as $prefecture )
 														<option value="{{$prefecture->id}}"  @if($prefecture->id == old('prefecture')) selected @endif>{{$prefecture->name}}</option>
 													@endforeach
 												</select>

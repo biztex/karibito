@@ -716,8 +716,8 @@
 }
 .recommendList.style2 .list .info {
     border: 1px solid #DDDDDD;
-	width: 260px;
-	height: 320px;
+	width: 192px;
+	height: 345px;
 	display:flex;
 	flex-flow: column;
 	justify-content:space-between;
@@ -735,6 +735,13 @@
 	.infoTop{
 		width: 168px;
 		height: 200px;
+	}
+	.recommendList.style2 .list .info {
+		width: 168px;
+		height: 300px;
+	}
+	.mypageP01 .blogDtOtherBtn a {
+		font-size: 12px;
 	}
 }
 
@@ -1361,11 +1368,17 @@
 	height: 30px;
 	object-fit: cover;
 }
-.recommendListInfo {
-	height:	218px;
+.moreRecommendListInfo {
+	width: 260px !important;
+	height: 203px !important;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-between;
+}
+img.moreRecommendListImg {
+	width: 260px !important;
+	height: 155px !important;
+	object-fit: cover;
 }
 .contactForm input[type='text'],
 .contactForm input[type='number'],

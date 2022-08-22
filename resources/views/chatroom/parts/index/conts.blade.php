@@ -9,7 +9,7 @@
             <div class="info">
                 <div class="breadcrumb"><a tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
                 <div class="draw">
-                    <p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
+                    <p class="price word-break"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
                 </div>
                 <div class="single">
                     <span tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</span>
@@ -22,7 +22,7 @@
             <div class="info">
                 <div class="breadcrumb"><a tabindex="0">{{$value->reference->mProductChildCategory->mProductCategory->name}}</a> ＞ <span>{{$value->reference->mProductChildCategory->name}}</span></div>
                 <div class="draw">
-                    <p class="price"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
+                    <p class="price word-break"><font>{{$value->reference->title}}</font><br>{{ number_format($value->reference->price)}}円</p>
                 </div>
                 <div class="single">
                     <span tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</span>
@@ -40,7 +40,7 @@
                     <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @endif
                 <div class="introd">
-                        <p class="name">{{$value->sellerUser->name}}</p>
+                        <p class="name word-break">{{$value->sellerUser->name}}</p>
                         <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @endif
                 <div class="introd">
-                    <p class="name">{{$value->buyerUser->name}}</p>
+                    <p class="name word-break">{{$value->buyerUser->name}}</p>
                     <p>({{App\Models\UserProfile::GENDER[$value->buyerUser->userProfile->gender]}}/ {{$value->buyerUser->userProfile->age}}/ {{$value->buyerUser->userProfile->prefecture->name}})</p>
                 </div>
             </div>
