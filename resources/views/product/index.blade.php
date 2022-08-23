@@ -115,15 +115,7 @@
                             @endforeach
                         </div>
                         <div class=wp-pagenavi>
-                            {{-- <span class="current">1</span>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                            ...
-                            <a href="#" class="nextpostslink">次へ</a> --}}
+                            {{-- <a href="#" class="nextpostslink">次へ</a> --}}
                             {{ $products->links() }}
                         </div>
                     </div>
