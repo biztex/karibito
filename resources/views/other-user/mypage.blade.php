@@ -187,7 +187,7 @@
                                 @endif
 
                                 @if ($portfolio_list->isEmpty())
-                                    <p>ポートフォリオの登録はありません。</p>
+                                    <p>ポートフォリオの登録がありません。</p>
                                 @else
                                     <ul class="mypagePortfolioUl">
                                         @foreach ($portfolio_list as $portfolio)
