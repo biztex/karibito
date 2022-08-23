@@ -16,7 +16,7 @@ class AdminContactService
         ContactMailHistory::create([
             'name'    => $request->name,
             'mail'    => $request->mail,
-            // 'type'    => $request->type, 非表示にしたのでコメントアウト
+            'type'    => $request->type,
             'message' => $request->message
         ]);
         Mail::to('adminContact@test.com')

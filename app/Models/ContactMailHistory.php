@@ -9,16 +9,21 @@ class ContactMailHistory extends Model
 {
     use HasFactory;
 
-    // タイプを非表示に変更したので　コメントアウト
-    // public const TYPE_ZERO= 0; //仮名
-    // public const TYPE_ONE = 1; //仮名
-    // public const TYPE_TWO = 2; //仮名
+    public const INFO = 0;
+    public const SERVICE = 1;
+    public const SELL_BUY = 2;
+    public const CANCEL = 3;
+    public const TROUBLE = 4;
+    public const REPORT = 5;
 
-    // public const CONTACT_TYPES = [
-    //     self::TYPE_ZERO => 'お問い合わせ種別',
-    //     self::TYPE_ONE => 'お問い合わせ種別1',
-    //     self::TYPE_TWO => 'お問い合わせ種別2'
-    // ];
+    public const CONTACT_TYPES = [
+        self::INFO => '【会員情報に関して】',
+        self::SERVICE => '【サービスに関して】',
+        self::SELL_BUY => '【購入・支払いに関して】',
+        self::CANCEL => '【キャンセル・返金に関して】',
+        self::TROUBLE => '【トラブルに関して】',
+        self::REPORT => '【ご通報】',
+    ];
 
     protected $guarded = ['id'];
 }
