@@ -1,10 +1,17 @@
 <x-layout>
     <article>
     	<div id="breadcrumb">
-			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
-			</div>
-		</div><!-- /.breadcrumb -->
+            <div class="inner">
+                    <a href="{{ route('home') }}">ホーム</a>　>　
+                    <a href="{{ route('chatroom.index') }}">やり取り一覧</a>　>　
+				@if($purchase->chatroom->reference === 'App\Models\Product')
+                    <a href="{{ route('product.show', $purchase->chatroom->reference_id) }}">{{$purchase->chatroom->reference->title}}</a>　>　
+                @else <!-- JobRequest-->
+                    <a href="{{ route('job_request.show', $purchase->chatroom->reference_id) }}">{{$purchase->chatroom->reference->title}}</a>　>　
+                @endif
+                    <span>キャンセル手続き</span>
+            </div>
+        </div><!-- /.breadcrumb -->
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">

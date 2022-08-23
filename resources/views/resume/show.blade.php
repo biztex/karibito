@@ -83,7 +83,7 @@
 								<div class="mypageItem">
 									<p class="mypageHd03">職務</p>
 									<div class="mypageBox">
-										@if(Auth::user()->userJob || Auth::user()->userJob->content !== null)
+										@if(Auth::user()->userJob && Auth::user()->userJob->content !== null)
 											<div class="mypageDuties" style="word-wrap: break-word;">
 												<p>{!!nl2br(Auth::user()->userJob->content)!!}</p>
 											</div>
