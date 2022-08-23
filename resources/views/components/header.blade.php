@@ -112,7 +112,7 @@
                                 <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p>
                                 <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                 <div class="navMypageUl link01">
-                                    <a href="{{ route('mypage') }}">マイページ</a>
+                                    {{-- <a href="{{ route('mypage') }}">マイページ</a> --}}
                                     <a href="#">お気に入り</a>
                                     @can('identify')
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
@@ -126,10 +126,12 @@
                                     <a href="{{route('login')}}" class="log">ログイン</a>
                                     <a href="{{route('register')}}" class="sign">新規登録</a>
                                 @endguest
-                                <a href="{{ route('guide') }}">ご利用ガイド</a>
+                                <a href="{{ route('support') }}">ご利用ガイド</a>
                                 <a href="#">カリビトQ&A</a>
                                 <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
-                                <a href="{{ route('setting.index') }}">設定</a>
+                                @auth
+                                    <a href="{{ route('setting.index') }}">設定</a> {{--未ログインユーザーには必要ない？--}}
+                                @endauth
                                 <a href="{{ route('contact') }}">お問い合わせ</a>
                             </div>
 
