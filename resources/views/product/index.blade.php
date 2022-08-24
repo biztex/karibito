@@ -198,6 +198,9 @@
                                     </td>
                                 </tr>
                             </table>
+                            <div class="checkboxChoice">
+                                <label><input type="checkbox" name="is_sale" value="1" @if (isset($is_sale) && $is_sale === '1') checked @endif>期限内</label>
+                            </div>
                             {{-- 検索ではない時 --}}
                             @if (isset($parent_category_flg))
                                 @if ($parent_category_flg === 1)

@@ -198,6 +198,9 @@
 									</td>
 								</tr>
 							</table>
+							<div class="checkboxChoice">
+								<label><input type="checkbox" name="is_sale" value="1" @if (isset($is_sale) && $is_sale === '1') checked @endif>販売中</label>
+							</div>
 							@if (isset($parent_category_flg))
 								@if ($parent_category_flg === 1)
 									<input type="hidden" name="parent_category_flg" value="1">

@@ -69,6 +69,7 @@ class ProductController extends Controller
         $high_price = $request->high_price;
         $is_online = $request->is_online;
         $age_period = $request->age_period;
+        $is_sale = $request->is_sale;
         $sort = $request->sort;
         $keyword = $request->keyword;
         $parent_category_id = $request->parent_category_id;
@@ -86,10 +87,10 @@ class ProductController extends Controller
 
         if ($service_flg === '1') { //プロダクトの時
             $products = $this->product_service->searchProducts($request);
-            return view('product.index', compact('products', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title'));
+            return view('product.index', compact('products', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale'));
         } elseif ($service_flg === '2') { //リクエストの時
             $job_requests = $this->job_request_service->searchJobRequests($request);
-            return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title'));
+            return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale'));
         }
     }
 }
