@@ -1,63 +1,54 @@
 <x-layout>
-<x-parts.post-button/>
-    <article>
-        <body id="portfolio">
+    <x-parts.post-button/>
+    <article id="portfolio">
 
-            <div id="breadcrumb">
-                <div class="inner">
-                    <a href="{{ route('home') }}">ホーム</a>　>　<span>ポートフォリオ</span>
-                </div>
-            </div><!-- /.breadcrumb -->
+        <div id="breadcrumb">
+            <div class="inner">
+                <a href="{{ route('home') }}">ホーム</a>　>　<span>ポートフォリオ</span>
+            </div>
+        </div><!-- /.breadcrumb -->
 
-            <x-parts.ban-msg/>
-            <x-parts.flash-msg/>
+        <x-parts.ban-msg/>
+        <x-parts.flash-msg/>
 
-            <div id="contents" class="otherPage">
-                <div class="inner02 clearfix">
-                    <div id="main">
-                        <div class="mypageWrap">
-                            <div class="mypageSec05">
-                                <p class="mypageHd02"><span>ポートフォリオ</span></p>
-                                <ul class="mypagePortfolioUl02">
-                                    <li class="editLi">
-                                        <a href="{{ route('portfolio.create') }}">
-                                            <p class="imgP"><img src="img/mypage/edit_portfolio.jpg" alt=""></p>
-                                        </a>
-                                    </li>
-                                    @foreach ($portfolio_list as $portfolio)
+        <div id="contents" class="otherPage">
+            <div class="inner02 clearfix">
+                <div id="main">
+                    <div class="mypageWrap">
+                        <div class="mypageSec05">
+                            <p class="mypageHd02"><span>ポートフォリオ</span></p>
+                            <ul class="mypagePortfolioUl02">
+                                <li class="editLi">
+                                    <a href="{{ route('portfolio.create') }}">
+                                        <p class="imgP"><img src="img/mypage/edit_portfolio.jpg" alt=""></p>
+                                    </a>
+                                </li>
+                                @foreach ($portfolio_list as $portfolio)
                                     <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <li>
-                                            </a><p class="imgP"><a href="{{ route('portfolio.show', $portfolio) }}"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></a></p>
-                                            <p class="editP"><a href="{{ route('portfolio.edit', $portfolio) }}">編集する</a>
-                                                <button onclick='return confirm("このポートフォリオを削除しますか？");' class="delete">削除</button>
+                                            <p class="imgP">
+                                                <a href="{{ route('portfolio.show', $portfolio) }}">
+                                                    <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
+                                                </a>
+                                            </p>
+                                            <p class="editP">
+                                                <a href="{{ route('portfolio.edit', $portfolio) }}">編集する</a>
+                                                <button onclick='return confirm("このポートフォリオを削除しますか？");' class="delete">
+                                                    削除
+                                                </button>
                                             </p>
                                         </li>
                                     </form>
-                                    @endforeach
-                                </ul>
-                            </div>
+                                @endforeach
+                            </ul>
                         </div>
-                    </div><!-- /#main -->
-                    <x-side-menu/>
-                </div>
-            </div><!-- /#contents -->
-            </article>
-            <script type="text/javascript" src="js/jquery.min.js"></script>
-            <script type="text/javascript" src="js/jquery.matchHeight-min.js"></script>
-            <script type="text/javascript" src="js/jquery.biggerlink.min.js"></script>
-            <script type="text/javascript" src="js/slick.js"></script>
-            <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-            <script type="text/javascript" src="js/jquery.ui.datepicker-ja.min.js"></script>
-            <script type="text/javascript" src="js/jquery.fancybox.js"></script>
-            <script type="text/javascript" src="js/common.js"></script>
-            <script type="text/javascript">
-            $(function(){
-
-            });
-            </script>
-        </body>
-        <x-hide-modal/>
+                    </div>
+                </div><!-- /#main -->
+                <x-side-menu/>
+            </div>
+        </div><!-- /#contents -->
     </article>
+    <x-hide-modal/>
 </x-layout>
