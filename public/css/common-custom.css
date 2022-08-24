@@ -22,35 +22,3 @@
 .bg-customer-gray {
     background-color: #F7F7F7;
 }
-
-/* ポートフォリオの削除ボタン */
-#portfolio .delete {
-    font-family: "メイリオ",Meiryo,'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','ＭＳ Ｐゴシック',Verdana,Arial,Helvetica,sans-serif;
-    border: none;
-    background-color: #fff;
-    cursor: pointer;
-    font-size: 1.4rem;
-    color: #158ACC;
-    text-align: center;
-}
-
-#portfolio .imgP {
-    overflow: hidden;
-    height: 246px;
-    width: 246px;
-    display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-#portfolio .imgP > a > img {
-    min-height: 100%;
-    max-width: none !important
-}
-
-@media screen and (max-width: 768px) {
-    #portfolio .imgP {
-        height: 358px;
-        width: 358px;
-    }
-}
