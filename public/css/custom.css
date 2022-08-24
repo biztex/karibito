@@ -1426,3 +1426,8 @@ img.moreRecommendListImg {
 .contactForm select {
 	color: black !important;
 }
+@media screen and (max-width: 340px) {
+	dt.hideModalName span {
+		font-size: 11px;
+	}
+}
