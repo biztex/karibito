@@ -70,6 +70,6 @@ class Kernel extends HttpKernel
         'already.answered.karibito_survey' => \App\Http\Middleware\AlreadyAnsweredKaribitoSurvey::class,
         'is_ban' => \App\Http\Middleware\BanAccount::class,
         'update_latest_login_datetime' => \App\Http\Middleware\UpdateLatestLoginDatetime::class,
-
+        'exists_target_user_profile' =>\App\Http\Middleware\ExistsTargetUserProfile::class,
     ];
 }

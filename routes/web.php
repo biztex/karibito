@@ -444,8 +444,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('payment/getCardList', [\App\Http\Controllers\Sample\PaymentController::class, 'getCardList'])->name('sample.getCardList'); // クレカ一覧取得
     });
 
+
     // 該当ユーザーの各ページ
-    Route::prefix('user')->name('user.')->group(function () {
+    Route::prefix('user')->middleware('exists_target_user_profile')->name('user.')->group(function () {
         Route::get('{user}/publication',[OtherUserController::class, 'publication'])->name('publication');
         Route::get('{user}/mypage',[OtherUserController::class, 'mypage'])->name('mypage');
         Route::get('{user}/skills',[OtherUserController::class, 'skills'])->name('skills');
