@@ -16,6 +16,6 @@
                     @endif
                 </div>
             </div>
-        <p class="login">最終ログイン：オンライン中</p>
+        <p class="login">最終ログイン：{{ $service->user->latest_login_datetime }}</p>
     </div>
 </div>
