@@ -1149,7 +1149,7 @@
 		width: 26px;
 		height: 26px;
 	}
-	
+
 }
 .max-string {
 	color: #545454;
@@ -1482,4 +1482,8 @@ img.moreRecommendListImg {
 	#portfolio .editPLink {
 		font-size: 1.4rem;
 	}
+
+    dt.hideModalName span {
+        font-size: 11px;
+    }
 }

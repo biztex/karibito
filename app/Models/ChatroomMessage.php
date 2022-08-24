@@ -21,6 +21,11 @@ class ChatroomMessage extends Model
         self::IS_COMPLETE => '購入完了',
     ];
 
+    public function scopeWorked($query)
+    {
+        return $query->where('is_complete_message', 1)->exists();
+    }
+
     public function scopePartner($query)
     {
         return $query->where('user_id', '<>', \Auth::id());
