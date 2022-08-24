@@ -351,6 +351,7 @@ class ProductService
         $high_price = $request->high_price;
         $is_online = $request->is_online;
         $age_period = $request->age_period;
+        $is_sale = $request->is_sale;
         $sort = $request->sort;
         $keyword = $request->keyword;
         $parent_category_id = $request->parent_category_id;
@@ -396,6 +397,16 @@ class ProductService
             $query->where('is_online', $is_online);
         } elseif ($is_online === '1') {
             $query->where('is_online', $is_online);
+        }
+
+        if ($is_sale === '1') {
+            $query->where(function ($query) {
+                $query->where('number_of_sale', Product::UNLIMITED_OF_SALE)
+                    ->orwhere(function ($query) {
+                        $query->where('number_of_sale', Product::ONE_OF_SALE)
+                        ->doesntHave('chatrooms.purchase');
+                    });
+            });
         }
 
         if (!empty($sort)) {
