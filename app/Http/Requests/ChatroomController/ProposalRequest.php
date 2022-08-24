@@ -28,10 +28,13 @@ class ProposalRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    public function messages()
     {
         return [
-            'price' => '提供価格'
+            'price.required' => '提供価格は必ず指定してください',
+            'price.integer' => '提供価格は500円~9,990,000円で指定してください' ,
+            'price.min' => '提供価格は500円~9,990,000円で指定してください' ,
+            'price.max' => '提供価格は500円~9,990,000円で指定してください' ,
         ];
     }
 }
