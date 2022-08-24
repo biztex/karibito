@@ -18,7 +18,7 @@
 									<p class="name">{{ $user->name }}</p>
 								</div>
 							</div>
-							<p class="login">最終ログイン：オンライン中</p>
+        					<p class="login">最終ログイン：{{ $user->latest_login_datetime }}</p>
 						</div>
 					</div>
 					<h2 class="hdM">DM</h2>

@@ -13,7 +13,7 @@
                     <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
                 </div>
             </div>
-            <p class="login">最終ログイン：オンライン中</p>
+            <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
         </div>
 
         @include('chatroom.parts.show.partner-tell')
@@ -35,7 +35,7 @@
                     <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
                 </div>
             </div>
-            <p class="login">最終ログイン：オンライン中</p>
+            <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
         </div>
 
         @include('chatroom.parts.show.partner-tell')
@@ -55,7 +55,7 @@
                     <p class="name">{{$partner->name}}</p>
                 </div>
             </div>
-            <p class="login">最終ログイン：オンライン中</p>
+            <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
         </div>
 
         @include('chatroom.parts.show.partner-tell')
