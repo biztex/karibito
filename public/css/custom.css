@@ -924,17 +924,6 @@
 	}
 }
 /*add 中澤 20220705 スキルページ */
-.mypagePortfolioUl02 .editP {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-}
-.mypagePortfolioUl02 .editP a {
-	display: block;
-	margin: 0 10px;
-}
-
 .mypageUl03 li {
 	position: relative;
 	padding-right: 60px;
@@ -1438,23 +1427,59 @@ img.moreRecommendListImg {
 	text-align: center;
 }
 
-#portfolio .imgP {
-	overflow: hidden;
-	height: 246px;
-	width: 246px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+#portfolio .mypagePortfolioUl02 {
+	/*width: 100%;*/
 }
 
-#portfolio .imgP > a > img {
-	min-height: 100%;
-	max-width: none !important
+#portfolio .mypagePortfolioUl02 .editLi {
+	position: relative;
+	height: 0;
+	padding-bottom: 100%;
+	margin-bottom: 34px;
+}
+
+#portfolio .mypagePortfolioUl02 .editLi .editLiLink {
+	display: contents;
+}
+
+#portfolio .mypagePortfolioUl02 .editLi .editLiLink img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#portfolio .mypagePortfolioUl02 .editLi .editLiLink img:hover {
+	opacity: .7;
+	-webkit-opacity: .7;
+	-moz-opacity: .7;
+	transition: all 0.5s !important;
+	-moz-transition: all 0.5s !important;
+	-webkit-transition: all 0.5s !important;
+}
+
+#portfolio .mypagePortfolioUl02 .editLi .editP {
+	position: absolute;
+	width: 100%;
+	top: 104%;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+#portfolio .mypagePortfolioUl02 .editLi .editP a {
+	display: block;
+	margin: 0 10px;
 }
 
 @media screen and (max-width: 768px) {
-	#portfolio .imgP {
-		height: 358px;
-		width: 358px;
+	#portfolio .mypagePortfolioUl02 {
+		gap: 30px 20px;
+	}
+
+	#portfolio .editPLink {
+		font-size: 1.4rem;
 	}
 }
