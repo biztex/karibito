@@ -42,7 +42,7 @@
                                                 <div class="info">
                                                     <div class="breadcrumb"><a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id) }}"tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('product.category.index.show', $val->mProductChildCategory->id) }}">{{ $val->mProductChildCategory->name }}</a></div>
                                                     <div class="draw">
-                                                        <p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
+                                                        <p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
                                                     </div>
                                                     <div class="single">
                                                         <span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
@@ -71,7 +71,7 @@
                                                 <div class="info">
                                                     <div class="breadcrumb"><a href="{{ route('job_request.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show', $val->category_id)}}">{{ $val->mProductChildCategory->name }}</a></div>
                                                     <div class="draw">
-                                                        <p class="price"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
+                                                        <p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
                                                     </div>
                                                     <div class="single">
                                                         <span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
