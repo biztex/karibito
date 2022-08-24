@@ -51,15 +51,15 @@
 
                     @if(Auth::user()->userProfile->is_identify == 0)
                         <dl class=" inlineFlex">
-                            <dt>姓<span>(本名は非公開です)</span></dt>
+                            <dt class="hideModalName">姓<span>(本名は非公開です)</span></dt>
                             <dd><input type="text" name="first_name" value="{{old('first_name',Auth::user()->userProfile->first_name)}}"></dd>
                         </dl>
                         <dl class=" inlineFlex">
-                            <dt>名<span>(本名は非公開です)</span></dt>
+                            <dt class="hideModalName">名<span>(本名は非公開です)</span></dt>
                             <dd><input type="text" name="last_name" value="{{old('last_name',Auth::user()->userProfile->last_name)}}"></dd>
                         </dl>
                     @else
-                        <dl class=" inlineFlex">
+                        <dl>
                             <dt>姓名<span>(本名は非公開です)</span></dt>
                             <dd>{{ Auth::user()->userProfile->first_name.'  '.Auth::user()->userProfile->last_name }}</dd>
                             <input type="hidden" name="first_name" value="{{ Auth::user()->userProfile->first_name }}">

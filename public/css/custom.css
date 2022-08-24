@@ -1452,9 +1452,13 @@ img.moreRecommendListImg {
 	max-width: none !important
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 766px) {
 	#portfolio .imgP {
 		height: 358px;
 		width: 358px;
 	}
+  
+  dt.hideModalName span {
+		font-size: 11px;
+  }
 }

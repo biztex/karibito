@@ -31,6 +31,7 @@
 							@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 							<p>評価のコメントを記入しましょう</p>
 							<textarea name="text">{{ old('text') }}</textarea>
+							<p class="taRResume">255</p>
 						</div>
 						<div class="functeBtns">
 							@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
