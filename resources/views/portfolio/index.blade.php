@@ -1,6 +1,6 @@
 <x-layout>
     <x-parts.post-button/>
-    <article id="portfolio">
+    <div id="portfolio">
 
         <div id="breadcrumb">
             <div class="inner">
@@ -49,6 +49,6 @@
                 <x-side-menu/>
             </div>
         </div><!-- /#contents -->
-    </article>
+    </div>
     <x-hide-modal/>
 </x-layout>
