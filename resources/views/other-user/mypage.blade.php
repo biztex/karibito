@@ -191,12 +191,10 @@
                                 @else
                                     <ul class="mypagePortfolioUl">
                                         @foreach ($portfolio_list as $portfolio)
-                                        <li>
-                                            <p class="imgP">
-                                                <a href="{{ route('user.portfolio.show', [$user, $portfolio]) }}">
-                                                    <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
-                                                </a>
-                                            </p>
+										<li class="editLi">
+											<a href="{{ route('user.portfolio.show', [$user, $portfolio]) }}" class="editLiLink">
+												<img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
+											</a>
                                         </li>
                                         @endforeach
                                     </ul>
