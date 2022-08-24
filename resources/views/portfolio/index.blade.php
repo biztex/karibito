@@ -19,28 +19,26 @@
                             <p class="mypageHd02"><span>ポートフォリオ</span></p>
                             <ul class="mypagePortfolioUl02">
                                 <li class="editLi">
-                                    <a href="{{ route('portfolio.create') }}">
-                                        <p class="imgP"><img src="img/mypage/edit_portfolio.jpg" alt=""></p>
+                                    <a href="{{ route('portfolio.create') }}" class="editLiLink">
+                                        <img src="img/mypage/edit_portfolio.jpg" alt="">
                                     </a>
                                 </li>
                                 @foreach ($portfolio_list as $portfolio)
-                                    <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <li>
-                                            <p class="imgP">
-                                                <a href="{{ route('portfolio.show', $portfolio) }}">
-                                                    <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
-                                                </a>
-                                            </p>
-                                            <p class="editP">
-                                                <a href="{{ route('portfolio.edit', $portfolio) }}">編集する</a>
+                                    <li class="editLi">
+                                        <a href="{{ route('portfolio.show', $portfolio) }}" class="editLiLink">
+                                            <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
+                                        </a>
+                                        <div class="editP">
+                                            <a href="{{ route('portfolio.edit', $portfolio) }}" class="editPLink">編集する</a>
+                                            <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
                                                 <button onclick='return confirm("このポートフォリオを削除しますか？");' class="delete">
                                                     削除
                                                 </button>
-                                            </p>
-                                        </li>
-                                    </form>
+                                            </form>
+                                        </div>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
