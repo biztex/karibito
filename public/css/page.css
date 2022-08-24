@@ -127,35 +127,86 @@
 }
 
 .recommendCates .cate01 {
-	background-image: url(../img/top/ico_cate01.png);
+	background-image: url(../img/top/ico_cate01.png); /*家事*/
 }
 
 .recommendCates .cate02 {
-	background-image: url(../img/top/ico_cate02.png);
+	background-image: url(../img/top/ico_cate02.png); /*修理組み立て*/
 }
 
 .recommendCates .cate03 {
-	background-image: url(../img/top/ico_cate03.png);
+	background-image: url(../img/top/ico_cate03.png); /*ペット*/
 }
 
 .recommendCates .cate04 {
-	background-image: url(../img/top/ico_cate04.png);
+	background-image: url(../img/top/ico_cate04.png); /*高齢者*/
 }
 
 .recommendCates .cate05 {
-	background-image: url(../img/top/ico_cate05.png);
+	background-image: url(../img/top/ico_cate05.png); /*車*/
 }
 
 .recommendCates .cate06 {
-	background-image: url(../img/top/ico_cate06.png);
+	background-image: url(../img/top/ico_cate06.png); /*引っ越し*/
 }
 
 .recommendCates .cate07 {
-	background-image: url(../img/top/ico_cate07.png);
+	background-image: url(../img/top/ico_cate07.png); /*趣味*/
 }
 
 .recommendCates .cate08 {
-	background-image: url(../img/top/ico_cate08.png);
+	background-image: url(../img/top/ico_cate08.png); /*美容*/
+}
+
+.recommendCates .cate09 {
+	background-image: url(../img/top/ico_cate09.png); /*写真*/
+}
+
+.recommendCates .cate10 {
+	background-image: url(../img/top/ico_cate10.png); /*その他*/
+}
+
+.recommendCates .cate11 {
+	background-image: url(../img/top/ico_cate11.png); /*インテリア*/
+}
+
+.recommendCates .cate12 {
+	background-image: url(../img/top/ico_cate12.png); /*デザイン*/
+}
+
+.recommendCates .cate13 {
+	background-image: url(../img/top/ico_cate13.png); /*パソコン*/
+}
+
+.recommendCates .cate14 {
+	background-image: url(../img/top/ico_cate14.png); /*ビジネスサポート*/
+}
+
+.recommendCates .cate15 {
+	background-image: url(../img/top/ico_cate15.png); /*冠婚葬祭*/
+}
+
+.recommendCates .cate16 {
+	background-image: url(../img/top/ico_cate16.png); /*料理*/
+}
+
+.recommendCates .cate17 {
+	background-image: url(../img/top/ico_cate17.png); /*恋愛・結婚*/
+}
+
+.recommendCates .cate18 {
+	background-image: url(../img/top/ico_cate18.png); /*体験・アクティビティ*/
+}
+
+.recommendCates .cate19 {
+	background-image: url(../img/top/ico_cate19.png); /*出張サービス*/
+}
+
+.recommendCates .cate20 {
+	background-image: url(../img/top/ico_cate20.png); /*調べもの*/
+}
+.recommendCates .cate21 {
+	background-image: url(../img/top/ico_cate21.png); /*レンタル*/
 }
 
 .recommendList+.recommendList {
