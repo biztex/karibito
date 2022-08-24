@@ -5,8 +5,10 @@
     @else
         <ul class="mypagePortfolioUl">
             @foreach (Auth::user()->portfolios as $portfolio)
-                <li>
-                    <p class="imgP"><a href="{{ route('user.portfolio.show', [Auth::id(), $portfolio]) }}"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></a></p>
+                <li class="editLi">
+                    <a href="{{ route('user.portfolio.show', [Auth::id(), $portfolio]) }}" class="editLiLink">
+                        <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="">
+                    </a>
                 </li>
             @endforeach
         </ul>

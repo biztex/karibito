@@ -1416,6 +1416,39 @@ img.moreRecommendListImg {
 	color: black !important;
 }
 
+/* マイページ内ポートフォリオ */
+#mypage .mypagePortfolioUl .editLi {
+	position: relative;
+	height: 0;
+	padding-bottom: 100%;
+}
+
+#mypage .mypagePortfolioUl .editLi .editLiLink {
+	display: contents;
+}
+
+#mypage .mypagePortfolioUl .editLi .editLiLink img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#mypage .mypagePortfolioUl .editLi .editLiLink img:hover {
+	opacity: .7;
+	-webkit-opacity: .7;
+	-moz-opacity: .7;
+	transition: all 0.5s !important;
+	-moz-transition: all 0.5s !important;
+	-webkit-transition: all 0.5s !important;
+}
+
+@media screen and (max-width: 768px) {
+	#mypage .mypagePortfolioUl {
+		gap: 30px 20px;
+	}
+}
+
 /* ポートフォリオ一覧 */
 #portfolio .delete {
 	font-family: "メイリオ",Meiryo,'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','ＭＳ Ｐゴシック',Verdana,Arial,Helvetica,sans-serif;
@@ -1425,10 +1458,6 @@ img.moreRecommendListImg {
 	font-size: 1.4rem;
 	color: #158ACC;
 	text-align: center;
-}
-
-#portfolio .mypagePortfolioUl02 {
-	/*width: 100%;*/
 }
 
 #portfolio .mypagePortfolioUl02 .editLi {
