@@ -37,7 +37,7 @@
     </dl>
     <div class="mypageIntro">
         <p class="mypageHd01">自己紹介</p>
-        <p class="mypageIntroTxt">{!! nl2br(e(Auth::user()->userProfile->introduction)) !!}</p>
+        <p class="mypageIntroTxt text-black">{!! nl2br(e(Auth::user()->userProfile->introduction)) !!}</p>
     </div>
     <div class="mypageProud">
         @if($specialties->isNotEmpty())
