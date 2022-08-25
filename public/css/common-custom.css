@@ -22,3 +22,8 @@
 .bg-customer-gray {
     background-color: #F7F7F7;
 }
+
+/* テキスト色系 */
+.text-black {
+    color: #333;
+}

@@ -34,7 +34,7 @@
 <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
 <link rel="stylesheet" href="/css/jquery.fancybox.css">
-<link rel="stylesheet" type="/text/css" href="/style.css" media="all">
+{{-- <link rel="stylesheet" type="/text/css" href="/style.css" media="all"> stylecssが二つある--}}
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/common-custom.css" media="all">
 </head>

@@ -26,9 +26,9 @@
                 <li><a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a></li>
                 <li><a href="{{ route('payment.index') }}" class="">決済履歴</a></li>
                 <li><a href="{{ route('point.index') }}" class="">ポイント取得・利用履歴</a></li>
-                <li><a href="/sample/friends" class="">フォロー・フォロワー</a></li>
+                {{-- <li><a href="/sample/friends" class="">フォロー・フォロワー</a></li> --}}
                 <li><a href="{{ route('user_notification.index') }}" class="">お知らせ</a></li>
-                <li><a href="/sample/faq" class="">カリビト知恵袋</a></li>
+                {{-- <li><a href="/sample/faq" class="">カリビト知恵袋</a></li> --}}
                 <li><a href="{{ route('secret01') }}" class="">マッチングする秘訣</a></li>
                 <li><a href="{{ route('coupon.index') }}" class="">クーポン</a></li>
                 <li><a href="{{ route('dm.index') }}" class="">DM</a></li>

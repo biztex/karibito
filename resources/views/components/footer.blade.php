@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="downloadWrap">
+        {{-- <div class="downloadWrap">
             <div class="inner">
                 <div class="img"><img src="/img/common/img_download.png" srcset="/img/common/img_download.png 1x, /img/common/img_download@2x.png 2x" alt=""><a href="#" target="_blank" class="logo sp"><img src="/img/common/ico_sns_logo.svg" alt="LOGO"></a></div>
                 <div class="info">
@@ -44,13 +44,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="bottom">
             <div class="inner">
                 <div class="serviceLinks">
                     <a href="{{ route('company') }}">運営会社</a>
-                    <a href="#">採用情報</a>
-                    <a href="#">約款特定</a>
+                    {{-- <a href="#">採用情報</a>
+                    <a href="#">約款特定</a> --}}
+                    <a href="#">商取引法に基づく表示</a>
                     <a href="{{ route('notation') }}">商取引法に基づく表示</a>
                     <a href="#">よくある質問</a>
                     <a href="{{ route('contact') }}">お問い合わせ</a>
