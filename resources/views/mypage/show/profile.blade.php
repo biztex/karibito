@@ -22,7 +22,7 @@
         @endif
         <dd>
             <div class="mypageP01 word-break">{{Auth::user()->userProfile->user->name}} <a href="#fancybox_person" class="fancybox fancybox_profile"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></div>
-            <!-- <p class="mypageP02">最終ログイン：8時間前</p> -->
+            <p class="mypageP02">最終ログイン：{{Auth::user()->latest_login_datetime}}</p>
             <p class="mypageP03">({{App\Models\UserProfile::GENDER[Auth::user()->userProfile->gender]}} / {{Auth::user()->userProfile->age}} / {{Auth::user()->userProfile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
             <p class="mypageP04 check">
                 @if(Auth::user()->userProfile->is_identify == 1)

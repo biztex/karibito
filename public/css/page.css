@@ -109,12 +109,16 @@
 .recommendCates ul {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
 }
 
 .recommendCates li {
-	width: 12.5%;
+	width: calc(100% / 9);
 	text-align: center;
+	margin-bottom: 20px;
+}
+
+.recommendCates li:nth-of-type(n + 19) {
+	margin-bottom: 0;
 }
 
 .recommendCates li a {
@@ -156,6 +160,58 @@
 
 .recommendCates .cate08 {
 	background-image: url(../img/top/ico_cate08.png);
+}
+
+.recommendCates .cate09 {
+	background-image: url(../img/top/ico_cate09.png);
+}
+
+.recommendCates .cate10 {
+	background-image: url(../img/top/ico_cate10.png);
+}
+
+.recommendCates .cate11 {
+	background-image: url(../img/top/ico_cate11.png);
+}
+
+.recommendCates .cate12 {
+	background-image: url(../img/top/ico_cate12.png);
+}
+
+.recommendCates .cate13 {
+	background-image: url(../img/top/ico_cate13.png);
+}
+
+.recommendCates .cate14 {
+	background-image: url(../img/top/ico_cate14.png);
+}
+
+.recommendCates .cate15 {
+	background-image: url(../img/top/ico_cate15.png);
+}
+
+.recommendCates .cate16 {
+	background-image: url(../img/top/ico_cate16.png);
+}
+
+.recommendCates .cate17 {
+	background-image: url(../img/top/ico_cate17.png);
+}
+
+.recommendCates .cate18 {
+	background-image: url(../img/top/ico_cate18.png);
+}
+
+.recommendCates .cate19 {
+	background-image: url(../img/top/ico_cate19.png);
+}
+
+.recommendCates .cate20 {
+	background-image: url(../img/top/ico_cate20.png);
+}
+
+.recommendCates .cate21 {
+	background-image: url(../img/top/ico_cate21.png);
 }
 
 .recommendList+.recommendList {
@@ -719,6 +775,10 @@
 		width: 25%;
 	}
 
+	.recommendCates li:nth-of-type(n + 19) {
+		margin-bottom: 16px;
+	}
+
 	.recommendCates li a {
 		padding-top: 65px;
 		background-size: 56px;
@@ -1248,6 +1308,62 @@
 	margin-bottom: 10px;
 }
 
+.overlayDetail {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0px;
+	width: 100vw;
+	height: 100%;
+	background: rgba(35, 35, 35, 0.7);
+	z-index: 989;
+	text-indent: -9999px;
+}
+
+.modal {
+	position: relative;
+}
+
+.hidden {
+	display: none;
+}
+
+.modal__box {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 72rem;
+	width: 100%;
+	max-height: 64rem;
+	background-color: #fff;
+	box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.16);
+	z-index: 1000;
+}
+
+.modal__box input[type=text] {
+	padding: 0 10px;
+	height: 33px;
+	border: 1px solid #CCCCCC;
+}
+
+.modal__close {
+	font-weight: 500;
+	color: #fff;
+	cursor: pointer;
+	border: none;
+	background: none;
+	position: fixed;
+	top: 184px;
+	right: calc((100% - 72.8rem)/2);
+	z-index: 1000;
+	padding: 0;
+}
+
+.modal__close--icon {
+	font-size: 5.6rem;
+}
+
 
 /*** タブレット ***/
 @media screen and (max-width: 767px) {
@@ -1345,6 +1461,14 @@
 
 	#Wrap .recommendList {
 		margin-bottom: 30px;
+	}
+
+	.modal__box {
+		width: 90%;
+	}
+
+	.modal__close {
+		right: 4.2%;
 	}
 }
 
@@ -1620,7 +1744,7 @@
 	}
 
 	.recommendList .list.sliderSP02 .item {
-		flex: 0 0 19%;
+		flex: 0 0 32.3%;
 		margin: 0 0 20px 1%;
 		min-width: 190px
 	}
@@ -4155,6 +4279,7 @@ select.faqSelect {
 	line-height: 1.53;
 }
 
+.privacyTop h3,
 .privacyItem h3 {
 	font-size: 1.6rem;
 	line-height: 1.6875;
@@ -4168,9 +4293,13 @@ select.faqSelect {
 	padding: 20px;
 }
 
-.privacyItem ul li {
+.privacyItem .textIndent li {
 	padding-left: 1em;
 	text-indent: -1em;
+}
+
+.privacyItem ul li:not(:first-of-type) {
+	margin-top: 1.6rem;
 }
 
 @media screen and (max-width: 767px) {
@@ -5603,8 +5732,6 @@ select.searchSelect {
 }
 
 .mypageEditInput input[type='text'],
-.mypageEditInput input[type='password'],
-.mypageEditInput input[type='tel'],
 .mypageEditInput input[type='button'],
 .mypageEditInput select,
 .mypageEditInput textarea {
@@ -5713,7 +5840,6 @@ select.searchSelect {
 	}
 
 	.mypageEditInput input[type='text'],
-	.mypageEditInput input[type='password'],
 	.mypageEditInput input[type='button'],
 	.mypageEditInput select,
 	.mypageEditInput textarea {
@@ -5835,12 +5961,16 @@ select.searchSelect {
 .portfolioDtDate {
 	color: #666666;
 	font-size: 1.4rem;
-	margin-bottom: 28px;
+}
+
+.portfolioDtBreadcrumbs {
+	margin-top: 8px;
 }
 
 .portfolioDtCont {
 	font-size: 1.4rem;
 	line-height: 1.78;
+	margin-top: 20px;
 }
 
 .portfolioDtCont p+p {
@@ -5852,10 +5982,6 @@ select.searchSelect {
 	text-align: center;
 	background-image: linear-gradient(45deg, #FFFFFF, #E8E6E9);
 	margin-bottom: 40px;
-}
-
-.portfolioDtDetail {
-    overflow-wrap: break-word;
 }
 
 .detailSns {
@@ -9048,12 +9174,28 @@ input.small {
 /*20220509
 ---------------------------------------------------*/
 .detailStyle .title .favorite {
-	display: inline-block;
-	padding: 8px 15px 8px 36px;
-	background: url(../img/common/ico_heart.svg)no-repeat 15px center;
+	/* padding: 8px 15px 8px 15px; */
+	/* background: url(../img/common/ico_heart.svg)no-repeat 15px center; */
 	border: 1px solid #AAAAAA;
 	border-radius: 3px;
 	font-size: 1.2rem;
+	display: flex;
+	align-items: center;
+	width: 122px;
+	height: 36px;
+}
+
+.detailStyle .title .favorite .icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	margin-left: 6px;
+}
+
+.detailStyle .title .favorite .icon img {
+	width: 14px;
 }
 
 .detailStyle .title .datas .data {
@@ -10120,4 +10262,145 @@ input.small {
 		padding-top: 30px;
 		margin-top: 15px;
 	}
+}
+
+.bankTransferList {
+	margin-top: 26px;
+}
+
+.bankTransferItem {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.bankTransferItem:not(:first-of-type) {
+	margin-top: 32px;
+}
+
+.bankTransferLabel {
+	border-bottom: 1px solid #EDEDED;
+	padding-bottom: 10px;
+}
+
+.bankTransferPrice {
+	margin-top: 14px;
+}
+
+.bankTransferNum {
+	font-size: 18px;
+}
+
+.bankTransferBox .memberConfigHd {
+	margin-bottom: 0;
+}
+
+.bankTransferBtnWrap {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.bankTransferBtn {
+	color: #fff;
+	background-color: #AAAAAA;
+	border-radius: 3px;
+	width: 175px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bankTransferAttention {
+	margin-top: 40px;
+	font-size: 12px;
+}
+
+.bankTransferAttention p {
+	line-height: 24px;
+}
+
+.bankTransferHistoryBox .bankTransferList {
+	margin-top: 0;
+}
+
+.bankTransferHistoryBox .bankTransferPrice {
+	margin-top: 0;
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.bankTransferDate {
+	font-size: 13px;
+	font-weight: 300;
+}
+
+.bankTransferText {
+	font-size: 15px;
+	margin-top: 8px;
+}
+
+.bankTransferHistoryBox .bankTransferItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+}
+
+.bankTransferHistoryBox .bankTransferItem:not(:first-of-type) {
+	border-top: 1px solid #CCCCCC;
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+/*** タブレット ***/
+@media screen and (max-width: 767px) {
+	.bankTransferHistoryBox .bankTransferItem {
+		flex-direction: column;
+		justify-content: initial;
+		align-items: initial;
+	}
+
+	.bankTransferHistoryBox .bankTransferItem .bankTransferHalf:last-of-type {
+		align-self: flex-end;
+	}
+
+	.bankTransferHistoryBox .bankTransferAttention {
+		font-size: 12px;
+	}
+
+	.bankTransferHistoryBox .bankTransferPrice {
+		font-size: 14px;
+	}
+
+	.bankTransferHistoryBox .bankTransferText {
+		font-size: 13px;
+		margin-top: 3px;
+	}
+
+	.bankTransferHistoryBox .bankTransferItem:not(:first-of-type) {
+		margin-top: 10px;
+		padding-top: 10px;
+	}
+
+	.bankTransferList {
+		margin-top: 20px;
+	}
+
+	.bankTransferLabel {
+		padding-bottom: 8px;
+	}
+
+	.bankTransferPrice {
+		margin-top: 10px;
+	}
+
+	.bankTransferBtnWrap {
+		margin-top: 32px;
+	}
+
+	.bankTransferAttention {
+		margin-top: 32px;
+	}
+
 }

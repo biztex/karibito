@@ -89,6 +89,7 @@ class JobRequestService
         $high_price = $request->high_price;
         $is_online = $request->is_online;
         $age_period = $request->age_period;
+        $is_sale = $request->is_sale;
         $sort = $request->sort;
         $keyword = $request->keyword;
         $parent_category_id = $request->parent_category_id;
@@ -136,6 +137,10 @@ class JobRequestService
             $query->where('is_online', $is_online);
         }
 
+        if ($is_sale === '1') {
+            $query->where('application_deadline', '>=', date('Y-m-d'));
+        }
+
         if (!empty($sort)) {
             if ($sort == 1) { //ランキングの高い順
                 $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
@@ -158,30 +163,5 @@ class JobRequestService
 
         return $url;
     }
-
-    // public function getDiffDateTime($job_requests) 多分使わない、消す
-    // {
-    //     // dd($job_requests);
-    //     // $year = 2022;
-    //     // $year = Carbon::year();
-    //     // $month = 7;
-    //     // $day = 26;
-    //     $year = date('Y');
-    //     $month = date('m');
-    //     $day = date('j') + 1; //明日の00:00分まで（日付が変わる時）
-    //     $day2 = Carbon::createMidnightDate($year, $month, $day);
-    //     // $job_request = JobRequest::publish()->orderBy('created_at','desc')->paginate(10);
-    //     // $day1 = date('Y-m-d', strtotime('+1 day'));
-    //     // $day1 = now();
-    //     // dd($day2);
-    //     // foreach($job_requests as $job_request) {
-    //     // }
-    //     $day1 = $job_requests['application_deadline'];
-    //     $diff_date_time = $day2->diff($day1);
-    //     // dd($diff_date_time);
-    //     // $diff_date_time = DiffDateTime::diff_date_time($day1, $day2);
-
-    //     return array ($diff_date_time);
-    // }
 
 }

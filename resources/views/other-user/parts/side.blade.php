@@ -6,7 +6,7 @@
         @else
             <a href="{{ route('user.mypage', $user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
         @endif
-        <!-- <p class="login">最終ログイン：8時間前</p> -->
+        <p class="login">最終ログイン：{{ $user->latest_login_datetime }}</p>
 
         <p class="introd"><span>{{$user->name}}</span><br>({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{ $user->userProfile->age }}/ {{$user->userProfile->prefecture->name}})</p>
 

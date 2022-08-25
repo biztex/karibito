@@ -7,31 +7,35 @@
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="friendsTop">
-						<div class="sellerTop">
-							<div class="user">
-								@if($dmroom->from_user_id === Auth::id())
+						@if($dmroom->from_user_id === Auth::id())
+							<div class="sellerTop">
+								<div class="user">
 									@if($dmroom->toUser->userProfile->icon === null)
-										<a href="{{ route('user.mypage', $dmroom_user->toUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+										<a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
 									@else
-										<a href="{{ route('user.mypage', $dmroom_user->toUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></a>
+										<a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></a>
 									@endif
-								@else
-									@if($dmroom->fromUser->userProfile->icon === null)
-										<a href="{{ route('user.mypage', $dmroom_user->fromUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
-									@else
-										<a href="{{ route('user.mypage', $dmroom_user->fromUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></a>
-									@endif
-								@endif
-								<div class="info">
-									@if($dmroom->from_user_id === \Auth::id())
-										<p class="name" style="margin-left:10px;">{{ $dmroom->toUser->name }}</p>
-									@elseif($dmroom->to_user_id === \Auth::id())
-										<p class="name" style="margin-left:10px;">{{ $dmroom->fromUser->name }}</p>
-									@endif
+									<div class="info">
+										<p class="name">{{ $dmroom->toUser->name }}</p>
+									</div>
 								</div>
+								<p class="login">最終ログイン：{{ $dmroom->toUser->latest_login_datetime }}</p>
 							</div>
-							<p class="login">最終ログイン：オンライン中</p>
-						</div>
+						@else
+							<div class="sellerTop">
+								<div class="user">
+									@if($dmroom->fromUser->userProfile->icon === null)
+										<a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+									@else
+										<a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></a>
+									@endif
+									<div class="info">
+										<p class="name">{{ $dmroom->fromUser->name }}</p>
+									</div>
+								</div>
+								<p class="login">最終ログイン：{{ $dmroom->fromUser->latest_login_datetime }}</p>
+							</div>
+						@endif
 					</div>
 					<h2 class="hdM">DM</h2>
 					<div class="subPagesTab">

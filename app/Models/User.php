@@ -107,6 +107,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->attributes['avg_star'] = $this->evaluations->avg('star');
     }
 
+    public function getLatestLoginDatetimeAttribute($value)
+    {
+        $latest_login_datetime = new \DateTimeImmutable($value);
+        $now = new \DateTimeImmutable(now());
+        $diff_second = $now->getTimestamp() - $latest_login_datetime->getTimestamp();
+
+        if($value === null) {
+            return $this->created_at->diffForHumans();
+        } elseif($diff_second <= 600) {
+            return 'オンライン中';
+        } else {
+            return $value->diffForHumans();
+        }
+
+    }
+
+
     /**
      * 通知設定
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

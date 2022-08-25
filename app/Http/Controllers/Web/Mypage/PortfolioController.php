@@ -22,7 +22,7 @@ class PortfolioController extends Controller
     {
         $portfolio_list = Portfolio::where('user_id', \Auth::id())->get();
 
-        return view('portfolio.index', compact('portfolio_list'));
+        return view('mypage.portfolio.index', compact('portfolio_list'));
     }
 
     public function show(Portfolio $portfolio)
@@ -34,12 +34,12 @@ class PortfolioController extends Controller
         $prev_page = $this->portfolio_service->prevPage($portfolio, $portfolio_list);
         $next_page = $this->portfolio_service->nextPage($portfolio, $portfolio_list);
 
-        return view('portfolio.show', compact('portfolio', 'portfolio_list', 'url', 'prev_page', 'next_page'));
+        return view('mypage.portfolio.show', compact('portfolio', 'portfolio_list', 'url', 'prev_page', 'next_page'));
     }
 
     public function create()
     {
-        return view('portfolio.create');
+        return view('mypage.portfolio.create');
     }
 
     public function store(StoreRequest $request)
@@ -54,7 +54,7 @@ class PortfolioController extends Controller
 
     public function edit(Portfolio $portfolio)
     {
-        return view('portfolio.edit', compact('portfolio'));
+        return view('mypage.portfolio.edit', compact('portfolio'));
     }
 
     public function update(UpdateRequest $request, Portfolio $portfolio)

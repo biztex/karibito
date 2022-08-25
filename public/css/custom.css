@@ -67,6 +67,7 @@
 #news .sidePerson,
 #coupon .sidePerson,
 .dm-page .sidePerson,
+.dm-page-show .sidePerson,
 #setting .sidePerson,
 #setting-page .sidePerson,
 #withdraw .sidePerson,
@@ -1067,6 +1068,7 @@
     padding: 0 10px;
 }
 .mypageEditInput input[type='tel'],
+.mypageEditInput input[type='password'],
 .mypageEditInput input[type='email'] {
     border: 1px solid #DDDDDD;
     background-color: #fff;
@@ -1077,7 +1079,8 @@
     padding: 0 10px;
 }
 @media screen and (max-width: 767px){
-	.mypageEditInput input[type='tel'] {
+	.mypageEditInput input[type='tel'],
+	.mypageEditInput input[type='password'] {
 		font-size: 1.2rem;
 		height: 35px;
 	}
@@ -1581,4 +1584,7 @@ img.moreRecommendListImg {
     dt.hideModalName span {
         font-size: 11px;
     }
+}
+.portfolioDtDetail {
+    overflow-wrap: break-word;
 }
