@@ -55,7 +55,7 @@
                 <li><a href="{{ route('support') }}">ご利用ガイド</a></li>
                 <li><a href="#">カテゴリー項目追加依頼</a></li>
                 <li><a href="{{ route('privacy-policy') }}">個人情報の取り扱いについて</a></li>
-                <li><a href="#">特定商取引法に基づく表記</a></li>
+                <li><a href={{ route('notation') }}>特定商取引法に基づく表記</a></li>
                 <li><a href="{{ route('terms-of-service') }}">利用規約</a></li>
                 <li><a href="{{ route('company') }}">運営会社について</a></li>
                 <li><div class="edition">バージョン <span>00.0000,00</span></div></li>

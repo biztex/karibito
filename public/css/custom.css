@@ -1188,6 +1188,7 @@
 }
 
 .mypageEditInput input[type='tel'],
+/* .mypageEditInput input[type='password'], */
 .mypageEditInput input[type='email'] {
 	border: 1px solid #DDDDDD;
 	background-color: #fff;
@@ -1204,6 +1205,7 @@
 		height: 35px;
 	}
 }
+
 
 .bl_credit-card-info {
 	display: flex;
