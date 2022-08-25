@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -43,6 +44,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     protected $appends = ['avg_star'];
+
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'latest_login_datetime'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -109,6 +117,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getLatestLoginDatetimeAttribute($value)
     {
+        $value = Carbon::parse($value);
         $latest_login_datetime = new \DateTimeImmutable($value);
         $now = new \DateTimeImmutable(now());
         $diff_second = $now->getTimestamp() - $latest_login_datetime->getTimestamp();
