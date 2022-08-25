@@ -24,14 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // 公開&&下書きでない・自分以外
+        // 公開&&下書きでない・一旦自分のものも表示
         $recommend_products = $this->home_service->paginateProduct(10); // おすすめ10件（選定確認中）
         $product_category_ranks = $this->home_service->getProductCategoryRanks(); // カテゴリー別のカテゴリー9件 (選定確認中)
         $products = $this->home_service->publishProducts(); // カテゴリー別の中身を10件ずつ (選定確認中)
         // $products = $this->home_service->paginateProduct(10);
         // $product_category_ranks = MProductCategory::all();
 
-        $recommend_job_requests = $this->home_service->paginateJobRequest(10); 
+        $recommend_job_requests = $this->home_service->paginateJobRequest(10);
         $job_category_ranks = $this->home_service->getJobRequestCategoryRanks();
         $job_requests = $this->home_service->publishJobRequests();
         // $job_category_ranks = $this->home_service->getJobRequestCategoryRanks(9);

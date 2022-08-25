@@ -14,7 +14,7 @@ class HomeService
     public function paginateProduct($i)
     {
         $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
-            ->otherUsers()
+            // ->otherUsers()
             ->orderBy('created_at', 'desc')
             ->paginate($i);
 
@@ -25,7 +25,7 @@ class HomeService
     public function publishProducts()
     {
         $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
-            ->otherUsers()
+            // ->otherUsers()
             ->orderBy('created_at','desc')
             ->get(); // 公開&&下書きでない
 
