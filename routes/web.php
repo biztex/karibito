@@ -341,6 +341,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
     Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
     Route::view('/company', 'company')->name('company');
     Route::view('/terms-of-service', 'terms-of-service')->name('terms-of-service');
+    Route::view('/notation', 'notation')->name('notation');
 
     // GET	        /photo      	        photo.index　          一覧画面
     // GET	        /photo/create	        photo.create　         登録画面
