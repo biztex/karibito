@@ -181,5 +181,10 @@ class AuthServiceProvider extends ServiceProvider
                 && $purchased_cancel->status === PurchasedCancel::STATUS_CANCELED 
                 && $purchased_cancel->purchase->chatroom->status === Chatroom::STATUS_CANCELED;
         });
+
+        // カリビトアンケート
+        Gate::define('survey', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->buyer_user_id || $user->id === $chatroom->seller_user_id;
+        });
     }
 }

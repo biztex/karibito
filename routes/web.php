@@ -325,13 +325,21 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('{purchased_cancel}/approval', 'complete')->middleware('can:canceled,purchased_cancel')->name('complete'); //キャンセル承認画面
 
         });
-        // DM
-        Route::get('/dm',[DmroomController::class,'index'])->name('dm.index');
-        Route::get('/dm/show/{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('dm.show');
-        Route::post('/dm',[DmroomController::class,'store'])->name('dm.store');
-        Route::get('/dm/create/{user}',[DmroomController::class,'create'])->middleware('can:not.create.dm,user')->name('dm.create')->middleware('is_ban');
-        Route::post('/dm/{dmroom}',[DmroomController::class,'message'])->name('dm.message')->middleware('is_ban');
 
+        // アンケート
+        Route::prefix('survey')->name('survey.')->middleware(['already.answered.karibito_survey','can:survey,chatroom'])->group(function () {
+            Route::get('{chatroom}', [KaribitoSurveyController::class, 'create'])->name('create');
+            Route::post('{chatroom}', [KaribitoSurveyController::class, 'store'])->name('store');
+        });
+
+        // DM
+        Route::prefix('dm')->name('dm.')->group(function () {
+            Route::get('',[DmroomController::class,'index'])->name('index');
+            Route::post('',[DmroomController::class,'store'])->name('store');
+            Route::get('{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('show');
+            Route::post('{dmroom}',[DmroomController::class,'message'])->middleware('is_ban')->name('message');
+            Route::get('create/{user}',[DmroomController::class,'create'])->middleware(['can:not.create.dm,user','is_ban'])->name('create');
+        });
     });
     // 提供・リクエストの詳細ページ
     Route::get('product/{product}', [MypageProductController::class, 'show'])->name('product.show');
@@ -457,8 +465,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
     });
     Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
-    // アンケート
-    Route::get('survey/{chatroom}', [KaribitoSurveyController::class, 'create'])->name('survey.create');
-    Route::post('survey/{chatroom}', [KaribitoSurveyController::class, 'store'])->middleware('already.answered.karibito_survey')->name('survey.store');
-
+    
+    
 });

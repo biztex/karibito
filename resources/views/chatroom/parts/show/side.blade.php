@@ -41,7 +41,7 @@
                 @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
                     <form id="form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
                         @csrf
-                        <input type="submit" class="orange loading-disabled" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" value="作業完了報告をする">
+                        <input type="submit" class="orange loading-disabled" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" onclick='return confirm("作業完了報告をしてもよろしいですか？");'value="作業完了報告をする">
                     </form>
                 @endif
             @endif
