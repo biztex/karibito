@@ -122,55 +122,55 @@
 								<table>
 									<tbody><tr>
 										<th>会社名</th>
-										<td>テキストが入ります</td>
+										<td>株式会社カリビト</td>
 									</tr>
 									<tr>
 										<th>所在地</th>
-										<td>テキストが入りますテキストが入ります</td>
+										<td>愛媛県松山市二番町5丁目7</td>
 									</tr>
 									<tr>
 										<th>電話番号</th>
-										<td>000-0000-0000</td>
+										<td>089-993-8781</td>
 									</tr>
 									<tr>
 										<th>FAX番号</th>
-										<td>000-0000-0000</td>
+										<td>089-993-8781</td>
 									</tr>
 									<tr>
 										<th>URL</th>
-										<td><a href="#" target="_blank">https://</a></td>
+										<td><a href="https://karibito.co.jp/" target="_blank">https://karibito.co.jp/</a></td>
 									</tr>
 									<tr>
 										<th>E-mail</th>
-										<td><a href="mailto:info">info@</a></td>
+										<td><a href="mailto:info">info@karibito.co.jp</a></td>
 									</tr>
-									<tr>
+									{{-- <tr>
 										<th>定休日</th>
 										<td>テキストが入ります</td>
 									</tr>
 									<tr>
 										<th>登録番号</th>
 										<td>テキストが入ります</td>
-									</tr>
-									<tr>
+									</tr> --}}
+									{{-- <tr>
 										<th>設立年月日</th>
 										<td>0000年0月0日</td>
-									</tr>
+									</tr> --}}
 									<tr>
 										<th>代表者</th>
-										<td>代表取締役　テキストが入ります</td>
+										<td>代表取締役　鎌田 哲至</td>
 									</tr>
-									<tr>
+									{{-- <tr>
 										<th>資本金</th>
 										<td>0000円</td>
-									</tr>
+									</tr> --}}
 									<tr>
 										<th>主要取引先銀行</th>
-										<td>00銀行</td>
+										<td>伊予銀行　みずほ銀行</td>
 									</tr>
 									<tr>
 										<th>事業内容</th>
-										<td>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</td>
+										<td>スキルマーケット「カリビト」に関する運営・開発・販売</td>
 									</tr>
 								</tbody></table>
 							</div>
