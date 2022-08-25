@@ -3,7 +3,7 @@
     <article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>カリビトアンケート</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents">
@@ -14,7 +14,7 @@
 						<h3><span>カリビトアンケート</span></h3>
 						<p>カリビトアンケートをご利用いただき誠にありがとうございます。<br>本アプリにつきまして改善点などご要望等ございましたら<br>下記よりご連絡ください。<br>今後ともどうぞよろしくお願い致します。</p>
 					</div>
-                    <form action="{{ route('survey.store', $chatroom) }}" method="POST" enctype="multipart/form-data">
+                    <form id="form" action="{{ route('survey.store', $chatroom) }}" method="POST" enctype="multipart/form-data">
 					@csrf
                         <div class="evaluation">
                             <p class="scroe"><span>アンケートを送信いただけますと<br>もれなくカリビトポイント<big>50PT</big>プレゼント！</span></p>
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="functeBtns">
-                            <input type="submit" class="red" value="アンケート内容を送信する">
+                            <input type="submit" class="red loading-disabled" value="アンケート内容を送信する">
                         </div>
                     </form>
 				</div>

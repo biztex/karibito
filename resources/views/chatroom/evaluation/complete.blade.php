@@ -2,7 +2,10 @@
     <article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<a href="#">やること</a>　>　<span>お支払い手続き</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　
+                <a href="{{ route('chatroom.index') }}">やりとり一覧</a>　>　
+                <a href="{{ route('chatroom.show', $chatroom->id) }}">{{ $chatroom->reference->title }}</a>　>　
+				<span>評価</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div id="contents" style="margin-bottom:35px;">
