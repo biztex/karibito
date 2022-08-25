@@ -20,10 +20,10 @@ class AlreadyAnsweredKaribitoSurvey
         
         $survey = KaribitoSurvey::firstWhere([
             ['user_id',\Auth::id()],
-            ['chatroom_id', $request->chatroom_id],
+            ['chatroom_id', $request->chatroom->id],
         ]);
         if($survey){
-            return redirect()->route('chatroom.show', $request->chatroom_id)->with('flash_msg','アンケートは回答済みです。');
+            return redirect()->route('chatroom.show', $request->chatroom->id)->with('flash_msg','アンケートは回答済みです。');
         };
         return $next($request);
     }
