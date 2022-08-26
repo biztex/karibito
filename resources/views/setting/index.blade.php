@@ -65,13 +65,6 @@
 										@endif
 									</dd>
 								</dl>
-								{{-- <dl class="memberConfigDl">
-									<dt>機密保持契約（NDA）</dt>
-									<dd>
-										<span class="status_span">未承認</span>
-										<a class="configLink" href="#">確認する</a>
-									</dd>
-								</dl> --}}
 							</div>
 							<div class="memberConfigItem">
 								<h3 class="memberConfigHd">お支払い方法</h3>

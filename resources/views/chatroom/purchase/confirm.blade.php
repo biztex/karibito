@@ -34,7 +34,6 @@
 												@endif
 												<div class="info">
 													<p>{{ $proposal->chatroom->reference->title }}</p>
-													{{-- <p class="link"><a href="#">機密保持契約(NDA)</a></p> --}}
 												</div>
 											</div>
 										</td>
