@@ -140,6 +140,8 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('point', [PointController::class, 'index'])->name('point.index');
             // 決済履歴
             Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
+            // 仮売上金
+            Route::view('transfer-request', 'mypage.transfer_request.index')->name('transfer.index');
             // メンバー情報
             Route::view('member', 'member.index')->name('member'); //このページなくなる
             // 会員情報
