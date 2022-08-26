@@ -63,14 +63,6 @@
 										@if(Auth::user()->userProfile->is_identify === 0)
 										<a href="#fancybox_register"  class="fancybox fancybox_register">申請する</a>
 										@endif
-										{{-- @dd(Auth::user()->userProfile->is_identify) --}}
-									</dd>
-								</dl>
-								<dl class="memberConfigDl">
-									{{-- <dt>機密保持契約（NDA）</dt> --}}
-									<dd>
-										<span class="status_span">未承認</span>
-										<a class="configLink" href="#">確認する</a>
 									</dd>
 								</dl>
 							</div>
@@ -80,6 +72,15 @@
 									<dt>クレジットカード</dt>
 									<dd>
 										<a class="configLink" href="{{ route('setting.card.create') }}">変更する</a>
+									</dd>
+								</dl>
+							</div>
+							<div class="memberConfigItem">
+								<h3 class="memberConfigHd">受取口座の登録・変更</h3>
+								<dl class="memberConfigDl">
+									<dt>受取口座</dt>
+									<dd>
+										<a class="configLink" href="{{ route('setting.bank.edit') }}">変更する</a>
 									</dd>
 								</dl>
 							</div>

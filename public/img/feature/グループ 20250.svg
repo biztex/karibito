@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="273" height="213" viewBox="0 0 273 213">
+  <defs>
+    <filter id="長方形_1818" x="0" y="0" width="273" height="213" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="グループ_20250" data-name="グループ 20250" transform="translate(-5082 1579)">
+    <g transform="matrix(1, 0, 0, 1, 5082, -1579)" filter="url(#長方形_1818)">
+      <rect id="長方形_1818-2" data-name="長方形 1818" width="255" height="195" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <g id="グループ_20249" data-name="グループ 20249" transform="translate(45)">
+      <text id="カテゴリーが豊富" transform="translate(5094 -1535)" font-size="20" font-family="HiraginoSans-W5, Hiragino Sans"><tspan x="0" y="0">カテゴリーが豊富</tspan></text>
+      <g id="グループ" transform="translate(2028.82 1143)">
+        <text id="アプリを使っていく中で" transform="translate(3079.18 -2571)" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans"><tspan x="0" y="0">アプリを使っていく中で</tspan></text>
+        <text id="使い方や疑問に思ったことをみんなで" transform="translate(3043.18 -2554)" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans"><tspan x="0" y="0">使い方や疑問に思ったことをみんなで</tspan></text>
+        <text id="解決していく機能です_" data-name="解決していく機能です。" transform="translate(3079.96 -2537)" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans"><tspan x="0" y="0">解決していく機能です。</tspan></text>
+      </g>
+      <g id="グループ_20169" data-name="グループ 20169" transform="translate(23325.805 14575.69)">
+        <path id="パス_51369" data-name="パス 51369" d="M358.609,109.715a7.413,7.413,0,1,0,7.413,7.413,7.413,7.413,0,0,0-7.413-7.413m0,12.224a4.811,4.811,0,1,1,4.808-4.81,4.811,4.811,0,0,1-4.808,4.81" transform="translate(-18526 -16176.057)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51370" data-name="パス 51370" d="M385.132,110.473H358.67a1.3,1.3,0,0,0,0,2.6h26.462a1.3,1.3,0,0,0,0-2.6" transform="translate(-18515.205 -16174.731)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51371" data-name="パス 51371" d="M372.921,113.407H358.67a1.3,1.3,0,0,0,0,2.6h14.252a1.3,1.3,0,0,0,0-2.6" transform="translate(-18515.205 -16169.604)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51372" data-name="パス 51372" d="M358.609,102.309a7.412,7.412,0,1,0,7.413,7.413,7.412,7.412,0,0,0-7.413-7.413m0,12.21a4.811,4.811,0,1,1,4.808-4.81,4.811,4.811,0,0,1-4.808,4.81" transform="translate(-18526 -16188.999)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51373" data-name="パス 51373" d="M385.132,103.042H358.67a1.3,1.3,0,0,0,0,2.6h26.462a1.3,1.3,0,0,0,0-2.6" transform="translate(-18515.205 -16187.719)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51374" data-name="パス 51374" d="M372.921,106.024H358.67a1.3,1.3,0,0,0,0,2.6h14.252a1.3,1.3,0,0,0,0-2.6" transform="translate(-18515.205 -16182.507)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51375" data-name="パス 51375" d="M358.609,117.127a7.412,7.412,0,1,0,7.413,7.413,7.412,7.412,0,0,0-7.413-7.413m0,12.21a4.811,4.811,0,1,1,4.808-4.81,4.811,4.811,0,0,1-4.808,4.81" transform="translate(-18526 -16163.104)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51376" data-name="パス 51376" d="M385.132,117.856H358.67a1.3,1.3,0,0,0,0,2.6h26.462a1.3,1.3,0,0,0,0-2.6" transform="translate(-18515.205 -16161.829)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="パス_51377" data-name="パス 51377" d="M372.921,120.837H358.67a1.3,1.3,0,0,0,0,2.6h14.252a1.3,1.3,0,0,0,0-2.6" transform="translate(-18515.205 -16156.619)" fill="#f8bc04" stroke="#f8bc04" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -23,10 +23,7 @@
                 <a href="javascript:;" class="templateOpen">定型文を使う</a>
                 
             </div>
-            <div class="about mt25">
-                <p class="tit">【資料を添付する】について</p>
-                <p>・テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト<br>・テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
-            </div>
+            <x-parts.file-input/>
             <div class="cancelTitle">
                 <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
             </div>

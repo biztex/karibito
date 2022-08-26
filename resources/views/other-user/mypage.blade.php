@@ -49,7 +49,6 @@
                                             @if ($user->userProfile->is_identify)
                                                 <a>本人確認済み</a>
                                             @endif
-                                            {{-- <a>機密保持契約(NDA) 可能</a> --}}
                                         </p>
 										<p class="mypageP05"></p>
 										<div class="mypageP06">

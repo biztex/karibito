@@ -47,7 +47,7 @@
 												<tr>
 													<th>カード番号</th>
 													<td>
-														<div class="mypageEditInput"><input type="tell" name="cc_number" placeholder="" maxlength="16" pattern="([0-9]| )*"></div>
+														<div class="mypageEditInput"><input type="tel" name="cc_number" placeholder="" maxlength="16" pattern="([0-9]| )*"></div>
 														<p class="noticeP">例）1234567890123456</p>
 													</td>
 												</tr>

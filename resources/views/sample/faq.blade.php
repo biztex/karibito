@@ -1,5 +1,6 @@
 <x-layout>
-<article>
+<body id="faq">
+	<article>
 		<div id="breadcrumb">
 			<div class="inner">
 				<a href="index.html">ホーム</a>　>　<span>カリビト知恵袋</span>
