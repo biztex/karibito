@@ -161,6 +161,8 @@
                 $(".formLinksArea").children(".js-youtubeForm").each(function(index, element){
                     $(element).find(".js-link").text("動画(YouTubeのみ)" + (index + 1));
                 })
+            } else {
+                $('.js-youtubeForm input[type="text"]').val('');
             }
         });
     }
