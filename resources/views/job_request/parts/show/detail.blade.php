@@ -4,7 +4,10 @@
             <div class="single">
                 <a tabindex="0"> {{ App\Models\JobRequest::IS_ONLINE[$job_request->is_online] }} </a>
             </div>
-            <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
+            <a href="#" class="favorite">
+                <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                <span>お気に入り</span>
+            </a>
         </div>
         <div class="datas">
             <span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$job_request->is_call] }}</span>

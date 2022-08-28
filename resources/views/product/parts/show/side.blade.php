@@ -32,10 +32,10 @@
                 </div>
             @endif
         </div>
-        <p class="specialtyBtn"><span>この情報をシェアする</span></p>
+        <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
     </div>
 
     <x-parts.box-seller :user='$product->user'/>
 
-    
 </aside>
+<x-parts.share-modal/>

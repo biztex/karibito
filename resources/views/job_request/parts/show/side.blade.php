@@ -34,9 +34,10 @@
                 <a href="{{ route('chatroom.new.job_request', $job_request->id ) }}" class="orange full">交渉画面へ進む</a>
             </div>
         @endif
-        <p class="specialtyBtn"><span>この情報をシェアする</span></p>
+        <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
     </div>
 
     <x-parts.box-seller :user='$user'/>
 
 </aside>
+<x-parts.share-modal/>
