@@ -42,7 +42,6 @@
                     </div>
                 </div> --}}
                 <x-parts.product-item :product="$value"/>
-
             @endforeach
         </div>
     </div>
