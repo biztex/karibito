@@ -33,15 +33,15 @@
 										<li>
 											<div class="cont01">
 												@if(isset($val->productImage[0]))
-												<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
+													<p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
 												@else
-												<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+													<p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
 												@endif
 												<div class="info">
 													@if(!empty($val->category_id))
-													<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
+														<div class="breadcrumb"><a href="#" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<span>{{ $val->mProductChildCategory->name }}</span></div>
 													@else
-													<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
+														<div class="breadcrumb"><a href="#" tabindex="0">カテゴリ未選択</a></div>
 													@endif
 													<div class="draw">
 														<p class="price">
@@ -50,17 +50,17 @@
 													</div>
 													<div class="single">
 														@if(null !== ($val->is_online))
-														<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
+															<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 														@endif
 													</div>
+													<div class="link">
+														<a href="{{ route('product.edit',$val->id) }}">編集する</a>
+														<form method="post" action="{{ route('product.destroy', $val->id ) }}">
+															@csrf @method('delete')
+															<p class="linkdel"><input type="submit" class="full" value="削除"></p>
+														</form>
+													</div>
 												</div>
-												<p class="link"><a href="{{ route('product.edit',$val->id) }}">編集する</a></p>
-												<form method="post" action="{{ route('product.destroy', $val->id ) }}">
-                                                @csrf @method('delete')
-                                                    <p class="linkdel">
-                                                        <input type="submit" class="full" value="削除">
-										            </p>
-                                                </form>
 											</div>
 										</li>
 										@endforeach
@@ -95,14 +95,14 @@
 														<span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
 														@endif
 													</div>
+													<div class="link">
+														<a href="{{ route('job_request.edit',$val->id) }}">編集する</a>
+														<form method="post" action="{{ route('job_request.destroy', $val->id ) }}">
+															@csrf @method('delete')
+															<p class="linkdel"><input type="submit" class="full" value="削除"></p>
+														</form>
+													</div>
 												</div>
-												<p class="link"><a href="{{ route('job_request.edit',$val->id) }}">編集する</a></p>
-												<form method="post" action="{{ route('job_request.destroy', $val->id ) }}">
-                                                @csrf @method('delete')
-                                                    <p class="linkdel">
-                                                        <input type="submit" class="full" value="削除">
-										            </p>
-                                                </form>
 											</div>
 										</li>
 										@endforeach
