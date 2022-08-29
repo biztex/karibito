@@ -114,7 +114,7 @@
 						<p class="cases">{{$job_requests->total()}}件中
 							{{  ($job_requests->currentPage() -1) * $job_requests->perPage() + 1}} - {{ (($job_requests->currentPage() -1) * $job_requests->perPage() + 1) + (count($job_requests) -1)  }}件の表示
 						</p>
-						<div class="list sliderSP">{{--st3クラスを消した。横幅がおかしかったため。sliderSp0202の02を消したら治った--}}
+						<div class="list sliderSP02">{{--st3クラスを消した。横幅がおかしかったため--}}
 							@foreach( $job_requests as $value)
 								<x-parts.job-request-item :value='$value'/>
 							@endforeach

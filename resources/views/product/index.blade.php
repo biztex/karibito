@@ -108,7 +108,7 @@
                         <p class="cases">{{$products->total()}}件中
                             {{  ($products->currentPage() -1) * $products->perPage() + 1}} - {{ (($products->currentPage() -1) * $products->perPage() + 1) + (count($products) -1)  }}件の表示
                         </p>
-                        <div class="list sliderSP">{{--sliderSP02→sliderSPで横幅とかが治った。経過を見る--}}
+                        <div class="list sliderSP02">
                             @foreach( $products as $product)
                                 <x-parts.product-item :product='$product'/>
                             @endforeach
