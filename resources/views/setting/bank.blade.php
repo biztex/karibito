@@ -13,68 +13,64 @@
             <div id="main">
 					<div class="configEditWrap">
 						<div class="configEditItem">
-							<h2 class="subPagesHd">振込口座</h2>
+							<h2 class="subPagesHd">受取口座の登録・変更</h2>
 							<div class="configEditBox">
 								@if($bank !== null)
 									<div class="configEditList" style="margin-bottom:35px;">
-										<h3 class="mypageEditHd">現在の登録口座</h3>
-											<div class="configEditTable">
-												<table>
-													<tr>
-														<th>金融機関名</th>
-														<td>{{ $bank->bank_name }}</td>
-													</tr>
-                                                    <tr>
-														<th>金融機関コード</th>
-														<td>{{ $bank->bank_code }}</td>
-													</tr>
-                                                    <tr>
-														<th>支店名</th>
-														<td>{{ $bank->branch_name }}</td>
-													</tr>
-                                                    <tr>
-														<th>支店コード</th>
-														<td>{{ $bank->branch_code }}</td>
-													</tr>
-                                                    <tr>
-														<th>口座種別</th>
-														<td>{{ \App\Models\BankAccount::BANK_TYPE[$bank->type] }}</td>
-													</tr>
-													<tr>
-														<th>口座名義人名</th>
-														<td>{{ Crypt::decryptString($bank->name) }}</td>
-													</tr>
-                                                    <tr>
-														<th>口座番号</th>
-														<td>{{ Crypt::decryptString($bank->number) }}</td>
-													</tr>
-												</table>
-												<form action="{{ route('setting.bank.destroy') }}" method="post" class="configEditDeleteBtn">
-													@csrf @method('delete')
-													<button type="submit" onclick='return confirm("削除してもよろしいですか？");'>削除</button>
-												</form>
-											</div>
+										<h3 class="mypageEditHd">現在の受取口座情報</h3>
+										<div class="configEditTable">
+											<table>
+												<tr>
+													<th>銀行名</th>
+													<td>{{ $bank->bank_name }}</td>
+												</tr>
+												<tr>
+													<th>銀行コード</th>
+													<td>{{ $bank->bank_code }}</td>
+												</tr>
+												<tr>
+													<th>支店名</th>
+													<td>{{ $bank->branch_name }}</td>
+												</tr>
+												<tr>
+													<th>支店コード</th>
+													<td>{{ $bank->branch_code }}</td>
+												</tr>
+												<tr>
+													<th>口座種別</th>
+													<td>{{ \App\Models\BankAccount::BANK_TYPE[$bank->type] }}</td>
+												</tr>
+												<tr>
+													<th>口座番号</th>
+													<td>{{ Crypt::decryptString($bank->number) }}</td>
+												</tr>
+												<tr>
+													<th>口座名義</th>
+													<td>{{ Crypt::decryptString($bank->name) }}</td>
+												</tr>
+											</table>
+											{{-- <form action="{{ route('setting.bank.destroy') }}" method="post" class="configEditDeleteBtn">
+												@csrf @method('delete')
+												<button type="submit" onclick='return confirm("削除してもよろしいですか？");'>削除</button>
+											</form> --}}
+										</div>
 									</div>
 								@endif
 								<form id="form" action="{{ route('setting.bank.update') }}" method="post">
 									@csrf
 									<div class="configEditList">
-									@if($bank === null)
-										<h3 class="mypageEditHd">振込口座を登録</h3>
-									@else
-										<h3 class="mypageEditHd">振込口座情報を変更</h3>
-									@endif
+										<h3 class="mypageEditHd">新しい受取口座情報</h3>
 										<div class="configEditTable">
 											<table>
 												<tr>
-													<th>金融機関名</th>
+													<th>銀行名</th>
 													<td>
 														@error('bank_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
 														<div class="mypageEditInput"><input type="text" name="bank_name" value="{{ old('bank_name') }}"></div>
 													</td>
 												</tr>
                                                 <tr>
-													<th>金融機関コード</th>
+													<th>銀行コード</th>
 													<td>
 														@error('bank_code')<div class="alert alert-danger">{{ $message }}</div>@enderror
 														<div class="mypageEditInput"><input type="text" name="bank_code" value="{{ old('bank_code') }}"></div>
@@ -107,26 +103,26 @@
 														</div>
 													</td>
 												</tr>
-                                                <tr>
-													<th>口座名義人名</th>
-													<td>
-														@error('bank_account_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
-														<div class="mypageEditInput"><input type="text" name="bank_account_name" value="{{ old('bank_account_name') }}"></div>
-													</td>
-												</tr>
-                                                <tr>
+												<tr>
 													<th>口座番号</th>
 													<td>
 														@error('bank_account_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
 														<div class="mypageEditInput"><input type="tell" name="bank_account_number" value="{{ old('bank_account_number') }}"></div>
 													</td>
-												</tr>                                    
+												</tr>  
+                                                <tr>
+													<th>口座名義</th>
+													<td>
+														@error('bank_account_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
+														<div class="mypageEditInput"><input type="text" name="bank_account_name" value="{{ old('bank_account_name') }}"></div>
+													</td>
+												</tr>
 											</table>
 										</div>
 									</div>
 
 									<div class="configEditButton">
-										<input class="loading-disabled" type="submit" value="登録">
+										<input class="loading-disabled" type="submit" value="送信">
 									</div>
 								</form>
 							</div>

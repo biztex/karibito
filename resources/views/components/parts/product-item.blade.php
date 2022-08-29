@@ -2,7 +2,7 @@
 	<!-- <p class="level"></p> topのカテゴリー別のみ仕様 -->
     <a href="{{ route('product.show',$product->id) }}" class="img imgBox">
         @if(isset($product->productImage[0]))
-            <img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="width: 192px;height: 160px;object-fit: cover;">
+            <img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="">
             <button class="favorite">お気に入り</button>
         @else
             <img src="/img/common/img_work01@2x.jpg" alt="">

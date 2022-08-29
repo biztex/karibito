@@ -360,7 +360,7 @@
 									<p class="mypageP01">{{$user_profile->name}} <a href="#fancybox_person" class="fancybox"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></p>
 									<p class="mypageP02">最終ログイン：8時間前</p>
 									<p class="mypageP03">({{$gender}} / {{$age}} / {{$user_prefecture}}) <span>所持ポイント：0000pt</span></p>
-									<p class="mypageP04 check"><a href="#">本人確認済み</a>{{-- <a href="#">機密保持契約(NDA) 可能</a> --}}</p>
+									<p class="mypageP04 check"><a href="#">本人確認済み</a></p>
 									<p class="mypageP05"><a href="#" class="more">過去の評価を詳しく見る</a></p>
 									<div class="mypageP06">
 										<div class="evaluate three"></div><a href="#">(3.0)</a>

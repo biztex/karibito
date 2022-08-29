@@ -4,7 +4,7 @@
             <a tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</a>
         </div>
         <a href="#" class="favorite">
-            <span class="icon"><img src="img/common/ico_heart.svg" alt=""></span>
+            <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
             <span>お気に入り</span>
         </a>
     </div>

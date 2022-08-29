@@ -4,10 +4,10 @@
         <div class="shareSnsEmail">
             <h3>SNSやメールでチケットをシェアする</h3>
             <div class="sns">
-                <a href="#" target="_blank"><img src="img/mypage/ico_facebook.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="img/mypage/ico_line.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
+                <a href="#" target="_blank"><img src="/img/mypage/ico_facebook.svg" alt=""></a>
+                <a href="#" target="_blank"><img src="/img/mypage/ico_line.svg" alt=""></a>
+                <a href="#" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a>
+                <a href="#" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a>
             </div>
             <form>
                 <table>

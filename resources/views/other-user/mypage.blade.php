@@ -49,7 +49,6 @@
                                             @if ($user->userProfile->is_identify)
                                                 <a>本人確認済み</a>
                                             @endif
-                                            {{-- <a>機密保持契約(NDA) 可能</a> --}}
                                         </p>
 										<p class="mypageP05"></p>
 										<div class="mypageP06">
@@ -77,7 +76,13 @@
 						</div>
 						<div class="otherMypageSec01">
 							<div class="inner">
-								<p class="mypageHd02"><span>現在の出品サービス一覧</span>@if($products->isNotEmpty())<a href="{{ route('user.publication', $user->id) }}" class="more">出品サービスをもっと見る</a>@endif</p>
+								<div class="mypageHd02">
+									<p>現在の出品サービス一覧</p>
+									@if($products->isNotEmpty())
+										<a href="{{ route('user.publication', $user->id) }}" class="more">出品サービスをもっと見る</a>
+									@endif
+								</div>
+
 								{{-- <div class="recommendList style2 ">
 									<div class="list sliderSP02"> --}}
 
@@ -129,11 +134,16 @@
 
 						<div class="mypageSec04">
 							<div class="inner">
-                                @if (\Auth::id() === $user->id)
-                                    <p class="mypageHd02"><span>スキル・経歴・職務</span>@if ($user->userSkills->isNotEmpty())<a href="{{ route('resume.show') }}" class="more">スキル・経歴・職務を編集する</a>@endif</p>
-                                @else
-                                    <p class="mypageHd02"><span>スキル・経歴・職務</span>@if ($user->userSkills->isNotEmpty())<a href="{{ route('user.skills', $user->id) }}" class="more">スキル・経歴をもっと見る</a>@endif</p>
-                                @endif
+								<div class="mypageHd02">
+									<p>スキル・経歴・職務</p>
+									@if ($user->userSkills->isNotEmpty())
+										@if (\Auth::id() === $user->id)
+											<a href="{{ route('resume.show') }}" class="more">スキル・経歴・職務を編集する</a>
+										@else
+											<a href="{{ route('user.skills', $user->id) }}" class="more">スキル・経歴をもっと見る</a>
+										@endif
+									@endif
+								</div>
 								<div class="mypageItem">
 									<p class="mypageHd03">スキル</p>
                                     @if ($user->userSkills->isEmpty())
@@ -180,11 +190,16 @@
 						</div>
 						<div class="mypageSec05">
 							<div class="inner">
-                                @if (\Auth::id() === $user->id)
-                                    <p class="mypageHd02"><span>ポートフォリオ</span>@if ($portfolio_list->isNotEmpty())<a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a>@endif</p>
-                                @else
-                                    <p class="mypageHd02"><span>ポートフォリオ</span>@if ($portfolio_list->isNotEmpty())<a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a>@endif</p>
-                                @endif
+								<div class="mypageHd02">
+									<p>ポートフォリオ</p>
+									@if ($portfolio_list->isNotEmpty())
+										@if (\Auth::id() === $user->id)
+											<a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a>
+										@else
+											<a href="{{ route('user.portfolio', $user) }}" class="more">ポートフォリオをもっと見る</a>
+										@endif
+									@endif
+								</div>
 
                                 @if ($portfolio_list->isEmpty())
                                     <p>ポートフォリオの登録がありません。</p>
@@ -204,11 +219,12 @@
 
 						<div class="otherMypageSec02">
 							<div class="inner">
-								<p class="mypageHd02"><span>依頼者からの評価</span>
+								<div class="mypageHd02">
+									<p>依頼者からの評価</p>
 									@if($evaluations['good']->isNotEmpty() || $evaluations['usually']->isNotEmpty() || $evaluations['pity']->isNotEmpty())
 										<a href="{{ route('user.evaluation', $user->id) }}" class="more">評価をもっと見る</a>
 									@endif
-								</p>
+								</div>
 								<div class="evaluationStar">
 									<span>総評</span>
 									<x-parts.evaluation-star :star='$user->avg_star'/>

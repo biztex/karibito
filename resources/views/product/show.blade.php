@@ -18,7 +18,7 @@
         </div><!-- /.breadcrumb -->
         <x-parts.ban-msg/>
 
-        <div id="contents" class="">
+        <div id="contents" class="detailStyle">
             <div class="inner02 ">
                 <div class="clearfix">
                     <div id="main">
@@ -27,16 +27,17 @@
 
                         @include('product.parts.show.evaluation')
 
-                        @include('product.parts.show.side')
-
-                        @include('product.parts.show.others')
-
-                        @include('product.parts.show.share')
-
                     </div>
+
+                    @include('product.parts.show.side')
+
                 </div>
+
+                @include('product.parts.show.others')
+
+                @include('product.parts.show.share')
+
             </div><!--inner-->
-        </div><!--contents-->
     </article>
 </x-layout>
 <script type="text/javascript">

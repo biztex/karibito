@@ -28,7 +28,6 @@
                 @if(Auth::user()->userProfile->is_identify == 1)
                     <a>本人確認済み</a>
                 @endif
-                {{-- <a href="#">機密保持契約(NDA) 可能</a></p> --}}
             <p class="mypageP05"><a href="{{ route('evaluation') }}" class="more">過去の評価を詳しく見る</a></p>
             <div class="mypageP06">
                 <x-parts.evaluation-star :star='Auth::user()->avg_star'/><p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">{{ number_format(Auth::user()->avg_star,1) }}</a>)</p>
