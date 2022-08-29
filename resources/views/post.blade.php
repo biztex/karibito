@@ -30,21 +30,24 @@
                         @else
                             @foreach($products as $val)
                             <li>
-                                @if($val->status === App\Models\Product::STATUS_PRIVATE)
-                                    <div class="cont01 public01">
-                                @elseif($val->status === App\Models\Product::STATUS_PUBLISH)
-                                    <div class="cont01 public02">
-                                @endif
-                                    @if(isset($val->productImage[0]))
-                                    <p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
-                                    @else
-                                    <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+                                <a href="{{ route('product.show',$val->id) }}">
+                                    @if($val->status === App\Models\Product::STATUS_PRIVATE)
+                                        <div class="cont01 public01">
+                                    @elseif($val->status === App\Models\Product::STATUS_PUBLISH)
+                                        <div class="cont01 public02">
                                     @endif
-                                    <div class="info">
-                                        <div class="breadcrumb">
-                                            <a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{$val->mProductChildCategory->mProductCategory->name}}</a> ＞ 
-                                            <a href="{{ route('product.category.index.show', $val->category_id) }}">{{$val->mProductChildCategory->name}}</a>
-                                        </div>
+                                    @if(isset($val->productImage[0]))
+                                        <p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
+                                    @else
+                                        <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+                                    @endif
+                                </a>
+                                <div class="info">
+                                    <div class="breadcrumb">
+                                        <a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{$val->mProductChildCategory->mProductCategory->name}}</a> ＞ 
+                                        <a href="{{ route('product.category.index.show', $val->category_id) }}">{{$val->mProductChildCategory->name}}</a>
+                                    </div>
+                                    <a href="{{ route('product.show',$val->id) }}">
                                         <div class="draw">
                                             <p class="price">
                                                 <font>{{$val->title}}</font><br>{{number_format($val->price)}}円
@@ -53,8 +56,9 @@
                                         <div class="single">
                                             <span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
                                         </div>
-                                        <p class="link"><a href="{{ route('product.show', $val->id) }}">詳細見る</a></p>
-                                    </div>
+                                    </a>
+                                    <p class="link"><a href="{{ route('product.show', $val->id) }}">詳細見る</a></p>
+                                </div>
                                 </div>
                             </li>
                             @endforeach
@@ -69,24 +73,27 @@
                         @else
                             @foreach($job_requests as $val)
                             <li>
+                                <a href="{{ route('job_request.show',$val->id) }}">
                                 <div class="cont01">
                                     <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
+                                    </a>
                                     <div class="info">
                                         <div class="breadcrumb">
                                             <a href="{{ route('job_request.category.index', $val->category_id)}}" tabindex="0">{{$val->mProductChildCategory->mProductCategory->name}}</a> ＞ 
                                             <a href="{{ route('job_request.category.index.show', $val->mProductChildCategory->id)}}">{{$val->mProductChildCategory->name}}</a>
                                         </div>
-                                        <div class="draw">
-                                            <p class="price">
-                                                <font>{{$val->title}}</font><br>{{number_format($val->price)}}円
-                                            </p>
-                                        </div>
-                                        <div class="single">
-                                            <span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
-                                        </div>
+                                        <a href="{{ route('job_request.show',$val->id) }}">
+                                            <div class="draw">
+                                                <p class="price">
+                                                    <font>{{$val->title}}</font><br>{{number_format($val->price)}}円
+                                                </p>
+                                            </div>
+                                            <div class="single">
+                                                <span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
+                                            </div>
+                                        </a>
                                         <p class="link"><a href="{{ route('job_request.show', $val->id) }}">詳細見る</a></p>
                                     </div>
-
                                 </div>
                             </li>
                             @endforeach
