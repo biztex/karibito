@@ -107,9 +107,8 @@
                     <div class="recommendList style2">
                         <p class="cases">{{$products->total()}}件中
                             {{  ($products->currentPage() -1) * $products->perPage() + 1}} - {{ (($products->currentPage() -1) * $products->perPage() + 1) + (count($products) -1)  }}件の表示
-                            {{-- <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$products->total() . '件中' . $products->firstItem() . '-' . $products->lastItem()}}件）</h3> --}}
                         </p>
-                        <div class="list sliderSP02">
+                        <div class="list sliderSP">{{--sliderSP02→sliderSPで横幅とかが治った。経過を見る--}}
                             @foreach( $products as $product)
                                 <x-parts.product-item :product='$product'/>
                             @endforeach
