@@ -34,7 +34,7 @@
                 @endif
 				<div id="main">
 					<div class="cateList">
-						@if (isset($parent_category_flg))
+						@if (isset($parent_category_flg) && $parent_category_flg === 1)
                             <h2 class="hdM">カテゴリ一覧</h2>
                             <div class="list sliderSP02">
                                 @if ($parent_category_flg === 1)
