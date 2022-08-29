@@ -816,14 +816,35 @@
 	border: 1px solid;
 }
 
-.linkdel {
-	margin-top: 50px;
+@media screen and (min-width: 767px) {
+	.linkdel {
+		margin-top: 50px;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+@media screen and (max-width: 767px) {
+	.favoriteUl01 .cont01 .info .link {
+		display: flex;
+	}
+	.linkdel {
+		margin-top: 10px;
+		margin-left: 10px;
+		width: 100px;
+	}
+
+}
+@media screen and (max-width: 391px) {
+	.favoriteUl01 .cont01 .info .link {
+		display: block;
+	}
+	.linkdel {
+		margin-left: 0;
+	}
 }
 
 .linkdel input {
-	position: absolute;
-	right: 0;
-	top: 50;
 	z-index: 1;
 	display: flex;
 	justify-content: center;
@@ -1749,7 +1770,7 @@ img.moreRecommendListImg {
 	margin: 0 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 766px) {
 	#portfolio .mypagePortfolioUl02 {
 		gap: 30px 20px;
 	}
@@ -1760,5 +1781,45 @@ img.moreRecommendListImg {
 
 	dt.hideModalName span {
 		font-size: 11px;
+	}
+
+	.mypageHd02 {
+		display: block;
+	}
+
+	.mypageHd02 a {
+		margin: 0;
+	}
+	.recommendList .list.sliderSP02 .item {
+		min-width: 168px;
+		flex: 0;
+	}
+}
+@media screen and (min-width: 766px) {
+
+	.recommendList .list.sliderSP02 .item {
+		flex: 0;
+		min-width: 192px;
+	}
+}
+.detailStyle .recommendList .list .item {
+    margin: 0 9px 0 0;
+    width: 192px !important;
+}
+
+.detailStyle .recommendList .list .single span {
+    padding: 0 5px;
+	background: #9A814A;
+    color: #fff;
+}
+
+.detailStyle .recommendList .list .aboutUser {
+    padding-top: 0;
+    border-top: none;
+}
+@media screen and (max-width: 766px) {
+	.detailStyle .recommendList .list .item {
+		margin: 0 9px 0 0;
+		width: 168px !important;
 	}
 }
