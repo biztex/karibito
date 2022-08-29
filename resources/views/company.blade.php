@@ -138,7 +138,7 @@
 									</tr>
 									<tr>
 										<th>URL</th>
-										<td><a href="https://karibito.co.jp/" target="_blank">https://karibito.co.jp/</a></td>
+										<td><a href="https://karibito.co.jp/" target="_blank" rel="noopener noreferrer">https://karibito.co.jp/</a></td>
 									</tr>
 									<tr>
 										<th>E-mail</th>

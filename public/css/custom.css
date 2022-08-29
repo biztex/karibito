@@ -1555,8 +1555,7 @@
 
 .center_cam {
 	position: absolute;
-	top:
-		50%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -1591,6 +1590,17 @@ img.moreRecommendListImg {
 .contactForm input[type='number'],
 .contactForm select {
 	color: black !important;
+}
+
+.contactForm input[type='date'] {
+	position: relative;
+}
+
+.contactForm input[type='date']::-webkit-calendar-picker-indicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+	opacity: 0;
 }
 
 /* マイページ内ポートフォリオ */
