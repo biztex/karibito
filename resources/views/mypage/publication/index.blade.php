@@ -25,34 +25,30 @@
                                 <div class="tabBox is_active" id="tab_box01">
                                     <ul class="favoriteUl01">
                                         @if(empty($products[0]))
-                                        <li><div>投稿がありません。</div></li>
+                                            <li><div>投稿がありません。</div></li>
                                         @else
-                                        @foreach($products as $val)
-                                        <li>
-                                            @if($val->status === App\Models\Product::STATUS_PRIVATE)
-                                            <div class="cont01 public01">
-                                            @elseif($val->status === App\Models\Product::STATUS_PUBLISH)
-                                            <div class="cont01 public02">
-                                            @endif
-                                                @if(isset($val->productImage[0]))
-                                                <p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
-                                                @else
-                                                <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+                                            @foreach($products as $val)
+                                            <li>
+                                                @if($val->status === App\Models\Product::STATUS_PRIVATE)
+                                                    <div class="cont01 public01">
+                                                @elseif($val->status === App\Models\Product::STATUS_PUBLISH)
+                                                    <div class="cont01 public02">
                                                 @endif
-                                                <div class="info">
-                                                    <div class="breadcrumb"><a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id) }}"tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('product.category.index.show', $val->mProductChildCategory->id) }}">{{ $val->mProductChildCategory->name }}</a></div>
-                                                    <div class="draw">
-                                                        <p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
-                                                    </div>
-                                                    <div class="single">
-                                                        <span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
+                                                    @if(isset($val->productImage[0]))
+                                                        <p class="img"><img src="{{ asset('/storage/'.$val->productImage[0]->path)}}" alt=""></p>
+                                                    @else
+                                                        <p class="img"><img src="img/common/img_work01@2x.jpg" alt=""></p>
+                                                    @endif
+                                                    <div class="info">
+                                                        <div class="breadcrumb"><a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id) }}"tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('product.category.index.show', $val->mProductChildCategory->id) }}">{{ $val->mProductChildCategory->name }}</a></div>
+                                                        <div class="draw"><p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p></div>
+                                                        <div class="single"><span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span></div>
+                                                        <p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
+                                                        <p >{{date('Y/m/d', strtotime($val->created_at))}}</p>
                                                     </div>
                                                 </div>
-                                                <p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
-                                                <p class="" style="position: absolute; bottom: 0; right: 0;">{{date('Y/m/d', strtotime($val->created_at))}}</p>
-                                            </div>
-                                        </li>
-                                        @endforeach
+                                            </li>
+                                            @endforeach
                                         @endif
                                     </ul>
                                     {{ $products->fragment('')->links() }}
@@ -62,26 +58,22 @@
                                 <div class="tabBox" id="tab_box02">
                                     <ul class="favoriteUl01">
                                         @if(empty($job_requests[0]))
-                                        <li><div>投稿がありません。</div></li>
+                                            <li><div>投稿がありません。</div></li>
                                         @else
-                                        @foreach($job_requests as $val)
-                                        <li>
-                                            <div class="cont01">
-                                                <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
-                                                <div class="info">
-                                                    <div class="breadcrumb"><a href="{{ route('job_request.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show', $val->category_id)}}">{{ $val->mProductChildCategory->name }}</a></div>
-                                                    <div class="draw">
-                                                        <p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p>
+                                            @foreach($job_requests as $val)
+                                                <li>
+                                                    <div class="cont01">
+                                                        <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
+                                                        <div class="info">
+                                                            <div class="breadcrumb"><a href="{{ route('job_request.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show', $val->category_id)}}">{{ $val->mProductChildCategory->name }}</a></div>
+                                                            <div class="draw"><p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p></div>
+                                                            <div class="single"><span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span></div>
+                                                            <p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
+                                                            <p>{{date('Y/m/d', strtotime($val->created_at))}}</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="single">
-                                                        <span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
-                                                    </div>
-                                                </div>
-                                                <p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
-                                                <p class="" style="position: absolute; bottom: 0; right: 0;">{{date('Y/m/d', strtotime($val->created_at))}}</p>
-                                            </div>
-                                        </li>
-                                        @endforeach
+                                                </li>
+                                            @endforeach
                                         @endif
                                     </ul>
                                     {{ $job_requests->fragment('job-request')->links() }}
