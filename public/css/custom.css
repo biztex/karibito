@@ -1043,10 +1043,17 @@
 	}
 }
 
-/*add 中澤 20220705 スキルページ */
 .mypageUl03 li {
 	position: relative;
 	padding-right: 60px;
+}
+
+.mypageUl03 li span {
+	word-break: break-all;
+}
+
+.mypageDuties p {
+	word-break: break-all;
 }
 
 .mypageUl03 li .mypageCtrl {
@@ -1690,6 +1697,10 @@ img.moreRecommendListImg {
 	.other_user .mypagePortfolioUl {
 		gap: 30px 20px;
 	}
+}
+
+.portfolioDtDetail {
+    word-break: break-all;
 }
 
 /* 他ポートフォリオ一覧 */
