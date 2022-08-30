@@ -24,7 +24,7 @@
                                 <p>{!!$news->content!!}</p>
                             </div>
                         </div>
-                        <div class="supportNewsBtn"><a href="javascript:history.back();">一覧へ戻る</a></div>
+                        <div class="supportNewsBtn"><a href="{{ route('news.index') }}">一覧へ戻る</a></div>
                     </div>
                 </div>
             </div><!-- /#contents -->
