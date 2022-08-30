@@ -61,7 +61,7 @@
 														<a href="{{ route('product.edit',$val->id) }}">編集する</a>
 														<form method="post" action="{{ route('product.destroy', $val->id ) }}">
 															@csrf @method('delete')
-															<p class="linkdel"><input type="submit" class="full" value="削除"></p>
+															<p class="linkdel"><input type="submit" class="full" value="削除"  onclick='return confirm("削除してもよろしいですか？");'></p>
 														</form>
 													</div>
 												</div>
@@ -107,7 +107,7 @@
 														<a href="{{ route('job_request.edit',$val->id) }}">編集する</a>
 														<form method="post" action="{{ route('job_request.destroy', $val->id ) }}">
 															@csrf @method('delete')
-															<p class="linkdel"><input type="submit" class="full" value="削除"></p>
+															<p class="linkdel"><input type="submit" class="full" value="削除"  onclick='return confirm("削除してもよろしいですか？");'></p>
 														</form>
 													</div>
 												</div>
