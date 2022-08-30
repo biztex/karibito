@@ -15,7 +15,10 @@
         <span class ="data">エリア： {{ App\Models\Prefecture::find($product->prefecture_id)->name }} </span>
         @endif
         <span class="data">販売数：@if(!is_null($product->number_of_sale)){{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}@endif</span>
-        <span class="data">投稿日：{{$product->created_at->diffForHumans()}}
+        <span class="data">投稿日：{{ date('Y年n月j日', strtotime($product->created_at)) }}({{$product->created_at->diffForHumans()}})
+        @if (!$product->created_at == $product->updated_at)
+            <span class="data">更新日：{{ date('Y年n月j日', strtotime($product->updated_at)) }}({{$product->updated_at->diffForHumans()}})
+        @endif
     </div>
     <h2><span class="word-break">{{$product->title}}</span></h2>
 </div>

@@ -105,8 +105,10 @@ class JobRequestController extends Controller
     public function show(JobRequest $job_request)
     {
         $user = User::find($job_request->user_id);
+        $deadline = new Carbon(date("Y-m-d",strtotime("$job_request->application_deadline")));
+        $today = new Carbon('today');
 
-        return view('job_request.show',compact('job_request','user'));
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today'));
     }
 
     /**
