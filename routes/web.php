@@ -66,6 +66,9 @@ use App\Http\Controllers\Web\Mypage\PortfolioController;
 Route::get('sample', function () {
     return view('sample');
 });
+Route::fallback(function() {
+    return response()->view('errors.404', [], 404);
+});
 Route::middleware('update_latest_login_datetime')->group(function () {
 
     // 画面組込中
