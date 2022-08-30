@@ -10,16 +10,19 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
+use App\Services\ChatroomService;
 use App\Http\Requests\JobRequestController\DraftRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
 
 class JobRequestController extends Controller
 {
     private $job_request_service;
+    private $chatroom_service;
 
-    public function __construct(JobRequestService $job_request_service)
+    public function __construct(JobRequestService $job_request_service, ChatroomService $chatroom_service)
     {
         $this->job_request_service = $job_request_service;
+        $this->chatroom_service = $chatroom_service;
     }
 
     /**
@@ -155,6 +158,8 @@ class JobRequestController extends Controller
     public function destroy(JobRequest $job_request)
     {
         $job_request->delete(); // データ論理削除
+        $this->chatroom_service->deleteJobRequest($job_request);
+
         \Session::put('flash_msg','リクエストを削除しました');
 
         if ($job_request->is_draft == JobRequest::NOT_DRAFT) {

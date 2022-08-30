@@ -297,7 +297,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->middleware('can:chatroom.evaluation.complete,chatroom')->name('evaluation.complete'); // 評価完了
 
             // 支払い
-            Route::middleware('can:purchase,proposal')->group(function () {
+            Route::middleware('deleted_service','can:purchase,proposal')->group(function () {
                 Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
                 Route::post('purchase/{proposal}','purchaseConfirm')->name('purchase.confirm'); // 確認画面
                 Route::post('purchased/{proposal}','purchased')->name('purchased');

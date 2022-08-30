@@ -3,35 +3,36 @@
         <p class="sideHd">掲載内容</p>
         <div class="sideUl01">
 
-        @if($chatroom->reference_type === 'App\Models\Product')
-            <div class="publicate">
-                <div class="cont">
-                    @if(isset($chatroom->reference->productImage[0]))
-                        <p class="img"><img src="{{ asset('/storage/'.$chatroom->reference->productImage[0]->path)}}" alt="" style="width: 75px;height: 62.5px;object-fit: cover;"></p>
-                    @else
-                        <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
-                    @endif
-                    <p class="txt">{{ $chatroom->reference->title }}</p>
+            @if($chatroom->reference === null)
+                <div style="padding:15px; font-weight:100;">この商品は削除されました</div>
+            @elseif($chatroom->reference_type === 'App\Models\Product')
+                <div class="publicate">
+                    <div class="cont">
+                        @if(isset($chatroom->reference->productImage[0]))
+                            <p class="img"><img src="{{ asset('/storage/'.$chatroom->reference->productImage[0]->path)}}" alt="" style="width: 75px;height: 62.5px;object-fit: cover;"></p>
+                        @else
+                            <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
+                        @endif
+                        <p class="txt">{{ $chatroom->reference->title }}</p>
+                    </div>
+                    <div class="amount">
+                        <p>希望報酬額</p>
+                        <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
+                    </div>
                 </div>
-                <div class="amount">
-                    <p>希望報酬額</p>
-                    <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
+            @else
+                <div class="publicate">
+                    <div class="cont">
+                        <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
+                        <p class="txt">{{ $chatroom->reference->title }}</p>
+                    </div>
+                    <div class="amount">
+                        <p>予算額</p>
+                        <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
+                    </div>
                 </div>
-            </div>
-        @else
-            <div class="publicate">
-                <div class="cont">
-                    <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
-                    <p class="txt">{{ $chatroom->reference->title }}</p>
-                </div>
-                <div class="amount">
-                    <p>予算額</p>
-                    <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
-                </div>
-            </div>
 
-        @endif
-
+            @endif
         </div>
 
         <div class="functeBtns">
@@ -53,32 +54,34 @@
     </div>
 </aside>
 
-<div class="hide"><!-- #fancybox_proposal -->
-    <div id="fancybox_proposal" class="fancyboxWrap">
-        <form id="form" action="{{ route('chatroom.proposal', $chatroom->id) }}" method="POST">
-        @csrf
-            <p class="fancyboxHd">掲載内容の提案</p>
-            <div class="fancyboxCont">
-                <div class="fancyboxProposal">
-                    <ul class="contactForm">
-                        <li>
-                            <p><span class="th">商品名</span><br>{{ $chatroom->reference->title }}</p>
-                        </li>
-                        <li>
-                            <div class="amount">
-                                <p>希望報酬額</p>
-                                <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
-                            </div>
-                            @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                            <p class="th">提供価格</p>
-                            <p class="budget"><input type="text" name="price" placeholder="0" autofocus value="{{old('price')}}"></p>
-                        </li>
-                    </ul>
+@if($chatroom->reference !== null)
+    <div class="hide"><!-- #fancybox_proposal -->
+        <div id="fancybox_proposal" class="fancyboxWrap">
+            <form id="form" action="{{ route('chatroom.proposal', $chatroom->id) }}" method="POST">
+            @csrf
+                <p class="fancyboxHd">掲載内容の提案</p>
+                <div class="fancyboxCont">
+                    <div class="fancyboxProposal">
+                        <ul class="contactForm">
+                            <li>
+                                <p><span class="th">商品名</span><br>{{ $chatroom->reference->title }}</p>
+                            </li>
+                            <li>
+                                <div class="amount">
+                                    <p>希望報酬額</p>
+                                    <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
+                                </div>
+                                @error('price')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                <p class="th">提供価格</p>
+                                <p class="budget"><input type="text" name="price" placeholder="0" autofocus value="{{old('price')}}"></p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="functeBtns">
-                <input type="submit" class="orange loading-disabled" value="この内容で商品を提案する">
-            </div>
-        </form>
-    </div>
-</div><!-- /#fancybox_proposal -->
+                <div class="functeBtns">
+                    <input type="submit" class="orange loading-disabled" value="この内容で商品を提案する">
+                </div>
+            </form>
+        </div>
+    </div><!-- /#fancybox_proposal -->
+@endif
