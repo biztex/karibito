@@ -1,6 +1,7 @@
 <x-layout>
 <x-parts.post-button/>
-    <article>
+<x-parts.flash-msg/>
+<article>
         <div id="breadcrumb">
             <div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　>　

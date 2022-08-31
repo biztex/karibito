@@ -90,18 +90,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id !== $to_user->id;
         });
 
-        // Productからやりとり
-        // 自分のサービスからは交渉へ進めない
-        Gate::define('start.chatroom.product', function (User $user, Product $product) {
-            return $user->id !== $product->user_id ;
-        });
-
-        // JobRequestからやりとり
-        // 自分のサービスからは交渉へ進めない
-        Gate::define('start.chatroom.job.request', function (User $user, JobRequest $job_request) {
-            return $user->id !== $job_request->user_id ;
-        });
-
         // 自分のやりとり
         // 購入者か提供者が自分でないとアクセスできない
         Gate::define('my.chatroom', function (User $user, Chatroom $chatroom) {
@@ -186,5 +174,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('survey', function (User $user, Chatroom $chatroom) {
             return $user->id === $chatroom->buyer_user_id || $user->id === $chatroom->seller_user_id;
         });
+
+         // 商品の削除 一旦保留いらなくなった場合削除してください(寺岡)
+         // 商品が1回以上購入されていたら削除できなくなるゲート
+        // Gate::define('deletable', function (User $user, Product $product) {
+        //     return Chatroom::numberOfSold($product->id) === 0;
+        // });
     }
 }
