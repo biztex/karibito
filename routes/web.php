@@ -66,6 +66,9 @@ use App\Http\Controllers\Web\Mypage\PortfolioController;
 Route::get('sample', function () {
     return view('sample');
 });
+Route::fallback(function() {
+    return response()->view('errors.404', [], 404);
+});
 Route::middleware('update_latest_login_datetime')->group(function () {
 
     // 画面組込中
@@ -104,7 +107,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::post('can_call',[UserProfileController::class, 'updateCanCall'])->name('can_call.update');
 
             // スキル・経歴・職務
-            Route::middleware('can:identify')->group(function () {
+            // Route::middleware('can:identify')->group(function () {
                 Route::get('resume',[ResumeController::class, 'show'])->name('resume.show');
 
                 // スキル
@@ -122,11 +125,12 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 // 職務
                 Route::get('job',[JobController::class, 'create'])->name('job.create');
                 Route::post('job',[JobController::class, 'store'])->name('job.store');
-            });
 
-            // ポートフォリオ
-            Route::resource('portfolio', PortfolioController::class);
+                // ポートフォリオ
+                Route::resource('portfolio', PortfolioController::class);
+            // });
 
+            
             // お知らせ一覧表示(UserNotification)
             Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
             // お知らせ一覧表示(UserNotification)
@@ -205,7 +209,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         // 商品登録
         Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
             // Route::get('/index/{category}', 'showCategory')->name('show.category');
-            Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
+            Route::middleware(['can:my.product,product'/* , 'can:identify' */])->group(function () {
                 Route::get('{product}/edit', 'edit')->name('edit');
                 Route::post('{product}/update', 'update')->name('update');
                 Route::post('post/{product}/edit', 'postEdit')->name('post.edit')->middleware('is_ban');
@@ -214,7 +218,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('{product}/preview','updatePreview')->name('update.preview');
                 Route::post('{product}/draft','updateDraft')->name('update.draft');
             });
-            Route::middleware('can:identify')->group(function () {
+            // Route::middleware('can:identify')->group(function () {
                 Route::get('create', 'create')->name('create')->middleware('is_ban');
                 Route::post('post/create', 'postCreate')->name('post.create');
                 Route::post('store', 'store')->name('store');
@@ -222,12 +226,12 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('preview', 'preview')->name('preview');
                 Route::post('post/store/preview', 'storePreview')->name('store.preview');
                 Route::view('thanks', 'product.thanks')->name('thanks');
-            });
+            // });
         });
 
         // リクエスト
         Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
-            Route::middleware(['can:my.job.request,job_request', 'can:identify'])->group(function () {
+            Route::middleware(['can:my.job.request,job_request'/* , 'can:identify' */])->group(function () {
                 Route::get('{job_request}/edit','edit')->name('edit')->middleware('is_ban');
                 Route::post('{job_request}/update','update')->name('update');
                 Route::post('post/{job_request}/edit', 'postEdit')->name('post.edit');
@@ -236,7 +240,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('{job_request}/preview','updatePreview')->name('update.preview');
                 Route::post('{job_request}/draft','updateDraft')->name('update.draft');
             });
-            Route::middleware('can:identify')->group(function () {
+            // Route::middleware('can:identify')->group(function () {
                 Route::get('create','create')->name('create')->middleware('is_ban');
                 Route::post('post/create', 'postCreate')->name('post.create');
                 Route::post('store','store')->name('store');
@@ -244,7 +248,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('preview','preview')->name('preview');
                 Route::post('post/store/preview','storePreview')->name('store.preview');
                 Route::view('thanks', 'job_request.thanks')->name('thanks');
-            });
+            // });
         });
 
         // 秘訣

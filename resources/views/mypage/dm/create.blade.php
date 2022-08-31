@@ -39,7 +39,7 @@
 								<div class="item">
 									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="evaluation">
-										<textarea name="text" placeholder="依頼する内容を入力してください" class="templateText">{{ old('text') }}</textarea>
+										<textarea name="text" placeholder="本文を入力してください" class="templateText">{{ old('text') }}</textarea>
 										<input type="hidden" name="to_user_id" value="{{ $user->id }}">
 									</div>
 									<p class="taR">3000</p>
