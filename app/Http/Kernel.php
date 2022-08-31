@@ -71,5 +71,7 @@ class Kernel extends HttpKernel
         'is_ban' => \App\Http\Middleware\BanAccount::class,
         'update_latest_login_datetime' => \App\Http\Middleware\UpdateLatestLoginDatetime::class,
         'exists_target_user_profile' =>\App\Http\Middleware\ExistsTargetUserProfile::class,
+        'my.product.start.chatroom' => \App\Http\Middleware\MyProductStartChatroom::class,
+        'my.job_request.start.chatroom' => \App\Http\Middleware\MyJobRequestStartChatroom::class
     ];
 }

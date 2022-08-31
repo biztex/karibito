@@ -90,18 +90,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id !== $to_user->id;
         });
 
-        // Productからやりとり
-        // 自分のサービスからは交渉へ進めない
-        Gate::define('start.chatroom.product', function (User $user, Product $product) {
-            return $user->id !== $product->user_id ;
-        });
-
-        // JobRequestからやりとり
-        // 自分のサービスからは交渉へ進めない
-        Gate::define('start.chatroom.job.request', function (User $user, JobRequest $job_request) {
-            return $user->id !== $job_request->user_id ;
-        });
-
         // 自分のやりとり
         // 購入者か提供者が自分でないとアクセスできない
         Gate::define('my.chatroom', function (User $user, Chatroom $chatroom) {
