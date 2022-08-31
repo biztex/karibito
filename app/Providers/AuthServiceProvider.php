@@ -186,5 +186,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('survey', function (User $user, Chatroom $chatroom) {
             return $user->id === $chatroom->buyer_user_id || $user->id === $chatroom->seller_user_id;
         });
+
+         // 商品の削除 一旦保留いらなくなった場合削除してください(寺岡)
+         // 商品が1回以上購入されていたら削除できなくなるゲート
+        // Gate::define('deletable', function (User $user, Product $product) {
+        //     return Chatroom::numberOfSold($product->id) === 0;
+        // });
     }
 }
