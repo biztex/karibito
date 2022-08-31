@@ -8,9 +8,9 @@
 					<p>知識・スキル・経験を商品化マッチングプラットフォーム！</p>
 					<div class="btnTeams">
 						<a href="{{ route('home') }}" class="blue">サービスを探す</a>
-						@can('identify')
+						{{-- @can('identify') --}}
 							<a href="{{ route('post') }}" class="yellow">サービスを投稿する</a>
-						@endcan
+						{{-- @endcan --}}
 					</div>
 				</div>
 			</div>
