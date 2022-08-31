@@ -36,10 +36,10 @@
 						<h3>SNSやメールでチケットをシェアする</h3>
 						<div class="sns">
                             <div id="fb-root"></div>
-							<a href="http://www.facebook.com/share.php?u={{ session('url') }}"><img src="img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
-							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
-							<a href="https://twitter.com/share?url={{ session('url') }}&text={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのサービスをシェア&hashtags=karibito" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
-							<a href="mailto:?subject=カリビトのサービスをシェア&body={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア {{  session('url') }}" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
+							<a href="http://www.facebook.com/share.php?u={{ session('url') }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
+							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="/img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
+							<a href="https://twitter.com/share?url={{ session('url') }}&text={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのサービスをシェア&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
+							<a href="mailto:?subject=カリビトのサービスをシェア&body={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア {{  session('url') }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a>
 						</div>
 						<form>
 							<table>

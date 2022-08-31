@@ -116,7 +116,7 @@
 					renderer: 'svg',
 					loop: false,
 					autoplay: true,
-					path: 'heart_action.json'
+					path: '/heart_action.json'
 				});
 			}
 		});

@@ -87,7 +87,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $all_products = Product::getUser($product->user_id)->orderBy('created_at', 'desc')->get();
+        // $all_products = Product::getUser($product->user_id, $product->id)->orderBy('created_at', 'desc')->get();
+        $all_products = Product::getUserOtherProduct($product->user_id, $product->id)->orderBy('created_at', 'desc')->get();
 
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
 

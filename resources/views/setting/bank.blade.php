@@ -96,8 +96,7 @@
 														@error('type')<div class="alert alert-danger">{{ $message }}</div>@enderror
 														<div class=" radioChoice">
 																<input type="radio" name="type" value="{{ App\Models\BankAccount::TYPE_ORDINARY }}" @if(old('type') == App\Models\BankAccount::TYPE_ORDINARY) checked @endif>
-																<span class="credit-card-info-number" style="margin-right:80px;">{{ App\Models\BankAccount::BANK_TYPE[App\Models\BankAccount::TYPE_ORDINARY] }}</span>
-
+																<span class="credit-card-info-number">{{ App\Models\BankAccount::BANK_TYPE[App\Models\BankAccount::TYPE_ORDINARY] }}</span><br>
 																<input type="radio" name="type" value="{{ App\Models\BankAccount::TYPE_CURRENT }}" @if(old('type') == App\Models\BankAccount::TYPE_CURRENT) checked @endif>
 																<span class="credit-card-info-number">{{ App\Models\BankAccount::BANK_TYPE[App\Models\BankAccount::TYPE_CURRENT] }}</span>
 														</div>
@@ -107,7 +106,7 @@
 													<th>口座番号</th>
 													<td>
 														@error('bank_account_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
-														<div class="mypageEditInput"><input type="tell" name="bank_account_number" value="{{ old('bank_account_number') }}"></div>
+														<div class="mypageEditInput"><input type="tel" name="bank_account_number" value="{{ old('bank_account_number') }}"></div>
 													</td>
 												</tr>  
                                                 <tr>
