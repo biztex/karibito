@@ -262,12 +262,12 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
 
-            Route::middleware(['my.product.start.chatroom', 'is_ban'])->group(function () {
+            Route::middleware(['product.start.chatroom', 'is_ban'])->group(function () {
                 Route::get('product/{product}','newProduct')->name('new.product'); // productからの交渉する
                 Route::post('product/{product}', 'createProduct')->name('create.product'); // productからのstart
             });
 
-            Route::middleware(['my.job_request.start.chatroom', 'is_ban'])->group(function () {
+            Route::middleware(['job_request.start.chatroom', 'is_ban'])->group(function () {
                 Route::get('job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestから交渉する
                 Route::post('job_request/{job_request}', 'createJobRequest')->name('create.job_request'); // job_requestからのstart
             });

@@ -105,10 +105,12 @@ class JobRequestController extends Controller
     public function show(JobRequest $job_request)
     {
         $user = User::find($job_request->user_id);
+        $deadline = new Carbon(date("Y-m-d",strtotime("$job_request->application_deadline")));
+        $today = new Carbon('today');
 
         $requested = Chatroom::requested($job_request->id);
 
-        return view('job_request.show',compact('job_request','user', 'requested'));
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested'));
     }
 
     /**
