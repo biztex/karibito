@@ -29,6 +29,11 @@
                 <a tabindex="-1" class="full" style="margin-bottom: 4px">交渉画面へ進む</a>
                 <span>期限切れのリクエストです。ユーザーにDMでお問い合わせください。</span>
             </div>
+        @elseif ($requested)
+                <div class="functeBtns">
+                    <a tabindex="-1" class="full">交渉画面へ進む</a>
+                    <span style="font-size: 0.8em;">この商品は売り切れています。<br>ユーザーにDMでお問い合わせください。</span>
+                </div>
         @else
             <div class="functeBtns">
                 <a href="{{ route('chatroom.new.job_request', $job_request->id ) }}" class="orange full">交渉画面へ進む</a>

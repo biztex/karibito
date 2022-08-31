@@ -95,11 +95,9 @@ class ProductController extends Controller
 
         $evaluation_counts = $this->evaluation_service->countEvaluations($product->user_id);
 
-        // $chatroom_status = Chatroom::where('reference_id', $product->id)->pluck('status')->first();
-
         $number_of_sold = Chatroom::numberOfSold($product->id);
 
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', /* 'chatroom_status',  */'number_of_sold'));
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold'));
     }
 
     /**
