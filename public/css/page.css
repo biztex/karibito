@@ -6202,6 +6202,13 @@ select.searchSelect {
 	margin-bottom: 10px;
 }
 
+.blogDtOtherBtn a.followB {
+	color: #ffffff;
+    background-color: #158ACC;
+	border-color: #158ACC;
+	margin-bottom: 10px;
+}
+
 .blogAll a {
 	display: flex;
 	justify-content: center;
@@ -6736,6 +6743,11 @@ select.searchSelect {
 }
 
 .mypageP01 .blogDtOtherBtn a.followA {
+	margin-bottom: 0px;
+	margin-left: 12px;
+}
+
+.mypageP01 .blogDtOtherBtn a.followB {
 	margin-bottom: 0px;
 	margin-left: 12px;
 }
