@@ -170,6 +170,7 @@ class ProductController extends Controller
             $product = $this->product_service->storeDraftProduct($request->all());
             $this->product_service->storeAdditionalOption($request->all(), $product->id);
             $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
@@ -199,6 +200,7 @@ class ProductController extends Controller
 
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 
@@ -218,7 +220,9 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
-        return view('product.preview',compact('request','user'));
+        $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+
+        return view('product.preview',compact('request','user', 'iframe_urls'));
     }
 
     public function postCreate(Request $request)
@@ -249,7 +253,9 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
-        return view('product.update_preview',compact('request','user', 'product'));
+        $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+
+        return view('product.update_preview',compact('request','user', 'product', 'iframe_urls'));
     }
 
     /**
@@ -263,6 +269,7 @@ class ProductController extends Controller
             $product = $this->product_service->storeProduct($request->all());
             $this->product_service->storeAdditionalOption($request->all(), $product->id);
             $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
@@ -284,6 +291,7 @@ class ProductController extends Controller
             $this->product_service->updateProduct($request->all(), $product);
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 

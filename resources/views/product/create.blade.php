@@ -287,7 +287,7 @@
                                         @error('youtube_link.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{ old('youtube_link.'.$num, $product_question) }}">
+                                                <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{ old('youtube_link.'.$num, $link) }}">
                                             </div>
                                             <div>
                                                 <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>

@@ -174,6 +174,23 @@ class ProductService
         }
     }
 
+    /**
+     * 動画を変換
+     */
+    public function changeYoutubeLink(array $request)
+    {
+        foreach($request as $val) {
+            if (strpos($val, "watch") != false) {
+                $video_id = substr($val, (strpos($val, "=")+1));
+            } else {
+                $video_id = substr($val, (strpos($val, "youtu.be/")+9));
+            }
+            $iframe_url = 'https://www.youtube.com/embed/' . $video_id;
+            $iframe_urls[] = $iframe_url;
+        }
+        return $iframe_urls;
+    }
+
 
     /**
      * Base64エンコードされたデータをファイルに変換
