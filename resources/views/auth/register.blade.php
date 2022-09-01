@@ -1,6 +1,6 @@
 <x-layout>
 	<article>
-		<body id="register" class="none-modal>
+		<body id="register" class="none-modal">
 			
 			<div id="contents" class="oneColumnPage02">
 				<div class="inner">
