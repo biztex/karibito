@@ -156,7 +156,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(UserJob::class);
     }
-    
+
     public function dmroom()
     {
         return $this->hasMany(Dmroom::class);
@@ -174,7 +174,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Evaluation::class, 'target_user_id');
     }
-    
+
     public function payments()
     {
         return $this->hasMany(Payment::class);
@@ -195,4 +195,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Chatroom::class, 'seller_user_id');
     }
 
+    public function userFollows()
+    {
+        return $this->hasMany(UserFollow::class, 'following_user_id');
+    }
 }
