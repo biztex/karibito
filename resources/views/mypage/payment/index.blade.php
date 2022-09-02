@@ -57,6 +57,16 @@
                                             </div>
                                         </li>
                                     @endforeach
+
+										<li>
+											<div class="box">
+												<div class="cont">
+													<p class="date">2022年8月30日</p>
+													<p class="txt">タイトル</p>
+												</div>
+												<div class="price-back"><span>返金</span>9,999円</div>
+											</div>
+										</li>
 							    
                                 {{ $withdrawals->fragment('withdrawal')->links() }}
 									
