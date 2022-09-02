@@ -987,7 +987,7 @@
 
 @media screen and (min-width: 768px) {
 	.other_user#wrapper {
-		padding-top: 178px;
+		padding-top: 125px;
 	}
 
 	.other_user #header {
@@ -1843,4 +1843,12 @@ img.moreRecommendListImg {
 		margin: 0 9px 0 0;
 		width: 168px !important;
 	}
+}
+.paymentUl01 .price-back span {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 3px 5px;
+    color: #fff;
+    background-color: #FCAA00;
+    margin-right: 10px;
 }
