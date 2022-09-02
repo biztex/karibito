@@ -259,11 +259,13 @@
                         </div> --}}
                     </div>
 
+                    @auth
                     {{-- @can('identify') --}}
                         <div class="right">
                             <a href="{{ route('post') }}">投稿する</a>
                         </div>
                     {{-- @endcan --}}
+                    @endauth
                 </div>
             </div>
         </div>

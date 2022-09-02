@@ -36,6 +36,7 @@
 
                 <div class="fancyPersonTable">	
                     <dl class="">
+						<p style="font-size:12px;">※ニックネームは公開されます。</p>
                         <dt>ニックネーム</dt>
                         @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <dd><input type="text" name="name" value="{{old('name',\Auth::user()->name)}}"></dd>
@@ -48,6 +49,7 @@
                             <div class="alert alert-danger" style="padding-bottom:0;">{{$errors->first('last_name')}}</div>
                         @endif
                     </dl>
+                    <dl style="margin:0;"><p style="font-size:12px;">※本人認証に利用されるものと同じ姓名でご記入ください。</p></dl>
 
                     @if(Auth::user()->userProfile->is_identify == 0)
                         <dl class=" inlineFlex">

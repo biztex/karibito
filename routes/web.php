@@ -103,7 +103,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('delete_icon', [IconController::class, 'delete'])->name('icon.delete');
             Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
             Route::get('identification',[IdentificationController::class, 'index']);
-            Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+            Route::post('identification',[IdentificationController::class, 'upload'])->name('identification');
             Route::post('can_call',[UserProfileController::class, 'updateCanCall'])->name('can_call.update');
 
             // スキル・経歴・職務
@@ -137,6 +137,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::middleware(['can:my.user.notification,user_notification'])->group(function () {
                 Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
             });
+
+            // 評価一覧
+            Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
             // クーポン
             Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
@@ -469,7 +472,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
         Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
     });
-    Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
     
     
