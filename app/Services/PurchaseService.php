@@ -43,7 +43,7 @@ class PurchaseService
     public function getCommission(Proposal $proposal): int
     {
         $m_commission_rate = MCommissionRate::nowRate(); // 現在の手数料を取得
-        $commission = $proposal->price * $m_commission_rate->rate / 100;
+        $commission = round($proposal->price * $m_commission_rate->rate / 100);
 
         return $commission;
     }
