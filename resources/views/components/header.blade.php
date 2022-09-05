@@ -284,7 +284,7 @@
                 </div>
             </div>
         </div> --}}
-        
+
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
