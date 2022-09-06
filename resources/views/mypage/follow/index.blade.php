@@ -33,7 +33,6 @@
 								<li><a href="#tab_box02">フォロワー</a></li>
 							</ul>
 							<div class="tabBox is_active" id="tab_box01">
-                                {{ $followings->links() }}
 								<ul class="friendsUl01">
                                     @foreach ($followings as $following)
                                     <li>
@@ -59,7 +58,6 @@
                                 {{ $followings->links() }}
 							</div>
 							<div class="tabBox" id="tab_box02">
-                                {{ $followeds->links() }}
 								<ul class="friendsUl01">
 									@foreach ($followeds as $followed)
                                     <li>
