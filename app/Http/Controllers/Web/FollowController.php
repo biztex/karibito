@@ -16,8 +16,8 @@ class FollowController extends Controller
      */
     public function index()
     {
-        $followings = UserFollow::where('followed_user_id', \Auth::user()->id)->get();
-        $followeds = UserFollow::where('following_user_id', \Auth::user()->id)->get();
+        $followings = UserFollow::where('followed_user_id', \Auth::user()->id)->paginate(10);
+        $followeds = UserFollow::where('following_user_id', \Auth::user()->id)->paginate(10);
         return view('mypage.follow.index', compact('followings', 'followeds'));
     }
 

@@ -18,11 +18,11 @@
 						<div class="friendsTop">
 							<ul>
 								<li>
-									<p class="number">{{ count($followings) }}</p>
+									<p class="number">{{ $followings->total() }}</p>
 									<p class="txt">フォロー中</p>
 								</li>
 								<li>
-									<p class="number">{{ count($followeds) }}</p>
+									<p class="number">{{ $followeds->total() }}</p>
 									<p class="txt">フォロワー</p>
 								</li>
 							</ul>
@@ -33,6 +33,7 @@
 								<li><a href="#tab_box02">フォロワー</a></li>
 							</ul>
 							<div class="tabBox is_active" id="tab_box01">
+                                {{ $followings->links() }}
 								<ul class="friendsUl01">
                                     @foreach ($followings as $following)
                                     <li>
@@ -55,8 +56,10 @@
 									</li>
                                     @endforeach
 								</ul>
+                                {{ $followings->links() }}
 							</div>
 							<div class="tabBox" id="tab_box02">
+                                {{ $followeds->links() }}
 								<ul class="friendsUl01">
 									@foreach ($followeds as $followed)
                                     <li>
@@ -79,6 +82,7 @@
 									</li>
                                     @endforeach
 								</ul>
+                                {{ $followeds->links() }}
 							</div>
 						</div>
 					</div>
