@@ -1852,3 +1852,17 @@ img.moreRecommendListImg {
     background-color: #FCAA00;
     margin-right: 10px;
 }
+.mypageShare p {
+    margin-bottom: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 6px;
+    background-color: #F854B1;
+    box-shadow: 0 6px 0 #c60d7c;
+    position: relative;
+    padding: 7px 30px;
+}
