@@ -109,8 +109,9 @@ class JobRequestController extends Controller
         $today = new Carbon('today');
 
         $requested = Chatroom::requested($job_request->id);
+        $url = $this->job_request_service->getURL($job_request->id);
 
-        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested'));
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url'));
     }
 
     /**

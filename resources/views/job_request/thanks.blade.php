@@ -36,28 +36,15 @@
 						<h3>SNSやメールでチケットをシェアする</h3>
 						<div class="sns">
                             <div id="fb-root"></div>
-							<a href="http://www.facebook.com/share.php?u={{ session('url') }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
-							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="/img/mypage/ico_line.svg" alt=""></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
+							<a href="http://www.facebook.com/share.php?u={{ session('url') }}" target="_blank"><img src="/img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
+							<a href="https://social-plugins.line.me/lineit/share?url={{ session('url') }}"><img src="/img/mypage/ico_line.svg" alt="" target="_blank"></a>{{-- href="https://social-plugins.line.me/lineit/share?url={{URL}}" --}}
 							<a href="https://twitter.com/share?url={{ session('url') }}&text={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a>{{-- href="https://twitter.com/share?url={{URL}}&text={{本文}}&hashtags={{ハッシュタグ}}" --}}
 							<a href="mailto:?subject=カリビトのリクエストをシェア&body={{ session('product_title') }} %20%7C%20 {{ session('name') }} %20%7C%20 カリビトのリクエストをシェア {{  session('url') }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a>
 						</div>
-						<form>
-							<table>
-								<tr>
-									<th>あなたの招待コードURL</th>
-									<td>
-										<div class="copy">
-											<input type="text" class="url" id="copyInput" value="https://1111111">
-											<span class="btn" onclick="copy()">コピーする</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th>あなたの招待コード</th>
-									<td><input type="text" class="small" value="a8358d0dj1j"></td>
-								</tr>
-							</table>
-						</form>
+						
+						{{-- 招待コード --}}
+						<x-parts.invitation-code/>
+
 					</div>
 					<div class="serviceThanksLinks">
 					@if(substr(str_replace(url(''), "", $_SERVER['HTTP_REFERER']), 0, 4) == '/job')

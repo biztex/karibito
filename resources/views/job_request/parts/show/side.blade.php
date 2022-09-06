@@ -45,4 +45,3 @@
     <x-parts.box-seller :user='$user'/>
 
 </aside>
-<x-parts.share-modal/>

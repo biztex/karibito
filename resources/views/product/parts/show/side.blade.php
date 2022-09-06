@@ -38,4 +38,3 @@
     <x-parts.box-seller :user='$product->user'/>
 
 </aside>
-<x-parts.share-modal/>

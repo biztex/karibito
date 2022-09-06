@@ -98,7 +98,10 @@ class ProductController extends Controller
 
         $number_of_sold = Chatroom::numberOfSold($product->id);
 
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold'));
+        $url = $this->product_service->getURL($product->id);
+
+
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url'));
     }
 
     /**
