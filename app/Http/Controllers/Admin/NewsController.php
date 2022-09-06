@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\News\StoreRequest;
 use App\Models\News;
 use App\Services\NewsService;
+use App\Services\UserNotificationService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,12 @@ class NewsController extends Controller
 {
 
     private $news_service;
+    private $user_notification_service;
 
-    public function __construct(NewsService $news_service)
+    public function __construct(NewsService $news_service, UserNotificationService $user_notification_service)
     {
         $this->news_service = $news_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -50,7 +53,7 @@ class NewsController extends Controller
     public function store(StoreRequest $request)
     {
         $this->news_service->storeNews($request->all());
-        $this->news_service->storeUserNotification($request->all());
+        $this->user_notification_service->storeUserNotificationNews($request->all());
 
         return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを投稿しました');
     }
