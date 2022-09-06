@@ -12,7 +12,7 @@ class UserNotificationSettingService
 
     public function updateSetting(array $params, $id)
     {
-        $columns = ['is_like', 'is_posting', 'is_fav', 'is_arrival', 'is_news', 'is_promo',];
+        $columns = ['is_like', 'is_news', 'is_message', 'is_posting', 'is_fav'];
 
         $setting = UserNotificationSetting::find($id);
 

@@ -61,9 +61,9 @@
 					</div>
 					<div class="serviceThanksLinks">
 					@if(substr(str_replace(url(''), "", $_SERVER['HTTP_REFERER']), 0, 4) == '/job')
-						<p class="checkGuideOriginal" target="_blank"><a href="{{route('publication',['#job-request'])}}">掲載内容一覧</a></p>
+						<p class="checkGuideOriginal"><a href="{{route('publication',['#job-request'])}}">掲載内容一覧</a></p>
 					@else
-					    <p class="checkGuideOriginal" target="_blank"><a href="{{route('publication')}}">掲載内容一覧</a></p>
+					    <p class="checkGuideOriginal"><a href="{{route('publication')}}">掲載内容一覧</a></p>
 					@endif
 					</div>
 					<div class="postLinks">
