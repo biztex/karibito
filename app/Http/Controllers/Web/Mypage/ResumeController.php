@@ -18,22 +18,6 @@ class ResumeController extends Controller
         //
     }
 
-    // public function skillCreate()
-    // {
-    //     return view('resume.skill_create');
-    // }
-
-
-    // public function careerCreate()
-    // {
-    //     return view('resume.career_create');
-    // }
-
-    // public function jobCreate()
-    // {
-    //     $jobs = \Auth::user()->userJob;
-    //     return view('resume.job_create', compact('jobs'));
-    // }
     /**
      * Show the form for creating a new resource.
      *

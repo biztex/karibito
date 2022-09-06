@@ -1,6 +1,7 @@
 <x-layout>
 <x-parts.post-button/>
-    <article>
+<x-parts.flash-msg/>
+<article>
         <div id="breadcrumb">
             <div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　>　
@@ -74,31 +75,31 @@
     }
     moreload.init();
 
-    // modal open sns share
-		$(".specialtyBtn .share").on("click", function() {
-			const $overlay = $(".overlayDetail");
-			$overlay.css('display', 'block');
+        // modal open sns share
+        $(".specialtyBtn.share").on("click", function() {
+            const $overlay = $(".overlayDetail");
+            $overlay.css('display', 'block');
 
-			$(".modal").removeClass('hidden');
+            $(".modal").removeClass('hidden');
 
-			const windowHeight = $(window).height();
-			const modalBoxHeight = $(".modal__box").innerHeight();
-			const topPosition = ((windowHeight - modalBoxHeight) / 2) - 66;
-			$(".modal__close").css('top', `${topPosition}px`);
-		})
+            const windowHeight = $(window).height();
+            const modalBoxHeight = $(".modal__box").innerHeight();
+            const topPosition = ((windowHeight - modalBoxHeight) / 2) - 66;
+            $(".modal__close").css('top', `${topPosition}px`);
+        })
 
-		const closeModal = function() {
-			$(".modal").addClass('hidden');
-			$(".overlayDetail").css('display', 'none');
-		};
+        const closeModal = function() {
+            $(".modal").addClass('hidden');
+            $(".overlayDetail").css('display', 'none');
+        };
 
-		$(".overlayDetail").on("click", function() {
-			closeModal();
-		})
+        $(".overlayDetail").on("click", function() {
+            closeModal();
+        })
 
-		$(".modal__close").on('click', function() {
-			closeModal();
-		});
+        $(".modal__close").on('click', function() {
+            closeModal();
+        });
 
 		// お気に入りクリック挙動
 		$(".detailStyle .title .favorite").on("click", function() {
@@ -115,7 +116,7 @@
 					renderer: 'svg',
 					loop: false,
 					autoplay: true,
-					path: 'heart_action.json'
+					path: '/heart_action.json'
 				});
 			}
 		});

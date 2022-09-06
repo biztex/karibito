@@ -1,6 +1,7 @@
 <x-layout>
 <x-parts.post-button/>
-	<article>
+<x-parts.flash-msg/>
+<article>
     	<div id="breadcrumb">
 			<div class="inner">
 
@@ -26,6 +27,9 @@
 						@include('job_request.parts.show.side')
 
 					</div>
+
+					@include('job_request.parts.show.share')
+
 				</div><!--inner02-->
 			</form>
         </div><!--contents-->

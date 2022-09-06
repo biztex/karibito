@@ -6,11 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserProfile;
-use App\Models\Prefecture;
-use App\Libraries\Age;
 use App\Services\AdminUserSearchService;
 use App\Mail\Admin\NotifyBanMail;
 use App\Mail\Admin\CancelNotifyBanMail;
+use App\Mail\User\ApproveMail;
 
 class UserController extends Controller
 {
@@ -106,24 +105,23 @@ class UserController extends Controller
     /**
      * 身分証明証の承認をする
      */
-    public function approve($id)
+    public function approve(User $user)
     {
-        $user = UserProfile::firstWhere('user_id',$id);
-        $user->fill(['is_identify' => 1])->save();
+        $user->userProfile->fill(['is_identify' => 1])->save();
 
-        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの本人確認を承認しました！";
+        \Mail::to($user->email)->send(new ApproveMail($user));
+        $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認を承認しました！";
         return back()->with('flash_msg',$flash_msg);
     }
 
     /**
      * 身分証明証の承認を取り消す
      */
-    public function revokeApproval($id)
+    public function revokeApproval(User $user)
     {
-        $user = UserProfile::firstWhere('user_id',$id);
-        $user->fill(['is_identify' => 0])->save();
+        $user->userProfile->fill(['is_identify' => 0])->save();
 
-        $flash_msg = "id:" . $user->user_id . " " . $user->first_name . $user->last_name . "さんの本人確認の承認を取り消しました！";
+        $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認の承認を取り消しました！";
         return back()->with('flash_msg',$flash_msg);
 
     }
@@ -131,35 +129,29 @@ class UserController extends Controller
     /**
      * 利用制限をする
      */
-    public function limitAccount($id)
+    public function limitAccount(User $user)
     {
-        $user_profile = UserProfile::firstWhere('user_id',$id);
-
-        $user_profile->fill([
+        $user->userProfile->fill([
             'is_ban' => 1,
             'is_banned_at' => now()
         ])->save();
 
-        $flash_msg = "id:" . $user_profile->user_id . " " . $user_profile->first_name . $user_profile->last_name . "さんの利用を制限しました！";
+        \Mail::to($user->email)->send(new NotifyBanMail($user->userProfile));
 
-        \Mail::to($user_profile->user->email)->send(new NotifyBanMail($user_profile));
-
+        $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの利用を制限しました！";
         return back()->with('flash_msg',$flash_msg);
     }
 
     /**
      * 利用制限を解除する
      */
-    public function cancelLimitAccount($id)
+    public function cancelLimitAccount(User $user)
     {
-        $user_profile = UserProfile::firstWhere('user_id',$id);
+        $user->userProfile->fill(['is_ban' => 0])->save();
 
-        $user_profile->fill(['is_ban' => 0])->save();
+        \Mail::to($user->email)->send(new CancelNotifyBanMail($user->userProfile));
 
-        $flash_msg = "id:" . $user_profile->user_id . " " . $user_profile->first_name . $user_profile->last_name . "さんの利用制限を解除しました！";
-
-        \Mail::to($user_profile->user->email)->send(new CancelNotifyBanMail($user_profile));
-
+        $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの利用制限を解除しました！";
         return back()->with('flash_msg',$flash_msg);
     }
 

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Mail\User\IdentificationUploadMail;
 use App\Models\Specialty;
 use App\Http\Requests\UserProfile\StoreRequest;
 use Carbon\Carbon;
@@ -90,9 +91,11 @@ class UserProfileService
     {
         $user_profile = \Auth::user()->userProfile;
         $user_profile->identification_path = $request->file('identification_path')->store('identification_paths','public');
+        $user_profile->save();
 
-        return $user_profile->save();
+        \Mail::send(new IdentificationUploadMail());
     }
+
 
     /**
      * ユーサープロフィール

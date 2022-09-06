@@ -31,8 +31,12 @@
 									</li>
 								</ul>
 								<div class="bankTransferBtnWrap">
-									<a href="" class="bankTransferBtn">ポイントに交換する</a>
-									<a href="" class="bankTransferBtn">振り込み申請をする</a>
+									{{-- <a href="" class="bankTransferBtn">ポイントに交換する</a> --}}
+									@if(Auth::user()->bankAccount !== null)
+										<a href="" class="bankTransferBtn">振り込み申請をする</a>
+									@else
+										<a href="{{ route('setting.bank.edit') }}" onclick='return confirm("振込口座の登録が必要です");' class="bankTransferBtn">振り込み申請をする</a>
+									@endif
 								</div>
 								<div class="bankTransferAttention">
 									<p>※終了した取引のみ売り上げに反映されます。</p>

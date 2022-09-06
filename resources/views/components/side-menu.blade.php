@@ -37,7 +37,7 @@
                 <li><a href="{{ route('showWithdrawForm') }}" class="">退会</a></li>
             </ul>
         </div>
-        @can('identify')
+        {{-- @can('identify') --}}
             <div class="sideItem">
                 <p class="sideHd">出品者向け</p>
                 <ul class="sideUl01">
@@ -49,7 +49,7 @@
                     <li><a href="{{ route('transfer.index') }}" class="">売上管理・振込申請</a></li>
             </ul>
             </div>
-        @endcan
+        {{-- @endcan --}}
         <div class="sideItem">
             <p class="sideHd">カリビトについて</p>
             <ul class="sideUl01">

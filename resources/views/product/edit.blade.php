@@ -337,7 +337,7 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            @elseif($product->youtube_link) {{--この分岐が何のためにあるのか忘れてしまいました--}}
+                            @elseif($product->youtube_link)
                                 @foreach($product->youtube_link as $num => $youtube_link)
                                     <div class="js-youtubeForm">
                                         <p class="th js-link">動画(YouTubeのみ) {{$num + 1}}</p>

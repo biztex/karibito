@@ -29,6 +29,22 @@ class Chatroom extends Model
         self::STATUS_CANCELED => 'キャンセル'
     ];
 
+    public function scopeNumberOfSold($query, $product_id): int
+    {
+        return $query->where('reference_type', 'App\Models\Product')
+            ->where('reference_id', $product_id)
+            ->whereIn('status', [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION, self::STATUS_SELLER_EVALUATION, self::STATUS_COMPLETE, self::STATUS_CANCELED])
+            ->count();
+    }
+
+    public function scopeRequested($query, $job_request_id): bool
+    {
+        return $query->where('reference_type', 'App\Models\JobRequest')
+            ->where('reference_id', $job_request_id)
+            ->whereIn('status', [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION, self::STATUS_SELLER_EVALUATION, self::STATUS_COMPLETE, self::STATUS_CANCELED])
+            ->exists();
+    }
+
     /**
      * 進行中のやりとり
      * status キャンセル・完了以外
