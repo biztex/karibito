@@ -17,6 +17,7 @@ use App\Services\PurchaseService;
 use App\Services\EvaluationService;
 use App\Services\PaymentService;
 use App\Services\PointService;
+use App\Services\UserNotificationService;
 use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
@@ -34,9 +35,11 @@ class ChatroomController extends Controller
     private $evaluation_service;
     private $point_service;
     private $coupon_service;
+    private $user_notification_service;
+
     private readonly PaymentService $payment_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service, CouponService $coupon_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -46,6 +49,7 @@ class ChatroomController extends Controller
         $this->payment_service = $payment_service;
         $this->point_service = $point_service;
         $this->coupon_service = $coupon_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -177,7 +181,8 @@ class ChatroomController extends Controller
      */
     public function message(MessageRequest $request, Chatroom $chatroom)
     {
-        $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+        $chatroom_message = $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+        $this->user_notification_service->storeUserNotification($request->all(), $chatroom_message);
 
         return back();
     }

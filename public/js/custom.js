@@ -67,14 +67,6 @@ $(function () {
 		$('html').removeClass('fancybox-lock');
 	})
 
-	// カリビト安心サポートリンク別ウィンドウで開く
-	$(document).ready(function(){
-		$('.checkGuideOriginal a').click(function(){
-		window.open(this.href,'');
-		return false;
-		});
-	});
-
 	// リクエストのページリンククリック時、リンク先でもリクエストを自動的に表示する
 	// URLのハッシュ値が #job-request の場合
 	var hash = $(location).prop('hash');
@@ -87,10 +79,7 @@ $(function () {
 	} else if (hash == "#pity") {
 		$('#box03').trigger('click');
 	}
-	
 
-
-	
 	// 提供登録画像プレビュー / localStorageに画像一時保存
 	// 画像に変更あれば'delete'/'insert'のいずれかを配列の番号とともに格納していく
 	for (let i = 0; i < 10; i++) {
