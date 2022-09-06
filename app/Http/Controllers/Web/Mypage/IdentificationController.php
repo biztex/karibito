@@ -17,7 +17,12 @@ class IdentificationController extends Controller
 
     }
 
-    public function update(UpdateIdentificationRequest $request)
+    public function index()
+    {
+        return back();
+    }
+
+    public function upload(UpdateIdentificationRequest $request)
     {
            $this->user_profile_service->updateIdentification($request);
 

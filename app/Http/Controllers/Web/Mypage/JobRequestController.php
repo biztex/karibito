@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Models\JobRequest;
 use App\Models\Product;
-use App\Models\Prefecture;
+use App\Models\Chatroom;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -105,8 +105,13 @@ class JobRequestController extends Controller
     public function show(JobRequest $job_request)
     {
         $user = User::find($job_request->user_id);
+        $deadline = new Carbon(date("Y-m-d",strtotime("$job_request->application_deadline")));
+        $today = new Carbon('today');
 
-        return view('job_request.show',compact('job_request','user'));
+        $requested = Chatroom::requested($job_request->id);
+        $url = $this->job_request_service->getURL($job_request->id);
+
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url'));
     }
 
     /**

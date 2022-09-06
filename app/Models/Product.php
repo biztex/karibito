@@ -105,6 +105,17 @@ class Product extends Model
     }
 
     /**
+     * 特定ユーザーの提供、かつ今表示されていないものを取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeGetUserOtherProduct($query, $user, $product_id)
+    {
+        return $query->publish()->where('user_id', $user)->where('id', '<>', $product_id);
+    }
+
+    /**
      * 公開かつ下書きでない
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query

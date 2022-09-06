@@ -34,6 +34,12 @@ class DraftRequest extends FormRequest
             'is_call' => 'nullable | integer | boolean',
             'number_of_sale' => ' nullable | integer',
             'status' => ' nullable | integer',
+            'option_name.*' => 'nullable | string | max:400',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'nullable | max:400',
+            'answer.*' => 'nullable | max:400',
+            'youtube_link.*' => 'nullable | string | max:255 | url'
         ];
     }
 

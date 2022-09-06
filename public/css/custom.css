@@ -987,7 +987,7 @@
 
 @media screen and (min-width: 768px) {
 	.other_user#wrapper {
-		padding-top: 178px;
+		padding-top: 125px;
 	}
 
 	.other_user #header {
@@ -1043,10 +1043,17 @@
 	}
 }
 
-/*add 中澤 20220705 スキルページ */
 .mypageUl03 li {
 	position: relative;
 	padding-right: 60px;
+}
+
+.mypageUl03 li span {
+	word-break: break-all;
+}
+
+.mypageDuties p {
+	word-break: break-all;
 }
 
 .mypageUl03 li .mypageCtrl {
@@ -1692,6 +1699,10 @@ img.moreRecommendListImg {
 	}
 }
 
+.portfolioDtDetail {
+    word-break: break-all;
+}
+
 /* 他ポートフォリオ一覧 */
 .other-user-portfolio .mypagePortfolioUl02 .editLi {
 	position: relative;
@@ -1832,4 +1843,26 @@ img.moreRecommendListImg {
 		margin: 0 9px 0 0;
 		width: 168px !important;
 	}
+}
+.paymentUl01 .price-back span {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 3px 5px;
+    color: #fff;
+    background-color: #FCAA00;
+    margin-right: 10px;
+}
+.mypageShare p {
+    margin-bottom: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 6px;
+    background-color: #F854B1;
+    box-shadow: 0 6px 0 #c60d7c;
+    position: relative;
+    padding: 7px 30px;
 }

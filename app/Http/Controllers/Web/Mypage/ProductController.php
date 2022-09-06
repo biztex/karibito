@@ -87,7 +87,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $all_products = Product::getUser($product->user_id)->orderBy('created_at', 'desc')->get();
+        // $all_products = Product::getUser($product->user_id, $product->id)->orderBy('created_at', 'desc')->get();
+        $all_products = Product::getUserOtherProduct($product->user_id, $product->id)->orderBy('created_at', 'desc')->get();
 
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
 
@@ -95,9 +96,12 @@ class ProductController extends Controller
 
         $evaluation_counts = $this->evaluation_service->countEvaluations($product->user_id);
 
-        $chatroom_status = Chatroom::where('reference_id', $product->id)->pluck('status')->first();
+        $number_of_sold = Chatroom::numberOfSold($product->id);
 
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'chatroom_status'));
+        $url = $this->product_service->getURL($product->id);
+
+
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url'));
     }
 
     /**
@@ -169,6 +173,7 @@ class ProductController extends Controller
             $product = $this->product_service->storeDraftProduct($request->all());
             $this->product_service->storeAdditionalOption($request->all(), $product->id);
             $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
@@ -198,6 +203,7 @@ class ProductController extends Controller
 
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 
@@ -217,7 +223,9 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
-        return view('product.preview',compact('request','user'));
+        $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+
+        return view('product.preview',compact('request','user', 'iframe_urls'));
     }
 
     public function postCreate(Request $request)
@@ -248,7 +256,9 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
-        return view('product.update_preview',compact('request','user', 'product'));
+        $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+
+        return view('product.update_preview',compact('request','user', 'product', 'iframe_urls'));
     }
 
     /**
@@ -262,6 +272,7 @@ class ProductController extends Controller
             $product = $this->product_service->storeProduct($request->all());
             $this->product_service->storeAdditionalOption($request->all(), $product->id);
             $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
@@ -283,6 +294,7 @@ class ProductController extends Controller
             $this->product_service->updateProduct($request->all(), $product);
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 

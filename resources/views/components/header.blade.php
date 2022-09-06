@@ -86,9 +86,9 @@
                                             @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
                                                 <div class="navMypageUl">
                                                     <a href="{{ route('mypage') }}">マイページ</a>
-                                                    @can('identify')
+                                                    {{-- @can('identify') --}}
                                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                                    @endcan
+                                                    {{-- @endcan --}}
                                                     <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
                                                     <a href="{{ route('setting.index') }}">設定</a>
                                                 </div>
@@ -114,10 +114,10 @@
                                 <div class="navMypageUl link01">
                                     {{-- <a href="{{ route('mypage') }}">マイページ</a> --}}
                                     <a href="#">お気に入り</a>
-                                    @can('identify')
+                                    {{-- @can('identify') --}}
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
                                         <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </div>
                             @endauth
 
@@ -259,11 +259,13 @@
                         </div> --}}
                     </div>
 
-                    @can('identify')
+                    @auth
+                    {{-- @can('identify') --}}
                         <div class="right">
                             <a href="{{ route('post') }}">投稿する</a>
                         </div>
-                    @endcan
+                    {{-- @endcan --}}
+                    @endauth
                 </div>
             </div>
         </div>
@@ -282,7 +284,7 @@
                 </div>
             </div>
         </div> --}}
-        
+
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
@@ -291,14 +293,14 @@
                         <p class="linkTxt">ホーム</p>
                     </a>
                 </div>
-                @can('identify')
+                {{-- @can('identify') --}}
                     <div class="spFixedItem">
                         <a href="{{ route('post') }}" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
                             <p class="linkTxt">投稿</p>
                         </a>
                     </div>
-                @endcan
+                {{-- @endcan --}}
                 <div class="spFixedItem">
                     <a href="{{ route('chatroom.index') }}" class="spFixedLink">
                         <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>

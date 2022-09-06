@@ -23,8 +23,8 @@
 						{{-- プロフィール --}}
 						@include('mypage.show.profile')
 						
-
-						{{-- <div class="mypageShare"><a href="#">お友達を紹介して300pt GETする</a></div> --}}
+						{{-- 友達紹介 --}}
+						@include('mypage.show.share')
 
 						{{-- お知らせ --}}
 						@include('mypage.show.notification')
@@ -46,3 +46,34 @@
 	</body>
 </article>
 </x-layout>
+<script type="text/javascript">
+    $(function () {
+	// modal open sns share
+		$(".mypageShare").on("click", function() {
+			const $overlay = $(".overlayDetail");
+			$overlay.css('display', 'block');
+
+			$(".modal").removeClass('hidden');
+
+			const windowHeight = $(window).height();
+			const modalBoxHeight = $(".modal__box").innerHeight();
+			const topPosition = ((windowHeight - modalBoxHeight) / 2) - 66;
+			$(".modal__close").css('top', `${topPosition}px`);
+		})
+
+		const closeModal = function() {
+			$(".modal").addClass('hidden');
+			$(".overlayDetail").css('display', 'none');
+		};
+
+		$(".overlayDetail").on("click", function() {
+			closeModal();
+		})
+
+		$(".modal__close").on('click', function() {
+			closeModal();
+		});
+
+		
+		});
+</script>

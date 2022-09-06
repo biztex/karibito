@@ -20,7 +20,6 @@ class UserNotificationSettingController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request);
         $id = Auth::user()->userNotificationSetting->id;
         $this->notification_setting_service->updateSetting($request->all(), $id);
 
