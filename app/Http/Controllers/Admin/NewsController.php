@@ -52,8 +52,8 @@ class NewsController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $this->news_service->storeNews($request->all());
-        $this->user_notification_service->storeUserNotificationNews($request->all());
+        $news = $this->news_service->storeNews($request->all());
+        $this->user_notification_service->storeUserNotificationNews($news);
 
         return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを投稿しました');
     }

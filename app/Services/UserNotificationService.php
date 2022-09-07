@@ -6,8 +6,8 @@ use App\Models\UserNotification;
 use App\Models\User;
 
 use App\Jobs\SendNewNewsNotificationMail;
-use App\Mail\NewsRegisterMail;
 use App\Models\Chatroom;
+use App\Models\News;
 
 class UserNotificationService
 {
@@ -21,44 +21,54 @@ class UserNotificationService
     }
 
     // チャットメッセージが来たら通知する
-    public function storeUserNotification(array $request, $chatroom_message)
+    public function storeUserNotificationMessage(Chatroom $chatroom)
     {
-        $receive_user = User::find($chatroom_message->to_user_id); //メッセージを受け取ったユーザー
-        $send_user = User::find($chatroom_message->user_id); //メッセージを送ったユーザー
+        $receive_user = User::find($chatroom->to_user_id); //メッセージを受け取ったユーザー
 
-        $user_notification = new UserNotification;
-        $user_notification->user_id = $receive_user->id;
-        if(empty($receive_user->userNotificationSetting->is_news)) {
-            $user_notification->is_notification = 0;
+        if($receive_user->id == $chatroom->sellerUser->id)
+        {
+            $send_user_id = $chatroom->buyerUser->id; //メッセージを送ったユーザーid
         } else {
-            $user_notification->is_notification = 1;
+            $send_user_id = $chatroom->sellerUser->id; //メッセージを送ったユーザーid
+        }
+        $send_user = User::find($send_user_id);
+
+        $user_notification_contents = [
+            'user_id' => $receive_user->id,
+            'title' => $send_user->name.'さんからメッセージが届きました。',
+        ];
+        if(empty($receive_user->userNotificationSetting->is_news)) {
+            $user_notification_contents['is_notification'] = 0;
+        } else {
+            $user_notification_contents['is_notification'] = 1;
         }
 
-        $user_notification->title = $send_user->name.'さんからメッセージが届きました。';
         // $user_notification->content = $request['text'];内容はチャットの詳細を見るためなしにする・
 
-        $user_notification->save();
-        // SendNewNewsNotificationMail::dispatch($user_notification);
+        $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
+        // SendNewNewsNotificationMail::dispatch($user_notification);;メール処理は一旦飛ばす
     }
 
 
     // ニュースのみ全員に送るため例外
-    public function storeUserNotificationNews(array $params)
+    public function storeUserNotificationNews(News $news)
     {
         $users_id = User::where('deleted_at', null)->get('id');
 
         foreach($users_id as $user_id){
-            $user_notification = new UserNotification;
-            $user_notification->user_id = $user_id->id;
+            $user_notification_contents = [
+                'user_id' => $user_id->id,
+                'title' => $news->title,
+                'content' => $news->content,
+            ];
 
             if(empty($user_id->userNotificationSetting->is_news)) {
-                $user_notification->is_notification = 0;
+                $user_notification_contents['is_notification'] = 0;
             } else {
-                $user_notification->is_notification = 1;
+                $user_notification_contents['is_notification'] = 1;
             }
-            $user_notification->title = $params['title'];
-            $user_notification->content = $params['content'];
-            $user_notification->save();
+
+            $user_notification = $news->userNotifications()->create($user_notification_contents);
             SendNewNewsNotificationMail::dispatch($user_notification);
         }
     }

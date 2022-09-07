@@ -182,7 +182,7 @@ class ChatroomController extends Controller
     public function message(MessageRequest $request, Chatroom $chatroom)
     {
         $chatroom_message = $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
-        $this->user_notification_service->storeUserNotification($request->all(), $chatroom_message);
+        $this->user_notification_service->storeUserNotificationMessage($chatroom);
 
         return back();
     }

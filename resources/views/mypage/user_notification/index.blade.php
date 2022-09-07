@@ -19,8 +19,12 @@
 									<div class="pl10">カリビトからのお知らせがありません。</div>
 								@else
 									@foreach($user_notifications as $user_notification)
-									<li>
-										<a href="{{route('user_notification.show', $user_notification->id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
+										<li>
+											@if ($user_notification->reference_type === 'App\Models\Chatroom')
+												<a href="{{route('chatroom.show', $user_notification->reference_id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
+											@else
+												<a href="{{route('user_notification.show', $user_notification->id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
+											@endif
 											<dl>
 												<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
 												<dd>
@@ -30,8 +34,8 @@
 													</p>
 												</dd>
 											</dl>
-										</a>
-									</li>
+											</a>
+										</li>
 									@endforeach
 								@endif
 							</ul>

@@ -28,4 +28,12 @@ class UserNotification extends Model
             return $textFormat->generateLinkFromSentence($value);
         }
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function reference()
+    {
+        return $this->morphTo(__FUNCTION__, 'reference_type', 'reference_id');
+    }
 }
