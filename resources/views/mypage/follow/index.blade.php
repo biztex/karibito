@@ -30,7 +30,7 @@
 						<div class="subPagesTab tabWrap">
 							<ul class="tabLink">
 								<li><a href="#tab_box01" class="is_active">フォロー中</a></li>
-								<li><a href="#tab_box02">フォロワー</a></li>
+								<li><a href="#tab_box02" id="box02">フォロワー</a></li>
 							</ul>
 							<div class="tabBox is_active" id="tab_box01">
 								<ul class="friendsUl01">
@@ -55,7 +55,7 @@
 									</li>
                                     @endforeach
 								</ul>
-                                {{ $followings->links() }}
+                                {{ $followings->fragment('')->links() }}
 							</div>
 							<div class="tabBox" id="tab_box02">
 								<ul class="friendsUl01">
@@ -80,7 +80,7 @@
 									</li>
                                     @endforeach
 								</ul>
-                                {{ $followeds->links() }}
+                                {{ $followeds->fragment('followed')->links() }}
 							</div>
 						</div>
 					</div>
