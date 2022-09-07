@@ -42,6 +42,7 @@ use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\DmroomController;
 use App\Http\Controllers\Web\KaribitoSurveyController;
+use App\Http\Controllers\Web\FollowController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -205,7 +206,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('job_request',function () { return redirect()->route('publication');});
         Route::get('product',function () { return redirect()->route('publication');});
         Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
-        
+
         // 提供・リクエスト 下書き一覧
         Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
 
@@ -349,6 +350,13 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::post('{dmroom}',[DmroomController::class,'message'])->middleware('is_ban')->name('message');
             Route::get('create/{user}',[DmroomController::class,'create'])->middleware(['can:not.create.dm,user','is_ban'])->name('create');
         });
+
+        // フォロー・フォロワー
+        Route::prefix('follow')->name('follow.')->group(function () {
+            Route::resource('',FollowController::class, ['only' => 'index']);
+            Route::get('/add/{id}', [FollowController::class, 'addFollow'])->name('add');
+            Route::get('/sub/{id}', [FollowController::class, 'subFollow'])->name('sub');
+        });
     });
     // 提供・リクエストの詳細ページ
     Route::get('product/{product}', [MypageProductController::class, 'show'])->name('product.show');
@@ -473,6 +481,4 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
     });
 
-    
-    
 });
