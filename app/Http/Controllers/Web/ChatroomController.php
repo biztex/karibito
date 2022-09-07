@@ -168,6 +168,7 @@ class ChatroomController extends Controller
         }
 
         $this->chatroom_message_service->isView($chatroom);
+        $this->user_notification_service->isView($chatroom);
 
         return view('chatroom.show', compact('chatroom', 'partner'));
     }
@@ -182,7 +183,7 @@ class ChatroomController extends Controller
     public function message(MessageRequest $request, Chatroom $chatroom)
     {
         $chatroom_message = $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
-        $this->user_notification_service->storeUserNotification($request->all(), $chatroom_message);
+        $this->user_notification_service->storeUserNotificationMessage($chatroom);
 
         return back();
     }

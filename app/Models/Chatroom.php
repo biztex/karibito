@@ -10,6 +10,7 @@ class Chatroom extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $appends = ['to_user_id'];
 
     const STATUS_START = 1;
     const STATUS_PROPOSAL = 2;
@@ -28,6 +29,17 @@ class Chatroom extends Model
         self::STATUS_COMPLETE => '完了',
         self::STATUS_CANCELED => 'キャンセル'
     ];
+
+
+    protected function getToUserIdAttribute()
+    {
+        if($this->chatroomMessages->last()->user_id == $this->sellerUser->id)
+        {
+            return $this->buyer_user_id;
+        } else {
+            return $this->seller_user_id;
+        }
+    }
 
     public function scopeNumberOfSold($query, $product_id): int
     {
@@ -187,4 +199,12 @@ class Chatroom extends Model
     {
         return $this->hasMany(Evaluation::class);
     }   
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function userNotifications()
+    {
+        return $this->morphMany(UserNotification::class, 'reference');
+    }
 }

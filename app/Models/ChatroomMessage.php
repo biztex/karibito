@@ -21,17 +21,6 @@ class ChatroomMessage extends Model
         self::IS_COMPLETE => '購入完了',
     ];
 
-    protected $appends = ['to_user_id'];
-
-    protected function getToUserIdAttribute()
-    {
-        if($this->chatroom->sellerUser->id == $this->user_id)
-        {
-            return $this->chatroom->buyer_user_id;
-        } else {
-            return $this->chatroom->seller_user_id;
-        }
-    }
 
     public function scopeWorked($query)
     {
