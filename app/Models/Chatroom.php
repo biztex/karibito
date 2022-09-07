@@ -33,7 +33,7 @@ class Chatroom extends Model
 
     protected function getToUserIdAttribute()
     {
-        if($this->sellerUser->user_id == $this->chatroomMessages->first()->user_id)
+        if($this->chatroomMessages->last()->user_id == $this->sellerUser->id)
         {
             return $this->buyer_user_id;
         } else {

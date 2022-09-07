@@ -72,4 +72,12 @@ class UserNotificationService
             SendNewNewsNotificationMail::dispatch($user_notification);
         }
     }
+
+    public function isView(Chatroom $chatroom)
+    {
+        UserNotification::where([
+            ['reference_id', '=', $chatroom->id],
+            ['user_id', '=', \Auth::user()->id],
+        ])->update(['is_view' => 1]);
+    }
 }
