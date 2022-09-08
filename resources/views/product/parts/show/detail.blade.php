@@ -3,10 +3,18 @@
         <div class="single">
             <a tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</a>
         </div>
-        <a href="#" class="favorite">
+        <form method="post" action="{{ route('favorite.store', $product->id) }}">
+            @csrf
+        {{-- <a href="{{ route('favorite.create' ) }}" class="favorite">
             <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
             <span>お気に入り</span>
-        </a>
+        </a> --}}
+            <input type="hidden" name="product_id" value="{{$product->id}}">
+            <button type="submit" class="favorite">
+                <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                <span>お気に入り</span>
+            </button>
+        </form>
     </div>
     <div class="datas">
         <span class="data">電話相談の受付：@if(!is_null($product->is_call)) {{ App\Models\Product::IS_CALL[$product->is_call] }} @endif</span>

@@ -67,7 +67,7 @@
                                         </div>
                                     </li>
                                     <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
-                                    <li><a href="#" class="nav02">お気に入り</a></li>
+                                    <li><a href="{{ route('favorite.index') }}" class="nav02">お気に入り</a></li>
                                     <li class="navLink">
                                             @if(empty(Auth::user()->userProfile->icon))
                                                 <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
@@ -113,7 +113,7 @@
                                 <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                 <div class="navMypageUl link01">
                                     {{-- <a href="{{ route('mypage') }}">マイページ</a> --}}
-                                    <a href="#">お気に入り</a>
+                                    <a href="{{ route('favorite.index') }}">お気に入り</a>
                                     {{-- @can('identify') --}}
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
                                         <a href="{{ route('post') }}" class="blueBtn">投稿する</a>

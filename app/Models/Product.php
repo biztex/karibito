@@ -11,6 +11,7 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
+    protected $appends = ['number_of_sold'];
 
     const STATUS_PUBLISH = 1;
 
@@ -57,6 +58,11 @@ class Product extends Model
         self::IS_DRAFT => '下書き',
     ];
 
+
+    protected function getNumberOfSoldAttribute()
+    {
+        return Chatroom::numberOfSold($this->id);
+    }
 
     /**
      * 制限されているユーザーの商品以外を取得
@@ -234,5 +240,13 @@ class Product extends Model
     public function points()
     {
         return $this->morphMany(UserGetPoint::class, 'reference');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'reference');
     }
 }

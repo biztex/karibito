@@ -49,6 +49,7 @@ use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
+use App\Http\Controllers\Web\Mypage\FavoriteController;
 use App\Http\Controllers\Web\Mypage\PortfolioController;
 
 // 管理者用
@@ -129,9 +130,12 @@ Route::middleware('update_latest_login_datetime')->group(function () {
 
                 // ポートフォリオ
                 Route::resource('portfolio', PortfolioController::class);
+
+                // お気に入り
+                Route::get('favorite/index', [FavoriteController::class, 'index'])->name('favorite.index');
+                Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite.store');
             // });
 
-            
             // お知らせ一覧表示(UserNotification)
             Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
             // お知らせ一覧表示(UserNotification)
@@ -185,7 +189,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                     Route::post('bank', 'update')->name('update');
                     Route::delete('bank', 'destroy')->name('destroy');
                 });
-
 
                 // お知らせ機能の設定
                 Route::put('/notification', [UserNotificationSettingController::class, 'update'])->name('notification.update');
