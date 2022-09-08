@@ -3,17 +3,27 @@
         <div class="single">
             <a tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</a>
         </div>
-        <form method="post" action="{{ route('favorite.store', $product->id) }}">
-            @csrf
-        {{-- <a href="{{ route('favorite.create' ) }}" class="favorite">
-            <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
-            <span>お気に入り</span>
-        </a> --}}
-            <input type="hidden" name="product_id" value="{{$product->id}}">
-            <button type="submit" class="favorite">
+        @if (is_null($is_favorite))
+            <form method="post" action="{{ route('favorite.store', $product->id) }}">
+            {{-- <a href="{{ route('favorite.create' ) }}" class="favorite">
                 <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
                 <span>お気に入り</span>
-            </button>
+            </a> --}}
+                <button type="submit" class="favorite">
+                    <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                    <span>お気に入り</span>
+                </button>
+        @else
+            <form method="post" action="{{ route('favorite.delete', $product->id) }}">いいねされている
+                @method('delete')
+                <button type="submit" class="favorite">
+                    <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                    <span>お気に入り</span>
+                </button>
+        @endif
+            <input type="hidden" name="product_id" value="{{$product->id}}">
+            @csrf
+            {{-- 連打防止つける --}}
         </form>
     </div>
     <div class="datas">

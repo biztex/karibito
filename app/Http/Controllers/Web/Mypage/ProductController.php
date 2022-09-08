@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\AdditionalOption;
 use App\Models\Chatroom;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
@@ -98,10 +99,11 @@ class ProductController extends Controller
 
         $number_of_sold = Chatroom::numberOfSold($product->id);
 
+        $is_favorite = Favorite::product()->where('reference_id', $product->id)->first();
+
         $url = $this->product_service->getURL($product->id);
 
-
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url'));
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite'));
     }
 
     /**
