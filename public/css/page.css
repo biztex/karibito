@@ -5733,6 +5733,7 @@ select.searchSelect {
 
 .mypageEditInput input[type='text'],
 .mypageEditInput input[type='button'],
+.mypageEditInput input[type='password'],
 .mypageEditInput select,
 .mypageEditInput textarea {
 	border: 1px solid #DDDDDD;
@@ -6439,6 +6440,7 @@ select.searchSelect {
 		display: flex;
 		justify-content: center;
 		margin-bottom: 10px;
+        word-break: break-all;
 	}
 
 	.configEditDl01 dt {
@@ -6446,6 +6448,10 @@ select.searchSelect {
 		padding-top: 8px;
 		white-space: nowrap;
 	}
+
+    .configEditMail {
+        white-space: normal !important;
+    }
 
 	.configEditDl01 dd {
 		width: 320px;

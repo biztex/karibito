@@ -18,10 +18,7 @@
                                 @csrf
                                 <div class="configEditBox">
                                     <dl class="configEditDl01 text-left">
-                                        <dt>現在のメールアドレス：</dt>
-                                        <dt>
-                                            <div class="align-bottom">{{ Auth::user()->email }}</div>
-                                        </dt>
+                                        <dt class="configEditMail">現在のメールアドレス：{{ Auth::user()->email }}</dt>
                                     </dl>
                                     <dl class="configEditDl01">
                                         <dt>新しいメールアドレス</dt>
