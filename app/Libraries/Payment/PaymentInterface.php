@@ -15,7 +15,7 @@ interface PaymentInterface
      * @param string $currency
      * @return string $charge_id
      */
-    public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string;
+    // public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string;
 
     /**
      * 決済の実行
@@ -24,29 +24,26 @@ interface PaymentInterface
      * @param string $currency
      * @return string charge_id
      */
-    public function createCharge(string $token, int $amount, string $currency): string;
+    // public function createCharge(string $token, int $amount, string $currency): string;
 
     /**
      * 顧客登録
-     * @param string $email
-     * @param string $description
      * @return string $customer_id
      */
-    public function createCustomer(string $email, string $description): string;
+    public function createCustomer(): string;
 
     /**
      * 顧客情報取得
-     * @param string $payjp_customer_id
      * @return string $customer_id
      */
-    public function getCustomer(string $customer_id): string;
+    public function getCustomer(): string;
     
     /**
      * カードトークン発行
      * @param array $params
      * @return string $token
      */
-    public function createToken(array $params): string;
+    // public function createToken(array $params): string;
 
     /**
      * クレカ登録
@@ -54,7 +51,7 @@ interface PaymentInterface
      * @param string $token
      * @return void
      */
-    public function createCard(string $customer_id, string $token);
+    public function createCard(string $customer_id, string $token): void;
 
     /**
      * クレカ情報取得
@@ -62,7 +59,7 @@ interface PaymentInterface
      * @param string $payjp_card_id
      * @return array $card
      */
-    public function getCard(string $customer_id, string $payjp_card_id): object|array;
+    // public function getCard(string $customer_id, string $payjp_card_id): object|array;
 
     /**
      * クレカ一覧取得
@@ -71,7 +68,7 @@ interface PaymentInterface
      * @param int $offset
      * @return array $cards
      */
-    public function getCardList(string $customer_id, int $limit, int $offset): array;
+    public function getCardList(string $customer_id, int $limit): array;
 
     /**
      * クレカ削除
@@ -86,5 +83,5 @@ interface PaymentInterface
      * @param string $payjp_charge_id
      * @return void
      */
-    public function refundPayment(string $payjp_charge_id);
+    // public function refundPayment(string $payjp_charge_id);
 }

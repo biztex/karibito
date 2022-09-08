@@ -18,11 +18,11 @@ class StubPayment implements PaymentInterface
      * @param string $currency
      * @return string $charge_id
      */
-    public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string
-    {
-        Log::info('StubPayment:決済実行完了');
-        return 'ch_' . uniqid();
-    }
+    // public function createCustomerCharge(string $card_id, string $customer_id, int $amount, string $currency): string
+    // {
+    //     Log::info('StubPayment:決済実行完了');
+    //     return 'ch_' . uniqid();
+    // }
     /**
      * 決済の実行
      * @param string $token
@@ -30,11 +30,11 @@ class StubPayment implements PaymentInterface
      * @param string $currency
      * @return string charge_id
      */
-    public function createCharge(string $token, int $amount, string $currency): string
-    {
-        Log::info('StubPayment:決済実行完了');
-        return 'ch_' . uniqid();
-    }
+    // public function createCharge(string $token, int $amount, string $currency): string
+    // {
+    //     Log::info('StubPayment:決済実行完了');
+    //     return 'ch_' . uniqid();
+    // }
 
     /**
      * 顧客登録
@@ -42,7 +42,7 @@ class StubPayment implements PaymentInterface
      * @param string $description
      * @return string customer_id
      */
-    public function createCustomer(string $email = '', string $description = ''): string
+    public function createCustomer(): string
     {
         Log::info('StubPayment:顧客登録完了');
         return 'cus_' . uniqid();
@@ -50,10 +50,9 @@ class StubPayment implements PaymentInterface
 
      /**
      * 顧客情報取得
-     * @param string $payjp_customer_id
      * @return string $customer->id
      */
-    public function getCustomer(string $customer_id = ''): string
+    public function getCustomer(): string
     {
         Log::info('StubPayment:顧客情報取得完了');
         return 'cus_' . uniqid();
@@ -64,11 +63,11 @@ class StubPayment implements PaymentInterface
      * @param array $params
      * @return string $token
      */
-    public function createToken(array $params): string
-    {
-        Log::info('StubPayment:クレカトークン発行');
-        return 'tok_000000000000000000001';
-    }
+    // public function createToken(array $params): string
+    // {
+    //     Log::info('StubPayment:クレカトークン発行');
+    //     return 'tok_000000000000000000001';
+    // }
 
     /**
      * クレカ登録
@@ -76,7 +75,7 @@ class StubPayment implements PaymentInterface
      * @param string $token
      * @return void
      */
-    public function createCard(string $customer_id = '', string $token = '')
+    public function createCard(string $customer_id = '', string $token = ''): void
     {
         Log::info('StubPayment:クレカ登録完了');
     }
@@ -87,20 +86,20 @@ class StubPayment implements PaymentInterface
      * @param string $payjp_card_id
      * @return array $card
      */
-    public function getCard(string $customer_id, string $payjp_card_id): array
-    {
-        Log::info('StubPayment:クレカ情報取得');
+    // public function getCard(string $customer_id, string $payjp_card_id): array
+    // {
+    //     Log::info('StubPayment:クレカ情報取得');
 
-        return [
-            'id' => 'car_000000000000000000001',
-            'brand' => 'Visa',
-            'last4' => '1234',
-            'exp_year' => '2025',
-            'exp_month' => '12',
-            'name' => 'YAMADA TARO',
-            'customer' => 'cus_0000000000000000',
-        ];
-    }
+    //     return [
+    //         'id' => 'car_000000000000000000001',
+    //         'brand' => 'Visa',
+    //         'last4' => '1234',
+    //         'exp_year' => '2025',
+    //         'exp_month' => '12',
+    //         'name' => 'YAMADA TARO',
+    //         'customer' => 'cus_0000000000000000',
+    //     ];
+    // }
 
     /**
      * クレカ一覧取得
@@ -109,7 +108,7 @@ class StubPayment implements PaymentInterface
      * @param int $offset
      * @return array
      */
-    public function getCardList(string $customer_id = '', int $limit = 10, int $offset = 1): array
+    public function getCardList(string $customer_id = '', int $limit = 10): array
     {
         Log::info('StubPayment:クレカ一覧取得');
         return [
@@ -159,8 +158,8 @@ class StubPayment implements PaymentInterface
      * @param string $payjp_charge_id
      * @return void
      */
-    public function refundPayment(string $payjp_charge_id)
-    {
-        Log::info('StubPayment:返金');
-    }
+    // public function refundPayment(string $payjp_charge_id)
+    // {
+    //     Log::info('StubPayment:返金');
+    // }
 }
