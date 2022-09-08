@@ -7,6 +7,7 @@ use App\Models\JobRequest;
 use App\Models\Product;
 use App\Models\Chatroom;
 use App\Models\User;
+use App\Models\Favorite;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
@@ -111,7 +112,9 @@ class JobRequestController extends Controller
         $requested = Chatroom::requested($job_request->id);
         $url = $this->job_request_service->getURL($job_request->id);
 
-        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url'));
+        $is_favorite = Favorite::jobRequest()->where('reference_id', $job_request->id)->first();
+
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite'));
     }
 
     /**

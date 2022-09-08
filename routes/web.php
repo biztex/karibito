@@ -134,6 +134,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 // お気に入り
                 Route::get('favorite/index', [FavoriteController::class, 'index'])->name('favorite.index');
                 Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite.store');
+                Route::delete('favorite', [FavoriteController::class, 'delete'])->name('favorite.delete');
             // });
 
             // お知らせ一覧表示(UserNotification)
