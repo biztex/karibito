@@ -21,7 +21,7 @@
         <div class="sideItem">
             <ul class="sideUl01">
                 <li><a href="{{ route('mypage') }}" class="">マイページ</a></li>
-                <li><a href="/sample/favorite" class="">お気に入り</a></li>
+                <li><a href="{{ route('favorite.index') }}" class="">お気に入り</a></li>
                 <li><a href="{{ route('chatroom.active') }}" class="">進行中の取引</a></li>
                 <li><a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a></li>
                 <li><a href="{{ route('evaluation') }}" class="">評価一覧</a></li>
