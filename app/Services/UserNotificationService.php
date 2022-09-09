@@ -20,6 +20,55 @@ class UserNotificationService
         return $user_notifications;
     }
 
+    // お気に入りしている商品が更新されたら通知する
+    public function storeUserNotificationFavorite($product)
+    {
+        $favorite_users = $product->favorites;
+
+        foreach ($favorite_users as $favorite_user) {
+            $user_notification_contents = [
+                'user_id' => $favorite_user->user_id,
+                'title' => 'あなたがいいねした '.$product->title.'が更新されました。確認してみましょう。',
+            ];
+
+            if(empty($favorite_user->userNotificationSetting->is_fav)) {
+                $user_notification_contents['is_notification'] = 0;
+            } else {
+                $user_notification_contents['is_notification'] = 1;
+            }
+            $user_notification = $product->userNotifications()->create($user_notification_contents);
+            // SendNewNewsNotificationMail::dispatch($user_notification);
+        };
+
+    }
+
+    // いいねがされたら通知する
+    public function storeUserNotificationlike($product)
+    {
+        $login_user = \Auth::user();
+        $product_user = User::find($product->user_id);
+
+        $user_notification = new UserNotification;
+
+        $user_notification = [
+            'user_id' => $product_user->id,
+            'title' => $login_user->name.'さんからいいねが来ました。',
+            'content' => $login_user->name.'さんが'.$product->title.'にいいねをしました。確認してみましょう。', //よう確認
+            'reference_type' => 'App\Models\Favorite',
+            'reference_id' => $product->id,
+        ];
+
+        if(empty($product_user->userNotificationSetting->is_like)) {
+            $user_notification['is_notification'] = 0;
+        } else {
+            $user_notification['is_notification'] = 1;
+        }
+
+        UserNotification::create($user_notification);
+
+        // SendNewNewsNotificationMail::dispatch($user_notification);
+    }
+
     // チャットメッセージが来たら通知する
     public function storeUserNotificationMessage(Chatroom $chatroom)
     {
@@ -37,7 +86,7 @@ class UserNotificationService
             'user_id' => $receive_user->id,
             'title' => $send_user->name.'さんからメッセージが届きました。',
         ];
-        if(empty($receive_user->userNotificationSetting->is_news)) {
+        if(empty($receive_user->userNotificationSetting->is_message)) {
             $user_notification_contents['is_notification'] = 0;
         } else {
             $user_notification_contents['is_notification'] = 1;
@@ -73,10 +122,11 @@ class UserNotificationService
         }
     }
 
-    public function isView(Chatroom $chatroom)
+    // 既読処理
+    public function isView($reference_type)
     {
         UserNotification::where([
-            ['reference_id', '=', $chatroom->id],
+            ['reference_id', '=', $reference_type->id],
             ['user_id', '=', \Auth::user()->id],
         ])->update(['is_view' => 1]);
     }

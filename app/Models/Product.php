@@ -249,4 +249,12 @@ class Product extends Model
     {
         return $this->morphMany(Favorite::class, 'reference');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function userNotifications()
+    {
+        return $this->morphMany(UserNotification::class, 'reference');
+    }
 }

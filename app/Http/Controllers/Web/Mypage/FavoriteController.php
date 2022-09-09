@@ -9,8 +9,20 @@ use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Services\UserNotificationService;
+
+
 class FavoriteController extends Controller
 {
+
+    private $user_notification_service;
+
+    public function __construct(UserNotificationService $user_notification_service)
+    {
+        $this->user_notification_service = $user_notification_service;
+    }
+
+
     public function index()
     {
         $user_product_favorites = Favorite::product()->get();
@@ -24,7 +36,6 @@ class FavoriteController extends Controller
         foreach($user_job_request_favorites as $user_job_request_favorite) {
             $job_requests[] = $user_job_request_favorite->reference;
         };
-
 
         return view('mypage.favorite.index', compact('products', 'job_requests'));
     }
@@ -56,6 +67,7 @@ class FavoriteController extends Controller
         }
 
         $product->favorites()->create($favorites);
+        $this->user_notification_service->storeUserNotificationLike($product);
 
         // フラッシュメッセージ追加
         return redirect()->back()->with('flash_msg', 'お気に入りに追加しました！');
