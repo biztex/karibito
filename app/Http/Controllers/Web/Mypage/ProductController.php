@@ -15,16 +15,19 @@ use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
+use App\Services\UserNotificationService;
 
 class ProductController extends Controller
 {
     private $product_service;
     private $evaluation_service;
+    private $user_notification_service;
 
-    public function __construct(ProductService $product_service, EvaluationService $evaluation_service)
+    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, UserNotificationService $user_notification_service)
     {
         $this->product_service = $product_service;
         $this->evaluation_service = $evaluation_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -101,6 +104,8 @@ class ProductController extends Controller
 
         $is_favorite = Favorite::product()->where('reference_id', $product->id)->first();
 
+        $this->user_notification_service->isView($product);
+
         $url = $this->product_service->getURL($product->id);
 
         return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite'));
@@ -144,6 +149,8 @@ class ProductController extends Controller
 
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
+
+        $this->user_notification_service->storeUserNotificationFavorite($product);
 
         return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
