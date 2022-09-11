@@ -147,12 +147,11 @@ class ProductController extends Controller
             $this->product_service->updateProductQuestion($request->all(), $product);
             $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
+            $this->user_notification_service->storeUserNotificationFavorite($product);
         });
 
-        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first(); //この処理は何か確認
         $url = $this->product_service->getURL($product->id);
-
-        $this->user_notification_service->storeUserNotificationFavorite($product);
 
         return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }

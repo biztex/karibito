@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewsRegisterMail extends Mailable
+class FavoriteRegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,7 +29,7 @@ class NewsRegisterMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('[カリビト]　ニュースが届きました！') //メールタイトル
-        ->text('mail.html.news_register');
+        return $this->subject('[カリビト]　あなたがお気に入りした商品が更新されました！') //メールタイトル
+        ->text('mail.html.favorite_register');
     }
 }

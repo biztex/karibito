@@ -56,7 +56,7 @@ class FavoriteController extends Controller
     // お気に入りを登録
     public function store(Request $request)
     {
-        $favorites = [
+        $favorite_user = [
             'user_id' => \Auth::user()->id,
         ];
 
@@ -66,7 +66,7 @@ class FavoriteController extends Controller
             $product = JobRequest::find($request->job_request_id);
         }
 
-        $product->favorites()->create($favorites);
+        $product->favorites()->create($favorite_user);
         $this->user_notification_service->storeUserNotificationLike($product);
 
         // フラッシュメッセージ追加

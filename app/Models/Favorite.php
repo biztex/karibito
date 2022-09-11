@@ -55,6 +55,13 @@ class Favorite extends Model
         return $query->loginUser()->where('reference_type', 'App\Models\JobRequest');
     }
 
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 
 
