@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Jobs\SendNewNewsNotificationMail;
 use App\Models\Chatroom;
 use App\Models\News;
+use App\Models\UserFollow;
 
 class UserNotificationService
 {
@@ -18,6 +19,34 @@ class UserNotificationService
         $user_notifications = UserNotification::latest()->where('user_id', $user_id)->paginate($i);
 
         return $user_notifications;
+    }
+
+    // 自分がフォローしているユーザーが商品を投稿したら通知する
+    public function storeUserNotificationPost($product)
+    {
+        $followed_user = User::where('id', $product->user_id)->first(); //フォローされている人が取れる
+
+        $follow_users_id = UserFollow::where('following_user_id', $followed_user->id)->pluck('followed_user_id')->toArray();
+
+        $follow_users = User::where('id', $follow_users_id)->get(); //フォローしているユーザー取得
+
+        foreach ($follow_users as $follow_user) {
+            $user_notification_contents = [
+                'user_id' => $follow_user->id,
+                'title' => 'あなたがフォローしている '.$followed_user->name.'さんが新しい投稿をしました。確認してみましょう。',
+                'reference_type' => 'App\Models\UserFollow',
+                'reference_id' => $product->id,
+            ];
+
+            if(empty($follow_user->userNotificationSetting->is_posting)) {
+                $user_notification_contents['is_notification'] = 0;
+            } else {
+                $user_notification_contents['is_notification'] = 1;
+            }
+
+            UserNotification::create($user_notification_contents);
+            // SendNewNewsNotificationMail::dispatch($user_notification);
+        };
     }
 
     // お気に入りしている商品が更新されたら通知する
