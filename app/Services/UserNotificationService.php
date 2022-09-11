@@ -5,7 +5,11 @@ namespace App\Services;
 use App\Models\UserNotification;
 use App\Models\User;
 
+use App\Jobs\SendNewFavoriteNotificationMail;
 use App\Jobs\SendNewNewsNotificationMail;
+use App\Jobs\SendNewLikeNotificationMail;
+use App\Jobs\SendNewPostNotificationMail;
+use App\Jobs\SendNewMessageNotificationMail;
 use App\Models\Chatroom;
 use App\Models\News;
 use App\Models\UserFollow;
@@ -44,8 +48,8 @@ class UserNotificationService
                 $user_notification_contents['is_notification'] = 1;
             }
 
-            UserNotification::create($user_notification_contents);
-            // SendNewNewsNotificationMail::dispatch($user_notification);
+            $user_notification = UserNotification::create($user_notification_contents);
+            SendNewPostNotificationMail::dispatch($user_notification);
         };
     }
 
@@ -60,13 +64,14 @@ class UserNotificationService
                 'title' => 'あなたがいいねした '.$product->title.'が更新されました。確認してみましょう。',
             ];
 
-            if(empty($favorite_user->userNotificationSetting->is_fav)) {
+            if(empty($favorite_user->user->userNotificationSetting->is_fav)) {
                 $user_notification_contents['is_notification'] = 0;
             } else {
                 $user_notification_contents['is_notification'] = 1;
             }
+
             $user_notification = $product->userNotifications()->create($user_notification_contents);
-            // SendNewNewsNotificationMail::dispatch($user_notification);
+            SendNewFavoriteNotificationMail::dispatch($user_notification);
         };
 
     }
@@ -93,9 +98,8 @@ class UserNotificationService
             $user_notification['is_notification'] = 1;
         }
 
-        UserNotification::create($user_notification);
-
-        // SendNewNewsNotificationMail::dispatch($user_notification);
+        $mail_content = UserNotification::create($user_notification);
+        SendNewLikeNotificationMail::dispatch($mail_content);
     }
 
     // チャットメッセージが来たら通知する
@@ -121,14 +125,12 @@ class UserNotificationService
             $user_notification_contents['is_notification'] = 1;
         }
 
-        // $user_notification->content = $request['text'];内容はチャットの詳細を見るためなしにする・
-
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
-        // SendNewNewsNotificationMail::dispatch($user_notification);;メール処理は一旦飛ばす
+        SendNewMessageNotificationMail::dispatch($user_notification);
     }
 
 
-    // ニュースのみ全員に送るため例外
+    // ニュース
     public function storeUserNotificationNews(News $news)
     {
         $users_id = User::where('deleted_at', null)->get('id');
