@@ -8,14 +8,18 @@ use Illuminate\Http\Request;
 use App\Services\PortfolioService;
 use App\Http\Requests\PortfolioController\StoreRequest;
 use App\Http\Requests\PortfolioController\UpdateRequest;
+use App\Services\UserNotificationService;
 
 class PortfolioController extends Controller
 {
     private $portfolio_service;
+    private $user_notification_service;
 
-    public function __construct(PortfolioService $portfolio_service)
+
+    public function __construct(PortfolioService $portfolio_service, UserNotificationService $user_notification_service)
     {
         $this->portfolio_service = $portfolio_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     public function index()
@@ -47,6 +51,7 @@ class PortfolioController extends Controller
         \DB::transaction(function () use ($request) {
         $portfolio = $this->portfolio_service->storePortfolio($request);
         $this->portfolio_service->storePortfolioLink($request->all(), $portfolio->id);
+        $this->user_notification_service->storeUserNotificationPost($portfolio);
         });
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを登録しました！');

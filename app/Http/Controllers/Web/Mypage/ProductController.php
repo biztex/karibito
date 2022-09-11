@@ -79,6 +79,8 @@ class ProductController extends Controller
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
 
+        $this->user_notification_service->storeUserNotificationPost($product);
+
         return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
