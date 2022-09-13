@@ -114,14 +114,8 @@ class CancelController extends Controller
     public function approval(PurchasedCancel $purchased_cancel)
     {
         $payment = $purchased_cancel->purchase->payment;
-        \DB::transaction(function () use ($purchased_cancel, $payment) {
-            $this->purchased_cancel_service->changeStatusComplete($purchased_cancel);
-            $this->purchase_service->isCancel($purchased_cancel->purchase);
-            $this->chatroom_message_service->storePurchasedCancelApprovalMessage($purchased_cancel);
-            $this->chatroom_service->statusChangeCanceled($purchased_cancel->purchase->chatroom);
+        $this->purchased_cancel_service->purchasedCancelComplete($purchased_cancel, $payment);
 
-            $payment = $this->payment_service->refundPayment($payment);
-        });
         return redirect()->route('cancel.complete', $purchased_cancel);
     }
 

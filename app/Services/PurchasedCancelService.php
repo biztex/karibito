@@ -3,10 +3,41 @@
 namespace App\Services;
 
 use App\Models\Purchase;
+use App\Models\Payment;
 use App\Models\PurchasedCancel;
+use App\Services\ChatroomService;
+use App\Services\ChatroomMessageService;
+use App\Services\PaymentService;
 
 class PurchasedCancelService
 {
+    private $chatroom_service;
+    private $chatroom_message_service;
+    private readonly PaymentService $payment_service;
+
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, PaymentService $payment_service)
+    {
+        $this->chatroom_service = $chatroom_service;
+        $this->chatroom_message_service = $chatroom_message_service;
+        $this->payment_service = $payment_service;
+    }
+
+    public function purchasedCancelComplete(PurchasedCancel $purchased_cancel, Payment $payment)
+    {
+        // キャンセルテーブルのステータスを成立に
+        $this->changeStatusComplete($purchased_cancel);
+        // 購入テーブルをキャンセル済に
+        $this->isCancel($purchased_cancel->purchase);
+        // キャンセル成立メッセージ送信
+        $this->chatroom_message_service->storePurchasedCancelApprovalMessage($purchased_cancel);
+        // チャットルームのっステータスをキャンセルに
+        $this->chatroom_service->statusChangeCanceled($purchased_cancel->purchase->chatroom);
+
+        // 決済履歴テーブルにキャンセル履歴を
+        $this->payment_service->refundPayment($payment);
+    }
+
+
     public function storePurchasedCancel(array $request, Purchase $purchase): PurchasedCancel
     {
         $purchased_cancel = new PurchasedCancel();
@@ -37,5 +68,13 @@ class PurchasedCancelService
     public function changeStatusObjection(PurchasedCancel $purchased_cancel)
     {
         $purchased_cancel->fill(['status' => PurchasedCancel::STATUS_OBJECTION])->save();
+    }
+
+    public function isCancel(Purchase $purchase)
+    {
+        $purchase->fill([
+            'is_cancel' => Purchase::IS_CANCEL,
+            'cancel_date' => \Carbon\Carbon::now()    
+            ])->save();
     }
 }

@@ -11,10 +11,16 @@ class Payment extends Model
 
     protected $guarded = ['id'];
 
-    // 対象ユーザーの支払い(返金済は除外)
-    public function scopeWithdrawalUser($query, $user_id)
+    // 対象ユーザーの支払い
+    public function scopeTargetUser($query, $user_id)
     {
-        return $query->notRefunded()->where('user_id', $user_id);
+        return $query->where('user_id', $user_id);
+    }
+
+    // 対象ユーザーの返金
+    public function scopeTargetUserRefund($query, $user_id)
+    {
+        return $query->targetUser($user_id)->where('refunded_at', "!=", null);
     }
 
     // 返金以外
