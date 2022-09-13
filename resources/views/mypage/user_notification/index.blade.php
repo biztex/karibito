@@ -18,7 +18,7 @@
 								@if(empty($user_notifications[0]))
 									<div class="pl10">カリビトからのお知らせがありません。</div>
 								@else
-									@foreach($user_notifications as $user_notification)
+									@foreach($user_notifications as $k => $user_notification)
 										<li>
 											@if ($user_notification->reference_type === 'App\Models\Chatroom')
 												<a href="{{route('chatroom.show', $user_notification->reference_id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
@@ -26,9 +26,8 @@
 												<a href="{{route('product.show', $user_notification->reference_id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
 											@elseif ($user_notification->reference_type === 'App\Models\JobRequest')
 												<a href="{{route('job_request.show', $user_notification->reference_id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
-											@elseif ($user_notification->reference_type === 'App\Models\JobRequest')
-											{{-- どうやって分岐するのか、ユーザーが投稿したものと同じ名前にするとproductがかぶる --}}
-												<a href="{{route('job_request.show', $user_notification->reference_id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
+											@elseif ($user_notification->reference_type === 'App\Models\Portfolio')
+												<a href="{{route('user.portfolio.show', [$portfolio_user_id[$k], $user_notification->reference_id])}}" @if ($user_notification->is_view === 1) class="already" @endif>
 											@else
 												<a href="{{route('user_notification.show', $user_notification->id)}}" @if ($user_notification->is_view === 1) class="already" @endif>
 											@endif

@@ -20,6 +20,14 @@ class UserNotificationController extends Controller
     {
         $user_notifications = $this->user_notification_service->paginate(20);
 
+        foreach($user_notifications as $k => $user_notification) {
+            if($user_notification->reference_type === 'App\Models\Portfolio') {
+                $portfolio_user_id[$k] = $user_notification->reference->user_id;
+            }
+        }
+        if(isset($portfolio_user_id)) {
+            return view('mypage.user_notification.index', compact('user_notifications', 'portfolio_user_id'));
+        }
         return view('mypage.user_notification.index', compact('user_notifications'));
     }
 

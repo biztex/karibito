@@ -7,9 +7,9 @@ use App\Models\User;
 
 use App\Jobs\SendNewFavoriteNotificationMail;
 use App\Jobs\SendNewNewsNotificationMail;
-use App\Jobs\SendNewLikeNotificationMail;
 use App\Jobs\SendNewPostNotificationMail;
-use App\Jobs\SendNewMessageNotificationMail;
+use App\Mail\MessageRegisterMail;
+use App\Mail\LikeRegisterMail;
 use App\Models\Chatroom;
 use App\Models\News;
 use App\Models\UserFollow;
@@ -38,8 +38,6 @@ class UserNotificationService
             $user_notification_contents = [
                 'user_id' => $follow_user->id,
                 'title' => 'あなたがフォローしている '.$followed_user->name.'さんが新しい投稿をしました。確認してみましょう。',
-                'reference_type' => 'App\Models\UserFollow',
-                'reference_id' => $product->id,
             ];
 
             if(empty($follow_user->userNotificationSetting->is_posting)) {
@@ -48,8 +46,10 @@ class UserNotificationService
                 $user_notification_contents['is_notification'] = 1;
             }
 
-            $user_notification = UserNotification::create($user_notification_contents);
+            $user_notification = $product->userNotifications()->create($user_notification_contents);
             SendNewPostNotificationMail::dispatch($user_notification);
+
+            return $followed_user;
         };
     }
 
@@ -73,7 +73,6 @@ class UserNotificationService
             $user_notification = $product->userNotifications()->create($user_notification_contents);
             SendNewFavoriteNotificationMail::dispatch($user_notification);
         };
-
     }
 
     // いいねがされたら通知する
@@ -87,8 +86,8 @@ class UserNotificationService
         $user_notification = [
             'user_id' => $product_user->id,
             'title' => $login_user->name.'さんからいいねが来ました。',
-            'content' => $login_user->name.'さんが'.$product->title.'にいいねをしました。確認してみましょう。', //よう確認
-            'reference_type' => 'App\Models\Favorite',
+            // 'content' => $login_user->name.'さんが'.$product->title.'にいいねをしました。確認してみましょう。',
+            'reference_type' => 'App\Models\Product',
             'reference_id' => $product->id,
         ];
 
@@ -99,7 +98,8 @@ class UserNotificationService
         }
 
         $mail_content = UserNotification::create($user_notification);
-        SendNewLikeNotificationMail::dispatch($mail_content);
+        \Mail::to($product_user->email)->send(new LikeRegisterMail($mail_content));
+        // SendNewLikeNotificationMail::dispatch($mail_content);
     }
 
     // チャットメッセージが来たら通知する
@@ -126,9 +126,8 @@ class UserNotificationService
         }
 
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
-        SendNewMessageNotificationMail::dispatch($user_notification);
+        \Mail::to($receive_user->email)->send(new MessageRegisterMail($user_notification));
     }
-
 
     // ニュース
     public function storeUserNotificationNews(News $news)

@@ -96,6 +96,8 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
+        $this->user_notification_service->storeUserNotificationPost($job_request);
+
         return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
