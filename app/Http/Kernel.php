@@ -72,5 +72,7 @@ class Kernel extends HttpKernel
         'update_latest_login_datetime' => \App\Http\Middleware\UpdateLatestLoginDatetime::class,
         'exists_target_user_profile' =>\App\Http\Middleware\ExistsTargetUserProfile::class,
         'deleted_service' =>\App\Http\Middleware\DeletedService::class,
+        'product.start.chatroom' => \App\Http\Middleware\ProductStartChatroom::class,
+        'job_request.start.chatroom' => \App\Http\Middleware\JobRequestStartChatroom::class
     ];
 }

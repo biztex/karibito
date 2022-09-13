@@ -124,7 +124,7 @@
 						{{ $job_requests->links() }}
 					</div>
 				</div><!-- /#main -->
-				<aside id="side">
+				<aside id="side" class="pc">
 					<h2 class="cate cate02">
 						@if (isset($parent_category_flg))
                             @if ($parent_category_flg === 1)
@@ -133,7 +133,6 @@
                                 {{$child_category->mProductCategory->name}}から探す</h2>
                             @endif
                         @endif
-					</h2>
 					<ul class="links">
 						@if (isset($parent_category_flg))
                             @if ($parent_category_flg === 1)

@@ -8,6 +8,8 @@ use  App\Models\Proposal;
 use  App\Models\Evaluation;
 use  App\Models\Purchase;
 use  App\Models\PurchasedCancel;
+use  App\Models\User;
+use  App\Models\UserNotification;
 
 
 class ChatroomMessageService
@@ -29,7 +31,8 @@ class ChatroomMessageService
             ];
         }
 
-        $chatroom->chatroomMessages()->create($message);
+        $chatroom_message = $chatroom->chatroomMessages()->create($message);
+        return $chatroom_message;
     }
 
     // 提案 chatroom message テーブル

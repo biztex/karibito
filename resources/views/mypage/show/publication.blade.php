@@ -8,7 +8,6 @@
                     <p class="txt">カリビトは、知識・スキル・経験を売り買いできるオンラインマーケットです。<br>あなたの ”得意” や ”経験”
                         を必要としている人がきっといます。<br>カリビトで出品してみませんか？</p>
                     <p class=""><a href="{{route('post')}}" class="more">追加する</a></p>
-
                 </div>
             @else
                 @foreach ($products as $product)

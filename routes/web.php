@@ -42,12 +42,14 @@ use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\DmroomController;
 use App\Http\Controllers\Web\KaribitoSurveyController;
+use App\Http\Controllers\Web\FollowController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
+use App\Http\Controllers\Web\Mypage\FavoriteController;
 use App\Http\Controllers\Web\Mypage\PortfolioController;
 
 // 管理者用
@@ -65,6 +67,9 @@ use App\Http\Controllers\Web\Mypage\PortfolioController;
 
 Route::get('sample', function () {
     return view('sample');
+});
+Route::fallback(function() {
+    return response()->view('errors.404', [], 404);
 });
 Route::middleware('update_latest_login_datetime')->group(function () {
 
@@ -100,11 +105,11 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('delete_icon', [IconController::class, 'delete'])->name('icon.delete');
             Route::get('created_user', [UserProfileController::class, 'showComplete'])->name('complete.show');
             Route::get('identification',[IdentificationController::class, 'index']);
-            Route::post('identification',[IdentificationController::class, 'update'])->name('identification');
+            Route::post('identification',[IdentificationController::class, 'upload'])->name('identification');
             Route::post('can_call',[UserProfileController::class, 'updateCanCall'])->name('can_call.update');
 
             // スキル・経歴・職務
-            Route::middleware('can:identify')->group(function () {
+            // Route::middleware('can:identify')->group(function () {
                 Route::get('resume',[ResumeController::class, 'show'])->name('resume.show');
 
                 // スキル
@@ -122,10 +127,15 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 // 職務
                 Route::get('job',[JobController::class, 'create'])->name('job.create');
                 Route::post('job',[JobController::class, 'store'])->name('job.store');
-            });
 
-            // ポートフォリオ
-            Route::resource('portfolio', PortfolioController::class);
+                // ポートフォリオ
+                Route::resource('portfolio', PortfolioController::class);
+
+                // お気に入り
+                Route::get('favorite/index', [FavoriteController::class, 'index'])->name('favorite.index');
+                Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite.store');
+                Route::delete('favorite', [FavoriteController::class, 'delete'])->name('favorite.delete');
+            // });
 
             // お知らせ一覧表示(UserNotification)
             Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
@@ -133,6 +143,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::middleware(['can:my.user.notification,user_notification'])->group(function () {
                 Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
             });
+
+            // 評価一覧
+            Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
             // クーポン
             Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
@@ -178,7 +191,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                     Route::delete('bank', 'destroy')->name('destroy');
                 });
 
-
                 // お知らせ機能の設定
                 Route::put('/notification', [UserNotificationSettingController::class, 'update'])->name('notification.update');
             });
@@ -198,14 +210,14 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('job_request',function () { return redirect()->route('publication');});
         Route::get('product',function () { return redirect()->route('publication');});
         Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
-        
+
         // 提供・リクエスト 下書き一覧
         Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
 
         // 商品登録
         Route::prefix('product')->controller(MypageProductController::class)->name('product.')->group(function () {
             // Route::get('/index/{category}', 'showCategory')->name('show.category');
-            Route::middleware(['can:my.product,product', 'can:identify'])->group(function () {
+            Route::middleware(['can:my.product,product'/* , 'can:identify' */])->group(function () {
                 Route::get('{product}/edit', 'edit')->name('edit');
                 Route::post('{product}/update', 'update')->name('update');
                 Route::post('post/{product}/edit', 'postEdit')->name('post.edit')->middleware('is_ban');
@@ -214,7 +226,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('{product}/preview','updatePreview')->name('update.preview');
                 Route::post('{product}/draft','updateDraft')->name('update.draft');
             });
-            Route::middleware('can:identify')->group(function () {
+            // Route::middleware('can:identify')->group(function () {
                 Route::get('create', 'create')->name('create')->middleware('is_ban');
                 Route::post('post/create', 'postCreate')->name('post.create');
                 Route::post('store', 'store')->name('store');
@@ -222,12 +234,12 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('preview', 'preview')->name('preview');
                 Route::post('post/store/preview', 'storePreview')->name('store.preview');
                 Route::view('thanks', 'product.thanks')->name('thanks');
-            });
+            // });
         });
 
         // リクエスト
         Route::prefix('job_request')->controller(MypageJobRequestController::class)->name('job_request.')->group(function () {
-            Route::middleware(['can:my.job.request,job_request', 'can:identify'])->group(function () {
+            Route::middleware(['can:my.job.request,job_request'/* , 'can:identify' */])->group(function () {
                 Route::get('{job_request}/edit','edit')->name('edit')->middleware('is_ban');
                 Route::post('{job_request}/update','update')->name('update');
                 Route::post('post/{job_request}/edit', 'postEdit')->name('post.edit');
@@ -236,7 +248,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('{job_request}/preview','updatePreview')->name('update.preview');
                 Route::post('{job_request}/draft','updateDraft')->name('update.draft');
             });
-            Route::middleware('can:identify')->group(function () {
+            // Route::middleware('can:identify')->group(function () {
                 Route::get('create','create')->name('create')->middleware('is_ban');
                 Route::post('post/create', 'postCreate')->name('post.create');
                 Route::post('store','store')->name('store');
@@ -244,7 +256,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('preview','preview')->name('preview');
                 Route::post('post/store/preview','storePreview')->name('store.preview');
                 Route::view('thanks', 'job_request.thanks')->name('thanks');
-            });
+            // });
         });
 
         // 秘訣
@@ -262,14 +274,14 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
 
-            Route::middleware('can:start.chatroom.product,product')->group(function () {
-                Route::get('product/{product}','newProduct')->name('new.product')->middleware('is_ban'); // productからの交渉する
-                Route::post('product/{product}', 'createProduct')->name('create.product')->middleware('is_ban'); // productからのstart
+            Route::middleware(['product.start.chatroom', 'is_ban'])->group(function () {
+                Route::get('product/{product}','newProduct')->name('new.product'); // productからの交渉する
+                Route::post('product/{product}', 'createProduct')->name('create.product'); // productからのstart
             });
 
-            Route::middleware('can:start.chatroom.job.request,job_request')->group(function () {
-                Route::get('job_request/{job_request}','newJobRequest')->name('new.job_request')->middleware('is_ban'); // job_requestから交渉する
-                Route::post('job_request/{job_request}', 'createJobRequest')->name('create.job_request')->middleware('is_ban'); // job_requestからのstart
+            Route::middleware(['job_request.start.chatroom', 'is_ban'])->group(function () {
+                Route::get('job_request/{job_request}','newJobRequest')->name('new.job_request'); // job_requestから交渉する
+                Route::post('job_request/{job_request}', 'createJobRequest')->name('create.job_request'); // job_requestからのstart
             });
 
             Route::middleware('can:my.chatroom,chatroom')->group(function () {
@@ -341,6 +353,13 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('show');
             Route::post('{dmroom}',[DmroomController::class,'message'])->middleware('is_ban')->name('message');
             Route::get('create/{user}',[DmroomController::class,'create'])->middleware(['can:not.create.dm,user','is_ban'])->name('create');
+        });
+
+        // フォロー・フォロワー
+        Route::prefix('follow')->name('follow.')->group(function () {
+            Route::resource('',FollowController::class, ['only' => 'index']);
+            Route::get('/add/{id}', [FollowController::class, 'addFollow'])->name('add');
+            Route::get('/sub/{id}', [FollowController::class, 'subFollow'])->name('sub');
         });
     });
     // 提供・リクエストの詳細ページ
@@ -465,8 +484,5 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
         Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
     });
-    Route::get('evaluation',[EvaluationController::class, 'show'])->name('evaluation');
 
-    
-    
 });

@@ -12,7 +12,7 @@
 		<div id="contents">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					<h2 class="subPagesHd">サービスをリクエストする<p class="checkGuideOriginal" target="_blank"><a href="{{ route('support') }}">カリビト安心サポートをご確認ください</a></p></h2>
+					<h2 class="subPagesHd">サービスをリクエストする<p class="checkGuideOriginal"><a href="{{ route('support') }}" target="_blank">カリビト安心サポートをご確認ください</a></p></h2>
 					<form class="contactForm" id="form" method="POST">
 						@csrf
 

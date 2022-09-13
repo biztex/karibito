@@ -67,19 +67,11 @@ $(function () {
 		$('html').removeClass('fancybox-lock');
 	})
 
-	// カリビト安心サポートリンク別ウィンドウで開く
-	$(document).ready(function(){
-		$('.checkGuideOriginal a').click(function(){
-		window.open(this.href,'');
-		return false;
-		});
-	});
-
 	// リクエストのページリンククリック時、リンク先でもリクエストを自動的に表示する
 	// URLのハッシュ値が #job-request の場合
 	var hash = $(location).prop('hash');
 
-	if (hash == "#job-request" || hash == "#usually" || hash == "#inactive" || hash == "#withdrawal") {
+	if (hash == "#job-request" || hash == "#followed" || hash == "#usually" || hash == "#inactive" || hash == "#withdrawal") {
 
 
 
@@ -87,10 +79,8 @@ $(function () {
 	} else if (hash == "#pity") {
 		$('#box03').trigger('click');
 	}
-	
 
 
-	
 	// 提供登録画像プレビュー / localStorageに画像一時保存
 	// 画像に変更あれば'delete'/'insert'のいずれかを配列の番号とともに格納していく
 	for (let i = 0; i < 10; i++) {
@@ -107,8 +97,8 @@ $(function () {
 					$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
 				}
 				reader.readAsDataURL(e.target.files[0]);
-				$("input[name='image_status"+i+"']").val('insert');	
-				localStorage.setItem('status'+i,"insert");			
+				$("input[name='image_status"+i+"']").val('insert');
+				localStorage.setItem('status'+i,"insert");
 			});
 		});
 
@@ -118,7 +108,7 @@ $(function () {
 			$("input[name='base64_text["+i+"]']").attr('value', null);
 
 			$("input[name='image_status"+i+"']").val('delete');
-			localStorage.setItem('status'+i,"delete");			
+			localStorage.setItem('status'+i,"delete");
 
 			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
 			localStorage.removeItem('pic'+i);
@@ -168,5 +158,5 @@ $(function () {
 		$(this).closest('.otherBtn').hide();
 	})
 
-	
+
 });

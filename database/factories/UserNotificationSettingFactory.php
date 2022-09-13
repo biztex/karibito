@@ -21,11 +21,10 @@ class UserNotificationSettingFactory extends Factory
         return [
             'user_id'    => User::factory(),
             'is_like'    => 0,
+            'is_news'    => 0,
+            'is_message' => 0,
             'is_posting' => 0,
             'is_fav'     => 0,
-            'is_arrival' => 0,
-            'is_news'    => 0,
-            'is_promo'   => 0,
         ];
     }
 }

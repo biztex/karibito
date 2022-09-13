@@ -16,6 +16,9 @@
                         <div class="portfolioDtWrap">
                             <h2 class="portfolioDtHd break-word">{{ $portfolio->title }}</h2>
                             <p class="portfolioDtDate">{{ $portfolio->year }}年 {{ $portfolio->month }}月</p>
+                            <div class="portfolioDtBreadcrumbs">
+                                <span>{{$portfolio->mProductChildCategory->mProductCategory->name}}</span>　>　<span>{{$portfolio->mProductChildCategory->name}}</span>
+                            </div>
                             <div class="portfolioDtCont">
                                 <p class="portfolioDtImg"><img src="{{ asset('/storage/'.$portfolio->path)}}" alt=""></p>
                                 <p class="portfolioDtDetail">{{ $portfolio->detail }}</p>

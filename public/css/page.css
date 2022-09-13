@@ -5733,6 +5733,7 @@ select.searchSelect {
 
 .mypageEditInput input[type='text'],
 .mypageEditInput input[type='button'],
+.mypageEditInput input[type='password'],
 .mypageEditInput select,
 .mypageEditInput textarea {
 	border: 1px solid #DDDDDD;
@@ -6202,6 +6203,13 @@ select.searchSelect {
 	margin-bottom: 10px;
 }
 
+.blogDtOtherBtn a.followB {
+	color: #ffffff;
+    background-color: #158ACC;
+	border-color: #158ACC;
+	margin-bottom: 10px;
+}
+
 .blogAll a {
 	display: flex;
 	justify-content: center;
@@ -6439,6 +6447,7 @@ select.searchSelect {
 		display: flex;
 		justify-content: center;
 		margin-bottom: 10px;
+        word-break: break-all;
 	}
 
 	.configEditDl01 dt {
@@ -6446,6 +6455,10 @@ select.searchSelect {
 		padding-top: 8px;
 		white-space: nowrap;
 	}
+
+    .configEditMail {
+        white-space: normal !important;
+    }
 
 	.configEditDl01 dd {
 		width: 320px;
@@ -6736,6 +6749,11 @@ select.searchSelect {
 }
 
 .mypageP01 .blogDtOtherBtn a.followA {
+	margin-bottom: 0px;
+	margin-left: 12px;
+}
+
+.mypageP01 .blogDtOtherBtn a.followB {
 	margin-bottom: 0px;
 	margin-left: 12px;
 }

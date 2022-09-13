@@ -31,4 +31,12 @@ class News extends Model
             return $textFormat->generateLinkFromSentence($value);
         }
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function userNotifications()
+    {
+        return $this->morphMany(UserNotification::class, 'reference');
+    }
 }

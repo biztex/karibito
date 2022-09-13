@@ -9,22 +9,26 @@ use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\AdditionalOption;
 use App\Models\Chatroom;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
 use App\Services\ChatroomService;
+use App\Services\UserNotificationService;
 
 class ProductController extends Controller
 {
     private $product_service;
     private $evaluation_service;
     private $chatroom_service;
+    private $user_notification_service;
 
-    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, ChatroomService $chatroom_service)
+    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, ChatroomService $chatroom_service, UserNotificationService $user_notification_service)
     {
         $this->product_service = $product_service;
         $this->evaluation_service = $evaluation_service;
         $this->chatroom_service = $chatroom_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -76,6 +80,8 @@ class ProductController extends Controller
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
 
+        $this->user_notification_service->storeUserNotificationPost($product);
+
         return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
@@ -88,7 +94,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $all_products = Product::getUser($product->user_id)->orderBy('created_at', 'desc')->get();
+        // $all_products = Product::getUser($product->user_id, $product->id)->orderBy('created_at', 'desc')->get();
+        $all_products = Product::getUserOtherProduct($product->user_id, $product->id)->orderBy('created_at', 'desc')->get();
 
         $additional_options = $product->additionalOption->where('is_public',AdditionalOption::STATUS_PUBLISH);
 
@@ -96,9 +103,15 @@ class ProductController extends Controller
 
         $evaluation_counts = $this->evaluation_service->countEvaluations($product->user_id);
 
-        $chatroom_status = Chatroom::where('reference_id', $product->id)->pluck('status')->first();
+        $number_of_sold = Chatroom::numberOfSold($product->id);
 
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'chatroom_status'));
+        $is_favorite = Favorite::product()->where('reference_id', $product->id)->first();
+
+        $this->user_notification_service->isView($product);
+
+        $url = $this->product_service->getURL($product->id);
+
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite'));
     }
 
     /**
@@ -135,9 +148,10 @@ class ProductController extends Controller
             $this->product_service->updateProductQuestion($request->all(), $product);
             $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
+            $this->user_notification_service->storeUserNotificationFavorite($product);
         });
 
-        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first(); //この処理は何か確認
         $url = $this->product_service->getURL($product->id);
 
         return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
@@ -172,6 +186,7 @@ class ProductController extends Controller
             $product = $this->product_service->storeDraftProduct($request->all());
             $this->product_service->storeAdditionalOption($request->all(), $product->id);
             $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
@@ -201,6 +216,7 @@ class ProductController extends Controller
 
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 
@@ -220,7 +236,9 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
-        return view('product.preview',compact('request','user'));
+        $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+
+        return view('product.preview',compact('request','user', 'iframe_urls'));
     }
 
     public function postCreate(Request $request)
@@ -251,7 +269,9 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
-        return view('product.update_preview',compact('request','user', 'product'));
+        $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+
+        return view('product.update_preview',compact('request','user', 'product', 'iframe_urls'));
     }
 
     /**
@@ -265,6 +285,7 @@ class ProductController extends Controller
             $product = $this->product_service->storeProduct($request->all());
             $this->product_service->storeAdditionalOption($request->all(), $product->id);
             $this->product_service->storeProductQuestion($request->all(), $product->id);
+            $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
         });
 
@@ -286,6 +307,7 @@ class ProductController extends Controller
             $this->product_service->updateProduct($request->all(), $product);
             $this->product_service->updateAdditionalOption($request->all(), $product);
             $this->product_service->updateProductQuestion($request->all(), $product);
+            $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
         });
 

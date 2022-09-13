@@ -78,7 +78,7 @@
 								<div class="item">
 									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="evaluation">
-										<textarea name="text" placeholder="依頼する内容入力してください" class="templateText">{{ old('text') }}</textarea>
+										<textarea name="text" placeholder="本文を入力してください" class="templateText">{{ old('text') }}</textarea>
 									</div>
 									<p class="taR">3000</p>
 									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror

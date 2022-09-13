@@ -8,7 +8,7 @@
         <div class="item">
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
             <div class="evaluation">
-                <textarea name="text" placeholder="依頼する内容を入力してください" class="templateText"></textarea>
+                <textarea name="text" placeholder="本文を入力してください" class="templateText"></textarea>
 				<p class="max-string">3000</p>
             </div>
 
