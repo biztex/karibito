@@ -25,7 +25,7 @@ class JobRequestStartChatroom
             return redirect()->route('job_request.show', $request->job_request->id);
         }elseif(Chatroom::requested($request->job_request->id)) {
             return redirect()->route('job_request.show', $request->job_request->id)->with('flash_msg','この商品は売り切れています。ユーザーにDMでお問い合わせください。');
-        }elseif($today->gt($deadline)){
+        }elseif($deadline->gt($today)){
             return redirect()->route('job_request.show', $request->job_request->id)->with('flash_msg','期限切れのリクエストです。ユーザーにDMでお問い合わせください。');
         }
         return $next($request);
