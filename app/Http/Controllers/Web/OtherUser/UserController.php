@@ -16,16 +16,19 @@ use App\Services\EvaluationService;
 use App\Services\PortfolioService;
 use App\Models\JobRequest;
 use App\Models\Portfolio;
+use App\Services\UserNotificationService;
 
 class UserController extends Controller
 {
     private $evaluation_service;
     private $portfolio_service;
+    private $user_notification_service;
 
-    public function __construct(EvaluationService $evaluation_service, PortfolioService $portfolio_service)
+    public function __construct(EvaluationService $evaluation_service, PortfolioService $portfolio_service, UserNotificationService $user_notification_service)
     {
         $this->evaluation_service = $evaluation_service;
         $this->portfolio_service = $portfolio_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -92,6 +95,8 @@ class UserController extends Controller
 
         $prev_page = $this->portfolio_service->prevPage($portfolio, $portfolio_list);
         $next_page = $this->portfolio_service->nextPage($portfolio, $portfolio_list);
+
+        $this->user_notification_service->isView($portfolio);
 
         return view('other-user.portfolio.show', compact('user', 'portfolio', 'portfolio_list', 'url', 'prev_page', 'next_page'));
     }

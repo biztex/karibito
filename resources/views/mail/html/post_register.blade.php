@@ -5,8 +5,6 @@
 
 
 {{$user_notification->title}}
-早速確認してみましょう！
-
 {{ route('user_notification.index') }}
 
 
