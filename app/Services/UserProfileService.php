@@ -22,23 +22,11 @@ class UserProfileService
     }
 
     /**
-     * payjp 顧客id保存
-     * @param string $customer_id
-     * @return void
-     */
-    public function createCustomer($customer_id)
-    {
-        \Auth::user()->fill([
-                'stripe_id' => \Crypt::encryptString($customer_id)
-            ])->save();
-    }
-
-    /**
      * stripe 顧客id保存
      * @param string $customer_id
      * @return void
      */
-    public function createStripeCustomer($customer_id)
+    public function fillCustomerId($customer_id)
     {
         \Auth::user()->fill([
                 'stripe_id' => \Crypt::encryptString($customer_id)

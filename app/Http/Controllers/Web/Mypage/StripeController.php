@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Services\StripeService;
 use Illuminate\Http\Request;
+use App\Http\Requests\StripeController\StoreRequest;
 
 class StripeController extends Controller
 {
@@ -28,17 +29,17 @@ class StripeController extends Controller
 
     /**
      * クレカ登録
-     * @param Request $request
+     * @param StoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $token = $request->stripeToken;
         if ($token) {
             $this->stripe_service->createCard($token);
             
         } else {
-            return back();
+            return back()->whit("flash_msg", "カード情報の登録に失敗しました。");
         }
 
         return back()->with("flash_msg", "カード情報の登録が完了しました。");
