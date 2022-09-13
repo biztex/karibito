@@ -59,9 +59,11 @@
 								<dl class="memberConfigDl">
 									<dt>本人確認</dt>
 									<dd>
-										<span class="status_span">@if(Auth::user()->userProfile->is_identify === 1)承認@elseif (Auth::user()->userProfile->is_identify === 0)未承認@endif</span>
-										@if(Auth::user()->userProfile->is_identify === 0)
-										<a href="#fancybox_register"  class="fancybox fancybox_register">申請する</a>
+										@if(Auth::user()->userProfile->is_identify === 1)
+											<span class="status_span status_confirmed">承認</span>
+										@else
+											<span class="status_span">未承認</span>
+											<a href="#fancybox_register"  class="fancybox fancybox_register">申請する</a>
 										@endif
 									</dd>
 								</dl>
