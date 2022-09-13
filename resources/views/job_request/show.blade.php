@@ -1,6 +1,7 @@
 <x-layout>
 <x-parts.post-button/>
-	<article>
+<x-parts.flash-msg/>
+<article>
     	<div id="breadcrumb">
 			<div class="inner">
 
@@ -26,6 +27,9 @@
 						@include('job_request.parts.show.side')
 
 					</div>
+
+					@include('job_request.parts.show.share')
+
 				</div><!--inner02-->
 			</form>
         </div><!--contents-->
@@ -64,4 +68,50 @@
 		}
 	}
 	moreload.init();
+
+    // modal open sns share
+	$(".specialtyBtn.share").on("click", function() {
+		const $overlay = $(".overlayDetail");
+		$overlay.css('display', 'block');
+
+		$(".modal").removeClass('hidden');
+
+		const windowHeight = $(window).height();
+		const modalBoxHeight = $(".modal__box").innerHeight();
+		const topPosition = ((windowHeight - modalBoxHeight) / 2) - 66;
+		$(".modal__close").css('top', `${topPosition}px`);
+	})
+
+	const closeModal = function() {
+		$(".modal").addClass('hidden');
+		$(".overlayDetail").css('display', 'none');
+	};
+
+	$(".overlayDetail").on("click", function() {
+		closeModal();
+	})
+
+	$(".modal__close").on('click', function() {
+		closeModal();
+	});
+
+	// お気に入りクリック挙動
+	$(".detailStyle .title .favorite").on("click", function() {
+		const img = $(".detailStyle .title .favorite .icon img");
+		const heart = $(".detailStyle .title .favorite .icon")[0];
+
+		if ($(img).hasClass("hidden")) {
+			$(img).removeClass("hidden");
+			$(img).siblings('svg').remove();
+		} else {
+			$(img).addClass("hidden");
+			lottie.loadAnimation({
+				container: heart,
+				renderer: 'svg',
+				loop: false,
+				autoplay: true,
+				path: '/heart_action.json'
+			});
+		}
+	});
 </script>

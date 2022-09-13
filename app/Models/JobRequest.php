@@ -220,4 +220,20 @@ class JobRequest extends Model
         $date = new Carbon($this->application_deadline);
         return $this->attributes['diff_time'] = $date->addDay()->diffForHumans(Carbon::now());
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'reference');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function userNotifications()
+    {
+        return $this->morphMany(UserNotification::class, 'reference');
+    }
 }

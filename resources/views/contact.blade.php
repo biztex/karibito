@@ -19,7 +19,7 @@
                                 <div class="labelName"><input type="text" name="name" placeholder="名前" @if(\Auth::User()) value="{{ \Auth::User()->name }}" @endif required></div>
                                 <div class="labelMail"><input type="email" name="mail" placeholder="メールアドレス" @if(\Auth::User()) value="{{ \Auth::User()->email }}" @endif required></div>
                                 <div class="labelType">
-                                    <select name="type">
+                                    <select name="type" style="color:#000;">
                                         @foreach (App\Models\ContactMailHistory::CONTACT_TYPES as $i => $option)
                                             <option value='{{ $i }}'>{{ $option }}</option>
                                         @endforeach

@@ -3,10 +3,28 @@
         <div class="single">
             <a tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</a>
         </div>
-        <a href="#" class="favorite">
-            <span class="icon"><img src="img/common/ico_heart.svg" alt=""></span>
-            <span>お気に入り</span>
-        </a>
+        @if (is_null($is_favorite))
+            <form method="post" action="{{ route('favorite.store', $product->id) }}">
+            {{-- <a href="{{ route('favorite.create' ) }}" class="favorite">
+                <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                <span>お気に入り</span>
+            </a> --}}
+                <button type="submit" class="favorite">
+                    <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                    <span>お気に入り</span>
+                </button>
+        @else
+            <form method="post" action="{{ route('favorite.delete', $product->id) }}">いいねされている
+                @method('delete')
+                <button type="submit" class="favorite">
+                    <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                    <span>お気に入り</span>
+                </button>
+        @endif
+            <input type="hidden" name="product_id" value="{{$product->id}}">
+            @csrf
+            {{-- 連打防止つける --}}
+        </form>
     </div>
     <div class="datas">
         <span class="data">電話相談の受付：@if(!is_null($product->is_call)) {{ App\Models\Product::IS_CALL[$product->is_call] }} @endif</span>
@@ -15,7 +33,10 @@
         <span class ="data">エリア： {{ App\Models\Prefecture::find($product->prefecture_id)->name }} </span>
         @endif
         <span class="data">販売数：@if(!is_null($product->number_of_sale)){{App\Models\Product::NUMBER_OF_SALE[$product->number_of_sale]}}@endif</span>
-        <span class="data">投稿日：{{$product->created_at->diffForHumans()}}
+        <span class="data">投稿日：{{ date('Y年n月j日', strtotime($product->created_at)) }}({{$product->created_at->diffForHumans()}})
+        @if (!$product->created_at == $product->updated_at)
+            <span class="data">更新日：{{ date('Y年n月j日', strtotime($product->updated_at)) }}({{$product->updated_at->diffForHumans()}})
+        @endif
     </div>
     <h2><span class="word-break">{{$product->title}}</span></h2>
 </div>

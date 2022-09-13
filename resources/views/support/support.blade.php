@@ -15,7 +15,7 @@
 							</li>
 							<li class="biggerlink">
 								<p class="tit">初めての方へ</p>
-								<a href="#support02" class="scroll ico_support02"></a>
+								<a href="{{ route('guide') }}" class="ico_support02" target="_blank" rel="noopener noreferrer"></a>
 								<p>初心者ガイド</p>
 							</li>
 							<li class="biggerlink">
@@ -25,7 +25,7 @@
 							</li>
 							<li class="biggerlink">
 								<p class="tit">運営会社</p>
-								<a href="{{ route('company') }}" class="ico_support04"></a>
+								<a href="{{ route('company') }}" class="ico_support04" target="_blank" rel="noopener noreferrer"></a>
 								<p>カリビトについて</p>
 							</li>
 						</ul>

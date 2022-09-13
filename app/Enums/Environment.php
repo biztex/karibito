@@ -14,10 +14,10 @@ enum Environment: string
     case PRODUCTION = 'production'; // 本番環境
 
     // 本番環境以外の環境
-    const NOT_PRODUCTION_ENVS = [
+    const IS_ENABLE_EASY_LOGIN_ENVS = [
         self::LOCAL,
         self::DEVELOPMENT,
-        self::STAGE,
+//        self::STAGE,
     ];
 
     /**
@@ -26,6 +26,6 @@ enum Environment: string
      */
     public static function isEnableEasyLogin(): bool
     {
-        return in_array(self::from(config('app.env')), self::NOT_PRODUCTION_ENVS, true);
+        return in_array(self::from(config('app.env')), self::IS_ENABLE_EASY_LOGIN_ENVS, true);
     }
 }

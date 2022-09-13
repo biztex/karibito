@@ -21,10 +21,10 @@
                         <input type="submit" onclick='return confirm("削除してもよろしいですか？");' class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
                     </div>
                 </form>
-            @elseif ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $chatroom_status === 6) {{--販売個数が一つで、かつ既に購入されているものをこの分岐に入れる--}}
+            @elseif ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $number_of_sold !== 0) {{--販売個数が一つで、かつ既に購入されているものをこの分岐に入れる--}}
                 <div class="functeBtns">
                     <a tabindex="-1" class="full">交渉画面へ進む</a>
-                    <span>この商品は売り切れています。ユーザーにDMでお問い合わせください。</span>
+                    <span style="font-size: 0.8em;">この商品は売り切れています。<br>ユーザーにDMでお問い合わせください。</span>
                 </div>
             @else
                 <div class="functeBtns">
@@ -32,10 +32,9 @@
                 </div>
             @endif
         </div>
-        <p class="specialtyBtn"><span>この情報をシェアする</span></p>
+        <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
     </div>
 
     <x-parts.box-seller :user='$product->user'/>
 
-    
 </aside>

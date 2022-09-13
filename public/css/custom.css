@@ -61,31 +61,175 @@
 }
 
 #mypage .sidePerson,
+#favorite .sidePerson,
 #chatroom-active .sidePerson,
 #chatroom-inactive .sidePerson,
+#evaluation .sidePerson,
 #payment .sidePerson,
 #point .sidePerson,
+#friends .sidePerson,
 #news .sidePerson,
+#user_notification .sidePerson,
+#faq .sidePerson,
+#secret .sidePerson,
 #coupon .sidePerson,
 .dm-page .sidePerson,
 .dm-page-show .sidePerson,
 #setting .sidePerson,
 #setting-page .sidePerson,
 #withdraw .sidePerson,
-#portfolio .sidePerson,
 #resume .sidePerson,
+#portfolio .sidePerson,
+#blog .sidePerson,
 #publication .sidePerson,
 #draft .sidePerson,
-#user_notification .sidePerson,
-#evaluation .sidePerson,
-#secret01 .sidePerson,
-#secret02 .sidePerson,
-#secret03 .sidePerson,
-#secret04 .sidePerson,
-#secret05 .sidePerson,
-#secret06 .sidePerson {
+#transfer .sidePerson
+{
 	display: none;
 }
+
+/* サイドメニューアクティブ指定 */
+#mypage #side div:nth-of-type(2) ul li:nth-of-type(1) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#favorite #side div:nth-of-type(2) ul li:nth-of-type(2) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#chatroom-active #side div:nth-of-type(2) ul li:nth-of-type(3) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#chatroom-inactive #side div:nth-of-type(2) ul li:nth-of-type(4) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#evaluation #side div:nth-of-type(2) ul li:nth-of-type(5) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#payment #side div:nth-of-type(2) ul li:nth-of-type(6) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#point #side div:nth-of-type(2) ul li:nth-of-type(7) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#friends #side div:nth-of-type(2) ul li:nth-of-type(8) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#news #side div:nth-of-type(2) ul li:nth-of-type(9) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+/* .user_notification_show #side div:nth-of-type(2) ul li:nth-of-type(8) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+} */
+
+/* #faq #side div:nth-of-type(2) ul li:nth-of-type(10) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+} */
+
+#secret #side div:nth-of-type(2) ul li:nth-of-type(10) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#coupon #side div:nth-of-type(2) ul li:nth-of-type(11) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+.dm-page #side div:nth-of-type(2) ul li:nth-of-type(12) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+.dm-page-show #side div:nth-of-type(2) ul li:nth-of-type(12) a {
+	color: #333333;
+	background-color: #FCAA00;
+}
+
+#setting #side div:nth-of-type(2) ul li:nth-of-type(13) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#setting-page #side div:nth-of-type(2) ul li:nth-of-type(13) a {
+	color: #333333;
+	background-color: #FCAA00;
+}
+
+#withdraw #side div:nth-of-type(2) ul li:nth-of-type(14) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#resume #side div:nth-of-type(3) ul li:nth-of-type(1) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#portfolio #side div:nth-of-type(3) ul li:nth-of-type(2) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+/* #blog #side div:nth-of-type(3) ul li:nth-of-type(3) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+} */
+
+#publication #side div:nth-of-type(3) ul li:nth-of-type(3) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#draft #side div:nth-of-type(3) ul li:nth-of-type(4) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#transfer #side div:nth-of-type(3) ul li:nth-of-type(5) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
 
 #mypage .detailStyle .recommendList .list .item {
 	max-width: 212px
@@ -636,148 +780,6 @@
 
 }
 
-#mypage #side div:nth-of-type(2) ul li:nth-of-type(1) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#favorite #side div:nth-of-type(2) ul li:nth-of-type(2) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#chatroom-active #side div:nth-of-type(2) ul li:nth-of-type(3) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#chatroom-inactive #side div:nth-of-type(2) ul li:nth-of-type(4) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#payment #side div:nth-of-type(2) ul li:nth-of-type(5) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#point #side div:nth-of-type(2) ul li:nth-of-type(6) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#friends #side div:nth-of-type(2) ul li:nth-of-type(7) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#news #side div:nth-of-type(2) ul li:nth-of-type(8) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-.user_notification_show #side div:nth-of-type(2) ul li:nth-of-type(8) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#secret01 #side div:nth-of-type(2) ul li:nth-of-type(10) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#secret02 #side div:nth-of-type(2) ul li:nth-of-type(10) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#secret03 #side div:nth-of-type(2) ul li:nth-of-type(10) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#secret04 #side div:nth-of-type(2) ul li:nth-of-type(10) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#secret05 #side div:nth-of-type(2) ul li:nth-of-type(10) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#secret06 #side div:nth-of-type(2) ul li:nth-of-type(10) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#setting #side div:nth-of-type(2) ul li:nth-of-type(13) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#setting-page #side div:nth-of-type(2) ul li:nth-of-type(13) a {
-	color: #333333;
-	background-color: #FCAA00;
-}
-
-#withdraw #side div:nth-of-type(2) ul li:nth-of-type(14) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#resume #side div:nth-of-type(3) ul li:nth-of-type(1) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#publication #side div:nth-of-type(3) ul li:nth-of-type(4) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-#draft #side div:nth-of-type(3) ul li:nth-of-type(5) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-.dm-page #side div:nth-of-type(2) ul li:nth-of-type(12) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
-.dm-page-show #side div:nth-of-type(2) ul li:nth-of-type(12) a {
-	color: #333333;
-	background-color: #FCAA00;
-}
-
-#portfolio #side div:nth-of-type(3) ul li:nth-of-type(2) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-
 .checkGuide.more {
 	float: none;
 	display: block;
@@ -814,14 +816,35 @@
 	border: 1px solid;
 }
 
-.linkdel {
-	margin-top: 50px;
+@media screen and (min-width: 767px) {
+	.linkdel {
+		margin-top: 50px;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+@media screen and (max-width: 767px) {
+	.favoriteUl01 .cont01 .info .link {
+		display: flex;
+	}
+	.linkdel {
+		margin-top: 10px;
+		margin-left: 10px;
+		width: 100px;
+	}
+
+}
+@media screen and (max-width: 391px) {
+	.favoriteUl01 .cont01 .info .link {
+		display: block;
+	}
+	.linkdel {
+		margin-left: 0;
+	}
 }
 
 .linkdel input {
-	position: absolute;
-	right: 0;
-	top: 50;
 	z-index: 1;
 	display: flex;
 	justify-content: center;
@@ -964,7 +987,7 @@
 
 @media screen and (min-width: 768px) {
 	.other_user#wrapper {
-		padding-top: 178px;
+		padding-top: 125px;
 	}
 
 	.other_user #header {
@@ -1020,10 +1043,17 @@
 	}
 }
 
-/*add 中澤 20220705 スキルページ */
 .mypageUl03 li {
 	position: relative;
 	padding-right: 60px;
+}
+
+.mypageUl03 li span {
+	word-break: break-all;
+}
+
+.mypageDuties p {
+	word-break: break-all;
 }
 
 .mypageUl03 li .mypageCtrl {
@@ -1555,8 +1585,7 @@
 
 .center_cam {
 	position: absolute;
-	top:
-		50%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -1591,6 +1620,17 @@ img.moreRecommendListImg {
 .contactForm input[type='number'],
 .contactForm select {
 	color: black !important;
+}
+
+.contactForm input[type='date'] {
+	position: relative;
+}
+
+.contactForm input[type='date']::-webkit-calendar-picker-indicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+	opacity: 0;
 }
 
 /* マイページ内ポートフォリオ */
@@ -1657,6 +1697,10 @@ img.moreRecommendListImg {
 	.other_user .mypagePortfolioUl {
 		gap: 30px 20px;
 	}
+}
+
+.portfolioDtDetail {
+    word-break: break-all;
 }
 
 /* 他ポートフォリオ一覧 */
@@ -1747,7 +1791,7 @@ img.moreRecommendListImg {
 	margin: 0 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 766px) {
 	#portfolio .mypagePortfolioUl02 {
 		gap: 30px 20px;
 	}
@@ -1759,4 +1803,66 @@ img.moreRecommendListImg {
 	dt.hideModalName span {
 		font-size: 11px;
 	}
+
+	.mypageHd02 {
+		display: block;
+	}
+
+	.mypageHd02 a {
+		margin: 0;
+	}
+	.recommendList .list.sliderSP02 .item {
+		min-width: 168px;
+		flex: 0;
+	}
+}
+@media screen and (min-width: 766px) {
+
+	.recommendList .list.sliderSP02 .item {
+		flex: 0;
+		min-width: 192px;
+	}
+}
+.detailStyle .recommendList .list .item {
+    margin: 0 9px 0 0;
+    width: 192px !important;
+}
+
+.detailStyle .recommendList .list .single span {
+    padding: 0 5px;
+	background: #9A814A;
+    color: #fff;
+}
+
+.detailStyle .recommendList .list .aboutUser {
+    padding-top: 0;
+    border-top: none;
+}
+@media screen and (max-width: 766px) {
+	.detailStyle .recommendList .list .item {
+		margin: 0 9px 0 0;
+		width: 168px !important;
+	}
+}
+.paymentUl01 .price-back span {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 3px 5px;
+    color: #fff;
+    background-color: #FCAA00;
+    margin-right: 10px;
+}
+.mypageShare p {
+    margin-bottom: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 6px;
+    background-color: #F854B1;
+    box-shadow: 0 6px 0 #c60d7c;
+    position: relative;
+    padding: 7px 30px;
 }

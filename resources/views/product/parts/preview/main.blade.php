@@ -13,4 +13,7 @@
 
     <!-- よくある質問 -->
     @include('product.parts.preview.faq')
+
+    <!-- youtube -->
+    @include('product.parts.preview.youtube')
 </div>

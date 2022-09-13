@@ -14,7 +14,7 @@
         <div id="contents">
             <div class="cancelWrap">
                 <div class="inner inner05">
-                    <h2 class="subPagesHd">サービスを編集する<p class="checkGuideOriginal" target="_blank"><a href="{{ route('support') }}">カリビト安心サポートをご確認ください</a></p></h2>
+                    <h2 class="subPagesHd">サービスを編集する<p class="checkGuideOriginal"><a href="{{ route('support') }}" target="_blank">カリビト安心サポートをご確認ください</a></p></h2>
                     <form method="post" class="contactForm" enctype="multipart/form-data">
                         @csrf
 
@@ -337,7 +337,7 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            @elseif($product->youtube_link) {{--この分岐が何のためにあるのか忘れてしまいました--}}
+                            @elseif($product->youtube_link)
                                 @foreach($product->youtube_link as $num => $youtube_link)
                                     <div class="js-youtubeForm">
                                         <p class="th js-link">動画(YouTubeのみ) {{$num + 1}}</p>

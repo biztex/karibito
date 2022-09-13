@@ -5,21 +5,25 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Models\JobRequest;
 use App\Models\Product;
-use App\Models\Prefecture;
+use App\Models\Chatroom;
 use App\Models\User;
+use App\Models\Favorite;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
 use App\Http\Requests\JobRequestController\DraftRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
+use App\Services\UserNotificationService;
 
 class JobRequestController extends Controller
 {
     private $job_request_service;
+    private $user_notification_service;
 
-    public function __construct(JobRequestService $job_request_service)
+    public function __construct(JobRequestService $job_request_service, UserNotificationService $user_notification_service)
     {
         $this->job_request_service = $job_request_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -92,6 +96,8 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
+        $this->user_notification_service->storeUserNotificationPost($job_request);
+
         return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
@@ -105,8 +111,17 @@ class JobRequestController extends Controller
     public function show(JobRequest $job_request)
     {
         $user = User::find($job_request->user_id);
+        $deadline = new Carbon(date("Y-m-d",strtotime("$job_request->application_deadline")));
+        $today = new Carbon('today');
 
-        return view('job_request.show',compact('job_request','user'));
+        $requested = Chatroom::requested($job_request->id);
+        $url = $this->job_request_service->getURL($job_request->id);
+
+        $is_favorite = Favorite::jobRequest()->where('reference_id', $job_request->id)->first();
+
+        $this->user_notification_service->isView($job_request);
+
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite'));
     }
 
     /**
@@ -141,6 +156,8 @@ class JobRequestController extends Controller
 
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
+
+        $this->user_notification_service->storeUserNotificationFavorite($job_request);
 
         return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }

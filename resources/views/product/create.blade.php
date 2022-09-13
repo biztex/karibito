@@ -12,7 +12,7 @@
         <div id="contents">
             <div class="cancelWrap">
                 <div class="inner inner05">
-                    <h2 class="subPagesHd">サービスを提供する<p class="checkGuideOriginal" target="_blank"><a href="{{ route('support') }}">カリビト安心サポートをご確認ください</a></p></h2>
+                    <h2 class="subPagesHd">サービスを提供する<p class="checkGuideOriginal"><a href="{{ route('support') }}" target="_blank">カリビト安心サポートをご確認ください</a></p></h2>
                     <form method="post" id="form"  class="contactForm" enctype="multipart/form-data">
                         @csrf
                         <p class="th">カテゴリ<span class="must">必須</span></p>
@@ -287,7 +287,7 @@
                                         @error('youtube_link.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{ old('youtube_link.'.$num, $product_question) }}">
+                                                <input type="text" name="youtube_link[]" placeholder="YouTubeのリンクを入力してください" value="{{ old('youtube_link.'.$num, $link) }}">
                                             </div>
                                             <div>
                                                 <a href="javascript:;" class="fs25 ml05 js-deleteYoutube">×</a>

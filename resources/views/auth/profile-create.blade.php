@@ -1,6 +1,6 @@
 <x-layout>
 	<article>
-		<body id="create">
+		<body id="create" class="none-modal">
 			<div id="contents" class="oneColumnPage02">
 				<div class="inner">
 					<div id="main">
@@ -69,6 +69,7 @@
 												</select>
 											</div>
 									</div>
+									<p style="font-size:12px;">※ニックネームは公開されます。<br>　本人認証に利用されるものと同じ姓名でご記入ください。</p>
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit loading-disabled" value="登録"></li>
 									</ul>

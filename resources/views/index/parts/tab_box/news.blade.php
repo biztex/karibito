@@ -7,7 +7,7 @@
             @foreach($news_list as $news)
                 <dl>
                     <dt>{{$news->created_at->format('Y/m/d')}}</dt>
-                    <dd><a href="{{ route('news.show', $news->id) }}">{{$news->title}}</a></dd>
+                    <dd><a href="{{ route('news.show', $news->id) }}" target="_blank" rel="noopener noreferrer">{{$news->title}}</a></dd>
                 </dl>
             @endforeach
         @endif

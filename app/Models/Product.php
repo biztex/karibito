@@ -11,6 +11,7 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
+    protected $appends = ['number_of_sold'];
 
     const STATUS_PUBLISH = 1;
 
@@ -58,6 +59,11 @@ class Product extends Model
     ];
 
 
+    protected function getNumberOfSoldAttribute()
+    {
+        return Chatroom::numberOfSold($this->id);
+    }
+
     /**
      * 制限されているユーザーの商品以外を取得
      *
@@ -66,7 +72,7 @@ class Product extends Model
      */
     public function scopeNotBan($query)
     {
-        $ban_user_ids = UserProfile::where('is_ban' ,1)->pluck('id')->toArray();;
+        $ban_user_ids = UserProfile::where('is_ban' ,1)->pluck('id')->toArray();
 
         return $query->where('user_id', "!=", $ban_user_ids);
     }
@@ -102,6 +108,17 @@ class Product extends Model
     public function scopeGetUser($query, $user)
     {
         return $query->publish()->where('user_id', $user);
+    }
+
+    /**
+     * 特定ユーザーの提供、かつ今表示されていないものを取得
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeGetUserOtherProduct($query, $user, $product_id)
+    {
+        return $query->publish()->where('user_id', $user)->where('id', '<>', $product_id);
     }
 
     /**
@@ -223,5 +240,21 @@ class Product extends Model
     public function points()
     {
         return $this->morphMany(UserGetPoint::class, 'reference');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'reference');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function userNotifications()
+    {
+        return $this->morphMany(UserNotification::class, 'reference');
     }
 }

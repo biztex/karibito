@@ -44,17 +44,27 @@
                                             <p class="navMessageHd">お知らせ</p>
                                             <div class="navMessageUl">
                                                 @if(isset($not_view_user_notifications[0]))
-                                                    @foreach ($not_view_user_notifications as $not_view_user_notification)
+                                                    @foreach ($not_view_user_notifications as $k => $not_view_user_notification)
                                                         @if ($not_view_user_notification->is_view === 0)
-                                                            <a href="{{route('user_notification.show', $not_view_user_notification->id)}}">
-                                                                <dl>
-                                                                    <dt><img src="/img/common/img_message01.png" alt=""></dt>
-                                                                    <dd>
-                                                                        <p class="txt">{{$not_view_user_notification->title}}</p>
-                                                                        <p class="time">{{$not_view_user_notification->created_at->diffForHumans()}}</p>
-                                                                    </dd>
-                                                                </dl>
-                                                            </a>
+                                                            @if ($not_view_user_notification->reference_type === 'App\Models\Chatroom')
+                                                                <a href="{{route('chatroom.show', $not_view_user_notification->reference_id)}}">
+                                                            @elseif ($not_view_user_notification->reference_type === 'App\Models\Product')
+                                                                <a href="{{route('product.show', $not_view_user_notification->reference_id)}}">
+                                                            @elseif ($not_view_user_notification->reference_type === 'App\Models\JobRequest')
+                                                                <a href="{{route('job_request.show', $not_view_user_notification->reference_id)}}">
+                                                            @elseif ($not_view_user_notification->reference_type === 'App\Models\Portfolio')
+                                                                <a href="{{route('user.portfolio.show', [$portfolio_user_id[$k], $not_view_user_notification->reference_id])}}">
+                                                            @else
+                                                                <a href="{{route('user_notification.show', $not_view_user_notification->id)}}">
+                                                            @endif
+                                                            <dl>
+                                                                <dt><img src="/img/common/img_message01.png" alt=""></dt>
+                                                                <dd>
+                                                                    <p class="txt">{{$not_view_user_notification->title}}</p>
+                                                                    <p class="time">{{$not_view_user_notification->created_at->diffForHumans()}}</p>
+                                                                </dd>
+                                                            </dl>
+                                                        </a>
                                                         @endif
                                                     @endforeach
                                                 @else
@@ -67,7 +77,7 @@
                                         </div>
                                     </li>
                                     <li><a href="{{ route('chatroom.index') }}" class="nav03">やりとり</a></li>
-                                    <li><a href="#" class="nav02">お気に入り</a></li>
+                                    <li><a href="{{ route('favorite.index') }}" class="nav02">お気に入り</a></li>
                                     <li class="navLink">
                                             @if(empty(Auth::user()->userProfile->icon))
                                                 <a href="javascript:void(0);" class="nav_mypage navLinkA" style="margin:0 0 15px 15px;"><img src="/img/mypage/no_image.jpg" alt=""></a>
@@ -86,9 +96,9 @@
                                             @if(\App\Models\UserProfile::where([['user_id', '=', Auth::id()],['first_name', '<>', null],])->exists())
                                                 <div class="navMypageUl">
                                                     <a href="{{ route('mypage') }}">マイページ</a>
-                                                    @can('identify')
+                                                    {{-- @can('identify') --}}
                                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                                    @endcan
+                                                    {{-- @endcan --}}
                                                     <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
                                                     <a href="{{ route('setting.index') }}">設定</a>
                                                 </div>
@@ -113,11 +123,11 @@
                                 <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
                                 <div class="navMypageUl link01">
                                     {{-- <a href="{{ route('mypage') }}">マイページ</a> --}}
-                                    <a href="#">お気に入り</a>
-                                    @can('identify')
+                                    <a href="{{ route('favorite.index') }}">お気に入り</a>
+                                    {{-- @can('identify') --}}
                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
                                         <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </div>
                             @endauth
 
@@ -259,11 +269,13 @@
                         </div> --}}
                     </div>
 
-                    @can('identify')
+                    @auth
+                    {{-- @can('identify') --}}
                         <div class="right">
                             <a href="{{ route('post') }}">投稿する</a>
                         </div>
-                    @endcan
+                    {{-- @endcan --}}
+                    @endauth
                 </div>
             </div>
         </div>
@@ -282,7 +294,7 @@
                 </div>
             </div>
         </div> --}}
-        
+
         @auth
             <div class="spFixed">
                 <div class="spFixedItem">
@@ -291,14 +303,14 @@
                         <p class="linkTxt">ホーム</p>
                     </a>
                 </div>
-                @can('identify')
+                {{-- @can('identify') --}}
                     <div class="spFixedItem">
                         <a href="{{ route('post') }}" class="spFixedLink">
                             <p class="linkIcon"><img src="/img/common/icon_spfixed02.svg" alt=""></p>
                             <p class="linkTxt">投稿</p>
                         </a>
                     </div>
-                @endcan
+                {{-- @endcan --}}
                 <div class="spFixedItem">
                     <a href="{{ route('chatroom.index') }}" class="spFixedLink">
                         <p class="linkIcon"><img src="/img/common/ico_talk.svg" alt=""></p>

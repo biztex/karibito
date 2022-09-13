@@ -37,13 +37,20 @@ class UpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'bank_name'   => '金融機関名',
-            'bank_code'   => '金融機関コード',
+            'bank_name'   => '金融名',
+            'bank_code'   => '金融コード',
             'branch_name' => '支店名',
             'branch_code' => '支店コード',
             'type'        => '口座種別',
-            'bank_account_name'        => '口座名義人名',
+            'bank_account_name'        => '口座名義',
             'bank_account_number'      => '口座番号',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'bank_account_name.*' => '口座名義は全角カタカナ(スペースなし)でご入力ください'
         ];
     }
 }

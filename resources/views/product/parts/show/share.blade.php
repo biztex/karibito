@@ -4,28 +4,15 @@
         <div class="shareSnsEmail">
             <h3>SNSやメールでチケットをシェアする</h3>
             <div class="sns">
-                <a href="#" target="_blank"><img src="img/mypage/ico_facebook.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="img/mypage/ico_line.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="img/mypage/ico_twitter.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="img/mypage/ico_mail.svg" alt=""></a>
+                <a href="http://www.facebook.com/share.php?u={{ $url }}" target="_blank"><img src="/img/mypage/ico_facebook.svg" alt=""></a>
+                <a href="https://social-plugins.line.me/lineit/share?url={{ $url }}" target="_blank"><img src="/img/mypage/ico_line.svg" alt=""></a>
+                <a href="https://twitter.com/share?url={{ $url }}&text={{ $product->title }} %20%7C%20 {{ $product->user->name }} %20%7C%20 カリビトのサービスをシェア&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a>
+                <a href="mailto:?subject=カリビトのサービスをシェア&body={{ $product->title }} %20%7C%20 {{ $product->user->name }} %20%7C%20 カリビトのサービスをシェア {{ $url }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a>
             </div>
-            <form>
-                <table>
-                    <tr>
-                        <th>あなたの招待コードURL</th>
-                        <td>
-                            <div class="copy">
-                                <input type="text" class="url" id="copyInput" value="https://1111111">
-                                <span class="btn" onclick="copy()">コピーする</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>あなたの招待コード</th>
-                        <td><input type="text" class="small" value="a8358d0dj1j"></td>
-                    </tr>
-                </table>
-            </form>
+
+            {{-- 招待コード --}}
+            <x-parts.invitation-code/>
+            
         </div>
     </div>
 </div>

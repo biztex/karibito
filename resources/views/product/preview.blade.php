@@ -20,13 +20,13 @@
                 <input type="hidden" value="{{ $request->category_id }}" name="category_id">
                 <input type="hidden" value="{{ $request->number_of_sale }}" name="number_of_sale">
                 <input type="hidden" value="{{ $request->status }}" name="status">
-                <div class="inner02 ">
+                <div class="inner02">
                     <div class="clearfix">
-                        
+
                         @include('product.parts.preview.main')
-                        
+
                         @include('product.parts.preview.side')
-                        
+
                     </div>
                 </div><!--inner-->
             </form>

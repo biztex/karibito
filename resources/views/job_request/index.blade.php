@@ -34,7 +34,7 @@
                 @endif
 				<div id="main">
 					<div class="cateList">
-						@if (isset($parent_category_flg))
+						@if (isset($parent_category_flg) && $parent_category_flg === 1)
                             <h2 class="hdM">カテゴリ一覧</h2>
                             <div class="list sliderSP02">
                                 @if ($parent_category_flg === 1)
@@ -113,9 +113,8 @@
 					<div class="recommendList style2">
 						<p class="cases">{{$job_requests->total()}}件中
 							{{  ($job_requests->currentPage() -1) * $job_requests->perPage() + 1}} - {{ (($job_requests->currentPage() -1) * $job_requests->perPage() + 1) + (count($job_requests) -1)  }}件の表示
-                            {{-- <h3 class="col-7 col-md-9 mb-0 h3">商品一覧（{{$job_requests->total() . '件中' . $job_requests->firstItem() . '-' . $job_requests->lastItem()}}件）</h3> --}}
 						</p>
-						<div class="list sliderSP02">　{{--st3クラスを消した。横幅がおかしかったため--}}
+						<div class="list sliderSP02">{{--st3クラスを消した。横幅がおかしかったため--}}
 							@foreach( $job_requests as $value)
 								<x-parts.job-request-item :value='$value'/>
 							@endforeach
@@ -125,7 +124,7 @@
 						{{ $job_requests->links() }}
 					</div>
 				</div><!-- /#main -->
-				<aside id="side">
+				<aside id="side" class="pc">
 					<h2 class="cate cate02">
 						@if (isset($parent_category_flg))
                             @if ($parent_category_flg === 1)
@@ -134,7 +133,6 @@
                                 {{$child_category->mProductCategory->name}}から探す</h2>
                             @endif
                         @endif
-					</h2>
 					<ul class="links">
 						@if (isset($parent_category_flg))
                             @if ($parent_category_flg === 1)
