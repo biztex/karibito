@@ -103,7 +103,7 @@
                                                     <a href="{{ route('setting.index') }}">設定</a>
                                                 </div>
                                             @endif
-                                            <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
+                                            <p class="navMypageUlLink"><a href="{{ route('logout') }}" class="fs12" style="font-size: 1.3rem;">ログアウト</a></p> {{--クラス反応しない。スタイル下手ガキ修正--}}
                                         </div>
                                     </li>
                                 @endauth

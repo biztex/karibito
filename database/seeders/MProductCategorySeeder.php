@@ -35,7 +35,12 @@ class MProductCategorySeeder extends Seeder
             ['id' => 18, 'name' => '体験・アクティビティ'],
             ['id' => 19, 'name' => '出張サービス'],
             ['id' => 20, 'name' => '調べもの'],
-            ['id' => 21, 'name' => 'レンタル']
+            ['id' => 21, 'name' => 'レンタル'],
+            ['id' => 22, 'name' => 'イラスト・漫画'],
+            ['id' => 23, 'name' => 'マーケティング・Web集客'],
+            ['id' => 24, 'name' => 'ライティング・翻訳'],
+            ['id' => 25, 'name' => '学習・就職・資格・コーチング'],
+            ['id' => 26, 'name' => 'マネー・副業・アフィリエイト']
         ];
         \DB::table('m_product_categories')->insert($params);
     }
