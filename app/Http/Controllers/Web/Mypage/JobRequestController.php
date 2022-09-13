@@ -11,6 +11,7 @@ use App\Models\Favorite;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
+use App\Services\ChatroomService;
 use App\Http\Requests\JobRequestController\DraftRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
 use App\Services\UserNotificationService;
@@ -18,13 +19,19 @@ use App\Services\UserNotificationService;
 class JobRequestController extends Controller
 {
     private $job_request_service;
+
+    private $chatroom_service;
+    
     private $user_notification_service;
 
-    public function __construct(JobRequestService $job_request_service, UserNotificationService $user_notification_service)
+    public function __construct(JobRequestService $job_request_service, ChatroomService $chatroom_service, UserNotificationService $user_notification_service)
     {
         $this->job_request_service = $job_request_service;
+        $this->chatroom_service = $chatroom_service;
         $this->user_notification_service = $user_notification_service;
     }
+
+    
 
     /**
      * Display a listing of the resource.
@@ -172,6 +179,8 @@ class JobRequestController extends Controller
     public function destroy(JobRequest $job_request)
     {
         $job_request->delete(); // データ論理削除
+        $this->chatroom_service->deleteJobRequest($job_request);
+
         \Session::put('flash_msg','リクエストを削除しました');
 
         if ($job_request->is_draft == JobRequest::NOT_DRAFT) {

@@ -117,4 +117,14 @@ class ChatroomMessageService
     {
         ChatroomMessage::where('chatroom_id', $chatroom->id)->partner()->update(['is_view' => 1]);
     }
+
+    // 商品削除メッセージ
+    public function storeDeleteMessage(Chatroom $chatroom)
+    {
+        $message = [
+            'user_id' => \Auth::id(),
+            'text' => '商品を削除しました',
+        ];
+        $chatroom->chatroomMessages()->create($message);
+    }
 }

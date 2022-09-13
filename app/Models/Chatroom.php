@@ -106,6 +106,28 @@ class Chatroom extends Model
     }
 
     /**
+     * product_idより対象のチャットルームを取得
+     * 
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTargetProduct($query, $product_id)
+    {
+        return $query->product()->where('reference_id', $product_id);
+    }
+
+     /**
+     * job_request_idより対象のチャットルームを取得
+     * 
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTargetJobRequest($query, $job_request_id)
+    {
+        return $query->product()->where('reference_id', $job_request_id);
+    }
+
+    /**
      * referenceがJobRequest かつ
      * seller / buyer がログインユーザーである 
      *

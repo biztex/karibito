@@ -1,5 +1,9 @@
 <div class="conts">
-    @if($value->reference_type === 'App\Models\Product')
+    @if($value->reference === null)
+        <div class="cont01">
+            <p class="price word-break" style="padding-left:15px;"><font>この商品は削除されました</font><br></p>
+        </div>
+    @elseif($value->reference_type === 'App\Models\Product')
         <div class="cont01">
             @if(isset($value->reference->productImage[0]))
                 <p class="img"><img src="{{ asset('/storage/'.$value->reference->productImage[0]->path)}}" alt=""></p>

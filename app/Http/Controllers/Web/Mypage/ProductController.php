@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Http\Requests\ProductController\DraftRequest;
-use App\Libraries\Age;
-use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\AdditionalOption;
@@ -15,18 +13,21 @@ use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
+use App\Services\ChatroomService;
 use App\Services\UserNotificationService;
 
 class ProductController extends Controller
 {
     private $product_service;
     private $evaluation_service;
+    private $chatroom_service;
     private $user_notification_service;
 
-    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, UserNotificationService $user_notification_service)
+    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, ChatroomService $chatroom_service, UserNotificationService $user_notification_service)
     {
         $this->product_service = $product_service;
         $this->evaluation_service = $evaluation_service;
+        $this->chatroom_service = $chatroom_service;
         $this->user_notification_service = $user_notification_service;
     }
 
@@ -166,6 +167,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete(); // データ論理削除
+        $this->chatroom_service->deleteProduct($product);
+    
         \Session::put('flash_msg','提供商品を削除しました');
         if ($product->is_draft == Product::NOT_DRAFT) {
             return redirect()->route('publication');
