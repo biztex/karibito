@@ -15,7 +15,15 @@
         <p class="check"><a>本人確認済み</a></p>
         @if (\Auth::id() !== $user->id)
             <div class="blogDtOtherBtn">
-                <a href="#" class="followA">フォローする</a>
+                @if(\Auth::user())
+                    @if(App\Models\UserFollow::IsFollowing($user->id))
+                        <a href="{{ route('follow.sub', ['id' => $user->id]) }}" class="followB" onclick='return confirm("フォローを解除しますか？");'>フォロー済み</a>
+                    @else
+                        <a href="{{ route('follow.add', ['id' => $user->id]) }}" class="followA">フォローする</a>
+                    @endif
+                @else
+                    <a href="{{ route('follow.add', ['id' => $user->id]) }}" class="followA">フォローする</a>
+                @endif
                 @if(empty($dmrooms))
                     <a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
                 @else

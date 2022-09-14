@@ -8,6 +8,8 @@ use  App\Models\Proposal;
 use  App\Models\Evaluation;
 use  App\Models\Purchase;
 use  App\Models\PurchasedCancel;
+use  App\Models\User;
+use  App\Models\UserNotification;
 
 
 class ChatroomMessageService
@@ -29,7 +31,8 @@ class ChatroomMessageService
             ];
         }
 
-        $chatroom->chatroomMessages()->create($message);
+        $chatroom_message = $chatroom->chatroomMessages()->create($message);
+        return $chatroom_message;
     }
 
     // 提案 chatroom message テーブル
@@ -113,5 +116,15 @@ class ChatroomMessageService
     public function isView($chatroom)
     {
         ChatroomMessage::where('chatroom_id', $chatroom->id)->partner()->update(['is_view' => 1]);
+    }
+
+    // 商品削除メッセージ
+    public function storeDeleteMessage(Chatroom $chatroom)
+    {
+        $message = [
+            'user_id' => \Auth::id(),
+            'text' => '商品を削除しました',
+        ];
+        $chatroom->chatroomMessages()->create($message);
     }
 }

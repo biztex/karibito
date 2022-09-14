@@ -72,7 +72,7 @@ class JobRequest extends Model
     {
         // return $query->inDeadline()->otherUsers(); 現段階では期限切れも表示するため一旦非表示
         // return $query->otherUsers(); 自分のも表示するから非表示
-        return $query->publish();
+        return $query->publish()->has('user');
     }
 
     /**
@@ -219,5 +219,21 @@ class JobRequest extends Model
     {
         $date = new Carbon($this->application_deadline);
         return $this->attributes['diff_time'] = $date->addDay()->diffForHumans(Carbon::now());
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'reference');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function userNotifications()
+    {
+        return $this->morphMany(UserNotification::class, 'reference');
     }
 }

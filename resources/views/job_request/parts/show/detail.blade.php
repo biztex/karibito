@@ -4,10 +4,28 @@
             <div class="single">
                 <a tabindex="0"> {{ App\Models\JobRequest::IS_ONLINE[$job_request->is_online] }} </a>
             </div>
-            <a href="#" class="favorite">
-                <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
-                <span>お気に入り</span>
-            </a>
+                @if (is_null($is_favorite))
+                    <form method="post" action="{{ route('favorite.store', $job_request->id) }}">
+                    {{-- <a href="{{ route('favorite.create' ) }}" class="favorite">
+                        <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                        <span>お気に入り</span>
+                    </a> --}}
+                    <button type="submit" class="favorite">
+                        <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                        <span>お気に入り</span>
+                    </button>
+                @else
+                    <form method="post" action="{{ route('favorite.delete', $job_request->id) }}">
+                        @method('delete')
+                        <button type="submit" class="favorite">
+                            <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                            <span>お気に入り</span>
+                        </button>
+                @endif
+                <input type="hidden" name="job_request_id" value="{{$job_request->id}}">
+                {{-- 連打防止つける --}}
+                @csrf
+            </form>
         </div>
         <div class="datas">
             <span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$job_request->is_call] }}</span>

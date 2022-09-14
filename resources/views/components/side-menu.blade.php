@@ -21,13 +21,13 @@
         <div class="sideItem">
             <ul class="sideUl01">
                 <li><a href="{{ route('mypage') }}" class="">マイページ</a></li>
-                <li><a href="/sample/favorite" class="">お気に入り</a></li>
+                <li><a href="{{ route('favorite.index') }}" class="">お気に入り</a></li>
                 <li><a href="{{ route('chatroom.active') }}" class="">進行中の取引</a></li>
                 <li><a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a></li>
                 <li><a href="{{ route('evaluation') }}" class="">評価一覧</a></li>
                 <li><a href="{{ route('payment.index') }}" class="">支払い履歴</a></li>
                 <li><a href="{{ route('point.index') }}" class="">ポイント取得・利用履歴</a></li>
-                {{-- <li><a href="/sample/friends" class="">フォロー・フォロワー</a></li> --}}
+                <li><a href="{{ route('follow.index') }}" class="">フォロー・フォロワー</a></li>
                 <li><a href="{{ route('user_notification.index') }}" class="">お知らせ</a></li>
                 {{-- <li><a href="/sample/faq" class="">カリビト知恵袋</a></li> --}}
                 <li><a href="{{ route('secret01') }}" class="">マッチングする秘訣</a></li>

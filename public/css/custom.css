@@ -131,22 +131,22 @@
 	pointer-events: none;
 }
 
-/* #friends #side div:nth-of-type(2) ul li:nth-of-type(8) a {
+#friends #side div:nth-of-type(2) ul li:nth-of-type(8) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+
+#news #side div:nth-of-type(2) ul li:nth-of-type(9) a {
+	color: #333333;
+	background-color: #FCAA00;
+	pointer-events: none;
+}
+/* .user_notification_show #side div:nth-of-type(2) ul li:nth-of-type(8) a {
 	color: #333333;
 	background-color: #FCAA00;
 	pointer-events: none;
 } */
-
-#news #side div:nth-of-type(2) ul li:nth-of-type(8) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
-.user_notification_show #side div:nth-of-type(2) ul li:nth-of-type(8) a {
-	color: #333333;
-	background-color: #FCAA00;
-	pointer-events: none;
-}
 
 /* #faq #side div:nth-of-type(2) ul li:nth-of-type(10) a {
 	color: #333333;
@@ -154,41 +154,41 @@
 	pointer-events: none;
 } */
 
-#secret #side div:nth-of-type(2) ul li:nth-of-type(9) a {
+#secret #side div:nth-of-type(2) ul li:nth-of-type(10) a {
 	color: #333333;
 	background-color: #FCAA00;
 	pointer-events: none;
 }
 
-#coupon #side div:nth-of-type(2) ul li:nth-of-type(10) a {
+#coupon #side div:nth-of-type(2) ul li:nth-of-type(11) a {
 	color: #333333;
 	background-color: #FCAA00;
 	pointer-events: none;
 }
 
-.dm-page #side div:nth-of-type(2) ul li:nth-of-type(11) a {
+.dm-page #side div:nth-of-type(2) ul li:nth-of-type(12) a {
 	color: #333333;
 	background-color: #FCAA00;
 	pointer-events: none;
 }
 
-.dm-page-show #side div:nth-of-type(2) ul li:nth-of-type(11) a {
+.dm-page-show #side div:nth-of-type(2) ul li:nth-of-type(12) a {
 	color: #333333;
 	background-color: #FCAA00;
 }
 
-#setting #side div:nth-of-type(2) ul li:nth-of-type(12) a {
+#setting #side div:nth-of-type(2) ul li:nth-of-type(13) a {
 	color: #333333;
 	background-color: #FCAA00;
 	pointer-events: none;
 }
 
-#setting-page #side div:nth-of-type(2) ul li:nth-of-type(12) a {
+#setting-page #side div:nth-of-type(2) ul li:nth-of-type(13) a {
 	color: #333333;
 	background-color: #FCAA00;
 }
 
-#withdraw #side div:nth-of-type(2) ul li:nth-of-type(13) a {
+#withdraw #side div:nth-of-type(2) ul li:nth-of-type(14) a {
 	color: #333333;
 	background-color: #FCAA00;
 	pointer-events: none;
@@ -1880,6 +1880,7 @@ img.moreRecommendListImg {
     position: relative;
     padding: 7px 30px;
 }
+
 /* stripe クレジットカード入力欄用 */
 .creditField {
 	display: flex;

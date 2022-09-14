@@ -43,12 +43,14 @@ use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\DmroomController;
 use App\Http\Controllers\Web\KaribitoSurveyController;
+use App\Http\Controllers\Web\FollowController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
+use App\Http\Controllers\Web\Mypage\FavoriteController;
 use App\Http\Controllers\Web\Mypage\PortfolioController;
 
 // 管理者用
@@ -129,9 +131,13 @@ Route::middleware('update_latest_login_datetime')->group(function () {
 
                 // ポートフォリオ
                 Route::resource('portfolio', PortfolioController::class);
+
+                // お気に入り
+                Route::get('favorite/index', [FavoriteController::class, 'index'])->name('favorite.index');
+                Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite.store');
+                Route::delete('favorite', [FavoriteController::class, 'delete'])->name('favorite.delete');
             // });
 
-            
             // お知らせ一覧表示(UserNotification)
             Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
             // お知らせ一覧表示(UserNotification)
@@ -186,7 +192,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                     Route::delete('bank', 'destroy')->name('destroy');
                 });
 
-
                 // お知らせ機能の設定
                 Route::put('/notification', [UserNotificationSettingController::class, 'update'])->name('notification.update');
             });
@@ -206,7 +211,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('job_request',function () { return redirect()->route('publication');});
         Route::get('product',function () { return redirect()->route('publication');});
         Route::get('publication',[MypageJobRequestController::class, 'index'])->name('publication');
-        
+
         // 提供・リクエスト 下書き一覧
         Route::get('draft',[MypageJobRequestController::class, 'draft'])->name('draft');
 
@@ -305,7 +310,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->middleware('can:chatroom.evaluation.complete,chatroom')->name('evaluation.complete'); // 評価完了
 
             // 支払い
-            Route::middleware('can:purchase,proposal')->group(function () {
+            Route::middleware('deleted_service','can:purchase,proposal')->group(function () {
                 Route::get('purchase/{proposal}','purchase')->name('purchase'); //入力画面
                 Route::post('purchase/{proposal}','purchaseConfirm')->name('purchase.confirm'); // 確認画面
                 Route::post('purchased/{proposal}','purchased')->name('purchased');
@@ -349,6 +354,13 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('show');
             Route::post('{dmroom}',[DmroomController::class,'message'])->middleware('is_ban')->name('message');
             Route::get('create/{user}',[DmroomController::class,'create'])->middleware(['can:not.create.dm,user','is_ban'])->name('create');
+        });
+
+        // フォロー・フォロワー
+        Route::prefix('follow')->name('follow.')->group(function () {
+            Route::resource('',FollowController::class, ['only' => 'index']);
+            Route::get('/add/{id}', [FollowController::class, 'addFollow'])->name('add');
+            Route::get('/sub/{id}', [FollowController::class, 'subFollow'])->name('sub');
         });
     });
     // 提供・リクエストの詳細ページ
@@ -478,6 +490,4 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
     });
 
-    
-    
 });

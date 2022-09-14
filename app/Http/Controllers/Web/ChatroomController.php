@@ -17,6 +17,7 @@ use App\Services\PurchaseService;
 use App\Services\EvaluationService;
 use App\Services\StripeService;
 use App\Services\PointService;
+use App\Services\UserNotificationService;
 use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
@@ -34,9 +35,11 @@ class ChatroomController extends Controller
     private $evaluation_service;
     private $point_service;
     private $coupon_service;
+    private $user_notification_service;
+    private readonly PaymentService $payment_service;
     private readonly StripeService $stripe_service;
-
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PointService $point_service, CouponService $coupon_service, StripeService $stripe_service)
+    
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service, StripeService $stripe_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -46,6 +49,7 @@ class ChatroomController extends Controller
         $this->stripe_service = $stripe_service;
         $this->point_service = $point_service;
         $this->coupon_service = $coupon_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -164,6 +168,7 @@ class ChatroomController extends Controller
         }
 
         $this->chatroom_message_service->isView($chatroom);
+        $this->user_notification_service->isView($chatroom);
 
         return view('chatroom.show', compact('chatroom', 'partner'));
     }
@@ -178,6 +183,7 @@ class ChatroomController extends Controller
     public function message(MessageRequest $request, Chatroom $chatroom)
     {
         $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+        $this->user_notification_service->storeUserNotificationMessage($chatroom);
 
         return back();
     }

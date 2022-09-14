@@ -5,25 +5,30 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductController\StoreRequest;
 use App\Http\Requests\ProductController\DraftRequest;
-use App\Libraries\Age;
-use App\Models\User;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Models\AdditionalOption;
 use App\Models\Chatroom;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
+use App\Services\ChatroomService;
+use App\Services\UserNotificationService;
 
 class ProductController extends Controller
 {
     private $product_service;
     private $evaluation_service;
+    private $chatroom_service;
+    private $user_notification_service;
 
-    public function __construct(ProductService $product_service, EvaluationService $evaluation_service)
+    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, ChatroomService $chatroom_service, UserNotificationService $user_notification_service)
     {
         $this->product_service = $product_service;
         $this->evaluation_service = $evaluation_service;
+        $this->chatroom_service = $chatroom_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -75,6 +80,8 @@ class ProductController extends Controller
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->product_service->getURL($product->id);
 
+        $this->user_notification_service->storeUserNotificationPost($product);
+
         return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
     }
 
@@ -98,10 +105,13 @@ class ProductController extends Controller
 
         $number_of_sold = Chatroom::numberOfSold($product->id);
 
+        $is_favorite = Favorite::product()->where('reference_id', $product->id)->first();
+
+        $this->user_notification_service->isView($product);
+
         $url = $this->product_service->getURL($product->id);
 
-
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url'));
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite'));
     }
 
     /**
@@ -138,9 +148,10 @@ class ProductController extends Controller
             $this->product_service->updateProductQuestion($request->all(), $product);
             $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
+            $this->user_notification_service->storeUserNotificationFavorite($product);
         });
 
-        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
+        $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first(); //この処理は何か確認
         $url = $this->product_service->getURL($product->id);
 
         return redirect()->route('product.thanks')->with(['url' => $url, 'product_title' => $product->title, 'name' => $product->user->name]);
@@ -156,6 +167,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete(); // データ論理削除
+        $this->chatroom_service->deleteProduct($product);
+    
         \Session::put('flash_msg','提供商品を削除しました');
         if ($product->is_draft == Product::NOT_DRAFT) {
             return redirect()->route('publication');

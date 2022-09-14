@@ -4,7 +4,11 @@
             <div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('chatroom.index') }}">やりとり一覧</a>　>　
-                <span>{{ $chatroom->reference->title }}</span>
+                @if($chatroom->reference !== null)
+                    <span>{{ $chatroom->reference->title }}</span>
+                @else
+                    <span>削除された商品</span>
+                @endif
             </div>
         </div><!-- /.breadcrumb -->
 

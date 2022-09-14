@@ -7,20 +7,31 @@ use App\Models\JobRequest;
 use App\Models\Product;
 use App\Models\Chatroom;
 use App\Models\User;
+use App\Models\Favorite;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\JobRequestService;
+use App\Services\ChatroomService;
 use App\Http\Requests\JobRequestController\DraftRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
+use App\Services\UserNotificationService;
 
 class JobRequestController extends Controller
 {
     private $job_request_service;
 
-    public function __construct(JobRequestService $job_request_service)
+    private $chatroom_service;
+    
+    private $user_notification_service;
+
+    public function __construct(JobRequestService $job_request_service, ChatroomService $chatroom_service, UserNotificationService $user_notification_service)
     {
         $this->job_request_service = $job_request_service;
+        $this->chatroom_service = $chatroom_service;
+        $this->user_notification_service = $user_notification_service;
     }
+
+    
 
     /**
      * Display a listing of the resource.
@@ -92,6 +103,8 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
+        $this->user_notification_service->storeUserNotificationPost($job_request);
+
         return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
@@ -111,7 +124,11 @@ class JobRequestController extends Controller
         $requested = Chatroom::requested($job_request->id);
         $url = $this->job_request_service->getURL($job_request->id);
 
-        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url'));
+        $is_favorite = Favorite::jobRequest()->where('reference_id', $job_request->id)->first();
+
+        $this->user_notification_service->isView($job_request);
+
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite'));
     }
 
     /**
@@ -147,6 +164,8 @@ class JobRequestController extends Controller
         $job_request = JobRequest::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
         $url = $this->job_request_service->getURL($job_request->id);
 
+        $this->user_notification_service->storeUserNotificationFavorite($job_request);
+
         return redirect()->route('job_request.thanks')->with(['url' => $url, 'product_title' => $job_request->title, 'name' => $job_request->user->name]);
     }
 
@@ -160,6 +179,8 @@ class JobRequestController extends Controller
     public function destroy(JobRequest $job_request)
     {
         $job_request->delete(); // データ論理削除
+        $this->chatroom_service->deleteJobRequest($job_request);
+
         \Session::put('flash_msg','リクエストを削除しました');
 
         if ($job_request->is_draft == JobRequest::NOT_DRAFT) {

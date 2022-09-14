@@ -5,10 +5,18 @@ namespace App\Services;
 use  App\Models\Product;
 use  App\Models\JobRequest;
 use  App\Models\Chatroom;
+use  App\Services\ChatroomMessageService;
 
 
 class ChatroomService
 {
+    private $chatroom_message_service;
+
+    public function __construct(ChatroomMessageService $chatroom_message_service)
+    {
+        $this->chatroom_message_service = $chatroom_message_service;
+    }
+
     // 新規チャット(提供)
     public function startChatroomProduct(Product $product): Chatroom
     {
@@ -66,6 +74,24 @@ class ChatroomService
     public function statusChangeCanceled(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => 7])->save();
+    }
+
+    // 商品が削除されたとき、チャットルームのステータスをキャンセルにし、
+    // 商品が削除されましたメッセージを送る
+    public function deleteProduct(Product $product)
+    {
+        foreach($product->chatrooms as $chatroom) {
+            $this->statusChangeCanceled($chatroom);
+            $this->chatroom_message_service->storeDeleteMessage($chatroom);
+        }
+    }
+    
+    public function deleteJobRequest(JobRequest $job_request)
+    {
+        foreach($job_request->chatrooms as $chatroom) {
+            $this->statusChangeCanceled($chatroom);
+            $this->chatroom_message_service->storeDeleteMessage($chatroom);
+        }
     }
 
 }
