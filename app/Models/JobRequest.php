@@ -72,7 +72,7 @@ class JobRequest extends Model
     {
         // return $query->inDeadline()->otherUsers(); 現段階では期限切れも表示するため一旦非表示
         // return $query->otherUsers(); 自分のも表示するから非表示
-        return $query->publish();
+        return $query->publish()->has('user');
     }
 
     /**
