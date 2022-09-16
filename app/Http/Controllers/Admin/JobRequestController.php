@@ -19,7 +19,7 @@ class JobRequestController extends Controller
 
     public function index()
     {
-        $job_requests = JobRequest::orderBy('id', 'desc')->paginate(50);
+        $job_requests = JobRequest::orderBy('id', 'desc')->has('user')->paginate(50);
 
         return view('admin.job_request.index',compact('job_requests'));
     }

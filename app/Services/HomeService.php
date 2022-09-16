@@ -16,6 +16,7 @@ class HomeService
         $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
             // ->otherUsers()
             ->orderBy('created_at', 'desc')
+            ->has('user')//一旦ここに入れておく、緊急対応
             ->paginate($i);
 
         return $products;
@@ -27,6 +28,7 @@ class HomeService
         $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
             // ->otherUsers()
             ->orderBy('created_at','desc')
+            ->has('user') //一旦ここに入れておく、緊急対応
             ->get(); // 公開&&下書きでない
 
         return $products;
