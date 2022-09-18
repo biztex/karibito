@@ -126,8 +126,6 @@ class JobRequestController extends Controller
 
         $is_favorite = Favorite::jobRequest()->where('reference_id', $job_request->id)->first();
 
-        $this->user_notification_service->isView($job_request);
-
         return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite'));
     }
 
