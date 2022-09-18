@@ -16,9 +16,9 @@
 							<li><a href="#tab_box01" class="is_active">進行中のやりとり</a></li>
 							<li><a href="#tab_box02" class="" id="box02">過去のやりとり</a></li>
 						</ul>
-						
+
 						@include('chatroom.parts.index.active')
-						
+
 
 						@include('chatroom.parts.index.inactive')
 					</div>

@@ -107,8 +107,6 @@ class ProductController extends Controller
 
         $is_favorite = Favorite::product()->where('reference_id', $product->id)->first();
 
-        $this->user_notification_service->isView($product);
-
         $url = $this->product_service->getURL($product->id);
 
         return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite'));

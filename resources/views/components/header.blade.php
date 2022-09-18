@@ -46,25 +46,15 @@
                                                 @if(isset($not_view_user_notifications[0]))
                                                     @foreach ($not_view_user_notifications as $k => $not_view_user_notification)
                                                         @if ($not_view_user_notification->is_view === 0)
-                                                            @if ($not_view_user_notification->reference_type === 'App\Models\Chatroom')
-                                                                <a href="{{route('chatroom.show', $not_view_user_notification->reference_id)}}">
-                                                            @elseif ($not_view_user_notification->reference_type === 'App\Models\Product')
-                                                                <a href="{{route('product.show', $not_view_user_notification->reference_id)}}">
-                                                            @elseif ($not_view_user_notification->reference_type === 'App\Models\JobRequest')
-                                                                <a href="{{route('job_request.show', $not_view_user_notification->reference_id)}}">
-                                                            @elseif ($not_view_user_notification->reference_type === 'App\Models\Portfolio')
-                                                                <a href="{{route('user.portfolio.show', [$portfolio_user_id[$k], $not_view_user_notification->reference_id])}}">
-                                                            @else
-                                                                <a href="{{route('user_notification.show', $not_view_user_notification->id)}}">
-                                                            @endif
-                                                            <dl>
-                                                                <dt><img src="/img/common/img_message01.png" alt=""></dt>
-                                                                <dd>
-                                                                    <p class="txt">{{$not_view_user_notification->title}}</p>
-                                                                    <p class="time">{{$not_view_user_notification->created_at->diffForHumans()}}</p>
-                                                                </dd>
-                                                            </dl>
-                                                        </a>
+                                                            <a href="{{route('already_read.show', $not_view_user_notification->id)}}">
+                                                                <dl>
+                                                                    <dt><img src="/img/common/img_message01.png" alt=""></dt>
+                                                                    <dd>
+                                                                        <p class="txt">{{$not_view_user_notification->title}}</p>
+                                                                        <p class="time">{{$not_view_user_notification->created_at->diffForHumans()}}</p>
+                                                                    </dd>
+                                                                </dl>
+                                                            </a>
                                                         @endif
                                                     @endforeach
                                                 @else

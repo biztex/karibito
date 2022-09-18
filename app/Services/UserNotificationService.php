@@ -86,7 +86,6 @@ class UserNotificationService
         $user_notification = [
             'user_id' => $product_user->id,
             'title' => $login_user->name.'さんからいいねが来ました。',
-            // 'content' => $login_user->name.'さんが'.$product->title.'にいいねをしました。確認してみましょう。',
             'reference_type' => 'App\Models\Product',
             'reference_id' => $product->id,
         ];
@@ -99,7 +98,6 @@ class UserNotificationService
 
         $mail_content = UserNotification::create($user_notification);
         \Mail::to($product_user->email)->send(new LikeRegisterMail($mail_content));
-        // SendNewLikeNotificationMail::dispatch($mail_content);
     }
 
     // チャットメッセージが来たら通知する
@@ -150,14 +148,5 @@ class UserNotificationService
             $user_notification = $news->userNotifications()->create($user_notification_contents);
             SendNewNewsNotificationMail::dispatch($user_notification);
         }
-    }
-
-    // 既読処理
-    public function isView($reference_type)
-    {
-        UserNotification::where([
-            ['reference_id', '=', $reference_type->id],
-            ['user_id', '=', \Auth::user()->id],
-        ])->update(['is_view' => 1]);
     }
 }

@@ -96,8 +96,6 @@ class UserController extends Controller
         $prev_page = $this->portfolio_service->prevPage($portfolio, $portfolio_list);
         $next_page = $this->portfolio_service->nextPage($portfolio, $portfolio_list);
 
-        $this->user_notification_service->isView($portfolio);
-
         return view('other-user.portfolio.show', compact('user', 'portfolio', 'portfolio_list', 'url', 'prev_page', 'next_page'));
     }
 }

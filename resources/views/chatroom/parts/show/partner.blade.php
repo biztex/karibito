@@ -61,5 +61,5 @@
         @include('chatroom.parts.show.partner-tell')
 
     </div>
-    
+
 @endif

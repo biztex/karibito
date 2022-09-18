@@ -43,6 +43,7 @@ use App\Http\Controllers\Web\CancelController;
 use App\Http\Controllers\Web\DmroomController;
 use App\Http\Controllers\Web\KaribitoSurveyController;
 use App\Http\Controllers\Web\FollowController;
+use App\Http\Controllers\Web\AlreadyReadController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -141,7 +142,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('user_notification', [UserNotificationController::class, 'index'])->name('user_notification.index');
             // お知らせ一覧表示(UserNotification)
             Route::middleware(['can:my.user.notification,user_notification'])->group(function () {
-                Route::get('user_notification/{user_notification}', [UserNotificationController::class, 'show'])->name('user_notification.show');
+                Route::get('user_notification/{user_notification}', [AlreadyReadController::class, 'show'])->name('already_read.show');
             });
 
             // 評価一覧
