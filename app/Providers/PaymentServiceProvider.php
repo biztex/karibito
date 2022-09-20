@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Libraries\Payment\PayjpPayment;
+use App\Libraries\Payment\StripePayment;
 use App\Libraries\Payment\PaymentInterface;
 use App\Libraries\Payment\StubPayment;
 use Illuminate\Support\ServiceProvider;
@@ -16,11 +16,11 @@ class PaymentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // envにpayjpの設定の有無によってインスタンスを変更
-        if(config('payjp.secret_key')){
-            // あり：PayjpPaymentを注入
+        // envにstripeの設定の有無によってインスタンスを変更
+        if(config('stripe.stripe_secret_key')){
+            // あり：StripePaymentを注入
             $this->app->bind(PaymentInterface::class, function ($app) {
-                return new PayjpPayment();
+                return new StripePayment();
             });
         } else {
             // なし：StubPaymentを注入

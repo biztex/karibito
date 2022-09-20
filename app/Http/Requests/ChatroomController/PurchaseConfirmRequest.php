@@ -18,13 +18,6 @@ class PurchaseConfirmRequest extends FormRequest
     }
     protected function prepareForValidation()
     {
-        if( $this->card_id !== 'immediate' ) {
-            $exp = null;
-        } else {
-            $exp = $this->exp_year . '-' . $this->exp_month; 
-        }      
-
-
         if($this->coupon_use === null) {
             $coupon_number = null;
         } else {
@@ -38,7 +31,6 @@ class PurchaseConfirmRequest extends FormRequest
         }
 
         $this->merge([
-            'exp' => $exp,
             'coupon_number' => $coupon_number,
             'user_use_point' => $user_use_point
         ]);
@@ -68,12 +60,7 @@ class PurchaseConfirmRequest extends FormRequest
         return [
             'payment_type' => 'required',
             'card_id' => 'required | string',
-            'cc_number' => 'required_if:card_id,immediate | nullable | digits_between:14,16',
-            'cc_name' => 'required_if:card_id,immediate | nullable | string | max:30',
-            'cvc' => 'required_if:card_id,immediate | nullable | digits_between:3,4',
-            'exp_year' => 'required_if:card_id,immediate | nullable ',
-            'exp_month' => 'required_if:card_id,immediate | nullable ',
-            'exp' => 'required_if:card_id,immediate | nullable | after:last month',
+            'stripeToken' => 'required_if:card_id,immediate| nullable | string',
             'coupon_use' => 'nullable |  boolean',
             'coupon_number' => ['required_if:coupon_use,1', 'nullable', new UseCouponRule],
             'coupon_discount' => "integer | nullable",
@@ -86,7 +73,8 @@ class PurchaseConfirmRequest extends FormRequest
     {
         return [
             'card_id.*' => '※お支払いカードを選択してください。',
-            'coupon_number.required_if' => '利用するクーポンを選択してください。' 
+            'coupon_number.required_if' => '利用するクーポンを選択してください。' ,
+            'stripeToken.*' => '※カード情報を正しく入力してください。'
         ];
     }
 }

@@ -4,7 +4,7 @@
 	<article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>決済履歴</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>支払い履歴</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.ban-msg/>
@@ -13,66 +13,38 @@
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="subPagesWrap">
-						<h2 class="subPagesHd">決済履歴</h2>
+						<h2 class="subPagesHd">支払い履歴</h2>
 						<div class="subPagesTab tabWrap">
-							<ul class="tabLink">
-								<li><a href="#tab_box01" class="is_active">入金履歴</a></li>
-								<li><a href="#tab_box02" id="box02">支払い履歴</a></li>
-							</ul>
+							{{-- <ul class="tabLink">
+								<li><a href="#tab_box01" class="is_active">支払い履歴</a></li>
+							</ul> --}}
 							<div class="tabBox is_active" id="tab_box01">
-                            @if(empty($deposits[0]))
-								<p class="name">入金履歴はありません。</p>
-							@else
-								<ul class="paymentUl01">
-                                    @foreach($deposits as $value)
-                                        <li>
-                                            <div class="box">
-                                                <div class="cont">
-                                                    <p class="date">{{ date('Y年n月j日', strtotime($value->created_at)) }}</p>
-                                                    <p class="txt">{{ $value->purchase->chatroom->reference->title }}</p>
-                                                </div>
-                                                <div class="price"><span>入金</span>{{ number_format($value->amount) }}円</div>
-                                            </div>
-                                        </li>
-									@endforeach
-
-                                {{ $deposits->fragment('')->links() }}
-
-								</ul>
-                            @endif
-							</div>
-							<div class="tabBox" id="tab_box02">
-                            @if(empty($withdrawals[0]))
-								<p class="name">支払い履歴はありません。</p>
-							@else
-								<ul class="paymentUl01">
-                                    @foreach($withdrawals as $value)
-                                        <li>
-                                            <div class="box">
-                                                <div class="cont">
-                                                    <p class="date">{{ date('Y年n月j日', strtotime($value->created_at)) }}</p>
-                                                    <p class="txt">{{ $value->purchase->chatroom->reference->title }}</p>
-                                                </div>
-                                                <div class="price"><span>支払い</span>{{ number_format($value->amount) }}円</div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-
-										<li>
-											<div class="box">
-												<div class="cont">
-													<p class="date">2022年8月30日</p>
-													<p class="txt">タイトル</p>
+								@if(empty($withdrawals[0]))
+									<p class="name">支払い履歴はありません。</p>
+								@else
+									<ul class="paymentUl01">
+										@foreach($withdrawals as $value)
+											<li>
+												<div class="box">
+													<div class="cont">
+														<p class="date">{{ date('Y年n月j日', strtotime($value->created_at)) }}</p>
+														<p class="txt">{{ $value->purchase->chatroom->reference->title }}</p>
+													</div>
+													@if($value->refunded_at === null)
+														<div class="price"><span>支払い</span>{{ number_format($value->amount) }}円</div>
+													@else
+														<div class="price-back"><span>返金</span>{{ number_format($value->amount_refunded) }}円</div>
+													@endif
 												</div>
-												<div class="price-back"><span>返金</span>9,999円</div>
-											</div>
-										</li>
-							    
-                                {{ $withdrawals->fragment('withdrawal')->links() }}
+											</li>
+										@endforeach
 									
-								</ul>
-                            @endif
+									{{ $withdrawals->links() }}
+										
+									</ul>
+								@endif
 							</div>
+							
 						</div>
 					</div>
 				</div><!-- /#main -->

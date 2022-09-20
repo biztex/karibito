@@ -15,7 +15,7 @@ use App\Services\ChatroomMessageService;
 use App\Services\ProposalService;
 use App\Services\PurchaseService;
 use App\Services\EvaluationService;
-use App\Services\PaymentService;
+use App\Services\StripeService;
 use App\Services\PointService;
 use App\Services\UserNotificationService;
 use App\Services\PurcahsedProductService;
@@ -39,16 +39,16 @@ class ChatroomController extends Controller
     private $user_notification_service;
     private $purchased_product_service;
 
-    private readonly PaymentService $payment_service;
+    private readonly StripeService $stripe_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service, PurcahsedProductService $purchased_product_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service, StripeService $stripe_service, PurcahsedProductService $purchased_product_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
         $this->proposal_service = $proposal_service;
         $this->purchase_service = $purchase_service;
         $this->evaluation_service = $evaluation_service;
-        $this->payment_service = $payment_service;
+        $this->stripe_service = $stripe_service;
         $this->point_service = $point_service;
         $this->coupon_service = $coupon_service;
         $this->user_notification_service = $user_notification_service;
@@ -219,7 +219,7 @@ class ChatroomController extends Controller
      */
     public function purchase(Proposal $proposal)
     {
-        $cards = $this->payment_service->getCardList();
+        $cards = $this->stripe_service->getCardList();
         $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
         $user_has_coupons = $this->coupon_service->showCoupon(); //期限が切れていないクーポンを取得
         $commission = $this->purchase_service->getCommission($proposal);
@@ -236,10 +236,11 @@ class ChatroomController extends Controller
      */
     public function purchaseConfirm(PurchaseConfirmRequest $request, Proposal $proposal)
     {
-        $card = $this->payment_service->getCard($request->card_id);
+        $stripe_token = $this->stripe_service->checkToken($request->all());
+        $card = $this->stripe_service->getCard($request->all());
         $amount = $this->purchase_service->getConfirmAmount($proposal, $request->all());
 
-        return view('chatroom.purchase.confirm',compact('request', 'proposal', 'card', 'amount'));
+        return view('chatroom.purchase.confirm',compact('request', 'proposal','stripe_token', 'card', 'amount'));
     }
 
     /**
@@ -252,21 +253,22 @@ class ChatroomController extends Controller
     public function purchased(PaymentRequest $request, Proposal $proposal)
     {
         \DB::transaction(function () use ($request, $proposal) {
+            // 金額取得
             $amount = $this->purchase_service->getFinalAmount($proposal, $request->all());
-            $payjp_charge_id = $this->payment_service->createCharge($request->all(), $amount['total']);
-            $payment = $this->payment_service->storePayment($payjp_charge_id, $amount['total']);
-            $this->proposal_service->purchasedProposal($proposal);
-            $purchase = $this->purchase_service->storePurchase($proposal, $payment);
-            $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
-            $this->chatroom_service->statusChangeWork($proposal->chatroom);
+            // stripe支払い処理
+            $charge_id = $this->stripe_service->createCheckout($request->all(), $amount['total']);
+            // 購入完了処理
+            $this->purchase_service->purchased($charge_id, $amount['total'], $proposal);
+            // pointを与える
             $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 取得ポイントは手数料含めるか確認
+            // pointを消化する
             $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
             $this->purchased_product_service->storePurchasedProduct($proposal->chatroom);
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }
 
-    /**
+       /**
      * 作業完了
      * @param \App\Models\Chatroom $chatroom
      * 

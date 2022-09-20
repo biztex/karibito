@@ -1,4 +1,5 @@
 <x-layout>
+<script src="https://js.stripe.com/v3"></script>
 <body id="setting-page">
 <x-parts.post-button/>
 	<article>
@@ -38,65 +39,57 @@
 										@endforeach
 									@endif
 								</div>
-								<form id="form" action="{{ route('setting.card.store') }}" method="post">
+								<form id="payment-form" action="{{ route('setting.card.store') }}" method="post">
 									@csrf
 									<div class="configEditList">
-										<h3 class="mypageEditHd">新しいカード情報　@if($errors->any())<span>※正しい情報を入力してください</span>@endif</h3>
-										<div class="configEditTable">
-											<table>
-												<tr>
-													<th>カード番号</th>
-													<td>
-														<div class="mypageEditInput"><input type="tel" name="cc_number" placeholder="" maxlength="16" pattern="([0-9]| )*"></div>
-														<p class="noticeP">例）1234567890123456</p>
-													</td>
-												</tr>
-												<tr>
-													<th>有効期限</th>
-													<td>
-														<div class="mypageEditInput flexLine02">
-															<select name="exp_month">
-																@for($i=1; $i<=12; $i++)
-																	<option value="{{$i}}" @if($i == old('exp_month')) selected @endif>{{sprintf('%02d', $i)}}</option>
-																@endfor
-															</select>
-															<span class="span">/</span>
-															<select name="exp_year">
-																@for($i=2022; $i<=2030; $i++)
-																	<option value="{{$i}}" @if($i == old('exp_year')) selected @endif>{{$i}}</option>
-																@endfor
-															</select>
-														</div>
-														<p class="noticeP">※カードに刻印されている表記のとおりにご選択ください。</p>
-													</td>
-												</tr>
-												<tr>
-													<th>カード名義</th>
-													<td>
-														<div class="mypageEditInput"><input type="text" name="cc_name" placeholder=""></div>
-													<p class="noticeP">※カードに刻印されている表記のとおりにご選択ください。</p>
-													</td>
-												</tr>
-												<tr>
-													<th>セキュリティコード</th>
-													<td class="creditCode">
-														<input type="tell" name="cvc" class="small" maxlength="4">
-														<a href="#" class="link">▶セキュリティコードとは？</a>
-														<div class="creditCodeBox">
-															<p>セキュリティコードの場所</p>
-															<div class="creditCodeImg">
-																<img src="/img/cart_buy/security_guide_3.png" alt="">
-															</div>
-															<p>※カードの裏に記載されている<br>3桁のコードをご記入ください。</p>
-														</div>
-													</td>
-												</tr>
-											</table>
-										</div>
-									</div>
+										<h3 class="mypageEditHd">新しいカード情報　<span id="card-error"></span></h3>
+										<div style="padding: 10px;border: 1px solid #ccc;" class="">
+											
+											<div class="creditField">
+												<div id="label">カード番号</div>
+												<div class="stripeCreditCardElements">
+													<div class="creditCardElements" id="card-number"></div>
+													<p class="noticeP">例）1234567890123456</p>
+												</div>
+											</div>
 
-									<div class="configEditButton">
-										<input class="loading-disabled" type="submit" value="登録">
+											<div class="creditField">
+												<div id="label">有効期限</div>
+												<div class="stripeCreditCardElements">
+													<div class="creditCardElements" id="card-expiry"></div>
+													<p class="noticeP">※カードに刻印されている表記のとおりにご選択ください。</p>
+												</div>
+											</div>
+
+											<div class="creditField">
+												<div id="label">カード名義</div>
+												<div class="stripeCreditCardElements">
+													<div class="mypageEditInput"><input type="text" name="cardName" id="cardName" placeholder=""></div>
+													<p class="noticeP">※カードに刻印されている表記のとおりにご選択ください。</p>
+												</div>
+											</div>
+
+											<div class="creditField">
+												<div id="smallLabel">セキュリティコード</div>
+												<div class="creditCode">
+													<div class="stripeCreditCardElements">
+														<div id="card-cvc" class="creditCardElements small"></div>
+													</div>
+													<a href="#" class="link">▶セキュリティコードとは？</a>
+													<div class="creditCodeBox">
+														<p>セキュリティコードの場所</p>
+														<div class="creditCodeImg">
+															<img src="/img/cart_buy/security_guide_3.png" alt="">
+														</div>
+														<p>※カードの裏に記載されている<br>3桁のコードをご記入ください。</p>
+													</div>
+												</div>
+												
+											</div>
+											<div class="configEditButton">
+												<input class="" type="submit" value="登録">
+											</div>
+										</div>
 									</div>
 								</form>
 							</div>
@@ -109,3 +102,102 @@
 		</div><!-- /#contents -->
 	</article>
 </x-layout>
+
+<script>
+	if('{{ config('stripe.stripe_public_key') }}') {
+
+		// publishable API keyをセットする
+		const stripe = Stripe('{{ config('stripe.stripe_public_key') }}');
+		const elements = stripe.elements();
+
+		// カード番号・有効期限・名義入力欄用
+		const elementStyles = { 
+			base: {
+				// 入力した文字のサイズ
+				fontSize: '14px',
+				// 入力した文字の色
+				color: "#111111",
+				// プレースホルダーの文字色
+				'::placeholder': {
+					color: '#d3d3d3'
+				}
+			}
+			// エラー時の入力した文字色と左のカードアイコンの色
+			,invalid: {
+				color: '#ff5f3f',
+				iconColor: '#ff5f3f'
+			}
+		};
+
+		// セキュリティーコード入力欄用 
+		const elementSmallStyles = {
+			base: {
+				fontSize: '14px',
+				color: "#111111",
+				'::placeholder': {
+					color: '#ffffff'
+				}
+			}
+			,invalid: {
+				color: '#ff5f3f',
+				iconColor: '#ff5f3f'
+			}
+		};
+
+		// カード番号
+		const cardNumber = elements.create('cardNumber', {style: elementStyles});
+		cardNumber.mount('#card-number');
+
+		// 有効期限
+		const cardExpiry = elements.create('cardExpiry', {style: elementStyles});
+		cardExpiry.mount('#card-expiry');
+
+		// セキュリティーコード
+		const cardCvc = elements.create('cardCvc', {style: elementSmallStyles});
+		cardCvc.mount('#card-cvc');
+
+		// トークンの生成、またはサブミット時のエラーを表示
+		const form = document.getElementById('payment-form');
+		form.addEventListener('submit', function(event) {
+			// デフォルトのsubmit動作を止める
+			event.preventDefault();
+			stripe.createToken(cardNumber,{name: document.querySelector('#cardName').value}).then(function(result) {
+				if (result.error) {
+					// エラーがあった場合、エラーを表示
+					const errorElement = document.getElementById('card-error');
+					errorElement.textContent = result.error.message;
+				} else {
+					// エラーがない場合、トークン送信
+					stripeTokenHandler(result.token);
+				}
+			});
+		});
+		function stripeTokenHandler(token) {
+			// トークンIDを付加してフォームデータをサブミット
+			const form = document.getElementById('payment-form');
+			const hiddenInput = document.createElement('input');
+			hiddenInput.setAttribute('type', 'hidden');
+			hiddenInput.setAttribute('name', 'stripeToken');
+			hiddenInput.setAttribute('value', token.id);
+			form.appendChild(hiddenInput);
+			// フォーム送信
+			form.submit();
+		}
+
+	} else {
+		// stripe key未設定の時
+		const form = document.getElementById('payment-form');
+	
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			const hiddenInput = document.createElement('input');
+			hiddenInput.setAttribute('type', 'hidden');
+			hiddenInput.setAttribute('name', 'stripeToken');
+			hiddenInput.setAttribute('value', 'tok_xxx');
+			form.appendChild(hiddenInput);
+			// フォーム送信
+			form.submit();
+		});
+	};
+	
+</script>

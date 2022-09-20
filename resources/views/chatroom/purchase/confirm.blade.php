@@ -84,45 +84,13 @@
 							<div class="method">
 								<p class="tit">お支払い方法</p>
 								<div class="credit">
-									@if($card === null)
-										<div class="bl_credit-card-info">
-											<input type="hidden" name="immediate" value="checked">
-											<span class="credit-card-info-number">************{{ substr($request->cc_number, -4) }}</span>
-											<input type="hidden" name="cc_number" value="{{ $request->cc_number }}">
-
-											<span>{{ $request->cc_name }}</span>
-											<input type="hidden" name="cc_name" value="{{ $request->cc_name }}">
-
-											<input type="hidden" name="exp_month" value="{{ $request->exp_month }}">
-											<input type="hidden" name="exp_year" value="{{ $request->exp_year }}">
-										</div>
-									@else
-										<div class="bl_credit-card-info">
-											<span class="credit-card-info-number">************{{ $card['last4'] }}</span>
-											<span>{{ $card['name'] }}</span>
-											<input type="hidden" name="card_id" value="{{ $card['id'] }}">
-											<input type="hidden" name="customer_id" value="{{ $card['customer'] }}">
-											<input type="hidden" name="immediate" value="">
-										</div>
-									@endif
-									<!-- <table>
-										<tr>
-											<th>カード番号</th>
-											<td>{{ $request->card_number }}</td>
-										</tr>
-										<tr>
-											<th>有効期限</th>
-											<td>{{ date("yy",strtotime($request->year)) }}年/{{ $request->month }}月</td>
-										</tr>
-										<tr>
-											<th>カード名義</th>
-											<td>{{ $request->card_name }}</td>
-										</tr>
-										<tr>
-											<th>セキュリティコード</th>
-											<td>{{ $request->security_code }}</td>
-										</tr>
-									</table> -->
+									<div class="bl_credit-card-info">
+										<span class="credit-card-info-number">************{{ $card['last4'] }}</span>
+										<span>{{ $card['name'] }}</span>
+										<input type="hidden" name="card_id" value="{{ Crypt::encryptString($card['id']) }}">
+										<input type="hidden" name="customer_id" value="@if(is_null($stripe_token)){{ $card['customer'] }}@endif">
+										<input type="hidden" name="stripe_token" value="@if(!is_null($stripe_token)){{ Crypt::encryptString($stripe_token) }}@endif">
+									</div>
 								</div>
 							</div>
 							<div class="warnNotes mt50">
