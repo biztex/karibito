@@ -1,5 +1,5 @@
 <x-layout>
-    <div id="friends">
+    <div id="favorite">
         <body id="estimate">
             <x-parts.post-button/>
             <x-parts.ban-msg/>
@@ -23,7 +23,7 @@
                                     <div class="tabBox is_active" id="tab_box01">
                                         <ul class="favoriteUl01 status">
                                             @foreach ($products as $product)
-                                                <li @if ($product->number_of_sale === App\Models\Product::UNLIMITED_OF_SALE || ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $product->number_of_sold == 0)) class="during" @endif> {{-- 販売数が無制限のものまたは、販売数が一つで、かつ販売されていないものにduringクラスをつける --}}
+                                                <li @if ($product->number_of_sale === App\Models\Product::UNLIMITED_OF_SALE || ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $product->number_of_sold == 0)) class="during" @endif> {{-- Todo:販売数が無制限のものまたは、販売数が一つで、かつ販売されていないものにduringクラスをつける --}}
                                                     <div class="cont01">
                                                         @if(isset($product->productImage[0]))
                                                             <a href="{{ route('product.show',$product->id) }}">

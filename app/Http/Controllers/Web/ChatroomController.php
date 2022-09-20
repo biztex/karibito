@@ -18,6 +18,7 @@ use App\Services\EvaluationService;
 use App\Services\PaymentService;
 use App\Services\PointService;
 use App\Services\UserNotificationService;
+use App\Services\PurcahsedProductService;
 use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
@@ -36,10 +37,11 @@ class ChatroomController extends Controller
     private $point_service;
     private $coupon_service;
     private $user_notification_service;
+    private $purchased_product_service;
 
     private readonly PaymentService $payment_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PaymentService $payment_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service, PurcahsedProductService $purchased_product_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -50,6 +52,7 @@ class ChatroomController extends Controller
         $this->point_service = $point_service;
         $this->coupon_service = $coupon_service;
         $this->user_notification_service = $user_notification_service;
+        $this->purchased_product_service = $purchased_product_service;
     }
 
     /**
@@ -200,6 +203,7 @@ class ChatroomController extends Controller
             $proposal = $this->proposal_service->storeProposal($request->all(), $chatroom);
             $this->chatroom_message_service->storeProposalMessage($proposal, $chatroom);
             $this->chatroom_service->statusChangeContract($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
         return redirect()->route('chatroom.getProposal', $chatroom);
@@ -218,7 +222,7 @@ class ChatroomController extends Controller
         $cards = $this->payment_service->getCardList();
         $user_has_point = $this->point_service->showPoint(); //ポイントの合計を取得
         $user_has_coupons = $this->coupon_service->showCoupon(); //期限が切れていないクーポンを取得
-        $commission = $this->purchase_service->getCommission($proposal); 
+        $commission = $this->purchase_service->getCommission($proposal);
 
         return view('chatroom.purchase.create',compact('proposal', 'cards', 'user_has_coupons', 'user_has_point', 'commission'));
     }
@@ -247,7 +251,6 @@ class ChatroomController extends Controller
      */
     public function purchased(PaymentRequest $request, Proposal $proposal)
     {
-        
         \DB::transaction(function () use ($request, $proposal) {
             $amount = $this->purchase_service->getFinalAmount($proposal, $request->all());
             $payjp_charge_id = $this->payment_service->createCharge($request->all(), $amount['total']);
@@ -258,6 +261,7 @@ class ChatroomController extends Controller
             $this->chatroom_service->statusChangeWork($proposal->chatroom);
             $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 取得ポイントは手数料含めるか確認
             $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
+            $this->purchased_product_service->storePurchasedProduct($proposal->chatroom);
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }
