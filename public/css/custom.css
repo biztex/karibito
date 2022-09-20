@@ -1261,9 +1261,23 @@
 	color: red;
 }
 
-.paymentUl01 .price {
+.paymentUl01 .price,
+.paymentUl01 .price-back  {
 	width: auto;
 	margin-left: 10px;
+	font-size: 16px;
+}
+
+@media screen and (max-width: 767px){
+	.paymentUl01 .price,
+	.paymentUl01 .price-back {
+		width: auto;
+		font-size: 1.4rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		white-space: nowrap;
+	}
 }
 
 .chatPages .communicate li .img .head {
@@ -1866,3 +1880,99 @@ img.moreRecommendListImg {
     position: relative;
     padding: 7px 30px;
 }
+
+/* stripe クレジットカード入力欄用 */
+.creditField {
+	display: flex;
+	padding: 2px;
+}
+.stripeCreditCardElements {
+	width: 70%;
+	margin-left: 10px;
+}
+#label  {
+	font-size: 14px;
+	padding: 17px 20px;
+	width: 30%;
+	text-align: right;
+	background-color: #F5F5F5;
+	vertical-align: middle;
+	white-space: nowrap;
+	overflow-wrap: break-word;
+}
+#smallLabel  {
+	font-size: 12px;
+	padding: 17px 20px;
+	width: 30% ;
+	text-align: right;
+	background-color: #F5F5F5;
+	vertical-align: middle;
+	white-space: nowrap;
+	overflow-wrap: break-word;
+}
+.creditCardElements,
+.mypageEditInput input#cardName {
+	box-sizing: border-box;
+	height: 40px;
+	padding: 10px 12px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-color: white;
+	border: 1px solid #DDDDDD;
+	background-color: #fff;
+	border-radius: 3px;
+	width: 100%;
+}
+
+.noticeP {
+	color: #737878;
+	font-size: 1.3rem;
+	margin-top: 3px;
+}
+.creditCode a {
+    color: #158ACC;
+    font-size: 1.2rem;
+	margin-left: 10px;
+}
+
+@media screen and (max-width: 960px){
+	.creditField {
+		display: block;
+	}
+	.stripeCreditCardElements {
+		width: 100%;
+		margin-left: 0px;
+	}
+	#label, #smallLabel {
+		font-size: 12px;
+		width: 100%;
+		text-align: left;
+		padding: 10px;
+		margin-top: 15px;
+		margin-bottom: 5px;
+	}
+	.creditCardElements,
+	.mypageEditInput input#cardName {
+		height: 33px;
+		font-size: 12px;	
+	}
+	.creditCardElements.small {
+		width: 30%;
+	}
+	.creditCode a {
+		margin-left: 0px;
+	}
+}
+.StripeElement {
+	width: 100%;
+}
+/* エラー時の入力欄枠線とラーメッセージの文字色 */
+.StripeElement--invalid, #card-errors {
+	border-color: #ff5f3f;
+	color: #ff5f3f;
+}
+/* オートコンプリートで入力した時  */
+.StripeElement--webkit-autofill {
+	background-color: #beddf9 !important;
+}
+/* /stripe クレジットカード入力欄用 */

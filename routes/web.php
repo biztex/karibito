@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
 use App\Http\Controllers\Web\Mypage\ChangeTelController;
 use App\Http\Controllers\Web\Mypage\PaymentController;
+use App\Http\Controllers\Web\Mypage\StripeController;
 use App\Http\Controllers\Web\Mypage\BankAccountController;
 use Illuminate\Support\Facades\Route;
 
@@ -178,7 +179,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 });
 
                 // クレジットカード
-                Route::controller(PaymentController::class)->name('card.')->group(function () {
+                Route::controller(StripeController::class)->name('card.')->group(function () {
                     Route::get('card', 'create')->name('create');
                     Route::post('card', 'store')->name('store');
                     Route::delete('card/{card_id}', 'destroy')->name('destroy');
@@ -473,6 +474,10 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::post('payment/createCharge', [\App\Http\Controllers\Sample\PaymentController::class, 'createCharge'])->name('sample.createCharge'); // 決済実行客登録
         Route::post('payment/createCard', [\App\Http\Controllers\Sample\PaymentController::class, 'createCard'])->name('sample.createCard'); // クレカ登録
         Route::get('payment/getCardList', [\App\Http\Controllers\Sample\PaymentController::class, 'getCardList'])->name('sample.getCardList'); // クレカ一覧取得
+
+        // サンプルstripe
+        Route::view('stripe', 'sample.stripe');
+        Route::post('stripe/createCard', [StripeController::class, 'storeCard'])->name('stripe.create.card');
     });
 
 
