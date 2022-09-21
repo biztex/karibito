@@ -353,12 +353,14 @@
 	.navUl04 li{
 		width: calc(50% - 3px)
 	}
-	
 }
 @media screen and (max-width: 767px) {
 	#gNavi{
 		padding: 20px 15px;
 		max-width: 260px;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: 100px;
 	}
 	#headerLinks .item{height:50px;}
 	#headerLogo{
