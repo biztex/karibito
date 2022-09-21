@@ -266,11 +266,13 @@ class ChatroomController extends Controller
             $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom);
             $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
             $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
+            $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
+            $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }
 
-       /**
+    /**
      * 作業完了
      * @param \App\Models\Chatroom $chatroom
      * 

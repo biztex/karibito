@@ -27,4 +27,20 @@ class PurchasedProduct extends Model
     {
         return $this->hasMany(PurchasedProductQuestion::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasedProductLink()
+    {
+        return $this->hasMany(PurchasedProductYoutubeLink::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasedProductImage()
+    {
+        return $this->hasMany(PurchasedProductImage::class);
+    }
 }
