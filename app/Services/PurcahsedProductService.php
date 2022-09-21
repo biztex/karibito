@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Chatroom;
 use App\Models\PurchasedProduct;
 use App\Models\Product;
@@ -11,13 +9,6 @@ use App\Models\Product;
 
 class PurcahsedProductService
 {
-
-    // private $product_service;
-
-    // public function __construct(ProductService $product_service)
-    // {
-    //     $this->product_service = $product_service;
-    // }
 
     public function storePurchasedProduct(Chatroom $chatroom)
     {
@@ -44,13 +35,13 @@ class PurcahsedProductService
         $product_options = $product->additionalOption;
         if (isset($product_options)) {
             foreach ($product_options as $product_option) {
-                    $options = [
-                        'name' => $product_option->name,
-                        'price' => $product_option->price,
-                        'is_public' => $product_option->is_public,
-                    ];
-                    $purchased_product = PurchasedProduct::find($purchased_product_id);
-                    $purchased_product->purchasedAdditionalOption()->create($options);
+                $options = [
+                    'name' => $product_option->name,
+                    'price' => $product_option->price,
+                    'is_public' => $product_option->is_public,
+                ];
+                $purchased_product = PurchasedProduct::find($purchased_product_id);
+                $purchased_product->purchasedAdditionalOption()->create($options);
             }
         }
     }
@@ -65,13 +56,51 @@ class PurcahsedProductService
 
         if (isset($product_questions)) {
             foreach ($product_questions as $product_question) {
-                    $questions = [
-                        'title' => $product_question->title,
-                        'answer' => $product_question->answer,
-                    ];
+                $questions = [
+                    'title' => $product_question->title,
+                    'answer' => $product_question->answer,
+                ];
 
-                    $purchased_product = PurchasedProduct::find($purchased_product_id);
-                    $purchased_product->purchasedProductQuestion()->create($questions);
+                $purchased_product = PurchasedProduct::find($purchased_product_id);
+                $purchased_product->purchasedProductQuestion()->create($questions);
+            }
+        }
+    }
+
+    /**
+     * 新規動画追加
+     */
+    public function storePurchasedProductLink(Chatroom $chatroom, $purchased_product_id)
+    {
+        $product = $chatroom->reference;
+        $product_links = $product->productLink;
+
+        if (isset($product_links)) {
+            foreach ($product_links as $product_link) {
+                $links = [
+                    'youtube_link' => $product_link->youtube_link,
+                ];
+                $purchased_product = PurchasedProduct::find($purchased_product_id);
+                $purchased_product->purchasedProductLink()->create($links);
+            }
+        }
+    }
+
+    /**
+     * 提供画像登録
+     */
+    public function storePurchasedProductImage(Chatroom $chatroom, $purchased_product_id)
+    {
+        $product = $chatroom->reference;
+        $product_images = $product->productImage;
+
+        if (isset($product_images)) {
+            foreach ($product_images as $product_image) {
+                $product_image = [
+                    'path' => $product_image->path,
+                ];
+                $purchased_product = PurchasedProduct::find($purchased_product_id);
+                $purchased_product->purchasedProductImage()->create($product_image);
             }
         }
     }
