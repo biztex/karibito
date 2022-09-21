@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('purchased_product_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('purchased_product_id')->constrained()->cascadeOnDelete();
             $table->string('title', 400)->comment('タイトル')->nullable();
             $table->string('answer', 400)->comment('回答')->nullable();
             $table->timestamps();

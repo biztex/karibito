@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('purchased_additional_options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('purchased_product_id')->constrained()->cascadeOnDelete();
             $table->string('name')->comment('オプション名')->nullable();
             $table->integer('price')->comment('金額')->nullable();
             $table->boolean('is_public')->comment('0.非公開 1.公開');

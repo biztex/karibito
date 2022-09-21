@@ -12,4 +12,19 @@ class PurchasedProduct extends Model
 
     protected $guarded = [ 'id' ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasedAdditionalOption()
+    {
+        return $this->hasMany(PurchasedAdditionalOption::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasedProductQuestion()
+    {
+        return $this->hasMany(PurchasedProductQuestion::class);
+    }
 }

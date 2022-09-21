@@ -263,7 +263,9 @@ class ChatroomController extends Controller
             $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 取得ポイントは手数料含めるか確認
             // pointを消化する
             $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
-            $this->purchased_product_service->storePurchasedProduct($proposal->chatroom);
+            $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom);
+            $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
+            $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
         });
         return view('chatroom.purchase.complete', compact('proposal'));
     }
