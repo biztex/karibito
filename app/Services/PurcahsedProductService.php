@@ -31,24 +31,47 @@ class PurcahsedProductService
         }
         $purchased_product->is_draft = Product::NOT_DRAFT;
         $purchased_product->save();
+
+        return $purchased_product->id;
     }
 
     /**
      * 新規有料オプション追加
      */
-    public function storePurchasedAdditionalOption(Chatroom $chatroom)
+    public function storePurchasedAdditionalOption(Chatroom $chatroom, $purchased_product_id)
     {
-        if (isset($request['option_name'])) {
-            foreach ($request['option_name'] as $index => $value) {
-                if (null !== ($request['option_name'][$index])) {
+        $product = $chatroom->reference;
+        $product_options = $product->additionalOption;
+        if (isset($product_options)) {
+            foreach ($product_options as $product_option) {
                     $options = [
-                        'name' => $request['option_name'][$index],
-                        'price' => $request['option_price'][$index],
-                        'is_public' => $request['option_is_public'][$index]
+                        'name' => $product_option->name,
+                        'price' => $product_option->price,
+                        'is_public' => $product_option->is_public,
                     ];
-                    $product = Product::find($id);
-                    $product->additionalOption()->create($options);
-                }
+                    $purchased_product = PurchasedProduct::find($purchased_product_id);
+                    $purchased_product->purchasedAdditionalOption()->create($options);
+            }
+        }
+    }
+
+    /**
+     * 新規よくある質問追加
+     */
+    public function storePurchasedProductQuestion(Chatroom $chatroom, $purchased_product_id)
+    {
+        $product = $chatroom->reference;
+        $product_questions = $product->productQuestion;
+
+        if (isset($product_questions)) {
+            foreach ($product_questions as $product_question) {
+                    $questions = [
+                        'title' => $product_question->title,
+                        'answer' => $product_question->answer,
+                    ];
+
+                    $purchased_product = PurchasedProduct::find($purchased_product_id);
+                    $purchased_product->purchasedProductQuestion()->create($questions);
             }
         }
     }
