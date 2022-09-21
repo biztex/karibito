@@ -111,85 +111,75 @@
                                 </dl>
                                 <p class="gnavEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集</a></p>
                                 <p class="gnavEdit"><a href="{{ route('mypage') }}">マイページ</a></p>
+                                <div class="navMypageUl">
+                                    <a href="{{ route('publication') }}">掲載内容一覧</a>
+                                    <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
+                                </div>
                                 <div class="navMypageUl link01">
+                                    <a href="{{ route('mypage') }}" class="">マイページ</a>
+                                    <a href="{{ route('favorite.index') }}" class="">お気に入り</a>
+                                    <a href="{{ route('chatroom.active') }}" class="">進行中の取引</a>
+                                    <a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a>
+                                    <a href="{{ route('evaluation') }}" class="">評価一覧</a>
+                                    <a href="{{ route('payment.index') }}" class="">支払い履歴</a>
+                                    <a href="{{ route('point.index') }}" class="">ポイント取得・利用履歴</a>
+                                    <a href="{{ route('follow.index') }}" class="">フォロー・フォロワー</a>
+                                    <a href="{{ route('user_notification.index') }}" class="">お知らせ</a>
+                                    <a href="{{ route('secret01') }}" class="">マッチングする秘訣</a>
+                                    <a href="{{ route('coupon.index') }}" class="">クーポン</a>
+                                    <a href="{{ route('dm.index') }}" class="">DM</a>
+                                    <a href="{{ route('setting.index') }}" class="">会員情報</a>
+                                    <a href="{{ route('setting.index') }}">設定</a>
+                                    <a href="{{ route('showWithdrawForm') }}" class="">退会</a>
                                     {{-- @can('identify') --}}
-                                        <a href="{{ route('publication') }}">掲載内容一覧</a>
-                                        <a href="{{ route('post') }}" class="blueBtn">投稿する</a>
                                     {{-- @endcan --}}
-                                        <a href="{{ route('mypage') }}" class="">マイページ</a>
-                                        <a href="{{ route('favorite.index') }}" class="">お気に入り</a>
-                                        <a href="{{ route('chatroom.active') }}" class="">進行中の取引</a>
-                                        <a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a>
-                                        <a href="{{ route('evaluation') }}" class="">評価一覧</a>
-                                        <a href="{{ route('payment.index') }}" class="">決済履歴</a>
-                                        <a href="{{ route('point.index') }}" class="">ポイント取得・利用履歴</a>
-                                        <a href="{{ route('follow.index') }}" class="">フォロー・フォロワー</a>
-                                        <a href="{{ route('user_notification.index') }}" class="">お知らせ</a>
                                         {{-- <li><a href="/sample/faq" class="">カリビト知恵袋</a></li> --}}
-                                        <a href="{{ route('secret01') }}" class="">マッチングする秘訣</a>
-                                        <a href="{{ route('coupon.index') }}" class="">クーポン</a>
-                                        <a href="{{ route('dm.index') }}" class="">DM</a>
-                                        <a href="{{ route('setting.index') }}" class="">会員情報</a>
-                                        <a href="{{ route('showWithdrawForm') }}" class="">退会</a>
-
-                                    {{-- <a href="{{ route('mypage') }}">マイページ</a> --}}
-                                    {{-- <a href="{{ route('favorite.index') }}">お気に入り</a> --}}
                                 </div>
-                                <div class="sideItem">
-                                    <p class="sideHd">出品者向け</p>
-                                    <ul class="sideUl01">
-                                        <li><a href="{{ route('resume.show') }}" class="">スキル / 経歴</a></li>
-                                        <li><a href="{{ route('portfolio.index') }}" class="">ポートフォリオ</a></li>
-                                        {{-- <li><a href="#">ブログ</a></li> --}}
-                                        <li><a href="{{ route('publication') }}" class="">掲載内容一覧</a></li>
-                                        <li><a href="{{ route('draft') }}">掲載内容の下書き</a></li>
-                                        <li><a href="{{ route('transfer.index') }}" class="">売上管理・振込申請</a></li>
-                                    </ul>
+                                <div class="navMypageUl">
+                                    <p class="fwB">出品者向け</p>
+                                    <a href="{{ route('resume.show') }}" class="">スキル / 経歴</a>
+                                    <a href="{{ route('portfolio.index') }}" class="">ポートフォリオ</a>
+                                    {{-- <li><a href="#">ブログ</a></li> --}}
+                                    <a href="{{ route('publication') }}" class="">掲載内容一覧</a>
+                                    <a href="{{ route('draft') }}">掲載内容の下書き</a>
+                                    <a href="{{ route('transfer.index') }}" class="">売上管理・振込申請</a>
                                 </div>
-
-                                <div class="sideItem">
-                                    <p class="sideHd">カリビトについて</p>
-                                    <ul class="sideUl01">
-                                        <li><a href="{{ route('contact') }}">お問い合わせ</a></li>
-                                        <li><a href="{{ route('support') }}">ご利用ガイド</a></li>
-                                        <li><a href="#">カテゴリー項目追加依頼</a></li>
-                                        <li><a href="{{ route('privacy-policy') }}">個人情報の取り扱いについて</a></li>
-                                        <li><a href={{ route('notation') }}>特定商取引法に基づく表記</a></li>
-                                        <li><a href="{{ route('terms-of-service') }}">利用規約</a></li>
-                                        <li><a href="{{ route('company') }}">運営会社について</a></li>
-                                        <li><div class="edition">バージョン <span>00.0000,00</span></div></li>
-                                    </ul>
+                                <div class="navMypageUl">
+                                    <p class="fwB">カリビトについて</p>
+                                        <a href="{{ route('contact') }}">お問い合わせ</a>
+                                        <a href="{{ route('support') }}">ご利用ガイド</a>
+                                        <a href="#">カテゴリー項目追加依頼</a>
+                                        <a href="{{ route('privacy-policy') }}">個人情報の取り扱いについて</a>
+                                        <a href={{ route('notation') }}>特定商取引法に基づく表記</a>
+                                        <a href="{{ route('terms-of-service') }}">利用規約</a>
+                                        <a href="{{ route('company') }}">運営会社について</a>
+                                        <div class="edition">バージョン <span>00.0000,00</span></div>
                                 </div>
+                                @auth
+                                    <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
+                                @endauth
                             @endauth
 
                             <div class="navMypageUl"  @if(Auth::check()) style="margin-top:10px" @endif>
                                 @guest
                                     <a href="{{route('login')}}" class="log">ログイン</a>
                                     <a href="{{route('register')}}" class="sign">新規登録</a>
+                                    <a href="{{ route('support') }}">ご利用ガイド</a>
+                                    {{-- <a href="#">カリビトQ&A</a> --}}
+                                    <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
+                                    <a href="{{ route('contact') }}">お問い合わせ</a>
                                 @endguest
-                                <a href="{{ route('support') }}">ご利用ガイド</a>
-                                <a href="#">カリビトQ&A</a>
-                                <a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>
-                                @auth
-                                    <a href="{{ route('setting.index') }}">設定</a> {{--未ログインユーザーには必要ない？--}}
-                                @endauth
-                                <a href="{{ route('contact') }}">お問い合わせ</a>
                             </div>
-
-                            @auth
-                                <p class="navMypageUlLink"><a href="{{ route('logout') }}">ログアウト</a></p>
-                            @endauth
-
                         </div>
                     </nav><!-- /#gNavi -->
                     <div class="overlay"></div>
 
-                    <div class="fun">
+                    {{-- <div class="fun"> 使われていないため、一旦コメントアウト、いらない場合削除する
                         @guest
                             <a href="{{route('login')}}" class="log">ログイン</a>
                             <a href="{{route('register')}}" class="sign">新規登録</a>
                         @endguest
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

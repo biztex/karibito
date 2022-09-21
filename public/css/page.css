@@ -5331,6 +5331,10 @@ select.searchSelect {
 	margin-right: 15px;
 }
 
+.navMypageUl {
+	font-size: 1.3rem;
+}
+
 .navMypageUl a {
 	display: flex;
 	align-items: center;
