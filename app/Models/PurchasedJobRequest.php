@@ -12,4 +12,9 @@ class PurchasedJobRequest extends Model
 
     protected $guarded = [ 'id' ];
 
+    // MProductChildCategoryモデルとのリレーション
+    public function mProductChildCategory()
+    {
+        return $this->belongsTo(MProductChildCategory::class,'category_id');
+    }
 }
