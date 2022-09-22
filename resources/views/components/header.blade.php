@@ -174,12 +174,12 @@
                     </nav><!-- /#gNavi -->
                     <div class="overlay"></div>
 
-                    {{-- <div class="fun"> 使われていないため、一旦コメントアウト、いらない場合削除する
+                    <div class="fun">
                         @guest
                             <a href="{{route('login')}}" class="log">ログイン</a>
                             <a href="{{route('register')}}" class="sign">新規登録</a>
                         @endguest
-                    </div> --}}
+                    </div>
 
                 </div>
             </div>
