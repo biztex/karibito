@@ -66,7 +66,7 @@
             <ul>
                 @foreach($additional_options as $additional_option)
                     <li>
-                        <span class="add">＋ {{$additional_option->name}}</span>
+                        <span class="add break-word">＋ {{$additional_option->name}}</span>
                         <span class="price">￥@if(!is_null($additional_option->price)){{ number_format(App\Models\AdditionalOption::OPTION_PRICE[$additional_option->price])}}@endif</span>
                     </li>
                 @endforeach
@@ -81,8 +81,8 @@
             <ul class="toggleWrapPC">
                 @foreach($product->productQuestion as $product_question)
                     <li>
-                        <p class="quest toggleBtn"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
-                        <p class="answer toggleBox" style="width:100%;">{{$product_question->answer}}</p>
+                        <p class="quest toggleBtn break-word"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
+                        <p class="answer toggleBox break-word" style="width:100%;">{{$product_question->answer}}</p>
                     </li>
                 @endforeach
             </ul>
