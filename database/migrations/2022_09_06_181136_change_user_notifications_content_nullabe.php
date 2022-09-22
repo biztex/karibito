@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_notifications', function (Blueprint $table) {
-            $table->unsignedInteger("reference_id")->after('user_id'); // reference_id, reference_typeを作成
-            $table->string("reference_type")->after('reference_id');
-            $table->index(["reference_id", "reference_type"]);
+            // $table->unsignedInteger("reference_id")->after('user_id'); // reference_id, reference_typeを作成
+            // $table->string("reference_type")->after('reference_id');
+            // $table->index(["reference_id", "reference_type"]);
             $table->text('content')->comment('詳細')->change()->nullable();
         });
     }
@@ -29,8 +29,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('user_notifications', function (Blueprint $table) {
-            $table->dropColumn('reference_type');
-            $table->dropColumn('reference_id');
+            // $table->dropColumn('reference_type');
+            // $table->dropColumn('reference_id');
             $table->dropColumn('content');
         });
     }
