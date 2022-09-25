@@ -22,6 +22,10 @@ class PurcahsedProductService
         }
         $purchased_product->is_draft = Product::NOT_DRAFT;
         $purchased_product->save();
+        $chatroom->purchased_reference_id = $purchased_product->id;
+        $chatroom->purchased_reference_type = 'App\Models\PurchasedProduct';
+
+        $chatroom->save();
 
         return $purchased_product->id;
     }

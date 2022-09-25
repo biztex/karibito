@@ -11,7 +11,7 @@
                 <a href="{{(url()->current())}}">サービス提供の詳細</a>
             @else
                 <span>サービスを探す</span>　>　
-                <a href="{{ route('product.category.index', $product->mProductChildCategory->mProductCategory->id)}}">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</>　>　
+                <a href="{{ route('product.category.index', $product->mProductChildCategory->mProductCategory->id)}}">@if(!is_null($product->category_id)){{$product->mProductChildCategory->mProductCategory->name}} @endif</a>　>　
                 <a href="{{ route('product.category.index.show', $product->category_id)}}">@if(!is_null($product->category_id)){{$product->mProductChildCategory->name}} @endif</a>　>　
                 <span>{{$product->title}}</span>
             @endif

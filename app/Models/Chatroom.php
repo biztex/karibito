@@ -175,6 +175,14 @@ class Chatroom extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function referencePurchased()
+    {
+        return $this->morphTo(__FUNCTION__, 'purchased_reference_type', 'purchased_reference_id');
+    }
+
+    /**
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
     public function sellerUser()

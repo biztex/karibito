@@ -174,7 +174,8 @@
                     </nav><!-- /#gNavi -->
                     <div class="overlay"></div>
 
-                     <div class="fun">
+
+                    <div class="fun">
                         @guest
                             <a href="{{route('login')}}" class="log">ログイン</a>
                             <a href="{{route('register')}}" class="sign">新規登録</a>

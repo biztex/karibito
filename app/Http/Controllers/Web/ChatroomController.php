@@ -18,14 +18,15 @@ use App\Services\EvaluationService;
 use App\Services\StripeService;
 use App\Services\PointService;
 use App\Services\UserNotificationService;
+use App\Services\CouponService;
 use App\Services\PurcahsedProductService;
+use App\Services\PurcahsedJobRequestService;
 use App\Http\Requests\ChatroomController\MessageRequest;
 use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
 use App\Models\MCommissionRate;
-use App\Services\CouponService;
 
 class ChatroomController extends Controller
 {
@@ -38,10 +39,11 @@ class ChatroomController extends Controller
     private $coupon_service;
     private $user_notification_service;
     private $purchased_product_service;
+    private $purchased_job_request_service;
 
     private readonly StripeService $stripe_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service, StripeService $stripe_service, PurcahsedProductService $purchased_product_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service, StripeService $stripe_service, PurcahsedProductService $purchased_product_service, PurcahsedJobRequestService $purchased_job_request_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -53,6 +55,7 @@ class ChatroomController extends Controller
         $this->coupon_service = $coupon_service;
         $this->user_notification_service = $user_notification_service;
         $this->purchased_product_service = $purchased_product_service;
+        $this->purchased_job_request_service = $purchased_job_request_service;
     }
 
     /**
@@ -247,7 +250,7 @@ class ChatroomController extends Controller
      * 購入完了
      * @param PaymentRequest $request
      * @param \App\Models\Proposal $proposal
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function purchased(PaymentRequest $request, Proposal $proposal)
@@ -263,12 +266,20 @@ class ChatroomController extends Controller
             $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 取得ポイントは手数料含めるか確認
             // pointを消化する
             $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
-            $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom);
-            $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
-            $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
-            $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
-            $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
         });
+
+        if($proposal->chatroom->reference_type === 'App\Models\Product'){
+            \DB::transaction(function () use ($proposal) {
+                $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom); //購入物作成
+                $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
+            });
+        }else{
+            $this->purchased_job_request_service->storePurchasedJobRequest($proposal->chatroom); //購入物リクエスト作成
+        }
+
         return view('chatroom.purchase.complete', compact('proposal'));
     }
 

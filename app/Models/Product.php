@@ -219,6 +219,14 @@ class Product extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasedProduct()
+    {
+        return $this->hasMany(PurchasedProduct::class, 'product_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function chatrooms()
