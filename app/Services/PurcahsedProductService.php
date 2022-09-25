@@ -12,8 +12,6 @@ class PurcahsedProductService
 
     public function storePurchasedProduct(Chatroom $chatroom)
     {
-        // 一つにまとめても良いか？商品の中でリクエストと分岐して、商品の場合はこの中で他のを呼ぶ
-
         $product = $chatroom->reference;
         $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale', 'status'];
 

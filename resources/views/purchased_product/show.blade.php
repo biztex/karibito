@@ -18,20 +18,20 @@
                 </div>
             </div><!-- /.breadcrumb -->
             <x-parts.ban-msg/>
-    
+
             <div id="contents" class="detailStyle">
                 <div class="inner02 ">
                     <div class="clearfix">
                         <big>契約時の内容が表示されています</big>
                         <div id="main">
+
+                            @include('purchased_product.parts.show.detail')
     
-                            @include('product.parts.show.detail')
-    
-                            @include('product.parts.show.evaluation')
+                            @include('purchased_product.parts.show.evaluation')
     
                         </div>
     
-                        @include('product.parts.show.side')
+                        @include('purchased_product.parts.show.side')
     
                     </div>
     

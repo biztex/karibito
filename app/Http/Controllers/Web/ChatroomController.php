@@ -250,7 +250,7 @@ class ChatroomController extends Controller
      * 購入完了
      * @param PaymentRequest $request
      * @param \App\Models\Proposal $proposal
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function purchased(PaymentRequest $request, Proposal $proposal)
@@ -266,13 +266,20 @@ class ChatroomController extends Controller
             $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 取得ポイントは手数料含めるか確認
             // pointを消化する
             $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
-            $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom); //購入物作成
-            $this->purchased_job_request_service->storePurchasedJobRequest($proposal->chatroom); //購入物リクエスト作成
-            $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
-            $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
-            $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
-            $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
         });
+
+        if($proposal->chatroom->reference_type === 'App\Models\Product'){
+            \DB::transaction(function () use ($proposal) {
+                $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom); //購入物作成
+                $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
+            });
+        }else{
+            $this->purchased_job_request_service->storePurchasedJobRequest($proposal->chatroom); //購入物リクエスト作成
+        }
+
         return view('chatroom.purchase.complete', compact('proposal'));
     }
 

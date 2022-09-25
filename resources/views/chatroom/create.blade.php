@@ -46,7 +46,7 @@
 
                 <!-- 掲載内容 -->
                 @include('chatroom.parts.create.side')
-                
+
             </div><!--inner-->
         </div><!-- /#contents -->
     </article>
