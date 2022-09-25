@@ -9,12 +9,6 @@ use Illuminate\Http\Request;
 
 class PurchasedJobRequestController extends Controller
 {
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Chatroom $chatroom)
     {
         $job_request = PurchasedJobRequest::find($chatroom->referencePurchased->id);

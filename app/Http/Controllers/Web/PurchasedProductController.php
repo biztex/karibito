@@ -10,12 +10,6 @@ use Illuminate\Http\Request;
 
 class PurchasedProductController extends Controller
 {
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Chatroom $chatroom)
     {
         $product = PurchasedProduct::find($chatroom->referencePurchased->id);
