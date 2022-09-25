@@ -224,6 +224,22 @@
                             @endforeach
                         </ul>
                     </div>
+                    <div class="searchWrapItem">
+                        <p class="searchWrapHd" style="margin-top: 10px;"><img src="/img/common/icon_search_hd.svg" alt="">リクエスト一覧</p> {{--仮でスタイルを入れています。問題なければそのまま--}}
+                        <ul class="searchItemUl">
+                            @foreach($categories as $category)
+                                <li>
+                                    <a href="{{route('job_request.category.index', $category->id) }}"><img src="/img/common/search_item{{$loop->iteration}}.svg" alt="">{{$category->name}}</a>
+                                    <span class="span"></span>
+                                    <ul class="searchSubUl">
+                                        @foreach($category->mProductChildCategory as $child_category)
+                                            <li><a href="{{route('job_request.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div><!-- /.headLinks -->
