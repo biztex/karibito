@@ -6,15 +6,18 @@ use  App\Models\Product;
 use  App\Models\JobRequest;
 use  App\Models\Chatroom;
 use  App\Services\ChatroomMessageService;
+use  App\Services\ProfitService;
 
 
 class ChatroomService
 {
     private $chatroom_message_service;
+    private $profit_service;
 
-    public function __construct(ChatroomMessageService $chatroom_message_service)
+    public function __construct(ChatroomMessageService $chatroom_message_service, ProfitService $profit_service)
     {
         $this->chatroom_message_service = $chatroom_message_service;
+        $this->profit_service = $profit_service;
     }
 
     // 新規チャット(提供)
@@ -64,10 +67,14 @@ class ChatroomService
         $chatroom->fill(['status' => 5])->save();
     }
 
-    // ステータスを 6:完了 に変更
+    // ステータスを 6:完了 に変更 & 売上金レコード作成
     public function statusChangeComplete(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => 6])->save();
+        // 要確認
+        if(empty($chatroom->profit)){
+            $this->profit_service->storeProfit($chatroom->seller_user_id, $chatroom->id, $chatroom->purchase->proposal->price);
+        }
     }
 
     // ステータスを 7:キャンセル に変更
