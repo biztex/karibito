@@ -20,12 +20,7 @@
                         </li>
                     </ol>
                 </nav>
-                <div class="d-flex justify-content-end">
-                    <form action="{{ route('admin.payment.download') }}" class="mt-2" method="post">
-                        @csrf
-                            <button class="btn btn-secondary" type="submit">振込用CSV出力</button>
-                    </form>
-                </div>
+
                 <div class="card shadow-sm mb-5">
                     <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
                         <h5 class="text-white mb-0">

@@ -46,7 +46,7 @@
                     {{-- <li><a href="#">ブログ</a></li> --}}
                     <li><a href="{{ route('publication') }}" class="">掲載内容一覧</a></li>
                     <li><a href="{{ route('draft') }}">掲載内容の下書き</a></li>
-                    <li><a href="{{ route('transfer.index') }}" class="">売上管理・振込申請</a></li>
+                    <li><a href="{{ route('profit.index') }}" class="">売上管理・振込申請</a></li>
             </ul>
             </div>
         {{-- @endcan --}}

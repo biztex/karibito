@@ -83,7 +83,8 @@
 #blog .sidePerson,
 #publication .sidePerson,
 #draft .sidePerson,
-#transfer .sidePerson
+#transfer .sidePerson,
+#transfer-show .sidePerson
 {
 	display: none;
 }
@@ -228,6 +229,10 @@
 	color: #333333;
 	background-color: #FCAA00;
 	pointer-events: none;
+}
+#transfer-show #side div:nth-of-type(3) ul li:nth-of-type(5) a {
+	color: #333333;
+	background-color: #FCAA00;
 }
 
 
@@ -1976,3 +1981,30 @@ img.moreRecommendListImg {
 	background-color: #beddf9 !important;
 }
 /* /stripe クレジットカード入力欄用 */
+
+
+button.bankTransferBtn {
+	font-size: 14px;
+	border: none;
+}
+@media screen and (max-width: 766px){
+	button.bankTransferBtn {
+		font-size: 12px;
+	}
+}
+.bankTransferType {
+	font-size: 12px;
+	font-weight: 300;
+	display: inline-flex;
+    background: #B4B4B4;
+    border-radius: 0px;
+    text-align: center;
+    padding: 0 5px;
+    line-height: 23px;
+    color: #fff;
+	margin-bottom: 2px;
+}
+.bankTransferItem {
+	display: flex;
+	justify-content: space-between;
+}
