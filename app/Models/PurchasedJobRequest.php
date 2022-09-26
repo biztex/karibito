@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PurcahsedJobRequest extends Model
+class PurchasedJobRequest extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [ 'id' ];
 
+    // MProductChildCategoryモデルとのリレーション
+    public function mProductChildCategory()
+    {
+        return $this->belongsTo(MProductChildCategory::class,'category_id');
+    }
 }

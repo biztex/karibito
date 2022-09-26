@@ -24,7 +24,7 @@
                 <p class="txt">【法人の場合】<br>履歴事項全部証明書　(※3 ヵ月以内のものに限ります)</p>
             </div>
             <div class="fancyRegisterItem">
-                <p class="txt">【カリビトアプリ登録情報】<br>都道府県:{{ Auth::user()->userProfile->prefecture->name }}<br>住所:{{ Auth::user()->userProfile->address }}<br>氏名:{{ Auth::user()->userProfile->first_name.Auth::user()->userProfile->last_name }}
+                {{-- <p class="txt">【カリビトアプリ登録情報】<br>都道府県:{{ Auth::user()->userProfile->prefecture->name }}<br>住所:{{ Auth::user()->userProfile->address }}<br>氏名:{{ Auth::user()->userProfile->first_name.Auth::user()->userProfile->last_name }} --}}
                                                        <br>生年月日:@if(Auth::user()->userProfile->birthday !== null){{ date("Y年n月j日",strtotime(Auth::user()->userProfile->birthday)) }}@endif</p>
             </div>
             <div class="fancyRegisterItem">

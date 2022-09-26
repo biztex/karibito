@@ -37,7 +37,7 @@
 
                             <!-- 入力エリア -->
                             @include('chatroom.parts.show.form')
-                            
+
                             <div class="item">
                                 <div class="about">
                                     <p class="danger">ご注意！</p>
@@ -47,10 +47,10 @@
                         </div>
                     </div>
                 </div><!-- /#main -->
-                
+
                 <!-- 掲載内容 -->
                 @include('chatroom.parts.show.side')
-                
+
             </div><!--/.inner02-->
         </div><!-- /#contents -->
     </article>

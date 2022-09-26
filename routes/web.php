@@ -48,6 +48,8 @@ use App\Http\Controllers\Web\DmroomController;
 use App\Http\Controllers\Web\KaribitoSurveyController;
 use App\Http\Controllers\Web\FollowController;
 use App\Http\Controllers\Web\AlreadyReadController;
+use App\Http\Controllers\Web\PurchasedProductController;
+use App\Http\Controllers\Web\PurchasedJobRequestController;
 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
@@ -300,6 +302,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('{chatroom}/proposal','proposal')->name('proposal')->middleware('is_ban'); //提案
                 Route::get('{chatroom}/proposal','getProposal')->name('getProposal');
             });
+
+            Route::get('{chatroom}/show/purchased_product', [PurchasedProductController::class, 'show'])->name('show.purchased_product');
+            Route::get('{chatroom}/show/purchased_job_request', [PurchasedJobRequestController::class, 'show'])->name('show.purchased_job_request');
 
             Route::get('{chatroom}/complete','complete')->middleware('can:worked,chatroom')->name('complete')->middleware('is_ban'); //作業完了
 

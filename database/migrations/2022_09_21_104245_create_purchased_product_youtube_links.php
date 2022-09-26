@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('purchased_additional_options', function (Blueprint $table) {
+        Schema::create('purchased_product_youtube_links', function (Blueprint $table) {
             $table->id();
             $table->foreignId('purchased_product_id')->constrained()->cascadeOnDelete();
-            $table->string('name')->comment('オプション名')->nullable();
-            $table->integer('price')->comment('金額')->nullable();
-            $table->boolean('is_public')->comment('0.非公開 1.公開');
-            $table->softDeletes();
+            $table->string('youtube_link')->comment('YouTubeのリンク');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchased_additional_options');
+        Schema::dropIfExists('purchased_product_youtube_links');
     }
 };

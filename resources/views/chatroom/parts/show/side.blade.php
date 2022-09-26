@@ -2,36 +2,30 @@
     <div class="sideItem">
         <p class="sideHd">掲載内容</p>
         <div class="sideUl01">
+            @if ($chatroom->has('referencePurchased')) {{--分岐確認、購入前の詳細が見れない--}}
+                @if ($chatroom->purchased_reference_type === 'App\Models\PurchasedProduct')
 
-            @if($chatroom->reference === null)
-                <div style="padding:15px; font-weight:100;">この商品は削除されました</div>
-            @elseif($chatroom->reference_type === 'App\Models\Product')
-                <div class="publicate">
-                    <div class="cont">
-                        @if(isset($chatroom->reference->productImage[0]))
-                            <p class="img"><img src="{{ asset('/storage/'.$chatroom->reference->productImage[0]->path)}}" alt="" style="width: 75px;height: 62.5px;object-fit: cover;"></p>
-                        @else
-                            <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
-                        @endif
-                        <p class="txt">{{ $chatroom->reference->title }}</p>
-                    </div>
-                    <div class="amount">
-                        <p>希望報酬額</p>
-                        <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
-                    </div>
-                </div>
+                    @include('chatroom.parts.show.product.purchased-product')
+
+                @elseif ($chatroom->purchased_reference_type === 'App\Models\PurchasedJobRequest')
+
+                    @include('chatroom.parts.show.product.purchased-job-request')
+
+                @endif
             @else
-                <div class="publicate">
-                    <div class="cont">
-                        <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
-                        <p class="txt">{{ $chatroom->reference->title }}</p>
-                    </div>
-                    <div class="amount">
-                        <p>予算額</p>
-                        <p class="num">¥{{ number_format($chatroom->reference->price) }}</p>
-                    </div>
-                </div>
+                @if($chatroom->reference === null)
 
+                    <div style="padding:15px; font-weight:100;">この商品は削除されました</div>
+
+                @elseif($chatroom->reference_type === 'App\Models\Product')
+
+                    @include('chatroom.parts.show.product.product')
+
+                @else
+
+                    @include('chatroom.parts.show.product.job-request')
+
+                @endif
             @endif
         </div>
 
