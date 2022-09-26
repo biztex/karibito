@@ -15,6 +15,7 @@ use App\Models\Chatroom;
 use App\Models\Proposal;
 use App\Models\Purchase;
 use App\Models\PurchasedCancel;
+use App\Models\TransferRequest;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -175,10 +176,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $chatroom->buyer_user_id || $user->id === $chatroom->seller_user_id;
         });
 
-         // 商品の削除 一旦保留いらなくなった場合削除してください(寺岡)
-         // 商品が1回以上購入されていたら削除できなくなるゲート
-        // Gate::define('deletable', function (User $user, Product $product) {
-        //     return Chatroom::numberOfSold($product->id) === 0;
-        // });
+        // 振込申請内訳
+        Gate::define('my.transfer_request', function (User $user, TransferRequest $transfer_request) {
+            return $user->id === $transfer_request->user_id;
+        });
     }
 }
