@@ -199,4 +199,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(UserFollow::class, 'following_user_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transferRequests()
+    {
+        return $this->hasMany(TransferRequest::class);
+    }
 }

@@ -24,17 +24,19 @@ class PurchasedCancelService
 
     public function purchasedCancelComplete(PurchasedCancel $purchased_cancel, Payment $payment)
     {
-        // キャンセルテーブルのステータスを成立に
-        $this->changeStatusComplete($purchased_cancel);
-        // 購入テーブルをキャンセル済に
-        $this->isCancel($purchased_cancel->purchase);
-        // キャンセル成立メッセージ送信
-        $this->chatroom_message_service->storePurchasedCancelApprovalMessage($purchased_cancel);
-        // チャットルームのっステータスをキャンセルに
-        $this->chatroom_service->statusChangeCanceled($purchased_cancel->purchase->chatroom);
+        \DB::transaction(function () use ($purchased_cancel, $payment) {
+            // キャンセルテーブルのステータスを成立に
+            $this->changeStatusComplete($purchased_cancel);
+            // 購入テーブルをキャンセル済に
+            $this->isCancel($purchased_cancel->purchase);
+            // キャンセル成立メッセージ送信
+            $this->chatroom_message_service->storePurchasedCancelApprovalMessage($purchased_cancel);
+            // チャットルームのっステータスをキャンセルに
+            $this->chatroom_service->statusChangeCanceled($purchased_cancel->purchase->chatroom);
 
-        // 決済履歴テーブルにキャンセル履歴を
-        $this->payment_service->refundPayment($payment);
+            // 決済履歴テーブルにキャンセル履歴を
+            $this->payment_service->refundPayment($payment);
+        });
     }
 
 

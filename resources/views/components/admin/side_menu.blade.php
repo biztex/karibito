@@ -6,7 +6,8 @@
         <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.m_commission_rates.index') }}" class="text-secondary">手数料</a></p></li>
         <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.survey.index') }}" class="text-secondary">アンケート</a></p></li>
         <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.payment.index') }}" class="text-secondary">決済</a></p></li>
-        <!-- @if(Auth::guard('admin')->user()->role == 1)
+        <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.transfer_request.index') }}" class="text-secondary">振込申請</a></p></li>
+                <!-- @if(Auth::guard('admin')->user()->role == 1)
             <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.index') }}" class="text-secondary">admin list</a></p></li>
         @endif
         <li class="list-group-item">###</li>

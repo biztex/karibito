@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\KaribitoSurveyController as AdminKaribitoSurveyController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Admin\TransferRequestController as AdminTransferRequestController;
 use App\Http\Controllers\Auth\FacebookLoginController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\Web\Mypage\ChangePasswordController;
@@ -16,6 +17,8 @@ use App\Http\Controllers\Web\Mypage\ChangeTelController;
 use App\Http\Controllers\Web\Mypage\PaymentController;
 use App\Http\Controllers\Web\Mypage\StripeController;
 use App\Http\Controllers\Web\Mypage\BankAccountController;
+use App\Http\Controllers\Web\Mypage\ProfitController;
+use App\Http\Controllers\Web\Mypage\TransferRequestController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Mypage\UserProfileController;
@@ -158,7 +161,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             // 決済履歴
             Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
             // 仮売上金
-            Route::view('transfer-request', 'mypage.transfer_request.index')->name('transfer.index');
+            Route::get('profit', [ProfitController::class, 'index'])->name('profit.index');
+            Route::post('profit', [TransferRequestController::class, 'store'])->name('transfer_request.store');
+            Route::get('transfer_request/{transfer_request}', [TransferRequestController::class, 'show'])->middleware('can:my.transfer_request,transfer_request')->name('transfer_request.show');
             // メンバー情報
             Route::view('member', 'member.index')->name('member'); //このページなくなる
             // 会員情報
@@ -452,6 +457,21 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('/payment',[AdminPaymentController::class, 'index'])->name('payment.index');
             Route::get('/payment/search',[AdminPaymentController::class, 'search'])->name('payment.search');
             Route::post('/payment',[AdminPaymentController::class, 'download'])->name('payment.download');
+
+            // 振込申請
+            Route::prefix('transfer_request')->controller(AdminTransferRequestController::class)->name('transfer_request.')->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('/{season}', 'season')->name('season');
+                Route::post('', 'csvDownload')->name('download');
+
+
+                Route::post('/complete', 'complete')->name('complete');
+                Route::get('/complete', 'getComplete');
+                Route::post('/fail', 'fail')->name('fail');
+                Route::post('/back', 'back')->name('back');
+            });
+
+
         });
     });
 

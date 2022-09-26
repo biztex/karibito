@@ -142,7 +142,7 @@
                                     {{-- <li><a href="#">ブログ</a></li> --}}
                                     <a href="{{ route('publication') }}" class="">掲載内容一覧</a>
                                     <a href="{{ route('draft') }}">掲載内容の下書き</a>
-                                    <a href="{{ route('transfer.index') }}" class="">売上管理・振込申請</a>
+                                    <a href="{{ route('profit.index') }}" class="">売上管理・振込申請</a
                                 </div>
                                 <div class="navMypageUl">
                                     <p class="fwB">カリビトについて</p>
