@@ -10,7 +10,7 @@
             <x-parts.ban-msg/>
             <x-parts.post-button/>
             <x-parts.flash-msg/>
-    
+
             <div id="contents" class="otherPage">
                 <div class="inner02 clearfix">
                     <div id="main">
@@ -76,6 +76,9 @@
                                                                 <div class="draw"><p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p></div>
                                                                 <div class="single"><span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span></div>
                                                             </a>
+                                                            @if($val->application_deadline > \Carbon\Carbon::now())
+                                                                <div class="time-limit-over"><span tabindex="0">期限切れ</span></div>
+                                                            @endif
                                                             <p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
                                                             <p>{{date('Y/m/d', strtotime($val->created_at))}}</p>
                                                         </div>
@@ -94,4 +97,3 @@
             </div><!-- /#contents -->
         </article>
     </x-layout>
-    
