@@ -82,7 +82,7 @@
                                             <li><div>投稿がありません。</div></li>
                                         @else
                                             @foreach($job_requests as $job_request)
-                                                <li @if ($job_request->application_deadline > \Carbon\Carbon::now()) class="during" @endif>{{-- 販売されていないものにduringクラスをつける --}}
+                                                <li @if ($job_request->application_deadline > \Carbon\Carbon::now()) class="during" @endif>{{-- 応募期限が切れていないものにduringクラスをつける --}}
                                                     <div class="cont01">
                                                         <a href="{{ route('job_request.show',$job_request->id) }}">
                                                             <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
