@@ -2993,6 +2993,19 @@
 
 }
 
+.favoriteUl01 .time-limit-over span {
+	background: #cf3030;
+  border-radius: 0px;
+	text-align: center;
+	line-height: 23px;
+	padding: 0 5px;
+	color: #fff;
+	display: inline-flex;
+	margin-right: 4px;
+	margin-bottom: 2px;
+  font-size: 10px;
+}
+
 .favoriteUl01 .single-sold-out span {
 	background: #43ab35;
 	border-radius: 0px;
@@ -3003,8 +3016,7 @@
 	display: inline-flex;
 	margin-right: 4px;
 	margin-bottom: 2px;
-    font-size: 10px;
-
+  font-size: 10px;
 }
 
 .favoriteUl01 .single a {
