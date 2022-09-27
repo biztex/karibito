@@ -47,7 +47,7 @@
                                                             <div class="draw"><p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p></div>
                                                             <div class="single"><span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span></div>
                                                         </a>
-                                                        @if((\App\Models\Chatroom::numberOfSold($val->id) < 1) && ($val->number_of_sale == \App\Models\Product::ONE_OF_SALE))
+                                                        @if((\App\Models\Chatroom::numberOfSold($val->id) >= 1) && ($val->number_of_sale === \App\Models\Product::ONE_OF_SALE))
                                                             <div class="single-sold-out"><span tabindex="0">契約済</span></div>
                                                         @endif
                                                         <p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
