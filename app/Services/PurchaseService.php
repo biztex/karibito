@@ -10,6 +10,8 @@ use App\Services\ProposalService;
 use App\Services\ChatroomService;
 use App\Services\ChatroomMessageService;
 use App\Services\CouponService;
+use App\Services\PurchasedProductService;
+use App\Services\PurchasedJobRequestService;
 
 class PurchaseService
 {
@@ -17,13 +19,17 @@ class PurchaseService
     private $chatroom_message_service;
     private $proposal_service;
     private $coupon_service;
+    private $purchased_product_service;
+    private $purchased_job_request_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, CouponService $coupon_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, CouponService $coupon_service, PurchasedProductService $purchased_product_service, PurchasedJobRequestService $purchased_job_request_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
         $this->proposal_service = $proposal_service;
         $this->coupon_service = $coupon_service;
+        $this->purchased_product_service = $purchased_product_service;
+        $this->purchased_job_request_service = $purchased_job_request_service;
     }
 
     /**
@@ -128,6 +134,27 @@ class PurchaseService
 
         $amount['total'] = $amount['price'] + $amount['commission'] - $amount['coupon_discount'] - $amount['use_point'];
         return $amount;
+    }
+
+    /**
+     * 購入物作成
+     * @param Proposal $proposal
+     * 
+     * @return void
+     */
+    public function savePurchasedProduct(Proposal $proposal): void
+    {
+        if($proposal->chatroom->reference_type === 'App\Models\Product'){
+            \DB::transaction(function () use ($proposal) {
+                $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom); //購入物作成
+                $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
+                $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
+            });
+        }else{
+            $this->purchased_job_request_service->storePurchasedJobRequest($proposal->chatroom); //購入物リクエスト作成
+        }
     }
 
 }

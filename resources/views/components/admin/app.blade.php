@@ -31,11 +31,11 @@
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 				<!-- <a class="nav-item nav-link active" href="{{ route('admin.dashboard') }}">Home <span class="sr-only">(current)</span></a> -->
-				<a class="nav-item nav-link active" href="{{ route('admin.users.index') }}">Users</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.users.index') }}">ユーザー</a>
 				<!-- @if(\Auth::guard('admin')->user()->role == 1)<a class="nav-item nav-link" href="{{ route('admin.index') }}">Admin</a>@endif -->
-				<a class="nav-item nav-link active" href="{{ route('admin.news.index') }}">News</a>
-				<a class="nav-item nav-link active" href="{{ route('admin.products.index') }}">Products</a>
-				<a class="nav-item nav-link active" href="{{ route('admin.job_requests.index') }}">JobRequests</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.news.index') }}">お知らせ</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.products.index') }}">提供</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.job_requests.index') }}">リクエスト</a>
 				<a class="nav-item nav-link active" href="{{ route('admin.m_commission_rates.index') }}">手数料</a>
 				<a class="nav-item nav-link active" href="{{ route('admin.survey.index') }}">アンケート</a>
 				<a class="nav-item nav-link active" href="{{ route('admin.payment.index') }}">決済</a>

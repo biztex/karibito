@@ -5,9 +5,9 @@
                     <a href="{{ route('home') }}">ホーム</a>　>　
                     <a href="{{ route('chatroom.index') }}">やり取り一覧</a>　>　
 				@if($purchase->chatroom->reference === 'App\Models\Product')
-                    <a href="{{ route('product.show', $purchase->chatroom->reference_id) }}">{{$purchase->chatroom->reference->title}}</a>　>　
+                    <a href="{{ route('product.show', $purchase->chatroom->reference_id) }}">{{$purchase->chatroom->referencePurchased->title}}</a>　>　
                 @else <!-- JobRequest-->
-                    <a href="{{ route('job_request.show', $purchase->chatroom->reference_id) }}">{{$purchase->chatroom->reference->title}}</a>　>　
+                    <a href="{{ route('job_request.show', $purchase->chatroom->reference_id) }}">{{$purchase->chatroom->referencePurchased->title}}</a>　>　
                 @endif
                     <span>キャンセル手続き</span>
             </div>

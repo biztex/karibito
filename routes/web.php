@@ -303,9 +303,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::get('{chatroom}/proposal','getProposal')->name('getProposal');
             });
 
-            Route::get('{chatroom}/show/purchased_product', [PurchasedProductController::class, 'show'])->name('show.purchased_product');
-            Route::get('{chatroom}/show/purchased_job_request', [PurchasedJobRequestController::class, 'show'])->name('show.purchased_job_request');
-
             Route::get('{chatroom}/complete','complete')->middleware('can:worked,chatroom')->name('complete')->middleware('is_ban'); //作業完了
 
             Route::middleware('can:buyer.evaluation,chatroom')->group(function () {
@@ -328,6 +325,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             });
             Route::get('purchased/{proposal}','getPurchased')->middleware('can:purchased,proposal')->name('getPurchased');
         });
+
+        Route::get('/purchased_product/{product}', [PurchasedProductController::class, 'show'])->name('purchased_product');
+        Route::get('/purchased_job_request/{job_request}', [PurchasedJobRequestController::class, 'show'])->name('purchased_job_request');
 
         // やりとりキャンセル
         Route::prefix('cancel')->controller(CancelController::class)->name('cancel.')->group(function () {
@@ -464,9 +464,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::get('/{season}', 'season')->name('season');
                 Route::post('', 'csvDownload')->name('download');
 
-
                 Route::post('/complete', 'complete')->name('complete');
-                Route::get('/complete', 'getComplete');
                 Route::post('/fail', 'fail')->name('fail');
                 Route::post('/back', 'back')->name('back');
             });

@@ -9,7 +9,7 @@ use App\Models\JobRequest;
 use App\Models\PurchasedJobRequest;
 
 
-class PurcahsedJobRequestService
+class PurchasedJobRequestService
 {
     public function storePurchasedJobRequest(Chatroom $chatroom)
     {

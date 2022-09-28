@@ -70,15 +70,6 @@ class ProfitService
 
         return $profit;
     }
-
-    public function updateTransferRequest(array $not_transfer_profits, TransferRequest $transfer_request)
-    {
-        foreach($not_transfer_profits as $value) {
-            $profit = Profit::find($value->id);
-            $profit->transfer_request_id = $transfer_request->id;
-            $profit->save();
-        }
-    }
    
     public function changeStatusComplete(Profit $profit)
     {

@@ -1,6 +1,6 @@
-@if($chatroom->reference === null)
+@if($chatroom->referencePurchased === null)
 
-@elseif($chatroom->reference->is_call ===  1 && $chatroom->canCall())
+@elseif($chatroom->referencePurchased->is_call ===  1 && $chatroom->canCall())
     <div class="tellTop">
         <div class="support">
             <span class="pre">電話対応：{{App\Models\UserProfile::CALL_STATUS[$partner->userProfile->can_call]}}</span>

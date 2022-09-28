@@ -2,7 +2,7 @@
     <div class="sideItem">
         <p class="sideHd">掲載内容</p>
         <div class="sideUl01">
-            @if ($chatroom->has('referencePurchased')) {{--分岐確認、購入前の詳細が見れない--}}
+            @if ($chatroom->referencePurchased !== null)
                 @if ($chatroom->purchased_reference_type === 'App\Models\PurchasedProduct')
 
                     @include('chatroom.parts.show.product.purchased-product')
@@ -28,7 +28,6 @@
                 @endif
             @endif
         </div>
-
         <div class="functeBtns">
             @if($chatroom->seller_user_id === Auth::id())
                 @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)

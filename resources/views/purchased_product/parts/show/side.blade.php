@@ -1,12 +1,8 @@
 <aside id="side">
     <div class="box reservate">
-        <h3>{{ number_format($product->price) }}円</h3>
-        <p class="status">応募期限</p>
-        <p class="date" style="margin-bottom:10px;height:33.5px;">{{ date('Y/m/d',strtotime($product->application_deadline)) }}</p>
-        @if(!is_null($job_request->required_date))
-            <p class="status">納品希望日</p>
-            <p class="date">{{ date('Y/m/d',strtotime($job_request->required_date)) }}</p>
-        @endif
+        <h3>{{number_format($product->price)}}円</h3>
+        <p class="status">所用期間</p>
+        <p class="date">{{$product->number_of_day}}日</p>
         <!-- <div class="calendar"><div id="datepicker"></div></div> -->
     </div>
     <div>

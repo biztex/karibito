@@ -88,16 +88,20 @@ class ChatroomService
     public function deleteProduct(Product $product)
     {
         foreach($product->chatrooms as $chatroom) {
-            $this->statusChangeCanceled($chatroom);
-            $this->chatroom_message_service->storeDeleteMessage($chatroom);
+            if($chatroom->status === Chatroom::STATUS_START || $chatroom->status === Chatroom::STATUS_PROPOSAL ) {
+                $this->statusChangeCanceled($chatroom);
+                $this->chatroom_message_service->storeDeleteMessage($chatroom);
+            }
         }
     }
     
     public function deleteJobRequest(JobRequest $job_request)
     {
         foreach($job_request->chatrooms as $chatroom) {
-            $this->statusChangeCanceled($chatroom);
-            $this->chatroom_message_service->storeDeleteMessage($chatroom);
+            if($chatroom->status === Chatroom::STATUS_START || $chatroom->status === Chatroom::STATUS_PROPOSAL ) {
+                $this->statusChangeCanceled($chatroom);
+                $this->chatroom_message_service->storeDeleteMessage($chatroom);
+            }
         }
     }
 

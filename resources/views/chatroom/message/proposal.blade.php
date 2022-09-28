@@ -37,26 +37,8 @@
         </li>
     @endif
 
-{{-- 商品が削除された状態  --}}
-@elseif($chatroom->reference === null)
-
-    <li>
-        <div class="img">
-            @include('chatroom.message.parts.icon')
-            <div class="info">
-                <p class="name">{{$message->user->name}}</p>
-                <p>{{$message->text}}</p>
-                <div class="proposeBuy">
-                    <p class="tit">この商品は削除されました<p>
-                    <p class="buy"><input type="submit" value="この商品は削除されました" disabled></p>
-                </div>
-            </div>
-        </div>
-        @include('chatroom.message.parts.time')
-    </li>
-
 <!-- 購入済 状態-->
-@else
+@elseif($chatroom->referencePurchased !== null)
     <!-- 購入された提案-->
     @if($message->reference_id === $chatroom->purchase->proposal->id)
         <!-- 提案者の時 -->
@@ -68,7 +50,7 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p>{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="tit">{{$chatroom->reference->title}}<p>
+                            <p class="tit">{{$chatroom->referencePurchased->title}}<p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                             <p class="buy"><input type="submit" value="購入されました" disabled></p>
                         </div>
@@ -86,7 +68,7 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p>{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="tit">{{$chatroom->reference->title}}</p>
+                            <p class="tit">{{$chatroom->referencePurchased->title}}</p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                             <p class="buy"><input type="submit" class="white" value="購入済み"></p>
                         </div>
@@ -107,7 +89,7 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p>{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="tit">{{$chatroom->reference->title}}<p>
+                            <p class="tit">{{$chatroom->referencePurchased->title}}<p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                         </div>
                     </div>
@@ -124,7 +106,7 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p>{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="tit">{{$chatroom->reference->title}}</p>
+                            <p class="tit">{{$chatroom->referencePurchased->title}}</p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                         </div>
                     </div>
@@ -133,4 +115,22 @@
             </li>
         @endif
     @endif
+{{-- 商品が削除された状態  --}}
+@elseif($chatroom->reference === null)
+
+    <li>
+        <div class="img">
+            @include('chatroom.message.parts.icon')
+            <div class="info">
+                <p class="name">{{$message->user->name}}</p>
+                <p>{{$message->text}}</p>
+                <div class="proposeBuy">
+                    <p class="tit">この商品は削除されました<p>
+                    <p class="buy"><input type="submit" value="この商品は削除されました" disabled></p>
+                </div>
+            </div>
+        </div>
+        @include('chatroom.message.parts.time')
+    </li>
+
 @endif

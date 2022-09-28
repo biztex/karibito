@@ -20,8 +20,8 @@
             </div><!-- /.breadcrumb -->
             <div id="contents" class="detailStyle">
                     <div class="inner02">
+                        <big>※ 契約時の内容が表示されています</big>
                         <div class="clearfix">
-                            <big>契約時の内容が表示されています</big>
 
                             @include('purchased_job_request.parts.show.detail')
 

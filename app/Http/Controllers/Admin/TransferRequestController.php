@@ -23,7 +23,7 @@ class TransferRequestController extends Controller
     {
         $today = today()->year . sprintf('%02d', today()->month) . today()->day; // yyyymmdd
         $now_season = $this->transfer_request_service->getNowSeason($today);
-        $transfer_requests = TransferRequest::requestSeason($now_season['num'])->orderByDesc('id')->paginate(25);
+        $transfer_requests = TransferRequest::requestSeason($now_season['num'])->orderBy('status', 'asc')->orderBy('id', 'desc')->get();
 
         $next_season = $this->transfer_request_service->getNextSeason($now_season['num']);
         $prev_season = $this->transfer_request_service->getPrevSeason($now_season['num']);
@@ -53,7 +53,7 @@ class TransferRequestController extends Controller
         
         $now_season = $this->transfer_request_service->getNowSeason($day);
 
-        $transfer_requests = TransferRequest::requestSeason($season)->orderByDesc('id')->paginate(25);
+        $transfer_requests = TransferRequest::requestSeason($season)->orderBy('status', 'asc')->orderBy('id', 'desc')->get();
 
         $next_season = $this->transfer_request_service->getNextSeason($season);
         $prev_season = $this->transfer_request_service->getPrevSeason($season);

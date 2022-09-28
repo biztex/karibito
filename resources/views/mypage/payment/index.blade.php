@@ -28,7 +28,7 @@
 												<div class="box">
 													<div class="cont">
 														<p class="date">{{ date('Y年n月j日', strtotime($value->created_at)) }}</p>
-														<p class="txt">{{ $value->purchase->chatroom->reference->title }}</p>
+														<p class="txt">{{ $value->purchase->chatroom->referencePurchased->title }}</p>
 													</div>
 													@if($value->refunded_at === null)
 														<div class="price"><span>支払い</span>{{ number_format($value->amount) }}円</div>

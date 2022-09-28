@@ -4,7 +4,9 @@
             <div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('chatroom.index') }}">やりとり一覧</a>　>　
-                @if($chatroom->reference !== null)
+                @if($chatroom->referencePurchased !== null)
+                    <span>{{ $chatroom->referencePurchased->title }}</span>
+                @elseif($chatroom->reference !== null)
                     <span>{{ $chatroom->reference->title }}</span>
                 @else
                     <span>削除された商品</span>
