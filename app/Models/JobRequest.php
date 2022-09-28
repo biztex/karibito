@@ -21,7 +21,7 @@ class JobRequest extends Model
      */
     protected $guarded = [ 'id' ];
 
-    protected $appends = ['diff_time'];
+    protected $appends = ['diff_time', 'carbon_deadline', 'is_purchased'];
 
     const STATUS_PUBLISH = 1;
 
@@ -219,6 +219,18 @@ class JobRequest extends Model
     {
         $date = new Carbon($this->application_deadline);
         return $this->attributes['diff_time'] = $date->addDay()->diffForHumans(Carbon::now());
+    }
+
+    protected function getCarbonDeadlineAttribute()
+    {
+        $deadline = new Carbon(date("Y-m-d",strtotime("$this->application_deadline")));
+        return $this->attributes['carbon_deadline'] = $deadline;
+    }
+
+    protected function getIsPurchasedAttribute()
+    {
+        $requested = Chatroom::requested($this->id);
+        return $this->attributes['is_purchased'] = $requested;
     }
 
     /**

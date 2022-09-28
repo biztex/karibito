@@ -23,7 +23,7 @@
                                     <div class="tabBox is_active" id="tab_box01">
                                         <ul class="favoriteUl01 status">
                                             @foreach ($products as $product)
-                                                <li @if ($product->number_of_sale === App\Models\Product::UNLIMITED_OF_SALE || ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $product->number_of_sold == 0)) class="during" @endif> {{-- Todo:販売数が無制限のものまたは、販売数が一つで、かつ販売されていないものにduringクラスをつける --}}
+                                                <li @if ($product->number_of_sale === App\Models\Product::UNLIMITED_OF_SALE || ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $product->number_of_sold < 1)) class="during" @endif>
                                                     <div class="cont01">
                                                         @if(isset($product->productImage[0]))
                                                             <a href="{{ route('product.show',$product->id) }}">
@@ -82,7 +82,7 @@
                                             <li><div>投稿がありません。</div></li>
                                         @else
                                             @foreach($job_requests as $job_request)
-                                                <li> {{-- 掲載中か否かの判断はまだ未実装 --}}
+                                                <li @if ($job_request->is_purchased === false && $job_request->carbon_deadline->gte($today)) class="during" @endif>
                                                     <div class="cont01">
                                                         <a href="{{ route('job_request.show',$job_request->id) }}">
                                                             <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
