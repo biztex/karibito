@@ -7,7 +7,7 @@ use App\Models\PurchasedProduct;
 use App\Models\Product;
 
 
-class PurcahsedProductService
+class PurchasedProductService
 {
 
     public function storePurchasedProduct(Chatroom $chatroom)
@@ -45,7 +45,7 @@ class PurcahsedProductService
                     'is_public' => $product_option->is_public,
                 ];
                 $purchased_product = PurchasedProduct::find($purchased_product_id);
-                $purchased_product->purchasedAdditionalOption()->create($options);
+                $purchased_product->additionalOption()->create($options);
             }
         }
     }
@@ -66,7 +66,7 @@ class PurcahsedProductService
                 ];
 
                 $purchased_product = PurchasedProduct::find($purchased_product_id);
-                $purchased_product->purchasedProductQuestion()->create($questions);
+                $purchased_product->productQuestion()->create($questions);
             }
         }
     }
@@ -85,7 +85,7 @@ class PurcahsedProductService
                     'youtube_link' => $product_link->youtube_link,
                 ];
                 $purchased_product = PurchasedProduct::find($purchased_product_id);
-                $purchased_product->purchasedProductLink()->create($links);
+                $purchased_product->productLink()->create($links);
             }
         }
     }
@@ -104,7 +104,7 @@ class PurcahsedProductService
                     'path' => $product_image->path,
                 ];
                 $purchased_product = PurchasedProduct::find($purchased_product_id);
-                $purchased_product->purchasedProductImage()->create($product_image);
+                $purchased_product->productImage()->create($product_image);
             }
         }
     }

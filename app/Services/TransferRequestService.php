@@ -34,18 +34,15 @@ class TransferRequestService
 
         // 振込未申請の売上金額取得
         $profit = $this->profit_service->getProfit($not_transfer_profits->all());
-        // 振込手数料390円を差し引いた金額
 
         // 振込申請作成
-        $transfer_request = $this->storeTransferRequestTable( $profit['total']);
+        $transfer_request = $this->storeTransferRequestTable($profit['total']);
 
         // 売上テーブルを振込申請中に
         $this->profit_service->ChangeStatusRequesting($not_transfer_profits->all());
 
         // 振込内訳テーブル作成
         $this->storeDetails($transfer_request, $not_transfer_profits->all());
-        // // 振込未申請の売り上げに申請id付与し、申請済に
-        // $this->profit_service->updateTransferRequest($not_transfer_profits->all(), $transfer_request);
        
     }
 
