@@ -45,11 +45,13 @@
                                                         <div class="breadcrumb"><a href="{{ route('product.category.index', $val->mProductChildCategory->mProductCategory->id) }}"tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('product.category.index.show', $val->mProductChildCategory->id) }}">{{ $val->mProductChildCategory->name }}</a></div>
                                                         <a href="{{ route('product.show',$val->id) }}">
                                                             <div class="draw"><p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p></div>
-                                                            <div class="single"><span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span></div>
+                                                            <div class="single">
+                                                                <span tabindex="0">{{ App\Models\Product::IS_ONLINE[$val->is_online] }}</span>
+                                                                @if((\App\Models\Chatroom::numberOfSold($val->id) >= 1) && ($val->number_of_sale === \App\Models\Product::ONE_OF_SALE))
+                                                                    <span class="purchased">契約済</span>
+                                                                @endif
+                                                            </div>
                                                         </a>
-                                                        @if((\App\Models\Chatroom::numberOfSold($val->id) >= 1) && ($val->number_of_sale === \App\Models\Product::ONE_OF_SALE))
-                                                            <div class="single-sold-out"><span tabindex="0">契約済</span></div>
-                                                        @endif
                                                         <p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
                                                         <p >{{date('Y/m/d', strtotime($val->created_at))}}</p>
                                                     </div>
@@ -77,11 +79,13 @@
                                                             <div class="breadcrumb"><a href="{{ route('job_request.category.index', $val->mProductChildCategory->mProductCategory->id)}}" tabindex="0">{{ $val->mProductChildCategory->mProductCategory->name }}</a>&emsp;＞&emsp;<a href="{{ route('job_request.category.index.show', $val->category_id)}}">{{ $val->mProductChildCategory->name }}</a></div>
                                                             <a href="{{ route('job_request.show',$val->id) }}">
                                                                 <div class="draw"><p class="price word-break"><font>{{ $val->title }}</font><br>{{ number_format($val->price) }}円</p></div>
-                                                                <div class="single"><span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span></div>
+                                                                <div class="single">
+                                                                    <span tabindex="0">{{ App\Models\JobRequest::IS_ONLINE[$val->is_online] }}</span>
+                                                                    @if($val->application_deadline < \Carbon\Carbon::now())
+                                                                        <span class="time-limit-over">期限切れ</span>
+                                                                    @endif
+                                                                </div>
                                                             </a>
-                                                            @if($val->application_deadline < \Carbon\Carbon::now())
-                                                                <div class="time-limit-over"><span tabindex="0">期限切れ</span></div>
-                                                            @endif
                                                             <p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
                                                             <p>{{date('Y/m/d', strtotime($val->created_at))}}</p>
                                                         </div>
