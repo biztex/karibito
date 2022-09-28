@@ -7,6 +7,7 @@ use App\Models\JobRequest;
 use App\Models\Product;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 use App\Services\UserNotificationService;
@@ -29,6 +30,7 @@ class FavoriteController extends Controller
         $user_job_request_favorites = Favorite::jobRequest()->get();
         $products = array();
         $job_requests = array();
+        $today = new Carbon('today');
 
         foreach($user_product_favorites as $user_product_favorite) {
                 $products[] = $user_product_favorite->reference;
@@ -37,7 +39,7 @@ class FavoriteController extends Controller
             $job_requests[] = $user_job_request_favorite->reference;
         };
 
-        return view('mypage.favorite.index', compact('products', 'job_requests'));
+        return view('mypage.favorite.index', compact('products', 'job_requests', 'today'));
     }
 
     // お気に入りを削除
