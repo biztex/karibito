@@ -21,7 +21,7 @@ class PurchasedProduct extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchasedAdditionalOption()
+    public function additionalOption()
     {
         return $this->hasMany(PurchasedAdditionalOption::class);
     }
@@ -29,7 +29,7 @@ class PurchasedProduct extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchasedProductQuestion()
+    public function productQuestion()
     {
         return $this->hasMany(PurchasedProductQuestion::class);
     }
@@ -37,7 +37,7 @@ class PurchasedProduct extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchasedProductLink()
+    public function productLink()
     {
         return $this->hasMany(PurchasedProductYoutubeLink::class);
     }
@@ -45,7 +45,7 @@ class PurchasedProduct extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchasedProductImage()
+    public function productImage()
     {
         return $this->hasMany(PurchasedProductImage::class);
     }
