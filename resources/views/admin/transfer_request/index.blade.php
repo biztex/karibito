@@ -13,7 +13,7 @@
                 <div class="card shadow-sm mb-5">
                     <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
                         <h5 class="text-white mb-0">
-                            <i class="fas fa-info mr-2">振込申請情報：全{{ $transfer_requests->total() }}件</i>
+                            <i class="fas fa-info mr-2">振込申請情報：全{{ $transfer_requests->count() }}件</i>
                             <i class="fas fa-info mr-2 count"></i>
                         </h5>
                         <a href="{{ route('admin.transfer_request.season', $prev_season['num']) }}" class="btn btn-outline-secondary"><< {{$prev_season['string']}}</a>
@@ -67,13 +67,11 @@
                                             @endif
                                         </tr>
                                     @endforeach
-                                    {{ $transfer_requests->links() }}
                                 </tbody>
                             </table>
                         </div>
                     </form>
                 </div>
-                {{ $transfer_requests->links() }}
             </div>
         </div>
     </div>

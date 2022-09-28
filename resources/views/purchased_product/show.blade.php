@@ -21,8 +21,8 @@
 
             <div id="contents" class="detailStyle">
                 <div class="inner02 ">
+                    <big>※ 契約時の内容が表示されています</big>
                     <div class="clearfix">
-                        <big>契約時の内容が表示されています</big>
                         <div id="main">
 
                             @include('purchased_product.parts.show.detail')

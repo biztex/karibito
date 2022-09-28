@@ -2008,3 +2008,10 @@ button.bankTransferBtn {
 	display: flex;
 	justify-content: space-between;
 }
+a.after-none {
+	padding: 0;
+	display: block;
+}
+a.after-none::after {
+	content: none;
+}

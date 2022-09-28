@@ -21,12 +21,12 @@
 
 <div class="slider">
     <div class="big">
-        @foreach($product->purchasedProductImage as $val)
+        @foreach($product->productImage as $val)
             <div class="item"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:cover;"></div>
         @endforeach
     </div>
     <div class="small">
-        @foreach($product->purchasedProductImage as $val)
+        @foreach($product->productImage as $val)
             <div class="item"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:cover;"></div>
         @endforeach
     </div>
@@ -52,12 +52,12 @@
         </div>
     </div>
 @endif
-@if($product->purchasedProductQuestion->isNotEmpty())
+@if($product->productQuestion->isNotEmpty())
     <div class="content">
         <div class="optional faq">
             <h2 class="hdM">よくあるご質問</h2>
             <ul class="toggleWrapPC">
-                @foreach($product->purchasedProductQuestion as $product_question)
+                @foreach($product->productQuestion as $product_question)
                     <li>
                         <p class="quest toggleBtn"><span>{{$product_question->title}}</span><span class="more">回答を見る</span></p>
                         <p class="answer toggleBox" style="width:100%;">{{$product_question->answer}}</p>
@@ -67,7 +67,7 @@
         </div>
     </div>
 @endif
-@if ($product->purchasedProductLink->isNotEmpty()) {{--YouTubeの動画--}}
+@if ($product->productLink->isNotEmpty()) {{--YouTubeの動画--}}
     <div class="content">
         <div class="optional">
             <h2 class="hdM">参考動画</h2>

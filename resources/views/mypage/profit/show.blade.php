@@ -52,13 +52,13 @@
 										@else
 											<a href="{{ route('chatroom.show', $value->profit->chatroom_id) }}" class="bankTransferItem">
 												<div class="bankTransferHalf">
-													@if($value->profit->chatroom->reference_type === 'App\Models\Product')
+													@if($value->profit->chatroom->purchased_reference_type === 'App\Models\Product')
 														<p class="bankTransferType">提供</p>
 													@else
 														<p class="bankTransferType">リクエスト</p>
 													@endif
 													<p class="bankTransferDate">取引完了日：{{ date('Y年n月j日 H:i', strtotime($value->profit->created_at)) }}</p>
-													<p class="bankTransferText">{{ $value->profit->chatroom->reference->title }}</p>
+													<p class="bankTransferText">{{ $value->profit->chatroom->referencePurchased->title }}</p>
 												</div>
 												<div class="bankTransferHalf">
 													
