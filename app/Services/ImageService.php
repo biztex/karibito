@@ -46,8 +46,8 @@ class ImageService
         // storageまでのパスを取得
         $storage_file_path = storage_path('app/public/');
 
-        \Storage::makeDirectory($folder_path . 's');
-        \Storage::makeDirectory('original/'. $folder_path . 's');
+        \Storage::makeDirectory('public/' . $folder_path . 's');
+        \Storage::makeDirectory('public/original/'. $folder_path . 's');
 
         // 圧縮後のものをStorageに保存
         $resized_image->save($storage_file_path . $file_path);
