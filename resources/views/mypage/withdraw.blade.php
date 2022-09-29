@@ -28,7 +28,7 @@
                                 @csrf
                                 <div class="configEditBox">
                                     <div class="configEditButton">
-                                        <input type="submit" value="退会する" name="">
+                                        <input type="submit" value="退会する" name="" onclick='return confirm("退会してもよろしいですか？");'>
                                     </div>
                                 </div>
                             </form>
