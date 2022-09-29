@@ -4,9 +4,17 @@ namespace App\Services;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\Portfolio;
+use App\Services\ImageService;
 
 class PortfolioService
 {
+    protected $image_service;
+
+    public function __construct(ImageService $image_service)
+    {
+        $this->image_service = $image_service;
+    }
+
     /**
      * 新規ポートフォリオ投稿
      */
@@ -14,7 +22,7 @@ class PortfolioService
     {
         $portfolio = new Portfolio;
         $portfolio->user_id = \Auth::id();
-        $portfolio->path =  $request->path->store('portfolio_paths', 'public');
+        $portfolio->path = $this->image_service->resizeImage($request->path, Portfolio::RESIZE_WIDTH, 'portfolio_path');
         $portfolio->fill($request->substitutable());
         $portfolio->save();
 
@@ -46,7 +54,11 @@ class PortfolioService
     {
         //画像は変更時のみ保存する
         if($request->path){
-            $portfolio->path =  $request->path->store('portfolio_paths', 'public');
+            $old = $portfolio->path;
+            \Storage::delete('public/' . $old);
+            \Storage::delete('public/original/' . $old);
+
+            $portfolio->path = $this->image_service->resizeImage($request->path, Portfolio::RESIZE_WIDTH, 'portfolio_path');
         }
         $portfolio->fill($request->substitutable());
         $portfolio->save();
@@ -112,5 +124,21 @@ class PortfolioService
                 return $next_page;
             }
         }
+    }
+
+    /**
+     * ポートフォリオを削除する
+     * @param Portfolio $portfolio
+     * 
+     * @return void
+     */
+    public function delete(Portfolio $portfolio)
+    {
+        \DB::transaction(function () use ($portfolio) {
+            \Storage::delete('public/' . $portfolio->path);
+            \Storage::delete('public/original/' . $portfolio->path);
+            $portfolio->portfolioLink()->delete();
+            $portfolio->delete();
+        });
     }
 }

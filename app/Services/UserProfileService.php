@@ -8,9 +8,16 @@ use App\Mail\User\IdentificationUploadMail;
 use App\Models\Specialty;
 use App\Http\Requests\UserProfile\StoreRequest;
 use Carbon\Carbon;
+use App\Services\ImageService;
 
 class UserProfileService
 {
+    protected $image_service;
+    
+    public function __construct(ImageService $image_service)
+    {
+        $this->image_service = $image_service;
+    }
     /**
      * ニックネーム変更
      */
@@ -90,7 +97,7 @@ class UserProfileService
     public function updateIdentification($request)
     {
         $user_profile = \Auth::user()->userProfile;
-        $user_profile->identification_path = $request->file('identification_path')->store('identification_paths','public');
+        $user_profile->identification_path = $this->image_service->resizeImage($request->file('identification_path'), UserProfile::RESIZE_WIDTH_IDENTIFICATION, 'identification_path');
         $user_profile->save();
 
         \Mail::send(new IdentificationUploadMail());
@@ -101,24 +108,22 @@ class UserProfileService
      * ユーサープロフィール
      * カバー・アイコン画像変更・登録
      */
-    public function updateUserProfileImage($request,$value)
+    public function updateUserProfileImage($request,$value, $resize_width)
     {
         $user_profile = \Auth::user()->userProfile;
 
-        $old = $user_profile->$value;
-
         if(isset($request->$value)){
-            $user_profile->$value = $request->file($value)->store($value . 's','public');
-
-            if(null !== $old){
-                \Storage::delete('public/' . $old);
-            }
+            $this->deleteUserProfileImage($value);
+            $resize_file_path = $this->image_service->resizeImage($request->file($value), $resize_width, $value);
+            $user_profile->$value = $resize_file_path;
         }
         return $user_profile->save();
     }
 
     /**
      * カバー・アイコン画像削除
+     * @param string $value : cover / icon
+     * @return void
      */
     public function deleteUserProfileImage($value)
     {
@@ -129,8 +134,9 @@ class UserProfileService
 
         if(null !== $old){
             \Storage::delete('public/' . $old);
+            \Storage::delete('public/original/' . $old);
         }
-        return $user_profile->save();
+        $user_profile->save();
     }
 
     /**

@@ -10,11 +10,18 @@ use App\Models\ProductImage;
 use App\Models\ProductQuestion;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Traits\ProductSearchTrait;
+use App\Services\ImageService;
 
 
 class ProductService
 {
     use ProductSearchTrait;
+
+    protected $image_service;
+    public function __construct(ImageService $image_service)
+    {
+        $this->image_service = $image_service;
+    }
 
     /**
      * 新規商品投稿
@@ -197,26 +204,14 @@ class ProductService
      */
     public function changeUploadFile($base64)
     {
-        $storage = 'public';
-        $dir = 'product_paths';
-
-        // 拡張子を取得
-        preg_match('/data:image\/(\w+);base64,/', $base64, $matches);
-        $extension = $matches[1];
-
         // base64にエンコードされたデータをデコード
         $img = preg_replace('/^data:image.*base64,/', '', $base64);
         $img = str_replace(' ', '+', $img);
-        $fileData = base64_decode($img);
+        $file_data = base64_decode($img);
 
-        // pathを整形
-        $dir = rtrim($dir, '/').'/';
-        $fileName = md5($img);
-        $path = $dir.$fileName.'.'.$extension;
+        $resize_file_path = $this->image_service->resizeImage($file_data, ProductImage::RESIZE_WIDTH, 'product_path');
 
-        \Storage::disk($storage)->put($path, $fileData);
-
-        return $path;
+        return $resize_file_path;
     }
 
 
@@ -231,7 +226,7 @@ class ProductService
             foreach ($paths as $path) {
                 if ($path !== null){
                     $product_image = new ProductImage();
-                    $product_image->path = $path->store('product_paths', 'public');
+                    $product_image->path = $this->image_service->resizeImage($path, ProductImage::RESIZE_WIDTH, 'product_path');
                     $product_image->product_id = $id;
                     $product_image->save();
                 }
@@ -259,9 +254,7 @@ class ProductService
         // 登録済の画像を配列で取得
         $old_images = ProductImage::where('product_id',$id)->get();
         // $image_status = json_decode($request->image_status,true);
-
         // 追加・変更・削除があれば実行
-        // if (isset($image_status)) {
             for($i=0; $i<10; $i++){
                 $image_status = $request['image_status'.$i];
 
@@ -273,7 +266,7 @@ class ProductService
                     if($request->paths !== null && $request['paths'.$i] !== null) {
                         // input:fileでわたってきているとき
                         $product_image = new ProductImage();
-                        $product_image->path = $request->paths['paths'.$i]->store('product_paths', 'public');
+                        $product_image->path = $this->image_service->resizeImage($request->paths['paths'.$i], ProductImage::RESIZE_WIDTH, 'product_path');
                         $product_image->product_id = $id;
                         $product_image->save();
 
@@ -300,7 +293,7 @@ class ProductService
             foreach($old_images as $val){
                 $val->delete();
             }
-        // }
+            
     }
 
 

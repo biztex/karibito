@@ -182,6 +182,8 @@ return [
 
         // 独自Provider
         \App\Providers\PaymentServiceProvider::class,
+         // Add Intervention Image.
+         Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*

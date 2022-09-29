@@ -9,6 +9,8 @@ class Portfolio extends Model
 {
     use HasFactory;
 
+    const RESIZE_WIDTH = 720;
+
     protected $guarded = [ 'id' ];
 
     public function user()

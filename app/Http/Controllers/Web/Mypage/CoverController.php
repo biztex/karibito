@@ -20,7 +20,7 @@ class CoverController extends Controller
 
     public function update(UpdateCoverRequest $request) 
     {
-        $this->user_profile_service->updateUserProfileImage($request,'cover');
+        $this->user_profile_service->updateUserProfileImage($request,'cover',UserProfile::RESIZE_WIDTH_COVER);
         \Session::put('flash_msg','カバーを変更しました！');
         return redirect()->route('mypage');
     }
