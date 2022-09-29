@@ -49,9 +49,9 @@ class PortfolioController extends Controller
     public function store(StoreRequest $request)
     {
         \DB::transaction(function () use ($request) {
-        $portfolio = $this->portfolio_service->storePortfolio($request);
-        $this->portfolio_service->storePortfolioLink($request->all(), $portfolio->id);
-        $this->user_notification_service->storeUserNotificationPost($portfolio);
+            $portfolio = $this->portfolio_service->storePortfolio($request);
+            $this->portfolio_service->storePortfolioLink($request->all(), $portfolio->id);
+            $this->user_notification_service->storeUserNotificationPost($portfolio);
         });
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを登録しました！');
@@ -72,8 +72,7 @@ class PortfolioController extends Controller
 
     public function destroy(Portfolio $portfolio)
     {
-        $portfolio->portfolioLink()->delete();
-        $portfolio->delete();
+        $this->portfolio_service->delete($portfolio);
 
         return redirect()->route('portfolio.index')->with('flash_msg', 'ポートフォリオを削除しました！');
     }

@@ -13,6 +13,7 @@ use App\Services\ImageService;
 class UserProfileService
 {
     protected $image_service;
+    
     public function __construct(ImageService $image_service)
     {
         $this->image_service = $image_service;
