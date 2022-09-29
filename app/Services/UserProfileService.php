@@ -111,8 +111,6 @@ class UserProfileService
     {
         $user_profile = \Auth::user()->userProfile;
 
-        $old = $user_profile->$value;
-
         if(isset($request->$value)){
             $this->deleteUserProfileImage($value);
             $resize_file_path = $this->image_service->resizeImage($request->file($value), $resize_width, $value);
@@ -123,6 +121,8 @@ class UserProfileService
 
     /**
      * カバー・アイコン画像削除
+     * @param string $value : cover / icon
+     * @return void
      */
     public function deleteUserProfileImage($value)
     {
@@ -135,7 +135,7 @@ class UserProfileService
             \Storage::delete('public/' . $old);
             \Storage::delete('public/original/' . $old);
         }
-        return $user_profile->save();
+        $user_profile->save();
     }
 
     /**
