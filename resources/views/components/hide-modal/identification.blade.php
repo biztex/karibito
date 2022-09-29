@@ -31,17 +31,19 @@
                 <p class="txt">安心安全のため、本人確認承認後はご住所 / 本名/ 生年月日のご変更ができなくなっておりますので、本人確認承認後にご住所 / 本名 / 生年月日をご変更されたい場合は、カリビト事務局へ、お問い合わせください</p>
             </div>
         </div>
-        <p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集はこちら</a></p>
+            <div style="margin:0 0 20px 20px;height:10px;"><p class="identification-file-name" style='color:#696969;'></p></div>
+            <p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集はこちら</a></p>
         @if(!empty(Auth::user()->userProfile->zip) && !empty(Auth::user()->userProfile->address) && !empty(Auth::user()->userProfile->birthday))
             <form action="{{ route('identification') }}" method="POST" name="upload" enctype="multipart/form-data">
                 @csrf
                 <label>
-                    <input type="file" name="identification_path" style="display:none;"  accept="image/png,image/jpeg,">
+                    <input type="file" name="identification_path" style="display:none;" id="identification_file_path" accept="image/png,image/jpeg,">
                     <p class="fancyRegisterUpload">身分証明書をアップロード</p>
                 </label>
                 
                 <p class="fancyRegisterSubmit"><a href="#" onclick="document.upload.submit()">提出する</a></p>
             </form>
+
         @else
             <div class="fancyRegisterItem">
                 <p class="txt">本人確認にはご住所 / 本名/ 生年月日のご登録が必要です。<br/>本人認証に利用されるものと同じ姓名でご登録ください。<br/>「プロフィール編集はこちら」より、郵便番号・住所の登録をお願いいたします。</p>

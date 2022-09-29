@@ -97,7 +97,7 @@ class UserProfileService
     public function updateIdentification($request)
     {
         $user_profile = \Auth::user()->userProfile;
-        $user_profile->identification_path = $request->file('identification_path')->store('identification_paths','public');
+        $user_profile->identification_path = $this->image_service->resizeImage($request->file('identification_path'), UserProfile::RESIZE_WIDTH_IDENTIFICATION, 'identification_path');
         $user_profile->save();
 
         \Mail::send(new IdentificationUploadMail());

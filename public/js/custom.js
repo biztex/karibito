@@ -1,4 +1,16 @@
 $(function () {
+	// 身分証明証提出
+	$(".fancyRegisterUpload").on('click', function () {
+		// 添付ファイルをリセット
+		$(".identification-file-name").text("");
+		$("input[name='identification_path']").val("");
+
+		$("input[name='identification_path']").on('change', function () {
+			let result = $('#identification_file_path').prop('files')[0].name;
+			$(".identification-file-name").text("選択ファイル："+result);
+		});
+	});
+
 	// チャットルーム資料添付・送信
 
 	$(".chatroom_file_input").on('click', function () {

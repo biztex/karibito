@@ -54,6 +54,7 @@ class UserProfile extends Model
 
     const RESIZE_WIDTH_ICON = 350;
     const RESIZE_WIDTH_COVER = 720;
+    const RESIZE_WIDTH_IDENTIFICATION = 720;
 
     protected $appends = ['age','now_age','full_name'];
 
