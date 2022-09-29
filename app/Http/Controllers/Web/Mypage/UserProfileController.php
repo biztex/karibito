@@ -105,8 +105,8 @@ class UserProfileController extends Controller
 
             $this->user_profile_service->updateUser($request->all());
             $this->user_profile_service->updateUserProfile($request);
-            $this->user_profile_service->updateUserProfileImage($request,'cover');
-            $this->user_profile_service->updateUserProfileImage($request,'icon');
+            $this->user_profile_service->updateUserProfileImage($request,'cover', UserProfile::RESIZE_WIDTH_COVER);
+            $this->user_profile_service->updateUserProfileImage($request,'icon', UserProfile::RESIZE_WIDTH_ICON);
             $this->user_profile_service->updateSpecialty($request->all());
 
         });
