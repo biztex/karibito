@@ -15,11 +15,19 @@ class ChangeTelController extends Controller
         $this->user_profile_service = $user_profile_service;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function edit()
     {
         return view('setting.tel');
     }
 
+    /**
+     * @param RegisterTelRequest $request
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(RegisterTelRequest $request)
     {
         \DB::transaction(function () use($request) {
