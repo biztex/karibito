@@ -23,30 +23,13 @@ class PaymentService
     }
 
     /**
-     * 対象ユーザーの入金一覧取得
-     * @param int $user_id
-     * @return object $deposits
-     */
-    public function getUserDeposits(int $user_id): object
-    {
-        // リファクタリング可能そう
-        $chatroom_ids = \App\Models\Chatroom::sellService($user_id)->pluck('id');
-        $payment_ids = \App\Models\Purchase::whereIn('chatroom_id',$chatroom_ids)->pluck('payment_id');
-        $deposits = Payment::whereIn('id', $payment_ids)->orderBy('id', 'desc')->paginate(20);
-
-        return $deposits;
-    }
-
-    /**
      * 対象ユーザーの支払い一覧取得
      * @param int $user_id
-     * @return object $withdrawals
+     * @return object
      */
     public function getUserWithdrawals($user_id): object
     {
-        $withdrawals = Payment::targetUser($user_id)->orderBy('id', 'desc')->paginate(20);
-
-        return $withdrawals;
+        return Payment::targetUser($user_id)->orderBy('id', 'desc')->paginate(20);
     }
 
     /**
@@ -68,9 +51,9 @@ class PaymentService
     /**
      * stripe全額返金処理
      * @param object $payment
-     * @return string
+     * @return string stripeの返金id
      */
-    public function refundStripe(Payment $payment)
+    public function refundStripe(Payment $payment): string
     {
         return $this->payment_interface->refundPayment(\Crypt::decryptString($payment->stripe_charge_id));
     }

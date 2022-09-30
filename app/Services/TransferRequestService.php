@@ -21,32 +21,36 @@ class TransferRequestService
 
     /**
      * 振込申請作成
-     * 
-     * @return TransferRequest
      */
     public function storeTransferRequest()
     {
-        // 売上テーブルに振込手数料レコード作成
-        $this->profit_service->storeCommission(\Auth::id(), - 390);
+        \DB::transaction(function () {
+            // 売上テーブルに振込手数料レコード作成
+            $this->profit_service->storeProfit(\Auth::id(), null, Profit::COMMISSION);
 
-        // 振込未申請の売上取得
-        $not_transfer_profits = $this->profit_service->getNotTransferProfit(\Auth::id());
+            // 振込未申請の売上取得
+            $not_transfer_profits = $this->profit_service->getNotTransferProfit(\Auth::id());
 
-        // 振込未申請の売上金額取得
-        $profit = $this->profit_service->getProfit($not_transfer_profits->all());
+            // 振込未申請の売上金額取得
+            $profit = $this->profit_service->getProfit($not_transfer_profits->all());
 
-        // 振込申請作成
-        $transfer_request = $this->storeTransferRequestTable($profit['total']);
+            // 振込申請作成
+            $transfer_request = $this->storeTransferRequestTable($profit['total']);
 
-        // 売上テーブルを振込申請中に
-        $this->profit_service->ChangeStatusRequesting($not_transfer_profits->all());
+            // 売上テーブルを振込申請中に
+            $this->profit_service->ChangeStatusRequesting($not_transfer_profits->all());
 
-        // 振込内訳テーブル作成
-        $this->storeDetails($transfer_request, $not_transfer_profits->all());
-       
+            // 振込内訳テーブル作成
+            $this->storeDetails($transfer_request, $not_transfer_profits->all());
+        });
     }
 
-    public function storeDetails(TransferRequest $transfer_request, array $not_transfer_profits)
+    /**
+     * 振込内訳テーブル作成
+     * @param TransferRequest $transfer_request
+     * @param array $not_transfer_profits
+     */
+    public function storeDetails(TransferRequest $transfer_request, array $not_transfer_profits): void
     {
         foreach($not_transfer_profits as $profit){
             $detail = new TransferRequestDetail;
@@ -55,6 +59,7 @@ class TransferRequestService
             $detail->save();
         }
     }
+
     /**
      * レコード作成
      * @param int $amount *手数料引いたもの
@@ -74,6 +79,9 @@ class TransferRequestService
 
     /**
      * 指定範囲のcsvをDL
+     * @param array $request
+     * 
+     * @return mixed
      */
     public function exportTransferRequestCsv(array $request)
     {
@@ -83,12 +91,14 @@ class TransferRequestService
             $data = [];
 
             foreach ($dl_transfer_requests as $transfer_request) {
+                $bank_account = $transfer_request->user->bankAccount;
+
                 $array_data = [
-                    $transfer_request->user->bankAccount->bank_code, // 銀行コード
-                    $transfer_request->user->bankAccount->branch_code, // 支店コード
-                    $transfer_request->user->bankAccount->type, // 預金種目
-                    \Crypt::decryptString($transfer_request->user->bankAccount->number), // 口座番号
-                    \Crypt::decryptString($transfer_request->user->bankAccount->name), // 受取人名
+                    $bank_account->bank_code, // 銀行コード
+                    $bank_account->branch_code, // 支店コード
+                    $bank_account->type, // 預金種目
+                    \Crypt::decryptString($bank_account->number), // 口座番号
+                    \Crypt::decryptString($bank_account->name), // 受取人名
                     $transfer_request->amount, // 振込金額
                     null, // 顧客コード
                     null, // 識別表示
@@ -105,6 +115,10 @@ class TransferRequestService
         }
     }
 
+    /**
+     * 振込申請を振込済にする
+     * @param array $transfer_request_ids
+     */
     public function changeStatusComplete(array $transfer_request_ids)
     {
         foreach($transfer_request_ids as $transfer_request_id) {
@@ -120,6 +134,10 @@ class TransferRequestService
         }
     }
 
+    /**
+     * 振込申請を振込失敗にする
+     * @param array $transfer_request_ids
+     */
     public function changeStatusFail(array $transfer_request_ids)
     {
         foreach($transfer_request_ids as $transfer_request_id) {
@@ -134,6 +152,10 @@ class TransferRequestService
         }
     }
 
+    /**
+     * 振込申請を申請中に戻す
+     * @param array $transfer_request_ids
+     */
     public function changeStatusBack(array $transfer_request_ids)
     {
         foreach($transfer_request_ids as $transfer_request_id) {
@@ -148,11 +170,23 @@ class TransferRequestService
         }
     }
 
-    public function getTransferRequest(int $user_id)
+    /**
+     * 振込申請一覧取得
+     * @param int $user_id
+     * 
+     * @return object
+     */
+    public function getTransferRequest(int $user_id): object
     {
         return TransferRequest::userTransferRequest($user_id)->orderBy('id', 'desc')->paginate(15);
     }
     
+    /**
+     * 年月旬の取得
+     * @param string $yyyymmdd
+     * 
+     * @return array $now_season
+     */
     public function getNowSeason(string $yyyymmdd): array
     {
         $year = substr($yyyymmdd, 0, 4);
@@ -175,6 +209,12 @@ class TransferRequestService
         return $now_season;
     }
 
+    /**
+     * 次の年月旬を取得
+     * @param string
+     * 
+     * @return array $next_season
+     */
     public function getNextSeason(string $data): array
     {
         $year = substr($data, 0, 4);
@@ -200,6 +240,12 @@ class TransferRequestService
         return $next_season;
     }
 
+    /**
+     * 前の年月旬を取得
+     * @param string
+     * 
+     * @return array $prev_season
+     */
     public function getPrevSeason(string $data): array
     {
         $year = substr($data, 0, 4);
@@ -225,6 +271,12 @@ class TransferRequestService
         return $prev_season;
     }
 
+    /**
+     * パラメータが現在と一致するかの確認
+     * @param string $season
+     * 
+     * @return bool
+     */
     public function seasonCheck(string $season): bool
     {
         $today = today()->year . sprintf('%02d', today()->month) . today()->day; // yyyymmdd

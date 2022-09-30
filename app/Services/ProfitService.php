@@ -2,19 +2,18 @@
 namespace App\Services;
 
 use App\Models\Profit;
-use App\Models\TransferRequest;
 
 class ProfitService
 {
     /**
      * profitテーブル作成
      * @param int $user_id
-     * @param int $chatroom_id
+     * @param int|null $chatroom_id
      * @param int $amount
      * 
      * @return void
      */
-    public function storeProfit(int $user_id, int $chatroom_id, int $amount): void
+    public function storeProfit(int $user_id, int|null $chatroom_id, int $amount): void
     {
         $profit = new Profit;
         $profit->user_id = $user_id;
@@ -23,16 +22,11 @@ class ProfitService
         $profit->save();
     }
 
-    public function storeCommission(int $user_id, int $amount): void
-    {
-        $profit = new Profit;
-        $profit->user_id = $user_id;
-        $profit->chatroom_id = null;
-        $profit->amount = $amount;
-        $profit->save();
-    }
-
-    public function ChangeStatusRequesting(array $not_transfer_profits)
+    /**
+     * ステータスを振込申請中に
+     * @param array $not_transfer_profits
+     */
+    public function ChangeStatusRequesting(array $not_transfer_profits): void
     {
         foreach($not_transfer_profits as $profit){
             $profit->status = Profit::STATUS_REQUESTING;
@@ -49,6 +43,12 @@ class ProfitService
         return Profit::notTransfer($user_id)->get();
     }
 
+    /**
+     * 振込未申請の売上金額取得
+     * @param array $not_transfer_profits
+     * 
+     * @return array $profit
+     */
     public function getProfit(array $not_transfer_profits): array
     {
         $profit = [];
@@ -71,18 +71,23 @@ class ProfitService
         return $profit;
     }
    
-    public function changeStatusComplete(Profit $profit)
+    /**
+     * 売上金の振込ステータスを振込済にする
+     * @param Profit $profit
+     */
+    public function changeStatusComplete(Profit $profit): void
     {
         $profit->status = Profit::STATUS_COMPLETE;
         $profit->save();
     }
 
-    public function changeStatusNone(Profit $profit)
+    /**
+     * 売上金の振込ステータスを未/失敗 にする
+     * @param Profit $profit
+     */
+    public function changeStatusNone(Profit $profit): void
     {
         $profit->status = Profit::STATUS_NONE;
         $profit->save();
-    }
-
-   
-    
+    }   
 }

@@ -37,7 +37,7 @@
 							<div class="memberConfigBox bankTransferBox bankTransferHistoryBox">
 							<div class="memberConfigItem">
 								<ul class="bankTransferList">
-									@foreach($transfer_request_details as $value)
+									@foreach($transfer_request->transferRequestDetails as $value)
 										@if($value->profit->chatroom_id === null && $value->profit->amount === -390)
 										<a href="" class="bankTransferItem">
 											<div class="bankTransferHalf">
