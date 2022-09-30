@@ -16,12 +16,13 @@ class ImageService
 {
     /**
      * 画像をリサイズして保存する
-     * @param $image_file
-     * @param $resize_width
-     * @param $folder_path
-     * @return mixed
+     * @param object $image_file
+     * @param int $resize_width
+     * @param string $folder_path
+     * 
+     * @return string $file_path
      */
-    public function resizeImage($image_file, $resize_width, $folder_path)
+    public function resizeImage(object $image_file, int $resize_width, string $folder_path): string
     {
         // 画像を読み込む
         $image = \Image::make($image_file);
@@ -46,6 +47,7 @@ class ImageService
         // storageまでのパスを取得
         $storage_file_path = storage_path('app/public/');
 
+        // ディレクトリ作成
         \Storage::makeDirectory('public/' . $folder_path . 's');
         \Storage::makeDirectory('public/original/'. $folder_path . 's');
 
@@ -57,14 +59,13 @@ class ImageService
         return $file_path;
     }
 
-
-
     /**
      * ファイルの拡張子取得
-     * @param $resize_image
-     * @return string $ext;
+     * @param object $resize_image
+     * 
+     * @return string $ext
      */
-    private function getImageExtension($resized_image): string
+    private function getImageExtension(object $resized_image): string
     {
         $ext = '';
         if ($resized_image->mime() === 'image/png') {
@@ -77,12 +78,13 @@ class ImageService
 
     /**
      * 保存するファイルパス
-     * @param $path :ファイルパス
-     * @param $ext :拡張子
+     * @param string $folder_path
+     * @param string $ext
+     * 
      * @return string
      */
-    private function getFilePath($path, $ext)
+    private function getFilePath($folder_path, $ext): string
     {
-        return $path . 's/' . Str::random(50) . $ext;
+        return $folder_path . 's/' . Str::random(50) . $ext;
     }
 }

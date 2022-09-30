@@ -70,7 +70,7 @@
 			} else if (@json($errors->has('identification_path'))){
 					$('.fancybox_register').click();
 					
-			} else if (@json($errors->has('name') || $errors->has('first_name') || $errors->has('last_name') || $errors->has('gender') || $errors->has('birthday') || $errors->has('prefecture') || $errors->has('zip') || $errors->has('address') || $errors->has('introduction') || $errors->has('icon') || $errors->has('cover') || $errors->has('profile_content') || $errors->has('arr_content') )) {
+			} else if (@json($errors->has('name') || $errors->has('first_name') || $errors->has('last_name') || $errors->has('gender') || $errors->has('birthday') || $errors->has('prefecture') || $errors->has('zip') || $errors->has('address') || $errors->has('introduction') || $errors->has('icon') || $errors->has('cover') || $errors->has('profile_content.*') || $errors->has('arr_content') )) {
 						$('.fancybox').click();
 						
 			} else if (@json($errors->has('base64_text.0'))) {

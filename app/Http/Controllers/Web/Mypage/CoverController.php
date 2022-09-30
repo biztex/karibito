@@ -15,23 +15,34 @@ class CoverController extends Controller
     public function __construct(UserProfileService $user_profile_service)
     {
         $this->user_profile_service = $user_profile_service;
-
     }
 
+    /**
+     * マイページよりカバー画像のみ変更
+     * @param UpdateCoverRequest $request
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateCoverRequest $request) 
     {
-        $this->user_profile_service->updateUserProfileImage($request,'cover',UserProfile::RESIZE_WIDTH_COVER);
-        \Session::put('flash_msg','カバーを変更しました！');
-        return redirect()->route('mypage');
+        \DB::transaction(function () use ($request) {
+            $this->user_profile_service->updateUserProfileImage($request->all(),'cover',UserProfile::RESIZE_WIDTH_COVER);
+            \Session::put('flash_msg','カバーを変更しました！');
+        });
+        return back();
     }
 
+    /**
+     * カバー画像の削除
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete() 
     {
-        $previous = url()->previous();
-
-        $this->user_profile_service->deleteUserProfileImage('cover');
-        \Session::put('flash_msg','カバーを削除しました！');
-        
-        return redirect($previous);
+        \DB::transaction(function () {
+            $this->user_profile_service->deleteUserProfileImage('cover');
+            \Session::put('flash_msg','カバーを削除しました！');
+        });
+        return back();
     }
 }
