@@ -4,7 +4,9 @@
 	<article>
 		<div id="breadcrumb">
                 <div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<a href="{{ route('setting.index') }}">会員情報</a>　>　<span>振込口座情報</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　
+				<a href="{{ route('setting.index') }}">会員情報</a>　>　
+				<span>振込口座情報</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.flash-msg/>
@@ -15,38 +17,38 @@
 						<div class="configEditItem">
 							<h2 class="subPagesHd">受取口座の登録・変更</h2>
 							<div class="configEditBox">
-								@if($bank !== null)
+								@if(Auth::user()->bankAccount !== null)
 									<div class="configEditList" style="margin-bottom:35px;">
 										<h3 class="mypageEditHd">現在の受取口座情報</h3>
 										<div class="configEditTable">
 											<table>
 												<tr>
 													<th>銀行名</th>
-													<td>{{ $bank->bank_name }}</td>
+													<td>{{ Auth::user()->bankAccount->bank_name }}</td>
 												</tr>
 												<tr>
 													<th>銀行コード</th>
-													<td>{{ $bank->bank_code }}</td>
+													<td>{{ Auth::user()->bankAccount->bank_code }}</td>
 												</tr>
 												<tr>
 													<th>支店名</th>
-													<td>{{ $bank->branch_name }}</td>
+													<td>{{ Auth::user()->bankAccount->branch_name }}</td>
 												</tr>
 												<tr>
 													<th>支店コード</th>
-													<td>{{ $bank->branch_code }}</td>
+													<td>{{ Auth::user()->bankAccount->branch_code }}</td>
 												</tr>
 												<tr>
 													<th>口座種別</th>
-													<td>{{ \App\Models\BankAccount::BANK_TYPE[$bank->type] }}</td>
+													<td>{{ \App\Models\BankAccount::BANK_TYPE[Auth::user()->bankAccount->type] }}</td>
 												</tr>
 												<tr>
 													<th>口座番号</th>
-													<td>{{ Crypt::decryptString($bank->number) }}</td>
+													<td>{{ Crypt::decryptString(Auth::user()->bankAccount->number) }}</td>
 												</tr>
 												<tr>
 													<th>口座名義</th>
-													<td>{{ Crypt::decryptString($bank->name) }}</td>
+													<td>{{ Crypt::decryptString(Auth::user()->bankAccount->name) }}</td>
 												</tr>
 											</table>
 											{{-- <form action="{{ route('setting.bank.destroy') }}" method="post" class="configEditDeleteBtn">
@@ -95,10 +97,10 @@
 													<td>
 														@error('type')<div class="alert alert-danger">{{ $message }}</div>@enderror
 														<div class=" radioChoice">
-																<input type="radio" name="type" value="{{ App\Models\BankAccount::TYPE_ORDINARY }}" @if(old('type') == App\Models\BankAccount::TYPE_ORDINARY) checked @endif>
-																<span class="credit-card-info-number">{{ App\Models\BankAccount::BANK_TYPE[App\Models\BankAccount::TYPE_ORDINARY] }}</span><br>
-																<input type="radio" name="type" value="{{ App\Models\BankAccount::TYPE_CURRENT }}" @if(old('type') == App\Models\BankAccount::TYPE_CURRENT) checked @endif>
-																<span class="credit-card-info-number">{{ App\Models\BankAccount::BANK_TYPE[App\Models\BankAccount::TYPE_CURRENT] }}</span>
+															<input type="radio" name="type" value="{{ App\Models\BankAccount::TYPE_ORDINARY }}" @if(old('type') == App\Models\BankAccount::TYPE_ORDINARY) checked @endif>
+															<span class="credit-card-info-number">{{ App\Models\BankAccount::BANK_TYPE[App\Models\BankAccount::TYPE_ORDINARY] }}</span><br>
+															<input type="radio" name="type" value="{{ App\Models\BankAccount::TYPE_CURRENT }}" @if(old('type') == App\Models\BankAccount::TYPE_CURRENT) checked @endif>
+															<span class="credit-card-info-number">{{ App\Models\BankAccount::BANK_TYPE[App\Models\BankAccount::TYPE_CURRENT] }}</span>
 														</div>
 													</td>
 												</tr>

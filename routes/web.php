@@ -197,7 +197,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::controller(BankAccountController::class)->name('bank.')->group(function () {
                     Route::get('bank', 'edit')->name('edit');
                     Route::post('bank', 'update')->name('update');
-                    Route::delete('bank', 'destroy')->name('destroy');
+                    // Route::delete('bank', 'destroy')->name('destroy');
                 });
 
                 // お知らせ機能の設定
