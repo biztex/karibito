@@ -1,12 +1,11 @@
 <x-layout>
-<x-parts.post-button/>
 	<article>
 	<body id="draft">
 		<div id="breadcrumb">
 			<div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　&gt;　
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
-                <a href="{{ route('draft') }}">下書き一覧</a>
+                <span>下書き一覧</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<x-parts.ban-msg/>
@@ -123,8 +122,7 @@
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu />
-			</div>
-			<!--inner-->
+			</div><!--inner-->
 		</div><!-- /#contents -->
 		<x-hide-modal />
 	</article>
