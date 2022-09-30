@@ -180,6 +180,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Payment::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function bankAccount()
     {
         return $this->hasOne(BankAccount::class);

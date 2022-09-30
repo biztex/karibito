@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
-use App\Models\Prefecture;
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
 use App\Http\Requests\UserProfile\UpdateCanCallRequest;
@@ -18,7 +17,6 @@ class UserProfileController extends Controller
     public function __construct(UserProfileService $user_profile_service)
     {
         $this->user_profile_service = $user_profile_service;
-
     }
 
     /**
@@ -51,7 +49,7 @@ class UserProfileController extends Controller
     public function store(StoreRequest $request)
     {
         \DB::transaction(function () use ($request) {
-            $this->user_profile_service->updateUser($request->all());
+            $this->user_profile_service->updateUserName($request->name);
             $this->user_profile_service->storeUserProfile($request->all());
         });
 
@@ -65,31 +63,8 @@ class UserProfileController extends Controller
      */
     public function showComplete()
     {
-        $user = UserProfile::with('user')->firstWhere('user_id',\Auth::id());
-        return view('auth.profile-created',compact('user'));
+        return view('auth.profile-created');
     }
-
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show()
-    // {
-    //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     //
-    // }
 
     /**
      * Update the specified resource in storage.
@@ -100,31 +75,17 @@ class UserProfileController extends Controller
      */
     public function update(UpdateRequest $request)
     {
-        $previous = url()->previous();
         \DB::transaction(function () use ($request) {
-
-            $this->user_profile_service->updateUser($request->all());
-            $this->user_profile_service->updateUserProfile($request);
-            $this->user_profile_service->updateUserProfileImage($request,'cover', UserProfile::RESIZE_WIDTH_COVER);
-            $this->user_profile_service->updateUserProfileImage($request,'icon', UserProfile::RESIZE_WIDTH_ICON);
-            $this->user_profile_service->updateSpecialty($request->all());
-
+            $this->user_profile_service->updateUserName($request->name);
+            $this->user_profile_service->updateUserProfile($request->all());
+            $this->user_profile_service->updateUserProfileImage($request->all(),'cover', UserProfile::RESIZE_WIDTH_COVER);
+            $this->user_profile_service->updateUserProfileImage($request->all(),'icon', UserProfile::RESIZE_WIDTH_ICON);
+            $this->user_profile_service->updateSpecialty($request->profile_content);
+            \Session::put('flash_msg','プロフィールを編集しました！');
         });
-        \Session::put('flash_msg','プロフィールを編集しました！');
 
-        return redirect($previous);
+        return back();
     }
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
-
     
     /**
      * Display the specified resource.
@@ -134,7 +95,7 @@ class UserProfileController extends Controller
      */
     public function updateCanCall(UpdateCanCallRequest $request)
     {
-        $this->user_profile_service->updateCanCall($request->all());
+        $this->user_profile_service->updateCanCall($request->can_call);
         return back();
     }
 }

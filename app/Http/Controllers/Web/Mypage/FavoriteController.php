@@ -8,7 +8,6 @@ use App\Models\Product;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 use App\Services\UserNotificationService;
 
@@ -23,21 +22,11 @@ class FavoriteController extends Controller
         $this->user_notification_service = $user_notification_service;
     }
 
-
     public function index()
     {
-        $user_product_favorites = Favorite::product()->get();
-        $user_job_request_favorites = Favorite::jobRequest()->get();
-        $products = array();
-        $job_requests = array();
+        $products = Favorite::product()->paginate(10);
+        $job_requests = Favorite::jobRequest()->paginate(10);
         $today = new Carbon('today');
-
-        foreach($user_product_favorites as $user_product_favorite) {
-                $products[] = $user_product_favorite->reference;
-        };
-        foreach($user_job_request_favorites as $user_job_request_favorite) {
-            $job_requests[] = $user_job_request_favorite->reference;
-        };
 
         return view('mypage.favorite.index', compact('products', 'job_requests', 'today'));
     }

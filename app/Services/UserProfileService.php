@@ -2,12 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Models\UserProfile;
 use App\Mail\User\IdentificationUploadMail;
-use App\Models\Specialty;
-use App\Http\Requests\UserProfile\StoreRequest;
-use Carbon\Carbon;
 use App\Services\ImageService;
 
 class UserProfileService
@@ -18,34 +14,32 @@ class UserProfileService
     {
         $this->image_service = $image_service;
     }
+
     /**
      * ニックネーム変更
+     * @param string $request_name
      */
-    public function updateUser($params)
+    public function updateUserName(string $request_name): void
     {
-        $user = \Auth::user();
-        $user->fill([ 'name' => $params['name'] ])->save();
-        return $user;
+        \Auth::user()->fill([ 'name' => $request_name ])->save();
     }
 
     /**
      * stripe 顧客id保存
      * @param string $customer_id
-     * @return void
      */
-    public function fillCustomerId($customer_id)
+    public function fillCustomerId($customer_id): void
     {
-        \Auth::user()->fill([
-                'stripe_id' => \Crypt::encryptString($customer_id)
-            ])->save();
+        \Auth::user()->fill([ 'stripe_id' => \Crypt::encryptString($customer_id) ])->save();
     }
 
     /**
      * ユーサープロフィール基本情報登録
+     * @param array $params
      */
-    public function storeUserProfile(array $params): UserProfile
+    public function storeUserProfile(array $params): void
     {
-        $user_profile = UserProfile::updateOrCreate(
+        UserProfile::updateOrCreate(
             ['user_id' => \Auth::id()],
             [
                 'first_name' => $params['first_name'],
@@ -55,49 +49,46 @@ class UserProfileService
             ],
         );
 
-        \DB::table('user_notification_settings')->insert([
-            [
-                'user_id' => \Auth::id(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-        ]);
+        // 通知設定の作成
+        \Auth::user()->userNotificationSetting()->create();
 
-        return $user_profile;
     }
 
     /**
      * ユーサープロフィール編集
+     * @param array $request
      */
-    public function updateUserProfile($request)
+    public function updateUserProfile(array $request): void
     {
-        if ( $request->year == null || $request->month == null || $request->day == null ){
+        if ( $request['year'] == null || $request['month'] == null || $request['day'] == null ){
             $birthday = null;
         } else {
-            $birthday = $request->year . '-' . $request->month . '-' . $request->day;
+            $birthday = $request['year'] . '-' . $request['month'] . '-' . $request['day'];
         }
+
         $user_profile = \Auth::user()->userProfile;
 
         $user_profile->fill([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'prefecture_id' => $request->prefecture,
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'gender' => $request['gender'],
+            'prefecture_id' => $request['prefecture'],
             'birthday' => $birthday,
-            'zip' => $request->zip,
-            'address' => $request->address,
-            'introduction' => $request->introduction,
+            'zip' => $request['zip'],
+            'address' => $request['address'],
+            'introduction' => $request['introduction'],
         ]);
-        return $user_profile->save();
+        $user_profile->save();
     }
 
     /**
      * 身分証明証提出
+     * @param object $identification_path
      */
-    public function updateIdentification($request)
+    public function updateIdentification($identification_path)
     {
         $user_profile = \Auth::user()->userProfile;
-        $user_profile->identification_path = $this->image_service->resizeImage($request->file('identification_path'), UserProfile::RESIZE_WIDTH_IDENTIFICATION, 'identification_path');
+        $user_profile->identification_path = $this->image_service->resizeImage($identification_path, UserProfile::RESIZE_WIDTH_IDENTIFICATION, 'identification_path');
         $user_profile->save();
 
         \Mail::send(new IdentificationUploadMail());
@@ -105,71 +96,76 @@ class UserProfileService
 
 
     /**
-     * ユーサープロフィール
      * カバー・アイコン画像変更・登録
+     * @param array $request
+     * @param string $void : cover / icon
+     * @param int $resize_width
+     * 
+     * @return void
      */
-    public function updateUserProfileImage($request,$value, $resize_width)
+    public function updateUserProfileImage(array $request, string $value, $resize_width): void
     {
-        $user_profile = \Auth::user()->userProfile;
-
-        if(isset($request->$value)){
+        if(isset($request[$value])){
             $this->deleteUserProfileImage($value);
-            $resize_file_path = $this->image_service->resizeImage($request->file($value), $resize_width, $value);
+            $resize_file_path = $this->image_service->resizeImage($request[$value], $resize_width, $value);
+
+            $user_profile = \Auth::user()->userProfile;
             $user_profile->$value = $resize_file_path;
+            $user_profile->save();
         }
-        return $user_profile->save();
     }
 
     /**
      * カバー・アイコン画像削除
      * @param string $value : cover / icon
+     * 
      * @return void
      */
-    public function deleteUserProfileImage($value)
+    public function deleteUserProfileImage(string $value): void
     {
         $user_profile = \Auth::user()->userProfile;
 
-        $old = $user_profile->$value;
+        $old_img = $user_profile->$value;
         $user_profile->$value = null;
 
-        if(null !== $old){
-            \Storage::delete('public/' . $old);
-            \Storage::delete('public/original/' . $old);
+        if(null !== $old_img){
+            \Storage::delete('public/' . $old_img);
+            \Storage::delete('public/original/' . $old_img);
         }
         $user_profile->save();
     }
 
     /**
      * ユーザーの電話番号変更
-     * @param User $user
      * @param string $new_tel
-     * @return User
      */
-    public function updateTel(User $user, string $new_tel): User
+    public function updateTel(string $new_tel)
     {
-        $user->tel = $new_tel;
-        $user->save();
-        return $user;
+        \Auth::user()->fill(['tel' => $new_tel ])->save();
     }
 
     /**
      * 得意分野登録
+     * @param array $contents
      */
-    public function updateSpecialty(array $request)
+    public function updateSpecialty(array $contents): void
     {
+        // 一旦すべて削除して入れなおす
         \Auth::user()->specialty()->delete();
-        if(isset($request['profile_content'])){
-            foreach($request['profile_content'] as $value){
-                if($value !== null){
-                    $content = ['profile_content' => $value];
-                    \Auth::user()->specialty()->create($content);
-                }
+
+        foreach($contents as $content) {
+            if($content !== null) {
+                \Auth::user()->specialty()->create(['content' => $content]);
             }
         }
     }
 
-    public function updateCanCall(array $request)
+    /**
+     * 電話対応
+     * @param string $can_call
+     */
+    public function updateCanCall(string $can_call): void
     {
-        \Auth::user()->userProfile->fill(['can_call' => $request['can_call']])->save();
+        \Auth::user()->userProfile->fill(['can_call' => $can_call ])->save();
     }
 }

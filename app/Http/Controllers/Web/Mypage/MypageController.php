@@ -25,9 +25,6 @@ class MypageController extends Controller
         $user_notifications = UserNotification::latest()->where('user_id', \Auth::id())->paginate(5);
         $products = Product::latest()->where('user_id', \Auth::id())->paginate(5);
 
-        $specialty = Specialty::Where('user_id',Auth::id());
-        $specialties = $specialty->get();
-
-        return view('mypage.show', compact('user_notifications', 'specialties', 'products'));
+        return view('mypage.show', compact('user_notifications', 'products'));
     }
 }

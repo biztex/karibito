@@ -55,12 +55,12 @@ class TransferRequest extends Model
             $date_to =  Carbon::create($year, $month, 15);
         } else {
             $date_from = Carbon::create($year, $month, 16);
-            $date_to = Carbon::create($year, $month, 1)->lastOfMonth();
+            $date_to = Carbon::create($year, $month, 1)->endOfMonth();
         }
         $date_from_string = $date_from . ' 00:00:00';
         $date_to_string = $date_to . ' 23:59:59';
 
-        return $query->requestDateBetween($date_from_string, $date_to_string);
+        return $query->requestDateBetween($date_from, $date_to);
 
     }
 

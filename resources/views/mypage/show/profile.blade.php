@@ -30,7 +30,12 @@
                 @endif
             <p class="mypageP05"><a href="{{ route('evaluation') }}" class="more">過去の評価を詳しく見る</a></p>
             <div class="mypageP06">
-                <x-parts.evaluation-star :star='Auth::user()->avg_star'/><p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">{{ number_format(Auth::user()->avg_star,1) }}</a>)</p>
+                <x-parts.evaluation-star :star='Auth::user()->avg_star'/>
+                @if(Auth::user()->avg_star === null)
+                    <p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">0.0</a>)</p>
+                @else
+                    <p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">{{ number_format(Auth::user()->avg_star,1) }}</a>)</p>
+                @endif
             </div>
         </dd>
     </dl>
@@ -39,13 +44,13 @@
         <p class="mypageIntroTxt text-black">{!! nl2br(e(Auth::user()->userProfile->introduction)) !!}</p>
     </div>
     <div class="mypageProud">
-        @if($specialties->isNotEmpty())
-        <p class="mypageHd01">得意分野</p>
+        @if(Auth::user()->specialty->isNotEmpty())
+            <p class="mypageHd01">得意分野</p>
+            <ul class="mypageProudUl">
+                @foreach(Auth::user()->specialty as $specialty)
+                    <li>{{ $specialty->content }}</li>
+                @endforeach
+            </ul>
         @endif
-        <ul class="mypageProudUl">
-            @foreach($specialties as $specialty)
-            <li>{{ $specialty->content }}</li>
-            @endforeach
-        </ul>
     </div>
 </div>
