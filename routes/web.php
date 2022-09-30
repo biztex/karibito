@@ -139,7 +139,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::resource('portfolio', PortfolioController::class);
 
                 // お気に入り
-                Route::get('favorite/index', [FavoriteController::class, 'index'])->name('favorite.index');
+                Route::get('favorite', [FavoriteController::class, 'index'])->name('favorite.index');
                 Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite.store');
                 Route::delete('favorite', [FavoriteController::class, 'delete'])->name('favorite.delete');
             // });
@@ -478,7 +478,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::view('add_category', 'sample.add_category');
         Route::view('contact', 'sample.contact');
         Route::view('estimate', 'sample.estimate');
-        Route::view('evaluation', 'sample.evaluation');
         Route::view('faq_answer', 'sample.faq_answer');
         Route::view('faq_detail', 'sample.faq_detail');
         Route::view('faq_post', 'sample.faq_post');
@@ -489,18 +488,8 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::view('news', 'sample.news');
         Route::view('notation', 'sample.notation');
         Route::view('past', 'sample.past');
-        Route::view('payment_history', 'sample.payment_history');
         Route::view('point_history', 'sample.point_history');
 
-        // サンプル決済画面
-        Route::view('payment', 'sample.payment');
-        Route::post('payment/createCharge', [\App\Http\Controllers\Sample\PaymentController::class, 'createCharge'])->name('sample.createCharge'); // 決済実行客登録
-        Route::post('payment/createCard', [\App\Http\Controllers\Sample\PaymentController::class, 'createCard'])->name('sample.createCard'); // クレカ登録
-        Route::get('payment/getCardList', [\App\Http\Controllers\Sample\PaymentController::class, 'getCardList'])->name('sample.getCardList'); // クレカ一覧取得
-
-        // サンプルstripe
-        Route::view('stripe', 'sample.stripe');
-        Route::post('stripe/createCard', [StripeController::class, 'storeCard'])->name('stripe.create.card');
     });
 
 
