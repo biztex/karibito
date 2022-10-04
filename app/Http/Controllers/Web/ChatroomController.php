@@ -255,7 +255,7 @@ class ChatroomController extends Controller
             // 購入完了処理
             $this->purchase_service->purchased($charge_id, $amount['total'], $proposal);
             // pointを与える
-            $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 取得ポイントは手数料含めるか確認
+            // $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
             // pointを消化する
             $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
             // 購入物作成

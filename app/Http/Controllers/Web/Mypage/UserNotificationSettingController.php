@@ -10,7 +10,6 @@ use App\Services\UserNotificationSettingService;
 
 class UserNotificationSettingController extends Controller
 {
-
     private $notification_setting_service;
 
     public function __construct(UserNotificationSettingService $notification_setting_service)

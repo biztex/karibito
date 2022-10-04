@@ -15,6 +15,7 @@ use App\Services\ProductService;
 use App\Services\EvaluationService;
 use App\Services\ChatroomService;
 use App\Services\UserNotificationService;
+use App\Services\PointService;
 
 class ProductController extends Controller
 {
@@ -22,13 +23,15 @@ class ProductController extends Controller
     private $evaluation_service;
     private $chatroom_service;
     private $user_notification_service;
+    private $point_service;
 
-    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, ChatroomService $chatroom_service, UserNotificationService $user_notification_service)
+    public function __construct(ProductService $product_service, EvaluationService $evaluation_service, ChatroomService $chatroom_service, UserNotificationService $user_notification_service, PointService $point_service)
     {
         $this->product_service = $product_service;
         $this->evaluation_service = $evaluation_service;
         $this->chatroom_service = $chatroom_service;
         $this->user_notification_service = $user_notification_service;
+        $this->point_service = $point_service;
     }
 
     /**
@@ -75,6 +78,7 @@ class ProductController extends Controller
             $this->product_service->storeProductQuestion($request->all(), $product->id);
             $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
+            $this->point_service->getPoint(1); //仮でポイント付与の処理をいれている
         });
 
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
@@ -166,7 +170,7 @@ class ProductController extends Controller
     {
         $product->delete(); // データ論理削除
         $this->chatroom_service->deleteProduct($product);
-    
+
         \Session::put('flash_msg','提供商品を削除しました');
         if ($product->is_draft == Product::NOT_DRAFT) {
             return redirect()->route('publication');
