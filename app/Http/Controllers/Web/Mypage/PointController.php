@@ -17,6 +17,7 @@ class PointController extends Controller
     {
         $this->point_service = $point_service;
     }
+
     /**
      * Display the specified resource.
      *
@@ -29,12 +30,12 @@ class PointController extends Controller
             ['user_id', '=', \Auth::id()],
             ['deadline', '>=', $today],
         ])
-        ->get();
+            ->get();
         $user_use_points = UserUsePoint::where([
             ['user_id', '=', \Auth::id()],
             ['deleted_at', '=', null],
         ])
-        ->get();
+            ->get();
         $user_has_point = $this->point_service->showPoint();
 
         return view('mypage.point.index', compact('user_has_point', 'user_get_points', 'user_use_points'));

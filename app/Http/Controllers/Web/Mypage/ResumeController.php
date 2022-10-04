@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 
 class ResumeController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +45,7 @@ class ResumeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {        
+    {
         return view('resume.show');
     }
 

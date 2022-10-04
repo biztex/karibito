@@ -37,7 +37,7 @@ class UserNotificationService
         foreach ($follow_users as $follow_user) {
             $user_notification_contents = [
                 'user_id' => $follow_user->id,
-                'title' => 'あなたがフォローしている '.$followed_user->name.'さんが新しい投稿をしました。確認してみましょう。',
+                'title' => 'あなたがフォローしている ' . $followed_user->name . 'さんが新しい投稿をしました。確認してみましょう。',
             ];
 
             if(empty($follow_user->userNotificationSetting->is_posting)) {
@@ -61,7 +61,7 @@ class UserNotificationService
         foreach ($favorite_users as $favorite_user) {
             $user_notification_contents = [
                 'user_id' => $favorite_user->user_id,
-                'title' => 'あなたがいいねした '.$product->title.'が更新されました。確認してみましょう。',
+                'title' => 'あなたがいいねした ' . $product->title . 'が更新されました。確認してみましょう。',
             ];
 
             if(empty($favorite_user->user->userNotificationSetting->is_fav)) {
@@ -81,11 +81,11 @@ class UserNotificationService
         $login_user = \Auth::user();
         $product_user = User::find($product->user_id);
 
-        $user_notification = new UserNotification;
+        $user_notification = new UserNotification();
 
         $user_notification = [
             'user_id' => $product_user->id,
-            'title' => $login_user->name.'さんからいいねが来ました。',
+            'title' => $login_user->name . 'さんからいいねが来ました。',
             'reference_type' => 'App\Models\Product',
             'reference_id' => $product->id,
         ];
@@ -115,7 +115,7 @@ class UserNotificationService
 
         $user_notification_contents = [
             'user_id' => $receive_user->id,
-            'title' => $send_user->name.'さんからメッセージが届きました。',
+            'title' => $send_user->name . 'さんからメッセージが届きました。',
         ];
         if(empty($receive_user->userNotificationSetting->is_message)) {
             $user_notification_contents['is_notification'] = 0;
