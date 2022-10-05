@@ -32,4 +32,17 @@ class CouponService
         ->pluck('discount')->first();
         return $discount;
     }
+
+    public function usedCoupon($coupon_number)
+    {
+        $used_coupon = UserCoupon::where([
+            ['user_id', '=', \Auth::id()],
+            ['used_at', '=', null],
+            ['coupon_number', '=', $coupon_number],
+        ])
+        ->first();
+// used_atを入れる
+        dd($used_coupon);
+        return $discount;
+    }
 }
