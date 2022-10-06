@@ -78,7 +78,6 @@ class ProductController extends Controller
             $this->product_service->storeProductQuestion($request->all(), $product->id);
             $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
-            $this->point_service->getPoint(1); //仮でポイント付与の処理をいれている
         });
 
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
