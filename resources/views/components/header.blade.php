@@ -93,7 +93,7 @@
                                                     <a href="{{ route('setting.index') }}">設定</a>
                                                 </div>
                                             @endif
-                                            <p class="navMypageUlLink"><a href="{{ route('logout') }}" class="fs12" style="font-size: 1.3rem;">ログアウト</a></p> {{--クラス反応しない。スタイル下手ガキ修正--}}
+                                            <p class="navMypageUlLink"><a href="{{ route('logout') }}" class="fs12" style="font-size: 1.3rem;">ログアウト</a></p> {{--クラス反応しない。スタイルベタ書き修正--}}
                                         </div>
                                     </li>
                                 @endauth
@@ -142,7 +142,7 @@
                                     {{-- <li><a href="#">ブログ</a></li> --}}
                                     <a href="{{ route('publication') }}" class="">掲載内容一覧</a>
                                     <a href="{{ route('draft') }}">掲載内容の下書き</a>
-                                    <a href="{{ route('profit.index') }}" class="">売上管理・振込申請</a
+                                    <a href="{{ route('profit.index') }}" class="">売上管理・振込申請</a>
                                 </div>
                                 <div class="navMypageUl">
                                     <p class="fwB">カリビトについて</p>

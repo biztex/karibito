@@ -237,9 +237,12 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
-        $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+        if(!is_null($request->youtube_link[0]) ){ //YouTubeリンクがある場合のみ枠を表示するためにこのコードを書いた
+            $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
+            return view('product.preview',compact('request','user', 'iframe_urls'));
+        }
 
-        return view('product.preview',compact('request','user', 'iframe_urls'));
+        return view('product.preview',compact('request','user'));
     }
 
     public function postCreate(Request $request)

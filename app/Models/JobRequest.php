@@ -21,7 +21,7 @@ class JobRequest extends Model
      */
     protected $guarded = [ 'id' ];
 
-    protected $appends = ['diff_time', 'carbon_deadline', 'is_purchased'];
+    protected $appends = ['diff_time', 'carbon_deadline', 'is_purchased', 'number_of_proposal'];
 
     const STATUS_PUBLISH = 1;
 
@@ -231,6 +231,12 @@ class JobRequest extends Model
     {
         $requested = Chatroom::requested($this->id);
         return $this->attributes['is_purchased'] = $requested;
+    }
+
+    protected function getNumberOfProposalAttribute()
+    {
+        $number_of_proposal = $this->chatrooms->count('proposals');
+        return $this->attributes['number_of_proposal'] = $number_of_proposal;
     }
 
     /**
