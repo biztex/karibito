@@ -9,6 +9,8 @@ use App\Models\UserCoupon;
 use App\Models\MPointRate;
 use App\Models\Product;
 use App\Models\Proposal;
+use Carbon\Carbon;
+
 
 class CouponService
 {
@@ -39,10 +41,9 @@ class CouponService
             ['user_id', '=', \Auth::id()],
             ['used_at', '=', null],
             ['coupon_number', '=', $coupon_number],
-        ])
-        ->first();
-// used_atを入れる
-        dd($used_coupon);
-        return $discount;
+        ])->first();
+
+        $used_coupon->used_at = Carbon::now();
+        $used_coupon->save();
     }
 }

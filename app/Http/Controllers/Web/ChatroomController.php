@@ -247,7 +247,6 @@ class ChatroomController extends Controller
      */
     public function purchased(PaymentRequest $request, Proposal $proposal)
     {
-        // dd($amount['use_coupon']);
         \DB::transaction(function () use ($request, $proposal) {
             // 金額取得
             $amount = $this->purchase_service->getFinalAmount($proposal, $request->all());
@@ -260,7 +259,7 @@ class ChatroomController extends Controller
             // pointを消化する
             $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
             // couponを消化する
-            // $this->coupon_service->usedCoupon($amount['use_coupon']);
+            $this->coupon_service->usedCoupon($request->coupon_number);
             // 購入物作成
             $this->purchase_service->savePurchasedProduct($proposal);
         });
