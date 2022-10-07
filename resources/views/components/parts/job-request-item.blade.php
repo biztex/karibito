@@ -18,7 +18,7 @@
                 </dl>
                 <dl>
                     <dt><span>提案数</span></dt>
-                    <dd>0</dd>
+                    <dd>{{$value->number_of_proposal}}</dd>
                 </dl>
                 <dl>
                     <dt><span>募集期限</span></dt>
