@@ -37,6 +37,11 @@ class CouponService
 
     public function usedCoupon($coupon_number)
     {
+
+        if($coupon_number === null){
+            return null;
+        }
+
         $used_coupon = UserCoupon::where([
             ['user_id', '=', \Auth::id()],
             ['used_at', '=', null],
@@ -45,5 +50,17 @@ class CouponService
 
         $used_coupon->used_at = Carbon::now();
         $used_coupon->save();
+
+        return $used_coupon;
+    }
+
+    public function cancelCoupon($user_coupon)
+    {
+        if($user_coupon === null){
+            return null;
+        }
+
+        $user_coupon->used_at = null;
+        $user_coupon->save();
     }
 }

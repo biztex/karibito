@@ -46,11 +46,21 @@ class PointService
 
         $service_title = $chatroom->reference->title;
 
-        $use_point = UserUsePoint::create([
+        $user_use_point = UserUsePoint::create([
             'user_id' => \Auth::id(),
             'name' => $service_title, //購入したサービスのタイトルが入るようになっている。要確認
             'point' => $point,
         ]);
-        return $use_point;
+
+        return $user_use_point;
+    }
+
+    public function cancelPoint(UserUsePoint|null $user_use_point)
+    {
+
+        if($user_use_point === null){
+            return null;
+        }
+        $user_use_point->delete();
     }
 }

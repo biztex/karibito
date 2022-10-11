@@ -252,14 +252,14 @@ class ChatroomController extends Controller
             $amount = $this->purchase_service->getFinalAmount($proposal, $request->all());
             // stripe支払い処理
             $charge_id = $this->stripe_service->createCheckout($request->all(), $amount['total']);
+            // couponを消化する
+            $user_coupon = $this->coupon_service->usedCoupon($request->coupon_number);
+            // pointを消化する
+            $user_use_point = $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
             // 購入完了処理
-            $this->purchase_service->purchased($charge_id, $amount['total'], $proposal);
+            $this->purchase_service->purchased($charge_id, $amount['total'], $proposal, $user_coupon, $user_use_point);
             // pointを与える
             // $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
-            // pointを消化する
-            $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
-            // couponを消化する
-            $this->coupon_service->usedCoupon($request->coupon_number);
             // 購入物作成
             $this->purchase_service->savePurchasedProduct($proposal);
         });

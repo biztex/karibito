@@ -62,6 +62,22 @@ class Purchase extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function userCoupon()
+    {
+        return $this->belongsTo(UserCoupon::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function userUsePoint()
+    {
+        return $this->belongsTo(UserUsePoint::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function purchasedCancels()
