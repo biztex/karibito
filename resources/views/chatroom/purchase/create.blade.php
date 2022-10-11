@@ -72,7 +72,7 @@
 
 								{{-- <p class="detail">{{$coupon->discount}}円割引クーポン(合計{{$coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($coupon->deadline))}}まで</p> --}}
 								{{-- 最低利用金額などはこっちでやる、仕様未決定のため、一旦飛ばす --}}
-                  
+
                                 <div class="warnNotes">
                                     <p class="danger">ご注意！</p>
                                     <p>※他のクーポンと併用はできません。</p>

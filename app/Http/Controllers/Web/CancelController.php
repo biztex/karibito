@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CancelController\StoreRequest;
 use App\Models\Purchase;
 use App\Models\PurchasedCancel;
+use App\Models\UserUsePoint;
 use App\Services\ChatroomService;
 use App\Services\ChatroomMessageService;
 use App\Services\PurchasedCancelService;
 use App\Services\PurchaseService;
 use App\Services\PaymentService;
+use App\Services\CouponService;
+use App\Services\PointService;
 
 
 class CancelController extends Controller
@@ -20,14 +23,18 @@ class CancelController extends Controller
     private $chatroom_message_service;
     private $purchased_cancel_service;
     private $purchase_service;
+    private $coupon_service;
+    private $user_use_point_service;
     private readonly PaymentService $payment_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, PurchasedCancelService $purchased_cancel_service, PurchaseService $purchase_service, PaymentService $payment_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, PurchasedCancelService $purchased_cancel_service, PurchaseService $purchase_service, CouponService $coupon_service, PointService $user_use_point_service, PaymentService $payment_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
         $this->purchased_cancel_service = $purchased_cancel_service;
         $this->purchase_service = $purchase_service;
+        $this->coupon_service = $coupon_service;
+        $this->user_use_point_service = $user_use_point_service;
         $this->payment_service = $payment_service;
     }
 
@@ -35,7 +42,7 @@ class CancelController extends Controller
      * キャンセル申請入力画面
      * @param  \Illuminate\Http\Request  $request
      * @param \App\Models\Purchase $purchase
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create(Request $request, Purchase $purchase)
@@ -113,6 +120,8 @@ class CancelController extends Controller
      */
     public function approval(PurchasedCancel $purchased_cancel)
     {
+        $this->coupon_service->cancelCoupon($purchased_cancel->purchase->userCoupon);
+        $this->user_use_point_service->cancelPoint($purchased_cancel->purchase->userUsePoint);
         $payment = $purchased_cancel->purchase->payment;
         $this->purchased_cancel_service->purchasedCancelComplete($purchased_cancel, $payment);
 
