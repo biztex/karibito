@@ -44,7 +44,7 @@ class JobRequest extends Model
     const CALL_INPOSSIBLE = 0;
 
     const CALL_POSSIBLE = 1;
-    
+
     const IS_CALL = [
         self::CALL_POSSIBLE => 'あり',
         self::CALL_INPOSSIBLE => 'なし',
@@ -72,7 +72,7 @@ class JobRequest extends Model
     {
         // return $query->inDeadline()->otherUsers(); 現段階では期限切れも表示するため一旦非表示
         // return $query->otherUsers(); 自分のも表示するから非表示
-        return $query->publish()->has('user');
+        return $query->publish();
     }
 
     /**
@@ -133,14 +133,14 @@ class JobRequest extends Model
     }
 
     /**
-     * 公開かつ下書きでない
+     * 退会していないかつ、公開かつ、下書きでない
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePublish($query)
     {
-        return $query->notDraft()->notBan()->where('status',self::STATUS_PUBLISH);
+        return $query->has('user')->notDraft()->notBan()->where('status',self::STATUS_PUBLISH);
     }
 
     /**
