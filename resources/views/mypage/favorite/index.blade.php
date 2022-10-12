@@ -27,9 +27,10 @@
                                 <div class="tabBox is_active" id="tab_box01">
                                     <ul class="favoriteUl01 status">
                                         @if(empty($products[0]))
-										    <li><div>投稿がありません。</div></li>
-									    @else
+                                          <li><div>投稿がありません。</div></li>
+                                        @else
                                             @foreach ($products as $product)
+                                              @if(isset($product->reference->user))
                                                 <li @if ($product->reference->number_of_sale === App\Models\Product::UNLIMITED_OF_SALE || ($product->reference->number_of_sale === App\Models\Product::ONE_OF_SALE && $product->reference->number_of_sold < 1)) class="during" @endif>
                                                     <div class="cont01">
                                                         @if(isset($product->reference->productImage[0]))
@@ -68,6 +69,7 @@
                                                         <x-parts.evaluation-star :star='$product->reference->user->avg_star'/>
                                                     </div>
                                                 </li>
+                                              @endif
                                             @endforeach
                                         @endif
                                     </ul>

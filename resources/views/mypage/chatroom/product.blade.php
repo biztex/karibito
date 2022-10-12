@@ -112,9 +112,12 @@
                     <a tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</a>
                 </div>
             </div>
-            <p class="link"><a href="{{ route('chatroom.show', $value->id)  }}">チャット</a></p>
+            @if(isset($value->buyerUser) && isset($value->sellerUser))
+              <p class="link"><a href="{{ route('chatroom.show', $value->id) }}">チャット</a></p>
+            @endif
         </div>
         <div class="cont02">
+          @if(isset($value->buyerUser) && isset($value->sellerUser))
             @if($value->buyerUser->id === Auth::id())
                 <div class="user">
                     @if(null !== $value->sellerUser->userProfile->icon)
@@ -142,6 +145,9 @@
                 </div>
                 <x-parts.evaluation-star :star='$value->buyerUser->avg_star'/>
             @endif
+          @else
+            <p>このユーザーは退会しました。</p>
+          @endif
         </div>
     </li>
 @endif

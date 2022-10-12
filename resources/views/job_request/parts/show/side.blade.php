@@ -1,5 +1,6 @@
 <aside id="side">
     <div class="box reservate">
+      @if(isset($job_request))
         <h3>{{ number_format($job_request->price) }}円</h3>
         <p class="status">応募期限</p>
         <p class="date" style="margin-bottom:10px;height:33.5px;">{{ date('Y/m/d',strtotime($job_request->application_deadline)) }}</p>
@@ -8,13 +9,18 @@
             <p class="date">{{ date('Y/m/d',strtotime($job_request->required_date)) }}</p>
         @endif
         <!-- <div class="calendar"><div id="datepicker"></div></div> -->
+      @endif
     </div>
     <div>
         <div class="peace">
             <h3>カリビト安心への取り組み</h3>
             <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
         </div>
-        @if($job_request->user->id === Auth::id() )
+        @if(empty($job_request->user))
+          <div class="indexNotice">
+              <h3 class="hd">このユーザーは退会しました。</h3>
+          </div>
+        @elseif($job_request->user->id === Auth::id() )
             <div class="functeBtns">
                 <a href="{{ route('job_request.edit', $job_request->id ) }}" class="full orange">編集</a>
             </div>
@@ -39,9 +45,13 @@
                 <a href="{{ route('chatroom.new.job_request', $job_request->id ) }}" class="orange full">交渉画面へ進む</a>
             </div>
         @endif
-        <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+        @if(isset($job_request->user))  
+          <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+        @endif
     </div>
 
-    <x-parts.box-seller :user='$user'/>
+    @if(isset($job_request->user))
+      <x-parts.box-seller :user='$user'/>
+    @endif
 
 </aside>

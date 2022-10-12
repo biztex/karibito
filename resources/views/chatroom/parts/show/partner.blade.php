@@ -1,4 +1,12 @@
-@if($partner === $chatroom->sellerUser && $chatroom->reference_type === 'App\Models\Product')
+@if(empty($partner))
+    <div class="friendsTop">
+      <div class="sellerTop">
+          <div class="user">
+            <p>お相手のユーザーは退会しました。</p>
+          </div>
+      </div>
+    </div>
+@elseif($partner === $chatroom->sellerUser && $chatroom->reference_type === 'App\Models\Product')
     <!-- 提供・出品者情報 -->
     <div class="friendsTop">
         <div class="sellerTop">

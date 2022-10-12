@@ -20,6 +20,7 @@
 							@else
 							<ul class="mypageUl02 friendsUl02">
 								@foreach($dmroom_users as $dmroom_user)
+                @if(isset($dmroom_user->toUser))
 								<li>
 									<a href="{{ route('dm.show', $dmroom_user->id) }}">
 										<div class="user">
@@ -46,6 +47,7 @@
 										<p class="time">{{ $dmroom_user->dmroomMessages->last()->created_at->diffForHumans() }}</p>
 									</a>
 								</li>
+                @endif
 								@endforeach
 							</ul>
 							{{ $dmroom_users->links() }}
