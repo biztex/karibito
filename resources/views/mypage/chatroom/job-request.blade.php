@@ -1,4 +1,6 @@
-@if($value->referencePurchased !== null)
+@if(empty($value->buyerUser))
+    <li><p>お相手のユーザーは退会しました。</p></li>
+@elseif($value->referencePurchased !== null)
     <li>
         <div class="cont01">
             <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
