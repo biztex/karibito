@@ -19,11 +19,8 @@
 
 						@include('chatroom.parts.index.active')
 
-            @if(empty($value->buyerUser) && empty($value->sellerUser))
-              <p style="margin:20px;">やりとりしていたユーザーはおりません。</p>
-            @else
-						  @include('chatroom.parts.index.inactive')
-            @endif
+						@include('chatroom.parts.index.inactive')
+
 					</div>
 				</div><!--inner-->
 			</div>

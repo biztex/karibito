@@ -83,7 +83,8 @@
                                             <li><div>投稿がありません。</div></li>
                                         @else
                                             @foreach($job_requests as $job_request)
-                                    <li @if ($job_request->reference->is_purchased === false && $job_request->reference->carbon_deadline->gte($today)) class="during" @endif>
+                                            @if(isset($job_request->reference->user))
+                                            <li @if ($job_request->reference->is_purchased === false && $job_request->reference->carbon_deadline->gte($today)) class="during" @endif>
                                                 <div class="cont01">
                                                     <a href="{{ route('job_request.show',$job_request->reference->id) }}">
                                                         <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
@@ -115,6 +116,7 @@
                                                     <x-parts.evaluation-star :star='$job_request->reference->user->avg_star'/>
                                                 </div>
                                             </li>
+                                            @endif
                                             @endforeach
                                         @endif
                                     </ul>

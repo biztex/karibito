@@ -68,11 +68,7 @@
     @endif
 
     <div class="cont02">
-        @if(empty($value->buyerUser))
-            <div class="cont01">
-                <p class="price word-break" style="padding-left:15px;"><font>このユーザーは退会しました</font><br></p>
-            </div>
-        @elseif($value->buyerUser->id === Auth::id())
+        @if($value->buyerUser->id === Auth::id())
             <div class="user">
                 @if(empty($value->sellerUser))
                   <div class="cont01">
@@ -96,9 +92,17 @@
         @else
             <div class="user">
                 @if(null !== $value->buyerUser->userProfile->icon)
-                    <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                    @if(empty($value->buyerUser->deleted_at))
+                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                    @else
+                        <span class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></span>
+                    @endif
                 @else
-                    <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @if(empty($value->buyerUser->deleted_at))
+                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @else
+                        <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                    @endif
                 @endif
                 <div class="introd">
                     <p class="name word-break">{{$value->buyerUser->name}}</p>

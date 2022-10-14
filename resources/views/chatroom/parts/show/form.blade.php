@@ -5,7 +5,7 @@
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
             <div class="evaluation">
                 <textarea name="text" placeholder="本文を入力してください" class="templateText"></textarea>
-				<p class="max-string">3000</p>
+				        <p class="max-string">3000</p>
             </div>
             
             @error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -20,12 +20,15 @@
 
             </div>
             <x-parts.file-input/>
-            <div class="cancelTitle">
-                <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
-            </div>
-            <div class="functeBtns">
-                <input type="submit" class="orange loading-disabled" value="送信する">
-            </div>
+
+            @if(empty($partner->deleted_at))
+                <div class="cancelTitle">
+                    <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
+                </div>
+                <div class="functeBtns">
+                    <input type="submit" class="orange loading-disabled" value="送信する">
+                </div>
+            @endif
         </div>
     </form>
 

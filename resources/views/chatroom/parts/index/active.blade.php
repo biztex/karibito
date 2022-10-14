@@ -5,16 +5,11 @@
         @else
             @foreach($active_chatrooms as $value)
                 <li>
-                    @if(isset($value->buyerUser) && isset($value->sellerUser))
-                      <x-parts.chatroom-step :value="$value"/>
-                    @endif
+                    <x-parts.chatroom-step :value="$value"/>
 
                     @include('chatroom.parts.index.conts')
 
-                    @if(isset($value->buyerUser) && isset($value->sellerUser))
-                      @include('chatroom.parts.index.functeBtns')
-                    @endif
-
+                    @include('chatroom.parts.index.functeBtns')
                 </li>
             @endforeach
         @endif

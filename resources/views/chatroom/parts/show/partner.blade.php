@@ -1,24 +1,28 @@
-@if(empty($partner))
-    <div class="friendsTop">
-      <div class="sellerTop">
-          <div class="user">
-            <p>お相手のユーザーは退会しました。</p>
-          </div>
-      </div>
-    </div>
-@elseif($partner === $chatroom->sellerUser && $chatroom->reference_type === 'App\Models\Product')
+@if($partner === $chatroom->sellerUser && $chatroom->reference_type === 'App\Models\Product')
     <!-- 提供・出品者情報 -->
     <div class="friendsTop">
         <div class="sellerTop">
             <div class="user">
                 @if(null !== $partner->userProfile->icon)
-                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
+                    @if(empty($partner->deleted_at))
+                        <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
+                    @else
+                        <span class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></span>
+                    @endif
                 @else
-                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @if(empty($partner->deleted_at))
+                        <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @else
+                        <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                    @endif
                 @endif
                 <div class="info">
-                    <p class="name">出品者・{{ $partner->name }}</p>
-                    <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
+                    <p class="name">出品者・{{ $partner->name }}</p> 
+                    @if(isset($partner->deleted_at))
+                        <h3>このユーザーは退会しています。</h3>
+                    @else
+                        <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
+                    @endif
                 </div>
             </div>
             <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
@@ -34,13 +38,25 @@
         <div class="sellerTop">
             <div class="user">
                 @if(null !== $partner->userProfile->icon)
-                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
+                    @if(empty($partner->deleted_at))
+                        <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
+                    @else
+                        <span class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></span>
+                    @endif
                 @else
-                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @if(empty($partner->deleted_at))
+                        <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @else
+                        <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                    @endif
                 @endif
                 <div class="info">
                     <p class="name">掲載者・{{ $partner->name }}</p>
-                    <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
+                    @if(isset($partner->deleted_at))
+                        <h3>このユーザーは退会しています。</h3>
+                    @else
+                        <p><a href="{{ route('user.skills', $partner->id) }}" class="link">職務経歴書を見る</a></p>
+                    @endif
                 </div>
             </div>
             <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
