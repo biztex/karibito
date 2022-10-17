@@ -21,14 +21,12 @@
             </div>
             <x-parts.file-input/>
 
-            @if(empty($partner->deleted_at))
-                <div class="cancelTitle">
-                    <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
-                </div>
-                <div class="functeBtns">
-                    <input type="submit" class="orange loading-disabled" value="送信する">
-                </div>
-            @endif
+            <div class="cancelTitle">
+                <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
+            </div>
+            <div class="functeBtns">
+                <input type="submit" class="orange loading-disabled" value="送信する">
+            </div>
         </div>
     </form>
 

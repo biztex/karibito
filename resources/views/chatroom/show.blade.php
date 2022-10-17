@@ -38,7 +38,9 @@
                             </div>
 
                             <!-- 入力エリア -->
-                            @include('chatroom.parts.show.form')
+                            @if(empty($partner->deleted_at))
+                                @include('chatroom.parts.show.form')
+                            @endif
 
                             <div class="item">
                                 <div class="about">
