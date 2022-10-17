@@ -16,7 +16,6 @@
                 </div>
             </div>
         </div>
-
     @elseif($value->purchased_reference_type === 'App\Models\PurchasedJobRequest')
         <div class="cont01">
             <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
@@ -30,7 +29,6 @@
                 </div>
             </div>
         </div>
-
     @elseif($value->reference === null)
         <div class="cont01">
             <p class="price word-break" style="padding-left:15px;"><font>この商品は削除されました</font><br></p>
@@ -70,21 +68,23 @@
     <div class="cont02">
         @if($value->buyerUser->id === Auth::id())
             <div class="user">
-                @if(empty($value->sellerUser))
-                  <div class="cont01">
-                      <p class="price word-break" style="padding-left:15px;"><font>このユーザーは退会しました</font><br></p>
-                  </div>
-                @elseif(null !== $value->sellerUser->userProfile->icon)
-                    <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                @if(null !== $value->sellerUser->userProfile->icon)
+                    @if(empty($value->sellerUser->deleted_at))
+                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                    @else
+                        <span class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></span>
+                    @endif
                 @else
-                    <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @if(empty($value->sellerUser->deleted_at))
+                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @else
+                        <span href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                    @endif
                 @endif
-                @if(isset($value->sellerUser))
-                  <div class="introd">
-                          <p class="name word-break">{{$value->sellerUser->name}}</p>
-                          <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
-                  </div>
-                @endif
+                <div class="introd">
+                        <p class="name word-break">{{$value->sellerUser->name}}</p>
+                        <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
+                </div>
             </div>
             @if(isset($value->sellerUser))
               <x-parts.evaluation-star :star='$value->sellerUser->avg_star'/>

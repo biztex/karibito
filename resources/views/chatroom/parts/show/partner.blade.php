@@ -31,7 +31,6 @@
         @include('chatroom.parts.show.partner-tell')
 
     </div>
-
 @elseif($partner === $chatroom->buyerUser && $chatroom->reference_type === 'App\Models\JobRequest')
     <!-- リクエスト・掲載者情報 -->
     <div class="friendsTop">
@@ -71,12 +70,23 @@
         <div class="sellerTop">
             <div class="user">
                 @if(null !== $partner->userProfile->icon)
-                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
+                    @if(empty($partner->deleted_at))
+                        <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></a>
+                    @else
+                        <span class="head"><img src="{{ asset('/storage/'.$partner->userProfile->icon) }}" alt=""></span>
+                    @endif
                 @else
-                    <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @if(empty($partner->deleted_at))
+                        <a href="{{ route('user.mypage', $partner->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @else
+                        <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                    @endif
                 @endif
                 <div class="info">
                     <p class="name">{{$partner->name}}</p>
+                    @if(isset($partner->deleted_at))
+                        <h3>このユーザーは退会しています。</h3>
+                    @endif
                 </div>
             </div>
             <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
