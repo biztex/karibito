@@ -61,18 +61,18 @@
 						<p class="th">応募期限<span class="must">必須</span></p>
 							@error('application_deadline')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="date" name="application_deadline" value="{{ old('application_deadline', $job_request->application_deadline) }}">
+							<input type="date" name="application_deadline" value="{{ old('application_deadline', $job_request->application_deadline) }}" style="color:#333">
 						</div>
 
 
 						<p class="th">納期希望日</p>
 							@error('required_date')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="date" name="required_date" value="{{ old('required_date', $job_request->required_date ) }}">
+							<input type="date" name="required_date" value="{{ old('required_date', $job_request->required_date ) }}" style="color:#333">
 						</div>
 
 							<div class="warnNotes" style="margin-bottom:5px;">
-								<p>【対面】：直接会って提供する内容を相手に行います。<br>【非対面】：互いが直接会わずに提供する内容を相手に行います。</p>
+								<p>【対面】：お互いが直接会ってサービスを提供します。<br>【非対面】：お互いが直接合わずに、オンライン上などで、サービスを提供します。</p>
 							</div>
 						<p class="th">仕事体系<span class="must">必須</span></p>
 							@error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
