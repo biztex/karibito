@@ -11,12 +11,23 @@
 							<div class="sellerTop">
 								<div class="user">
 									@if($dmroom->toUser->userProfile->icon === null)
-										<a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                      @if(empty($dmroom->toUser->deleted_at))
+										      <a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                      @else
+                          <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                      @endif
 									@else
-										<a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></a>
+                      @if(empty($dmroom->toUser->deleted_at))
+										      <a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></a>
+                      @else
+                          <span class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></span>
+                      @endif
 									@endif
 									<div class="info">
 										<p class="name">{{ $dmroom->toUser->name }}</p>
+                    @if(isset($dmroom->toUser->deleted_at))
+                        <p class="name">このユーザーは退会しました。</p>
+                    @endif
 									</div>
 								</div>
 								<p class="login">最終ログイン：{{ $dmroom->toUser->latest_login_datetime }}</p>
@@ -25,12 +36,23 @@
 							<div class="sellerTop">
 								<div class="user">
 									@if($dmroom->fromUser->userProfile->icon === null)
-										<a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                      @if(empty($dmroom->fromUser->deleted_at))
+										      <a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                      @else
+                          <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                      @endif
 									@else
-										<a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></a>
+                      @if(empty($dmroom->fromUser->deleted_at))
+										      <a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></a>
+                      @else
+                          <span class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></span>
+                      @endif
 									@endif
 									<div class="info">
 										<p class="name">{{ $dmroom->fromUser->name }}</p>
+                    @if(isset($dmroom->fromUser->deleted_at))
+                        <p class="name">このユーザーは退会しました。</p>
+                    @endif
 									</div>
 								</div>
 								<p class="login">最終ログイン：{{ $dmroom->fromUser->latest_login_datetime }}</p>
@@ -51,13 +73,23 @@
 								<li>
 									<div class="img">
 										@if(null !== $message->user->userProfile->icon)
-											<a href="{{ route('user.mypage', $message->user->id) }}" class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt=""></a>
+                        @if(empty($message->user->deleted_at))
+											      <a href="{{ route('user.mypage', $message->user->id) }}" class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt=""></a>
+                        @else
+                            <span class="head"><img src="{{ asset('/storage/'.$message->user->userProfile->icon) }}" alt=""></span>
+                        @endif
 										@else
-											<a href="{{ route('user.mypage', $message->user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @if(empty($message->user->deleted_at))
+    										  	<a href="{{ route('user.mypage', $message->user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        @endif
 										@endif
 										<div class="info">
 											<p class="name">{{$message->user->name}}</p>
-
+                      @if(isset($message->user->deleted_at))
+                          <p class="name">このユーザーは退会しました。</p>
+                      @endif
 											<p class="chatroom-text break-word">{!! $message->text !!}</p>
 											@if($message->file_name !== null)
 												<p class="chatroom-text break-word"><a href="{{ asset('/storage/'.$message->file_path) }}" download="{{ $message->file_name }}"  style="display: inline-flex; vertical-align: center;">
@@ -73,58 +105,60 @@
 								@endforeach
 								</ul>
 							</div>
-							<form action="{{ route('dm.message', $dmroom->id) }}" method="POST" enctype="multipart/form-data">
-							@csrf
-								<div class="item">
-									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
-									<div class="evaluation">
-										<textarea name="text" placeholder="本文を入力してください" class="templateText">{{ old('text') }}</textarea>
-									</div>
-									<p class="taR">3000</p>
-									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
-									<p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
-									<div class="btns">
+                  @if(empty($dmroom->fromUser->deleted_at) && empty($dmroom->toUser->deleted_at))
+                      <form action="{{ route('dm.message', $dmroom->id) }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                        <div class="item">
+                          @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                          <div class="evaluation">
+                            <textarea name="text" placeholder="本文を入力してください" class="templateText">{{ old('text') }}</textarea>
+                          </div>
+                          <p class="taR">3000</p>
+                          @error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                          <p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
+                          <div class="btns">
 
-										<p class="chatroom_file_input">資料を添付する</p>
-										<input type="file" name="file_path" id="file_path" style="display:none;">
-										<input type="hidden" name="file_name" value="">
-										
-										<a href="javascript:;" class="templateOpen">定型文を使う</a>
-											<div class="templatePopup">
-												<div class="templateOverlay"></div>
-												<div class="templateArea tabSelectArea">
-													<div class="templateClose"></div>
-													<h2 class="templateTitle">定型文の挿入</h2>
-													<div class="templateSelect">
-														<select class="tabSelectLinks">
-															<option value="#template01">あいさつ１</option>
-															<option value="#template02">あいさつ２</option>
-															<option value="#template03">あいさつ３</option>
-														</select>
-													</div>
-													<div class="templateBox tabSelectBox is-active" id="template01">
-														<textarea readonly>お世話になっております。&#13;一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。&#13;このたびは、●●●●についてお問い合わせいただき誠にありがとうございます。&#13;ご請求いただいた資料は、本日郵送にてお送りいたします。&#13;今週中にはお手元に届くかと存じます。&#13;ご確認よろしくお願いいたします。
-														</textarea>
-													</div>
-													<div class="templateBox tabSelectBox" id="template02">
-														<textarea readonly>あいさつ２あいさつ２あいさつ２あいさつ２あいさつ２</textarea>
-													</div>
-													<div class="templateBox tabSelectBox" id="template03">
-														<textarea readonly>あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３</textarea>
-													</div>
-													<div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
-												</div>
-											</div>
-									</div>
-									<x-parts.file-input/>
-									<div class="cancelTitle">
-										<p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
-									</div>
-									<div class="functeBtns">
-										<input type="submit" class="orange" value="送信する">
-									</div>
-								</div>
-							</form>
+                            <p class="chatroom_file_input">資料を添付する</p>
+                            <input type="file" name="file_path" id="file_path" style="display:none;">
+                            <input type="hidden" name="file_name" value="">
+                            
+                            <a href="javascript:;" class="templateOpen">定型文を使う</a>
+                              <div class="templatePopup">
+                                <div class="templateOverlay"></div>
+                                <div class="templateArea tabSelectArea">
+                                  <div class="templateClose"></div>
+                                  <h2 class="templateTitle">定型文の挿入</h2>
+                                  <div class="templateSelect">
+                                    <select class="tabSelectLinks">
+                                      <option value="#template01">あいさつ１</option>
+                                      <option value="#template02">あいさつ２</option>
+                                      <option value="#template03">あいさつ３</option>
+                                    </select>
+                                  </div>
+                                  <div class="templateBox tabSelectBox is-active" id="template01">
+                                    <textarea readonly>お世話になっております。&#13;一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。&#13;このたびは、●●●●についてお問い合わせいただき誠にありがとうございます。&#13;ご請求いただいた資料は、本日郵送にてお送りいたします。&#13;今週中にはお手元に届くかと存じます。&#13;ご確認よろしくお願いいたします。
+                                    </textarea>
+                                  </div>
+                                  <div class="templateBox tabSelectBox" id="template02">
+                                    <textarea readonly>あいさつ２あいさつ２あいさつ２あいさつ２あいさつ２</textarea>
+                                  </div>
+                                  <div class="templateBox tabSelectBox" id="template03">
+                                    <textarea readonly>あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３</textarea>
+                                  </div>
+                                  <div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
+                                </div>
+                              </div>
+                          </div>
+                            <x-parts.file-input/>
+                            <div class="cancelTitle">
+                              <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
+                            </div>
+                            <div class="functeBtns">
+                              <input type="submit" class="orange" value="送信する">
+                            </div>
+                        </div>
+                      </form>
+                  @endif
 							<div class="item">
 								<div class="about">
 									<p class="danger">ご注意！</p>
