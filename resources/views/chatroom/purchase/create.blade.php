@@ -54,6 +54,9 @@
 							</table>
 						</div>{{-- /.payment --}}
 
+						@if($user_has_coupons->isEmpty())
+						<p style="margin-top:5%;">現在ご利用いただけるクーポンはありません。</p>
+						@else
 						<div class="coupons">
 							<div class="checkbox">
 								@error('coupon_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -76,9 +79,11 @@
                                 <div class="warnNotes">
                                     <p class="danger">ご注意！</p>
                                     <p>※他のクーポンと併用はできません。</p>
+                                    <p>※決済後はクーポンのご利用はできませんのでご注意ください。</p>
                                 </div>
                             </div>{{-- /.checkbox --}}
 						</div>{{-- /.coupons --}}
+						@endif
 
 						<div class="radio">
 							<p class="tit">ポイントの利用@error('user_use_point')<span>{{ $message }}</span>@enderror</p>
