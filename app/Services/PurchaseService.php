@@ -158,9 +158,8 @@ class PurchaseService
         if($proposal->chatroom->reference_type === 'App\Models\Product'){
             // \DB::transaction(function () use ($proposal) {
                 $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom); //購入物作成
-                dd($purchased_product_id);
                 $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
-                $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
+                // $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
                 $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
                 $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
             // });
