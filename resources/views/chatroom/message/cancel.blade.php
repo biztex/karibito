@@ -170,7 +170,7 @@
 	            @include('chatroom.message.parts.time')
             </li>
         @endif
-    @else <!-- キャンセル申請に異議を申し立てました -->
+    @else <!-- 再交渉を希望しました -->
         <!-- 異議申し立て者の時 -->
         @if($message->user_id === Auth::id())
             <li>
@@ -180,7 +180,7 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p>{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="buy"><input type="submit" class="white" value="異議を申し立てました"></p>
+                            <p class="buy"><input type="submit" class="white" value="再交渉を希望しました"></p>
                         </div>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p>{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="buy"><input type="submit" class="white" value="承認されませんでした"></p>
+                            <p class="buy"><input type="submit" class="white" value="再交渉を希望されています　再度やり取りをお願いします"></p>
                         </div>
                     </div>
                 </div>

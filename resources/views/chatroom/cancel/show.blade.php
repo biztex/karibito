@@ -33,8 +33,8 @@
 					<div class="functeBtns">
 						<form id="form" action="" method="">
 						@csrf
-							<input type="submit" formaction="{{ route('cancel.approval', $purchased_cancel->id) }}" formmethod="post" class="blue loading-disabled" value="キャンセル申請を承認する">
-							<input type="submit" formaction="{{ route('cancel.objection', $purchased_cancel->id) }}" formmethod="get" class="loading-disabled" value="異議を申し立てる">
+							<input type="submit" formaction="{{ route('cancel.approval', $purchased_cancel->id) }}" formmethod="post" class="blue loading-disabled" value="承認する">
+							<input type="submit" formaction="{{ route('cancel.objection', $purchased_cancel->id) }}" formmethod="get" class="loading-disabled" value="再交渉する">
 						</form>
 					</div>
 				</div>
