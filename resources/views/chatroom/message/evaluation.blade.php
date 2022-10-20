@@ -27,7 +27,7 @@
                     <p class="name">{{$message->user->name}}</p>
                     <p>{{$message->text}}</p>
                     <div class="proposeBuy">
-                        <p class="buy"><a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">お相手を評価する</a></p>
+                        <p class="buy"><a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">これまでのお取引の評価を入力する</a></p>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     <p class="name">{{$message->user->name}}</p>
                     <p>{{$message->text}}</p>
                     <div class="proposeBuy">
-                        <p class="buy none"><input type="submit" value="お相手を評価する" disabled></p>
+                        <p class="buy none"><input type="submit" value="これまでのお取引の評価を入力する" disabled></p>
                     </div>
                 </div>
             </div>
