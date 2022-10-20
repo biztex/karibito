@@ -62,7 +62,7 @@ class ChatroomMessageService
     {
         $message = [
             'user_id' => \Auth::id(),
-            'text' => '作業報告が完了しました',
+            'text' => '納品が完了しました',
             'is_complete_message' => 1,
         ];
         $chatroom->chatroomMessages()->create($message);
