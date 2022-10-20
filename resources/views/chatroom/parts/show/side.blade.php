@@ -35,7 +35,7 @@
                 @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
                     <form id="form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
                         @csrf
-                        <input type="submit" class="orange loading-disabled" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" onclick='return confirm("納品完了報告をしてもよろしいですか？");'value="納品完了">
+                        <input type="submit" class="orange loading-disabled" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" onclick='return confirm("納品完了報告をしてもよろしいですか？");'value="納品を完了する">
                     </form>
                 @endif
             @endif
