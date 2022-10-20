@@ -107,7 +107,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
             'user_id' => \Auth::id(),
-            'text' => 'キャンセル申請に異議を申し立てました',
+            'text' => '再交渉を希望しました',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
     }
