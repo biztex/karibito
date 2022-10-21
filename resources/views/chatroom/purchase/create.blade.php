@@ -54,6 +54,9 @@
 							</table>
 						</div>{{-- /.payment --}}
 
+						@if($user_has_coupons->isEmpty())
+						<p style="margin-top:5%;">現在ご利用いただけるクーポンはありません。</p>
+						@else
 						<div class="coupons">
 							<div class="checkbox">
 								@error('coupon_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -72,13 +75,15 @@
 
 								{{-- <p class="detail">{{$coupon->discount}}円割引クーポン(合計{{$coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($coupon->deadline))}}まで</p> --}}
 								{{-- 最低利用金額などはこっちでやる、仕様未決定のため、一旦飛ばす --}}
-                  
+
                                 <div class="warnNotes">
                                     <p class="danger">ご注意！</p>
                                     <p>※他のクーポンと併用はできません。</p>
+                                    <p>※決済後はクーポンのご利用はできませんのでご注意ください。</p>
                                 </div>
                             </div>{{-- /.checkbox --}}
 						</div>{{-- /.coupons --}}
+						@endif
 
 						<div class="radio">
 							<p class="tit">ポイントの利用@error('user_use_point')<span>{{ $message }}</span>@enderror</p>

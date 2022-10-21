@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('chatroom_id')->comment('サービスやり取りID')->constrained()->cascadeOnDelete();
             $table->foreignId('proposal_id')->comment('購入した提案ID')->constrained('proposals');
-            // $table->foreignId('user_coupon_id')->nullable()->constrained('user_coupons')->comment('利用したクーポンのID');
-            // $table->foreignId('user_use_point_id')->nullable()->constrained('user_use_points')->comment('利用したポイントのID');
             $table->foreignId('buyer_user_id')->comment('購入したユーザーID')->constrained('users');
             $table->boolean('is_cancel')->default(0)->comment('キャンセルフラグ(1.キャンセル成立)');
             $table->date('cancel_date')->nullable()->comment('キャンセル成立');

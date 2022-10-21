@@ -61,18 +61,18 @@
 						<p class="th">応募期限<span class="must">必須</span></p>
 							@error('application_deadline')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="date" name="application_deadline" value="{{ old('application_deadline', $job_request->application_deadline) }}">
+							<input type="date" name="application_deadline" value="{{ old('application_deadline', $job_request->application_deadline) }}" style="color:#333">
 						</div>
 
 
 						<p class="th">納期希望日</p>
 							@error('required_date')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="date" name="required_date" value="{{ old('required_date', $job_request->required_date ) }}">
+							<input type="date" name="required_date" value="{{ old('required_date', $job_request->required_date ) }}" style="color:#333">
 						</div>
 
 							<div class="warnNotes" style="margin-bottom:5px;">
-								<p>【対面】：直接会って提供する内容を相手に行います。<br>【非対面】：互いが直接会わずに提供する内容を相手に行います。</p>
+								<p>【対面】：お互いが直接会ってサービスを提供します。<br>【非対面】：お互いが直接合わずに、オンライン上などで、サービスを提供します。</p>
 							</div>
 						<p class="th">仕事体系<span class="must">必須</span></p>
 							@error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -111,7 +111,7 @@
 
                         <div class="functeBtns">
 							<input type="submit" class="full" style="color:white;" formaction="{{ route('job_request.edit.preview',$job_request->id) }}" value="プレビュー画面を見る">
-							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.update',$job_request->id) }}" value="サービス提供を開始">
+							<input type="submit"  class="full green" style="color:white;" formaction="{{ route('job_request.update',$job_request->id) }}" value="リクエスト依頼を開始">
 							<input type="submit" class="full green_o" formaction="{{ route('job_request.update.draft', $job_request->id) }}" value="下書きとして保存">
 
 						</div>

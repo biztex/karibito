@@ -22,7 +22,7 @@ class ImageService
      * 
      * @return string $file_path
      */
-    public function resizeImage(object $image_file, int $resize_width, string $folder_path): string
+    public function resizeImage(object|string $image_file, int $resize_width, string $folder_path): string
     {
         // 画像を読み込む
         $image = \Image::make($image_file);

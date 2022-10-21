@@ -6,6 +6,8 @@ use App\Models\Proposal;
 use App\Models\Purchase;
 use App\Models\Payment;
 use App\Models\MCommissionRate;
+use App\Models\UserCoupon;
+use App\Models\UserUsePoint;
 use App\Services\ProposalService;
 use App\Services\ChatroomService;
 use App\Services\ChatroomMessageService;
@@ -35,15 +37,15 @@ class PurchaseService
     /**
      * 購入完了処理
      */
-    public function purchased(string $charge_id, int $amount, Proposal $proposal)
+    public function purchased(string $charge_id, int $amount, Proposal $proposal, UserCoupon|null $user_coupon, UserUsePoint|null $user_use_point)
     {
-        \DB::transaction(function () use ($charge_id, $amount, $proposal) {
+        \DB::transaction(function () use ($charge_id, $amount, $proposal, $user_coupon, $user_use_point) {
             // payment テーブル
             $payment = $this->storePayment($charge_id, $amount);
             // 提案と購入済に
             $this->proposal_service->purchasedProposal($proposal);
             // 購入テーブル
-            $purchase = $this->storePurchase($proposal, $payment);
+            $purchase = $this->storePurchase($proposal, $payment, $user_coupon, $user_use_point);
             // 購入メッセージ
             $this->chatroom_message_service->storePurchaseMessage($purchase, $proposal->chatroom);
             // チャットルームを作業に
@@ -68,7 +70,7 @@ class PurchaseService
         return $payment;
     }
 
-    public function storePurchase(Proposal $proposal, Payment $payment): Purchase
+    public function storePurchase(Proposal $proposal, Payment $payment, UserCoupon|null $user_coupon, UserUsePoint|null $user_use_point): Purchase
     {
         $m_commission_rate = MCommissionRate::nowRate();
 
@@ -79,6 +81,15 @@ class PurchaseService
             'payment_id' => $payment->id,
             'm_commission_rate_id' => $m_commission_rate->id
         ];
+
+        if(!is_null($user_coupon)) {
+            $column['user_coupon_id'] = $user_coupon->id;
+        };
+
+        if(!is_null($user_use_point)) {
+            $column['user_use_point_id'] = $user_use_point->id;
+        };
+
         $purchase = $chatroom->purchase()->create($column);
         return $purchase;
     }
@@ -145,13 +156,13 @@ class PurchaseService
     public function savePurchasedProduct(Proposal $proposal): void
     {
         if($proposal->chatroom->reference_type === 'App\Models\Product'){
-            \DB::transaction(function () use ($proposal) {
+            // \DB::transaction(function () use ($proposal) {
                 $purchased_product_id = $this->purchased_product_service->storePurchasedProduct($proposal->chatroom); //購入物作成
                 $this->purchased_product_service->storePurchasedAdditionalOption($proposal->chatroom, $purchased_product_id);
-                $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
+                // $this->purchased_product_service->storePurchasedProductQuestion($proposal->chatroom, $purchased_product_id);
                 $this->purchased_product_service->storePurchasedProductLink($proposal->chatroom, $purchased_product_id);
                 $this->purchased_product_service->storePurchasedProductImage($proposal->chatroom, $purchased_product_id);
-            });
+            // });
         }else{
             $this->purchased_job_request_service->storePurchasedJobRequest($proposal->chatroom); //購入物リクエスト作成
         }
