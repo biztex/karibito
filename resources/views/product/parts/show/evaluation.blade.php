@@ -7,9 +7,17 @@
                     <li>
                         <div class="img">
                             @if(empty($value->user->userProfile->icon))
-                                <a href="{{ route('user.mypage', $value->user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                                @if(empty($value->user->deleted_at))
+                                    <a href="{{ route('user.mypage', $value->user->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                                @else
+                                    <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                                @endif
                             @else
-                                <a href="{{ route('user.mypage', $value->user->id) }}" class="head"><img src={{asset('/storage/'.$value->user->userProfile->icon) }} alt=""></a>
+                                @if(empty($value->user->deleted_at))
+                                    <a href="{{ route('user.mypage', $value->user->id) }}" class="head"><img src={{asset('/storage/'.$value->user->userProfile->icon) }} alt=""></a>
+                                @else
+                                    <span class="head"><img src={{asset('/storage/'.$value->user->userProfile->icon) }} alt=""></span>
+                                @endif
                             @endif
 
                             @if($value->star == App\Models\Evaluation::PITY)
@@ -22,6 +30,9 @@
                         </div>
                         <div class="info">
                             <p>{{ $value->user->name }}<span class="date">{{ date("Y年n月j日",strtotime($value->created_at)) }}</span></p>
+                            @if(isset($value->user->deleted_at))
+                                <p>このユーザーは退会しています。</p>
+                            @endif
                             <p>{!! nl2br(e($value->text)) !!}</p>
                         </div>
                     </li>
