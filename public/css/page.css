@@ -10433,3 +10433,8 @@ input.small {
 	}
 
 }
+
+/* 銀行口座入力の注意書き */
+.bank-input-info{
+	color:red;
+}
