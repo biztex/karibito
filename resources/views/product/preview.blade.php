@@ -6,7 +6,7 @@
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
                 @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create')
                     <a href="{{ route('post') }}">投稿する</a>　>　
-                    <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                    <a href="{{ route('product.create') }}">サービスを出品する</a>　>　
                 @else
                     <a href="{{route('publication')}}">掲載内容一覧</a>　>　
                     <a href="{{(url()->previous())}}">サービスを編集する</a>　>　

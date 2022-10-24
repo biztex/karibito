@@ -1144,7 +1144,7 @@
 }
 
 .detailStyle .content .hdM {
-	font-size: 1.6rem;
+	font-size: 2.4rem;
 }
 
 .detailStyle .content p {
@@ -10432,4 +10432,9 @@ input.small {
 		margin-top: 32px;
 	}
 
+}
+
+/* 銀行口座入力の注意書き */
+.bank-input-info{
+	color:red;
 }
