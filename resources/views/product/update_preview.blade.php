@@ -2,7 +2,7 @@
     <article>
         <div id="breadcrumb">
             <div class="inner">
-                <a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを提供する</span>　>　<span>プレビュー</span>
+                <a href="{{ route('home') }}">ホーム</a>　>　<span>サービスを出品する</span>　>　<span>プレビュー</span>
             </div>
         </div><!-- /.breadcrumb -->
         <div id="contents" class="detailStyle">

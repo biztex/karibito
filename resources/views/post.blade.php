@@ -14,7 +14,7 @@
                 <div class="inner inner05">
                     <h2 class="subPagesHd">投稿</h2>
                     <div class="postLinks mb50">
-                        <a href="{{ route('product.create') }}" class="fun camera">サービスを提供する</a>
+                        <a href="{{ route('product.create') }}" class="fun camera">サービスを出品する</a>
                         <a href="{{ route('job_request.create') }}" class="fun note">サービスをリクエストする</a>
                         <div class="common">
                             <a href="{{ route('draft') }}">下書きを見る</a>
@@ -62,7 +62,7 @@
                                 </div>
                             </li>
                             @endforeach
-                            <a href="{{ route('publication') }}" class="more">提供中のサービスをもっと見る</a>
+                            <a href="{{ route('publication') }}" class="more">出品中のサービスをもっと見る</a>
                         @endif
                     </ul>
 

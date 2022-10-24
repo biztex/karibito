@@ -6,13 +6,13 @@
                 <a href="{{ route('home') }}">ホーム</a>　&gt;　
                 <a href="{{ route('mypage') }}">マイページ</a>　>　
                 <a href="{{ route('post') }}">投稿する</a>　>　
-                <a href="{{ route('product.create') }}">サービスを提供する</a>
+                <a href="{{ route('product.create') }}">サービスを出品する</a>
             </div>
         </div>
         <div id="contents">
             <div class="cancelWrap">
                 <div class="inner inner05">
-                    <h2 class="subPagesHd">サービスを提供する<p class="checkGuideOriginal"><a href="{{ route('support') }}" target="_blank">カリビト安心サポートをご確認ください</a></p></h2>
+                    <h2 class="subPagesHd">サービスを出品する<p class="checkGuideOriginal"><a href="{{ route('support') }}" target="_blank">カリビト安心サポートをご確認ください</a></p></h2>
                     <form method="post" id="form"  class="contactForm" enctype="multipart/form-data">
                         @csrf
                         <p class="th">カテゴリ<span class="must">必須</span></p>

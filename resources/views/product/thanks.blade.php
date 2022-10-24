@@ -7,10 +7,10 @@
                 {{--                {{dd(url()->previous())}}--}}
                 @if(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/create') {{--提供-完了--}}
                     <a href="{{ route('post') }}">投稿する</a>　>　
-                    <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                    <a href="{{ route('product.create') }}">サービスを出品する</a>　>　
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/product/preview') {{--提供-プレビュー-完了--}}
                     <a href="{{ route('post') }}">投稿する</a>　>　
-                    <a href="{{ route('product.create') }}">サービスを提供する</a>　>　
+                    <a href="{{ route('product.create') }}">サービスを出品する</a>　>　
                 @elseif(str_replace(url(''), "", $_SERVER['HTTP_REFERER']) == '/job_request/create') {{--リクエスト-完了--}}
                     <a href="{{ route('post') }}">投稿する</a>　>　
                     <a href="{{route('job_request.create')}}">サービスをリクエストする</a>　>　
