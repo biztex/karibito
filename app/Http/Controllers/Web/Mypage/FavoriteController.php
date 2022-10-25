@@ -24,7 +24,6 @@ class FavoriteController extends Controller
 
     public function index()
     {
-        //TODO:ソフトデリートされた人の商品を除きたい
         $products = Favorite::product()->paginate(10);
         $job_requests = Favorite::jobRequest()->paginate(10);
         $today = new Carbon('today');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserFollow;
+use App\Models\Favorite;
 
 class WithdrawController extends Controller
 {
@@ -25,7 +26,8 @@ class WithdrawController extends Controller
         \DB::transaction(function () use ($user, $str_delete) {
 
             \Auth::logout();// ログアウト
-            UserFollow::where('following_user_id',$user->id)->orWhere('followed_user_id',$user->id)->delete(); 
+            UserFollow::where('following_user_id',$user->id)->orWhere('followed_user_id',$user->id)->delete();
+            Favorite::where('user_id',$user->id)->delete();
             $user->delete(); // データ論理削除
             $user->email = $str_delete.$user->email;
             if ($user->google_id) {
