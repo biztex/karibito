@@ -31,23 +31,12 @@
         <div class="aboutUser">
             <div class="user" style="margin-bottom:6px;">
                 @if(empty($product->user->userProfile->icon))
-                    @if(empty($product->user->deleted_at))
-                        <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
-                    @else
-                        <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
-                    @endif
+                    <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @else
-                    @if(empty($product->user->deleted_at))
-                        <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt=""></a>
-                    @else
-                        <span class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt=""></span>
-                    @endif
+                    <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="{{asset('/storage/'.$product->user->userProfile->icon) }}" alt=""></a>
                 @endif
                 <div class="introd">
                     <p class="name word-break">{{ $product->user->name }}</p>
-                    @if(isset($product->user->deleted_at))
-                        <span>このユーザーは退会しています。</span>
-                    @endif
                     <p>({{ App\Models\UserProfile::GENDER[$product->user->userProfile->gender] }}/ {{ $product->user->userProfile->age }}/ {{ $product->user->userProfile->prefecture->name }})</p>
                 </div>
             </div>

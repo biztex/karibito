@@ -78,11 +78,14 @@
                     @if(empty($value->sellerUser->deleted_at))
                         <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                     @else
-                        <span href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
                     @endif
                 @endif
                 <div class="introd">
                         <p class="name word-break">{{$value->sellerUser->name}}</p>
+                        @if(isset($value->sellerUser->deleted_at))
+                            <p class="name">退会したユーザーです。</p>
+                        @endif
                         <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
                 </div>
             </div>
@@ -106,6 +109,9 @@
                 @endif
                 <div class="introd">
                     <p class="name word-break">{{$value->buyerUser->name}}</p>
+                    @if(isset($value->buyerUser->deleted_at))
+                        <p class="name">退会したユーザーです。</p>
+                    @endif
                     <p>({{App\Models\UserProfile::GENDER[$value->buyerUser->userProfile->gender]}}/ {{$value->buyerUser->userProfile->age}}/ {{$value->buyerUser->userProfile->prefecture->name}})</p>
                 </div>
             </div>
