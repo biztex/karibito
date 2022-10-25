@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('purchased_additional_options', function (Blueprint $table) {
-            $table->dropForeign('purchased_additional_options_product_id_foreign');
-            $table->dropIndex('purchased_additional_options_product_id_foreign');
-            $table->foreign('purchased_product_id')->references('id')->on('purchased_products');
+            // $table->dropForeign('purchased_additional_options_product_id_foreign');
+            // $table->dropIndex('purchased_additional_options_product_id_foreign');
+            // $table->foreign('purchased_product_id')->references('id')->on('purchased_products');
         });
     }
 
