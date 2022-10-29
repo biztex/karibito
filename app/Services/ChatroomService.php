@@ -104,5 +104,20 @@ class ChatroomService
             }
         }
     }
+    
+    // ユーザーが退会ボタンを押したとき、取引中のやりとりがあれば、
+    // 退会できない旨のメッセージを表示
+    public function canIWithdraw($user)
+    {
+        $chatrooms = Chatroom::where('seller_user_id',$user->id)
+                    ->orWhere('buyer_user_id',$user->id)
+                    ->get();
+        $can_i_withdraw = $chatrooms->whereBetween('status',[3,5])->isEmpty();
+
+        if(!$can_i_withdraw){
+            return redirect()->route('showWithdrawForm')->with('flash_msg','現在取引中のため退会することができません')->throwResponse();
+        }
+        return true;
+    }
 
 }

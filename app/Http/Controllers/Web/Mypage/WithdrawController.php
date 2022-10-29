@@ -3,13 +3,22 @@
 namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chatroom;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserFollow;
 use App\Models\Favorite;
+use App\Services\ChatroomService;
 
 class WithdrawController extends Controller
 {
+    private $chatroom_service;
+
+    public function __construct(ChatroomService $chatroom_service)
+    {
+        $this->chatroom_service = $chatroom_service;
+    }
+    
     /**
      * 退会フォームを表示
      */
@@ -22,6 +31,8 @@ class WithdrawController extends Controller
     {
         $user = \Auth::user();
         $str_delete = 'delete-'.$user->id.'-';
+        
+        $this->chatroom_service->canIWithdraw($user);
 
         \DB::transaction(function () use ($user, $str_delete) {
 
