@@ -18,7 +18,8 @@
 				<div id="main">
 					<div class="mypageWrap">
 						{{-- 電話対応 --}}
-						@include('mypage.show.call')
+						<!-- 電話機能は一旦止めてほしいためコメントアウト -->
+						<!-- @include('mypage.show.call') -->
 
 						{{-- プロフィール --}}
 						@include('mypage.show.profile')
