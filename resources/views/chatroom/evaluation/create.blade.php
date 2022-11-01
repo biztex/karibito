@@ -44,10 +44,11 @@
 							@endif
 						</div>
 					</form>
-					<div class="warnNotes">
+					<!-- 一旦コメントアウト -->
+					<!-- <div class="warnNotes">
 						<p class="danger">ご注意！</p>
 						<p>※他のクーポンと併用はできません。</p>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
