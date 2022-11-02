@@ -8615,6 +8615,14 @@ select.searchSelect {
 	padding: 20px;
 }
 
+.chatPages .item .finish_massage {
+	text-align: center;
+}
+
+.chatPages .item .finish_massage p {
+	font-size: 20px;
+}
+
 .chatPages .item+.item {
 	border-top: 1px solid #CDCDCD;
 }
@@ -8625,6 +8633,7 @@ select.searchSelect {
 	text-align: center;
 	font-size: 1.2rem;
 }
+
 
 .chatPages .warnBox {}
 
@@ -9269,6 +9278,8 @@ input.small {
 .exchangeChat .conts .chat_log{
   float: right;
 }
+
+.exchangeChat .
 
 .favoriteUl01.exchangeChat .cont02 {
 	background: #fff;

@@ -1,5 +1,5 @@
 <!-- 入力エリア -->
-<form id="form" action="{{ route('chatroom.message', $chatroom->id) }}" method="POST" enctype="multipart/form-data">
+<!-- <form id="form" action="{{ route('chatroom.message', $chatroom->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="item">
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -63,4 +63,4 @@
         </div>
         <div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
     </div>
-</div>
+</div> 
