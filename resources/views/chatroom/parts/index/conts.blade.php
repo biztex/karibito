@@ -49,6 +49,9 @@
                 </div>
                 <div class="single">
                     <span tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</span>
+                    <div class="chat_log">
+                        {{$value->chatroomMessages->last()->created_at;}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,9 +66,11 @@
                 <div class="single">
                     <span tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</span>
                 </div>
+    </div>
             </div>
         </div>
     @endif
+
 
     <div class="cont02">
         @if($value->buyerUser->id === Auth::id())
