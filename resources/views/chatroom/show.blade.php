@@ -36,7 +36,7 @@
                                     @include('chatroom.parts.show.message')
                                 </ul>
                                 <div class="finish_massage">
-                                    <p>取引が終了しました。ありがとうございました。</p>
+                                    <p>取引終了となります。ありがとうございました</p>
                                 </div>
                             </div>
 
