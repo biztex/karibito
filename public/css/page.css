@@ -9266,6 +9266,10 @@ input.small {
 	background: #F4F4F4;
 }
 
+.exchangeChat .conts .chat_log{
+  float: right;
+}
+
 .favoriteUl01.exchangeChat .cont02 {
 	background: #fff;
 }
