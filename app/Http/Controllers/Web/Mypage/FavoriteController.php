@@ -50,6 +50,7 @@ class FavoriteController extends Controller
         $favorite_user = [
             'user_id' => \Auth::user()->id,
         ];
+        
         if(isset($request->product_id)) {
             $product = Product::find($request->product_id);
         }else{
