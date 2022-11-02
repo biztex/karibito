@@ -13,6 +13,9 @@
                 </div>
                 <div class="single">
                     <span tabindex="0">{{App\Models\Product::IS_ONLINE[$value->referencePurchased->is_online]}}</span>
+                    <div class="chat_log">
+                        更新日時:{{$value->chatroomMessages->last()->created_at->format('Y-m-d H:i');}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,6 +30,9 @@
                 </div>
                 <div class="single">
                     <span tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->referencePurchased->is_online]}}</span>
+                    <div class="chat_log">
+                        更新日時:{{$value->chatroomMessages->last()->created_at->format('Y-m-d H:i');}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,7 +56,7 @@
                 <div class="single">
                     <span tabindex="0">{{App\Models\Product::IS_ONLINE[$value->reference->is_online]}}</span>
                     <div class="chat_log">
-                        {{$value->chatroomMessages->last()->created_at;}}
+                        更新日時:{{$value->chatroomMessages->last()->created_at->format('Y-m-d H:i');}}
                     </div>
                 </div>
             </div>
@@ -65,6 +71,9 @@
                 </div>
                 <div class="single">
                     <span tabindex="0">{{App\Models\JobRequest::IS_ONLINE[$value->reference->is_online]}}</span>
+                    <div class="chat_log">
+                        更新日時:{{$value->chatroomMessages->last()->created_at->format('Y-m-d H:i');}}
+                    </div>
                 </div>
     </div>
             </div>
