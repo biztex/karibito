@@ -9554,7 +9554,7 @@ input.small {
 }
 
 .contactForm .time:after {
-	content: "日";
+	/* content: "日"; */
 	position: absolute;
 	right: 20px;
 	top: 50%;
