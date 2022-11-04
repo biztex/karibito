@@ -83,13 +83,13 @@
                         </div>
 
                         <p class="th">所要時間<span class="must">必須</span></p>
-                            @error('number_of_day')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                            @error('time_unit')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                            <select name="time_unit">
-                                <option value="">選択してください</option>
-                                <option value="1" @if ( old('time_unit', $product->time_unit) == 1 ) selected @endif>日にち</option>
-                                <option value="2" @if ( old('time_unit', $product->time_unit) == 2 ) selected @endif>時間</option>
-                            </select>
+                        @error('number_of_day')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                        @error('time_unit')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                        <select name="time_unit">
+                            <option value="">選択してください</option>
+                            <option value="1" @if ( old('time_unit', $product->time_unit) == 1 ) selected @endif>日にち</option>
+                            <option value="2" @if ( old('time_unit', $product->time_unit) == 2 ) selected @endif>時間</option>
+                        </select>
                         <div class="td">
                             <p class="time"><input type="number" name="number_of_day" placeholder="入力してください" value="{{old('number_of_day', $product->number_of_day)}}"></p>
                         </div>
