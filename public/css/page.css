@@ -8615,6 +8615,14 @@ select.searchSelect {
 	padding: 20px;
 }
 
+.chatPages .item .finish_massage {
+	text-align: center;
+}
+
+.chatPages .item .finish_massage p {
+	font-size: 20px;
+}
+
 .chatPages .item+.item {
 	border-top: 1px solid #CDCDCD;
 }
