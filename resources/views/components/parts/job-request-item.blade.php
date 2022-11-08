@@ -22,11 +22,11 @@
                 </dl>
                 <dl>
                     <dt><span>募集期限</span></dt>
-                    <dd style="padding-left:5px;">{{ rtrim($value->diff_time, '後') }}</dd>
+                    <dd style="padding-left:5px;">{{ $value->diff_time }}</dd>
                 </dl>
             </div>
         </a>
-        
+
         <div class="aboutUser">
             <div class="user">
                 @if(empty($value->user->userProfile->icon))
