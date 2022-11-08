@@ -13,6 +13,8 @@ use App\Mail\LikeRegisterMail;
 use App\Models\Chatroom;
 use App\Models\News;
 use App\Models\UserFollow;
+use App\Models\Product;
+use App\Models\JobRequest;
 
 class UserNotificationService
 {
@@ -83,10 +85,16 @@ class UserNotificationService
 
         $user_notification = new UserNotification();
 
+        if($product instanceof Product){
+            $reference_type = 'App\Models\Product';
+        } elseif ($product instanceof JobRequest){
+            $reference_type = 'App\Models\JobRequest';
+        } 
+
         $user_notification = [
             'user_id' => $product_user->id,
             'title' => $login_user->name . 'さんからいいねが来ました。',
-            'reference_type' => 'App\Models\Product',
+            'reference_type' => $reference_type,
             'reference_id' => $product->id,
         ];
 

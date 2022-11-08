@@ -17,7 +17,6 @@ class HomeService
             // ->otherUsers()  今後自分以外のユーザーの商品のみ表示するときに使用
             ->publish()
             ->orderBy('created_at', 'desc')
-            ->has('user')//一旦ここに入れておく、緊急対応
             ->paginate($i);
 
         return $products;
@@ -30,7 +29,6 @@ class HomeService
             // ->otherUsers() 今後自分以外のユーザーの商品のみ表示するときに使用
             ->publish()
             ->orderBy('created_at','desc')
-            ->has('user') //一旦ここに入れておく、緊急対応
             ->get(); // 公開&&下書きでない
 
         return $products;

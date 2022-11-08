@@ -19,7 +19,7 @@
 
 						@include('chatroom.parts.index.active')
 
-
+                        
 						@include('chatroom.parts.index.inactive')
 					</div>
 				</div><!--inner-->

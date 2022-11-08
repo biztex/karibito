@@ -26,7 +26,9 @@
                                     <p>進行中の取引はありません。</p>
                                 @else
                                     @foreach($active_product_chatrooms as $value)
-                                        @include('mypage.chatroom.product')
+                                        @if(isset($value->sellerUser))
+                                          @include('mypage.chatroom.product')
+                                        @endif
                                     @endforeach
                                 @endif
                                 </ul>
@@ -39,7 +41,9 @@
                                         <p>進行中の取引はありません。</p>
                                     @else
                                         @foreach($active_job_request_chatrooms as $value)
+                                          @if(isset($value->buyerUser))
                                             @include('mypage.chatroom.job-request')
+                                          @endif
                                         @endforeach
                                     @endif  
                                 </ul>

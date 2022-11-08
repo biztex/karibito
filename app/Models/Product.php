@@ -122,14 +122,14 @@ class Product extends Model
     }
 
     /**
-     * 公開かつ下書きでない
+     * 退会していないかつ、公開かつ、下書きでない
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePublish($query)
     {
-        return $query->notDraft()->notBan()->where('status',Product::STATUS_PUBLISH);
+        return $query->has('user')->notDraft()->notBan()->where('status',Product::STATUS_PUBLISH);
     }
 
     /**

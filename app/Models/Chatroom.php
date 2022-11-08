@@ -187,7 +187,7 @@ class Chatroom extends Model
     */
     public function sellerUser()
     {
-        return $this->belongsTo(User::class, 'seller_user_id');
+        return $this->belongsTo(User::class, 'seller_user_id')->withTrashed();
     }
 
     /**
@@ -195,7 +195,7 @@ class Chatroom extends Model
     */
     public function buyerUser()
     {
-        return $this->belongsTo(User::class, 'buyer_user_id');
+        return $this->belongsTo(User::class, 'buyer_user_id')->withTrashed();
     }
 
     /**
