@@ -1849,7 +1849,8 @@
 .mypageCover {
 	margin: 0 -20px;
 	position: relative;
-	background: url(../img/mypage/img_rainbow.png)no-repeat center center;
+	/* background: url(../img/mypage/img_rainbow.png)no-repeat center center; バックグラウンドを指定したため一旦非表示*/
+	background-color: #EFEFEF;
 	background-size: cover;
 	height: 230px;
 }
@@ -1859,6 +1860,16 @@
 	right: 40px;
 	top: 20px;
 	z-index: 2;
+}
+
+.mypageCover .cover_background {
+	height:100%;
+}
+
+.mypageCover .cover_background img {
+	width: 800px;
+	height: 100%;
+	object-fit: contain;
 }
 
 .mypageDl01 {
@@ -2412,9 +2423,13 @@
 	.mypageCover {
 		margin: 0 -15px;
 		position: relative;
-		background: url(../img/mypage/img_rainbow.png)no-repeat center center;
+		/* background: url(../img/mypage/img_rainbow.png)no-repeat center center; バックグラウンドを指定したため一旦非表示 */
 		background-size: cover;
 		height: 160px;
+	}
+
+	.mypageCover img {
+		height: 100%;
 	}
 
 	.mypageCover a {
