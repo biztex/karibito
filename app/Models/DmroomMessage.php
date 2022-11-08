@@ -38,4 +38,30 @@ class DmroomMessage extends Model
             return $textFormat->generateLinkFromSentence($value);
         }
     }
+    
+    // 送信者を取得する
+    public static function getSendUser($dmroom){
+        $send_message = DmroomMessage::with('user')->where('dmroom_id',$dmroom->id)
+        ->latest()
+        ->first();
+        $send_user = $send_message->user;
+        return $send_user;
+    }
+    
+    // 受信者を取得する
+    public static function getReceiveUser($dmroom){
+        $send_message = DmroomMessage::with('user')->where('dmroom_id',$dmroom->id)
+        ->latest()
+        ->first();
+        
+        $send_user = $send_message->user;
+        if($dmroom->from_user_id !== $send_user->id){
+            $receive_user_id = $dmroom->from_user_id;
+        }else{
+            $receive_user_id = $dmroom->to_user_id;
+        }
+        
+        $receive_user = User::where('id',$receive_user_id)->firstOrFail();
+        return $receive_user;
+    }
 }

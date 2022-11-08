@@ -8,9 +8,17 @@ use App\Models\Dmroom;
 use App\Models\DmroomMessage;
 use App\Models\User;
 use App\Http\Requests\Mypage\DmroomController\MessageRequest;
+use App\Services\UserNotificationService;
 
 class DmroomController extends Controller
 {
+    private $user_notification_service;
+    
+    public function __construct(UserNotificationService $user_notification_service)
+    {
+        $this->user_notification_service = $user_notification_service;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -61,6 +69,7 @@ class DmroomController extends Controller
         }
 
         $dmroom->dmroomMessages()->create($message);
+        $this->user_notification_service->storeUserNotificationDm($dmroom);
         return redirect()->route('dm.show', $dmroom->id);
     }
 
@@ -82,6 +91,7 @@ class DmroomController extends Controller
         }
 
         $dmroom->dmroomMessages()->create($message);
+        $this->user_notification_service->storeUserNotificationDm($dmroom);
         return redirect()->route('dm.show', $dmroom->id);
     }
     /**
