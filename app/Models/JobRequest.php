@@ -44,7 +44,7 @@ class JobRequest extends Model
     const CALL_INPOSSIBLE = 0;
 
     const CALL_POSSIBLE = 1;
-    
+
     const IS_CALL = [
         self::CALL_POSSIBLE => 'あり',
         self::CALL_INPOSSIBLE => 'なし',
@@ -110,7 +110,7 @@ class JobRequest extends Model
         return $query->where('user_id',\Auth::id());
     }
 
-     /**
+    /**
      * 自分の以外の提供のみ取得
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
@@ -218,7 +218,11 @@ class JobRequest extends Model
     protected function getDiffTimeAttribute()
     {
         $date = new Carbon($this->application_deadline);
-        return $this->attributes['diff_time'] = $date->addDay()->diffForHumans(Carbon::now());
+        $diff_time = $date->addDay()->diffForHumans(Carbon::now());
+        if(strpos($diff_time, '前') !== false){ //期限が切れていた場合
+            return $this->attributes['diff_time'] = '期限切れ';
+        }
+        return $this->attributes['diff_time'] = rtrim($diff_time, '後');
     }
 
     protected function getCarbonDeadlineAttribute()

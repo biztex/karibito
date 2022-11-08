@@ -23,7 +23,7 @@
                         </button>
                 @endif
                 <input type="hidden" name="job_request_id" value="{{$job_request->id}}">
-                {{-- 連打防止つける --}}
+                {{-- todo:連打防止つける --}}
                 @csrf
             </form>
         </div>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <th><span class="th">残り時間</span></th>
-                <td><big>{{ rtrim($job_request->diff_time, '後') }}</big></td>
+                <td><big>{{$job_request->diff_time}}</big></td>
             </tr>
             @if(!is_null($job_request->required_date))
             <tr>
@@ -60,10 +60,10 @@
                 <th><span class="th">締切日</span></th>
                 <td>{{ date('Y年m月d日',strtotime($job_request->application_deadline)) }}</td>
             </tr>
-            <!-- <tr>
+            <tr>
                 <th><span class="th">提案人数</span></th>
-                <td>20人</td>
-            </tr> -->
+                <td>{{$job_request->number_of_proposal}}人</td>
+            </tr>
         </table>
     </div>
     <div class="content">
