@@ -15,6 +15,9 @@
             <a href="{{route('job_request.show', $value->reference_id)}}" class="blue_o">チケット詳細</a>
         @endif
     @endif
-
-        <a href="{{route('chatroom.show', $value->id)}}" class="green">チャットを開始</a>
+        @if ($value->status === 6)
+            <a href="{{route('chatroom.show', $value->id)}}" class="green">取引詳細</a>
+        @else
+            <a href="{{route('chatroom.show', $value->id)}}" class="green">チャットを開始</a>
+        @endif
 </div>

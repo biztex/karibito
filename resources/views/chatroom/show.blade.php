@@ -35,8 +35,12 @@
                                     <!-- メッセージ内容 -->
                                     @include('chatroom.parts.show.message')
                                 </ul>
+                                @if ($chatroom->status === 6)
+                                    <div class="finish_massage">
+                                        <p>取引終了となります。ありがとうございました。</p>
+                                    </div>
+                                @else
                             </div>
-
                             <!-- 入力エリア -->
                             @if(empty($partner->deleted_at))
                                 @include('chatroom.parts.show.form')
@@ -47,8 +51,10 @@
                                     <p class="danger">ご注意！</p>
                                     <p>・履歴を残すため、カリビト内でのやりとりを推奨しております。<br>・トラブルの際は 警察等の捜査依頼に積極的に協力しております 。<br>・直接お会いしての取引は、人目のつく場所か複数人で行いましょう。<br>・ 無断でキャンセル、公序良俗に反する行為、誹謗中傷などは利用停止となることがあります。</p>
                                 </div>
+                                @endif
                             </div>
                         </div>
+                        
                     </div>
                 </div><!-- /#main -->
 

@@ -61,6 +61,8 @@
 									<dd>
 										@if(Auth::user()->userProfile->is_identify === 1)
 											<span class="status_span status_confirmed">承認</span>
+										@elseif(Auth::user()->userProfile->is_identify === 0 && Auth::user()->userProfile->identification_path != null)
+											<span class="status_span">申請中</span>
 										@else
 											<span class="status_span">未承認</span>
 											<a href="#fancybox_register"  class="fancybox fancybox_register">申請する</a>

@@ -76,6 +76,7 @@
 													<td>
 														@error('bank_code')<div class="alert alert-danger">{{ $message }}</div>@enderror
 														<div class="mypageEditInput"><input type="text" name="bank_code" value="{{ old('bank_code') }}"></div>
+														<span class="bank-input-info">※半角で入力してください</span>
 													</td>
 												</tr>
                                                 <tr>
@@ -90,6 +91,7 @@
 													<td>
 														@error('branch_code')<div class="alert alert-danger">{{ $message }}</div>@enderror
 														<div class="mypageEditInput"><input type="text" name="branch_code" value="{{ old('branch_code') }}"></div>
+														<span class="bank-input-info">※半角で入力してください</span>
 													</td>
 												</tr>
                                                 <tr>

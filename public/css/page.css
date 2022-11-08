@@ -1144,7 +1144,7 @@
 }
 
 .detailStyle .content .hdM {
-	font-size: 1.6rem;
+	font-size: 2.4rem;
 }
 
 .detailStyle .content p {
@@ -8615,6 +8615,14 @@ select.searchSelect {
 	padding: 20px;
 }
 
+.chatPages .item .finish_massage {
+	text-align: center;
+}
+
+.chatPages .item .finish_massage p {
+	font-size: 20px;
+}
+
 .chatPages .item+.item {
 	border-top: 1px solid #CDCDCD;
 }
@@ -9264,6 +9272,10 @@ input.small {
 .exchangeChat .conts {
 	padding: 10px;
 	background: #F4F4F4;
+}
+
+.exchangeChat .conts .chat_log{
+  float: right;
 }
 
 .favoriteUl01.exchangeChat .cont02 {
@@ -10432,4 +10444,9 @@ input.small {
 		margin-top: 32px;
 	}
 
+}
+
+/* 銀行口座入力の注意書き */
+.bank-input-info{
+	color:red;
 }

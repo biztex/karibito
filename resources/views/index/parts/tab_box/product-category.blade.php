@@ -4,7 +4,7 @@
         <h2>現在、カテゴリ別ランキングはありません。</h2>
     @else
         @foreach($product_category_ranks as $m_product_category)
-            <div class="js-hide_product_categories @if ($loop->index >= 10) hide @endif"> {{-- div追加した（岩上）よくなかったら消します。 --}}
+            <div class="js-hide_product_categories @if ($loop->index >= 10) hide @endif">
                 <h3 class="cateTit"><span>{{ $m_product_category->name }}</span><a href="{{route('product.category.index', $m_product_category->id) }}" class="more">{{ $m_product_category->name }}から探す</a></h3>
                 <div class="list sliderSP">
                 {{ $count = 0 }}

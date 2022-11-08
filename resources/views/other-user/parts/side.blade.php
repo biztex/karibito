@@ -20,7 +20,9 @@
 
         <x-parts.evaluation-star :star='$user->avg_star'/>
 
-        <p class="check"><a>本人確認済み</a></p>
+        @if(Auth::user()->userProfile->is_identify == 1)
+            <a>本人確認済み</a>
+        @endif
         @if (\Auth::id() !== $user->id)
             @if(empty($user->deleted_at))
                 <div class="blogDtOtherBtn">

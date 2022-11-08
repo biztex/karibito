@@ -90,7 +90,7 @@
                                                         <a href="{{ route('publication') }}">掲載内容一覧</a>
                                                     {{-- @endcan --}}
                                                     <a href="#fancybox_person" class="fancybox">プロフィール編集</a>
-                                                    <a href="{{ route('setting.index') }}">設定</a>
+                                                    <a href="{{ route('setting.index') }}">会員情報</a>
                                                 </div>
                                             @endif
                                             <p class="navMypageUlLink"><a href="{{ route('logout') }}" class="fs12" style="font-size: 1.3rem;">ログアウト</a></p> {{--クラス反応しない。スタイルベタ書き修正--}}
