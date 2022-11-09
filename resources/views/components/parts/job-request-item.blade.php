@@ -22,20 +22,31 @@
                 </dl>
                 <dl>
                     <dt><span>募集期限</span></dt>
-                    <dd style="padding-left:5px;">{{ rtrim($value->diff_time, '後') }}</dd>
+                    <dd style="padding-left:5px;">{{ $value->diff_time }}</dd>
                 </dl>
             </div>
         </a>
-        
+
         <div class="aboutUser">
             <div class="user">
                 @if(empty($value->user->userProfile->icon))
-                    <a href="{{ route('user.mypage', $value->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @if(empty($value->user->deleted_at))
+                        <a href="{{ route('user.mypage', $value->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    @else
+                        <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                    @endif
                 @else
-                    <a href="{{ route('user.mypage', $value->user_id) }}" class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></a>
+                    @if(empty($value->user->deleted_at))
+                        <a href="{{ route('user.mypage', $value->user_id) }}" class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></a>
+                    @else
+                        <span class="ico"><img src="{{asset('/storage/'.$value->user->userProfile->icon) }}" alt=""></span>
+                    @endif
                 @endif
                 <div class="introd">
                     <p class="name word-break">{{ $value->user->name }}</p>
+                    @if(isset($value->user->deleted_at))
+                        <span>このユーザーは退会しています。</span>
+                    @endif
                     <p>({{ App\Models\UserProfile::GENDER[$value->user->userProfile->gender] }} /{{ $value->user->userProfile->age }}/ {{ $value->user->userProfile->prefecture->name }})</p>
                 </div>
             </div>

@@ -1,11 +1,12 @@
 <div class="mypageSec01">
     <div class="mypageCover">
-        @if(!empty(Auth::user()->userProfile->cover))
-            <img src="{{asset('/storage/'.Auth::user()->userProfile->cover) }}" style="width: 100%;height: 100%;object-fit: cover;">
-        @else
-            <img src="/img/mypage/img_rainbow.png" style="width: 100%;height: 100%;object-fit: cover;">
-        @endif
-
+        <div class="cover_background">
+            @if(!empty(Auth::user()->userProfile->cover))
+                <img src="{{asset('/storage/'.Auth::user()->userProfile->cover) }}">
+            @else
+                <img src="/img/mypage/img_rainbow.png" style="object-fit: cover;">
+            @endif
+        </div>
         <form method="POST" action="{{ route('cover.update') }}" enctype="multipart/form-data">
             @csrf @method('PUT')
                 <input type="file" name="cover" class="cover1" style="display:none;">

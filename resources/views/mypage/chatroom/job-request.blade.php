@@ -1,4 +1,6 @@
-@if($value->referencePurchased !== null)
+@if(empty($value->buyerUser))
+    <li><p>お相手のユーザーは退会しました。</p></li>
+@elseif($value->referencePurchased !== null)
     <li>
         <div class="cont01">
             <p class="img"><img src="/img/common/img_request@2x.jpg" alt=""></p>
@@ -22,12 +24,23 @@
             @if($value->buyerUser->id === Auth::id())
                 <div class="user">
                     @if(null !== $value->sellerUser->userProfile->icon)
-                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                        @if(empty($value->sellerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                        @else
+                            <span class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></span>
+                        @endif
                     @else
-                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @if(empty($value->sellerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        @endif
                     @endif
                     <div class="introd">
                             <p class="name">{{$value->sellerUser->name}}</p>
+                            @if(isset($value->sellerUser->deleted_at))
+                                <p class="name">退会したユーザーです。</p>
+                            @endif
                             <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
                     </div>
                 </div>
@@ -35,12 +48,23 @@
             @else
                 <div class="user">
                     @if(null !== $value->buyerUser->userProfile->icon)
-                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                        @if(empty($value->buyerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                        @else
+                            <span class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></span>
+                        @endif
                     @else
-                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @if(empty($value->buyerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        @endif
                     @endif
                     <div class="introd">
                         <p class="name">{{$value->buyerUser->name}}</p>
+                        @if(isset($value->buyerUser->deleted_at))
+                            <p class="name">退会したユーザーです。</p>
+                        @endif
                         <p>({{App\Models\UserProfile::GENDER[$value->buyerUser->userProfile->gender]}}/ {{$value->buyerUser->userProfile->age}}/ {{$value->buyerUser->userProfile->prefecture->name}})</p>
                     </div>
                 </div>
@@ -60,12 +84,23 @@
             @if($value->buyerUser->id === Auth::id())
                 <div class="user">
                     @if(null !== $value->sellerUser->userProfile->icon)
-                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                        @if(empty($value->sellerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                        @else
+                            <span class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></span>
+                        @endif
                     @else
-                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @if(empty($value->sellerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        @endif
                     @endif
                     <div class="introd">
                             <p class="name">{{$value->sellerUser->name}}</p>
+                            @if(isset($value->sellerUser->deleted_at))
+                                <p class="name">退会したユーザーです。</p>
+                            @endif
                             <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
                     </div>
                 </div>
@@ -73,12 +108,23 @@
             @else
                 <div class="user">
                     @if(null !== $value->buyerUser->userProfile->icon)
-                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                        @if(empty($value->buyerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                        @else
+                            <span class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></span>
+                        @endif
                     @else
-                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @if(empty($value->buyerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        @endif
                     @endif
                     <div class="introd">
                         <p class="name">{{$value->buyerUser->name}}</p>
+                        @if(isset($value->buyerUser->deleted_at))
+                            <p class="name">退会したユーザーです。</p>
+                        @endif
                         <p>({{App\Models\UserProfile::GENDER[$value->buyerUser->userProfile->gender]}}/ {{$value->buyerUser->userProfile->age}}/ {{$value->buyerUser->userProfile->prefecture->name}})</p>
                     </div>
                 </div>
@@ -109,12 +155,23 @@
             @if($value->buyerUser->id === Auth::id())
                 <div class="user">
                     @if(null !== $value->sellerUser->userProfile->icon)
-                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                        @if(empty($value->sellerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></a>
+                        @else
+                            <span class="ico"><img src="{{ asset('/storage/'.$value->sellerUser->userProfile->icon) }}" alt=""></span>
+                        @endif
                     @else
-                        <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @if(empty($value->sellerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->seller_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        @endif
                     @endif
                     <div class="introd">
                             <p class="name">{{$value->sellerUser->name}}</p>
+                            @if(isset($value->sellerUser->deleted_at))
+                                <p class="name">退会したユーザーです。</p>
+                            @endif
                             <p>({{App\Models\UserProfile::GENDER[$value->sellerUser->userProfile->gender]}}/ {{$value->sellerUser->userProfile->age}}/ {{$value->sellerUser->userProfile->prefecture->name}})</p>
                     </div>
                 </div>
@@ -122,12 +179,23 @@
             @else
                 <div class="user">
                     @if(null !== $value->buyerUser->userProfile->icon)
-                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                        @if(empty($value->buyerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></a>
+                        @else
+                            <span class="ico"><img src="{{ asset('/storage/'.$value->buyerUser->userProfile->icon) }}" alt=""></span>
+                        @endif
                     @else
-                        <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @if(empty($value->buyerUser->deleted_at))
+                            <a href="{{ route('user.mypage', $value->buyer_user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <span class="ico"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                        @endif
                     @endif
                     <div class="introd">
                         <p class="name">{{$value->buyerUser->name}}</p>
+                        @if(isset($value->buyerUser->deleted_at))
+                            <p class="name">退会したユーザーです。</p>
+                        @endif
                         <p>({{App\Models\UserProfile::GENDER[$value->buyerUser->userProfile->gender]}}/ {{$value->buyerUser->userProfile->age}}/ {{$value->buyerUser->userProfile->prefecture->name}})</p>
                     </div>
                 </div>
