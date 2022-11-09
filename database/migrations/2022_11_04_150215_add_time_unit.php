@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->tinyInteger('time_unit')->after('number_of_day');
+            $table->tinyInteger('time_unit')->after('is_online');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->tinyInteger('time_unit')->after('number_of_day');
+            $table->dropColumn('time_unit');
         });
     }
 };
