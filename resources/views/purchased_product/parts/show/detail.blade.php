@@ -22,12 +22,12 @@
 <div class="slider">
     <div class="big">
         @foreach($product->productImage as $val)
-            <div class="item"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:cover;"></div>
+            <div class="item" style="background-color: #EFEFEF;"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:contain;"></div>
         @endforeach
     </div>
     <div class="small">
         @foreach($product->productImage as $val)
-            <div class="item"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:cover;"></div>
+            <div class="item" style="background-color: #EFEFEF;"><img src="{{ asset('storage/'.$val->path) }}" style="aspect-ratio:16/9; object-fit:contain;"></div>
         @endforeach
     </div>
 </div>

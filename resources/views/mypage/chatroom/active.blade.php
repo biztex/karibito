@@ -41,11 +41,10 @@
                                         @foreach($active_job_request_chatrooms as $value)
                                             @include('mypage.chatroom.job-request')
                                         @endforeach
-                                    @endif  
+                                    @endif
                                 </ul>
                             {{ $active_job_request_chatrooms->fragment('job-request')->links() }}
                             </div>
-                            
                         </div>
                     </div>
                 </div><!-- /#main -->

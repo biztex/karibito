@@ -23,12 +23,12 @@
                                     <li><a href="#tab_box01" class="is_active">提供</a></li>
                                     <li><a href="#tab_box02" id="box02">リクエスト</a></li>
                                 </ul>
-							    <!---------------- 提供 ------------------>
+                                <!---------------- 提供 ------------------>
                                 <div class="tabBox is_active" id="tab_box01">
                                     <ul class="favoriteUl01 status">
                                         @if(empty($products[0]))
-										    <li><div>投稿がありません。</div></li>
-									    @else
+                                            <li><div>投稿がありません。</div></li>
+                                        @else
                                             @foreach ($products as $product)
                                                 <li @if ($product->reference->number_of_sale === App\Models\Product::UNLIMITED_OF_SALE || ($product->reference->number_of_sale === App\Models\Product::ONE_OF_SALE && $product->reference->number_of_sold < 1)) class="during" @endif>
                                                     <div class="cont01">

@@ -1342,13 +1342,6 @@
 	text-align: right;
 }
 
-.favoriteUl01.exchangeChat .img img {
-	object-fit: cover;
-	height: 100px;
-	width: 100px;
-	width: 100%;
-}
-
 .favoriteUl01 .user .ico img {
 	width: 40px;
 	height: 40px;
@@ -1592,7 +1585,7 @@
 .cont01 .img img {
 	width: 120px;
 	height: 100px;
-	object-fit: cover;
+	object-fit: contain;
 }
 
 @media screen and (max-width: 766px) {

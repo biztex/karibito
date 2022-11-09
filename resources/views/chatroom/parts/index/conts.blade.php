@@ -75,7 +75,6 @@
                         更新日時:{{$value->chatroomMessages->last()->created_at->format('Y-m-d H:i');}}
                     </div>
                 </div>
-    </div>
             </div>
         </div>
     @endif
