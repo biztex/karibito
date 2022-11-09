@@ -4,10 +4,20 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\UserFollow;
+use App\Services\ChatroomService;
+use App\Services\FavoriteService;
 
 class WithdrawController extends Controller
 {
+    private $chatroom_service;
+
+    public function __construct(ChatroomService $chatroom_service, FavoriteService $favorite_service)
+    {
+        $this->chatroom_service = $chatroom_service;
+        $this->favorite_service = $favorite_service;
+    }
+    
     /**
      * 退会フォームを表示
      */
@@ -20,10 +30,14 @@ class WithdrawController extends Controller
     {
         $user = \Auth::user();
         $str_delete = 'delete-'.$user->id.'-';
+        
+        $this->chatroom_service->canIWithdraw($user);
 
         \DB::transaction(function () use ($user, $str_delete) {
 
             \Auth::logout();// ログアウト
+            UserFollow::where('following_user_id',$user->id)->orWhere('followed_user_id',$user->id)->delete();
+            $this->favorite_service->deleteFavorites($user);
             $user->delete(); // データ論理削除
             $user->email = $str_delete.$user->email;
             if ($user->google_id) {

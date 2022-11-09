@@ -2,11 +2,21 @@
     <div class="box reservate">
         <h3>{{number_format($product->price)}}円</h3>
         <p class="status">所用期間</p>
-        <p class="date">{{$product->number_of_day}}日</p>
+        <p class="date">{{$product->number_of_day}}
+            @if ( $product->time_unit === 1 ) 
+                日
+            @else 
+                時間
+            @endif
+        </p>
         <!-- <div class="calendar"><div id="datepicker"></div></div> -->
     </div>
     <div class="functeBtns">
-        @if($product->user_id === Auth::id() )
+        @if(empty($product->user))
+          <div class="indexNotice">
+              <h3 class="hd">このユーザーは退会しました。</h3>
+          </div>
+        @elseif($product->user_id === Auth::id() )
             <div class="functeBtns">
                 <a href="{{ route('product.edit', $product->id)}}" class="orange full">編集</a>
             </div>
@@ -32,7 +42,9 @@
             <h3>カリビト安心への取り組み</h3>
             <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
         </div>
-        <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+        @if(isset($product->user))
+          <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+        @endif
     </div>
 
     <x-parts.box-seller :user='$product->user'/>

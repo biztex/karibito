@@ -1,4 +1,5 @@
 <div class="title">
+    @if(isset($product->user))
     <div class="fun">
         <div class="single">
             <a tabindex="0">@if(!is_null($product->is_online)) {{App\Models\Product::IS_ONLINE[$product->is_online]}}@endif</a>
@@ -21,11 +22,12 @@
                     <span>お気に入り</span>
                 </button>
         @endif
-            <input type="hidden" name="product_id" value="{{$product->id}}">
-            @csrf
-            {{-- 連打防止つける --}}
-        </form>
+                <input type="hidden" name="product_id" value="{{$product->id}}">
+                @csrf
+                {{-- 連打防止つける --}}
+            </form>
     </div>
+    @endif
     <div class="datas">
         <span class="data">電話相談の受付：@if(!is_null($product->is_call)) {{ App\Models\Product::IS_CALL[$product->is_call] }} @endif</span>
         <!-- <span class="data">閲覧：1000</span> -->

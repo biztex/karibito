@@ -36,56 +36,56 @@
 								<ul class="friendsUl01">
                                     @foreach ($followings as $following)
                                     <li>
-										<a href="{{ route('user.mypage', $following->followingUser->id) }}">
-											<div class="user">
-                                                @if(null !== $following->followingUser->userProfile->icon)
-                                                    <dt><img src="{{ asset('/storage/'.$following->followingUser->userProfile->icon) }}" alt="" style="height:132px;"></dt>
-                                                @else
-                                                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                @endif
-												<div class="introd">
-													<p class="name">{{ $following->followingUser->name }}</p>
-													<p>({{ App\Models\UserProfile::GENDER[$following->followingUser->userProfile->gender] }}/
-                                                        {{ $following->followingUser->userProfile->age }}代/
-                                                        {{ $following->followingUser->userProfile->prefecture->name}})</p>
-												</div>
-											</div>
-											<x-parts.evaluation-star :star='$following->followingUser->avg_star'/>
-										</a>
-									</li>
+                                        <a href="{{ route('user.mypage', $following->followingUser->id) }}">
+                                        <div class="user">
+                                            @if(null !== $following->followingUser->userProfile->icon)
+                                                <dt><img src="{{ asset('/storage/'.$following->followingUser->userProfile->icon) }}" alt="" style="height:132px;"></dt>
+                                            @else
+                                                <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                            @endif
+                                            <div class="introd">
+                                            <p class="name">{{ $following->followingUser->name }}</p>
+                                            <p>({{ App\Models\UserProfile::GENDER[$following->followingUser->userProfile->gender] }}/
+                                                                            {{ $following->followingUser->userProfile->age }}代/
+                                                                            {{ $following->followingUser->userProfile->prefecture->name}})</p>
+                                            </div>
+                                        </div>
+                                        <x-parts.evaluation-star :star='$following->followingUser->avg_star'/>
+                                        </a>
+                                    </li>
                                     @endforeach
 								</ul>
                                 {{ $followings->fragment('')->links() }}
-							</div>
+						    </div>
 							<div class="tabBox" id="tab_box02">
 								<ul class="friendsUl01">
 									@foreach ($followeds as $followed)
                                     <li>
-										<a href="{{ route('user.mypage', $followed->followedUser->id) }}">
-											<div class="user">
-												@if(null !== $followed->followedUser->userProfile->icon)
-                                                    <dt><img src="{{ asset('/storage/'.$followed->followedUser->userProfile->icon) }}" alt="" style="height:132px;"></dt>
-                                                @else
-                                                    <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
-                                                @endif
-												<div class="introd">
-													<p class="name">{{ $followed->followedUser->name }}</p>
-													<p>({{ App\Models\UserProfile::GENDER[$followed->followedUser->userProfile->gender] }}/
-                                                        {{ $followed->followedUser->userProfile->age }}代/
-                                                        {{ $followed->followedUser->userProfile->prefecture->name}})</p>
-												</div>
-											</div>
-                                            <x-parts.evaluation-star :star='$followed->followedUser->avg_star'/>
-										</a>
-									</li>
+                                    <a href="{{ route('user.mypage', $followed->followedUser->id) }}">
+                                        <div class="user">
+                                        @if(null !== $followed->followedUser->userProfile->icon)
+                                            <dt><img src="{{ asset('/storage/'.$followed->followedUser->userProfile->icon) }}" alt="" style="height:132px;"></dt>
+                                        @else
+                                            <p class="ico"><img src="/img/mypage/no_image.jpg" alt=""></p>
+                                        @endif
+                                        <div class="introd">
+                                            <p class="name">{{ $followed->followedUser->name }}</p>
+                                            <p>({{ App\Models\UserProfile::GENDER[$followed->followedUser->userProfile->gender] }}/
+                                                                        {{ $followed->followedUser->userProfile->age }}代/
+                                                                        {{ $followed->followedUser->userProfile->prefecture->name}})</p>
+                                        </div>
+                                        </div>
+                                        <x-parts.evaluation-star :star='$followed->followedUser->avg_star'/>
+                                    </a>
+                                    </li>
                                     @endforeach
 								</ul>
-                                {{ $followeds->fragment('followed')->links() }}
+                            {{ $followeds->fragment('followed')->links() }}
 							</div>
 						</div>
 					</div>
 				</div><!-- /#main -->
-                <x-side-menu/>
+        <x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
 	</article>

@@ -1,3 +1,4 @@
+@if(isset($job_request->user))
 <div class="modal hidden">
     <button class="modal__close" type="button"><span class="modal__close--icon">&times;</span></button>
     <div class="modal__box">
@@ -17,3 +18,4 @@
     </div>
 </div>
 <div class="overlayDetail"></div>
+@endif

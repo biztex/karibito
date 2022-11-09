@@ -28,22 +28,26 @@
                 @endif
             @endif
         </div>
-        <div class="functeBtns">
-            @if($chatroom->seller_user_id === Auth::id())
-                @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
-                    <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
-                @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
-                    <form id="form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
-                        @csrf
-                        <input type="submit" class="orange loading-disabled" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" onclick='return confirm("納品完了報告をしてもよろしいですか？");'value="納品を完了する">
-                    </form>
-                @endif
-            @endif
-            @if($chatroom->isCancelable())
-                <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
-            @endif
-        </div>
 
+        @if(empty($partner->deleted_at))
+            <div class="functeBtns">
+                @if($chatroom->seller_user_id === Auth::id())
+                    @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
+                        <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
+                    @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
+                        <form id="form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
+                            @csrf
+                            <input type="submit" class="orange loading-disabled" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" onclick='return confirm("納品完了報告をしてもよろしいですか？");'value="納品を完了する">
+                        </form>
+                    @endif
+                    @if($chatroom->isCancelable())
+                        <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
+                    @endif
+                @endif
+            </div>
+        @else
+            <p>このユーザーは退会しています。</p>
+        @endif
     </div>
 </aside>
 

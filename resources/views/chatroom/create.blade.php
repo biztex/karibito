@@ -15,7 +15,15 @@
         <div id="contents" class="otherPage otherPage2">
             <div class="inner02 clearfix">
                 <div id="main">
-
+                  @if(empty($service->user))
+                    <div class="indexNotice">
+                        <div class="inner">
+                            <div class="box newsList">
+                                <h2 class="hd">このユーザーは退会しました。</h2>
+                            </div>
+                        </div>
+                    </div>
+                  @else
                     <!-- 掲載者情報 -->
                     @include('chatroom.parts.create.partner')
 
@@ -42,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+                  @endif
                 </div><!-- /#main -->
 
                 <!-- 掲載内容 -->
