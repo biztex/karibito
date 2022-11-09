@@ -15,7 +15,7 @@ class DmroomMessage extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function dmrooms()
+    public function dmroom()
     {
         return $this->belongsTo(Dmroom::class);
     }
@@ -39,29 +39,17 @@ class DmroomMessage extends Model
         }
     }
     
-    // 送信者を取得する
-    public static function getSendUser($dmroom){
-        $send_message = DmroomMessage::with('user')->where('dmroom_id',$dmroom->id)
-        ->latest()
-        ->first();
-        $send_user = $send_message->user;
-        return $send_user;
-    }
-    
     // 受信者を取得する
-    public static function getReceiveUser($dmroom){
-        $send_message = DmroomMessage::with('user')->where('dmroom_id',$dmroom->id)
-        ->latest()
-        ->first();
-        
-        $send_user = $send_message->user;
+    public function getReceiveUser($dmroom_message)
+    {
+        $send_user = $dmroom_message->user;
+        $dmroom = $dmroom_message->dmroom;
         if($dmroom->from_user_id !== $send_user->id){
-            $receive_user_id = $dmroom->from_user_id;
+            $receive_user = $dmroom->fromUser;
         }else{
-            $receive_user_id = $dmroom->to_user_id;
+            $receive_user = $dmroom->toUser;
         }
-        
-        $receive_user = User::where('id',$receive_user_id)->firstOrFail();
+
         return $receive_user;
     }
 }

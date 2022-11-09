@@ -139,10 +139,11 @@ class UserNotificationService
     }
     
     //DMが来たら通知する
-    public function storeUserNotificationDm(Dmroom $dmroom)
-    {     
-        $send_user = DmroomMessage::getSendUser($dmroom);
-        $receive_user = DmroomMessage::getReceiveUser($dmroom);
+    public function storeUserNotificationDm($dmroom_message)
+    {    
+        $dmroom = $dmroom_message->dmroom;
+        $send_user = $dmroom_message->user; //送信者
+        $receive_user = $dmroom_message->getReceiveUser($dmroom_message); //受信者
         
         $user_notification_contents = [
             'user_id' => $receive_user->id,

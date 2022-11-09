@@ -90,8 +90,8 @@ class DmroomController extends Controller
             ];
         }
 
-        $dmroom->dmroomMessages()->create($message);
-        $this->user_notification_service->storeUserNotificationDm($dmroom);
+        $dmroom_message = $dmroom->dmroomMessages()->create($message);
+        $this->user_notification_service->storeUserNotificationDm($dmroom_message);
         return redirect()->route('dm.show', $dmroom->id);
     }
     /**
