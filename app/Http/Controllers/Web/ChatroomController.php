@@ -262,6 +262,8 @@ class ChatroomController extends Controller
             // $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
             // 購入物作成
             $this->purchase_service->savePurchasedProduct($proposal);
+            $chatroom = $proposal->chatroom;
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
         return view('chatroom.purchase.complete', compact('proposal'));
