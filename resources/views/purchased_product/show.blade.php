@@ -26,19 +26,19 @@
                         <div id="main">
 
                             @include('purchased_product.parts.show.detail')
-    
+
                             @include('purchased_product.parts.show.evaluation')
-    
+
                         </div>
-    
+
                         @include('purchased_product.parts.show.side')
-    
+
                     </div>
-    
+
                     {{-- @include('product.parts.show.others') --}}
-    
+
                     {{-- @include('product.parts.show.share') --}}
-    
+
                 </div><!--inner-->
         </article>
     </x-layout>

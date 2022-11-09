@@ -2,14 +2,14 @@
     <div class="big">
         @for($i = 0; $i < 10; $i++)
             @if($request['image_status'.$i] === "insert")
-                <div class="item"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="{{ $request['base64_text'][$i] }}" srcset="" alt=""></div>
+                <div class="item" style="background-color: #EFEFEF;"><img id="preview_slider{{$i}}" style="aspect-ratio:16/9; object-fit:contain;" src="{{ $request['base64_text'][$i] }}" srcset="" alt=""></div>
             @endif
         @endfor
     </div>
     <div class="small">
         @for($i = 0; $i < 10; $i++)
             @if($request['image_status'.$i] === "insert")
-                <div class="item"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:cover;" src="{{ $request['base64_text'][$i] }}"  srcset="" alt=""></div>
+                <div class="item" style="background-color: #EFEFEF;"><img id="preview_slider{{$i.$i}}" style="aspect-ratio:16/9; object-fit:contain;" src="{{ $request['base64_text'][$i] }}"  srcset="" alt=""></div>
             @endif
         @endfor
     </div>

@@ -408,27 +408,27 @@
                                         <li>
                                             <div id="product_pic{{$i}}" class="img">
                                                 @if(isset($product->productImage[$i]) && old('image_status'.$i) === null)
-                                                    <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->productImage[$i]->path)}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->productImage[$i]->path)}}" alt="">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
                                                     <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]', '#') }}">
                                                     <input type="hidden" name="old_image[{{$i}}]" value="{{ $product->productImage[$i]->path }}">
                                                 @elseif(isset($product->old_image[$i]) && old('image_status'.$i) === null)
-                                                    <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->old_image[$i])}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <img id="preview_product{{$i}}" src="{{ asset('/storage/'.$product->old_image[$i])}}" alt="">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
                                                     <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]', '#') }}">
                                                     <input type="hidden" name="old_image[{{$i}}]" value="{{ $product->old_image[$i] }}">
                                                 @elseif(old('image_status'.$i) === "delete")
-                                                    <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
                                                     <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
                                                     <input type="hidden" name="old_image[{{$i}}]" value="">
                                                 @elseif(old('image_status'.$i) === "insert")
-                                                    <img id="preview_product{{$i}}" src="{{ old('base64_text[$i]')}}" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <img id="preview_product{{$i}}" src="{{ old('base64_text[$i]')}}" alt="">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple >
                                                     <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
                                                     <input type="hidden" name="old_image[{{$i}}]" value="">
                                                 @else
-                                                    <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="" style="width: 144px;height: 144px;object-fit: cover;">
+                                                    <img id="preview_product{{$i}}" src="/img/service/img_provide.jpg" alt="">
                                                     <input type="file" name="paths[{{$i}}]" accept="image/*" style="display:none;" multiple>
                                                     <input type="hidden" name="base64_text[{{$i}}]" value="{{ old('base64_text[$i]') }}">
                                                     <input type="hidden" name="old_image[{{$i}}]" value="">
