@@ -2,7 +2,13 @@
     <div class="box reservate">
         <h3>{{number_format($product->price)}}円</h3>
         <p class="status">所用期間</p>
-        <p class="date">{{$product->number_of_day}}日</p>
+        <p class="date">{{$product->number_of_day}}
+            @if ( $product->time_unit === 1 ) 
+                日
+            @else 
+                時間
+            @endif
+        </p>
         <!-- <div class="calendar"><div id="datepicker"></div></div> -->
     </div>
     <div>
