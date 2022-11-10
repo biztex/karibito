@@ -280,6 +280,7 @@ class ChatroomController extends Controller
         \DB::transaction(function () use ($chatroom) {
             $this->chatroom_message_service->storeCompleteMessage($chatroom);
             $this->chatroom_service->statusChangeBuyerEvaluation($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
         return back();
     }
