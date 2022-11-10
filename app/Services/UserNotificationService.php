@@ -9,10 +9,13 @@ use App\Jobs\SendNewFavoriteNotificationMail;
 use App\Jobs\SendNewNewsNotificationMail;
 use App\Jobs\SendNewPostNotificationMail;
 use App\Mail\MessageRegisterMail;
+use App\Mail\DmRegisterMail;
 use App\Mail\LikeRegisterMail;
 use App\Models\Chatroom;
+use App\Models\Dmroom;
 use App\Models\News;
 use App\Models\UserFollow;
+use App\Models\DmroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
 
@@ -133,6 +136,27 @@ class UserNotificationService
 
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
         \Mail::to($receive_user->email)->send(new MessageRegisterMail($user_notification));
+    }
+    
+    //DMが来たら通知する
+    public function storeUserNotificationDm($dmroom_message)
+    {    
+        $dmroom = $dmroom_message->dmroom;
+        $send_user = $dmroom_message->user; //送信者
+        $receive_user = $dmroom_message->getReceiveUser($dmroom_message); //受信者
+        
+        $user_notification_contents = [
+            'user_id' => $receive_user->id,
+            'title' => $send_user->name . 'さんからメッセージが届きました。',
+        ];
+        if(empty($receive_user->userNotificationSetting->is_message)) {
+            $user_notification_contents['is_notification'] = 0;
+        } else {
+            $user_notification_contents['is_notification'] = 1;
+        }
+        
+        $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
+        \Mail::to($receive_user->email)->send(new DmRegisterMail($user_notification));
     }
 
     // ニュース

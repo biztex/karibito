@@ -34,4 +34,12 @@ class Dmroom extends Model
     {
         return $this->hasMany(DmroomMessage::class);
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function userNotifications()
+    {
+        return $this->morphMany(UserNotification::class, 'reference');
+    }
 }
