@@ -123,10 +123,19 @@ class UserNotificationService
             $send_user_id = $chatroom->sellerUser->id; //メッセージを送ったユーザーid
         }
         $send_user = User::find($send_user_id);
-
+        
+        // やりとりの進捗に合わせてメッセージタイトルを分ける
+        if($chatroom->status === 5) {
+            $title = $send_user->name . 'さんがあなたを評価しました。';
+        } elseif ($chatroom->status === 6) {
+            $title = $send_user->name . 'さんがあなたを評価しました。これで取引完了です。';
+        } else {
+            $title = $send_user->name . 'さんからメッセージが届きました。';
+        }
+        
         $user_notification_contents = [
             'user_id' => $receive_user->id,
-            'title' => $send_user->name . 'さんからメッセージが届きました。',
+            'title' => $title,
         ];
         if(empty($receive_user->userNotificationSetting->is_message)) {
             $user_notification_contents['is_notification'] = 0;
