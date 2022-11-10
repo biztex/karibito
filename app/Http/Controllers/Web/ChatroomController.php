@@ -306,6 +306,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeSellerEvaluation($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);
@@ -335,6 +336,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeComplete($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);
