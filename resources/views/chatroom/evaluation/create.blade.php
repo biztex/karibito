@@ -53,11 +53,12 @@
 				</div>
 			</div>
 		</div>
-		<script>
+    </article>
+</x-layout>
+
+<script>
     // 打ち込んだ文字数の表示
     function ShowLength( str ) {
         document.getElementById("inputlength").innerHTML = str.length + "/3000";
     }
 </script>
-    </article>
-</x-layout>
