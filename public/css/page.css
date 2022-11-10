@@ -6414,6 +6414,17 @@ select.searchSelect {
 	border: 0;
 }
 
+/* 退会理由のcテキストエリアcss */
+.configEditButton .withdraw_reason .withdraw_form {
+	resize: none;
+	padding: 10px 20px;
+	height: 196px;
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px;
+	font-size: 1.6rem;
+}
+
 .configEditDl01 .noticeP {
 	font-size: 1.2rem;
 	margin-top: 5px;
