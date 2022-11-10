@@ -27,6 +27,7 @@ class ProductFactory extends Factory
             'content'        => $this->faker->realText(3000),
             'price'          => $this->faker->numberBetween(500, 9990000),
             'is_online'      => $this->faker->boolean,
+            'time_unit'      => $this->faker->numberBetween(1, 2),
             'number_of_day'  => $this->faker->numberBetween(1, 100),
             'is_call'        => $this->faker->boolean,
             'number_of_sale' => $this->faker->randomElement([0, 99]),
