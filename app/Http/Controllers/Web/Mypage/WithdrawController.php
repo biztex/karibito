@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UserFollow;
 use App\Services\ChatroomService;
 use App\Services\FavoriteService;
+use App\http\Requests\WithdrawController\StoreRequest;
 
 class WithdrawController extends Controller
 {
@@ -17,7 +18,7 @@ class WithdrawController extends Controller
         $this->chatroom_service = $chatroom_service;
         $this->favorite_service = $favorite_service;
     }
-    
+
     /**
      * 退会フォームを表示
      */
@@ -26,11 +27,14 @@ class WithdrawController extends Controller
         return view('mypage.withdraw');
     }
 
-    public function withdraw(Request $request)
+    public function withdraw(StoreRequest $request)
     {
         $user = \Auth::user();
+        $user->withdraw_reason = $request->withdraw_reason;
+        $user->save();
+
         $str_delete = 'delete-'.$user->id.'-';
-        
+
         $this->chatroom_service->canIWithdraw($user);
 
         \DB::transaction(function () use ($user, $str_delete) {

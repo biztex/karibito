@@ -244,7 +244,8 @@ return [
         'base64_text.0' => '画像1枚目',
         'paths.*' => '画像',
         'memo' => 'メモ',
-        'youtube_link.*' => '動画URL'
+        'youtube_link.*' => '動画URL',
+        'withdraw_reason' => '退会理由'
     ],
 
 ];

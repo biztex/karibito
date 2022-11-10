@@ -24,14 +24,23 @@
 									<br>
 								</p>
 							</div>
-                            <form action="{{ route('withdraw') }}" method="post">
-                                @csrf
-                                <div class="configEditBox">
-                                    <div class="configEditButton">
-                                        <input type="submit" value="退会する" name="" onclick='return confirm("退会してもよろしいですか？");'>
-                                    </div>
-                                </div>
-                            </form>
+							<form action="{{ route('withdraw') }}" method="post">
+								@csrf
+								<div class="configEditBox">
+									<div class="configEditButton">
+										<!-- 退会理由 -->
+										<div class="withdraw_reason">
+											<p>もしこのまま退会されるようでしたら退会理由をご記入いただけましたら</p>
+											<p>今後の運営改善の参考にさせていただきますのでお手数ですがよろしくお願いいたします。</p><br>
+											<label for="withdraw_reason">退会理由<br>
+												@error('withdraw_reason')<div class="alert alert-danger">{{ $message }}</div>@enderror
+												<textarea class="withdraw_form" id="withdraw_reason" name="withdraw_reason">{{ old('withdraw_reason') }}</textarea>
+											</label>
+										</div>
+										<input type="submit" value="退会する" name="" onclick='return confirm("退会してもよろしいですか？");'>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div><!-- /#main -->
