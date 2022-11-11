@@ -5,7 +5,7 @@
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
             <div class="evaluation">
                 <textarea name="text" placeholder="本文を入力してください" class="templateText"onkeyup="ShowLength(value);"></textarea>
-				<p class="max-string" id="inputlength">/3000</p>
+				<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
             </div>
             
             @error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
