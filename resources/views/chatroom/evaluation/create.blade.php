@@ -34,7 +34,7 @@
 							@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 							<p>評価のコメントを記入しましょう</p>
 							<textarea name="text" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
-							<p class="max-string" id="inputlength">/255</p>
+							<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/255</p>
 						</div>
 						<div class="functeBtns">
 							@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
