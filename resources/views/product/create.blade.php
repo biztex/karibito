@@ -33,15 +33,17 @@
                         <p class="th">商品名<span class="must">必須</span></p>
                             @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-							<input type="text" name="title" value="{{ old('title',$request->title) }}">
-                            <p class="taR">30</p>
+							<input type="text" name="title" value="{{ old('title',$request->title) }}" onkeyup="ShowLengthProduct(value);">
+                            <p class="max-string" id="inputlengthProduct">
+                                {{ mb_strlen(old('title')) }}/30
+                            </p>
                         </div>
 
                         <p class="th">商品の詳細<span class="must">必須</span></p>
                             @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
-                            <textarea type="text" name="content">{{ old('content', $request->content) }}</textarea>
-                            <p class="taR">30-3000</p>
+                            <textarea type="text" name="content" onkeyup="ShowLengthProductShow(value);">{{ old('content', $request->content) }}</textarea>
+                            <p class="max-string" id="inputlengthProductShow">/3000</p>
                         </div>
 
                         <p class="th">価格<span class="must">必須</span></p>
@@ -203,14 +205,14 @@
                                         @error('question_title.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{$v}}</textarea>
-                                                <p class="taR">400</p>
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください" onkeyup="ShowLengthQuestionTitle(value);">{{$v}}</textarea>
+                                                <p class="max-string" id="inputlengthQuestionTitle">/400</p>
                                             </div>
                                             <p class="th js-answer">質問の回答 {{$k + 1}}</p>
                                             @error('answer.'.$k)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
-                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$k)}}</textarea>
-                                                <p class="taR">400</p>
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"onkeyup="ShowLengthQuestionAnswer(value);">{{ old('answer.'.$k)}}</textarea>
+                                                <p class="max-string" id="inputlengthLengthQuestionAnswer">/400</p>
                                             </div>
                                             <div>
                                                 <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
@@ -225,14 +227,14 @@
                                         @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question) }}</textarea>
-                                                <p class="taR">400</p>
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"onkeyup="ShowLengthQuestionTitle(value);">{{ old('question_title.'.$num, $product_question) }}</textarea>
+                                                <p class="max-string" id="inputlengthQuestionTitle">/400</p>
                                             </div>
                                             <p class="th js-answer">質問の回答 {{$num + 1}}</p>
                                             @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
-                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください">{{ old('answer.'.$num, $request->answer[$num]) }}</textarea>
-                                                <p class="taR">400</p>
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" onkeyup="ShowLengthQuestionAnswer(value);">{{ old('answer.'.$num, $request->answer[$num]) }}</textarea>
+                                                <p class="max-string" id="inputlengthQuestionAnswer">/400</p>
                                             </div>
                                             <div>
                                                 <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
@@ -246,14 +248,14 @@
                                     @error('question_title.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="enter">
-                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
-                                            <p class="taR">400</p>
+                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください" onkeyup="ShowLengthQuestionTitle(value);"></textarea>
+                                            <p class="max-string" id="inputlengthQuestionTitle">/400</p>
                                         </div>
                                         <p class="th js-answer">質問の回答1</p>
                                         @error('answer.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="enter">
-                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"></textarea>
-                                            <p class="taR">400</p>
+                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" onkeyup="ShowLengthQuestionAnswer(value);"></textarea>
+                                            <p class="max-string" id="inputlengthQuestionAnswer">/400</p>
                                         </div>
                                         <div>
                                             <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
@@ -460,5 +462,22 @@ $(function(){
                 })
             }
         });
+    }
+    
+    // 打ち込んだ文字数の表示
+    function ShowLengthProduct( str ) {
+        document.getElementById("inputlengthProduct").innerHTML = str.length + "/30";
+    }
+
+    function ShowLengthProductShow( str ) {
+        document.getElementById("inputlengthProductShow").innerHTML = str.length + "/3000";
+    }
+
+    function ShowLengthQuestionTitle( str ) {
+        document.getElementById("inputlengthQuestionTitle").innerHTML = str.length + "/400";
+    }
+
+    function ShowLengthQuestionAnswer( str ) {
+        document.getElementById("inputlengthQuestionAnswer").innerHTML = str.length + "/400";
     }
 </script>
