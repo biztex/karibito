@@ -39,8 +39,8 @@
 								<div class="item">
 									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="evaluation">
-										<textarea name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
-										<input type="hidden" name="to_user_id" value="{{ $user->id }}">
+											<textarea name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
+											<input type="hidden" name="to_user_id" value="{{ $user->id }}">
 									</div>
 									<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
 									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
