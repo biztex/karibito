@@ -169,6 +169,12 @@ $(function () {
 		$(".js-hide_job_request_categories").removeClass('hide');
 		$(this).closest('.otherBtn').hide();
 	})
-
-
+    
+    //確認モーダル表示
+    $('.js-alertModal').on('click', function() {
+        $("#overflow").show();
+    });
+    $('.js-alertCancel').on('click', function() {
+        $("#overflow").hide();
+    });
 });

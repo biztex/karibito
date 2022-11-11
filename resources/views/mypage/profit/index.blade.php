@@ -33,14 +33,44 @@
 								<div class="bankTransferBtnWrap">
 									{{-- <a href="" class="bankTransferBtn">ポイントに交換する</a> --}}
 									@if($profit['total'] <= 0)
-										<a href="" onclick='return confirm("売上金残高がございません");' class="bankTransferBtn">振り込み申請をする</a>
+                                        <a type="button" class="bankTransferBtn js-alertModal">振り込み申請をする</a>
+                                        {{-- モーダル --}}
+                                        <div id="overflow" style="width:100%; height:100%; background-color:rgba(0,0,0,0.2); position:fixed; top:0; left:0; z-index: 10; display: none;">
+                                            <div style="background:#FFF; padding:20px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+                                                <p style="font-size: 16px; font-weight: normal;">売上金残高がございません</p>
+                                                <div style="text-align: center;">
+                                                    <a type="button" class="js-alertCancel" style="background: #B5B5B5; height: 30px; font-size: 1.4rem; color:white; max-width: 100%; border-radius: 4px; font-weight:300; border: none; cursor: pointer; padding: 5px">キャンセル</a>
+                                                    <input type="submit" class="js-alertCancel" value="OK" style="background: #158ACC; border: none; height: 30px; font-size: 1.4rem; color:white; max-width: 100%;border-radius: 4px;font-weight:300;">
+                                                </div>
+                                            </div>
+                                        </div>
 									@elseif(Auth::user()->bankAccount !== null)
 										<form action="{{ route('transfer_request.store') }}" method="post">
 											@csrf
-											<button type="submit" onclick='return confirm("合計売上金残高の振込を申請しますか？");'  class="bankTransferBtn">振り込み申請をする</button>
+                                            <a type="button" class="bankTransferBtn js-alertModal">振り込み申請をする</a>
+                                            {{-- モーダル --}}
+                                            <div id="overflow" style="width:100%; height:100%; background-color:rgba(0,0,0,0.2); position:fixed; top:0; left:0; z-index: 10; display: none;">
+                                                <div style="background:#FFF; padding:20px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+                                                    <p style="font-size: 16px; font-weight: normal;">合計売上金残高の振込を申請しますか？</p>
+                                                    <div style="text-align: center;">
+                                                        <a type="button" class="js-alertCancel" style="background: #B5B5B5; height: 30px; font-size: 1.4rem; color:white; max-width: 100%; border-radius: 4px; font-weight:300; border: none; cursor: pointer; padding: 5px">キャンセル</a>
+                                                        <input type="submit" value="OK" style="background: #158ACC; border: none; height: 30px; font-size: 1.4rem; color:white; max-width: 100%;border-radius: 4px;font-weight:300;">
+                                                    </div>
+                                                </div>
+                                            </div>
 										</form>
 									@else
-										<a href="{{ route('setting.bank.edit') }}" onclick='return confirm("振込口座の登録が必要です");' class="bankTransferBtn">振り込み申請をする</a>
+                                        <a type="button" class="bankTransferBtn js-alertModal">振り込み申請をする</a>
+                                        {{-- モーダル --}}
+                                        <div id="overflow" style="width:100%; height:100%; background-color:rgba(0,0,0,0.2); position:fixed; top:0; left:0; z-index: 10; display: none;">
+                                            <div style="background:#FFF; padding:20px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+                                                <p style="font-size: 16px; font-weight: normal;">振込口座の登録が必要です</p>
+                                                <div style="text-align: center;">
+                                                    <a type="button" class="js-alertCancel" style="background: #B5B5B5; height: 30px; font-size: 1.4rem; color:white; max-width: 100%; border-radius: 4px; font-weight:300; border: none; cursor: pointer; padding: 5px">キャンセル</a>
+                                                    <input type="submit" class="js-alertCancel" value="OK" style="background: #158ACC; border: none; height: 30px; font-size: 1.4rem; color:white; max-width: 100%;border-radius: 4px;font-weight:300;">
+                                                </div>
+                                            </div>
+                                        </div>
 									@endif
 								</div>
 								<div class="bankTransferAttention">

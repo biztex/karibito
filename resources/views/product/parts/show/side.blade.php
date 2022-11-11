@@ -20,12 +20,23 @@
             <div class="functeBtns">
                 <a href="{{ route('product.edit', $product->id)}}" class="orange full">編集</a>
             </div>
-            <form method="post" action="{{ route('product.destroy', $product->id ) }}">
-                @csrf @method('delete')
-                <div class="functeBtns">
-                    <input type="submit" onclick='return confirm("削除してもよろしいですか？");' class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
+            
+            <div id="overflow" style="width:100%; height:100%; background-color:rgba(0,0,0,0.2); position:fixed; top:0; left:0; z-index: 10; display: none;">
+                <div class="conf" style="background:#FFF; padding:20px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+                    <p class="">本当に削除してもいいですか？</p>
+                    <form action="{{ route('product.destroy', $product->id )}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <div class="" >
+                            <input type="button" value="キャンセル" class="js-alertCancel" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;">
+                            <input type="submit" value="削除" class="orange" style="box-shadow: 0 6px 0 #d85403; height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;">   
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+            <div class="functeBtns">
+                <input type="button" class="full js-alertModal" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
+            </div>
         @elseif ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $number_of_sold !== 0) {{--販売個数が一つで、かつ既に購入されているものをこの分岐に入れる--}}
             <div class="functeBtns">
                 <a tabindex="-1" class="full">交渉画面へ進む</a>

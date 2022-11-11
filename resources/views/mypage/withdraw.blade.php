@@ -37,7 +37,16 @@
 												<textarea class="withdraw_form" id="withdraw_reason" name="withdraw_reason">{{ old('withdraw_reason') }}</textarea>
 											</label>
 										</div>
-										<input type="submit" value="退会する" name="" onclick='return confirm("退会してもよろしいですか？");'>
+
+                                        <input type="button" class="js-alertModal" value="退会する">
+                                        {{-- モーダル --}}
+                                        <div id="overflow" style="width:100%; height:100%; background-color:rgba(0,0,0,0.2); position:fixed; top:0; left:0; z-index: 10; display: none;">
+                                            <div class="conf" style="background:#FFF; padding:20px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+                                                <p>本当に退会してもよろしいですか？</p>
+                                                <input type="button" value="キャンセル" class="js-alertCancel" style="background: #B5B5B5;box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;">
+                                                <input type="submit" value="退会する" class="orange" style="box-shadow: 0 6px 0 #0043a2; height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;">
+                                            </div>
+                                        </div>
 									</div>
 								</div>
 							</form>

@@ -41,7 +41,15 @@
 												@endif
                                                 @if(\Auth::user())
                                                     @if(App\Models\UserFollow::IsFollowing($user->id))
-                                                        <a href="{{ route('follow.sub', ['id' => $user->id]) }}" class="followB" onclick='return confirm("フォローを解除しますか？");'>フォロー済み</a>
+                                                        <a type="button" class="followB js-alertModal" style="cursor: pointer">フォロー済み</a>
+                                                        {{-- モーダル --}}
+                                                        <div id="overflow" style="width:100%; height:100%; background-color:rgba(0,0,0,0.2); position:fixed; top:0; left:0; z-index: 10; display: none;">
+                                                            <div style="background:#FFF; padding:20px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+                                                                <p style="font-size: 16px; font-weight: normal;">フォローを解除してもよろしいですか？</p>
+                                                                <a type="button" class="js-alertCancel" style="background: #B5B5B5; box-shadow: 0 6px 0 #999999; height: 55px; font-size: 1.8rem; color:white; max-width: 100%; border-radius: 4px; font-weight:700; border: none; margin-bottom: 25px; cursor: pointer;">キャンセル</a>
+                                                                <a href="{{ route('follow.sub', ['id' => $user->id]) }}" style="background: #158ACC; border: none; box-shadow: 0 6px 0 #0043a2; height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;">フォロー解除</a>
+                                                            </div>
+                                                        </div>
                                                     @else
                                                         <a href="{{ route('follow.add', ['id' => $user->id]) }}" class="followA">フォローする</a>
                                                     @endif
