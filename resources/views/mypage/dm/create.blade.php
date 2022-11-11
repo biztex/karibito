@@ -42,7 +42,7 @@
 										<textarea name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
 										<input type="hidden" name="to_user_id" value="{{ $user->id }}">
 									</div>
-									<p class="max-string" id="inputlength">/3000</p>
+									<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
 									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
 									<div class="btns">
