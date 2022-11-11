@@ -4,7 +4,7 @@
         <div class="item">
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
             <div class="evaluation">
-                <textarea name="text" placeholder="本文を入力してください" class="templateText"onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
+                <textarea name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
 				<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
             </div>
             
