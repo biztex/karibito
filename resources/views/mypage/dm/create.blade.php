@@ -39,7 +39,7 @@
 								<div class="item">
 									@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="evaluation">
-											<textarea name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
+											<textarea name="text" placeholder="本文を入力してください" class="templateText" onclick="ClickShowLength(value);" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
 											<input type="hidden" name="to_user_id" value="{{ $user->id }}">
 									</div>
 									<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
@@ -105,6 +105,11 @@
 <script>
     // 打ち込んだ文字数の表示
     function ShowLength( str ) {
+        document.getElementById("inputlength").innerHTML = str.length + "/3000";
+    }
+
+		// フィールドをクリックしたら文字数の表示
+    function ClickShowLength( str ) {
         document.getElementById("inputlength").innerHTML = str.length + "/3000";
     }
 </script>
