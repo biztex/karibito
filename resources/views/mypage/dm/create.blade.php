@@ -18,7 +18,7 @@
 									<p class="name">{{ $user->name }}</p>
 								</div>
 							</div>
-        					<p class="login">最終ログイン：{{ $user->latest_login_datetime }}</p>
+							<p class="login">最終ログイン：{{ $user->latest_login_datetime }}</p>
 						</div>
 					</div>
 					<h2 class="hdM">DM</h2>
@@ -26,12 +26,14 @@
 						<div class="chatPages">
 							<div class="item">
 								<div class="warnBox">
-									<p class="tit">取引内容を入力し交渉をしましょう</p>
-									<p>履歴を残すため、カリビト内でのやりとりを推奨しております。</p>
-									<p class="note">※返信は3日以内にお願いします</p>
+									<p class="note">【注意事項】</p>
+									<p class="tit">メッセージのやり取りは、必ず「カリビトチャット」を通じて行ってください。</p>
+									<p>・メールアドレス・LINE・電話など外部連絡先の交換、またそれらを用いてのやり取り<br>・カリビト外での直接取引を促す行為</p>
+									<p>カリビトではこれらの行為を禁止しております。</p>
+									<p>確認した場合、アカウントの停止など、今後のご利用をお断りさせていただくことがございますので、ご注意ください。</p>
 								</div>
 								<ul class="communicate">
-									
+
 								</ul>
 							</div>
 							<form action="{{ route('dm.store') }}" method="POST" enctype="multipart/form-data">
@@ -46,37 +48,35 @@
 									@error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
 									<div class="btns">
-
 										<p class="chatroom_file_input">資料を添付する</p>
 										<input type="file" name="file_path" id="file_path" style="display:none;">
 										<input type="hidden" name="file_name" value="">
-
 										<a href="javascript:;" class="templateOpen">定型文を使う</a>
-											<div class="templatePopup">
-												<div class="templateOverlay"></div>
-												<div class="templateArea tabSelectArea">
-													<div class="templateClose"></div>
-													<h2 class="templateTitle">定型文の挿入</h2>
-													<div class="templateSelect">
-														<select class="tabSelectLinks">
-															<option value="#template01">あいさつ１</option>
-															<option value="#template02">あいさつ２</option>
-															<option value="#template03">あいさつ３</option>
-														</select>
-													</div>
-													<div class="templateBox tabSelectBox is-active" id="template01">
-														<textarea readonly>お世話になっております。&#13;一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。&#13;このたびは、●●●●についてお問い合わせいただき誠にありがとうございます。&#13;ご請求いただいた資料は、本日郵送にてお送りいたします。&#13;今週中にはお手元に届くかと存じます。&#13;ご確認よろしくお願いいたします。
-														</textarea>
-													</div>
-													<div class="templateBox tabSelectBox" id="template02">
-														<textarea readonly>あいさつ２あいさつ２あいさつ２あいさつ２あいさつ２</textarea>
-													</div>
-													<div class="templateBox tabSelectBox" id="template03">
-														<textarea readonly>あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３</textarea>
-													</div>
-													<div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
+										<div class="templatePopup">
+											<div class="templateOverlay"></div>
+											<div class="templateArea tabSelectArea">
+												<div class="templateClose"></div>
+												<h2 class="templateTitle">定型文の挿入</h2>
+												<div class="templateSelect">
+													<select class="tabSelectLinks">
+														<option value="#template01">あいさつ１</option>
+														<option value="#template02">あいさつ２</option>
+														<option value="#template03">あいさつ３</option>
+													</select>
 												</div>
+												<div class="templateBox tabSelectBox is-active" id="template01">
+													<textarea readonly>お世話になっております。&#13;一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。&#13;このたびは、●●●●についてお問い合わせいただき誠にありがとうございます。&#13;ご請求いただいた資料は、本日郵送にてお送りいたします。&#13;今週中にはお手元に届くかと存じます。&#13;ご確認よろしくお願いいたします。
+													</textarea>
+												</div>
+												<div class="templateBox tabSelectBox" id="template02">
+													<textarea readonly>あいさつ２あいさつ２あいさつ２あいさつ２あいさつ２</textarea>
+												</div>
+												<div class="templateBox tabSelectBox" id="template03">
+													<textarea readonly>あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３</textarea>
+												</div>
+												<div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
 											</div>
+										</div>
 									</div>
 									<x-parts.file-input/>
 									<div class="cancelTitle">

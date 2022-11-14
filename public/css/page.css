@@ -1141,6 +1141,7 @@
 .detailStyle .slider .small .item {
 	cursor: pointer;
 	padding-right: 8px;
+	background-color: #EFEFEF;
 }
 
 .detailStyle .content .hdM {
@@ -2962,6 +2963,7 @@
 .favoriteUl01 .img {
 	width: 120px;
 	margin-right: 20px;
+	background-color: #EFEFEF;
 }
 
 .favoriteUl01 .info {
@@ -6414,6 +6416,17 @@ select.searchSelect {
 	border: 0;
 }
 
+/* 退会理由のcテキストエリアcss */
+.configEditButton .withdraw_reason .withdraw_form {
+	resize: none;
+	padding: 10px 20px;
+	height: 196px;
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px;
+	font-size: 1.6rem;
+}
+
 .configEditDl01 .noticeP {
 	font-size: 1.2rem;
 	margin-top: 5px;
@@ -8181,6 +8194,13 @@ select.searchSelect {
 
 .publicate .cont .img {
 	width: 75px;
+	background-color: #EFEFEF;
+}
+
+.publicate .cont .img img {
+	width: 75px;
+	height: 62.5px;
+	object-fit: contain;
 }
 
 .publicate .cont .txt {
@@ -8823,6 +8843,12 @@ select.searchSelect {
 	width: 80px;
 }
 
+.cancelWrap .payment .cont .img img {
+	width: 75px;
+	height: 62.5px;
+	object-fit: contain;
+}
+
 .cancelWrap .payment .cont .info {
 	width: calc(100% - 90px);
 }
@@ -9298,7 +9324,7 @@ input.small {
 }
 
 .favoriteUl01.exchangeChat .img img {
-	object-fit: cover;
+	object-fit: contain;
 	height: 100px;
 	width: 100%;
 }
@@ -9577,7 +9603,7 @@ input.small {
 }
 
 .contactForm .time:after {
-	content: "日";
+	/* content: "日"; */
 	position: absolute;
 	right: 20px;
 	top: 50%;
@@ -9627,6 +9653,16 @@ input.small {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-gap: 24px 15px;
+}
+
+.mypagePortfolioUl03 .img {
+	background-color: #EFEFEF;
+}
+
+.mypagePortfolioUl03 .img img{
+	width: 144px;
+	height: 144px;
+	object-fit: contain;
 }
 
 .mypagePortfolioUl03 .img img {

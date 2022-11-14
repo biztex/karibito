@@ -6,11 +6,14 @@
         </h3>
         <input type="hidden" value="@if(!is_null($request->price)){{ $request->price }}@endif" name="price">
         <p class="status">所用期間</p>
-        <p class="date">
-            @if(!is_null($request->number_of_day))
-                {{ number_format($request->number_of_day) }}
-            @endif日
+        <p class="date">{{$request->number_of_day}}
+            @if ($request->time_unit == 1 ) 
+                日
+            @else 
+                時間
+            @endif
         </p>
+        
         <input type="hidden" value="@if(!is_null($request->number_of_day)){{ $request->number_of_day }}@endif" name="number_of_day">
         <!-- <div class="calendar"><div id="datepicker"></div></div> -->
     </div>

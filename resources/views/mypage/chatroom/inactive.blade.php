@@ -5,7 +5,7 @@
                 <div class="inner">
                     <a href="{{ route('home') }}">ホーム</a>　>　<span>過去の取引</span>
                 </div>
-            </div><!-- /.breadcrumb -->		
+            </div><!-- /.breadcrumb -->
             <x-parts.ban-msg/>
             <x-parts.post-button/>
             <div id="contents" class="otherPage">
@@ -31,7 +31,7 @@
                                     @endif
                                     </ul>
 								{{ $inactive_product_chatrooms->fragment('')->links() }}
-						        </div>
+                                </div>
 
                                 <div class="tabBox" id="tab_box02">
                                     <ul class="favoriteUl01 ">
@@ -41,14 +41,14 @@
                                             @foreach($inactive_job_request_chatrooms as $value)
                                                 @include('mypage.chatroom.job-request')
                                             @endforeach
-                                        @endif  
+                                        @endif
                                     </ul>
 								{{ $inactive_job_request_chatrooms->fragment('job-request')->links() }}
-						        </div>
-                                
-						    </div>
-					    </div>
-				    </div><!-- /#main -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div><!-- /#main -->
                     <x-side-menu/>
                 </div><!--inner-->
             </div><!-- /#contents -->

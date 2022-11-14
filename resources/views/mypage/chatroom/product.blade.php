@@ -2,7 +2,7 @@
     <li>
         <div class="cont01">
             @if(isset($value->referencePurchased->productImage[0]))
-                <p class="img"><img src="{{ asset('/storage/'.$value->referencePurchased->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: cover;"></p>
+                <p class="img"><img src="{{ asset('/storage/'.$value->referencePurchased->productImage[0]->path)}}" alt="" style="width: 120px;height: 100px;object-fit: contain;"></p>
             @else
                 <p class="img"><img src="/img/common/img_work01@2x.jpg" alt=""></p>
             @endif

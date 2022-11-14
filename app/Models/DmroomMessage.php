@@ -15,7 +15,7 @@ class DmroomMessage extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function dmrooms()
+    public function dmroom()
     {
         return $this->belongsTo(Dmroom::class);
     }
@@ -37,5 +37,19 @@ class DmroomMessage extends Model
         } else {
             return $textFormat->generateLinkFromSentence($value);
         }
+    }
+    
+    // 受信者を取得する
+    public function getReceiveUser($dmroom_message)
+    {
+        $send_user = $dmroom_message->user;
+        $dmroom = $dmroom_message->dmroom;
+        if($dmroom->from_user_id !== $send_user->id){
+            $receive_user = $dmroom->fromUser;
+        }else{
+            $receive_user = $dmroom->toUser;
+        }
+
+        return $receive_user;
     }
 }

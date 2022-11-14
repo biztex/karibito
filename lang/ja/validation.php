@@ -236,6 +236,7 @@ return [
         'is_call' => '電話相談の受付',
         'number_of_sale' => '販売数',
         'number_of_day' =>'所用期間',
+        'time_unit' => '日にちか時間',
         'option_name.*' => '有料オプション',
         'question_title.*' => '質問のタイトル',
         'answer.*' => '質問の回答',
@@ -243,7 +244,8 @@ return [
         'base64_text.0' => '画像1枚目',
         'paths.*' => '画像',
         'memo' => 'メモ',
-        'youtube_link.*' => '動画URL'
+        'youtube_link.*' => '動画URL',
+        'withdraw_reason' => '退会理由'
     ],
 
 ];

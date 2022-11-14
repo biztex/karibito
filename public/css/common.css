@@ -557,11 +557,12 @@ sub   { font-size: 8px; vertical-align: baseline;}
 }
 
 .imgBox{
-  width: 100%;
-  display: block;
+	width: 100%;
+	display: block;
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-color: #EFEFEF; /*岩上追加*/
 }
 .imgBox img{
 	width: 100%;

@@ -262,6 +262,8 @@ class ChatroomController extends Controller
             // $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
             // 購入物作成
             $this->purchase_service->savePurchasedProduct($proposal);
+            $chatroom = $proposal->chatroom;
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
         return view('chatroom.purchase.complete', compact('proposal'));
@@ -278,6 +280,7 @@ class ChatroomController extends Controller
         \DB::transaction(function () use ($chatroom) {
             $this->chatroom_message_service->storeCompleteMessage($chatroom);
             $this->chatroom_service->statusChangeBuyerEvaluation($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
         return back();
     }
@@ -306,6 +309,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeSellerEvaluation($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);
@@ -335,6 +339,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeComplete($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);

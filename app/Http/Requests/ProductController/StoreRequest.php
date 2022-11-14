@@ -32,6 +32,7 @@ class StoreRequest extends FormRequest
             'price' => 'required | integer | min:500 | max:9990000',
             'is_online' => 'required | boolean',
             'number_of_day' => 'required | integer | between:1,730',
+            'time_unit' => 'required | integer',
             'is_call' => 'required | boolean',
             'number_of_sale' => 'required | integer',
             'status' => 'required | integer',

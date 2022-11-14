@@ -15,7 +15,7 @@ use App\Services\PurchaseService;
 use App\Services\PaymentService;
 use App\Services\CouponService;
 use App\Services\PointService;
-
+use App\Services\UserNotificationService;
 
 class CancelController extends Controller
 {
@@ -27,7 +27,7 @@ class CancelController extends Controller
     private $user_use_point_service;
     private readonly PaymentService $payment_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, PurchasedCancelService $purchased_cancel_service, PurchaseService $purchase_service, CouponService $coupon_service, PointService $user_use_point_service, PaymentService $payment_service)
+    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, PurchasedCancelService $purchased_cancel_service, PurchaseService $purchase_service, CouponService $coupon_service, PointService $user_use_point_service, PaymentService $payment_service, UserNotificationService $userNotificationService)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -36,6 +36,7 @@ class CancelController extends Controller
         $this->coupon_service = $coupon_service;
         $this->user_use_point_service = $user_use_point_service;
         $this->payment_service = $payment_service;
+        $this->userNotificationService = $userNotificationService;
     }
 
     /**
@@ -85,6 +86,7 @@ class CancelController extends Controller
         $purchased_cancel = \DB::transaction(function () use ($request, $purchase) {
             $purchased_cancel = $this->purchased_cancel_service->storePurchasedCancel($request->all(), $purchase);
             $this->chatroom_message_service->storePurchasedCancelMessage($purchased_cancel, $purchase->chatroom);
+            $this->userNotificationService->storeUserNotificationMessage($purchase->chatroom);
             return $purchased_cancel;
         });
         return redirect()->route('cancel.send', $purchased_cancel->id);
@@ -124,7 +126,7 @@ class CancelController extends Controller
         $this->user_use_point_service->cancelPoint($purchased_cancel->purchase->userUsePoint);
         $payment = $purchased_cancel->purchase->payment;
         $this->purchased_cancel_service->purchasedCancelComplete($purchased_cancel, $payment);
-
+        $this->userNotificationService->storeUserNotificationMessage($purchased_cancel->purchase->chatroom);
         return redirect()->route('cancel.complete', $purchased_cancel);
     }
 
@@ -150,6 +152,7 @@ class CancelController extends Controller
         \DB::transaction(function () use ($purchased_cancel) {
             $this->purchased_cancel_service->changeStatusObjection($purchased_cancel);
             $this->chatroom_message_service->storePurchasedCancelObjectionMessage($purchased_cancel);
+            $this->userNotificationService->storeUserNotificationMessage($purchased_cancel->purchase->chatroom);
         });
         return redirect()->route('chatroom.show', $purchased_cancel->purchase->chatroom_id);
     }
