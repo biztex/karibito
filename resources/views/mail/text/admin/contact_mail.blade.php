@@ -6,7 +6,10 @@
 メールアドレス：{{ $request->mail }}
 タイプ：{{ \App\Models\ContactMailHistory::CONTACT_TYPES[$request->type] }}
 内容
-{{ $request->message }}
+
+{{-- TODO:メール画面での表示messageが結合していないのを後ほど対応 --}}
+{{-- {{ $message }} --}}
+{{ $request->product }}
 
 
 
