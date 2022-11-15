@@ -177,4 +177,18 @@ $(function () {
     $('.js-alertCancel').on('click', function() {
         $("#overflow").hide();
     });
+    //1ページ内に2つ必要な場合はこちらも使う↓（id被り防止）
+    $('.js-alertModal-2').on('click', function() {
+        $("#overflow2").show();
+    });
+    $('.js-alertCancel-2').on('click', function() {
+        $("#overflow2").hide();
+    });
+    //3つめ
+    $('.js-alertModal-3').on('click', function() {
+        $("#overflow3").show();
+    });
+    $('.js-alertCancel-3').on('click', function() {
+        $("#overflow3").hide();
+    });
 });

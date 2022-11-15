@@ -35,18 +35,9 @@
                     @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
                         <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
                     @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
-                        <form id="form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
+                        <form id="delivery-form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
                             @csrf
-
                             <input type="button" class="orange js-alertModal" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" value="納品を完了する">
-                            {{-- モーダル --}}
-                            <div id="overflow" style="width:100%; height:100%; background-color:rgba(0,0,0,0.2); position:fixed; top:0; left:0; z-index: 10; display: none;">
-                                <div style="background:#FFF; padding:20px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
-                                    <p style="font-size: 16px; font-weight: normal;">納品完了報告をしてもよろしいですか？</p>
-                                    <a type="button" class="js-alertCancel" style="background: #B5B5B5; box-shadow: 0 6px 0 #999999; height: 55px; font-size: 1.8rem; color:white; max-width: 100%; border-radius: 4px; font-weight:700; border: none; margin-bottom: 25px; cursor: pointer;">キャンセル</a>
-                                    <input type="submit" class="orange" value="納品完了報告" style="background: #EB6A1A; border: none; box-shadow: 0 6px 0 #d85403; height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;">
-                                </div>
-                            </div>
                         </form>
                     @endif
                     @if($chatroom->isCancelable())
@@ -58,6 +49,7 @@
             <p>このユーザーは退会しています。</p>
         @endif
     </div>
+    <x-parts.alert-modal phrase="納品完了報告をしてもよろしいですか？" value="OK" formId="delivery-form" />
 </aside>
 
 @if($chatroom->reference !== null)
