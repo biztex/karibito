@@ -1088,6 +1088,10 @@
 	margin-left: 5px;
 }
 
+.mypageUl03 li .mypageCtrl button:hover {
+    cursor: pointer;
+}
+
 /*add 中澤 20220705 経歴ページ */
 @media screen and (min-width: 768px) {
 	.careerCreate .mypageEditInput select {
