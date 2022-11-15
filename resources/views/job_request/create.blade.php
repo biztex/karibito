@@ -33,20 +33,19 @@
 							</select>
 						</div>
 
-
 						<p class="th">商品名<span class="must">必須</span></p>
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<input type="text" name="title" value="{{ old('title',$request->title) }}">
-							<p class="taR">30</p>
+								<input type="text" name="title" value="{{ old('title') }}" onkeyup="ShowLengthProduct(value);">
+                <p class="max-string" id="inputlengthProduct">{{ mb_strlen(old('title')) }}/30</p>
 						</div>
 
 
 						<p class="th">商品の詳細<span class="must">必須</span></p>
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-							<textarea type="text" name="content">{{ old('content', $request->content) }}</textarea>
-							<p class="taR">30-3000</p>
+								<textarea type="text" name="content" onkeyup="ShowLengthProductShow(value);">{{ old('content', $request->content) }}</textarea>
+								<p class="max-string" id="inputlengthProductShow">{{ mb_strlen(old('content')) }}/3000</p>
 						</div>
 
 
@@ -119,3 +118,14 @@
 		</div>
 	</article>
 </x-layout>
+
+<script>
+		// 打ち込んだ文字数の表示
+		function ShowLengthProduct( str ) {
+				document.getElementById("inputlengthProduct").innerHTML = str.length + "/30";
+		}
+
+    function ShowLengthProductShow( str ) {
+        document.getElementById("inputlengthProductShow").innerHTML = str.length + "/3000";
+    }
+</script>

@@ -8,8 +8,8 @@
         <div class="item">
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
             <div class="evaluation">
-                <textarea name="text" placeholder="本文を入力してください" class="templateText"></textarea>
-				<p class="max-string">3000</p>
+                <textarea name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);"></textarea>
+				<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
             </div>
 
             @error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -71,3 +71,10 @@
         <div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
     </div>
 </div>
+
+<script>
+    // 打ち込んだ文字数の表示
+    function ShowLength( str ) {
+        document.getElementById("inputlength").innerHTML = str.length + "/3000";
+    }
+</script>

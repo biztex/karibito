@@ -24,7 +24,7 @@
 									<br>
 								</p>
 							</div>
-							<form action="{{ route('withdraw') }}" method="post">
+							<form id="withdraw-form" action="{{ route('withdraw') }}" method="post">
 								@csrf
 								<div class="configEditBox">
 									<div class="configEditButton">
@@ -37,7 +37,7 @@
 												<textarea class="withdraw_form" id="withdraw_reason" name="withdraw_reason">{{ old('withdraw_reason') }}</textarea>
 											</label>
 										</div>
-										<input type="submit" value="退会する" name="" onclick='return confirm("退会してもよろしいですか？");'>
+                                        <input type="button" value="退会する" class="js-alertModal">
 									</div>
 								</div>
 							</form>
@@ -47,5 +47,6 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
+        <x-parts.alert-modal phrase="本当に退会してもよろしいですか？" value="退会する" formId="withdraw-form" />
 	</article>
 </x-layout>

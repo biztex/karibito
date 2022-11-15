@@ -20,10 +20,10 @@
             <div class="functeBtns">
                 <a href="{{ route('product.edit', $product->id)}}" class="orange full">編集</a>
             </div>
-            <form method="post" action="{{ route('product.destroy', $product->id ) }}">
+            <form id="delete-product" method="post" action="{{ route('product.destroy', $product->id ) }}">
                 @csrf @method('delete')
                 <div class="functeBtns">
-                    <input type="submit" onclick='return confirm("削除してもよろしいですか？");' class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
+                    <input type="button" class="full js-alertModal" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
                 </div>
             </form>
         @elseif ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $number_of_sold !== 0) {{--販売個数が一つで、かつ既に購入されているものをこの分岐に入れる--}}
@@ -48,5 +48,5 @@
     </div>
 
     <x-parts.box-seller :user='$product->user'/>
-
 </aside>
+<x-parts.alert-modal formId="delete-product" />

@@ -24,12 +24,13 @@
             <div class="functeBtns">
                 <a href="{{ route('job_request.edit', $job_request->id ) }}" class="full orange">編集</a>
             </div>
-            <form method="post" action="{{ route('job_request.destroy', $job_request->id ) }}">
+            <form id="delete-job_request" method="post" action="{{ route('job_request.destroy', $job_request->id ) }}">
                 @csrf @method('delete')
                 <div class="functeBtns">
-                    <input type="submit" class="full" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除" onclick='return confirm("削除してもよろしいですか？");'>
+                    <input type="button" class="full js-alertModal" style="box-shadow: 0 6px 0 #999999;height: 55px;font-size: 1.8rem;color:white;max-width: 100%;border-radius: 4px;font-weight:700;" value="削除">
                 </div>
             </form>
+            <x-parts.alert-modal formId="delete-job_request" />
         @elseif ($requested)
             <div class="functeBtns">
                 <a tabindex="-1" class="full">交渉画面へ進む</a>
