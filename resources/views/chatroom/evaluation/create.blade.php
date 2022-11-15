@@ -33,8 +33,8 @@
 						<div class="evaluation">
 							@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 							<p>評価のコメントを記入しましょう</p>
-							<textarea name="text">{{ old('text') }}</textarea>
-							<p class="taRResume">255</p>
+							<textarea name="text" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
+							<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/255</p>
 						</div>
 						<div class="functeBtns">
 							@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
@@ -54,3 +54,10 @@
 		</div>
     </article>
 </x-layout>
+
+<script>
+    // 打ち込んだ文字数の表示
+    function ShowLength( str ) {
+        document.getElementById("inputlength").innerHTML = str.length + "/255";
+    }
+</script>
