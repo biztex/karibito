@@ -47,7 +47,12 @@
             </div>
         @endif
         @if(isset($job_request->user))  
-          <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+            <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+            <form action="{{ route('contact') }}" method="get">
+                @csrf
+                <input type="hidden" name="job_request_id" value="{{ $job_request->id }}">
+                <p class="specialtyBtn"><input type="submit" class="report_btn" value="この商品を通報する"></p>
+            </form>
         @endif
     </div>
 

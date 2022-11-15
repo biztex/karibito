@@ -2353,6 +2353,19 @@
 	color: #158ACC;
 }
 
+/* 商品の詳細ページの通報ボタン */
+.specialtyBtn input {
+	border: 1px solid;
+  border-radius: 4px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	padding: 5px 10px;
+	font-size: 1.2rem;
+	background-color: #fff;
+	color: #ff0000;
+}
+
 .specialtyBtn img {
 	margin-right: 4px
 }
