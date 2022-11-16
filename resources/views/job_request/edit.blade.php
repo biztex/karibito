@@ -123,10 +123,10 @@
 </x-layout>
 
 <script>
-			// 打ち込んだ文字数の表示
-			function ShowLengthProduct( str ) {
-        document.getElementById("inputlengthProduct").innerHTML = str.length + "/30";
-    }
+	// 打ち込んだ文字数の表示
+	function ShowLengthProduct( str ) {
+		document.getElementById("inputlengthProduct").innerHTML = str.length + "/30";
+	}
 
     function ShowLengthProductShow( str ) {
         document.getElementById("inputlengthProductShow").innerHTML = str.length + "/3000";

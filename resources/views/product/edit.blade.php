@@ -244,16 +244,16 @@
                                         @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください" onkeyup="ShowLengthQuestionTitle(value);">{{ old('question_title.'.$num) }}</textarea>
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num) }}</textarea>
                                                 {{-- 一旦コメントアウト(岩上) --}}
-                                                {{-- <p class="max-string" id="inputlengthQuestionTitle">/400</p> --}}
+                                                {{-- <p class="max-string">/400</p> --}}
                                             </div>
                                             <p class="th js-answer">質問の回答 {{$num + 1}}</p>
                                             @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
-                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" onkeyup="ShowLengthQuestionAnswer(value);">{{ old('answer.'.$num) }}</textarea>
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" >{{ old('answer.'.$num) }}</textarea>
                                                 {{-- 一旦コメントアウト(岩上) --}}
-                                                {{-- <p class="max-string" id="inputlengthQuestionAnswer">/400</p> --}}
+                                                {{-- <p class="max-string">/400</p> --}}
                                             </div>
                                             <div>
                                                 <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
@@ -268,16 +268,16 @@
                                     @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="enter">
-                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください" onkeyup="ShowLengthQuestionTitle(value);">{{ old('question_title.'.$num, $product_question) }}</textarea>
+                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question) }}</textarea>
                                             {{-- 一旦コメントアウト(岩上) --}}
-                                            {{-- <p class="max-string" id="inputlengthQuestionTitle">/400</p> --}}
+                                            {{-- <p class="max-string">/400</p> --}}
                                         </div>
                                         <p class="th js-answer">質問の回答 {{$num + 1}}</p>
                                         @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="enter">
-                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"  onkeyup="ShowLengthQuestionAnswer(value);">{{ old('answer.'.$num, $product->answer[$num]) }}</textarea>
+                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください"  >{{ old('answer.'.$num, $product->answer[$num]) }}</textarea>
                                             {{-- 一旦コメントアウト(岩上) --}}
-                                            {{-- <p class="max-string" id="inputlengthQuestionAnswer">/400</p> --}}
+                                            {{-- <p class="max-string">/400</p> --}}
                                         </div>
                                         <div>
                                             <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
@@ -292,16 +292,16 @@
                                         @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください" onkeyup="ShowLengthQuestionTitle(value);">{{ old('question_title.'.$num, $product_question->title) }}</textarea>
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question->title) }}</textarea>
                                                 {{-- 一旦コメントアウト(岩上) --}}
-                                                {{-- <p class="max-string" id="inputlengthQuestionTitle">/400</p> --}}
+                                                {{-- <p class="max-string">/400</p> --}}
                                             </div>
                                             <p class="th js-answer">質問の回答 {{$num + 1}}</p>
                                             @error('answer.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="enter">
-                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" onkeyup="ShowLengthQuestionAnswer(value);">{{ old('answer.'.$num, $product_question->answer) }}</textarea>
+                                                <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" >{{ old('answer.'.$num, $product_question->answer) }}</textarea>
                                                 {{-- 一旦コメントアウト(岩上) --}}
-                                                {{-- <p class="max-string" id="inputlengthQuestionAnswer">/400</p> --}}
+                                                {{-- <p class="max-string">/400</p> --}}
                                             </div>
                                             <div>
                                                 <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
@@ -315,16 +315,16 @@
                                     @error('question_title.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="td">
                                         <div class="enter">
-                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください" onkeyup="ShowLengthQuestionTitle(value);"></textarea>
+                                            <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください"></textarea>
                                             {{-- 一旦コメントアウト(岩上) --}}
-                                            {{-- <p class="max-string" id="inputlengthQuestionTitle">/400</p> --}}
+                                            {{-- <p class="max-string">/400</p> --}}
                                         </div>
                                         <p class="th js-answer">質問の回答1</p>
                                         @error('answer.'.'0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="enter">
-                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" onkeyup="ShowLengthQuestionAnswer(value);"></textarea>
+                                            <textarea type="text" name="answer[]" placeholder="質問の回答入力してください" ></textarea>
                                             {{-- 一旦コメントアウト(岩上) --}}
-                                            {{-- <p class="max-string" id="inputlengthQuestionAnswer">/400</p> --}}
+                                            {{-- <p class="max-string">/400</p> --}}
                                         </div>
                                         <div>
                                             <a href="javascript:;" class="fs25 ml05 js-deleteQuestion">×</a>
