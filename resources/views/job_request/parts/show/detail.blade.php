@@ -6,20 +6,22 @@
             </div>
                 @if (is_null($is_favorite))
                     <form method="post" action="{{ route('favorite.store', $job_request->id) }}">
+                        <p style="text-align: center;">お気に入り</p>
                     {{-- <a href="{{ route('favorite.create' ) }}" class="favorite">
                         <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
                         <span>お気に入り</span>
                     </a> --}}
                     <button type="submit" class="favorite">
-                        <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
-                        <span>お気に入り</span>
+                        <span class="icon"><img src="/img/common/ico_heart.svg" alt="">{{ $count_favorite }}</span>
+                        <span>{{ $count_favorite }}</span>
                     </button>
                 @else
                     <form method="post" action="{{ route('favorite.delete', $job_request->id) }}">
+                        <p style="text-align: center;">お気に入り</p>
                         @method('delete')
                         <button type="submit" class="favorite">
                             <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
-                            <span>お気に入り</span>
+                            <span>{{ $count_favorite }}</span>
                         </button>
                 @endif
                 <input type="hidden" name="job_request_id" value="{{$job_request->id}}">
