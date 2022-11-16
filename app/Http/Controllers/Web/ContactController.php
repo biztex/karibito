@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\UserContactService;
 use App\Services\AdminContactService;
+use App\Models\JobRequest;
+use App\Models\Product;
 
 class ContactController extends Controller
 {
@@ -24,9 +26,20 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function contact()
+    public function contact(Request $request)
     {
-        return view('contact');
+        // 商品かリクエストのIDが渡ったら変数に格納
+        if ($request->product_id) {
+            $report_product_id = $request->product_id;
+            $report_product_title = Product::find($report_product_id)->title;
+            return view('contact', compact('report_product_title', 'report_product_id'));
+        } elseif ($request->job_request_id) {
+            $report_job_request_id = $request->job_request_id;
+            $report_job_request_title = JobRequest::find($report_job_request_id)->title;
+            return view('contact', compact('report_job_request_title', 'report_job_request_id'));
+        } else {
+            return view('contact');
+        }
     }
 
     /**

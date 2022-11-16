@@ -13,9 +13,9 @@
     </div>
     <div class="functeBtns">
         @if(empty($product->user))
-          <div class="indexNotice">
-              <h3 class="hd">このユーザーは退会しました。</h3>
-          </div>
+            <div class="indexNotice">
+                <h3 class="hd">このユーザーは退会しました。</h3>
+            </div>
         @elseif($product->user_id === Auth::id() )
             <div class="functeBtns">
                 <a href="{{ route('product.edit', $product->id)}}" class="orange full">編集</a>
@@ -43,7 +43,12 @@
             <p>報酬は取引前に事務局に支払われ、評価・完了後に振り込まれます。利用規約違反や少しでも不審な内容のサービスやリクエストやユーザーがあった場合は通報してください。</p>
         </div>
         @if(isset($product->user))
-          <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+            <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
+            <form action="{{ route('contact') }}" method="get">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <p class="specialtyBtn"><input type="submit" class="report_btn" value="この商品を通報する"></p>
+            </form>
         @endif
     </div>
 
