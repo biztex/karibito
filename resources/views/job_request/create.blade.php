@@ -44,8 +44,8 @@
 						<p class="th">商品の詳細<span class="must">必須</span></p>
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-								<textarea type="text" name="content" onkeyup="ShowLengthProductShow(value);">{{ old('content', $request->content) }}</textarea>
-								<p class="max-string" id="inputlengthProductShow">{{ mb_strlen(old('content')) }}/3000</p>
+							<textarea type="text" name="content" onkeyup="ShowLengthProductShow(value);">{{ old('content', $request->content) }}</textarea>
+							<p class="max-string" id="inputlengthProductShow">{{ mb_strlen(old('content')) }}/3000</p>
 						</div>
 
 
@@ -120,10 +120,10 @@
 </x-layout>
 
 <script>
-		// 打ち込んだ文字数の表示
-		function ShowLengthProduct( str ) {
-				document.getElementById("inputlengthProduct").innerHTML = str.length + "/30";
-		}
+	// 打ち込んだ文字数の表示
+	function ShowLengthProduct( str ) {
+			document.getElementById("inputlengthProduct").innerHTML = str.length + "/30";
+	}
 
     function ShowLengthProductShow( str ) {
         document.getElementById("inputlengthProductShow").innerHTML = str.length + "/3000";
