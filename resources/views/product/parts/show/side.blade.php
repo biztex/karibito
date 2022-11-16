@@ -13,9 +13,9 @@
     </div>
     <div class="functeBtns">
         @if(empty($product->user))
-          <div class="indexNotice">
-              <h3 class="hd">このユーザーは退会しました。</h3>
-          </div>
+            <div class="indexNotice">
+                <h3 class="hd">このユーザーは退会しました。</h3>
+            </div>
         @elseif($product->user_id === Auth::id() )
             <div class="functeBtns">
                 <a href="{{ route('product.edit', $product->id)}}" class="orange full">編集</a>
@@ -44,11 +44,11 @@
         </div>
         @if(isset($product->user))
             <p class="specialtyBtn share"><span>この情報をシェアする</span></p>
-                <form action="{{ route('contact') }}" method="get">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <p class="specialtyBtn"><input type="submit" class="report_btn" value="この商品を通報する"></p>
-                </form>
+            <form action="{{ route('contact') }}" method="get">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <p class="specialtyBtn"><input type="submit" class="report_btn" value="この商品を通報する"></p>
+            </form>
         @endif
     </div>
 

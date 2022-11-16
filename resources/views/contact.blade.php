@@ -43,7 +43,7 @@
                                 @elseif (isset($report_job_request_id))
                                     <input type="hidden" name="job_request_id" value="{{ $report_job_request_id }}"> {{-- リクエストID --}}
                                 @endif
-                                <p class="formBtn"><input type="submit" class="submit" value="送信する"></p> 
+                                <p class="formBtn"><input type="submit" class="submit" value="送信する"></p>
                             </form>
                         </div>
                     </div>
