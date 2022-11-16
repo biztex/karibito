@@ -13,6 +13,18 @@ class AdminContactService
      */
     public function sendMail($request)
     {
+        // 商品IDかリクエストIDが渡ったらの分岐
+        // 渡ってきた値をmessageと結合して変数に格納
+        if ($request->product_id) {
+            $report_message = "通報した商品ID:" . $request->product_id;
+        } elseif ($request->job_request_id) {
+            $report_message =  "通報したジョブリクエストID:" . $request->job_request_id;
+        }
+
+        if (isset($report_message)) {
+            $request->message = '[' . $report_message . "]" . $request->message;
+        }
+
         ContactMailHistory::create([
             'name'    => $request->name,
             'mail'    => $request->mail,

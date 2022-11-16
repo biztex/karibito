@@ -21,14 +21,28 @@
                                 <div class="labelType">
                                     <select name="type" style="color:#000;">
                                         @foreach (App\Models\ContactMailHistory::CONTACT_TYPES as $i => $option)
-                                            <option value='{{ $i }}'>{{ $option }}</option>
+                                            <option value='{{ $i }}' @if ($i == App\Models\ContactMailHistory::REPORT) selected @endif>{{ $option }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="labelMail">{{-- 商品名 --}}
+                                    <p style="opacity: 70%;">
+                                        @if (isset($report_product_title))
+                                            商品名:{{ $report_product_title }}
+                                        @elseif (isset($report_job_request_title))
+                                            リクエスト名:{{ $report_job_request_title }}
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="labelMessage">
                                     <p>お問い合わせ内容</p>
                                     <textarea name="message" placeholder="入力してください" required></textarea>
                                 </div>
+                                @if (isset($report_product_id))
+                                    <input type="hidden" name="product_id" value="{{ $report_product_id }}"> {{-- 商品ID --}}
+                                @elseif (isset($report_job_request_id))
+                                    <input type="hidden" name="job_request_id" value="{{ $report_job_request_id }}"> {{-- リクエストID --}}
+                                @endif
                                 <p class="formBtn"><input type="submit" class="submit" value="送信する"></p>
                             </form>
                         </div>
