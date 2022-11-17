@@ -28,8 +28,7 @@ class WithdrawMail extends Mailable
      */
     public function build()
     {
-        return $this->to(\Auth::user()->email)
-            ->subject('【カリビト】[重要]退会完了のお知らせ')
+        return $this->subject('【カリビト】[重要]退会完了のお知らせ')
             ->text('mail.text.user.withdraw_mail');
     }
 }

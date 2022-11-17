@@ -39,7 +39,7 @@ class WithdrawController extends Controller
         $this->chatroom_service->canIWithdraw($user);
 
         // 退会後のメール処理
-        \Mail::to('adminContact@test.com')
+        \Mail::to($user->email)
             ->send(new WithdrawMail($user));
 
         \DB::transaction(function () use ($user, $str_delete) {
