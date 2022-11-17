@@ -6435,7 +6435,11 @@ select.searchSelect {
 	font-size: 1.6rem;
 }
 .withdrawBox {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
+}
+.withdrawBox + .withdrawBox {
+	padding-top: 25px;
+	border-top: 1px solid #efefef;
 }
 .withdrawBoxInner {
 	padding: 10px;
@@ -6456,7 +6460,7 @@ select.searchSelect {
 	border-width: 6px 0 6px 8px;
 	border-color: transparent transparent transparent #999999;
 	position: absolute;
-	top: 5px;
+	top: 4px;
 	left: 0;
 }
 .withdrawBoxTitle {
@@ -6464,6 +6468,9 @@ select.searchSelect {
 }
 .withdrawBoxDl {
 	display: flex;
+}
+.withdrawBoxDl dt {
+	min-width: 65px;
 }
 .withdrawBoxDl + .withdrawBoxDl {
 	margin-top: 10px;
@@ -6474,6 +6481,18 @@ select.searchSelect {
 .withdraw_reasonText {
 	display: inline-block;
 	margin-bottom: 10px;
+}
+@media screen and (max-width: 767px) {
+	.withdrawBoxDl dt {
+		min-width: 60px;
+	}
+	.withdrawBoxIcon {
+		padding-left: 10px;
+	}
+	.withdrawBoxIcon::before {
+		content: "";
+		border-width: 4px 0 4px 6px;
+	}
 }
 
 /* 退会理由のcテキストエリアcss */

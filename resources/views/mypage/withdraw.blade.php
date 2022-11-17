@@ -40,7 +40,7 @@
 											<label><input type="checkbox" name="">上記条件を満たしている</label>
 										</div>
 									</div>
-									<div class="configEditButton">
+									<div class="configEditButton withdrawBox">
 										<!-- 退会理由 -->
 										<div class="withdraw_reason">
 											<label for="withdraw_reason"><span class="withdraw_reasonText">サービス改善のため、よろしければ退会理由を教えてください。</span><br>
