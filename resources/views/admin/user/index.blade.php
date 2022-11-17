@@ -96,6 +96,10 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary btn-sm">承認する</button>
                                             </form>
+                                            <form action="{{ route('admin.revokeApproval', $user->user_id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-light btn-sm">承認しない</button>
+                                            </form>
                                         @else
                                             <form action="{{ route('admin.revokeApproval', $user->user_id) }}" method="POST">
                                                 @csrf
