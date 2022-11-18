@@ -45,7 +45,9 @@ class UserProfileService
                 'first_name' => $params['first_name'],
                 'last_name' => $params['last_name'],
                 'gender' => $params['gender'],
-                'prefecture_id' => $params['prefecture'],
+                'prefecture_id' => $params['prefecture_id'],
+                'friend_code' => $params['friend_code'],
+                'where_know' => $params['where_know']
             ],
         );
 

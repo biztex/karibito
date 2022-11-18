@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
 use App\Http\Requests\UserProfile\UpdateCanCallRequest;
@@ -37,6 +38,17 @@ class UserProfileController extends Controller
     public function create()
     {
         return view('auth.profile-create');
+    }
+
+    public function friend_code(Request $request)
+    {
+        $name = $request->name;
+        $first_name = $request->first_name;
+        $last_name = $request->last_name;
+        $gender = $request->gender;
+        $prefecture = $request->prefecture_id;
+
+        return view('auth.friend_code', compact('name','first_name', 'last_name', 'gender', 'prefecture'));
     }
 
     /**
