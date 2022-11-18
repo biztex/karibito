@@ -74,7 +74,7 @@ class UserProfileService
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'gender' => $request['gender'],
-            'prefecture_id' => $request['prefecture'],
+            'prefecture_id' => $request['prefecture_id'],
             'birthday' => $birthday,
             'zip' => $request['zip'],
             'address' => $request['address'],

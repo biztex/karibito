@@ -57,11 +57,11 @@
 									</div>
 									<div class="labelCategory">
 										<p>都道府県</p>
-											@error('prefecture')
+											@error('prefecture_id')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 											<div>
-												<select name="prefecture_id" class="@error('prefecture') is-invalid @enderror" required>
+												<select name="prefecture_id" class="@error('prefecture_id') is-invalid @enderror" required>
 													<option value="">選択してください</option>
 													@foreach ( App\Models\Prefecture::all() as $prefecture )
 														<option value="{{$prefecture->id}}"  @if($prefecture->id == old('prefecture_id')) selected @endif>{{$prefecture->name}}</option>
