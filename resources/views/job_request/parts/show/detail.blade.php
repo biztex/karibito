@@ -18,7 +18,7 @@
                     <form method="post" action="{{ route('favorite.delete', $job_request->id) }}">
                         @method('delete')
                         <button type="submit" class="favorite">
-                            <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
+                            <span class="icon"><img src="https://t4.ftcdn.net/jpg/04/26/80/47/360_F_426804713_IEvXbiB6t4HyrCTpeisp2CBpJTmMBp4J.jpg" alt=""></span>
                             <span>お気に入り</span>
                         </button>
                 @endif
