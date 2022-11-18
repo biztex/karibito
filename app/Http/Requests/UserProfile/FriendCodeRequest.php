@@ -28,7 +28,9 @@ class FriendCodeRequest extends FormRequest
             'first_name' => 'required | max:24 | string',
             'last_name' => 'required | max:24 | string',
             'gender' => 'required | integer | in:1,2',
-            'prefecture_id' => 'required | integer | exists:prefectures,id'
+            'prefecture_id' => 'required | integer | exists:prefectures,id',
+            'friend_code' => 'max:10 | string',
+            'where_know' => 'required'
         ];
     }
 }

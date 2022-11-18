@@ -41,7 +41,7 @@ class UserProfileController extends Controller
         return view('auth.profile-create');
     }
 
-    public function friend_code(FriendCodeRequest $request)
+    public function friend_code(StoreRequest $request)
     {
         $name = $request->name;
         $first_name = $request->first_name;
@@ -59,7 +59,7 @@ class UserProfileController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request)
+    public function store(FriendCodeRequest $request)
     {
         \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUserName($request->name);
