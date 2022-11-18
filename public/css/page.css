@@ -9340,6 +9340,7 @@ input.small {
 	align-items: center;
 	width: 122px;
 	height: 36px;
+	background-color: white;
 }
 
 .detailStyle .title .favorite .icon {
