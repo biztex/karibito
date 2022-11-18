@@ -6429,6 +6429,72 @@ select.searchSelect {
 	border: 0;
 }
 
+/* 退会手続きcss */
+.withdrawLead {
+	margin-bottom: 25px;
+	font-size: 1.6rem;
+}
+.withdrawBox {
+	margin-bottom: 20px;
+}
+.withdrawBox + .withdrawBox {
+	padding-top: 25px;
+	border-top: 1px solid #efefef;
+}
+.withdrawBoxInner {
+	padding: 10px;
+	background-color: #efefef;
+}
+.withdrawBoxItem + .withdrawBoxItem {
+	margin-top: 10px;
+}
+.withdrawBoxIcon {
+	position: relative;
+	padding-left: 14px;
+}
+.withdrawBoxIcon::before {
+	content: "";
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 6px 0 6px 8px;
+	border-color: transparent transparent transparent #999999;
+	position: absolute;
+	top: 4px;
+	left: 0;
+}
+.withdrawBoxTitle {
+	margin-bottom: 10px;
+}
+.withdrawBoxDl {
+	display: flex;
+}
+.withdrawBoxDl dt {
+	min-width: 65px;
+}
+.withdrawBoxDl + .withdrawBoxDl {
+	margin-top: 10px;
+}
+.withdrawBoxCheckbox {
+	margin-top: 10px;
+}
+.withdraw_reasonText {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+@media screen and (max-width: 767px) {
+	.withdrawBoxDl dt {
+		min-width: 60px;
+	}
+	.withdrawBoxIcon {
+		padding-left: 10px;
+	}
+	.withdrawBoxIcon::before {
+		content: "";
+		border-width: 4px 0 4px 6px;
+	}
+}
+
 /* 退会理由のcテキストエリアcss */
 .configEditButton .withdraw_reason .withdraw_form {
 	resize: none;
