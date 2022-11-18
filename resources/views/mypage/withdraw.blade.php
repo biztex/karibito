@@ -7,37 +7,48 @@
 				<div id="main">
 					<div class="configEditWrap">
 						<div class="configEditItem">
-							<h2 class="subPagesHd">退会ページ</h2>
-							<div class="box">
-								<p class="title">カリビトを退会するにあたって</p>
-								<p class="txt">
-									・退会処理をすると、全てのサービスがご利用できなくなりますのでご注意ください。<br>
-									・購入予定者がいるサービスが残っている場合、キャンセルになります。<br>
-									・トークルームなど過去のやり取りの履歴は全て閲覧することができなくなります。<br>
-									・退会処理後にアカウントを元に戻すことはできませんのでお気をつけください。<br><br>
-									カリビトを退会する条件<br>
-									・購入者：購入したサービスが全て完了している<br>
-									・出品者：出品したサービスに対して全て正式な納品をしている<br>
-									・出品者：振込依頼中の売上がない<br>
-									・出品者：広告の返金申請中でない<br>
-									（売上の振込依頼、あるいは広告の返金申請を行なっている場合は、振込が完了してから退会手続きを行なってください）<br>
-									<br>
-								</p>
-							</div>
+							<h2 class="subPagesHd">退会手続き</h2>
+							<p class="withdrawLead">以下の内容をご確認の上、チェックいただき「退会する」ボタンを押してください。</p>
 							<form id="withdraw-form" action="{{ route('withdraw') }}" method="post">
 								@csrf
 								<div class="configEditBox">
-									<div class="configEditButton">
+									<div class="withdrawBox">
+										<div class="withdrawBoxInner">
+											<ul class="withdrawBoxList">
+												<li class="withdrawBoxItem withdrawBoxIcon">退会は取消しができません。</li>
+												<li class="withdrawBoxItem withdrawBoxIcon">退会後はすべてのサービスがご利用できなくなります。</li>
+												<li class="withdrawBoxItem withdrawBoxIcon">退会すると登録情報やお取引き履歴などの情報はすべて削除されます。</li>
+											</ul>
+										</div>
+										<div class="checkboxChoice withdrawBoxCheckbox">
+											<label><input type="checkbox" name="">上記事項に同意する</label>
+										</div>
+									</div>
+									<div class="withdrawBox">
+										<div class="withdrawBoxInner">
+											<p class="withdrawBoxTitle">《退会の条件》</p>
+											<dl class="withdrawBoxDl">
+												<dt class="withdrawBoxIcon">購入者：</dt>
+												<dd>購入したサービスがすべて完了している。（評価まで行っている。）</dd>
+											</dl>
+											<dl class="withdrawBoxDl">
+												<dt class="withdrawBoxIcon">出品者：</dt>
+												<dd>購入されたサービスがすべて完了している。（評価まで行っている。）<br>申請中の振込がすべて完了している。</dd>
+											</dl>
+										</div>
+										<div class="checkboxChoice withdrawBoxCheckbox">
+											<label><input type="checkbox" name="">上記条件を満たしている</label>
+										</div>
+									</div>
+									<div class="configEditButton withdrawBox">
 										<!-- 退会理由 -->
 										<div class="withdraw_reason">
-											<p>もしこのまま退会されるようでしたら、退会理由をご記入いただけましたら</p>
-											<p>今後の運営改善の参考にさせていただきますのでお手数ですがよろしくお願いいたします。</p><br>
-											<label for="withdraw_reason">退会理由<br>
+											<label for="withdraw_reason"><span class="withdraw_reasonText">サービス改善のため、よろしければ退会理由を教えてください。</span><br>
 												@error('withdraw_reason')<div class="alert alert-danger">{{ $message }}</div>@enderror
 												<textarea class="withdraw_form" id="withdraw_reason" name="withdraw_reason">{{ old('withdraw_reason') }}</textarea>
 											</label>
 										</div>
-                                        <input type="button" value="退会する" class="js-alertModal">
+										<input type="button" value="退会する" class="js-alertModal">
 									</div>
 								</div>
 							</form>
