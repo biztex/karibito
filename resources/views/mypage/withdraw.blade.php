@@ -21,7 +21,8 @@
 											</ul>
 										</div>
 										<div class="checkboxChoice withdrawBoxCheckbox">
-											<label><input type="checkbox" name="">上記事項に同意する</label>
+											<label><input type="checkbox" name="agree_not_cancel">上記事項に同意する</label>
+											@error('agree_not_cancel')<div class="alert alert-danger">{{ $message }}</div>@enderror
 										</div>
 									</div>
 									<div class="withdrawBox">
@@ -37,7 +38,8 @@
 											</dl>
 										</div>
 										<div class="checkboxChoice withdrawBoxCheckbox">
-											<label><input type="checkbox" name="">上記条件を満たしている</label>
+											<label><input type="checkbox" name="agree_not_in_the_middle">上記条件を満たしている</label>
+											@error('agree_not_in_the_middle')<div class="alert alert-danger">{{ $message }}</div>@enderror
 										</div>
 									</div>
 									<div class="configEditButton withdrawBox">
