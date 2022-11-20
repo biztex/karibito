@@ -22,7 +22,7 @@
             <x-parts.file-input/>
 
             <div class="cancelTitle">
-                <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
+                <p>送信されたチャットを必要に応じてカリビトが確認・削除することに同意します。</p>
             </div>
             <div class="functeBtns">
                 <input type="submit" class="orange loading-disabled" value="送信する">
