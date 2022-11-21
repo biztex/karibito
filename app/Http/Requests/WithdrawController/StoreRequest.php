@@ -24,7 +24,22 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'agree_not_cancel' => ['required'],
+            'agree_not_in_the_middle' => [ 'required'],
             'withdraw_reason' => [ 'required', 'string', 'max:3000' ]
+        ];
+    }
+
+    /**
+     * 定義済みバリデーションルールのエラーメッセージ取得
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'agree_not_cancel.required' => '退会するためには上記事項に同意する必要があります。',
+            'agree_not_in_the_middle.required' => '退会するためには条件を満たす必要があります。',
         ];
     }
 }
