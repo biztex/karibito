@@ -1864,7 +1864,7 @@
 }
 
 .mypageCover .cover_background {
-	height:100%;
+	height: 100%;
 }
 
 .mypageCover .cover_background img {
@@ -2356,7 +2356,7 @@
 /* 商品の詳細ページの通報ボタン */
 .specialtyBtn input {
 	border: 1px solid;
-  border-radius: 4px;
+	border-radius: 4px;
 	cursor: pointer;
 	display: inline-flex;
 	align-items: center;
@@ -6246,7 +6246,7 @@ select.searchSelect {
 
 .blogDtOtherBtn a.followB {
 	color: #ffffff;
-    background-color: #158ACC;
+	background-color: #158ACC;
 	border-color: #158ACC;
 	margin-bottom: 10px;
 }
@@ -6434,24 +6434,30 @@ select.searchSelect {
 	margin-bottom: 25px;
 	font-size: 1.6rem;
 }
+
 .withdrawBox {
 	margin-bottom: 20px;
 }
-.withdrawBox + .withdrawBox {
+
+.withdrawBox+.withdrawBox {
 	padding-top: 25px;
 	border-top: 1px solid #efefef;
 }
+
 .withdrawBoxInner {
 	padding: 10px;
 	background-color: #efefef;
 }
-.withdrawBoxItem + .withdrawBoxItem {
+
+.withdrawBoxItem+.withdrawBoxItem {
 	margin-top: 10px;
 }
+
 .withdrawBoxIcon {
 	position: relative;
 	padding-left: 14px;
 }
+
 .withdrawBoxIcon::before {
 	content: "";
 	width: 0;
@@ -6463,32 +6469,41 @@ select.searchSelect {
 	top: 4px;
 	left: 0;
 }
+
 .withdrawBoxTitle {
 	margin-bottom: 10px;
 }
+
 .withdrawBoxDl {
 	display: flex;
 }
+
 .withdrawBoxDl dt {
 	min-width: 65px;
 }
-.withdrawBoxDl + .withdrawBoxDl {
+
+.withdrawBoxDl+.withdrawBoxDl {
 	margin-top: 10px;
 }
+
 .withdrawBoxCheckbox {
 	margin-top: 10px;
 }
+
 .withdraw_reasonText {
 	display: inline-block;
 	margin-bottom: 10px;
 }
+
 @media screen and (max-width: 767px) {
 	.withdrawBoxDl dt {
 		min-width: 60px;
 	}
+
 	.withdrawBoxIcon {
 		padding-left: 10px;
 	}
+
 	.withdrawBoxIcon::before {
 		content: "";
 		border-width: 4px 0 4px 6px;
@@ -6565,7 +6580,7 @@ select.searchSelect {
 		display: flex;
 		justify-content: center;
 		margin-bottom: 10px;
-        word-break: break-all;
+		word-break: break-all;
 	}
 
 	.configEditDl01 dt {
@@ -6574,9 +6589,9 @@ select.searchSelect {
 		white-space: nowrap;
 	}
 
-    .configEditMail {
-        white-space: normal !important;
-    }
+	.configEditMail {
+		white-space: normal !important;
+	}
 
 	.configEditDl01 dd {
 		width: 320px;
@@ -9395,8 +9410,8 @@ input.small {
 	background: #F4F4F4;
 }
 
-.exchangeChat .conts .chat_log{
-  float: right;
+.exchangeChat .conts .chat_log {
+	float: right;
 }
 
 .favoriteUl01.exchangeChat .cont02 {
@@ -9739,7 +9754,7 @@ input.small {
 	background-color: #EFEFEF;
 }
 
-.mypagePortfolioUl03 .img img{
+.mypagePortfolioUl03 .img img {
 	width: 144px;
 	height: 144px;
 	object-fit: contain;
@@ -10579,8 +10594,13 @@ input.small {
 }
 
 /* 銀行口座入力の注意書き */
-.bank-input-info{
-	color:red;
+.bank-input-info {
+	color: red;
+}
+
+/* チャットルーム文言変更 */
+.warnBoxTitle {
+	font-weight: bold;
 }
 
 /* 会員登録画面注意書き */
@@ -10589,4 +10609,13 @@ input.small {
 	margin-bottom: 30px;
 	padding-left: 1em;
 	text-indent: -1em;
+}
+
+.warnBoxTitle,
+.warnBoxText {
+	text-align: left;
+}
+
+.chatPages .warnBox p+p.warnBoxText {
+	margin-top: 5px;
 }
