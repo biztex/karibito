@@ -1,5 +1,7 @@
 <div class="mypageSec03">
-    <p class="mypageHd02">出品サービス @if (!is_null($products[0]))<a href="{{ route('publication') }}" class="more">出品サービスを編集する</a>@endif</p>
+    <p class="mypageHd02">出品サービス<br>
+        @if (!is_null($products[0]))<a href="{{ route('publication') }}" class="more">出品サービスを編集する</a>@endif
+    </p>
     <div class="mypageBox">
         <ul class="favoriteUl01">
             @if (is_null($products[0]))
