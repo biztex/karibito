@@ -36,6 +36,7 @@
 										</ul>
 								<div class="contactBox">
 									<p class="loginHd"><span>または</span></p>
+									<p class="loginInfo">※迷惑メールの設定によっては、カリビトからのメールが届かない場合があります。カリビトからのメールが受信できるようにドメイン指定受信で「karibito.co.jp」を許可するように設定してください。</p>
 
 									<div class="labelCategory">
 										<p>メールアドレス（半角英数字128文字以内）</p>
