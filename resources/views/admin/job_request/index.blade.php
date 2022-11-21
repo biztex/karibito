@@ -14,7 +14,7 @@
                                 <input class="form-control" type="text" name="search" value="{{ $request->search ?? "" }}">
                                 <button class="btn btn-secondary btn-block w-25 ml-2" type="submit">検索</button>
                             </form>
-                            <div class="mt-2">※商品名かユーザー名に部分一致で検索</div>
+                            <div class="mt-2">※サービス名かユーザー名に部分一致で検索</div>
                         </li>
                     </ol>
                 </nav>
@@ -31,7 +31,7 @@
                             <tr>
                                 <th scope="col" class="text-nowrap">id</th>
                                 <th scope="col" class="text-nowrap">カテゴリー名</th>
-                                <th scope="col" class="text-nowrap">商品名</th>
+                                <th scope="col" class="text-nowrap">サービス名</th>
                                 <th scope="col" class="text-nowrap">ユーザー名</th>
                                 <th scope="col" class="text-nowrap">仕事体系</th>
                                 <th scope="col" class="text-nowrap">エリア</th>

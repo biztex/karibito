@@ -35,7 +35,7 @@
                             </select>
                         </div>
 
-                        <p class="th">商品名<span class="must">必須</span></p>
+                        <p class="th">サービス名<span class="must">必須</span></p>
                             @error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <input type="text" name="title" class="@error('title') is-invalid @enderror" value="{{old('title', $product->title)}}" onkeyup="ShowLengthProduct(value);">
