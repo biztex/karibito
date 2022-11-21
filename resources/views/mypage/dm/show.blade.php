@@ -1,76 +1,76 @@
 <x-layout>
-<body id="estimate" class="dm-page-show">
+    <body id="estimate" class="dm-page-show">
     <x-parts.post-button/>
     <article>
     <x-parts.flash-msg/>
-		<div id="contents" class="otherPage">
-        <div class="inner02 clearfix">
-            <div id="main">
-                <div class="friendsTop">
-                    @if($dmroom->from_user_id === Auth::id())
-                        <div class="sellerTop">
-                            <div class="user">
-                                @if($dmroom->toUser->userProfile->icon === null)
-                                    @if(empty($dmroom->toUser->deleted_at))
-                                        <a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+        <div id="contents" class="otherPage">
+            <div class="inner02 clearfix">
+                <div id="main">
+                    <div class="friendsTop">
+                        @if($dmroom->from_user_id === Auth::id())
+                            <div class="sellerTop">
+                                <div class="user">
+                                    @if($dmroom->toUser->userProfile->icon === null)
+                                        @if(empty($dmroom->toUser->deleted_at))
+                                            <a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                                        @else
+                                            <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                                        @endif
                                     @else
-                                        <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                                        @if(empty($dmroom->toUser->deleted_at))
+                                            <a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></a>
+                                        @else
+                                            <span class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></span>
+                                        @endif
                                     @endif
-                                @else
-                                    @if(empty($dmroom->toUser->deleted_at))
-                                        <a href="{{ route('user.mypage', $dmroom->toUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></a>
-                                    @else
-                                        <span class="head"><img src="{{ asset('/storage/'.$dmroom->toUser->userProfile->icon) }}" alt=""></span>
-                                    @endif
-                                @endif
-                                <div class="info">
-                                    <p class="name">{{ $dmroom->toUser->name }}</p>
-                                    @if(isset($dmroom->toUser->deleted_at))
-                                        <p class="name">このユーザーは退会しました。</p>
-                                    @endif
+                                    <div class="info">
+                                        <p class="name">{{ $dmroom->toUser->name }}</p>
+                                        @if(isset($dmroom->toUser->deleted_at))
+                                            <p class="name">このユーザーは退会しました。</p>
+                                        @endif
+                                    </div>
                                 </div>
+                                <p class="login">最終ログイン：{{ $dmroom->toUser->latest_login_datetime }}</p>
                             </div>
-                            <p class="login">最終ログイン：{{ $dmroom->toUser->latest_login_datetime }}</p>
-                        </div>
-                    @else
-                        <div class="sellerTop">
-                            <div class="user">
-                                @if($dmroom->fromUser->userProfile->icon === null)
-                                    @if(empty($dmroom->fromUser->deleted_at))
-                                        <a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                        @else
+                            <div class="sellerTop">
+                                <div class="user">
+                                    @if($dmroom->fromUser->userProfile->icon === null)
+                                        @if(empty($dmroom->fromUser->deleted_at))
+                                            <a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                                        @else
+                                            <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                                        @endif
                                     @else
-                                        <span class="head"><img src="/img/mypage/no_image.jpg" alt=""></span>
+                                        @if(empty($dmroom->fromUser->deleted_at))
+                                            <a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></a>
+                                        @else
+                                            <span class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></span>
+                                        @endif
                                     @endif
-                                @else
-                                    @if(empty($dmroom->fromUser->deleted_at))
-                                        <a href="{{ route('user.mypage', $dmroom->fromUser->id) }}" class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></a>
-                                    @else
-                                        <span class="head"><img src="{{ asset('/storage/'.$dmroom->fromUser->userProfile->icon) }}" alt=""></span>
-                                    @endif
-                                @endif
-                                <div class="info">
-                                    <p class="name">{{ $dmroom->fromUser->name }}</p>
-                                    @if(isset($dmroom->fromUser->deleted_at))
-                                        <p class="name">このユーザーは退会しました。</p>
-                                    @endif
+                                    <div class="info">
+                                        <p class="name">{{ $dmroom->fromUser->name }}</p>
+                                        @if(isset($dmroom->fromUser->deleted_at))
+                                            <p class="name">このユーザーは退会しました。</p>
+                                        @endif
+                                    </div>
                                 </div>
+                                <p class="login">最終ログイン：{{ $dmroom->fromUser->latest_login_datetime }}</p>
                             </div>
-                            <p class="login">最終ログイン：{{ $dmroom->fromUser->latest_login_datetime }}</p>
-                        </div>
-                    @endif
-                </div>
-                <h2 class="hdM">DM</h2>
-                <div class="subPagesTab">
-                    <div class="chatPages">
-                        <div class="item">
-                            <div class="warnBox">
-                                <p class="note">【注意事項】</p>
-                                <p class="tit">メッセージのやり取りは、必ず「カリビトチャット」を通じて行ってください。</p>
-                                <p>・メールアドレス・LINE・電話など外部連絡先の交換、またそれらを用いてのやり取り<br>・カリビト外での直接取引を促す行為</p>
-                                <p>カリビトではこれらの行為を禁止しております。</p>
-                                <p>確認した場合、アカウントの停止など、今後のご利用をお断りさせていただくことがございますので、ご注意ください。</p>
-                            </div>
-                            <ul class="communicate">
+                        @endif
+                    </div>
+                    <h2 class="hdM">DM</h2>
+                    <div class="subPagesTab">
+                        <div class="chatPages">
+                            <div class="item">
+                                <div class="warnBox">
+                                    <p class="note">【注意事項】</p>
+                                    <p class="tit">メッセージのやり取りは、必ず「カリビトチャット」を通じて行ってください。</p>
+                                    <p>・メールアドレス・LINE・電話など外部連絡先の交換、またそれらを用いてのやり取り<br>・カリビト外での直接取引を促す行為</p>
+                                    <p>カリビトではこれらの行為を禁止しております。</p>
+                                    <p>確認した場合、アカウントの停止など、今後のご利用をお断りさせていただくことがございますので、ご注意ください。</p>
+                                </div>
+                                <ul class="communicate">
                                 @foreach($dmroom->dmroomMessages as $message)
                                     <li>
                                         <div class="img">
@@ -94,13 +94,11 @@
                                                 @endif
                                                 <p class="chatroom-text break-word">{!! $message->text !!}</p>
                                                 @if($message->file_name !== null)
-                                                    <p class="chatroom-text break-word">
-                                                        <a href="{{ asset('/storage/'.$message->file_path) }}" download="{{ $message->file_name }}" style="display: inline-flex; vertical-align: center;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
-                                                            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-                                                        </svg>{{ $message->file_name }}
-                                                        </a>
-                                                    </p>
+                                                    <p class="chatroom-text break-word"><a href="{{ asset('/storage/'.$message->file_path) }}" download="{{ $message->file_name }}"  style="display: inline-flex; vertical-align: center;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
+                                                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                                                    </svg>{{ $message->file_name }}
+                                                    </a></p>
                                                 @endif
                                             </div>
                                         </div>
@@ -113,11 +111,11 @@
                             <form action="{{ route('dm.message', $dmroom->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                                 <div class="item">
-                                    @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <div class="evaluation">
-                                      <textarea name="text" placeholder="本文を入力してください" class="templateText">{{ old('text') }}</textarea>
+                                        <textarea name="text" placeholder="本文を入力してください" class="templateText" onclick="ClickShowLength(value);" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
                                     </div>
-                                    <p class="taR">3000</p>
+                                    <p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
                                     @error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                     <p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
                                     <div class="btns">
@@ -128,8 +126,8 @@
                                         <div class="templatePopup">
                                             <div class="templateOverlay"></div>
                                             <div class="templateArea tabSelectArea">
-                                                <div class="templateClose"></div>
-                                                <h2 class="templateTitle">定型文の挿入</h2>
+                                            <div class="templateClose"></div>
+                                            <h2 class="templateTitle">定型文の挿入</h2>
                                                 <div class="templateSelect">
                                                     <select class="tabSelectLinks">
                                                         <option value="#template01">あいさつ１</option>
@@ -151,9 +149,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <x-parts.file-input/>
                                     <div class="cancelTitle">
-                                        <p>送信されたチャットを必要に応じてカリビト確認・削除することに同意し、</p>
+                                        <p>送信されたチャットを必要に応じてカリビトが確認・削除することに同意します。</p>
                                     </div>
                                     <div class="functeBtns">
                                         <input type="submit" class="orange" value="送信する">
@@ -161,17 +158,23 @@
                                 </div>
                             </form>
                         @endif
-                        <div class="item">
-                            <div class="about">
-                                <p class="danger">ご注意！</p>
-                                <p>・履歴を残すため、カリビト内でのやりとりを推奨しております。<br>・トラブルの際は 警察等の捜査依頼に積極的に協力しております 。<br>・直接お会いしての取引は、人目のつく場所か複数人で行いましょう。<br>・ 無断でキャンセル、公序良俗に反する行為、誹謗中傷などは利用停止となることがあります。</p>
-                            </div>
                         </div>
                     </div>
-                </div>
-            </div><!-- /#main -->
-            <x-side-menu/>
-        </div><!--inner-->
-    </div><!-- /#contents -->
-</article>
+                </div><!-- /#main -->
+                <x-side-menu/>
+            </div><!--inner-->
+        </div><!-- /#contents -->
+    </article>
 </x-layout>
+    
+<script>
+    // 打ち込んだ文字数の表示
+    function ShowLength( str ) {
+        document.getElementById("inputlength").innerHTML = str.length + "/3000";
+    }
+
+        // フィールドをクリックしたら文字数の表示
+    function ClickShowLength( str ) {
+        document.getElementById("inputlength").innerHTML = str.length + "/3000";
+    }
+</script>

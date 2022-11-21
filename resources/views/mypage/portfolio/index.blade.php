@@ -30,12 +30,10 @@
                                         </a>
                                         <div class="editP">
                                             <a href="{{ route('portfolio.edit', $portfolio) }}" class="editPLink">編集する</a>
-                                            <form action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
+                                            <form id="delete-portfolio" action="{{ route('portfolio.destroy', $portfolio) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button onclick='return confirm("このポートフォリオを削除しますか？");' class="delete">
-                                                    削除
-                                                </button>
+                                                <button type="button" class="delete js-alertModal">削除</button>
                                             </form>
                                         </div>
                                     </li>
@@ -45,6 +43,8 @@
                     </div>
                 </div><!-- /#main -->
                 <x-side-menu/>
+
+                <x-parts.alert-modal phrase="このポートフォリオを削除しますか？" formId="delete-portfolio" />
             </div>
         </div><!-- /#contents -->
     </div>

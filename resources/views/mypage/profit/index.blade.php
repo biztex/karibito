@@ -33,14 +33,17 @@
 								<div class="bankTransferBtnWrap">
 									{{-- <a href="" class="bankTransferBtn">ポイントに交換する</a> --}}
 									@if($profit['total'] <= 0)
-										<a href="" onclick='return confirm("売上金残高がございません");' class="bankTransferBtn">振り込み申請をする</a>
+                                        <a type="button" class="bankTransferBtn js-alertModal">振り込み申請をする</a>
+                                        <x-parts.alert-modal phrase="売上金残高がございません" cancel_value="OK" />
 									@elseif(Auth::user()->bankAccount !== null)
-										<form action="{{ route('transfer_request.store') }}" method="post">
+										<form id="bankTransfer-form" action="{{ route('transfer_request.store') }}" method="post">
 											@csrf
-											<button type="submit" onclick='return confirm("合計売上金残高の振込を申請しますか？");'  class="bankTransferBtn">振り込み申請をする</button>
+                                            <a type="button" class="bankTransferBtn js-alertModal-3">振り込み申請をする</a>
+                                            <x-parts.alert-modal-3 phrase="合計売上金残高の振込を申請しますか？" value="OK" formId="bankTransfer-form" />
 										</form>
 									@else
-										<a href="{{ route('setting.bank.edit') }}" onclick='return confirm("振込口座の登録が必要です");' class="bankTransferBtn">振り込み申請をする</a>
+                                        <a type="button" class="bankTransferBtn js-alertModal-2">振り込み申請をする</a>
+                                        <x-parts.alert-modal-2 phrase="振込口座の登録が必要です" cancel_value="OK" />
 									@endif
 								</div>
 								<div class="bankTransferAttention">

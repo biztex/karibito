@@ -58,14 +58,17 @@
 													</a>
 													<div class="link">
 														<a href="{{ route('product.edit',$val->id) }}">編集する</a>
-														<form method="post" action="{{ route('product.destroy', $val->id ) }}">
+														<form id="delete-product" method="post" action="{{ route('product.destroy', $val->id ) }}">
 															@csrf @method('delete')
-															<p class="linkdel"><input type="submit" class="full" value="削除"  onclick='return confirm("削除してもよろしいですか？");'></p>
+                                                            <p class="linkdel">
+                                                                <input type="button" class="full js-alertModal" value="削除">
+                                                            </p>
 														</form>
 													</div>
 												</div>
 											</div>
 										</li>
+                                        <x-parts.alert-modal formId="delete-product"/>
 										@endforeach
 									@endif
 								</ul>
@@ -93,7 +96,7 @@
 													<a href="{{ route('job_request.edit',$val->id) }}">
 														<div class="draw">
 															<p class="price">
-																<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
+																<font>@if(!empty($val->title)){{ $val->title }}@else 商品名未定@endif</font><br>{{ number_format($val->price) }}円
 															</p>
 														</div>
 														<div class="single">
@@ -104,14 +107,17 @@
 													</a>
 													<div class="link">
 														<a href="{{ route('job_request.edit',$val->id) }}">編集する</a>
-														<form method="post" action="{{ route('job_request.destroy', $val->id ) }}">
+														<form id="delete-job_request" method="post" action="{{ route('job_request.destroy', $val->id ) }}">
 															@csrf @method('delete')
-															<p class="linkdel"><input type="submit" class="full" value="削除"  onclick='return confirm("削除してもよろしいですか？");'></p>
+                                                            <p class="linkdel">
+                                                                <input type="button" class="full js-alertModal-2" value="削除">
+                                                            </p>
 														</form>
 													</div>
 												</div>
 											</div>
 										</li>
+                                        <x-parts.alert-modal-2 formId="delete-job_request" />
 										@endforeach
 									@endif
 								</ul>

@@ -41,7 +41,10 @@
 												@endif
                                                 @if(\Auth::user())
                                                     @if(App\Models\UserFollow::IsFollowing($user->id))
-                                                        <a href="{{ route('follow.sub', ['id' => $user->id]) }}" class="followB" onclick='return confirm("フォローを解除しますか？");'>フォロー済み</a>
+                                                        <form id="follow-sub-form" action="{{ route('follow.sub', ['id' => $user->id]) }}" method="get">
+                                                            @csrf
+                                                            <a type="button" class="followB js-alertModal" style="cursor: pointer">フォロー済み</a>
+                                                        </form>
                                                     @else
                                                         <a href="{{ route('follow.add', ['id' => $user->id]) }}" class="followA">フォローする</a>
                                                     @endif
@@ -295,5 +298,6 @@
 				</div><!-- /#main -->
 			</div><!--inner-->
 		</div><!-- /#contents -->
+        <x-parts.alert-modal phrase="フォローを解除してもよろしいですか？" value="フォロー解除" formId="follow-sub-form" />
 	</article>
 </x-other-user.layout>
