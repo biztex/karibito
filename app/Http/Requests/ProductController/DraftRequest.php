@@ -47,7 +47,7 @@ class DraftRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_id.required_without_all' => 'カテゴリ / サービス名 / 商品の詳細 の中で1個以上の項目を必ず入力してください。',
+            'category_id.required_without_all' => 'カテゴリ / サービス名 / サービスの詳細 の中で1個以上の項目を必ず入力してください。',
         ];
     }
 }

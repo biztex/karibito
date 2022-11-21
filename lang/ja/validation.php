@@ -228,7 +228,7 @@ return [
         'category_id' => 'カテゴリ',
         'prefecture_id' => 'エリア',
         'title' => 'サービス名',
-        'content' => '商品の詳細',
+        'content' => 'サービスの詳細',
         'price' => '金額',
         'application_deadline' => '応募期限',
         'required_date' => '納品希望日',
