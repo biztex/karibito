@@ -10603,6 +10603,14 @@ input.small {
 	font-weight: bold;
 }
 
+/* 会員登録画面注意書き */
+.loginInfo {
+	font-size: 12px;
+	margin-bottom: 30px;
+	padding-left: 1em;
+	text-indent: -1em;
+}
+
 .warnBoxTitle,
 .warnBoxText {
 	text-align: left;
