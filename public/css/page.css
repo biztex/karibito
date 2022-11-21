@@ -10598,6 +10598,17 @@ input.small {
 	color: red;
 }
 
+/* チャット内サイドバーブロック固定 */
+@media screen and (min-width: 768px) {
+	#wrapper.visible {
+		overflow: visible;
+	}
+
+	.sideChatroom {
+		position: sticky;
+		top: 133px;
+	}
+
 /* チャットルーム文言変更 */
 .warnBoxTitle {
 	font-weight: bold;

@@ -72,5 +72,6 @@
             $('html').addClass('fancybox-margin fancybox-lock');
         };
 
+        $('#wrapper').addClass('visible');
     });
 </script>
