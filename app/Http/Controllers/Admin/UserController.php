@@ -124,7 +124,7 @@ class UserController extends Controller
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認の承認を取り消しました！";
 
-        \Mail::to($user->email)
+        \Mail::to('adminContact@test.com')
             ->send(new RevokeApprovalMail($user));
 
         $user->userProfile->identification_path = null;
