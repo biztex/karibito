@@ -1,5 +1,6 @@
 <div class="mypageSec04">
-    <p class="mypageHd02"><span>スキル・経歴・職務</span><a href="{{ route('resume.show') }}" class="more">スキル・経歴・職務を編集する</a>
+    <p class="mypageHd02"><span>スキル・経歴・職務</span><br>
+    <a href="{{ route('resume.show') }}" class="more">スキル・経歴・職務を編集する</a>
     </p>
     <div class="mypageItem">
         <p class="mypageHd03">スキル</p>

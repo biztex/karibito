@@ -111,8 +111,10 @@ class ProductController extends Controller
         $is_favorite = Favorite::product()->where('reference_id', $product->id)->first();
 
         $url = $this->product_service->getURL($product->id);
+        
+        $count_favorite = $product->favorites->count(); // いいねの数
 
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite'));
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite', 'count_favorite'));
     }
 
     /**
