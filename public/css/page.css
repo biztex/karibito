@@ -10515,3 +10515,36 @@ input.small {
 .bank-input-info{
 	color:red;
 }
+
+/* チャット内サイドバーブロック固定 */
+@media screen and (min-width: 768px) {
+	#wrapper.visible {
+		overflow: visible;
+	}
+
+	.sideChatroom {
+		position: sticky;
+		top: 133px;
+	}
+
+/* チャットルーム文言変更 */
+.warnBoxTitle {
+	font-weight: bold;
+}
+
+/* 会員登録画面注意書き */
+.loginInfo {
+	font-size: 12px;
+	margin-bottom: 30px;
+	padding-left: 1em;
+	text-indent: -1em;
+}
+
+.warnBoxTitle,
+.warnBoxText {
+	text-align: left;
+}
+
+.chatPages .warnBox p+p.warnBoxText {
+	margin-top: 5px;
+}

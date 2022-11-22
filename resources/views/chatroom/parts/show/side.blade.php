@@ -1,4 +1,4 @@
-<aside id="side">
+<aside id="side" class="sideChatroom">
     <div class="sideItem">
         <p class="sideHd">掲載内容</p>
         <div class="sideUl01">
