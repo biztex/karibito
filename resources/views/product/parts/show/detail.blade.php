@@ -6,21 +6,22 @@
         </div>
         @if (is_null($is_favorite))
             <form method="post" action="{{ route('favorite.store', $product->id) }}">
+                <p style="text-align: center;">お気に入り</p>
             {{-- <a href="{{ route('favorite.create' ) }}" class="favorite">
                 <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
-                <span>お気に入り</span>
+                <span></span>
             </a> --}}
                 <button type="submit" class="favorite">
                     <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
-                    <span>お気に入り</span>
+                    <span>{{ $count_favorite }}</span>
                 </button>
         @else
-            <form method="post" action="{{ route('favorite.delete', $product->id) }}">いいねされている
+            <form method="post" action="{{ route('favorite.delete', $product->id) }}">
+                <p style="text-align: center;">お気に入り</p>
                 @method('delete')
                 <button type="submit" class="favorite">
-                    <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
-                    <span>お気に入り</span>
-                </button>
+                    <span class="icon"><img src="https://t4.ftcdn.net/jpg/04/26/80/47/360_F_426804713_IEvXbiB6t4HyrCTpeisp2CBpJTmMBp4J.jpg" alt=""></span>
+                    <span>{{ $count_favorite }}</span>
         @endif
                 <input type="hidden" name="product_id" value="{{$product->id}}">
                 @csrf

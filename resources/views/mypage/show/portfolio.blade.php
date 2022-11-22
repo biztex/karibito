@@ -1,5 +1,6 @@
 <div class="mypageSec05">
-    <p class="mypageHd02"><span>ポートフォリオ</span><a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
+    <p class="mypageHd02"><span>ポートフォリオ</span><br>
+    <a href="{{ route('portfolio.index') }}" class="more">ポートフォリオを編集する</a></p>
     @if (Auth::user()->portfolios->isEmpty())
             <p>ポートフォリオの登録はありません。</p>
     @else
