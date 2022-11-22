@@ -8,6 +8,7 @@ use App\Models\UserFollow;
 use App\Services\ChatroomService;
 use App\Services\FavoriteService;
 use App\http\Requests\WithdrawController\StoreRequest;
+use App\Mail\User\WithdrawMail;
 
 class WithdrawController extends Controller
 {
@@ -36,6 +37,10 @@ class WithdrawController extends Controller
         $str_delete = 'delete-'.$user->id.'-';
 
         $this->chatroom_service->canIWithdraw($user);
+
+        // 退会後のメール処理
+        \Mail::to($user->email)
+            ->send(new WithdrawMail($user));
 
         \DB::transaction(function () use ($user, $str_delete) {
 
