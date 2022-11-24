@@ -10609,17 +10609,18 @@ input.small {
 		top: 133px;
 	}
 
-/* チャットルーム文言変更 */
-.warnBoxTitle {
-	font-weight: bold;
-}
+	/* チャットルーム文言変更 */
+	.warnBoxTitle {
+		font-weight: bold;
+	}
 
-/* 会員登録画面注意書き */
-.loginInfo {
-	font-size: 12px;
-	margin-bottom: 30px;
-	padding-left: 1em;
-	text-indent: -1em;
+	/* 会員登録画面注意書き */
+	.loginInfo {
+		font-size: 12px;
+		margin-bottom: 30px;
+		padding-left: 1em;
+		text-indent: -1em;
+	}
 }
 
 .warnBoxTitle,
