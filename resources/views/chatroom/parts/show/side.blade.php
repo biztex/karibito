@@ -62,7 +62,7 @@
                     <div class="fancyboxProposal">
                         <ul class="contactForm">
                             <li>
-                                <p><span class="th">商品名</span><br>{{ $chatroom->reference->title }}</p>
+                                <p><span class="th">サービス名</span><br>{{ $chatroom->reference->title }}</p>
                             </li>
                             <li>
                                 <div class="amount">
