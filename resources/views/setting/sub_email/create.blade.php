@@ -30,7 +30,7 @@
 										</ul>
 									@else
 										<ul class="loginFormBtn">
-											<li><input type="submit" class="submit loading-disabled" value="登録する"></li>
+											<li><input type="submit" class="submit loading-disabled" value="変更する"></li>
 										</ul>
 										<ul class="loginFormBtn">
 											<li><a href="{{ route('setting.index') }}">戻る</a></li>
