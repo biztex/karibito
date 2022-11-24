@@ -30,7 +30,7 @@
             @endif
         </div>
         <div class="functeBtns">
-            <input type="submit" class="orange" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を開始">
+            <input type="submit" class="orange" style="color: #fff;font-weight:700;box-shadow: 0 6px 0 #d85403;height: 55px;font-size: 1.8rem;" value="サービス提供を登録する">
         </div>
     </div>
 
