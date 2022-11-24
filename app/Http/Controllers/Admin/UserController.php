@@ -10,6 +10,7 @@ use App\Services\AdminUserSearchService;
 use App\Mail\Admin\NotifyBanMail;
 use App\Mail\Admin\CancelNotifyBanMail;
 use App\Mail\User\ApproveMail;
+use App\Mail\Admin\RevokeApprovalMail;
 
 class UserController extends Controller
 {
@@ -122,6 +123,13 @@ class UserController extends Controller
         $user->userProfile->fill(['is_identify' => 0])->save();
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認の承認を取り消しました！";
+
+        \Mail::to($user->email)
+            ->send(new RevokeApprovalMail($user));
+
+        $user->userProfile->identification_path = null;
+        $user->userProfile->save();
+
         return back()->with('flash_msg',$flash_msg);
 
     }

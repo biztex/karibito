@@ -31,7 +31,7 @@
                             <tr>
                                 <th scope="col" class="text-nowrap">id</th>
                                 <th scope="col" class="text-nowrap">カテゴリー名</th>
-                                <th scope="col" class="text-nowrap">商品名</th>
+                                <th scope="col" class="text-nowrap">サービス名</th>
                                 <th scope="col" class="text-nowrap">ユーザー名</th>
                                 <th scope="col" class="text-nowrap">仕事体系</th>
                                 <th scope="col" class="text-nowrap">エリア</th>

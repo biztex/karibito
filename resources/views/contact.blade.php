@@ -25,10 +25,10 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="labelMail">{{-- 商品名 --}}
+                                <div class="labelMail">{{-- サービス名 --}}
                                     <p style="opacity: 70%;">
                                         @if (isset($report_product_title))
-                                            商品名:{{ $report_product_title }}
+                                            サービス名:{{ $report_product_title }}
                                         @elseif (isset($report_job_request_title))
                                             リクエスト名:{{ $report_job_request_title }}
                                         @endif
