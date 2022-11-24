@@ -15,7 +15,7 @@
 											@error('sub_email')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-										<p><input type="text" name="sub_email" placeholder="" class="@error('sub_email') is-invalid @enderror" value="{{ old('sub_email') }}" required></p>
+										<p><input type="text" name="sub_email" value="{{ old('sub_email') }}"></p>
 									</div>
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit loading-disabled" value="登録"></li>
