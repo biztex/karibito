@@ -35,6 +35,12 @@
 										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('setting.email.edit') }}">変更する</a>
 									</dd>
 								</dl>
+								<dl class="memberConfigDl">
+									<dt>サブメールアドレス</dt>
+									<dd>
+										<a class="configLink" href="{{ route('sub_mail_create') }}">登録する</a>
+									</dd>
+								</dl>
 								@can('exist.password')
 									<dl class="memberConfigDl">
 										<dt>パスワード</dt>

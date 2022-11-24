@@ -103,6 +103,12 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::resource('user_profile', UserProfileController::class, ['only' => ['index', 'create', 'store']]);
         });
 
+        // TODO:editのルート後ほど追加
+        // サブメールのルート
+        Route::get('sub_email/create', [ChangeEmailController::class, 'subMailCreate'])->name('sub_mail_create');
+        Route::post('sub_email/create', [ChangeEmailController::class, 'subMailStore'])->name('sub_mail_store');
+        // Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
+
         // マイページ・プロフィール編集
         Route::middleware('null.user.profile')->group(function () {
             Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
