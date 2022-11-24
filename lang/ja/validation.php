@@ -211,6 +211,7 @@ return [
     'attributes' => [
         'name' => 'ニックネーム',
         'email' => 'メールアドレス',
+        'sub_email' => 'サブメールアドレス',
         'password' => 'パスワード',
         'tel' => '電話番号',
         'gender' => '性別',

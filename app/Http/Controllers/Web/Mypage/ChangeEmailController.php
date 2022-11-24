@@ -8,6 +8,7 @@ use App\Services\ChangeEmailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Http\Requests\Mypage\ChangeEmailController\StoreSubEmailRequest;
 
 class ChangeEmailController extends Controller
 {
@@ -48,22 +49,16 @@ class ChangeEmailController extends Controller
     // サブメール
     public function subMailCreate()
     {
-        // dd(Auth::user());
-        return view('setting/sub_email.create');
+        $user =  Auth::user();
+        return view('setting/sub_email.create',  compact('user'));
     }
 
     // サブメール登録と更新処理
-    public function subMailStore(Request $request)
+    public function subMailStore(StoreSubEmailRequest $request)
     {
         Auth::user()->sub_email = $request->sub_email;
         Auth::user()->save();
         return to_route('setting.index');
-    }
-
-    public function subMailEdit()
-    {
-        $user =  Auth::user();
-        return view('setting/sub_email.edit', compact('user'));
     }
 
     public function subMailDestroy()

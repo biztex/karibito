@@ -5,25 +5,35 @@
 				<div class="inner">
 					<div id="main">
 						<div class="loginWrap">
-							<h2 class="subPagesHd">サブメールアドレス登録</h2>
+							@if (!isset($user->sub_email))
+								<h2 class="subPagesHd">サブメールアドレス登録</h2>
+							@else
+								<h2 class="subPagesHd">サブメールアドレス編集</h2>
+							@endif
 							<div class="contactBox">
 								<form action="{{ route('sub_mail_store') }}" method="post" id="form" enctype="multipart/form-data" name="form1">
 									@csrf
-									{{-- TODO:すぐ飛べるために --}}
 									<div class="labelCategory">
 										<p>サブメールアドレス</p>
 											@error('sub_email')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-										<p><input type="text" name="sub_email" value="{{ old('sub_email') }}"></p>
+										<p><input type="text" name="sub_email" value="@if (!isset($user->sub_email)) {{ old('sub_email') }} @else {{ old('sub_email', $user->sub_email) }} @endif "></p>
 									</div>
-									<ul class="loginFormBtn">
-										<li><input type="submit" class="submit loading-disabled" value="登録"></li>
-									</ul>
-                                    <ul class="loginFormBtn">
-										<li><a href="{{ route('setting.index') }}">戻る</a></li>
-									</ul>
+										{{-- TODO:後ほどif文作成 --}}
+										<ul class="loginFormBtn">
+											<li><input type="submit" class="submit loading-disabled" value="登録する"></li>
+										</ul>
+										<ul class="loginFormBtn">
+											<li><a href="{{ route('setting.index') }}">戻る</a></li>
+										</ul>
 								</form>
+                                <form action="{{ route('sub_mail_destroy') }}" method="post"> {{-- 削除form --}}
+                                    @csrf
+                                    <ul class="loginFormBtn">
+                                        <li><input type="submit" style="background-color: crimson" class="submit loading-disabled" value="削除する"></li>
+                                    </ul>
+                                </form> {{-- 削除form --}}
 							</div>
 						</div>
 					</div><!-- /#main -->

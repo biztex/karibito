@@ -106,7 +106,6 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         // サブメールのルート
         Route::get('sub_email/create', [ChangeEmailController::class, 'subMailCreate'])->name('sub_mail_create');
         Route::post('sub_email/create', [ChangeEmailController::class, 'subMailStore'])->name('sub_mail_store');
-        Route::get('sub_email/edit', [ChangeEmailController::class, 'subMailEdit'])->name('sub_mail_edit');
         Route::post('sub_email/edit', [ChangeEmailController::class, 'subMailDestroy'])->name('sub_mail_destroy');
 
         // マイページ・プロフィール編集
