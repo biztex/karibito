@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UserFollow;
 use App\Services\ChatroomService;
 use App\Services\FavoriteService;
-use App\http\Requests\WithdrawController\StoreRequest;
+use App\Http\Requests\WithdrawController\StoreRequest;
 
 class WithdrawController extends Controller
 {
