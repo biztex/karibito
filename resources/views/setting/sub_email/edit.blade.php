@@ -9,7 +9,6 @@
 							<div class="contactBox">
 								<form action="{{ route('sub_mail_store') }}" method="post" id="form" enctype="multipart/form-data" name="form1">
 									@csrf
-									{{-- TODO:すぐ飛べるために --}}
 									<div class="labelCategory">
 										<p>サブメールアドレス</p>
 											@error('sub_email')
