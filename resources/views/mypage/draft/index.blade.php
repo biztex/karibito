@@ -47,7 +47,7 @@
 													<a href="{{ route('product.edit',$val->id) }}">
 														<div class="draw">
 															<p class="price">
-																<font>@if(!empty($val->title)){{ $val->title }}@else商品名未定@endif</font><br>{{ number_format($val->price) }}円
+																<font>@if(!empty($val->title)){{ $val->title }}@elseサービス名未定@endif</font><br>{{ number_format($val->price) }}円
 															</p>
 														</div>
 														<div class="single">
@@ -96,7 +96,7 @@
 													<a href="{{ route('job_request.edit',$val->id) }}">
 														<div class="draw">
 															<p class="price">
-																<font>@if(!empty($val->title)){{ $val->title }}@else 商品名未定@endif</font><br>{{ number_format($val->price) }}円
+																<font>@if(!empty($val->title)){{ $val->title }}@else サービス名未定@endif</font><br>{{ number_format($val->price) }}円
 															</p>
 														</div>
 														<div class="single">
