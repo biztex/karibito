@@ -52,6 +52,7 @@ class ChangeEmailController extends Controller
         return view('setting/sub_email.create');
     }
 
+    // サブメール登録と更新処理
     public function subMailStore(Request $request)
     {
         Auth::user()->sub_email = $request->sub_email;
@@ -59,13 +60,17 @@ class ChangeEmailController extends Controller
         return to_route('setting.index');
     }
 
-    // public function subMailCreate()
-    // {
-    //     return view('setting/sub_email.create');
-    // }
+    public function subMailEdit()
+    {
+        $user =  Auth::user();
+        return view('setting/sub_email.edit', compact('user'));
+    }
 
-    // public function subMailCreate()
-    // {
-    //     return view('setting/sub_email.create');
-    // }
+    public function subMailDestroy()
+    {
+        // dd(Auth::user());
+        Auth::user()->sub_email = null;
+        Auth::user()->save();
+        return to_route('setting.index');
+    }
 }

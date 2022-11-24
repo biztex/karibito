@@ -38,7 +38,8 @@
 								<dl class="memberConfigDl">
 									<dt>サブメールアドレス</dt>
 									<dd>
-										<a class="configLink" href="{{ route('sub_mail_create') }}">登録する</a>
+										<a class="configLink" href="{{ route('sub_mail_create') }}">登録する</a> 
+										<a class="configLink" href="{{ route('sub_mail_edit') }}">変更する</a> 
 									</dd>
 								</dl>
 								@can('exist.password')
