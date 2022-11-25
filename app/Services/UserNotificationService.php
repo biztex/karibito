@@ -153,12 +153,11 @@ class UserNotificationService
 
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
 
-        // TODO:未完成
-        if (!isset(Auth::user()->sub_email)) {
+        if (!isset($receive_user->sub_email)) {
             \Mail::to($receive_user->email)->send(new MessageRegisterMail($user_notification));
         } else {
             \Mail::to($receive_user->email)
-                ->cc(Auth::user()->sub_email)
+                ->cc($receive_user->sub_email)
                 ->send(new MessageRegisterMail($user_notification));
         }
     }
@@ -182,12 +181,11 @@ class UserNotificationService
         
         $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
         
-        // TODO:cc届かない
-        if (!isset(Auth::user()->sub_email)) {
+        if (!isset($receive_user->sub_email)) {
             \Mail::to($receive_user->email)->send(new DmRegisterMail($user_notification));
         } else {
             \Mail::to($receive_user->email)
-                ->cc(Auth::user()->sub_email)
+                ->cc($receive_user->sub_email)
                 ->send(new DmRegisterMail($user_notification));
         }
     }
