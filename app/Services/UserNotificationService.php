@@ -18,6 +18,7 @@ use App\Models\UserFollow;
 use App\Models\DmroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserNotificationService
 {
@@ -165,7 +166,14 @@ class UserNotificationService
         }
         
         $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
-        \Mail::to($receive_user->email)->send(new DmRegisterMail($user_notification));
+        
+        if (!isset(Auth::user()->sub_email)) {
+            \Mail::to($receive_user->email)->send(new DmRegisterMail($user_notification));
+        } else {
+            \Mail::to($receive_user->email)
+                ->cc(Auth::user()->sub_email)
+                ->send(new DmRegisterMail($user_notification));
+        }
     }
 
     // ニュース
