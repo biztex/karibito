@@ -38,9 +38,14 @@ class WithdrawController extends Controller
 
         $this->chatroom_service->canIWithdraw($user);
 
-        // 退会後のメール処理
-        \Mail::to($user->email)
-            ->send(new WithdrawMail($user));
+        if (!isset(\Auth::user()->sub_email)) {
+            \Mail::to($user->email)
+                ->send(new WithdrawMail($user));
+        } else {
+            \Mail::to($user->email)
+                ->cc(\Auth::user()->sub_email)
+                ->send(new WithdrawMail($user));
+        }
 
         \DB::transaction(function () use ($user, $str_delete) {
 
