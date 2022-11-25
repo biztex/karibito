@@ -18,7 +18,7 @@
 											@error('sub_email')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-										<p><input type="text" name="sub_email" value="@if (!isset($user->sub_email)) {{ old('sub_email') }} @else {{ old('sub_email', $user->sub_email) }} @endif "></p>
+										<p><input type="email" name="sub_email" value="@if (!isset($user->sub_email)) {{ old('sub_email') }} @else {{ old('sub_email', $user->sub_email) }} @endif "></p>
 									</div>
 									@if (!isset($user->sub_email))
 										{{-- TODO:後ほどインデントを整形--}}
