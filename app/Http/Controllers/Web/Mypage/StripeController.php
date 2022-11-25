@@ -39,7 +39,7 @@ class StripeController extends Controller
             $this->stripe_service->createCard($token);
             
         } else {
-            return back()->whit("flash_msg", "カード情報の登録に失敗しました。");
+            return back()->with("flash_msg", "カード情報の登録に失敗しました。");
         }
 
         return back()->with("flash_msg", "カード情報の登録が完了しました。");

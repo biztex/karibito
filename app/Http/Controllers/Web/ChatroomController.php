@@ -232,6 +232,13 @@ class ChatroomController extends Controller
     public function purchaseConfirm(PurchaseConfirmRequest $request, Proposal $proposal)
     {
         $stripe_token = $this->stripe_service->checkToken($request->all());
+
+        // カード保存、かつ新しいカードが選択されているとき
+        if (isset($request['is_credit_save']) && $request['card_id'] === 'immediate') {
+            $this->stripe_service->createCard($stripe_token);
+            \Session::put('flash_msg', 'クレジットカードの情報を保存しました。');
+        }
+        
         $card = $this->stripe_service->getCard($request->all());
         $amount = $this->purchase_service->getConfirmAmount($proposal, $request->all());
 

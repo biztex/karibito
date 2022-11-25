@@ -121,6 +121,7 @@ class PurchaseService
 
 
     /**
+     * 確認画面の金額取得
      * @param Proposal $proposal
      * @param array $params
      * 

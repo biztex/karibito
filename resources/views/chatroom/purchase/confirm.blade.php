@@ -8,6 +8,7 @@
 				<span>お支払い手続き</span>
 			</div>
 		</div><!-- /.breadcrumb -->
+        <x-parts.flash-msg />
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
@@ -90,6 +91,7 @@
 										<input type="hidden" name="card_id" value="{{ Crypt::encryptString($card['id']) }}">
 										<input type="hidden" name="customer_id" value="@if(is_null($stripe_token)){{ $card['customer'] }}@endif">
 										<input type="hidden" name="stripe_token" value="@if(!is_null($stripe_token)){{ Crypt::encryptString($stripe_token) }}@endif">
+                                        <input type="hidden" name="is_credit_save" value="{{ $request['is_credit_save'] }}">
 									</div>
 								</div>
 							</div>
