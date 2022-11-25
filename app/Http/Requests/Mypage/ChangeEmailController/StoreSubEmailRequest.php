@@ -24,7 +24,7 @@ class StoreSubEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'sub_email' => [ 'required', 'email', 'max:255' ]
+            'sub_email' => [ 'required', 'email', 'max:255', 'unique:users' ]
         ];
     }
 }
