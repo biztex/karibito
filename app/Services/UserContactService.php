@@ -14,10 +14,10 @@ class UserContactService
     public function sendMail($request)
     {
         if (!isset(Auth::user()->sub_email)) {
-            Mail::to($request->mail)
+            \Mail::to($request->mail)
                 ->send(new ContactMail($request));
         } else {
-            Mail::to($request->mail)
+            \Mail::to($request->mail)
                 ->cc(Auth::user()->sub_email)
                 ->send(new ContactMail($request));
         }
