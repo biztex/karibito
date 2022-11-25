@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\Mypage\ChangeEmailController\StoreSubEmailRequest;
-use App\Mail\User\SubEmailMail;
 
 class ChangeEmailController extends Controller
 {
@@ -59,9 +58,6 @@ class ChangeEmailController extends Controller
     {
         Auth::user()->sub_email = $request->sub_email;
         Auth::user()->save();
-
-        \Mail::to(Auth::user()->sub_email)
-            ->send(new SubEmailMail(Auth::user()));
         return to_route('setting.index');
     }
 
