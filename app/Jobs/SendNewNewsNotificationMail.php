@@ -11,7 +11,6 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Mail\NewsRegisterMail;
 use App\Models\UserNotification;
-use Illuminate\Support\Facades\Auth;
 
 class SendNewNewsNotificationMail implements ShouldQueue
 {
@@ -36,11 +35,12 @@ class SendNewNewsNotificationMail implements ShouldQueue
      */
     public function handle()
     {
-        if (!isset(Auth::user()->sub_email)) {
-            \Mail::to($this->user_notification->user->email)->send(new NewsRegisterMail($this->user_notification));
-        } else {
+        if (\Auth::user()->sub_email) {
             \Mail::to($this->user_notification->user->email)
                 ->cc(Auth::user()->sub_email)
+                ->send(new NewsRegisterMail($this->user_notification));
+        } else {
+            \Mail::to($this->user_notification->user->email)
                 ->send(new NewsRegisterMail($this->user_notification));
         }
     }

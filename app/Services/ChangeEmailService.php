@@ -6,7 +6,6 @@ use App\Mail\ChangeEmailMail;
 use App\Models\EmailReset;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class ChangeEmailService
 {
@@ -36,14 +35,16 @@ class ChangeEmailService
                 'token' => $token,
             ]);
             \DB::commit();
+            \Mail::to($new_email)->send(new ChangeEmailMail($token));
 
-            if (!isset(Auth::user()->sub_email)) {
-                \Mail::to($new_email)->send(new ChangeEmailMail($token));
-            } else {
-                \Mail::to($new_email)
-                    ->cc(Auth::user()->sub_email)
-                    ->send(new ChangeEmailMail($token));
-            }
+            // メール変更でCCにメールを入れてもいいか確認
+            // if (\Auth::user()->sub_email) {
+            //     \Mail::to($new_email)
+            //         ->cc(\Auth::user()->sub_email)
+            //         ->send(new ChangeEmailMail($token));
+            // } else {
+            //     \Mail::to($new_email)->send(new ChangeEmailMail($token));
+            // }
 
             return true;
         } catch (\Exception $e) {

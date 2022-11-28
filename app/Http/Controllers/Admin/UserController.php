@@ -110,13 +110,12 @@ class UserController extends Controller
     {
         $user->userProfile->fill(['is_identify' => 1])->save();
 
-        if (!isset($user->sub_email)) {
-            \Mail::to($user->email)
-                ->send(new ApproveMail($user));
-        }
-        else {
+        if ($user->sub_email) {
             \Mail::to($user->email)
                 ->cc($user->sub_email)
+                ->send(new ApproveMail($user));
+        } else {
+            \Mail::to($user->email)
                 ->send(new ApproveMail($user));
         }
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認を承認しました！";

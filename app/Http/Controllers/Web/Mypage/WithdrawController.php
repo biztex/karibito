@@ -38,12 +38,12 @@ class WithdrawController extends Controller
 
         $this->chatroom_service->canIWithdraw($user);
 
-        if (!isset(\Auth::user()->sub_email)) {
+        if (\Auth::user()->sub_email) {
             \Mail::to($user->email)
+                ->cc(\Auth::user()->sub_email)
                 ->send(new WithdrawMail($user));
         } else {
             \Mail::to($user->email)
-                ->cc(\Auth::user()->sub_email)
                 ->send(new WithdrawMail($user));
         }
 

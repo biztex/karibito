@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mypage\ChangeEmailController\SendChangeEmailLinkRequest;
 use App\Services\ChangeEmailService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Http\Requests\Mypage\ChangeEmailController\StoreSubEmailRequest;
 
 class ChangeEmailController extends Controller

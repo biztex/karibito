@@ -18,7 +18,6 @@ use App\Models\UserFollow;
 use App\Models\DmroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
-use Illuminate\Support\Facades\Auth;
 
 class UserNotificationService
 {
@@ -110,11 +109,12 @@ class UserNotificationService
 
         $mail_content = UserNotification::create($user_notification);
 
-        if (!isset($product_user->sub_email)) {
-            \Mail::to($product_user->email)->send(new LikeRegisterMail($mail_content));
-        } else {
+        if ($product_user->sub_email) {
             \Mail::to($product_user->email)
                 ->cc($product_user->sub_email)
+                ->send(new LikeRegisterMail($mail_content));
+        } else {
+            \Mail::to($product_user->email)
                 ->send(new LikeRegisterMail($mail_content));
         }
     }
@@ -153,11 +153,12 @@ class UserNotificationService
 
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
 
-        if (!isset($receive_user->sub_email)) {
-            \Mail::to($receive_user->email)->send(new MessageRegisterMail($user_notification));
-        } else {
+        if ($receive_user->sub_email) {
             \Mail::to($receive_user->email)
                 ->cc($receive_user->sub_email)
+                ->send(new MessageRegisterMail($user_notification));
+        } else {
+            \Mail::to($receive_user->email)
                 ->send(new MessageRegisterMail($user_notification));
         }
     }
@@ -181,11 +182,12 @@ class UserNotificationService
         
         $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
         
-        if (!isset($receive_user->sub_email)) {
-            \Mail::to($receive_user->email)->send(new DmRegisterMail($user_notification));
-        } else {
+        if ($receive_user->sub_email) {
             \Mail::to($receive_user->email)
                 ->cc($receive_user->sub_email)
+                ->send(new DmRegisterMail($user_notification));
+        } else {
+            \Mail::to($receive_user->email)
                 ->send(new DmRegisterMail($user_notification));
         }
     }

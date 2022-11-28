@@ -5,10 +5,10 @@
 				<div class="inner">
 					<div id="main">
 						<div class="loginWrap">
-							@if (!isset($user->sub_email))
-								<h2 class="subPagesHd">サブメールアドレス登録</h2>
-							@else
+							@if ($user->sub_email)
 								<h2 class="subPagesHd">サブメールアドレス編集</h2>
+							@else
+								<h2 class="subPagesHd">サブメールアドレス登録</h2>
 							@endif
 							<div class="contactBox">
 								<form action="{{ route('sub_mail_store') }}" method="post" id="form" enctype="multipart/form-data" name="form1">
@@ -18,10 +18,9 @@
 											@error('sub_email')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-										<p><input type="email" name="sub_email" value="@if (!isset($user->sub_email)) {{ old('sub_email') }} @else {{ old('sub_email', $user->sub_email) }} @endif "></p>
+										<p><input type="email" name="sub_email" value="{{ old('sub_email', $user->sub_email) }}"></p>
 									</div>
-									@if (!isset($user->sub_email))
-										{{-- TODO:後ほどインデントを整形--}}
+									@if (is_null($user->sub_email))
 										<ul class="loginFormBtn">
 											<li><input type="submit" class="submit loading-disabled" value="登録する"></li>
 										</ul>

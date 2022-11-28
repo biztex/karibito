@@ -35,11 +35,12 @@ class SendNewPostNotificationMail implements ShouldQueue
      */
     public function handle()
     {
-        if (!isset($this->user_notification->user->sub_email)) {
-            \Mail::to($this->user_notification->user->email)->send(new PostRegisterMail($this->user_notification));
-        } else {
+        if ($this->user_notification->user->sub_email) {
             \Mail::to($this->user_notification->user->email)
                 ->cc($this->user_notification->user->sub_email)
+                ->send(new PostRegisterMail($this->user_notification));
+        } else {
+            \Mail::to($this->user_notification->user->email)
                 ->send(new PostRegisterMail($this->user_notification));
         }
     }

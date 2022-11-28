@@ -35,18 +35,18 @@
 										{{ Auth::user()->email }}　<a class="configLink" href="{{ route('setting.email.edit') }}">変更する</a>
 									</dd>
 								</dl>
-								@if (!isset(Auth::user()->sub_email))
+								@if (Auth::user()->sub_email)
 									<dl class="memberConfigDl">
 										<dt>サブメールアドレス</dt>
 										<dd>
-											<a class="configLink" href="{{ route('sub_mail_create') }}">登録する</a> 
+											{{ Auth::user()->sub_email }}　<a class="configLink" href="{{ route('sub_mail_create') }}">変更する</a> 
 										</dd>
 									</dl>
 								@else
 									<dl class="memberConfigDl">
 										<dt>サブメールアドレス</dt>
 										<dd>
-											{{ Auth::user()->sub_email }}　<a class="configLink" href="{{ route('sub_mail_create') }}">変更する</a> 
+											<a class="configLink" href="{{ route('sub_mail_create') }}">登録する</a> 
 										</dd>
 									</dl>
 								@endif
