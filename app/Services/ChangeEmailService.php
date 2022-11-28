@@ -37,6 +37,15 @@ class ChangeEmailService
             \DB::commit();
             \Mail::to($new_email)->send(new ChangeEmailMail($token));
 
+            // メール変更でCCにメールを入れてもいいか確認
+            // if (\Auth::user()->sub_email) {
+            //     \Mail::to($new_email)
+            //         ->cc(\Auth::user()->sub_email)
+            //         ->send(new ChangeEmailMail($token));
+            // } else {
+            //     \Mail::to($new_email)->send(new ChangeEmailMail($token));
+            // }
+
             return true;
         } catch (\Exception $e) {
             \DB::rollback();

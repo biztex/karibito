@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web\Mypage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mypage\ChangeEmailController\SendChangeEmailLinkRequest;
 use App\Services\ChangeEmailService;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Mypage\ChangeEmailController\StoreSubEmailRequest;
 
 class ChangeEmailController extends Controller
 {
@@ -40,5 +42,27 @@ class ChangeEmailController extends Controller
         } else {
             return redirect()->route('setting.index')->with('flash_msg', 'トークンの有効期限が切れているか、トークンが不正です。');
         }
+    }
+
+    // サブメール
+    public function subMailCreate()
+    {
+        $user =  Auth::user();
+        return view('setting/sub_email.create',  compact('user'));
+    }
+
+    // サブメール登録と更新処理
+    public function subMailStore(StoreSubEmailRequest $request)
+    {
+        Auth::user()->sub_email = $request->sub_email;
+        Auth::user()->save();
+        return to_route('setting.index');
+    }
+
+    public function subMailDestroy()
+    {
+        Auth::user()->sub_email = null;
+        Auth::user()->save();
+        return to_route('setting.index');
     }
 }

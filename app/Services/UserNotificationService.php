@@ -108,7 +108,15 @@ class UserNotificationService
         }
 
         $mail_content = UserNotification::create($user_notification);
-        \Mail::to($product_user->email)->send(new LikeRegisterMail($mail_content));
+
+        if ($product_user->sub_email) {
+            \Mail::to($product_user->email)
+                ->cc($product_user->sub_email)
+                ->send(new LikeRegisterMail($mail_content));
+        } else {
+            \Mail::to($product_user->email)
+                ->send(new LikeRegisterMail($mail_content));
+        }
     }
 
     // チャットメッセージが来たら通知する
@@ -144,7 +152,15 @@ class UserNotificationService
         }
 
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
-        \Mail::to($receive_user->email)->send(new MessageRegisterMail($user_notification));
+
+        if ($receive_user->sub_email) {
+            \Mail::to($receive_user->email)
+                ->cc($receive_user->sub_email)
+                ->send(new MessageRegisterMail($user_notification));
+        } else {
+            \Mail::to($receive_user->email)
+                ->send(new MessageRegisterMail($user_notification));
+        }
     }
     
     //DMが来たら通知する
@@ -165,7 +181,15 @@ class UserNotificationService
         }
         
         $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
-        \Mail::to($receive_user->email)->send(new DmRegisterMail($user_notification));
+        
+        if ($receive_user->sub_email) {
+            \Mail::to($receive_user->email)
+                ->cc($receive_user->sub_email)
+                ->send(new DmRegisterMail($user_notification));
+        } else {
+            \Mail::to($receive_user->email)
+                ->send(new DmRegisterMail($user_notification));
+        }
     }
 
     // ニュース
