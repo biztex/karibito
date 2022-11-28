@@ -35,6 +35,12 @@ class SendNewFavoriteNotificationMail implements ShouldQueue
      */
     public function handle()
     {
-        \Mail::to($this->user_notification->user->email)->send(new FavoriteRegisterMail($this->user_notification));
+        if (!isset($this->user_notification->user->sub_email)) {
+            \Mail::to($this->user_notification->user->email)->send(new FavoriteRegisterMail($this->user_notification));
+        } else {
+            \Mail::to($this->user_notification->user->email)
+                ->cc($this->user_notification->user->sub_email)
+                ->send(new FavoriteRegisterMail($this->user_notification));
+        }
     }
 }

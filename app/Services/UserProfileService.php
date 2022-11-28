@@ -93,7 +93,14 @@ class UserProfileService
         $user_profile->identification_path = $this->image_service->resizeImage($identification_path, UserProfile::RESIZE_WIDTH_IDENTIFICATION, 'identification_path');
         $user_profile->save();
 
-        \Mail::send(new IdentificationUploadMail());
+        if (!isset( \Auth::user()->sub_email)) {
+            \Mail::to(\Auth::user()->email)
+                ->send(new IdentificationUploadMail());
+        } else {
+            \Mail::to(\Auth::user()->email)
+                ->cc(\Auth::user()->sub_email)
+                ->send(new IdentificationUploadMail());
+        }
     }
 
 

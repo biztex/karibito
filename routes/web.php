@@ -104,6 +104,11 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('user_profile/friend_code',[UserProfileController::class, 'friend_code'])->name('friend_code');
         });
 
+        // サブメールのルート
+        Route::get('sub_email/create', [ChangeEmailController::class, 'subMailCreate'])->name('sub_mail_create');
+        Route::post('sub_email/create', [ChangeEmailController::class, 'subMailStore'])->name('sub_mail_store');
+        Route::post('sub_email/edit', [ChangeEmailController::class, 'subMailDestroy'])->name('sub_mail_destroy');
+
         // マイページ・プロフィール編集
         Route::middleware('null.user.profile')->group(function () {
             Route::get('mypage', [MypageController::class, 'show'])->name('mypage');
