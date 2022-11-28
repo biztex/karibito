@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserProfile\StoreRequest;
 use App\Http\Requests\UserProfile\FriendCodeRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
