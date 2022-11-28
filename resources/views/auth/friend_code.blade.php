@@ -28,14 +28,14 @@
 											@error('friend_code')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-										<p><input type="text" name="friend_code" placeholder="" class="@error('friend_code') is-invalid @enderror" value="{{ old('friend_code') }}" required></p>
+										<p><input type="text" name="friend_code" placeholder="" class="@error('friend_code') is-invalid @enderror" value="{{ old('friend_code') }}"></p>
 									</div>
                                     <div class="labelCategory">
 										<p>カリビトをどこで知り合いましたか？</p>
 										@error('where_know')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
-                                        <select name="where_know" required>
+                                        <select name="where_know">
                                             <option value="">選択してください</option>
                                             <option value="1" @if (old('where_know') == '1') selected @endif >Yahoo!、Googleなどで検索した</option>
 											<option value="2" @if (old('where_know') == '2') selected @endif >知人が紹介してくれた（ブログ、SNS、メールなどウェブで）</option>

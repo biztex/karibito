@@ -279,7 +279,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
 
 
         // やり取り（提供・リクエスト共用版）
-        Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
+        Route::prefix('chatroom')->controller(ChatroomController::class)->middleware('null.user.profile')->name('chatroom.')->group(function () {
             Route::get('','index')->name('index');
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
@@ -360,19 +360,21 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         });
 
         // DM
-        Route::prefix('dm')->name('dm.')->group(function () {
-            Route::get('',[DmroomController::class,'index'])->name('index');
-            Route::post('',[DmroomController::class,'store'])->name('store');
-            Route::get('{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('show');
-            Route::post('{dmroom}',[DmroomController::class,'message'])->middleware('is_ban')->name('message');
-            Route::get('create/{user}',[DmroomController::class,'create'])->middleware(['can:not.create.dm,user','is_ban'])->name('create');
-        });
+        Route::middleware('null.user.profile')->group(function () {
+            Route::prefix('dm')->name('dm.')->group(function () {
+                Route::get('',[DmroomController::class,'index'])->name('index');
+                Route::post('',[DmroomController::class,'store'])->name('store');
+                Route::get('{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('show');
+                Route::post('{dmroom}',[DmroomController::class,'message'])->middleware('is_ban')->name('message');
+                Route::get('create/{user}',[DmroomController::class,'create'])->middleware(['can:not.create.dm,user','is_ban'])->name('create');
+            });
 
-        // フォロー・フォロワー
-        Route::prefix('follow')->name('follow.')->group(function () {
-            Route::resource('',FollowController::class, ['only' => 'index']);
-            Route::get('/add/{id}', [FollowController::class, 'addFollow'])->name('add');
-            Route::get('/sub/{id}', [FollowController::class, 'subFollow'])->name('sub');
+            // フォロー・フォロワー
+            Route::prefix('follow')->name('follow.')->group(function () {
+                Route::resource('',FollowController::class, ['only' => 'index']);
+                Route::get('/add/{id}', [FollowController::class, 'addFollow'])->name('add');
+                Route::get('/sub/{id}', [FollowController::class, 'subFollow'])->name('sub');
+            });
         });
     });
     // 提供・リクエストの詳細ページ
