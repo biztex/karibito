@@ -101,6 +101,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         // 会員登録・プロフィール登録
         Route::middleware('exist.user.profile')->group(function () {
             Route::resource('user_profile', UserProfileController::class, ['only' => ['index', 'create', 'store']]);
+            Route::get('user_profile/friend_code',[UserProfileController::class, 'friend_code'])->name('friend_code');
         });
 
         // マイページ・プロフィール編集
@@ -278,7 +279,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
 
 
         // やり取り（提供・リクエスト共用版）
-        Route::prefix('chatroom')->controller(ChatroomController::class)->name('chatroom.')->group(function () {
+        Route::prefix('chatroom')->controller(ChatroomController::class)->middleware('null.user.profile')->name('chatroom.')->group(function () {
             Route::get('','index')->name('index');
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
@@ -359,7 +360,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         });
 
         // DM
-        Route::prefix('dm')->name('dm.')->group(function () {
+        Route::prefix('dm')->name('dm.')->middleware('null.user.profile')->group(function () {
             Route::get('',[DmroomController::class,'index'])->name('index');
             Route::post('',[DmroomController::class,'store'])->name('store');
             Route::get('{dmroom}',[DmroomController::class,'show'])->middleware('can:my.dm,dmroom')->name('show');
@@ -368,7 +369,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         });
 
         // フォロー・フォロワー
-        Route::prefix('follow')->name('follow.')->group(function () {
+        Route::prefix('follow')->name('follow.')->middleware('null.user.profile')->group(function () {
             Route::resource('',FollowController::class, ['only' => 'index']);
             Route::get('/add/{id}', [FollowController::class, 'addFollow'])->name('add');
             Route::get('/sub/{id}', [FollowController::class, 'subFollow'])->name('sub');
