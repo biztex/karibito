@@ -21,7 +21,7 @@
 								</li>
 							</ul>
 							<div class="contactBox">
-								<form action="{{ route('user_profile.store') }}" method="post" id="form" enctype="multipart/form-data" name="form1">
+								<form action="{{ route('friend_code') }}" method="get" id="form" enctype="multipart/form-data" name="form1">
 									@csrf
 									<div class="labelCategory">
 										<p>ニックネーム（24字以内）</p>
@@ -57,21 +57,21 @@
 									</div>
 									<div class="labelCategory">
 										<p>都道府県</p>
-											@error('prefecture')
+											@error('prefecture_id')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 											<div>
-												<select name="prefecture" class="@error('prefecture') is-invalid @enderror" required>
+												<select name="prefecture_id" class="@error('prefecture_id') is-invalid @enderror" required>
 													<option value="">選択してください</option>
 													@foreach ( App\Models\Prefecture::all() as $prefecture )
-														<option value="{{$prefecture->id}}"  @if($prefecture->id == old('prefecture')) selected @endif>{{$prefecture->name}}</option>
+														<option value="{{$prefecture->id}}"  @if($prefecture->id == old('prefecture_id')) selected @endif>{{$prefecture->name}}</option>
 													@endforeach
 												</select>
 											</div>
 									</div>
 									<p style="font-size:12px;">※ニックネームは公開されます。<br>　本人認証に利用されるものと同じ姓名でご記入ください。</p>
 									<ul class="loginFormBtn">
-										<li><input type="submit" class="submit loading-disabled" value="登録"></li>
+										<li><input type="submit" class="submit loading-disabled" value="次へ"></li>
 									</ul>
 								</form>
 							</div>

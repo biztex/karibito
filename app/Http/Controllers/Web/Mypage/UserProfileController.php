@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Web\Mypage;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserProfile\StoreRequest;
+use App\Http\Requests\UserProfile\FriendCodeRequest;
 use App\Http\Requests\UserProfile\UpdateRequest;
 use App\Http\Requests\UserProfile\UpdateCanCallRequest;
 
@@ -39,6 +41,17 @@ class UserProfileController extends Controller
         return view('auth.profile-create');
     }
 
+    public function friend_code(StoreRequest $request)
+    {
+        $name = $request->name;
+        $first_name = $request->first_name;
+        $last_name = $request->last_name;
+        $gender = $request->gender;
+        $prefecture_id = $request->prefecture_id;
+
+        return view('auth.friend_code', compact('name','first_name', 'last_name', 'gender', 'prefecture_id'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -46,7 +59,7 @@ class UserProfileController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request)
+    public function store(FriendCodeRequest $request)
     {
         \DB::transaction(function () use ($request) {
             $this->user_profile_service->updateUserName($request->name);

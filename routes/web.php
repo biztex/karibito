@@ -101,6 +101,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         // 会員登録・プロフィール登録
         Route::middleware('exist.user.profile')->group(function () {
             Route::resource('user_profile', UserProfileController::class, ['only' => ['index', 'create', 'store']]);
+            Route::get('user_profile/friend_code',[UserProfileController::class, 'friend_code'])->name('friend_code');
         });
 
         // マイページ・プロフィール編集
