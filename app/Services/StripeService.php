@@ -106,7 +106,10 @@ class StripeService
      */
     public function createCheckout(array $request, int $amount)
     {
-        if($request['stripe_token'] !== null) {
+        if($request['is_credit_save'] && $request['stripe_token'] !== null){
+            $customer_id = $this->payment_interface->getCustomer();
+            return $this->payment_interface->createChargeByCustomer($amount, $customer_id, \Crypt::decryptString($request['card_id']));
+        }elseif($request['stripe_token'] !== null) {
             return $this->payment_interface->createChargeByToken($amount, \Crypt::decryptString($request['stripe_token']));
         } else {
             return $this->payment_interface->createChargeByCustomer($amount, $request['customer_id'], \Crypt::decryptString($request['card_id']));

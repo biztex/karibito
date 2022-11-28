@@ -118,7 +118,7 @@
 								<ul class="radioChoice" style="display:block;">
 									@foreach($cards as $card)
 										<div class="bl_credit-card-info">
-											<input type="radio" name="card_id" value="{{ Crypt::encryptString($card['id']) }}" @if(old('card_id', $cards[0]['id']) === $card['id']) checked @endif>
+											<input type="radio" name="card_id" value="{{ $card['id'] }}" @if(old('card_id', $cards[0]['id']) === $card['id']) checked @endif>
 											<span class="credit-card-info-number">************{{ $card['last4'] }}</span>
 											<span>{{ $card['name'] }}</span>
 										</div>
@@ -174,7 +174,9 @@
 										</div>
 									</div>
 								</div>
-
+                                <div class="checkboxChoice">
+                                    <label><input type="checkbox" name="is_credit_save" value="1">カードの情報を登録する</label>
+                                </div>
 							</div>{{-- /. --}}
 							<p class="click"><a href="">登録できない場合はこちら</a></p>
 						</div>{{-- /.method --}}
@@ -245,46 +247,41 @@
 
 		const form = document.getElementById('paymentform');
 
-		// 新しいカードか既存のカードの選択を確認
-		form.addEventListener('change', valueChange);
+        // 新しいカードを選択している時、Stripeトークン生成
+        form.addEventListener('submit', function(event) {
+            const checkValue = $('input:radio[name="card_id"]:checked').val();
+            event.preventDefault();
+            if(checkValue == 'immediate'){
+                stripe.createToken(cardNumber,{name: document.querySelector('#cardName').value}).then(function(result) {
+                    if (result.error) {
+                        // エラーがあった場合、エラーを表示
+                        const errorElement = document.getElementById('card-error');
+                        errorElement.textContent = result.error.message;
+                        // form.submit();
+                    } else {
+                        // エラーがない場合、トークン送信
+                        stripeTokenHandler(result.token);
+                    }
+                });
+            }else{
+                const form = document.getElementById('paymentform');
+                form.submit();
+            }
+        });
+        
+        function stripeTokenHandler(token) {
+            // トークンIDを付加してフォームデータをサブミット
+            const form = document.getElementById('paymentform');
+            const hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+            preventEvent = false;
 
-		function valueChange(event){
-			let checkValue = form.elements['card_id'].value;
-
-			// 新しいカードを選択している時、Stripeトークン生成
-			if(checkValue == 'immediate'){
-				
-				form.addEventListener('submit', function(event) {
-					// デフォルトのsubmit動作を止める
-					event.preventDefault();
-					stripe.createToken(cardNumber,{name: document.querySelector('#cardName').value}).then(function(result) {
-						if (result.error) {
-							// エラーがあった場合、エラーを表示
-							// const errorElement = document.getElementById('card-error');
-							// errorElement.textContent = result.error.message;
-							form.submit();
-						} else {
-							// エラーがない場合、トークン送信
-							stripeTokenHandler(result.token);
-						}
-					});
-				});
-
-				function stripeTokenHandler(token) {
-					// トークンIDを付加してフォームデータをサブミット
-					const form = document.getElementById('paymentform');
-					const hiddenInput = document.createElement('input');
-					hiddenInput.setAttribute('type', 'hidden');
-					hiddenInput.setAttribute('name', 'stripeToken');
-					hiddenInput.setAttribute('value', token.id);
-					form.appendChild(hiddenInput);
-					preventEvent = false;
-
-					// フォーム送信
-					form.submit();
-				}
-			}
-		};
+            // フォーム送信
+            form.submit();
+        }
 	} else {
 	// stripe key未設定の時
 		const form = document.getElementById('paymentform');
