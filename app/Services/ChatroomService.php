@@ -7,17 +7,20 @@ use  App\Models\JobRequest;
 use  App\Models\Chatroom;
 use  App\Services\ChatroomMessageService;
 use  App\Services\ProfitService;
+use  App\Services\PurchaseService;
 
 
 class ChatroomService
 {
     private $chatroom_message_service;
     private $profit_service;
+    private $purchase_service;
 
-    public function __construct(ChatroomMessageService $chatroom_message_service, ProfitService $profit_service)
+    public function __construct(ChatroomMessageService $chatroom_message_service, ProfitService $profit_service, PurchaseService $purchase_service)
     {
         $this->chatroom_message_service = $chatroom_message_service;
         $this->profit_service = $profit_service;
+        $this->purchase_service = $purchase_service;
     }
 
     // 新規チャット(提供)
@@ -73,7 +76,9 @@ class ChatroomService
         $chatroom->fill(['status' => 6])->save();
         // 要確認
         if(empty($chatroom->profit)){
-            $this->profit_service->storeProfit($chatroom->seller_user_id, $chatroom->id, $chatroom->purchase->proposal->price);
+            $commission = $this->purchase_service->getCommission($$chatroom->purchase->proposal);
+            dd($commission);
+            $this->profit_service->storeProfit($chatroom->seller_user_id, $chatroom->id, $chatroom->purchase->proposal->price, $commission);
         }
     }
 

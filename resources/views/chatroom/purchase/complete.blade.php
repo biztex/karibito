@@ -1,6 +1,6 @@
 <x-layout>
     <article>
-    	<div id="breadcrumb">
+		<div id="breadcrumb">
 			<div class="inner">
 				<a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('chatroom.index') }}">やりとり一覧</a>　>　
