@@ -345,7 +345,7 @@ class ChatroomController extends Controller
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
-            $this->chatroom_service->statusChangeComplete($chatroom);
+            $this->chatroom_service->statusChangeComplete($chatroom, $this->purchase_service);
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
 
