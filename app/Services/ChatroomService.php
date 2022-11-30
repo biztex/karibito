@@ -7,6 +7,7 @@ use  App\Models\JobRequest;
 use  App\Models\Chatroom;
 use  App\Services\ChatroomMessageService;
 use  App\Services\ProfitService;
+use  App\Services\PurchaseService;
 
 
 class ChatroomService
@@ -68,12 +69,13 @@ class ChatroomService
     }
 
     // ステータスを 6:完了 に変更 & 売上金レコード作成
-    public function statusChangeComplete(Chatroom $chatroom)
+    public function statusChangeComplete(Chatroom $chatroom, PurchaseService $purchase_service)
     {
         $chatroom->fill(['status' => 6])->save();
         // 要確認
         if(empty($chatroom->profit)){
-            $this->profit_service->storeProfit($chatroom->seller_user_id, $chatroom->id, $chatroom->purchase->proposal->price);
+            $commission = $purchase_service->getCommission($chatroom->purchase->proposal);
+            $this->profit_service->storeProfit($chatroom->seller_user_id, $chatroom->id, $chatroom->purchase->proposal->price, $commission);
         }
     }
 
