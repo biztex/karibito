@@ -19,7 +19,7 @@ trait UserHasPointTrait
         $today = date('Y-m-d');
         
         // 有効期限内、かつ、有効期限が昇順の取得ポイントのコレクション
-        $get_points = UserGetPoint::where([
+        $safe_points = UserGetPoint::where([
                             ['user_id', '=', \Auth::id()],
                             ['deadline', '>=', $today],
                         ])
@@ -28,26 +28,26 @@ trait UserHasPointTrait
                         ->get();
 
 
-        // 総取得ポイント 15000
-        $has_point = $get_points->sum('point'); // 7000
+        // 総取得ポイント
+        $has_point = $safe_points->sum('point');
 
-        // 総使用ポイント 3800
+        // 総使用済みポイント
         $used_point = UserUsePoint::where([
                             ['user_id', '=', \Auth::id()],
                             ['deleted_at', '=', null],
                         ])
                         ->get()
-                        ->sum('point'); //期限切れではないポイントの合計を取得 2000ポイント
+                        ->sum('point'); //期限切れではないポイントの合計を取得
         
-        // 古いポイントから差し引いていく
-        foreach($get_points as $key => $get_point_object) {
-            $get_point = $get_point_object->point;
-
-            if ($get_point <= $used_point) {
-                // used_point更新
-                $used_point -= $get_point;
-                // トータルポイント更新
-                $has_point -= $get_point;
+        // 有効期限が古いポイントから差し引いていく
+        foreach($safe_points as $most_old_object) {
+            $most_old_point = $most_old_object->point;
+            // もっとも古いポイントよりも総使用済みポイントが大きければ
+            if ($most_old_point <= $used_point) {
+                // 古いポイントの分、used_pointを小さく
+                $used_point -= $most_old_point;
+                // 古いポイントの分、総ポイントを小さく
+                $has_point -= $most_old_point;
             }else{
                 $has_point -= $used_point;
                 break;
