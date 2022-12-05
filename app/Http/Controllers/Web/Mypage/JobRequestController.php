@@ -126,7 +126,9 @@ class JobRequestController extends Controller
 
         $is_favorite = Favorite::jobRequest()->where('reference_id', $job_request->id)->first();
 
-        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite'));
+        $count_favorite = $job_request->favorites->count(); // いいねの数
+
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite', 'count_favorite'));
     }
 
     /**

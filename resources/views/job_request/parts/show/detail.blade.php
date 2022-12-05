@@ -12,7 +12,7 @@
                         <span>お気に入り</span>
                     </a> --}}
                     <button type="submit" class="favorite">
-                        <span class="icon"><img src="/img/common/ico_heart.svg" alt="">{{ $count_favorite }}</span>
+                        <span class="icon"><img src="/img/common/ico_heart.svg" alt=""></span>
                         <span>{{ $count_favorite }}</span>
                     </button>
                 @else
