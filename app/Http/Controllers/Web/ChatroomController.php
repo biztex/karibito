@@ -127,7 +127,8 @@ class ChatroomController extends Controller
         $chatroom = \DB::transaction(function () use ($request, $product) {
             $chatroom = $this->chatroom_service->startChatroomProduct($product);
             $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
-
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+            
             return $chatroom;
         });
         return redirect()->route('chatroom.show', $chatroom->id);
@@ -145,6 +146,7 @@ class ChatroomController extends Controller
         $chatroom = \DB::transaction(function () use ($request, $job_request) {
             $chatroom = $this->chatroom_service->startChatroomJobRequest($job_request);
             $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
             
             return $chatroom;
         });
