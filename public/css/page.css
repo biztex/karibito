@@ -57,7 +57,7 @@
 	height: 48px;
 	overflow: hidden;
 	background: #fff;
-	border: 1px solid #F8B52A;
+	border: 1px solid #85E5DF;
 	border-radius: 10px;
 }
 
@@ -76,7 +76,7 @@
 .seaServices .search input.btn {
 	-webkit-appearance: none;
 	width: 48px;
-	background: url(../img/common/ico_sea.svg)no-repeat center #F8B52A;
+	background: url(../img/common/ico_sea.svg)no-repeat center #85E5DF;
 	background-size: 16px;
 }
 
@@ -525,7 +525,7 @@
 .cateTit span {
 	display: inline-block;
 	padding: 5px 10px;
-	background: #FEC42D;
+	background: #85E5DF;
 	border-radius: 3px;
 	font-size: 2rem;
 	font-weight: bold;
@@ -620,7 +620,7 @@
 .aboutFeatures {
 	padding: 45px 0 50px;
 	margin-top: 50px;
-	background: #FFF2D6;
+	background: #C6FFFB;
 }
 
 .aboutFeatures .slider {
@@ -1526,9 +1526,9 @@
 }
 
 .indexTab .tabLink li a.is_active {
-	background-color: #000;
-	color: #fff;
-	border-color: #000;
+	background-color: #85E5DF;
+	color: #000;
+	border-color: #85E5DF;
 }
 
 .tabBox {
