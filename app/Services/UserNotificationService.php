@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Jobs\SendNewDmNotificationMail;
 use App\Models\UserNotification;
 use App\Models\User;
 
 use App\Jobs\SendNewFavoriteNotificationMail;
+use App\Jobs\SendNewLikeNotificationMail;
 use App\Jobs\SendNewNewsNotificationMail;
 use App\Jobs\SendNewPostNotificationMail;
 use App\Mail\MessageRegisterMail;
@@ -18,6 +20,7 @@ use App\Models\UserFollow;
 use App\Models\DmroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
+use App\Jobs\SendNewMessageNotificationMail; 
 
 class UserNotificationService
 {
@@ -109,14 +112,7 @@ class UserNotificationService
 
         $mail_content = UserNotification::create($user_notification);
 
-        if ($product_user->sub_email) {
-            \Mail::to($product_user->email)
-                ->cc($product_user->sub_email)
-                ->send(new LikeRegisterMail($mail_content));
-        } else {
-            \Mail::to($product_user->email)
-                ->send(new LikeRegisterMail($mail_content));
-        }
+        SendNewLikeNotificationMail::dispatch($product_user, $mail_content);
     }
 
     // チャットメッセージが来たら通知する
@@ -153,14 +149,7 @@ class UserNotificationService
 
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
 
-        if ($receive_user->sub_email) {
-            \Mail::to($receive_user->email)
-                ->cc($receive_user->sub_email)
-                ->send(new MessageRegisterMail($user_notification));
-        } else {
-            \Mail::to($receive_user->email)
-                ->send(new MessageRegisterMail($user_notification));
-        }
+        SendNewMessageNotificationMail::dispatch($receive_user,$user_notification); 
     }
     
     //DMが来たら通知する
@@ -182,14 +171,7 @@ class UserNotificationService
         
         $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
         
-        if ($receive_user->sub_email) {
-            \Mail::to($receive_user->email)
-                ->cc($receive_user->sub_email)
-                ->send(new DmRegisterMail($user_notification));
-        } else {
-            \Mail::to($receive_user->email)
-                ->send(new DmRegisterMail($user_notification));
-        }
+        SendNewDmNotificationMail::dispatch($receive_user,$user_notification);
     }
 
     // ニュース
