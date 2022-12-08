@@ -84,10 +84,8 @@
                     <li><a href="#">履歴書の作成・管理</a></li>
                     <li><a href="#">お知らせ機能の設定</a></li>
                 </ul>
-                <a href="#" target="_blank" ><img src="/img/common/footer_twitter.png" alt="Twitter" class="footer_twitter"></a>
+                <a href="#" target="_blank" ><img src="/img/common/footer_twitter_icon.png" alt="Twitter" class="footer_twitter"></a>
             </div>
-
-            
             <!--<a href="#">約款特定</a> 
             <a href="{{ route('notation') }}">商取引法に基づく表示</a>
             <a href="#">よくある質問</a>
