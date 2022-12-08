@@ -2,30 +2,33 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-
 use App\Mail\LikeRegisterMail;
 use App\Models\UserNotification;
+use Illuminate\Queue\SerializesModels;
+
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 
 class SendNewLikeNotificationMail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $user_notification;
+    private $product_user;
+    private $mail_content;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(UserNotification $user_notification)
+    public function __construct(User $product_user, UserNotification $mail_content)
     {
-        $this->user_notification = $user_notification;
+        $this->mail_content = $mail_content;
+        $this->product_user = $product_user;
     }
 
     /**
@@ -35,6 +38,13 @@ class SendNewLikeNotificationMail implements ShouldQueue
      */
     public function handle()
     {
-        \Mail::to($this->user_notification->user->email)->send(new LikeRegisterMail($this->user_notification));
+        if ($this->product_user->sub_email) {
+            \Mail::to($this->product_user->email)
+                ->cc($this->product_user->sub_email)
+                ->send(new LikeRegisterMail($this->mail_content));
+        } else {
+            \Mail::to($this->product_user->email)
+                ->send(new LikeRegisterMail($this->mail_content));
+        }
     }
 }
