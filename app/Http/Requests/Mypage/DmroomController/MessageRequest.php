@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Mypage\DmroomController;
 
+use App\Rules\EmailExclusion;
 use App\Rules\phoneNumExclusion;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,7 +26,7 @@ class MessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => ['required_without_all:file_name,file_path', 'max:3000', new phoneNumExclusion],
+            'text' => ['required_without_all:file_name,file_path', 'max:3000', new phoneNumExclusion, new EmailExclusion],
             'file_path' => 'max:20480 '
         ];
     }
