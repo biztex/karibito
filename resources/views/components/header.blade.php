@@ -34,7 +34,7 @@
                     <div class="btnMenu"><span></span><span></span><span></span></div>
                     <nav id="gNavi">
                         <ul class="navUl02 pc">
-                            <li><a href="{{ route('support') }}" class="nav01" >ヘルプ</a></li>
+                            <li><a href="{{ route('support') }}" class="nav01">ヘルプ</a></li>
                                 @auth
                                     <li class="navLink">
                                         <a href="javascript:void(0);" class="nav06 navLinkA">お知らせ
