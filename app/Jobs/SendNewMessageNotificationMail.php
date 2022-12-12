@@ -25,10 +25,10 @@ class SendNewMessageNotificationMail implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $reseive_user, UserNotification $user_notification)
+    public function __construct(User $receive_user, UserNotification $user_notification)
     {
         $this->user_notification = $user_notification;
-        $this->receive_user = $reseive_user;
+        $this->receive_user = $receive_user;
     }
 
     /**

@@ -256,11 +256,17 @@ class ChatroomController extends Controller
      */
     public function purchased(PaymentRequest $request, Proposal $proposal)
     {
-        \DB::transaction(function () use ($request, $proposal) {
+            \DB::beginTransaction();
+
             // 金額取得
             $amount = $this->purchase_service->getFinalAmount($proposal, $request->all());
             // stripe支払い処理
             $charge_id = $this->stripe_service->createCheckout($request->all(), $amount['total']);
+            if(gettype($charge_id) === 'array') {
+                \DB::rollBack();
+                return to_route('chatroom.purchase', $proposal)->with('flash_msg', 'カードエラーが起きました。');
+            }
+            
             // couponを消化する
             $user_coupon = $this->coupon_service->usedCoupon($request->coupon_number);
             // pointを消化する
@@ -273,7 +279,7 @@ class ChatroomController extends Controller
             $this->purchase_service->savePurchasedProduct($proposal);
             $chatroom = $proposal->chatroom;
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
-        });
+            \DB::commit();
 
         return view('chatroom.purchase.complete', compact('proposal'));
     }
