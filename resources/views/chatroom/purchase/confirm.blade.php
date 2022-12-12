@@ -53,7 +53,7 @@
 												<!-- <font class="colorRed">500円割引クーポン(合計3,000円以上のサービスでご利用可能)／2022年02月08日まで</font> -->
 											@endif
 
-											<br>手数料<br>
+											{{-- <br>手数料<br> 手数料は出品者負担のため一旦非表示--}}
 										</td>
 
 										<td>
@@ -66,7 +66,7 @@
 											@if ($request->coupon_use === '1' && !is_null($amount['coupon_discount']))
 												<br><font class="colorRed">¥-{!! number_format($amount['coupon_discount']) !!}</font>
 											@endif
-											<br>¥{{ number_format($amount['commission']) }}<br>
+											{{-- <br>¥{{ number_format($amount['commission']) }}<br> --}}
 										</td>
 									</tr>
 								</tbody>

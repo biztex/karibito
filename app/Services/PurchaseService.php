@@ -111,14 +111,14 @@ class PurchaseService
     public function getFinalAmount(Proposal $proposal, array $params): array
     {
         $amount['price'] = $proposal->price;
-        $amount['commission'] = $this->getCommission($proposal);
+        // $amount['commission'] = $this->getCommission($proposal); 手数料は出品者負担に変更のため一旦非表示
         $amount['coupon_discount'] = $this->coupon_service->getCouponDiscount($params['coupon_number']);
         $amount['use_point'] = $params['user_use_point'];
 
-        $amount['total'] = $amount['price'] + $amount['commission'] - $amount['coupon_discount'] - $amount['use_point'];
+        $amount['total'] = $amount['price'] - $amount['coupon_discount'] - $amount['use_point'];
+        // $amount['total'] = $amount['price'] + $amount['commission'] - $amount['coupon_discount'] - $amount['use_point'];
         return $amount;
     }
-
 
     /**
      * 確認画面の金額取得
@@ -130,7 +130,7 @@ class PurchaseService
     public function getConfirmAmount(Proposal $proposal, array $params): array
     {
         $amount['price'] = $proposal->price;
-        $amount['commission'] = $this->getCommission($proposal);
+        // $amount['commission'] = $this->getCommission($proposal);
 
         if(empty($params['coupon_use'])) {
             $amount['coupon_discount'] = 0;
@@ -144,7 +144,8 @@ class PurchaseService
             $amount['use_point'] = $params['user_use_point'];
         }
 
-        $amount['total'] = $amount['price'] + $amount['commission'] - $amount['coupon_discount'] - $amount['use_point'];
+        $amount['total'] = $amount['price'] - $amount['coupon_discount'] - $amount['use_point'];
+        // $amount['total'] = $amount['price'] + $amount['commission'] - $amount['coupon_discount'] - $amount['use_point'];
         return $amount;
     }
 

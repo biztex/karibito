@@ -13,12 +13,12 @@ class ProfitService
      * 
      * @return void
      */
-    public function storeProfit(int $user_id, int|null $chatroom_id, int $amount): void
+    public function storeProfit(int $user_id, int|null $chatroom_id, int $amount, int|null $commission): void
     {
         $profit = new Profit;
         $profit->user_id = $user_id;
         $profit->chatroom_id = $chatroom_id;
-        $profit->amount = $amount;
+        $profit->amount = $amount - $commission;
         $profit->save();
     }
 
@@ -70,7 +70,7 @@ class ProfitService
 
         return $profit;
     }
-   
+
     /**
      * 売上金の振込ステータスを振込済にする
      * @param Profit $profit

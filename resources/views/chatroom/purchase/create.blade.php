@@ -1,7 +1,7 @@
 <x-layout>
 	<script src="https://js.stripe.com/v3"></script>
     <article>
-    	<div id="breadcrumb">
+		<div id="breadcrumb">
 			<div class="inner">
                 <a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('chatroom.index') }}">やりとり一覧</a>　>　
@@ -41,14 +41,21 @@
 										<td>¥{!! number_format($proposal->price) !!}</td>
 									</tr>
 									<tr>
-										<td><big>商品代金</big><br>手数料</td>
-										<td><big>¥{!! number_format($proposal->price) !!}</big><br>¥{!! number_format($commission) !!}</td>
+										<td>
+											<big>商品代金</big>
+											{{-- <br>手数料  手数料は出品者負担に変更のため一旦コメントアウト--}}
+										</td>
+										<td>
+											<big>¥{!! number_format($proposal->price) !!}</big>
+											{{-- <br>¥{!! number_format($commission) !!} --}}
+										</td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<td>合計</td>
-										<td>¥{!! number_format($proposal->price + $commission) !!}</td>
+										<td>¥{!! number_format($proposal->price) !!}</td>
+										{{-- <td>¥{!! number_format($proposal->price + $commission) !!}</td> --}}
 									</tr>
 								</tfoot>
 							</table>
