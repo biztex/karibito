@@ -135,9 +135,8 @@ class StripePayment implements PaymentInterface
 
         } catch (CardException $e) {
             $body = $e->getJsonBody();
-            $flash_msg  = $body['error'];
 
-            return back()->with('flash_msg', $flash_msg);
+            return $body;
         }
     }
 
