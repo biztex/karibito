@@ -144,6 +144,13 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 // ポートフォリオ
                 Route::resource('portfolio', PortfolioController::class);
 
+                // ブログ
+                Route::view('blog', 'mypage.blog2.index')->name('blog');
+                Route::view('blog/edit', 'mypage.blog2.edit')->name('blog');
+                Route::view('blog/show', 'mypage.blog2.show')->name('blog');
+                // Route::get('blog', [FavoriteController::class, 'index'])->name('favorite.index');
+
+
                 // お気に入り
                 Route::get('favorite', [FavoriteController::class, 'index'])->name('favorite.index');
                 Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite.store');
