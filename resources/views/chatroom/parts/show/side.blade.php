@@ -33,7 +33,7 @@
             <div class="functeBtns">
                 @if($chatroom->seller_user_id === Auth::id())
                     @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
-                        <a href="#fancybox_proposal" class="orange fancybox">提案する</a>
+                        <a href="#fancybox_proposal" class="orange fancybox">サービスを提供する</a>
                     @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
                         <form id="delivery-form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
                             @csrf
