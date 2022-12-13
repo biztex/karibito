@@ -8,8 +8,9 @@
 		</div><!-- /.breadcrumb -->
 		<x-parts.ban-msg/>
 		<x-parts.flash-msg/>
-	
-		<div id="contents" class="oneColumnPage02">
+
+		<div id="contents" class="otherPage">
+		{{-- <div id="contents" class="oneColumnPage02"> 元々はこのクラス名が指定されていたが、サイドメニューの位置がおかしくなったためコメントアウト--}}
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="blogDtWrap">
