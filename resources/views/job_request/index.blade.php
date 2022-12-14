@@ -56,16 +56,17 @@
                         @endif
 					</div>
 
-					@if (isset($parent_category_flg) && $parent_category_flg === 1)
+					{{-- @if (isset($parent_category_flg) && $parent_category_flg === 1)
 						<div class="recommendList style2">
 							<h2 class="hdM">ランキング一覧</h2>
-							<div class="list sliderSP"> {{--st3クラスを消した。横幅がおかしかったため--}}
+							<div class="list sliderSP"> 
+								st3クラスを消した。横幅がおかしかったため
 								@foreach( $job_request_ranks as $value)
 									<x-parts.job-request-item :value='$value'/>
 								@endforeach
 							</div>
 						</div>
-					@endif
+					@endif --}}
 
 					{{-- @if (!isset($parent_category_flg))
 						<div class="recommendList style2">

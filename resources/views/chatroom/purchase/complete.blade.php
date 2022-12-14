@@ -18,7 +18,7 @@
 						<h2>お支払いが完了いたしました</h2>
 					</div>
 					<div class="cancelRea">
-						<p class="reason">チケットの購入が完了しました。</p>
+						<p class="reason">サービスの購入が完了しました。</p>
 					</div>
 					<div class="functeBtns">
 						<a href="{{route('chatroom.show', $proposal->chatroom->id)}}">やりとり画面に戻る</a>

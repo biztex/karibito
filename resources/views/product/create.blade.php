@@ -332,7 +332,7 @@
                             @error('product_pic')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <div class="warnNotes">
                                 <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
-                                <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はチケット詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>
+                                <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はサービス詳細画面に、ポートフォリオとして表示されます。<br>必須ではございませんので、アップロードなしでも問題ございません。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>
                             </div>
                             @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <ul class="mypagePortfolioUl03 mt40">

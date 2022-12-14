@@ -30,10 +30,10 @@
 				<div class="inner inner05">
 					<div class="cancelTitle">
 						<h2>おめでとうございます！</h2>
-						<p class="cancelRea">チケットの作成が完了しました。<br>チケットはSNSなどでみんなにシェアすることもできます。</p>
+						<p class="cancelRea">サービスの作成が完了しました。<br>サービスはSNSなどでみんなにシェアすることもできます。</p>
 					</div>
 					<div class="shareSnsEmail">
-						<h3>SNSやメールでチケットをシェアする</h3>
+						<h3>SNSやメールでサービスをシェアする</h3>
 						<div class="sns">
                             <div id="fb-root"></div>
 							<a href="http://www.facebook.com/share.php?u={{ session('url') }}" target="_blank"><img src="/img/mypage/ico_facebook.svg" alt=""></a>{{-- href="http://www.facebook.com/share.php?u={{URL}}" --}}
