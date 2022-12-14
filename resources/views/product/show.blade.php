@@ -119,5 +119,9 @@
 					path: '/heart_action.json'
 				});
 			}
+            
+            // 連打防止
+            $(this).prop("disabled", true);
+            $(this).closest('form').submit();
 		});
 </script>

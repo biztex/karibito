@@ -21,6 +21,7 @@ use App\Models\DmroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Jobs\SendNewMessageNotificationMail; 
+use App\Models\Favorite;
 
 class UserNotificationService
 {
@@ -96,6 +97,14 @@ class UserNotificationService
         } elseif ($product instanceof JobRequest){
             $reference_type = 'App\Models\JobRequest';
         } 
+        
+        // ※注意・・・UserNotificationのタイトルに含まれる「いいねした人の名前」と「いいね」という文言から過去のいいねを取得しています。
+        // そのためタイトルの文言が変更されるとこの変数も修正が必要。
+        $pase_like_notification = UserNotification::where('reference_id', $product->id)
+        ->where('user_id', $product_user->id)
+        ->where('title', 'like', '%' . $login_user->name . '%')
+        ->where('title', 'like', "%いいね%")
+        ->get();
 
         $user_notification = [
             'user_id' => $product_user->id,
@@ -111,8 +120,11 @@ class UserNotificationService
         }
 
         $mail_content = UserNotification::create($user_notification);
-
-        SendNewLikeNotificationMail::dispatch($product_user, $mail_content);
+        
+        // 過去に「いいね」が一度もされていなかった場合のみメール送信
+        if ($pase_like_notification->isEmpty()) {
+            SendNewLikeNotificationMail::dispatch($product_user, $mail_content);
+        }
     }
 
     // チャットメッセージが来たら通知する
