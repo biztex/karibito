@@ -3,6 +3,7 @@
 namespace App\Http\Requests\UserProfile;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UnderFifteen;
 
 class UpdateRequest extends FormRequest
 {
@@ -50,7 +51,7 @@ class UpdateRequest extends FormRequest
             'first_name' => 'required | max:24 | string',
             'last_name' => 'required | max:24 | string',
             'gender' => 'required | integer | in:1,2',
-            'birthday' => 'nullable | date',
+            'birthday' => ['nullable', 'date', new UnderFifteen],
             'prefecture' => 'required | integer | exists:prefectures,id',
             'zip' => 'nullable | numeric | digits:7',
             'address' => 'nullable | max:255',
