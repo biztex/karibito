@@ -88,7 +88,7 @@
                             <p class="time"><input type="number" name="number_of_day" value="{{ old('number_of_day', $request->number_of_day) }}" placeholder="入力してください"></p>
                         </div>
 
-                        <p class="th">電話相談の受付<span class="must">必須</span></p>
+                        {{-- <p class="th">電話相談の受付<span class="must">必須</span></p>
                             @error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_call">
@@ -96,7 +96,7 @@
                                 <option value="{{App\Models\Product::ON_CALL}}" @if(old('is_call', $request->is_call) == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
                                 <option value="{{App\Models\Product::OFF_CALL}}" @if(!is_null(old('is_call', $request->is_call)) && old('is_call', $request->is_call) == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <p class="th">販売数<span class="must">必須</span></p>
                             @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror
@@ -152,13 +152,13 @@
                                                 <div class="selects">
                                                     <select name="option_price[]">
                                                         @foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)
-                                                            <option value="{{ $key }}" @if(old('option_price.'.$num, $request->option_price[$num]) == $key) == $key) selected @endif>
+                                                            <option value="{{ $key }}" @if(old('option_price.'.$num, $request->option_price[$num]) == $key) selected @endif>
                                                             {{ $value }}円
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                     <select name="option_is_public[]">
-                                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.$num, $request->option_is_public[$num])) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
+                                                        <option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if((old('option_is_public.'.$num, $request->option_is_public[$num])) == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option>
                                                         <option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public.'.$num, $request->option_is_public[$num])) && old('option_is_public.'.$num, $request->option_is_public[$num]) == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option>
                                                     </select>
                                                 </div>
@@ -233,7 +233,7 @@
                                         @error('question_title.'.$num)<div class="alert alert-danger">{{ $message }}</div>@enderror
                                         <div class="td">
                                             <div class="enter">
-                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください>{{ old('question_title.'.$num, $product_question) }}</textarea>
+                                                <textarea type="text" name="question_title[]" placeholder="質問のタイトル入力してください">{{ old('question_title.'.$num, $product_question) }}</textarea>
                                                 {{-- 一旦コメントアウト(岩上) --}}
                                                 {{-- <!-- <p class="max-string" >{{ mb_strlen(old('question_title')) }}</p> --> --}}
                                             </div>

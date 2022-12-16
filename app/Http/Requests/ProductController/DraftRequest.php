@@ -32,7 +32,7 @@ class DraftRequest extends FormRequest
             'is_online' => 'nullable | integer | boolean',
             'number_of_day' => 'nullable | integer',
             'time_unit' => 'nullable | integer',
-            'is_call' => 'nullable | integer | boolean',
+            // 'is_call' => 'nullable | integer | boolean',
             'number_of_sale' => ' nullable | integer',
             'status' => ' nullable | integer',
             'option_name.*' => 'nullable | string | max:400',

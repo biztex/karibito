@@ -94,7 +94,7 @@
                             <p class="time"><input type="number" name="number_of_day" placeholder="入力してください" value="{{old('number_of_day', $product->number_of_day)}}"></p>
                         </div>
 
-                        <p class="th">電話相談の受付<span class="must">必須</span></p>
+                        {{-- <p class="th">電話相談の受付<span class="must">必須</span></p>
                             @error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_call">
@@ -102,7 +102,7 @@
                                 <option value="{{App\Models\Product::OFF_CALL}}" @if(!is_null(old('is_call', $product->is_call )) && old('is_call', $product->is_call ) == App\Models\Product::OFF_CALL) selected @endif>電話を受け付けない</option>
                                 <option value="{{App\Models\Product::ON_CALL}}" @if(old('is_call', $product->is_call ) == App\Models\Product::ON_CALL) selected @endif>電話を受け付ける</option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <p class="th">販売数<span class="must">必須</span></p>
                             @error('number_of_sale')<div class="alert alert-danger">{{ $message }}</div>@enderror

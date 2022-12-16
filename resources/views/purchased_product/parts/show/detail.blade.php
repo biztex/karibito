@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="datas">
-        <span class="data">電話相談の受付：@if(!is_null($product->is_call)) {{ App\Models\Product::IS_CALL[$product->is_call] }} @endif</span>
+        {{-- <span class="data">電話相談の受付：@if(!is_null($product->is_call)) {{ App\Models\Product::IS_CALL[$product->is_call] }} @endif</span> --}}
         <!-- <span class="data">閲覧：1000</span> -->
         @if(!is_null($product->prefecture_id))
         <span class ="data">エリア： {{ App\Models\Prefecture::find($product->prefecture_id)->name }} </span>

@@ -16,7 +16,8 @@ class JobRequestService
      */
     public function storeJobRequest(array $params): JobRequest
     {
-        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        // $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];　電話対応は仕様変更によって一旦非表示
+        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online'];
 
             $job_request = new JobRequest();
             $job_request->user_id = \Auth::id();
@@ -35,7 +36,8 @@ class JobRequestService
      */
     public function updateJobRequest(array $params, $job_request): JobRequest
     {
-        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        // $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];　電話対応は仕様変更によって一旦非表示
+        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online'];
 
             foreach($columns as $column){
                 $job_request->$column = $params[$column];
@@ -51,7 +53,8 @@ class JobRequestService
      */
     public function storeDraftJobRequest(array $params): JobRequest
     {
-        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        // $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online'];
 
             $job_request = new JobRequest();
             $job_request->user_id = \Auth::id();
@@ -70,7 +73,8 @@ class JobRequestService
      */
     public function updateDraftJobRequest(array $params, $job_request): JobRequest
     {
-        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        // $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online'];
 
             foreach($columns as $column){
                 $job_request->$column = $params[$column];

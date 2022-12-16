@@ -96,7 +96,7 @@
 						</div>
 
 
-						<p class="th">電話相談の受付<span class="must">必須</span></p>
+						{{-- <p class="th">電話相談の受付<span class="must">必須</span></p>
 							@error('is_call')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<select name="is_call">
@@ -104,7 +104,7 @@
 								<option value="0" @if(!is_null(old('is_call', $job_request->is_call )) && old('is_call', $job_request->is_call ) == 0) selected @endif>電話を受け付けない</option>
 								<option value="1" @if(old('is_call', $job_request->is_call ) == 1) selected @endif>電話を受け付ける</option>
 							</select>
-						</div>
+						</div> --}}
                         <input type="hidden" value="{{ $job_request->created_at }}" name="created_at">
 
 

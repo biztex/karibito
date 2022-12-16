@@ -13,7 +13,8 @@ class PurchasedProductService
     public function storePurchasedProduct(Chatroom $chatroom)
     {
         $product = $chatroom->reference;
-        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale', 'status'];
+        // $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day',  'is_call', 'number_of_sale', 'status'];
+        $columns = ['category_id', 'prefecture_id', 'title', 'content', 'price', 'is_online', 'number_of_day', 'number_of_sale', 'status'];
 
         $purchased_product = new PurchasedProduct;
         $purchased_product->user_id = $product->user_id;

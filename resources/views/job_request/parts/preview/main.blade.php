@@ -7,7 +7,7 @@
             <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
         </div>
         <div class="datas">
-            <span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$request->is_call] }}</span>
+            {{-- <span class="data">電話相談の受付：{{ App\Models\JobRequest::IS_CALL[$request->is_call] }}</span> --}}
             <!-- <span class="data">閲覧：1000</span> -->
             @if(!is_null($request->prefecture_id))
                 <span class="data">エリア：{{ App\Models\Prefecture::find($request->prefecture_id)->name }}</span>

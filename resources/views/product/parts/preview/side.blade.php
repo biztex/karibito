@@ -14,6 +14,7 @@
             @endif
         </p>
         
+        <input type="hidden" value="@if(!is_null($request->time_unit)){{ $request->time_unit }}@endif" name="time_unit">
         <input type="hidden" value="@if(!is_null($request->number_of_day)){{ $request->number_of_day }}@endif" name="number_of_day">
         <!-- <div class="calendar"><div id="datepicker"></div></div> -->
     </div>
