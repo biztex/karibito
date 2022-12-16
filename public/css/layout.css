@@ -438,6 +438,7 @@
 	padding:0 10px;
 }
 
+
 div#mainVisual {
     margin-top: 55px;
 }
@@ -454,7 +455,15 @@ div#mainVisual {
 #teaser {
 	background:url(../img/service/img_teaser.jpg)no-repeat center;
 	background-size:cover;
+	margin-top: 20px;
 }
+
+@media screen and (max-width: 767px) {
+	#teaser {
+		margin-top: 0px;
+	}
+}
+
 #teaser .inner{
 	display:flex;
 	align-items: center;
@@ -466,6 +475,9 @@ div#mainVisual {
 	font-size:3rem;
 	font-weight: bold;
 }
+
+
+
 
  
 /* !breadcrumb
