@@ -437,6 +437,17 @@
 #mainVisual .slider .item{
 	padding:0 10px;
 }
+
+div#mainVisual {
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 767px) {
+	div#mainVisual {
+		margin-top: 0px;
+	}
+}
+
  
 /* !teaser
 ---------------------------------------------------------- */
