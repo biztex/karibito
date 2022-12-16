@@ -131,9 +131,15 @@ class UserController extends Controller
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認の承認を取り消しました！";
 
-        \Mail::to($user->email)
-            ->send(new RevokeApprovalMail($user));
-
+        if ($user->sub_email) {
+            \Mail::to($user->email)
+                ->cc($user->sub_email)
+                ->send(new RevokeApprovalMail($user));
+        } else {
+            \Mail::to($user->email)
+                ->send(new RevokeApprovalMail($user));
+        }
+        
         $user->userProfile->identification_path = null;
         $user->userProfile->save();
 
@@ -151,7 +157,14 @@ class UserController extends Controller
             'is_banned_at' => now()
         ])->save();
 
-        \Mail::to($user->email)->send(new NotifyBanMail($user->userProfile));
+        if ($user->sub_email) {
+            \Mail::to($user->email)
+                ->cc($user->sub_email)
+                ->send(new NotifyBanMail($user->userProfile));
+        } else {
+            \Mail::to($user->email)
+                ->send(new NotifyBanMail($user->userProfile));
+        }
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの利用を制限しました！";
         return back()->with('flash_msg',$flash_msg);
@@ -164,7 +177,14 @@ class UserController extends Controller
     {
         $user->userProfile->fill(['is_ban' => 0])->save();
 
-        \Mail::to($user->email)->send(new CancelNotifyBanMail($user->userProfile));
+        if ($user->sub_email) {
+            \Mail::to($user->email)
+                ->cc($user->sub_email)
+                ->send(new CancelNotifyBanMail($user->userProfile));
+            } else {
+            \Mail::to($user->email)
+                ->send(new CancelNotifyBanMail($user->userProfile));
+        }
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの利用制限を解除しました！";
         return back()->with('flash_msg',$flash_msg);
