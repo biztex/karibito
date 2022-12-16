@@ -15,7 +15,7 @@
             @else
                 @if($chatroom->reference === null)
 
-                    <div style="padding:15px; font-weight:100;">この商品は削除されました</div>
+                    <div style="padding:15px; font-weight:100;">このサービスは削除されました</div>
 
                 @elseif($chatroom->reference_type === 'App\Models\Product')
 

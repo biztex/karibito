@@ -29,7 +29,7 @@
         @elseif ($product->number_of_sale === App\Models\Product::ONE_OF_SALE && $number_of_sold !== 0) {{--販売個数が一つで、かつ既に購入されているものをこの分岐に入れる--}}
             <div class="functeBtns">
                 <a tabindex="-1" class="full">交渉画面へ進む</a>
-                <span style="font-size: 0.8em;">この商品は売り切れています。<br>ユーザーにDMでお問い合わせください。</span>
+                <span style="font-size: 0.8em;">このサービスは売り切れています。<br>ユーザーにDMでお問い合わせください。</span>
             </div>
         @else
             <div class="functeBtns">
@@ -47,7 +47,7 @@
             <form action="{{ route('contact') }}" method="get">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <p class="specialtyBtn"><input type="submit" class="report_btn" value="この商品を通報する"></p>
+                <p class="specialtyBtn"><input type="submit" class="report_btn" value="このサービスを通報する"></p>
             </form>
         @endif
     </div>

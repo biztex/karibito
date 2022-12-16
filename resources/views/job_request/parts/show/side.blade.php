@@ -34,7 +34,7 @@
         @elseif ($requested)
             <div class="functeBtns">
                 <a tabindex="-1" class="full">交渉画面へ進む</a>
-                <span style="font-size: 0.8em;">この商品は売り切れています。<br>ユーザーにDMでお問い合わせください。</span>
+                <span style="font-size: 0.8em;">このサービスは売り切れています。<br>ユーザーにDMでお問い合わせください。</span>
             </div>
         @elseif ($today->gt($deadline))
             <div class="functeBtns">
@@ -51,7 +51,7 @@
             <form action="{{ route('contact') }}" method="get">
                 @csrf
                 <input type="hidden" name="job_request_id" value="{{ $job_request->id }}">
-                <p class="specialtyBtn"><input type="submit" class="report_btn" value="この商品を通報する"></p>
+                <p class="specialtyBtn"><input type="submit" class="report_btn" value="このサービスを通報する"></p>
             </form>
         @endif
     </div>
