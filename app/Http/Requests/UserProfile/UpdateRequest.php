@@ -54,6 +54,8 @@ class UpdateRequest extends FormRequest
             'prefecture' => 'required | integer | exists:prefectures,id',
             'zip' => 'nullable | numeric | digits:7',
             'address' => 'nullable | max:255',
+            'address_number' => 'nullable | max:255',
+            'apartment' => 'nullable | max:255',
             'introduction' => 'nullable | max:3000 | string',
             'icon' => 'nullable | max:20480 | file | image | mimes:png,jpg',
             'cover' => 'nullable | max:20480 | file | image | mimes:png,jpg',
@@ -72,6 +74,8 @@ class UpdateRequest extends FormRequest
             'zip.digits' => '郵便番号は半角数字7桁で指定してください。',
             'prefecture.integer' => '都道府県は以下より選択してください。',
             'prefecture.exists' => '都道府県は以下より選択してください。',
+            'address_number.max:255' => '番地は255文字以下で指定してください。',
+            'apartment.max:255' => 'マンションは255文字以下で指定してください。',
         ];
     }
 }
