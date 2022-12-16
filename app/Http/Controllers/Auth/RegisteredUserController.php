@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'confirmed', 'string', 'email', 'max:128', 'unique:users'],
             'password' => ['required', 'confirmed', 'between:8,100', Rules\Password::defaults(), new AlphaRule()],
             'terms' => 'required',
+            'over_15' => 'required',
         ]);
 
         $user = User::create([
