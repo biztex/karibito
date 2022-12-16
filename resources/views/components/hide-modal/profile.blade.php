@@ -117,22 +117,29 @@
                     @if(Auth::user()->userProfile->is_identify == 0)
                         <dl>
                             <dt>住所<span>(都道府県のみ表示されます)</span></dt>
-                            @error('zip')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                @error('zip')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <dd>
-                                <p class="addrNumber"><input class="short" type="text" name="zip" value="{{old('zip',Auth::user()->userProfile->zip)}}"></p>
-                                    
+                                <p class="addrNumber"><input class="short" type="text" id="zip" name="zip" value="{{old('zip',Auth::user()->userProfile->zip)}}"></p>
                                 <div class="addrSelect">
-                                @error('prefecture')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                <select class="short" name="prefecture">
+                                    <select class="short" name="prefecture" id="pref1">
                                         <option value="">選択してください</option>
                                         @foreach(App\Models\Prefecture::all() as $prefecture)
                                             <option value="{{$prefecture->id}}" @if($prefecture->id == (int)old('prefecture',Auth::user()->userProfile->prefecture_id)) selected @endif>{{$prefecture->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
-                                @error('address')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                <p><input type="text" name="address" placeholder="市区町村" value="{{old('address',Auth::user()->userProfile->address)}}"></p>
+                                @error('address')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <p><input type="text" name="address" id="address1" placeholder="市区町村" value="{{old('address',Auth::user()->userProfile->address)}}"></p>
+                                <p><input type="text" name="address_number" placeholder="番地" value="{{old('address_number',Auth::user()->userProfile->address_number)}}"></p>
+                                @error('address_number')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <p><input type="text" name="apartment" placeholder="(マンション)" value="{{old('apartment',Auth::user()->userProfile->apartment)}}"></p>
+                                @error('apartment')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </dd>
                         </dl>
                     @else

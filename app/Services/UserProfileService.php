@@ -74,10 +74,12 @@ class UserProfileService
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'gender' => $request['gender'],
-            'prefecture_id' => $request['prefecture_id'],
+            'prefecture_id' => $request['prefecture'],
             'birthday' => $birthday,
             'zip' => $request['zip'],
             'address' => $request['address'],
+            'address_number' => $request['address_number'],
+            'apartment' => $request['apartment'],
             'introduction' => $request['introduction'],
         ]);
         $user_profile->save();

@@ -225,6 +225,8 @@ return [
         'birthday' => '生年月日',
         'zip' => '郵便番号',
         'address' => '住所',
+        'address_number' => '番地',
+        'apartment' => 'アパートメント',
         'introduction' => '自己紹介',
         'terms' => '利用規約とプライバシーポリシー',
         'identification_path' => '身分証明証',
