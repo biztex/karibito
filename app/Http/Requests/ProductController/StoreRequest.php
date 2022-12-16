@@ -33,7 +33,7 @@ class StoreRequest extends FormRequest
             'is_online' => 'required | boolean',
             'number_of_day' => 'required | integer | between:1,730',
             'time_unit' => 'required | integer',
-            'is_call' => 'required | boolean',
+            // 'is_call' => 'required | boolean',　電話対応は仕様変更によって一旦非表示
             'number_of_sale' => 'required | integer',
             'status' => 'required | integer',
             'option_name.*' => 'nullable | string | max:400',

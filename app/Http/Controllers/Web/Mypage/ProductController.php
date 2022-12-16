@@ -211,7 +211,7 @@ class ProductController extends Controller
                 'is_online' => $request->is_online,
                 'number_of_day' => $request->number_of_day,
                 'time_unit' => $request->time_unit,
-                'is_call' => $request->is_call,
+                // 'is_call' => $request->is_call,
                 'number_of_sale' => $request->number_of_sale,
                 'status' => $request->status,
                 'is_draft' => Product::IS_DRAFT

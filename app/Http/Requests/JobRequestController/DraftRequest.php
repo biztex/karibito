@@ -33,7 +33,7 @@ class DraftRequest extends FormRequest
             'application_deadline' => 'nullable | date | after_or_equal:tomorrow',
             'required_date' => 'nullable | date | after_or_equal:application_deadline',
             'is_online' => 'nullable | integer | boolean',
-            'is_call' => 'nullable | integer | boolean',           
+            // 'is_call' => 'nullable | integer | boolean',
         ];
     }
 

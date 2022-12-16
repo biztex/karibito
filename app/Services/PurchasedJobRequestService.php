@@ -14,7 +14,8 @@ class PurchasedJobRequestService
     public function storePurchasedJobRequest(Chatroom $chatroom)
     {
         $job_request = $chatroom->reference;
-        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        // $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online',  'is_call'];
+        $columns = ['category_id',  'prefecture_id', 'title', 'content',  'price',  'application_deadline',  'required_date',  'is_online'];
 
         $purchased_product = new PurchasedJobRequest;
         $purchased_product->user_id = $job_request->user_id;

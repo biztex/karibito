@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
         'application_deadline' => 'required | date | after:yesterday',
         'required_date' => 'nullable | date | after:yesterday',
         'is_online' => 'required | boolean',
-        'is_call' => 'required | boolean',
+        // 'is_call' => 'required | boolean',　電話対応は仕様変更によって一旦非表示
         ];
     }
 
