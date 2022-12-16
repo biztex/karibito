@@ -74,8 +74,6 @@ class UpdateRequest extends FormRequest
             'zip.digits' => '郵便番号は半角数字7桁で指定してください。',
             'prefecture.integer' => '都道府県は以下より選択してください。',
             'prefecture.exists' => '都道府県は以下より選択してください。',
-            'address_number.max:255' => '番地は255文字以下で指定してください。',
-            'apartment.max:255' => 'マンションは255文字以下で指定してください。',
         ];
     }
 }
