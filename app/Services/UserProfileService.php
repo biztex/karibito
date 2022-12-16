@@ -11,9 +11,10 @@ class UserProfileService
 {
     protected $image_service;
     
-    public function __construct(ImageService $image_service)
+    public function __construct(ImageService $image_service, PointService $point_service)
     {
         $this->image_service = $image_service;
+        $this->point_service = $point_service;
     }
 
     /**
@@ -40,35 +41,27 @@ class UserProfileService
      */
     public function storeUserProfile(array $params): void
     {        
-        $myCode = \Str::random(11);
         \DB::beginTransaction();
         try {
-            UserProfile::updateOrCreate(
+            $guestProfile = UserProfile::updateOrCreate(
                 ['user_id' => \Auth::id()],
                 [
                     'first_name' => $params['first_name'],
                     'last_name' => $params['last_name'],
                     'gender' => $params['gender'],
                     'prefecture_id' => $params['prefecture_id'],
-                    'my_code' => $myCode,
+                    'my_code' => \Str::random(11),
                     'friend_code' => $params['friend_code'],
                     'where_know' => $params['where_know']
                 ],
             );
             
-            // 招待コード入力でポイント付与
-            $userHaveFriendCode = UserProfile::where('my_code', $params['friend_code'])->first();
-            if ($userHaveFriendCode && $params['friend_code'] !== null) {
-                // TODO その他の箇所で同じ処理を書いているため、ポイントのルールが決まり次第サービスに分離
-                $deadline = date("Y-m-d",mktime(0, 0, 0, date("m")+1, date("d"), date("Y")));
-                UserGetPoint::create([
-                    'user_id' => $userHaveFriendCode->user_id,
-                    'name' => '招待ポイントゲット！！',
-                    'point' => 300,
-                    'deadline' => $deadline,
-                    'reference_type' => 'App\Model\UserProfile',
-                    'reference_id' => $userHaveFriendCode->id,
-                ]);
+            $inviteeProfile = UserProfile::where('my_code', $params['friend_code'])->first();
+
+            // 招待コード入力で紹介者＆招待された人にポイント付与
+            if ($inviteeProfile && $params['friend_code'] !== null) {
+                $this->point_service->getPoint(1, $inviteeProfile);
+                $this->point_service->getPoint(1, $guestProfile);
             };
             
             // 通知設定の作成
