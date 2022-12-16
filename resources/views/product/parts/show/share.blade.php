@@ -3,7 +3,7 @@
     <div class="modal__box">
         <div class="shareSnsEmail">
           @if(isset($product->user))
-            <h3>SNSやメールでチケットをシェアする</h3>
+            <h3>SNSやメールでサービスをシェアする</h3>
             <div class="sns">
                 <a href="http://www.facebook.com/share.php?u={{ $url }}" target="_blank"><img src="/img/mypage/ico_facebook.svg" alt=""></a>
                 <a href="https://social-plugins.line.me/lineit/share?url={{ $url }}" target="_blank"><img src="/img/mypage/ico_line.svg" alt=""></a>
