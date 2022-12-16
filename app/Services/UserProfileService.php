@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\UserProfile;
 use App\Mail\User\IdentificationUploadMail;
+use App\Models\UserGetPoint;
 use App\Services\ImageService;
 
 class UserProfileService
@@ -38,21 +39,46 @@ class UserProfileService
      * @param array $params
      */
     public function storeUserProfile(array $params): void
-    {
-        UserProfile::updateOrCreate(
-            ['user_id' => \Auth::id()],
-            [
-                'first_name' => $params['first_name'],
-                'last_name' => $params['last_name'],
-                'gender' => $params['gender'],
-                'prefecture_id' => $params['prefecture_id'],
-                'friend_code' => $params['friend_code'],
-                'where_know' => $params['where_know']
-            ],
-        );
-
-        // 通知設定の作成
-        \Auth::user()->userNotificationSetting()->create();
+    {        
+        $myCode = \Str::random(11);
+        \DB::beginTransaction();
+        try {
+            UserProfile::updateOrCreate(
+                ['user_id' => \Auth::id()],
+                [
+                    'first_name' => $params['first_name'],
+                    'last_name' => $params['last_name'],
+                    'gender' => $params['gender'],
+                    'prefecture_id' => $params['prefecture_id'],
+                    'my_code' => $myCode,
+                    'friend_code' => $params['friend_code'],
+                    'where_know' => $params['where_know']
+                ],
+            );
+            
+            // 招待コード入力でポイント付与
+            $userHaveFriendCode = UserProfile::where('my_code', $params['friend_code'])->first();
+            if ($userHaveFriendCode && $params['friend_code'] !== null) {
+                // TODO その他の箇所で同じ処理を書いているため、ポイントのルールが決まり次第サービスに分離
+                $deadline = date("Y-m-d",mktime(0, 0, 0, date("m")+1, date("d"), date("Y")));
+                UserGetPoint::create([
+                    'user_id' => $userHaveFriendCode->user_id,
+                    'name' => '招待ポイントゲット！！',
+                    'point' => 300,
+                    'deadline' => $deadline,
+                    'reference_type' => 'App\Model\UserProfile',
+                    'reference_id' => $userHaveFriendCode->id,
+                ]);
+            };
+            
+            // 通知設定の作成
+            \Auth::user()->userNotificationSetting()->create();
+            
+            \DB::commit();
+        } catch(\Exception $e){
+            \DB::rollBack();
+            return;
+        };
 
     }
 

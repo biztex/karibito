@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <th>あなたの招待コード</th>
-                        <td><input type="text" class="small" value="a8358d0dj1j"></td>
+                        <td><input type="text" class="small" value="{{ Auth::user()->userProfile->my_code }}"></td>
                     </tr>
                 </table>
             </form>
