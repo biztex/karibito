@@ -50,6 +50,7 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js" integrity="sha512-yAr4fN9WZH6hESbOwoFZGtSgOP+LSZbs/JeoDr02pOX4yUFfI++qC9YwIQXIGffhnzliykJtdWTV/v3PxSz8aw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="https://jpostal-1006.appspot.com/jquery.jpostal.js"></script>
 <script>
 	$(function(){
 
