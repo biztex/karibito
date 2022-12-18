@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * モデルのインスタンスからreference_typeを返すメソッド
  * 
- * @param \App\Models
+ * @param \App\Models $instance
  * 
  * @return string
  */
@@ -27,6 +27,8 @@ trait GetReferenceTypeTrait
             $reference_type = 'App\Models\Product';
         } elseif ($instance instanceof JobRequest){
             $reference_type = 'App\Models\JobRequest';
+        } else {
+            $reference_type = null;
         }
         
         return $reference_type;
