@@ -9,16 +9,21 @@ class ProfitService
      * profitテーブル作成
      * @param int $user_id
      * @param int|null $chatroom_id
-     * @param int $amount
+     * @param int|null $amount
+     * @param int|null $commission
      * 
      * @return void
      */
-    public function storeProfit(int $user_id, int|null $chatroom_id, int $amount, int|null $commission): void
+    public function storeProfit(int $user_id, int|null $chatroom_id, int|null $amount, int|null $commission): void
     {
         $profit = new Profit;
         $profit->user_id = $user_id;
-        $profit->chatroom_id = $chatroom_id;
-        $profit->amount = $amount - $commission;
+        if (is_null($chatroom_id)) { //振込申請するときに手数料をひく
+            $profit->amount = $commission;
+        } else { //chatroom_idがある時は売り上げが入る
+            $profit->chatroom_id = $chatroom_id;
+            $profit->amount = $amount - $commission;
+        }
         $profit->save();
     }
 

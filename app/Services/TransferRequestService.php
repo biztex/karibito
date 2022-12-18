@@ -26,7 +26,7 @@ class TransferRequestService
     {
         \DB::transaction(function () {
             // 売上テーブルに振込手数料レコード作成
-            $this->profit_service->storeProfit(\Auth::id(), null, Profit::COMMISSION);
+            $this->profit_service->storeProfit(\Auth::id(), null, null, Profit::COMMISSION);
 
             // 振込未申請の売上取得
             $not_transfer_profits = $this->profit_service->getNotTransferProfit(\Auth::id());
