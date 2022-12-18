@@ -43,7 +43,7 @@ class UserProfileService
     {        
         \DB::beginTransaction();
         try {
-            $guestProfile = UserProfile::updateOrCreate(
+            $guest_profile = UserProfile::updateOrCreate(
                 ['user_id' => \Auth::id()],
                 [
                     'first_name' => $params['first_name'],
@@ -56,12 +56,12 @@ class UserProfileService
                 ],
             );
             
-            $inviteeProfile = UserProfile::where('my_code', $params['friend_code'])->first();
+            $invitee_profile = UserProfile::where('my_code', $params['friend_code'])->first();
 
             // 招待コード入力で紹介者＆招待された人にポイント付与
-            if ($inviteeProfile && $params['friend_code'] !== null) {
-                $this->point_service->getPoint(1, $inviteeProfile);
-                $this->point_service->getPoint(1, $guestProfile);
+            if ($invitee_profile && $params['friend_code'] !== null) {
+                $this->point_service->getPoint(1, $invitee_profile);
+                $this->point_service->getPoint(1, $guest_profile);
             };
             
             // 通知設定の作成

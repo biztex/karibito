@@ -12,12 +12,14 @@ use App\Models\Proposal;
 use App\Models\UserProfile;
 use App\Models\UserUsePoint;
 use App\Traits\UserHasPointTrait;
+use App\Traits\GetReferenceTypeTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class PointService
 {
     use UserHasPointTrait;
-
+    use GetReferenceTypeTrait;
+    
     public function showPoint()
     {
         return $this->userHasPoint();
@@ -29,12 +31,7 @@ class PointService
         // $point_rate = MPointRate::where('effective_datetime', '<=', $today)->latest()->first(); 仕様が変わる可能性があるため一旦残す
         // $now_rate = $point_rate->rate;
         
-        if($instance instanceof Proposal){
-            $reference_type = 'App\Models\Proposal';
-        } elseif ($instance instanceof UserProfile){
-            $reference_type = 'App\Models\UserProfile';
-        }
-        
+        $reference_type = $this->getReferenceType($instance);
         $deadline = date("Y-m-d",mktime(0, 0, 0, date("m")+$m_point->deadline_period, date("d"), date("Y")));
         $user_get_point = new UserGetPoint();
         $user_get_point->create([
