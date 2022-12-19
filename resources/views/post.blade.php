@@ -18,7 +18,7 @@
                         <a href="{{ route('job_request.create') }}" class="fun note">サービスをリクエストする</a>
                         <div class="common">
                             <a href="{{ route('draft') }}">下書きを見る</a>
-                            <a href="#" class="st2">ブログを投稿する</a>
+                            <a href="{{ route('blog.create') }}" class="st2">ブログを投稿する</a>
                             <a href="{{ route('portfolio.create') }}" class="st2">ポートフォリオを投稿する</a>
                         </div>
                     </div>

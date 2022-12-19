@@ -15,7 +15,7 @@
 					<div class="blogWrap">
 						<p class="mypageHd02"><span>ブログ</span></p>
 						<div class="blogAdd">
-							<a href="blog_edit.html"><img src="img/mypage/edit_blog.svg" alt="ブログを追加"></a>
+							<a href="{{ route('blog.create') }}"><img src="img/mypage/edit_blog.svg" alt="ブログを追加"></a>
 						</div>
 						<div class="blogItem">
 							<p class="blogItemImg"><img src="img/blog/img_detail01_01.jpg" alt=""></p>

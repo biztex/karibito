@@ -56,6 +56,7 @@ use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
+use App\Http\Controllers\Web\Mypage\BlogController;
 use App\Http\Controllers\Web\Mypage\FavoriteController;
 use App\Http\Controllers\Web\Mypage\PortfolioController;
 
@@ -145,9 +146,10 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::resource('portfolio', PortfolioController::class);
 
                 // ブログ
-                Route::view('blog', 'mypage.blog2.index')->name('blog');
-                Route::view('blog/edit', 'mypage.blog2.edit')->name('blog');
-                Route::view('blog/show', 'mypage.blog2.show')->name('blog');
+                Route::view('blog', 'mypage.blog.index')->name('blog');
+                Route::get('blog/create', [BlogController::class, 'create'])->name('blog.create');
+                Route::view('blog/edit', 'mypage.blog.edit')->name('blog');
+                Route::view('blog/show', 'mypage.blog.show')->name('blog');
                 // Route::get('blog', [FavoriteController::class, 'index'])->name('favorite.index');
 
 
