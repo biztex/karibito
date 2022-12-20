@@ -4,15 +4,17 @@ namespace App\Services;
 
 use App\Models\UserProfile;
 use App\Mail\User\IdentificationUploadMail;
+use App\Models\UserGetPoint;
 use App\Services\ImageService;
 
 class UserProfileService
 {
     protected $image_service;
     
-    public function __construct(ImageService $image_service)
+    public function __construct(ImageService $image_service, PointService $point_service)
     {
         $this->image_service = $image_service;
+        $this->point_service = $point_service;
     }
 
     /**
@@ -38,21 +40,38 @@ class UserProfileService
      * @param array $params
      */
     public function storeUserProfile(array $params): void
-    {
-        UserProfile::updateOrCreate(
-            ['user_id' => \Auth::id()],
-            [
-                'first_name' => $params['first_name'],
-                'last_name' => $params['last_name'],
-                'gender' => $params['gender'],
-                'prefecture_id' => $params['prefecture_id'],
-                'friend_code' => $params['friend_code'],
-                'where_know' => $params['where_know']
-            ],
-        );
+    {        
+        \DB::beginTransaction();
+        try {
+            $guest_profile = UserProfile::updateOrCreate(
+                ['user_id' => \Auth::id()],
+                [
+                    'first_name' => $params['first_name'],
+                    'last_name' => $params['last_name'],
+                    'gender' => $params['gender'],
+                    'prefecture_id' => $params['prefecture_id'],
+                    'my_code' => \Str::random(11),
+                    'friend_code' => $params['friend_code'],
+                    'where_know' => $params['where_know']
+                ],
+            );
+            
+            $invitee_profile = UserProfile::where('my_code', $params['friend_code'])->first();
 
-        // 通知設定の作成
-        \Auth::user()->userNotificationSetting()->create();
+            // 招待コード入力で紹介者＆招待された人にポイント付与
+            if ($invitee_profile && $params['friend_code'] !== null) {
+                $this->point_service->getPoint(1, $invitee_profile);
+                $this->point_service->getPoint(1, $guest_profile);
+            };
+            
+            // 通知設定の作成
+            \Auth::user()->userNotificationSetting()->create();
+            
+            \DB::commit();
+        } catch(\Exception $e){
+            \DB::rollBack();
+            return;
+        };
 
     }
 

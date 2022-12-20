@@ -25,7 +25,7 @@ use App\Models\Favorite;
 
 class UserNotificationService
 {
-
+    
     public function paginate($i)
     {
         $user_id = \Auth::id();
@@ -97,7 +97,7 @@ class UserNotificationService
         } elseif ($product instanceof JobRequest){
             $reference_type = 'App\Models\JobRequest';
         } 
-        
+
         // ※注意・・・UserNotificationのタイトルに含まれる「いいねした人の名前」と「いいね」という文言から過去のいいねを取得しています。
         // そのためタイトルの文言が変更されるとこの変数も修正が必要。
         $pase_like_notification = UserNotification::where('reference_id', $product->id)
