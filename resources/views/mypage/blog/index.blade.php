@@ -17,42 +17,47 @@
 						<div class="blogAdd">
 							<a href="{{ route('blog.create') }}"><img src="img/mypage/edit_blog.svg" alt="ブログを追加"></a>
 						</div>
-						<div class="blogItem">
-							<p class="blogItemImg"><img src="img/blog/img_detail01_01.jpg" alt=""></p>
-							<p class="blogItemHd">イラストレーター(ai)の不明な点にお答えします</p>
-							<p class="blogItemBread"><a href="#">デザイン </a>　>　<span>その他デザイン</span></p>
-							<div class="blogItemCont">
-								<p>参考書やネットを見てもわからない点を是非、ご質問ください！イラストレーターは年々、更新されており、常に新機能が追加されています。参考書やネット見ても自分のバージョンとは違って、よくわからないことがよくああああ</p>
+						@foreach ($blogs as $blog)
+							<div class="blogItem">
+								<p class="blogItemImg">
+									<a href="{{ route('blog.show', $blog) }}"><img src="{{ $blog->path }}" alt=""></a>
+								</p>
+								<p class="blogItemHd">{{ $blog->title }}</p>
+								<p class="blogItemBread">
+									<a href="{{ route('product.category.index', $blog->product->mProductChildCategory->mProductCategory->id) }}">
+										{{ $blog->product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;
+									<a href="{{ route('product.category.index.show', $blog->product->mProductChildCategory->id)}}">
+										{{ $blog->product->mProductChildCategory->name }}</a>
+								</p>
+								<div class="blogItemCont">
+									<p>{{ $blog->content }}</p>
+								</div>
+								<dl class="blogItemPerson">
+									@if(empty($blog->user->userProfile->icon))
+										<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+									@else
+										<dt><img src="{{asset('/storage/' . $blog->user->userProfile->icon) }}" alt=""></dt>
+									@endif
+									<dd>
+										<p class="nameP">{{ $blog->user->name }}</p>
+										<p class="dateP">{{ $blog->updated_at }}</p>
+									</dd>
+								</dl>
+								<div>
+									<p class="specialtyBtn addBtn02"><a href="{{ route('blog.edit', $blog) }}"><img src="img/mypage/icon_edit.svg" alt="">ブログを編集</a></p>
+									<form id="delete-blog" class="report_btn" action="{{ route('blog.destroy', $blog) }}" method="post">
+										@csrf
+										@method('DELETE')
+										<button type="button" class="delete js-alertModal">削除</button>
+									</form>
+								</div>
 							</div>
-							<dl class="blogItemPerson">
-								<dt><img src="img/blog/head_detail01_01.png" alt=""></dt>
-								<dd>
-									<p class="nameP">クリエイター名</p>
-									<p class="dateP">2021年7月26日</p>
-								</dd>
-							</dl>
-							<p class="specialtyBtn addBtn02"><a href="blog_edit.html"><img src="img/mypage/icon_edit.svg" alt="">ブログを編集</a></p>
-						</div>
-						<div class="blogItem">
-							<p class="blogItemImg"><img src="img/blog/img_detail02_01.jpg" alt=""></p>
-							<p class="blogItemHd">目的に沿って画像加工いたします</p>
-							<p class="blogItemBread"><a href="#">デザイン </a>　>　<span>その他デザイン</span></p>
-							<div class="blogItemCont">
-								<p>プロが行います！【 切り抜き／ 画像レタッチ／ 合成など】デザイナー歴10年以上の実績があります！ 画像加工のことならお任せください！ここ最近、メルカリやヤフオク出品にも背景を写したくない、自分で撮影あああああああ…</p>
-							</div>
-							<dl class="blogItemPerson">
-								<dt><img src="img/blog/head_detail01_01.png" alt=""></dt>
-								<dd>
-									<p class="nameP">クリエイター名</p>
-									<!-- <p class="dateP">2021年7月26日</p> -->
-								</dd>
-							</dl>
-							<p class="specialtyBtn addBtn02"><a href="blog_edit.html"><img src="img/mypage/icon_edit.svg" alt="">ブログを編集</a></p>
-						</div>
+						@endforeach
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu/>
 
+				<x-parts.alert-modal phrase="このブログを削除しますか？" formId="delete-blog" />
 			</div><!--inner-->
 		</div><!--contents-->
 		</div><!--blog-->
