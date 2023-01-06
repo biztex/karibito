@@ -15,6 +15,7 @@ class MPointSeeder extends Seeder
     public function run()
     {
         $params = [
+            ['name' => 'カリビトをご登録していただきありがとうございます！', 'point' => '1000', 'deadline_period' => '12'], //仮で作成
             ['name' => '初出品おめでとうポイント！', 'point' => '1000', 'deadline_period' => '12'] //仮で作成
         ];
         \DB::table('m_points')->insert($params);

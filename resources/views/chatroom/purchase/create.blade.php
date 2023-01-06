@@ -70,7 +70,7 @@
                                 <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1" @if(old('coupon_use') == 1) checked @endif>クーポンを利用する</label></p>
                                 <div class="pointInput mt12">
                                     <p class="mr18">
-                                        <select name="coupon_number" style="padding: 10px;">
+                                        <select name="coupon_number" style="padding: 10px;" class="coupon_number">
                                             <option value="">選択してください</option>
                                             @foreach ($user_has_coupons as $coupon)
                                                 <option value="{{$coupon->coupon_number}}" @if(old('coupon_number') == $coupon->coupon_number) selected @endif>{{$coupon->name}}:{{$coupon->content}}</option>
@@ -80,7 +80,7 @@
                                     {{-- <p class="adoptionBtn"><input type="button" value="適用"></p> --}}
                                 </div>{{-- /.pointInput --}}
 
-								{{-- <p class="detail">{{$coupon->discount}}円割引クーポン(合計{{$coupon->min_price}}円以上のサービスでご利用可能){{date('Y年m月d日', strtotime($coupon->deadline))}}まで</p> --}}
+								<p class="detail">クーポンが選択されていません。</p>
 								{{-- 最低利用金額などはこっちでやる、仕様未決定のため、一旦飛ばす --}}
 
                                 <div class="warnNotes">
@@ -199,6 +199,7 @@
 </x-layout>
 
 <script>
+let user_has_coupons = @json($user_has_coupons);
 
 	if('{{ config('stripe.stripe_public_key') }}') {
 
@@ -304,4 +305,22 @@
 			form.submit();
 		});
 	};
+
+	//セレクトボックスが切り替わったら発動
+	$('.coupon_number').change(function() {
+	
+		//選択したvalue値を変数に格納
+		var id = $(this).val();
+		
+		user_has_coupons.forEach(function(val){
+			if(val.id == id){
+				console.log(val.id);
+				//選択したvalue値をp要素に出力
+				$('p.detail').text(val.discount + '円割引クーポン(合計' + val.min_price + '円以上のサービスでご利用可能)' + val.deadline + 'まで');
+			} else {
+				$('p.detail').text('クーポンが選択されていません。');
+			}
+		});
+
+	})
 </script>
