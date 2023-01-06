@@ -146,10 +146,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::resource('portfolio', PortfolioController::class);
 
                 // ブログ
-                Route::view('blog', 'mypage.blog.index')->name('blog');
-                Route::get('blog/create', [BlogController::class, 'create'])->name('blog.create');
-                Route::view('blog/edit', 'mypage.blog.edit')->name('blog');
-                Route::view('blog/show', 'mypage.blog.show')->name('blog');
+                Route::resource('blog', BlogController::class);
                 // Route::get('blog', [FavoriteController::class, 'index'])->name('favorite.index');
 
 
