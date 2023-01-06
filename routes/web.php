@@ -513,6 +513,8 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
         Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
         Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
+        Route::get('{user}/blog',[OtherUserController::class, 'blog'])->name('blog');
+        Route::get('{user}/blog/{blog}',[OtherUserController::class, 'blogShow'])->name('blog.show');
     });
 
 });

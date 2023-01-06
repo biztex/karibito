@@ -12,6 +12,7 @@ use App\Models\UserCareer;
 use App\Models\UserJob;
 use App\Models\Evaluation;
 use App\Libraries\Age;
+use App\Models\Blog;
 use App\Services\EvaluationService;
 use App\Services\PortfolioService;
 use App\Models\JobRequest;
@@ -97,5 +98,21 @@ class UserController extends Controller
         $next_page = $this->portfolio_service->nextPage($portfolio, $portfolio_list);
 
         return view('other-user.portfolio.show', compact('user', 'portfolio', 'portfolio_list', 'url', 'prev_page', 'next_page'));
+    }
+
+    public function blog(User $user)
+    {
+        $blogs = Blog::where('user_id', $user->id)->get();
+
+        return view('other-user.blog.index', compact('user', 'blogs'));
+    }
+
+    public function blogShow(User $user, Blog $blog)
+    {
+        $blogs = Blog::where('user_id', $user->id)->get();
+        $base_url = config('app.url');
+        $url = "$base_url/user/$user->id/blog/$blog->id"; //必要ない場合削除
+
+        return view('other-user.blog.show', compact('user', 'blog', 'blogs', 'url'));
     }
 }

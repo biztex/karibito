@@ -93,7 +93,7 @@
                                                     <a href="{{ route('setting.index') }}">会員情報</a>
                                                 </div>
                                             @endif
-                                            <p class="navMypageUlLink"><a href="{{ route('logout') }}" class="fs12" style="font-size: 1.3rem;">ログアウト</a></p> {{--クラス反応しない。スタイルベタ書き修正--}}
+                                            <p class="navMypageUlLink"><a href="{{ route('logout') }}" class="fs12" style="font-size: 1.3rem;">ログアウト</a></p>
                                         </div>
                                     </li>
                                 @endauth
@@ -139,7 +139,7 @@
                                     <p class="fwB">出品者向け</p>
                                     <a href="{{ route('resume.show') }}" class="">スキル / 経歴</a>
                                     <a href="{{ route('portfolio.index') }}" class="">ポートフォリオ</a>
-                                    {{-- <li><a href="#">ブログ</a></li> --}}
+                                    <a href="{{ route('blog.index') }}">ブログ</a>
                                     <a href="{{ route('publication') }}" class="">掲載内容一覧</a>
                                     <a href="{{ route('draft') }}">掲載内容の下書き</a>
                                     <a href="{{ route('profit.index') }}" class="">売上管理・振込申請</a>
