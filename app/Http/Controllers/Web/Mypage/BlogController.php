@@ -55,7 +55,7 @@ class BlogController extends Controller
     public function store(StoreRequest $request): RedirectResponse
     {
         $this->blog_service->storeBlog($request);
-        return redirect()->route('blog.index')->with('flash_msg', 'ブログをブログしました！');;
+        return redirect()->route('blog.index')->with('flash_msg', 'ブログを投稿しました！');
     }
 
     /**
