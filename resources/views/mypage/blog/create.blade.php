@@ -13,37 +13,45 @@
 				<div id="main">
 					<div class="blogWrap">
 						<p class="mypageHd02"><span>ブログ</span></p>
-						<div class="mypageEditBox">
-							<div class="mypageEditList">
-								<p class="mypageEditHd">タイトル</p>
-								<div class="mypageEditInput"><input type="text" name="" placeholder="タイトルを入力してください"></div>
-							</div>
-							<div class="mypageEditList">
-								<p class="mypageEditHd">投稿する内容をご記入ください</p>
-								<div class="postFunction">
-									<a href="#"><img src="img/blog/ico_post01.svg" alt=""></a>
-									<a href="#"><img src="img/blog/ico_post02.svg" alt=""></a>
-									<a href="#"><img src="img/blog/ico_post03.svg" alt=""></a>
-									<a href="#"><img src="img/blog/ico_post04.svg" alt=""></a>
+						<form action="{{ route('blog.store') }}" method="post" idform enctype="multipart/form-data">
+							@csrf
+							<div class="mypageEditBox">
+								<div class="mypageEditList">
+									<p class="mypageEditHd">タイトル</p>
+									@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
+									<div class="mypageEditInput">
+										<input type="text" name="title" placeholder="タイトルを入力してください" value="{{ old('title', $request->title ?? "") }}" required>
+									</div>
 								</div>
-								<div class="mypageEditInput"><textarea placeholder="000文字以上で入力してください"></textarea></div>
-							</div>
-							<div class="mypageEditList">
-								<p class="mypageEditHd">投稿を選択してください</p>
-								<div class="mypageEditInput">
-									<select class="middle_ipt">
-										<option>選択してください</option>
-										<option>選択してください1</option>
-										<option>選択してください2</option>
-										<option>選択してください3</option>
-									</select>
+								<div class="mypageEditList">
+									<p class="mypageEditHd">投稿する内容をご記入ください</p>
+									@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
+									<div class="mypageEditInput">
+										<textarea name="content" placeholder="投稿する内容を入力してください" required>
+											{{ old('detail',$request->content ?? "") }}
+										</textarea>
+									</div>
+								</div>
+								<div class="mypageEditList">
+									<p class="mypageEditHd">出品サービス</p>
+									@error('product_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
+									<div class="mypageEditInput">
+										<select class="middle_ipt" name="product_id" required>
+											<option value="">選択してください</option>
+											@foreach (App\Models\Product::loginUsers()->notDraft()->orderBy('created_at', 'desc')->get() as $product)
+												<option value="{{$product->id}}" @if( old('product_id', $request->product_id ?? "") == $product->id ) selected @endif>
+													{{ $product->title }}
+												</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="fancyPersonBtn">
+									<a href="{{ route('blog.index') }}" class="fancyPersonCancel">キャンセル</a>
+									<button class="fancyPersonSign loading-disabled">登録する</button>
 								</div>
 							</div>
-							<div class="fancyPersonBtn">
-								<a href="#" class="fancyPersonCancel">キャンセル</a>
-								<a href="#" class="fancyPersonSign">登録する</a>
-							</div>
-						</div>
+						</form>
 					</div>
 				</div><!-- /#main -->
 				<x-side-menu/>

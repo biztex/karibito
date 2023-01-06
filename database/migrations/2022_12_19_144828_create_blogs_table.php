@@ -18,8 +18,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('product_id')->constrained('products');
             $table->string('title')->comment('ブログタイトル');
-            $table->string('content')->comment('投稿内容');
+            $table->text('content')->comment('投稿内容');
             $table->string('path')->comment('画像のパス');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
