@@ -40,7 +40,7 @@ class UserProfileService
      * @param array $params
      */
     public function storeUserProfile(array $params): void
-    {        
+    {
         \DB::beginTransaction();
         try {
             $guest_profile = UserProfile::updateOrCreate(
@@ -57,7 +57,7 @@ class UserProfileService
             );
             
             $invitee_profile = UserProfile::where('my_code', $params['friend_code'])->first();
-
+            
             // 招待コード入力で紹介者＆招待された人にポイント付与
             if ($invitee_profile && $params['friend_code'] !== null) {
                 $this->point_service->getPoint(1, $invitee_profile);
