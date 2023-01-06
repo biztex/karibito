@@ -670,11 +670,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 30px;
-	font-size: 14px;
-	color: #664d03;
-	background-color: #fff3cd;
-	border: solid 1px #ffecb5;
+	height: 50px;
+	font-size: 20px;
+	color: #222;
+	background-color: #C6FFFB;
+	border: solid 1px #fff;
 }
 
 .flash_close {
