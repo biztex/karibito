@@ -1,13 +1,13 @@
 <x-layout>
-    <x-parts.post-button/>
-    <div id="blog">
-        <div id="breadcrumb">
-            <div class="inner">
-                <a href="{{ route('home') }}">ホーム</a>　>　<span>ブログ</span>
-            </div>
-        </div><!-- /.breadcrumb -->
-        <x-parts.ban-msg/>
-        <x-parts.flash-msg/>
+	<x-parts.post-button/>
+	<div id="blog">
+		<div id="breadcrumb">
+			<div class="inner">
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>ブログ</span>
+			</div>
+		</div><!-- /.breadcrumb -->
+		<x-parts.ban-msg/>
+		<x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
@@ -60,6 +60,6 @@
 				<x-parts.alert-modal phrase="このブログを削除しますか？" formId="delete-blog" />
 			</div><!--inner-->
 		</div><!--contents-->
-		</div><!--blog-->
+	</div><!--blog-->
 	<x-hide-modal/>
 </x-layout>
