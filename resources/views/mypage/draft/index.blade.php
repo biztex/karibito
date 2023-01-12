@@ -56,13 +56,72 @@
 															@endif
 														</div>
 													</a>
-													<div class="link">
+													@if ($val->isPost())
+													<form method="post">
+														@csrf
+														<input type="hidden" name="id" value={{ $val->id }}>
+														<input type="hidden" name="category_id" value={{ $val->category_id }}>
+														<input type="hidden" name="title" value={{ $val->title }}>
+														<input type="hidden" name="content" value={{ $val->content }}>
+														<input type="hidden" name="price" value={{ $val->price }}>
+														<input type="hidden" name="is_online" value={{ $val->is_online }}>
+														<input type="hidden" name="prefecture_id" value={{ $val->prefecture_id }}>
+														<input type="hidden" name="time_unit" value={{ $val->time_unit }}>
+														<input type="hidden" name="number_of_day" value={{ $val->number_of_day }}>
+														<input type="hidden" name="number_of_sale" value={{ $val->number_of_sale }}>
+														@if(collect($val->additionalOption)->isNotEmpty())
+                            								@foreach($val->additionalOption as $additional_option)
+                                                        		<input type="hidden" name="option_name[]" value="{{ $additional_option->name }}">
+																<input type="hidden" name="option_price[]" value="{{ $additional_option->price }}">
+																<input type="hidden" name="option_is_public[]" value="{{ $additional_option->is_public }}">
+                                                        	@endforeach
+														@else
+															<input type="hidden" name="option_name[]" value="">
+															<input type="hidden" name="option_price[]" value="">
+															<input type="hidden" name="option_is_public[]" value="">
+														@endif
+														@if(collect($val->productQuestion)->isNotEmpty())
+                                							@foreach($val->productQuestion as $product_question)
+																<input type="hidden" name="question_title[]" value="{{ $product_question->title }}">
+																<input type="hidden" name="answer[]" value="{{ $product_question->answer }}">
+															@endforeach
+														@else
+															<input type="hidden" name="question_title[]" value="">
+															<input type="hidden" name="answer[]" value="">
+														@endif
+														@if(collect($val->productLink)->isNotEmpty())
+                            								@foreach($val->productLink as $link)
+																<input type="hidden" name="youtube_link[]" value="{{ $link->youtube_link }}">
+															@endforeach
+														@else
+															<input type="hidden" name="youtube_link[]" value="">
+														@endif
+														@for($i = 0; $i < 10; $i++)
+															@if(isset($val->productImage[$i]))
+																<input type="hidden" name="base64_text[]" value="#">
+                                                    			<input type="hidden" name="old_image[]" value="{{ $val->productImage[$i]->path }}">
+															@else
+																<input type="hidden" name="base64_text[]" value="">
+																<input type="hidden" name="old_image[]" value="">
+															@endif
+															<input type="hidden" name="image_status{{$i}}" value="">
+														@endfor
+														<input type="hidden" name="status" value={{ $val->status }}>
+														<div class="update">
+															<input type="submit" formaction="{{ route('product.update', $val->id) }}" value="登録する">
+														</div>
+														<div class="preview">
+															<input type="submit" formaction="{{ route('product.edit.preview', $val->id) }}" value="プレビュー">
+														</div>
+													</form>
+													@endif
+													<div class="edit">
 														<a href="{{ route('product.edit',$val->id) }}">編集する</a>
 														<form id="delete-product" method="post" action="{{ route('product.destroy', $val->id ) }}">
 															@csrf @method('delete')
-                                                            <p class="linkdel">
-                                                                <input type="button" class="full js-alertModal" value="削除">
-                                                            </p>
+															<p class="linkdel">
+																<input type="button" class="full js-alertModal" value="削除">
+															</p>
 														</form>
 													</div>
 												</div>
@@ -105,7 +164,27 @@
 															@endif
 														</div>
 													</a>
-													<div class="link">
+													@if ($val->isPost())
+													<form method="post">
+														@csrf
+														<input type="hidden" name="id" value={{ $val->id }}>
+														<input type="hidden" name="category_id" value={{ $val->category_id }}>
+														<input type="hidden" name="title" value={{ $val->title }}>
+														<input type="hidden" name="content" value={{ $val->content }}>
+														<input type="hidden" name="price" value={{ $val->price }}>
+														<input type="hidden" name="application_deadline" value={{ $val->application_deadline }}>
+														<input type="hidden" name="required_date" value={{ $val->required_date }}>
+														<input type="hidden" name="is_online" value={{ $val->is_online }}>
+														<input type="hidden" name="prefecture_id" value={{ $val->prefecture_id }}>
+														<div class="update">
+															<input type="submit" formaction="{{ route('job_request.update', $val->id) }}" value="登録する">
+														</div>
+														<div class="preview">
+															<input type="submit" formaction="{{ route('job_request.edit.preview', $val->id) }}" value="プレビュー">
+														</div>
+													</form>
+													@endif
+													<div class="edit">
 														<a href="{{ route('job_request.edit',$val->id) }}">編集する</a>
 														<form id="delete-job_request" method="post" action="{{ route('job_request.destroy', $val->id ) }}">
 															@csrf @method('delete')
