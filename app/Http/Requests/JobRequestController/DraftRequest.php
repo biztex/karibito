@@ -41,6 +41,7 @@ class DraftRequest extends FormRequest
     {
         return [
             'category_id.required_without_all' => 'カテゴリ / サービス名 / サービスの詳細 / 予算の中で1個以上の項目を必ず入力してください。',
+            'application_deadline.after_or_equal' => '応募期限には、明日以降の日付を指定してください。',
         ];
     }
 }
