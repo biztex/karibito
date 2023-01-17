@@ -8,7 +8,6 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        // 'name' => env('APP_NAME', 'laravel-backup'), 初期コード
         'name' =>config('app.env'). '_'.env('APP_NAME', 'laravel-backup'),
 
         'source' => [
@@ -19,7 +18,7 @@ return [
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    // base_path(),
+//                    base_path()
                     storage_path('app/public')
                 ],
 
@@ -119,6 +118,7 @@ return [
              */
             'disks' => [
                 'spaces',
+            ],
         ],
 
         /*
@@ -147,17 +147,17 @@ return [
      * For Slack you need to install laravel/slack-notification-channel.
      *
      * You can also use your own notification classes, just make sure the class is named after one of
-     * the `Spatie\Backup\Notifications\Notifications` classes.
+     * the `Spatie\Backup\Events` classes.
      */
     'notifications' => [
 
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => ['slack'],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => ['slack'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => ['slack'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => ['slack'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => ['slack'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['slack'],
         ],
 
         /*
@@ -166,14 +166,14 @@ return [
          */
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
-        // 'mail' => [
-        //     'to' => 'your@example.com',
-
-        //     'from' => [
-        //         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        //         'name' => env('MAIL_FROM_NAME', 'Example'),
-        //     ],
-        // ],
+//        'mail' => [
+//            'to' => 'your@example.com',
+//
+//            'from' => [
+//                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+//                'name' => env('MAIL_FROM_NAME', 'Example'),
+//            ],
+//        ],
 
         'slack' => [
             'webhook_url' => env('LOG_SLACK_WEBHOOK_URL'),
@@ -187,20 +187,6 @@ return [
 
             'icon' => null,
 
-        ],
-
-        'discord' => [
-            'webhook_url' => '',
-
-            /*
-             * If this is an empty string, the name field on the webhook will be used.
-             */
-            'username' => '',
-
-            /*
-             * If this is an empty string, the avatar on the webhook will be used.
-             */
-            'avatar_url' => '',
         ],
     ],
 
@@ -276,7 +262,6 @@ return [
              */
             'delete_oldest_backups_when_using_more_megabytes_than' => 5000,
         ],
-    ],
     ],
 
 ];
