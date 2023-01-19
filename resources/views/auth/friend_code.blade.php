@@ -31,7 +31,7 @@
 										<p><input type="text" name="friend_code" placeholder="" class="@error('friend_code') is-invalid @enderror" value="{{ old('friend_code') }}"></p>
 									</div>
                                     <div class="labelCategory">
-										<p>カリビトをどこで知り合いましたか？</p>
+										<p>カリビトをどこで知りましたか？</p>
 										@error('where_know')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
