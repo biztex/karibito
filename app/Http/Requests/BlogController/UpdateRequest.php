@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:30',
-            // 'product_id' => 'required|integer|exists:products,id',
+            'product_id' => 'required|integer|exists:products,id',
             'content' => 'required|string'
         ];
     }
