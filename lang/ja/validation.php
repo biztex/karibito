@@ -217,7 +217,7 @@ return [
         'gender' => '性別',
         'prefecture_id' => '都道府県',
         'friend_code' => '友達招待コード',
-        'where_know' => 'カリビトをどこで知り合いましたか',
+        'where_know' => 'カリビトをどこで知りましたか？',
         'icon' => 'アイコン画像',
         'cover' => 'カバー画像',
         'first_name' => '姓名',
