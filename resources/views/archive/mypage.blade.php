@@ -7,7 +7,7 @@
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
-		<div class="unregisteredP"><img src="./img/common/ico_check.png">本人確認未完了<a href="#fancybox_register" class="fancybox">【登録する】</a></div>
+		<div class="unregisteredP"><img src="./img/common/ico_check.png" style="width:20px; vertical-align:text-top;">本人確認未完了<a href="#fancybox_register" class="fancybox">【登録する】</a></div>
 		<div class="hide">
 			<div id="fancybox_register" class="fancyboxWrap">
 				<p class="fancyboxHd">身分証明証の登録</p>
