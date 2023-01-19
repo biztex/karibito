@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 class Product extends Model
 {
@@ -227,6 +229,16 @@ class Product extends Model
     }
 
     /**
+     * ブログ
+     * 
+     * @return HasMany
+     */
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function chatrooms()
@@ -264,5 +276,72 @@ class Product extends Model
     public function userNotifications()
     {
         return $this->morphMany(UserNotification::class, 'reference');
+    }
+
+    /**
+     * 投稿条件を満たしているかどうかを判別する
+     * 
+     * @return bool
+     */
+    public function isPost()
+    {
+        $isPost = true;
+        // データ生成
+        $product = $this->toArray();
+        if (collect($this->additionalOption)->isNotEmpty()) {
+            foreach($this->additionalOption as $additional_option) {
+                $product['option_name'][] = $additional_option->name;
+                $product['option_price'][] = $additional_option->price;
+                $product['option_is_public'][] = $additional_option->is_public;
+            }
+        }
+        if (collect($this->productQuestion)->isNotEmpty()) {
+            foreach($this->productQuestion as $product_question) {
+                $product['question_title'][] = $product_question->title;
+                $product['answer'][] = $product_question->answer;
+            }
+        }
+        if (collect($this->productLink)->isNotEmpty()) {
+            foreach($this->productLink as $link) {
+                $product['youtube_link'][] = $link->youtube_link;
+            }
+        }
+        for ($i = 0; $i < 10; $i++) {
+            if(isset($this->productImage[$i])) {
+                $product['base64_text'][] = '#';
+                $product['old_image'][] = $this->productImage[$i]->path;
+            } else {
+                $product['base64_text'][] = '';
+                $product['old_image'][] = '';
+            }
+            $product['image_status' . $i] = null;
+        }
+        $product['status'] = $this->status;
+        // バリデーション
+        $validator = Validator::make($product, [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'is_online' => 'required | boolean',
+            'number_of_day' => 'required | integer | between:1,730',
+            'time_unit' => 'required | integer',
+            // 'is_call' => 'required | boolean',　電話対応は仕様変更によって一旦非表示
+            'number_of_sale' => 'required | integer',
+            'status' => 'required | integer',
+            'option_name.*' => 'nullable | string | max:400',
+            'option_price.*' => 'nullable | integer',
+            'option_is_public.*' => 'integer',
+            'question_title.*' => 'required_unless:answer.*,null| max:400',
+            'answer.*' => 'required_unless:question_title.*,null| max:400',
+            'youtube_link.*' => 'nullable | string | max:255 | url',
+            'base64_text.0' => 'required',
+            'paths.*' => 'max:20480 | file | image | mimes:png,jpg'
+        ]);
+        if ($validator->fails()) {
+            $isPost = false;
+        }
+        return $isPost;
     }
 }

@@ -31,10 +31,10 @@ class StoreRequest extends FormRequest
         'title' => 'required | string | max:30',
         'content' => 'required | string | min:30 | max:3000 ',
         'price' => 'required | integer | min:500 | max:9990000',
-        'application_deadline' => 'required | date | after:yesterday',
-        'required_date' => 'nullable | date | after:yesterday',
+        'application_deadline' => 'required | date | after_or_equal:tomorrow', //応募期限
+        'required_date' => 'nullable | date | after_or_equal:application_deadline', // 納期希望日
         'is_online' => 'required | boolean',
-        'is_call' => 'required | boolean',
+        // 'is_call' => 'required | boolean',　電話対応は仕様変更によって一旦非表示
         ];
     }
 
@@ -48,16 +48,10 @@ class StoreRequest extends FormRequest
         //
     }
 
-    /**
-    * 項目名
-    *
-    * @return array
-    */
-    public function attributes()
+    public function messages()
     {
         return [
-            'after:yesterday' => '昨日',
-            'required_date' => '昨日',
+            'application_deadline.after_or_equal' => '応募期限には、明日以降の日付を指定してください。',
         ];
     }
 

@@ -125,8 +125,8 @@
                 <p class="name">{{$message->user->name}}</p>
                 <p>{{$message->text}}</p>
                 <div class="proposeBuy">
-                    <p class="tit">この商品は削除されました<p>
-                    <p class="buy"><input type="submit" value="この商品は削除されました" disabled></p>
+                    <p class="tit">このサービスは削除されました<p>
+                    <p class="buy"><input type="submit" value="このサービスは削除されました" disabled></p>
                 </div>
             </div>
         </div>

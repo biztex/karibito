@@ -23,7 +23,7 @@ class ProductStartChatroom
         if($request->product->user_id === \Auth::id()) {
             return redirect()->route('product.show', $request->product->id);
         }elseif($request->product->number_of_sale === Product::ONE_OF_SALE && $number_of_sold !== 0){
-            return redirect()->route('product.show', $request->product->id)->with('flash_msg','この商品は売り切れています。ユーザーにDMでお問い合わせください。');
+            return redirect()->route('product.show', $request->product->id)->with('flash_msg','このサービスは売り切れています。ユーザーにDMでお問い合わせください。');
         }
         return $next($request);
     }

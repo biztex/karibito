@@ -1,18 +1,24 @@
-<x-layout>
-	<x-parts.post-button/>
-	<div id="blog">
-		<div id="breadcrumb">
-			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>ブログ</span>
-			</div>
-		</div><!-- /.breadcrumb -->
-		<x-parts.ban-msg/>
-		<x-parts.flash-msg/>
+<x-other-user.layout>
+	<article>
+        <div class="otherNav">
+            <div class="inner">
+                <ul>
+                    <li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
+                    <li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
+                    <li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
+                    <li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
+                    <li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
+                    <li><a href="" class="is_active">ブログ</a></li>
+                </ul>
+            </div>
+        </div>
 
-		<div id="contents" class="otherPage">
-		{{-- <div id="contents" class="oneColumnPage02"> 元々はこのクラス名が指定されていたが、サイドメニューの位置がおかしくなったためコメントアウト--}}
-			<div class="inner02 clearfix">
-				<div id="main">
+        <x-parts.post-button/>
+        <x-parts.flash-msg/>
+
+        <div id="contents" class="otherPage">
+            <div class="inner02 clearfix">
+                <div id="main">
 					<div class="blogDtWrap">
 						<div class="">
 							<p class="blogItemImg"><img src="{{ $blog->path }}" alt=""></p>
@@ -90,17 +96,28 @@
 									</dd>
 								</dl>
 								<div class="blogDtOtherBtn">
-									<a href="#" class="followA">フォローする</a>
-									<a href="#">メッセージを送る</a>
+									@if(\Auth::user())
+                                        @if(App\Models\UserFollow::IsFollowing($user->id))
+                                            <a href="{{ route('follow.sub', ['id' => $user->id]) }}" class="followB" onclick='return confirm("フォローを解除しますか？");'>フォロー済み</a>
+                                        @else
+                                            <a href="{{ route('follow.add', ['id' => $user->id]) }}" class="followA">フォローする</a>
+                                        @endif
+                                    @else
+                                        <a href="{{ route('follow.add', ['id' => $user->id]) }}" class="followA">フォローする</a>
+                                    @endif
+                                    @if(empty($dmrooms))
+                                        <a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
+                                    @else
+                                        <a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
+                                    @endif
 								</div>
 							</div>
-							<p class="blogAll"><a href="{{ route('blog.index') }}">一覧へ戻る</a></p>
+							<p class="blogAll"><a href="{{ route('user.blog', $user->id) }}">一覧へ戻る</a></p>
 						</div>
 					</div>
 				</div><!-- /#main -->
-				<x-side-menu/>
-			</div><!--inner-->
-		</div><!--contents-->
-	</div><!--blog-->
-<x-hide-modal/>
-</x-layout>
+                @include('other-user.parts.side')
+            </div><!--inner-->
+        </div><!-- /#contents -->
+	</article>
+</x-other-user.layout>

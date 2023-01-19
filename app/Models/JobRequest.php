@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
 use App\Libraries\DiffDateTime;
-
+use Illuminate\Support\Facades\Validator;
 
 class JobRequest extends Model
 {
@@ -257,5 +257,31 @@ class JobRequest extends Model
     public function userNotifications()
     {
         return $this->morphMany(UserNotification::class, 'reference');
+    }
+
+    /**
+     * 投稿条件を満たしているかどうかを判別する
+     * 
+     * @return bool
+     */
+    public function isPost()
+    {
+        $isPost = true;
+        // バリデーション
+        $validator = Validator::make($this->toArray(), [
+            'category_id' => 'required | integer | exists:m_product_child_categories,id',
+            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'title' => 'required | string | max:30',
+            'content' => 'required | string | min:30 | max:3000 ',
+            'price' => 'required | integer | min:500 | max:9990000',
+            'application_deadline' => 'required | date | after:yesterday',
+            'required_date' => 'nullable | date | after:yesterday',
+            'is_online' => 'required | boolean',
+            // 'is_call' => 'required | boolean',　電話対応は仕様変更によって一旦非表示
+        ]);
+        if ($validator->fails()) {
+            $isPost = false;
+        }
+        return $isPost;
     }
 }

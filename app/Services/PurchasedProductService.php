@@ -17,6 +17,7 @@ class PurchasedProductService
 
         $purchased_product = new PurchasedProduct;
         $purchased_product->user_id = $product->user_id;
+        $purchased_product->is_call = 3; //nullを強要していないため、仮で入れる
         foreach($columns as $column){
             $purchased_product->$column = $product[$column];
         }

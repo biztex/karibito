@@ -56,6 +56,7 @@ use App\Http\Controllers\Web\Mypage\UserNotificationSettingController;
 use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
+use App\Http\Controllers\Web\Mypage\BlogController;
 use App\Http\Controllers\Web\Mypage\FavoriteController;
 use App\Http\Controllers\Web\Mypage\PortfolioController;
 
@@ -145,9 +146,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::resource('portfolio', PortfolioController::class);
 
                 // ブログ
-                Route::view('blog', 'mypage.blog2.index')->name('blog');
-                Route::view('blog/edit', 'mypage.blog2.edit')->name('blog');
-                Route::view('blog/show', 'mypage.blog2.show')->name('blog');
+                Route::resource('blog', BlogController::class);
                 // Route::get('blog', [FavoriteController::class, 'index'])->name('favorite.index');
 
 
@@ -514,6 +513,8 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         Route::get('{user}/evaluation',[OtherUserController::class, 'evaluation'])->name('evaluation');
         Route::get('{user}/portfolio',[OtherUserController::class, 'portfolio'])->name('portfolio');
         Route::get('{user}/portfolio/{portfolio}',[OtherUserController::class, 'portfolioShow'])->name('portfolio.show');
+        Route::get('{user}/blog',[OtherUserController::class, 'blog'])->name('blog');
+        Route::get('{user}/blog/{blog}',[OtherUserController::class, 'blogShow'])->name('blog.show');
     });
 
 });

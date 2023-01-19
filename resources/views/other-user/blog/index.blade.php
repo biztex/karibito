@@ -1,30 +1,34 @@
-<x-layout>
-	<x-parts.post-button/>
-	<div id="blog">
-		<div id="breadcrumb">
+<x-other-user.layout>
+	<article class="other-user-blog">
+		<div class="otherNav">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>ブログ</span>
+				<ul>
+					<li><a href="{{ route('user.mypage', $user->id) }}">ホーム</a></li>
+					<li><a href="{{ route('user.evaluation', $user->id) }}">評価</a></li>
+					<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
+					<li><a href="{{ route('user.portfolio', $user->id) }}">ポートフォリオ</a></li>
+					<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
+					<li><a href="" class="is_active">ブログ</a></li>
+				</ul>
 			</div>
-		</div><!-- /.breadcrumb -->
-		<x-parts.ban-msg/>
-		<x-parts.flash-msg/>
+		</div>
+
+		<x-parts.post-button/>
+        <x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="blogWrap">
 						<p class="mypageHd02"><span>ブログ</span></p>
-						<div class="blogAdd">
-							<a href="{{ route('blog.create') }}"><img src="img/mypage/edit_blog.svg" alt="ブログを追加"></a>
-						</div>
 						@foreach ($blogs as $blog)
 							<div class="blogItem">
 								<p class="blogItemImg">
-									<a href="{{ route('blog.show', $blog) }}"><img src="{{ $blog->path }}" alt=""></a>
+									<a href="{{ route('user.blog.show', [$user, $blog]) }}"><img src="{{ $blog->path }}" alt=""></a>
 								</p>
 								<p class="blogItemHd">{{ $blog->title }}</p>
 								<p class="blogItemBread">
-									<a href="{{ route('product.category.index', $blog->product->mProductChildCategory->mProductCategory->id) }}">
+									<a href="{{ route('product.category.index', $blog->product->mProductChildCategory->mProductCategory->id) }}"> {{--todo:ルート先修正--}}
 										{{ $blog->product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;
 									<a href="{{ route('product.category.index.show', $blog->product->mProductChildCategory->id)}}">
 										{{ $blog->product->mProductChildCategory->name }}</a>
@@ -43,23 +47,12 @@
 										<p class="dateP">{{ $blog->updated_at }}</p>
 									</dd>
 								</dl>
-								<div>
-									<p class="specialtyBtn addBtn02"><a href="{{ route('blog.edit', $blog) }}"><img src="img/mypage/icon_edit.svg" alt="">ブログを編集</a></p>
-									<form id="delete-blog" class="report_btn" action="{{ route('blog.destroy', $blog) }}" method="post">
-										@csrf
-										@method('DELETE')
-										<button type="button" class="delete js-alertModal">削除</button>
-									</form>
-								</div>
 							</div>
 						@endforeach
 					</div>
 				</div><!-- /#main -->
-				<x-side-menu/>
-
-				<x-parts.alert-modal phrase="このブログを削除しますか？" formId="delete-blog" />
+				@include('other-user.parts.side')
 			</div><!--inner-->
-		</div><!--contents-->
-	</div><!--blog-->
-	<x-hide-modal/>
-</x-layout>
+		</div><!-- /#contents -->
+	</article>
+</x-other-user.layout>

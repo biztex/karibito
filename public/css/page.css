@@ -3058,6 +3058,76 @@
 	color: #158ACC;
 }
 
+.favoriteUl01 .update input{
+	position: absolute;
+	right: 0;
+	top: 0px;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 25px;
+	border: 1px solid #55c948;
+	font-size: 1.4rem;
+	font-weight: bold;
+	border-radius: 3px;
+	color: white;
+	background: #55c948;
+}
+
+.favoriteUl01 .preview input{
+	position: absolute;
+	right: 0;
+	top: 27px;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 25px;
+	border: 1px solid #b5b5b5;
+	font-size: 1.4rem;
+	font-weight: bold;
+	border-radius: 3px;
+	color: white;
+	background: #b5b5b5;
+}
+
+.favoriteUl01 .edit a{
+	position: absolute;
+	right: 0;
+	top: 54px;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 25px;
+	border: 1px solid #158ACC;
+	font-size: 1.4rem;
+	font-weight: bold;
+	border-radius: 3px;
+	color: #158ACC;
+}
+
+.favoriteUl01 .linkdel input {
+	position: absolute;
+	right: 0;
+	top: 31px;
+	z-index: 1;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 25px;
+	border: 1px solid #6e6a6a;
+	font-size: 1.4rem;
+	font-weight: bold;
+	border-radius: 3px;
+	color: #6e6a6a;
+	background-color: white;
+}
+
 .favoriteUl01.status li .cont01:before {
 	content: '掲載終了';
 	position: absolute;

@@ -72,6 +72,18 @@ $(function () {
 		});
 	});
 
+	// 住所自動入力
+	$('#zip').jpostal({
+		keyup : '#zip',
+		postcode : [
+			'#zip'
+		],
+		address : {
+			'#pref1'  : '%3',
+			'#address1'  : '%4%5',
+		}
+	});
+
 	// モーダル キャンセルボタン
 	$('.fancyPersonCancel').click(function () {
 		$('.fancybox-overlay').fadeOut();

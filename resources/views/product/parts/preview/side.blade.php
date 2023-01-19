@@ -7,13 +7,14 @@
         <input type="hidden" value="@if(!is_null($request->price)){{ $request->price }}@endif" name="price">
         <p class="status">所用期間</p>
         <p class="date">{{$request->number_of_day}}
-            @if ($request->time_unit == 1 ) 
+            @if ($request->time_unit == 1 )
                 日
-            @else 
+            @else
                 時間
             @endif
         </p>
-        
+
+        <input type="hidden" value="@if(!is_null($request->time_unit)){{ $request->time_unit }}@endif" name="time_unit">
         <input type="hidden" value="@if(!is_null($request->number_of_day)){{ $request->number_of_day }}@endif" name="number_of_day">
         <!-- <div class="calendar"><div id="datepicker"></div></div> -->
     </div>

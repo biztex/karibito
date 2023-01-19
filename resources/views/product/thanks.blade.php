@@ -55,7 +55,7 @@
 					</div>
 					<div class="postLinks">
 						<div class="common">
-							<a href="#" class="st2">ブログを投稿する</a>
+							<a href="{{ route('blog.create') }}">ブログを投稿する</a>
 							<a href="{{ route('portfolio.create') }}" class="st2">ポートフォリオを投稿する</a>
 						</div>
 					</div>

@@ -18,6 +18,7 @@ class PurchasedJobRequestService
 
         $purchased_product = new PurchasedJobRequest;
         $purchased_product->user_id = $job_request->user_id;
+        $purchased_product->is_call = 3; //nullを強要していないため、仮で入れる
 
         foreach($columns as $column){
             $purchased_product->$column = $job_request[$column];

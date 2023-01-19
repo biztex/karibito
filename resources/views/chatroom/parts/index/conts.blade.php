@@ -37,7 +37,7 @@
         </div>
     @elseif($value->reference === null)
         <div class="cont01">
-            <p class="price word-break" style="padding-left:15px;"><font>この商品は削除されました</font><br></p>
+            <p class="price word-break" style="padding-left:15px;"><font>このサービスは削除されました</font><br></p>
         </div>
     @elseif($value->reference_type === 'App\Models\Product')
         <div class="cont01">

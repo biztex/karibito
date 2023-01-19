@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -74,6 +75,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function jobRequest()
     {
         return $this->hasMany(JobRequest::class);
+    }
+
+    /**
+     * ブログ
+     *
+     * @return HasMany
+     */
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class);
     }
 
     /**

@@ -69,6 +69,9 @@
 											<label><input type="checkbox" name="terms" value="checked" @if(old('terms') == 'checked') checked @endif required>
 												<a href="{{ route('terms-of-service') }}">利用規約</a>と<a href="{{ route('privacy-policy') }}">プライバシーポリシー</a>に同意する
 											</label>
+											<label><input type="checkbox" name="over_15" value="checked" @if(old('over_15') == 'checked') checked @endif required>
+												15歳以下の方はご利用できません。15歳以上ですか?
+											</label>
 										</div>
 									</div>
 

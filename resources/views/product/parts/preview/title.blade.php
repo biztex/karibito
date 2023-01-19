@@ -7,8 +7,8 @@
         <!-- <a href="#" class="favorite">お気に入り(11)</a> -->
     </div>
     <div class="datas">
-        <span class="data">電話相談の受付：@if(!is_null($request->is_call)){{ App\Models\Product::IS_CALL[$request->is_call] }}@endif</span>
-        <input type="hidden" value="@if(!is_null($request->is_call)){{ $request->is_call }}@endif" name="is_call">
+        {{-- <span class="data">電話相談の受付：@if(!is_null($request->is_call)){{ App\Models\Product::IS_CALL[$request->is_call] }}@endif</span>
+        <input type="hidden" value="@if(!is_null($request->is_call)){{ $request->is_call }}@endif" name="is_call"> --}}
         <!-- <span class="data">閲覧：1000</span> -->
         @if(!is_null($request->prefecture_id))
             <span class="data">エリア：{{ App\Models\Prefecture::find($request->prefecture_id)->name }}</span>
