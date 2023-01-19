@@ -65,6 +65,7 @@ class BlogService
         preg_match_all('/<img.*?src\s*=\s*[\"|\'](.*?)[\"|\'].*?>/i', $content, $img_path_list);
 
         DB::transaction(function () use ($request, $blog, $img_path_list) {
+            $blog->path = $img_path_list[1] ? $img_path_list[1][0] : 'OGP.jpg';
             $blog->fill($request->substitutable());
             $blog->save();
             // ブログ内に画像が投稿されていれば登録
