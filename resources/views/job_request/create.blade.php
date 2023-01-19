@@ -33,7 +33,7 @@
 							</select>
 						</div>
 
-						<p class="th">サービス名<span class="must">必須</span></p>
+						<p class="th">リクエスト名<span class="must">必須</span></p>
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 								<input type="text" name="title" value="{{ old('title') }}" onkeyup="ShowLengthProduct(value);">
@@ -41,7 +41,7 @@
 						</div>
 
 
-						<p class="th">サービスの詳細<span class="must">必須</span></p>
+						<p class="th">リクエスト詳細<span class="must">必須</span></p>
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<textarea type="text" name="content" onkeyup="ShowLengthProductShow(value);">{{ old('content', $request->content) }}</textarea>
@@ -108,7 +108,7 @@
 
 						<div class="functeBtns">
 							<input type="submit" class="full loading-disabled" style="color:white;" formaction="{{ route('job_request.preview') }}" value="プレビュー画面を見る">
-							<input type="submit"  class="full green loading-disabled" style="color:white;" formaction="{{ route('job_request.store') }}" value="リクエスト依頼を登録する">
+							<input type="submit"  class="full green loading-disabled" style="color:white;" formaction="{{ route('job_request.store') }}" value="リクエストを登録する">
 							<input type="submit" class="full green_o loading-disabled" formaction="{{ route('job_request.store.draft') }}" value="下書きとして保存">
 						</div>
 					</form>

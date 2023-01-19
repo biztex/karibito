@@ -310,7 +310,7 @@
                     @auth
                     {{-- @can('identify') --}}
                         <div class="right">
-                            <a href="{{ route('post') }}">投稿する</a>
+                            <a href="{{ route('post') }}">出品/リクエスト</a>
                         </div>
                     {{-- @endcan --}}
                     @endauth

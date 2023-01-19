@@ -1820,7 +1820,8 @@
 	justify-content: center;
 	align-items: center;
 	height: 50px;
-	font-size: 1.6rem
+	font-size: 1.6rem;
+	margin-top: 20px;
 }
 
 .unregisteredP a {
@@ -1837,7 +1838,7 @@
 }
 
 .otherPage {
-	margin: 30px 0
+	margin: 80px 0 30px;
 }
 
 .mypageSec01 {
@@ -8763,7 +8764,9 @@ select.searchSelect {
 	font-size: 1.2rem;
 }
 
-.chatPages .warnBox {}
+.chatPages .warnBox {
+	text-align: left;
+}
 
 .chatPages .warnBox p+p {
 	margin-top: 10px;

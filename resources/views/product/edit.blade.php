@@ -462,7 +462,7 @@
                             </div>
                             <div class="functeBtns">
                                 <input type="submit" class="full" style="color:white;" formaction="{{ route('product.edit.preview', $product->id) }}" value="プレビュー画面を見る">
-                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $product->id) }}" value="サービス提供を登録する">
+                                <input type="submit" class="full green" style="color:white;" formaction="{{ route('product.update', $product->id) }}" value="サービスを登録する">
                                 <input type="submit" class="full green_o" formaction="{{ route('product.update.draft', $product->id) }}" value="下書きとして保存">
                             </div>
                     </form>
