@@ -52,7 +52,9 @@
 
                         <div class="td">
                             <div class="warnNotes">
-                                <p>【対面】：お互いが直接会ってサービスを提供します。<br>【非対面】：お互いが直接合わずに、オンライン上などで、サービスを提供します。</p>
+                                <p>【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
+                                <br>
+                                【非対面】：お互いが直接合わずに、オンライン上などで、サービスを提供します。</p>
                             </div>
                         </div>
                         <p class="th">仕事体系<span class="must">必須</span></p>
@@ -377,7 +379,7 @@
                         </div>
                         <div class="functeBtns">
                             <input type="submit" class="full loading-disabled" style="color:white;" formaction="{{ route('product.preview') }}" value="プレビュー画面を見る">
-                            <input type="submit" class="full green loading-disabled" style="color:white;" formaction="{{ route('product.store') }}" value="サービス提供を登録する">
+                            <input type="submit" class="full green loading-disabled" style="color:white;" formaction="{{ route('product.store') }}" value="サービスを登録する">
                             <input type="submit" class="full green_o loading-disabled" formaction="{{ route('product.store.draft') }}" value="下書きとして保存">
                         </div>
                     </form>

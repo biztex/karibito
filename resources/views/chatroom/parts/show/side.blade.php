@@ -40,9 +40,9 @@
                             <input type="button" class="orange js-alertModal" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" value="納品を完了する">
                         </form>
                     @endif
-                    @if($chatroom->isCancelable())
-                        <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
-                    @endif
+                @endif
+                @if($chatroom->isCancelable())
+                    <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
                 @endif
             </div>
         @else

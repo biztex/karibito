@@ -52,7 +52,7 @@
                                                                     @endif
                                                                 </div>
                                                             </a>
-                                                            <p class="link"><a href="{{ route('product.show',$val->id) }}">詳細見る</a></p>
+                                                            <p class="link"><a href="{{ route('product.show',$val->id) }}">詳細</a></p>
                                                             <p >{{date('Y/m/d', strtotime($val->created_at))}}</p>
                                                         </div>
                                                     </div>
@@ -86,7 +86,7 @@
                                                                         @endif
                                                                     </div>
                                                                 </a>
-                                                                <p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細見る</a></p>
+                                                                <p class="link"><a href="{{ route('job_request.show',$val->id) }}">詳細</a></p>
                                                                 <p>{{date('Y/m/d', strtotime($val->created_at))}}</p>
                                                             </div>
                                                         </div>
