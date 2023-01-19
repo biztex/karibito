@@ -31,7 +31,7 @@
 								</dd>
 							</dl>
 							<div class="blogItemCont">
-								{{ $blog->content }}
+								{!! $blog->content !!}
 							</div>
 							<div class="recommendList style2 blogDtList">
 								<div class="list sliderSP02">

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Blog;
+use App\Models\BlogImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -28,13 +29,24 @@ class BlogService
      */
     public function storeBlog(Request $request): void
     {
-        DB::transaction(function () use ($request) {
+        // 対象html
+        $content = $request->input('content');
+        // htmlに含まれる画像パスの検索
+        preg_match_all('/<img.*?src\s*=\s*[\"|\'](.*?)[\"|\'].*?>/i', $content, $img_path_list);
+
+        DB::transaction(function () use ($request, $img_path_list) {
+            // ブログ情報登録
             $blog = new Blog();
             $blog->user_id = Auth::id();
-            // 画像パスは一旦静的に指定。仕様が決定次第要修正
-            $blog->path = 'OGP.jpg';
+            $blog->path = 'OGP.jpg'; // 画像パスは一旦静的に指定。仕様が決定次第要修正
             $blog->fill($request->substitutable());
             $blog->save();
+            // ブログ内に画像が投稿されていれば登録
+            if ($img_path_list) {
+                BlogImage::whereIn('url', $img_path_list[1])->update([
+                    'blog_id' => $blog->id
+                ]);
+            }
         });
     }
 
@@ -47,9 +59,20 @@ class BlogService
      */
     public function updateBlog(Request $request, Blog $blog): void
     {
-        DB::transaction(function () use ($request, $blog) {
+        // 対象html
+        $content = $request->input('content');
+        // htmlに含まれる画像パスの検索
+        preg_match_all('/<img.*?src\s*=\s*[\"|\'](.*?)[\"|\'].*?>/i', $content, $img_path_list);
+
+        DB::transaction(function () use ($request, $blog, $img_path_list) {
             $blog->fill($request->substitutable());
             $blog->save();
+            // ブログ内に画像が投稿されていれば登録
+            if ($img_path_list) {
+                BlogImage::whereIn('url', $img_path_list[1])->update([
+                    'blog_id' => $blog->id
+                ]);
+            }
         });
     }
 
@@ -59,9 +82,10 @@ class BlogService
      * @param Blog $blog
      * @return void
      */
-    public function deleteBlog(Blog $blog)
+    public function deleteBlog(Blog $blog): void
     {
         DB::transaction(function () use ($blog) {
+            $blog->blogImage->isEmpty() ? : $blog->blogImage()->delete();
             $blog->delete();
         });
     }
