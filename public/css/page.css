@@ -7368,7 +7368,7 @@ select.searchSelect {
 
 .supportTop {
 	margin: 0 auto 50px;
-	max-width: 965px;
+	max-width: 1045px;
 }
 
 .supportTop .search {
@@ -7409,7 +7409,7 @@ select.searchSelect {
 
 .supportTop .anchors li {
 	padding: 28px 10px;
-	width: 23%;
+	width: 18%;
 	background: #fff;
 	border: 1px solid #EBEBEB;
 	border-radius: 10px;
@@ -7438,6 +7438,10 @@ select.searchSelect {
 
 .supportTop .anchors .ico_support04 {
 	background-image: url(../img/support/ico_support04.svg);
+}
+
+.supportTop .anchors .ico_support05 {
+    background-image: url(../img/support/ico_support05.svg);
 }
 
 .supportWrap .mypageSec02 {
