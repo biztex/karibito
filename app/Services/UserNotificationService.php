@@ -208,4 +208,18 @@ class UserNotificationService
             SendNewNewsNotificationMail::dispatch($user_notification);
         }
     }
+
+    // 会員情報の身分証明書承認キャンセル通知
+    public function storeUserNotificationCancelIdentify($user_profile)
+    {
+        $user_notification = [
+            'user_id' => $user_profile->user_id,
+            'reference_type' => 'App\Models\UserProfile',
+            'reference_id' => $user_profile->id,
+            'title' => '本人確認申請が承認されませんでした。',
+            'is_notification' => 0
+        ];
+
+        UserNotification::create($user_notification);
+    }
 }
