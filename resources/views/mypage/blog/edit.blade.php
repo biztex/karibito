@@ -39,8 +39,9 @@
 									@error('product_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="mypageEditInput">
 										<select class="middle_ipt" name="product_id" required>
-											@foreach (App\Models\Product::loginUsers()->notDraft()->orderBy('created_at','desc')->get() as $key => $product)
-												<option value="{{ $key }}" @if( old('product_id', $blog->product_id) == $key) selected @endif>
+											<option value="">選択してください</option>
+											@foreach (App\Models\Product::loginUsers()->notDraft()->orderBy('created_at', 'desc')->get() as $product)
+												<option value="{{$product->id}}" @if( old('product_id', $blog->product_id ?? "") == $product->id ) selected @endif>
 													{{ $product->title }}
 												</option>
 											@endforeach

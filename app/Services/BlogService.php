@@ -38,7 +38,7 @@ class BlogService
             // ブログ情報登録
             $blog = new Blog();
             $blog->user_id = Auth::id();
-            $blog->path = 'OGP.jpg'; // 画像パスは一旦静的に指定。仕様が決定次第要修正
+            $blog->path = $img_path_list[1] ? $img_path_list[1][0] : 'OGP.jpg';
             $blog->fill($request->substitutable());
             $blog->save();
             // ブログ内に画像が投稿されていれば登録
