@@ -11,14 +11,17 @@ use App\Mail\Admin\NotifyBanMail;
 use App\Mail\Admin\CancelNotifyBanMail;
 use App\Mail\User\ApproveMail;
 use App\Mail\Admin\RevokeApprovalMail;
+use App\Services\UserNotificationService;
 
 class UserController extends Controller
 {
     private $user_search;
+    private $user_notification_service;
 
-    public function __construct(AdminUserSearchService $user_search)
+    public function __construct(AdminUserSearchService $user_search, UserNotificationService $user_notification_service)
     {
         $this->user_search = $user_search;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -142,6 +145,8 @@ class UserController extends Controller
         
         $user->userProfile->identification_path = null;
         $user->userProfile->save();
+        // キャンセル通知
+        $this->user_notification_service->storeUserNotificationCancelIdentify($user->userProfile);
 
         return back()->with('flash_msg',$flash_msg);
 
