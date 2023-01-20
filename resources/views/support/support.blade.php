@@ -21,12 +21,17 @@
 							<li class="biggerlink">
 								<p class="tit">お問い合わせ</p>
 								<a href="{{ route('contact') }}" class="ico_support03"></a>
-								<p>直接お問い合わせる</p>
+								<p>直接問い合わせる</p>
 							</li>
+                            <li class="biggerlink">
+                                <p class="tit">運営会社</p>
+                                <a href="{{ route('company') }}" class="ico_support04" target="_blank" rel="noopener noreferrer"></a>
+                                <p>カリビトについて</p>
+                            </li>
 							<li class="biggerlink">
-								<p class="tit">運営会社</p>
-								<a href="{{ route('company') }}" class="ico_support04" target="_blank" rel="noopener noreferrer"></a>
-								<p>カリビトについて</p>
+								<p class="tit">カリビトガイド</p>
+								<a class="ico_support05" target="_blank" rel="noopener noreferrer"></a>
+								<p>カリビトのご利用方法 </p>
 							</li>
 						</ul>
 					</div>
