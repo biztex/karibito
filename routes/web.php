@@ -57,6 +57,7 @@ use App\Http\Controllers\Web\Mypage\UserNotificationController;
 
 use App\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\Web\Mypage\BlogController;
+use App\Http\Controllers\Web\Mypage\BlogImageController;
 use App\Http\Controllers\Web\Mypage\FavoriteController;
 use App\Http\Controllers\Web\Mypage\PortfolioController;
 
@@ -147,6 +148,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
 
                 // ブログ
                 Route::resource('blog', BlogController::class);
+                Route::post('blog_image', [BlogImageController::class, 'store'])->name('blog_image.store');
                 // Route::get('blog', [FavoriteController::class, 'index'])->name('favorite.index');
 
 

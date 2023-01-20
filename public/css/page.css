@@ -6175,6 +6175,10 @@ select.searchSelect {
 	margin-bottom: 20px;
 }
 
+.blogItemCont img{
+	display: none;
+}
+
 .blogItem .blogItemCont {
 	overflow: hidden;
 	text-overflow: ellipsis;
