@@ -29,6 +29,8 @@ class AlreadyReadController extends Controller
             return redirect()->route('chatroom.show', ['chatroom' => $object]);
         } elseif($user_notification->reference_type === 'App\Models\Dmroom') {
             return redirect()->route('dm.show', ['dmroom' => $object]);
+        } elseif($user_notification->reference_type === 'App\Models\UserProfile') {
+            return redirect()->route('setting.index');
         } else{
             return view('mypage.user_notification.show', compact('user_notification'));
         }
