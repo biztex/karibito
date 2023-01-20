@@ -1,4 +1,5 @@
 <x-layout>
+<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
     <x-parts.post-button/>
     <div id="blog">
         <div id="breadcrumb">
@@ -28,7 +29,7 @@
 									@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="mypageEditInput">
 										<textarea name="content" placeholder="投稿する内容を入力してください" required>
-											{{ old('detail',$request->content ?? "") }}
+											{!! old('content', $request->content ?? "") !!}
 										</textarea>
 									</div>
 								</div>
@@ -59,3 +60,43 @@
 		</div><!--contents-->
 	<x-hide-modal/>
 </x-layout>
+<script type='text/javascript'>
+	tinymce.init({
+		selector : 'textarea',
+		plugins : [
+			'advlist anchor autolink autoresize autosave charmap code colorpicker',
+			'contextmenu directionality emoticons hr image imagetools importcss insertdatetime image legacyoutput link lists',
+			'media nonbreaking noneditable pagebreak paste preview save searchreplace stickytoolbar',
+			'tabfocus table textcolor textpattern toc visualblocks visualchars wordcount'
+		],
+		toolbar : 'formatselect bold italic underline forecolor backcolor| alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
+		menubar : true,
+		element_format : 'html',
+		relative_urls : false,
+		branding: false,
+		images_reuse_filename: true,
+		automatic_uploads: true,
+		images_upload_url: '/blog_image?_token={{csrf_token()}}',
+		file_picker_types: 'image',
+		file_picker_callback: function(cb, value, meta) {
+			var input = document.createElement('input');
+			input.setAttribute('type', 'file');
+			input.setAttribute('accept', 'image/*');
+			input.onchange = function() {
+				var file = this.files[0];
+
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = function () {
+					var id = 'blobid' + (new Date()).getTime();
+					var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+					var base64 = reader.result.split(',')[1];
+					var blobInfo = blobCache.create(id, file, base64);
+					blobCache.add(blobInfo);
+					cb(blobInfo.blobUri(), { title: file.name });
+				};
+			};
+			input.click();
+		}
+	});
+</script>

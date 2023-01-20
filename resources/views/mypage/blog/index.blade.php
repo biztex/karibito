@@ -30,7 +30,7 @@
 										{{ $blog->product->mProductChildCategory->name }}</a>
 								</p>
 								<div class="blogItemCont">
-									<p>{{ $blog->content }}</p>
+									<p>{!! $blog->content !!}</p>
 								</div>
 								<dl class="blogItemPerson">
 									@if(empty($blog->user->userProfile->icon))
