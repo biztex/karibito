@@ -57,7 +57,7 @@
 
                         <div class="td">
                             <div class="warnNotes">
-                                <p>【対面】：お互いが直接会ってサービスを提供します。<br>【非対面】：お互いが直接合わずに、オンライン上などで、サービスを提供します。</p>
+                                <p>【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span><br>【非対面】：お互いが直接合わずに、オンライン上などで、サービスを提供します。</p>
                             </div>
                         </div>
 
@@ -472,7 +472,7 @@
     </article>
 </x-layout>
 <script>
-    
+
 $(function(){
 
 	for (let i = 0; i < 10; i++) {
@@ -485,7 +485,7 @@ $(function(){
 			$("#preview_product"+i).attr('src',  localStorage.getItem("pic"+i));
 		}
 	}
-    
+
     delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
 	delQuestion();
 	delYoutube();
