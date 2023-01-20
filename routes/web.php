@@ -41,6 +41,7 @@ use App\Http\Controllers\Web\Mypage\PointController;
 use App\Http\Controllers\Web\OtherUser\UserController as OtherUserController;
 use App\Http\Controllers\Web\OtherUser\ProductController as OtherUserProductController;
 use App\Http\Controllers\Web\OtherUser\JobRequestController as OtherUserJobRequestController;
+use App\Http\Controllers\Web\OtherUser\BlogController as OtherUserBlogController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\ChatroomController;
 use App\Http\Controllers\Web\CancelController;
@@ -435,6 +436,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
     Route::get('job_request/index/category/show/{child_category}', [OtherUserJobRequestController::class, 'show'])->name('job_request.category.index.show');
     // Route::get('job_request/index/keyword/search', [OtherUserJobRequestController::class, 'search'])->name('job_request.search');
 
+    // ブログ一覧
+    Route::get('blog/index/category/{category}', [OtherUserBlogController::class, 'index'])->name('blog.category.index');
+    Route::get('blog/index/category/show/{child_category}', [OtherUserBlogController::class, 'show'])->name('blog.category.index.show');
 
     // --管理者画面-----------------------------------------------------------------------------
     Route::prefix('admin')->name('admin.')->group(function () {

@@ -286,17 +286,17 @@
                                 </ul>
                             </div>
                         </div>
-                        {{-- <div class="findLink">
+                        <div class="findLink">
                             <a class="findLinkA">ブログを探す</a>
                             <div class="findSubLink">
                                 <ul class="findSubLinkUl">
                                     @foreach($categories as $category)
                                         <li class="findSubLinkLi">
-                                            <a href="#">{{$category->name}}</a>
+                                            <a href="{{route('blog.category.index', $category->id) }}">{{$category->name}}</a>
                                             <div class="findThirdLink">
                                                 <ul class="findThirdLinkUl">
                                                     @foreach($category->mProductChildCategory as $child_category)
-                                                        <li><a href="#">{{$child_category->name}}</a></li>
+                                                        <li><a href="{{route('blog.category.index.show', $child_category->id) }}">{{$child_category->name}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -304,7 +304,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
 
                     @auth
