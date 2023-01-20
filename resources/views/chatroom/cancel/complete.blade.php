@@ -32,13 +32,13 @@
 					</ul>
 
 					<div class="cancelTitle">
-						<h2>キャンセルの申請を承認いたしました</h2>
+						<h2>キャンセル申請を承認しました！</h2>
 					</div>
 					<div class="cancelRea">
-						<p>キャンセルの申請を承認いたしました。<br>相手の方に承認の連絡が届きます。<br>今回のお取引はキャンセルとなりました。<br>取引相手との連絡は、カリビトチャットで可能です。<br>報酬等につきましては、直接取引相手様とお願いいたします。</p>
+						<p>キャンセルは双方の評価入力をもって完了します。<br>チャット画面からお相手の方の評価を入力してください。</p>
 					</div>
 					<div class="functeBtns">
-						<a href="{{ route('chatroom.show', $purchased_cancel->purchase->chatroom_id) }}">やりとりページへ戻る</a>
+						<a href="{{ route('chatroom.show', $purchased_cancel->purchase->chatroom_id) }}">チャット画面に戻る</a>
 					</div>
 				</div>
 			</div>
