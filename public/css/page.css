@@ -8656,6 +8656,14 @@ select.searchSelect {
 	font-weight: bold;
 }
 
+.cancelReason {
+    display: flex;
+}
+
+.cancelReason .cancelRea .reason {
+    text-align: left !important;
+}
+
 .cancelWrap .warnNotes {
 	margin-top: 22px;
 	padding: 15px;
