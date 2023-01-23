@@ -26,7 +26,7 @@
 						<div class="chatPages">
 							<div class="item">
 								<div class="warnBox">
-									<p class="note">【注意事項】</p>
+									<p class="note" style="color:red;">【注意事項】</p>
 									<p class="tit">メッセージのやり取りは、必ず「カリビトチャット」を通じて行ってください。</p>
 									<p>・メールアドレス・LINE・電話など外部連絡先の交換、またそれらを用いてのやり取り<br>・カリビト外での直接取引を促す行為</p>
 									<p>カリビトではこれらの行為を禁止しております。</p>
