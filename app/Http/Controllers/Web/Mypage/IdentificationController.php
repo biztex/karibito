@@ -24,8 +24,9 @@ class IdentificationController extends Controller
 
     public function upload(UpdateIdentificationRequest $request)
     {
-           $this->user_profile_service->updateIdentification($request->identification_path);
+        $this->user_profile_service->updateIdentification($request->identification_path);
+        \Session::flash('identify_upload', '身分証明証を提出しました!');
 
-        return back()->with('flash_msg','身分証明証を提出しました！');
+        return back();
     }
 }
