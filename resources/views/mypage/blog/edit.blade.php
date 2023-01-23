@@ -68,10 +68,14 @@
 			'advlist anchor autolink autoresize autosave charmap code colorpicker',
 			'contextmenu directionality emoticons hr image imagetools importcss insertdatetime image legacyoutput link lists',
 			'media nonbreaking noneditable pagebreak paste preview save searchreplace stickytoolbar',
-			'tabfocus table textcolor textpattern toc visualblocks visualchars wordcount'
+			'tabfocus table textcolor textpattern toc visualblocks visualchars wordcount',
+			'autolink',
+			'link',
+			'image'
 		],
-		toolbar : 'formatselect bold italic underline forecolor backcolor| alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
-		menubar : true,
+		default_link_target: '_blank',
+		toolbar : 'formatselect bold italic underline forecolor backcolor| alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+		menubar : false,
 		element_format : 'html',
 		relative_urls : false,
 		branding: false,
