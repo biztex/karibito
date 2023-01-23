@@ -29,8 +29,8 @@
 			<div class="cancelWrap">
 				<div class="inner inner05">
 					<div class="cancelTitle">
-						<h2>おめでとうございます！</h2>
-						<p class="cancelRea">サービスの作成が完了しました。<br>サービスはSNSなどでみんなにシェアすることもできます。</p>
+						<h2>出品が完了しました！！</h2>
+						<p class="cancelRea">あなたの出品がサービス一覧に登録されました。購入者の方からの連絡は、お知らせと登録されたメールに通知します。<br>出品したサービスはSNSでみんなにシェアできます。</p>
 					</div>
 					<div class="shareSnsEmail">
 						<h3>SNSやメールでサービスをシェアする</h3>
