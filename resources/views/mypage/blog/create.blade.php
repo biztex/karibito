@@ -82,6 +82,7 @@
 		automatic_uploads: true,
 		images_upload_url: '/blog_image?_token={{csrf_token()}}',
 		file_picker_types: 'image',
+		language: "ja",
 		file_picker_callback: function(cb, value, meta) {
 			var input = document.createElement('input');
 			input.setAttribute('type', 'file');
