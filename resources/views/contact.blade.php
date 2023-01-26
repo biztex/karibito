@@ -1,5 +1,4 @@
 <x-layout>
-    <x-parts.flash-msg/>
     <x-parts.post-button/>
     <article>
         <div id="breadcrumb">
@@ -7,6 +6,7 @@
                 <a href="{{ route('home') }}">ホーム</a>　>　<span>お問い合わせ</span>
             </div>
         </div><!-- /.breadcrumb -->
+        <x-parts.flash-msg/>
         <div id="contents" class="oneColumnPage">
             <div class="inner">
                 <div id="main">
