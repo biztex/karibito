@@ -1,5 +1,4 @@
 <x-layout>
-    <x-parts.flash-msg/>
     <x-parts.post-button/>
     <article>
         <div id="breadcrumb">
@@ -7,6 +6,7 @@
                 <a href="{{ route('home') }}">ホーム</a>　>　<span>お問い合わせ</span>
             </div>
         </div><!-- /.breadcrumb -->
+        <x-parts.flash-msg/>
         <div id="contents" class="oneColumnPage">
             <div class="inner">
                 <div id="main">
@@ -63,3 +63,13 @@
         </div><!-- /#contents -->
     </article>
 </x-layout>
+<script type="text/javascript">
+$(function(){
+    // 送信するボタン挙動
+    $(".submit").on("click", function() {
+        // 連打防止
+        $(this).prop("disabled", true);
+        $(this).closest('form').submit();
+    });
+})
+</script>
