@@ -63,3 +63,13 @@
         </div><!-- /#contents -->
     </article>
 </x-layout>
+<script type="text/javascript">
+$(function(){
+    // 送信するボタン挙動
+    $(".submit").on("click", function() {
+        // 連打防止
+        $(this).prop("disabled", true);
+        $(this).closest('form').submit();
+    });
+})
+</script>
