@@ -42,6 +42,7 @@
 											{{ Auth::user()->sub_email }}　<a class="configLink" href="{{ route('sub_mail_create') }}">変更する</a> 
 										</dd>
 									</dl>
+									<p class="memberConfigSupplement">＊登録するとこちらからもお知らせ通知を受け取ることができます。</p>
 								@else
 									<dl class="memberConfigDl">
 										<dt>サブメールアドレス</dt>
@@ -49,6 +50,7 @@
 											<a class="configLink" href="{{ route('sub_mail_create') }}">登録する</a> 
 										</dd>
 									</dl>
+									<p class="memberConfigSupplement">＊登録するとこちらからもお知らせ通知を受け取ることができます。</p>
 								@endif
 								@can('exist.password')
 									<dl class="memberConfigDl">

@@ -6431,6 +6431,11 @@ select.searchSelect {
 	color: #158ACC;
 }
 
+.memberConfigSupplement {
+	margin-top: 4px;
+	margin-bottom: 10px;
+}
+
 .status_span {
 	padding-left: 23px;
 	background: url(../img/common/ico_status.svg)no-repeat left center;
