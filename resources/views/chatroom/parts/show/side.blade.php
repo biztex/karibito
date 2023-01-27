@@ -33,16 +33,16 @@
             <div class="functeBtns">
                 @if($chatroom->seller_user_id === Auth::id())
                     @if($chatroom->status === App\Models\Chatroom::STATUS_START || $chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
-                        <a href="#fancybox_proposal" class="orange fancybox">サービスを提供する</a>
+                        <a href="#fancybox_proposal" class="orange fancybox">サービスの提供</a>
                     @elseif($chatroom->status === App\Models\Chatroom::STATUS_WORK)
                         <form id="delivery-form" action="{{ route('chatroom.complete', $chatroom->id) }}" method="get">
                             @csrf
-                            <input type="button" class="orange js-alertModal" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" value="納品を完了する">
+                            <input type="button" class="orange js-alertModal" style="height: 55px;font-size: 1.8rem;max-width: 280px;color:white;font-weight: bold;" value="納品完了">
                         </form>
                     @endif
                 @endif
                 @if($chatroom->isCancelable())
-                    <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請をする</a>
+                    <a href="{{ route('cancel.create', $chatroom->purchase->id) }}" class="cancel">キャンセル申請</a>
                 @endif
             </div>
         @else
