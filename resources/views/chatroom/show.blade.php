@@ -38,12 +38,10 @@
                                     <div class="finish_massage">
                                         <p>取引終了となります。ありがとうございました。</p>
                                     </div>
-                                @else
+                                @elseif(empty($partner->deleted_at)) <!-- 入力エリア -->
+                                        @include('chatroom.parts.show.form')
+                                @endif
                             </div>
-                            <!-- 入力エリア -->
-                            @if(empty($partner->deleted_at))
-                                @include('chatroom.parts.show.form')
-                            @endif
 
                         </div>
                         
