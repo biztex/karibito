@@ -110,7 +110,8 @@
 }
 
 .serviceLink .span{display: none;}
-@media (min-width: 47em) and (max-width: 1290px){
+/* @media (min-width: 47em) and (max-width: 1290px){ */
+@media (min-width: 47em) {
 
 	.serviceLink .box {
 	    overflow: hidden;
