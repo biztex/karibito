@@ -26,7 +26,7 @@ class DmroomController extends Controller
      */
     public function index(Dmroom $dmroom)
     {
-        $dmroom_users = Dmroom::where('from_user_id', \Auth::id())->orWhere('to_user_id', \Auth::id())->paginate(10);
+        $dmroom_users = Dmroom::where('from_user_id', \Auth::id())->orWhere('to_user_id', \Auth::id())->orderBy('updated_at', 'desc')->paginate(10);
 
         return view('mypage.dm.index',compact('dmroom_users','dmroom'));
     }
