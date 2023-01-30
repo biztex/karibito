@@ -30,7 +30,7 @@
 				<div class="inner inner05">
 					<div class="cancelTitle">
 						<h2>出品が完了しました！！</h2>
-						<p class="cancelRea">あなたの出品がサービス一覧に登録されました。購入者の方からの連絡は、お知らせと登録されたメールに通知します。<br>出品したサービスはSNSでみんなにシェアできます。</p>
+						<p class="cancelRea">あなたの出品がサービス一覧に登録されました。<br>購入者の方からの連絡は、お知らせと登録されたメールに通知します。<br>出品したサービスはSNSでみんなにシェアできます。</p>
 					</div>
 					<div class="shareSnsEmail">
 						<h3>SNSやメールでサービスをシェアする</h3>
@@ -55,7 +55,7 @@
 					</div>
 					<div class="postLinks">
 						<div class="common">
-							<a href="{{ route('blog.create') }}">ブログを投稿する</a>
+							<a href="{{ route('blog.create') }}" class="st2">ブログを投稿する</a>
 							<a href="{{ route('portfolio.create') }}" class="st2">ポートフォリオを投稿する</a>
 						</div>
 					</div>
