@@ -328,7 +328,7 @@
                         </div>
                     @endforeach
                     </div>
-                    <div class="span"><img src="/img/common/icon_slink.svg" alt=""></div>
+                    <!-- <div class="span"><img src="/img/common/icon_slink.svg" alt=""></div> -->
                 </div>
             </div>
         </div>

@@ -377,6 +377,20 @@ var common = (function () {
 		parent.$.fancybox.close();
 	});
 
+	$(".serviceLink .box").slick({
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		dots: false,
+		responsive: [
+			{
+				breakpoint: 1200,
+				settings: {
+					slidesToShow: 3,
+				}
+			}
+		]
+	});
+
 });
 
 

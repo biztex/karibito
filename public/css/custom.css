@@ -2012,3 +2012,13 @@ a.after-none {
 a.after-none::after {
 	content: none;
 }
+
+/* header serviceLink */
+@media screen and (min-width: 768px) {
+	#header .serviceLink.pc .slick-slide {
+		margin: 0 10px;
+	}
+	#header .serviceLink.pc .slick-slide a {
+		justify-content: center;
+	}
+}
