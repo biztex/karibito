@@ -4503,9 +4503,12 @@ select.faqSelect {
 }
 
 .contactTop {
+	margin-bottom: 40px;
+}
+.contactTop,
+.contactBoxText {
 	font-size: 1.4rem;
 	line-height: 1.64;
-	margin-bottom: 40px;
 }
 
 .contactBottom {
