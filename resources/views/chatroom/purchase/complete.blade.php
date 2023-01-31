@@ -18,7 +18,7 @@
 						<h2>お支払いが完了しました！</h2>
 					</div>
 					<div class="cancelRea">
-						<p class="reason">サービスの購入が完了しました。引き続きチャット画面にて購入が完了したメッセージを送り、詳細のすり合わせを行いましょう。</p>
+						<p class="reason">サービスの購入が完了しました。<br>引き続きチャット画面にて購入が完了したメッセージを送り、<br>詳細のすり合わせを行いましょう。</p>
 					</div>
 					<div class="functeBtns">
 						<a href="{{route('chatroom.show', $proposal->chatroom->id)}}">チャット画面に戻る</a>
