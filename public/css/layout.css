@@ -439,17 +439,6 @@
 	padding:0 10px;
 }
 
-
-div#mainVisual {
-    margin-top: 55px;
-}
-
-@media screen and (max-width: 767px) {
-	div#mainVisual {
-		margin-top: 0px;
-	}
-}
-
  
 /* !teaser
 ---------------------------------------------------------- */
@@ -503,9 +492,10 @@ div#mainVisual {
 } 
 @media screen and (max-width: 767px) {
 	#mainVisual .main{
-		padding:20px 0;
-		height:230px;
-		background-image: url(../img/top/img_main_sp.jpg);
+		padding:0;
+		height:auto;
+		background:none;
+		margin-top: -20px;
 	}
 	#mainVisual .logo{margin-bottom:15px;}
 	#mainVisual .logo img{height:72px;}
