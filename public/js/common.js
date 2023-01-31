@@ -377,19 +377,15 @@ var common = (function () {
 		parent.$.fancybox.close();
 	});
 
-	$(".serviceLink.pc .box").slick({
-		slidesToShow: 4,
-		slidesToScroll: 1,
-		dots: false,
-		responsive: [
-			{
-				breakpoint: 1000,
-				settings: {
-					slidesToShow: 3,
-				}
-			}
-		]
-	});
+	$(function() {
+		if (window.matchMedia('(min-width:769px)').matches) {
+			fr = new FilmRoll({
+				container: '#filmroll',
+				pager: false,
+				scroll: false,
+			});
+		}
+  });
 
 });
 
