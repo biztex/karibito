@@ -61,7 +61,7 @@ class UserProfileService
             $invitee_profile = UserProfile::where('my_code', $params['friend_code'])->first();
             
             // 新規会員登録時に登録者にクーポン付与、エラーになるため一旦非表示
-            // $this->coupon_service->createUserCoupon(MCoupon::NEW_REGISTRATION, $guest_profile->user_id);
+            $this->coupon_service->createUserCoupon(MCoupon::NEW_REGISTRATION, $guest_profile->user_id);
             // 招待コード入力で紹介者＆招待された人にクーポン付与
             if ($invitee_profile && $params['friend_code'] !== null) {
                 $this->coupon_service->createUserCoupon(MCoupon::INVITED_FRIEND, $guest_profile->user_id);
