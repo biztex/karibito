@@ -1,7 +1,11 @@
 <div class="item">
 	<!-- <p class="level"></p> topのカテゴリー別のみ仕様 -->
     <a href="{{ route('blog.show', $blog->id) }}" class="img imgBox">
-        <img src="{{ asset($blog->blogImage[0]->url) }}" alt="" style="object-fit: contain;">
+        @if(isset($blog->blogImage[0]))
+            <img src="{{ asset($blog->blogImage[0]->url) }}" alt="" style="object-fit: contain;">
+        @else
+            <img src="/img/mypage/img_notice01.png" alt="">
+        @endif
     </a>
     <div class="infoTop">
         <div>
