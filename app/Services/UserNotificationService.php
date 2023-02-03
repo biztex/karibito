@@ -20,7 +20,9 @@ use App\Models\UserFollow;
 use App\Models\DmroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
-use App\Jobs\SendNewMessageNotificationMail; 
+use App\Jobs\SendNewMessageNotificationMail;
+use App\Jobs\SendTransferFailureMail;
+use App\Mail\Admin\TransferFailureMail;
 use App\Models\Favorite;
 
 class UserNotificationService
@@ -221,5 +223,20 @@ class UserNotificationService
         ];
 
         UserNotification::create($user_notification);
+    }
+
+    // 振込申請の失敗通知
+    public function storeUserNotificationTransferFailure($transfer_request)
+    {
+        $user_notification_contents = [
+            'user_id' => $transfer_request->user_id,
+            'reference_type' => 'App\Models\TransferRequest',
+            'reference_id' => $transfer_request->id,
+            'title' => '振り込みに失敗しました。',
+            'is_notification' => 0
+        ];
+
+        $user_notification = UserNotification::create($user_notification_contents);
+        SendTransferFailureMail::dispatch($user_notification);
     }
 }
