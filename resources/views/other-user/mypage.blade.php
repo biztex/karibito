@@ -21,13 +21,21 @@
 				<div id="main">
 					<div class="otherMypageWrap">
 						<div class="mypageSec01">
-							<div class="mypageCover"></div>
+							<div class="mypageCover">
+								<div class="cover_background">
+									@if(!empty($user->userProfile->cover))
+										<img src="{{asset('/storage/'.$user->userProfile->cover) }}">
+									@else
+										<img src="/img/mypage/img_rainbow.png" style="object-fit: cover;">
+									@endif
+								</div>
+							</div>
 							<div class="inner">
 								<dl class="mypageDl01">
-							        @if(null !== $user->userProfile->icon)
+									@if(null !== $user->userProfile->icon)
                                         <dt><img src="{{ asset('/storage/'.$user->userProfile->icon) }}" alt="" style="height:132px;"></dt>
                                     @else
-									    <dt><img src="/img/mypage/no_image.jpg" alt=""></dt>
+										<dt><img src="/img/mypage/no_image.jpg" alt=""></dt>
                                     @endif
 									<dd>
 										<div class="mypageP01">
@@ -35,9 +43,9 @@
 											<div class="blogDtOtherBtn">
                                             @if (\Auth::id() !== $user->id)
 												@if(empty($dmrooms))
-												    <a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
+													<a href="{{ route('dm.create',$user->id) }}">メッセージを送る</a>
 												@else
-												    <a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
+													<a href="{{ route('dm.show',$dmrooms->id) }}">メッセージを送る</a>
 												@endif
                                                 @if(\Auth::user())
                                                     @if(App\Models\UserFollow::IsFollowing($user->id))
