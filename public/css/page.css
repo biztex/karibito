@@ -4505,6 +4505,10 @@ select.faqSelect {
 	line-height: 1.5;
 }
 
+.contactBoxLink {
+	text-decoration: underline;
+}
+
 .contactTop {
 	margin-bottom: 40px;
 }
@@ -4512,6 +4516,10 @@ select.faqSelect {
 .contactBoxText {
 	font-size: 1.4rem;
 	line-height: 1.64;
+}
+.contactBoxText {
+	margin-left: 1em;
+	text-indent: -1em;
 }
 
 .contactBottom {
