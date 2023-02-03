@@ -1866,6 +1866,9 @@
 
 .mypageCover .cover_background {
 	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .mypageCover .cover_background img {

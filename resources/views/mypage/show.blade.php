@@ -19,7 +19,7 @@
 					<div class="mypageWrap">
 						{{-- 電話対応 --}}
 						<!-- 電話機能は一旦止めてほしいためコメントアウト -->
-						<!-- @include('mypage.show.call') -->
+						{{-- @include('mypage.show.call') --}}
 
 						{{-- プロフィール --}}
 						@include('mypage.show.profile')
