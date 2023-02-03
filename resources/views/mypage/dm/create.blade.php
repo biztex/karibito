@@ -49,31 +49,6 @@
 										<input type="file" name="file_path" id="file_path" style="display:none;">
 										<input type="hidden" name="file_name" value="">
 										<a href="javascript:;" class="templateOpen">定型文を使う</a>
-										<div class="templatePopup">
-											<div class="templateOverlay"></div>
-											<div class="templateArea tabSelectArea">
-												<div class="templateClose"></div>
-												<h2 class="templateTitle">定型文の挿入</h2>
-												<div class="templateSelect">
-													<select class="tabSelectLinks">
-														<option value="#template01">あいさつ１</option>
-														<option value="#template02">あいさつ２</option>
-														<option value="#template03">あいさつ３</option>
-													</select>
-												</div>
-												<div class="templateBox tabSelectBox is-active" id="template01">
-													<textarea readonly>お世話になっております。&#13;一般社団法人日本ビジネスメール協会、●●担当の山田太郎と申します。&#13;このたびは、●●●●についてお問い合わせいただき誠にありがとうございます。&#13;ご請求いただいた資料は、本日郵送にてお送りいたします。&#13;今週中にはお手元に届くかと存じます。&#13;ご確認よろしくお願いいたします。
-													</textarea>
-												</div>
-												<div class="templateBox tabSelectBox" id="template02">
-													<textarea readonly>あいさつ２あいさつ２あいさつ２あいさつ２あいさつ２</textarea>
-												</div>
-												<div class="templateBox tabSelectBox" id="template03">
-													<textarea readonly>あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３あいさつ３</textarea>
-												</div>
-												<div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
-											</div>
-										</div>
 									</div>
 									<x-parts.file-input/>
 									<div class="cancelTitle">
@@ -84,7 +59,97 @@
 									</div>
 								</div>
 							</form>
-							
+<div class="templatePopup">
+	<div class="templateOverlay"></div>
+	<div class="templateArea tabSelectArea">
+		<div class="templateClose"></div>
+		<h2 class="templateTitle">定型文の挿入</h2>
+		<div class="templateSelect">
+			<select class="tabSelectLinks">
+				<option value="#template01">購入前の問い合わせ（購入者）</option>
+				<option value="#template02">購入確認のあいさつ（購入者）</option>
+				<option value="#template03">購入確認のあいさつ（出品者）</option>
+				<option value="#template04">購入後のあいさつ（購入者）</option>
+				<option value="#template05">購入後のあいさつ（出品者）</option>
+				<option value="#template06">やりとりが滞ってしまったら</option>
+				<option value="#template07">キャンセルについて（購入者）</option>
+				<option value="#template08">納品完了メール（出品者）</option>
+				<option value="#template09">サービス受取時（納品者）</option>
+			</select>
+		</div>
+		<div class="templateBox tabSelectBox is-active" id="template01">
+<textarea readonly> {{--表示が崩れるためインデント無視--}}
+はじめまして。〇〇と申します。
+▲▲様が出品されている「□□□」のサービスをお願いしたいと考えております。
+購入にあたり、下記内容をご確認の程よろしくお願い致します。
+（＊購入後のトラブル防止のため、気になることはしっかりと確認しましょう。）
+お忙しいところ大変お手数ではございますが、どうぞ宜しくお願い致します。
+</textarea>
+		</div>
+		<div class="templateBox tabSelectBox" id="template02">
+<textarea readonly>
+はじめまして。
+〇〇と申します。　
+▲▲様が出品されている「□□□」のサービスを購入したいと思いますので、「サービスの提供」通知を送っていただけますでしょうか。
+届き次第、購入手続きをさせていただきたいと思います。
+どうぞよろしくお願い致します。
+</textarea>
+												</div>
+												<div class="templateBox tabSelectBox" id="template03">
+<textarea readonly>
+この度は、数多くあるサービスの中からご連絡いただきまして誠にありがとうございます。
+さっそく「サービス提供」通知をお送りしましたので、購入手続きをお願いいたします。　
+お取引完了まで、どうぞよろしくお願い致します。
+</textarea>
+		</div>
+		<div class="templateBox tabSelectBox" id="template04">
+<textarea readonly>
+先ほどサービスを購入させていただきました〇〇です。　
+とても楽しみにしていますので、お取引完了までどうぞよろしくお願い致します。
+</textarea>
+		</div>
+		<div class="templateBox tabSelectBox" id="template05">
+<textarea readonly>
+この度はサービスをご購入いただき、誠にありがとうございます。
+お取引完了まで、どうぞよろしくお願い致します。　
+早速ですが、ご依頼内容の詳細を確認させていただきたいので、下記内容を教えてください。
+よろしくお願い致します。
+（＊サービス提供に必要な情報をしっかりとすり合わせましょう。）
+</textarea>
+		</div>
+		<div class="templateBox tabSelectBox" id="template06">
+<textarea readonly>
+●日に送らせていただきましたご連絡について、まだご返信をいただけておりませんのでご連絡をさせていただきました。
+現在の状況等、お早目にご連絡をいただければ幸いです。
+お忙しいところ恐縮ではございますが、どうぞよろしくお願い致します。
+</textarea>
+		</div>
+		<div class="templateBox tabSelectBox" id="template07">
+<textarea readonly>
+大変申し上げにくいのですが、今回のご依頼の件はキャンセルをお願いしたく存じます。
+キャンセル申請にも記述しておりますが、理由としましては（＊必ず理由を明記する）でございます。
+申請のご確認をお願いします。
+</textarea>
+		</div>
+		<div class="templateBox tabSelectBox" id="template08">
+<textarea readonly>
+サービスを納品させていただきますので、ご確認の程よろしくお願い致します。
+修正箇所や何か確認したい点がございましたら、お手数をおかけしますが「リトライ」を選択し、ご連絡をお願い致します。
+問題がないようでしたら、「承認」を選択していただき、評価にお進みいただけますでしょうか？
+よろしくお願い致します。
+</textarea>
+		</div>
+		<div class="templateBox tabSelectBox" id="template09">
+<textarea readonly>
+サービスの確認をさせていただきました。
+こちらで問題ございませんので、「承認」とさせて頂きます。
+どうもありがとうございます。
+</textarea>
+		</div>
+		<div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
+	</div>
+</div>
+
 						</div>
 					</div>
 				</div><!-- /#main -->
