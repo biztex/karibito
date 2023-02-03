@@ -324,7 +324,7 @@
                     <div id="filmroll" class="box">
                     @foreach($categories as $category)
                         <div class="link">
-                            <a href="#" class="linkA">{{ $category->name }}</a>
+                            <a href="{{route('product.category.index', $category->id) }}" class="linkA">{{ $category->name }}</a>
                         </div>
                     @endforeach
                     </div>
