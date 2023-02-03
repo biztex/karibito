@@ -2015,10 +2015,25 @@ a.after-none::after {
 
 /* header serviceLink */
 @media screen and (min-width: 768px) {
-	#header .serviceLink.pc .slick-slide {
-		margin: 0 10px;
+	#header .serviceLink.pc .box {
+		position: relative;
 	}
-	#header .serviceLink.pc .slick-slide a {
-		justify-content: center;
+	#header .serviceLink.pc .link {
+		width: auto !important;
+	}
+	a.film_roll_prev,
+	.film_roll_next {
+		position: absolute;
+    top: calc(50% - (34px / 2));
+    width: 34px;
+    height: 34px;
+	}
+	a.film_roll_prev {
+		left: 0;
+		background-image: url(../img/common/ico_prev.svg);
+	}
+	.film_roll_next {
+		right: 0;
+		background-image: url(../img/common/ico_next.svg);
 	}
 }

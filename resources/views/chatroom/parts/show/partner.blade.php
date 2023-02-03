@@ -28,7 +28,7 @@
             <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
         </div>
 
-        @include('chatroom.parts.show.partner-tell')
+        {{-- @include('chatroom.parts.show.partner-tell') 電話対応は一旦非表示--}}
 
     </div>
 @elseif($partner === $chatroom->buyerUser && $chatroom->reference_type === 'App\Models\JobRequest')
@@ -61,7 +61,7 @@
             <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
         </div>
 
-        @include('chatroom.parts.show.partner-tell')
+        {{-- @include('chatroom.parts.show.partner-tell')電話対応は一旦非表示 --}}
 
     </div>
 @else
@@ -92,7 +92,7 @@
             <p class="login">最終ログイン：{{ $partner->latest_login_datetime }}</p>
         </div>
 
-        @include('chatroom.parts.show.partner-tell')
+        {{-- @include('chatroom.parts.show.partner-tell')電話対応は一旦非表示 --}}
 
     </div>
 

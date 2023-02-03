@@ -6,11 +6,7 @@
 	<body id="index">
 		<div id="mainVisual">
 			<div class="main">
-				<div class="inner">
-					<p class="logo"><img src="/img/common/logo_title.svg" alt="LOGO"></p>
-					<p class="sub">知識・スキル・経験を商品化<br class="sp">マッチングプラットフォーム！</p>
-					<p class="cv"><img src="/img/top/main_cv.svg" alt=""></p>
-				</div>
+				<img src="/img/top/img_main_sp.jpg" srcset="/img/top/img_main_sp.jpg " alt="カリビト" class="sp">
 			</div>
 			<div class="slider">
 				<div class="item"><a href="#"><img src="/img/top/banner1.png" srcset="/img/top/banner1.png " alt="写真"></a></div>

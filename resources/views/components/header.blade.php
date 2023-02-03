@@ -321,7 +321,7 @@
         <div class="serviceLink pc">
             <div class="inner">
                 <div class="cont">
-                    <div class="box">
+                    <div id="filmroll" class="box">
                     @foreach($categories as $category)
                         <div class="link">
                             <a href="#" class="linkA">{{ $category->name }}</a>
