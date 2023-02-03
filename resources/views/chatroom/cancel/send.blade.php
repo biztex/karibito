@@ -37,7 +37,7 @@
                         <p>キャンセル理由の詳細</p>
                         <textarea readonly>{{ $purchased_cancel->text }}</textarea>
                     </div>
-					<div class="cancelRea mt20">
+					<div class="cancelRead mt20">
 						<p>
                             相手の方がキャンセル申請に「承認」した場合、または「再交渉」を選択しないまま72時間が経過した場合にキャンセル成立となります。
                             <br>
