@@ -2,7 +2,7 @@
 <article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<span>マッチングする秘訣</span>
+				<a href="index.html">ホーム</a>　>　<span>カリビトチャットのコツ</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>

@@ -3,7 +3,7 @@
 	<article id="secret">
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>マッチングする秘訣</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>カリビトチャットのコツ</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 

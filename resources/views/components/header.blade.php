@@ -125,7 +125,7 @@
                                     <a href="{{ route('point.index') }}" class="">ポイント取得・利用履歴</a>
                                     <a href="{{ route('follow.index') }}" class="">フォロー・フォロワー</a>
                                     <a href="{{ route('user_notification.index') }}" class="">お知らせ</a>
-                                    <a href="{{ route('secret01') }}" class="">マッチングする秘訣</a>
+                                    <a href="{{ route('secret01') }}" class="">カリビトチャットのコツ</a>
                                     <a href="{{ route('coupon.index') }}" class="">クーポン</a>
                                     <a href="{{ route('dm.index') }}" class="">DM</a>
                                     <a href="{{ route('setting.index') }}" class="">会員情報</a>
