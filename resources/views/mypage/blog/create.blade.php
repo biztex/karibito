@@ -34,7 +34,7 @@
 									</div>
 								</div>
 								<div class="mypageEditList">
-									<p class="mypageEditHd">出品サービス</p>
+									<p class="mypageEditHd">出品サービス（出品しているサービスのカテゴリに表示されます）</p>
 									@error('product_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
 									<div class="mypageEditInput">
 										<select class="middle_ipt" name="product_id" required>
