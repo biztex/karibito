@@ -263,7 +263,7 @@
 				<div id="main">
 					<div class="secretWrap">
 						<div class="secretBox">
-							<p class="secretHd"><img src="/img/secret/hd_secret.svg" alt="上手にマッチングする秘訣"></p>
+							<p class="secretHd"><img src="/img/secret/hd_secret.svg" alt="カリビトチャットのコツ"></p>
 							<p class="secretImg"><img src="/img/secret/img_secret05.png" alt=""></p>
 							<p class="secretStep">STEP 5</p>
 							<p class="secretTitle"><span>相手にも伝わるよう<br class="sp">「分かりやすい言葉」を使う</span></p>

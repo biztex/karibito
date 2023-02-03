@@ -15,7 +15,7 @@
 				<div id="main">
 					<div class="secretWrap">
 						<div class="secretBox">
-							<p class="secretHd"><img src="img/secret/hd_secret.svg" alt="上手にマッチングする秘訣"></p>
+							<p class="secretHd"><img src="img/secret/hd_secret.svg" alt="カリビトチャットのコツ"></p>
 							<p class="secretImg"><img src="img/secret/img_secret06.png" alt=""></p>
 							<p class="secretStep">STEP 6</p>
 							<p class="secretTitle"><span>「自分の強み」を伝える</span></p>
