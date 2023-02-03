@@ -32,7 +32,7 @@
 										<dl class="couponDl">
 											<dt>
 												<p class="nameP">{{$user_coupon->name}}</p>
-												<p class="txtP">{{$user_coupon->content}}<br>（電話対応サービス・おひねり・有料オプションの追加購入・有料ブログは利用不可）</p>
+												<p class="txtP">{{$user_coupon->content}}</p>
 												<p class="numberP"><font>クーポン番号</font><span class="couponNumber">{{$user_coupon->coupon_number}}</span></p>
 											</dt>
 											<dd>
