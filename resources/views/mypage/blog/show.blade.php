@@ -90,8 +90,12 @@
 									</dd>
 								</dl>
 								<div class="blogDtOtherBtn">
-									<a href="#" class="followA">フォローする</a>
-									<a href="#">メッセージを送る</a>
+									<a href="{{ route('blog.edit', $blog) }}" class="followA">編集する</a>
+									<form action="{{ route('blog.destroy', $blog) }}" method="POST">
+									  @csrf
+									  @method('DELETE')
+									  <button type="submit">削除する</button>
+									</form>
 								</div>
 							</div>
 							<p class="blogAll"><a href="{{ route('blog.index') }}">一覧へ戻る</a></p>
