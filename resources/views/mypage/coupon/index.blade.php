@@ -23,7 +23,7 @@
 							@endif
 							<div class="couponCont">
 								@if ($user_coupons->isNotEmpty())
-									<p class="couponNotice">会計時にクーポン番号を入力してください。</p>
+									<p class="couponNotice">会計時にクーポンを選択してください。</p>
 								@else
 									<p class="">現在クーポンはまだありません。</p>
 								@endif
@@ -39,7 +39,7 @@
 												<div class="couponTicket">
 													<div class="borderP">
 														<p class="typeP">報酬につかえるクーポン</p>
-														<p class="moneyP"><span>{{$user_coupon->discount}}</span>pt</p>
+														<p class="moneyP"><span>{{$user_coupon->discount}}</span>円OFF</p>
 														<p class="dateP">有効期限：{{date('Y年m月d日', strtotime($user_coupon->deadline))}}</p>
 													</div>
 												</div>
