@@ -6317,16 +6317,7 @@ select.searchSelect {
 	max-width: 100%;
 }
 
-.blogDtOtherBtn a {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 33px;
-	border: 1px solid #ccc;
-	font-size: 1.3rem;
-	border-radius: 3px;
-}
-
+.blogDtOtherBtn a,
 .blogDtOtherBtn form {
 	display: flex;
 	justify-content: center;
