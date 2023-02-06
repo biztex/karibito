@@ -66,14 +66,14 @@
 						@else
 						<div class="coupons">
 							<div class="checkbox">
-								@error('coupon_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
+								@error('coupon_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1" @if(old('coupon_use') == 1) checked @endif>クーポンを利用する</label></p>
                                 <div class="pointInput mt12">
                                     <p class="mr18">
-                                        <select name="coupon_number" style="padding: 10px;" class="coupon_number">
+                                        <select name="coupon_id" style="padding: 10px;" class="js-coupon">
                                             <option value="">選択してください</option>
                                             @foreach ($user_has_coupons as $coupon)
-                                                <option value="{{$coupon->coupon_number}}" @if(old('coupon_number') == $coupon->coupon_number) selected @endif>{{$coupon->name}}:{{$coupon->content}}</option>
+                                                <option value="{{$coupon->id}}" @if(old('coupon_id') == $coupon->id) selected @endif>{{$coupon->name}}:{{$coupon->content}}</option>
                                             @endforeach
                                         </select>
                                     </p>
@@ -87,6 +87,7 @@
                                     <p class="danger">ご注意！</p>
                                     <p>※他のクーポンと併用はできません。</p>
                                     <p>※決済後はクーポンのご利用はできませんのでご注意ください。</p>
+                                    <p>ポイントは取引金額の10%までご利用いただけます。</p>
                                 </div>
                             </div>{{-- /.checkbox --}}
 						</div>{{-- /.coupons --}}
@@ -307,14 +308,13 @@ let user_has_coupons = @json($user_has_coupons);
 	};
 
 	//セレクトボックスが切り替わったら発動
-	$('.coupon_number').change(function() {
+	$('.js-coupon').change(function() {
 	
 		//選択したvalue値を変数に格納
 		var id = $(this).val();
 		
 		user_has_coupons.forEach(function(val){
 			if(val.id == id){
-				console.log(val.id);
 				//選択したvalue値をp要素に出力
 				$('p.detail').text(val.discount + '円割引クーポン(合計' + val.min_price + '円以上のサービスでご利用可能)' + val.deadline + 'まで');
 			} else {

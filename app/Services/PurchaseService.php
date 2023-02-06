@@ -112,7 +112,7 @@ class PurchaseService
     {
         $amount['price'] = $proposal->price;
         // $amount['commission'] = $this->getCommission($proposal); 手数料は出品者負担に変更のため一旦非表示
-        $amount['coupon_discount'] = $this->coupon_service->getCouponDiscount($params['coupon_number']);
+        $amount['coupon_discount'] = $this->coupon_service->getCouponDiscount($params['coupon_id']);
         $amount['use_point'] = $params['user_use_point'];
 
         $amount['total'] = $amount['price'] - $amount['coupon_discount'] - $amount['use_point'];
@@ -135,7 +135,7 @@ class PurchaseService
         if(empty($params['coupon_use'])) {
             $amount['coupon_discount'] = 0;
         } else {
-            $amount['coupon_discount'] = $this->coupon_service->getCouponDiscount($params['coupon_number']);
+            $amount['coupon_discount'] = $this->coupon_service->getCouponDiscount($params['coupon_id']);
         }
 
         if($params['point_use'] == 0) {

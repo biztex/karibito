@@ -29,7 +29,7 @@ class UseCouponRule implements Rule
         $useable_coupons = \Auth::user()->userCoupons;
 
         foreach($useable_coupons as $coupon){
-            if($coupon->coupon_number === (int)$value) return true;
+            if($coupon->id === (int)$value) return true;
         }
         return false;
     }

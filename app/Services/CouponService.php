@@ -18,35 +18,36 @@ class CouponService
     public function showCoupon()
     {
         $user_coupons = UserCoupon::where([
-            ['user_id', '=', \Auth::id()],
-            ['used_at', '=', null],
+            ['user_id', \Auth::id()],
+            ['used_at', null],
+            ['deadline', '>=', Carbon::today()->format('Y-m-d')],
         ])
         ->get();
         return $user_coupons;
     }
 
-    public function getCouponDiscount($coupon_number)
+    public function getCouponDiscount($coupon_id)
     {
         $discount = UserCoupon::where([
-            ['user_id', '=', \Auth::id()],
-            ['used_at', '=', null],
-            ['coupon_number', '=', $coupon_number],
+            ['user_id', \Auth::id()],
+            ['used_at', null],
+            ['id', $coupon_id],
         ])
         ->pluck('discount')->first();
         return $discount;
     }
 
-    public function usedCoupon($coupon_number)
+    public function usedCoupon($coupon_id)
     {
 
-        if($coupon_number === null){
+        if($coupon_id === null){
             return null;
         }
 
         $used_coupon = UserCoupon::where([
-            ['user_id', '=', \Auth::id()],
-            ['used_at', '=', null],
-            ['coupon_number', '=', $coupon_number],
+            ['user_id', \Auth::id()],
+            ['used_at', null],
+            ['id', $coupon_id],
         ])->first();
 
         $used_coupon->used_at = Carbon::now();
