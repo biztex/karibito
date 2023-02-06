@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogController\StoreRequest;
 use App\Http\Requests\BlogController\UpdateRequest;
 use App\Models\Blog;
+use App\Models\Dmroom;
 use App\Services\BlogService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -66,7 +67,8 @@ class BlogController extends Controller
      */
     public function show(Blog $blog): View
     {
-        return view('mypage.blog.show', compact('blog'));
+        $dmrooms = Dmroom::where('to_user_id','=', $blog->user->id)->where('from_user_id', '=', \Auth::id())->first();
+        return view('mypage.blog.show', compact('blog', 'dmrooms'));
     }
 
     /**

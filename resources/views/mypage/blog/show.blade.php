@@ -10,7 +10,6 @@
 		<x-parts.flash-msg/>
 
 		<div id="contents" class="otherPage">
-		{{-- <div id="contents" class="oneColumnPage02"> 元々はこのクラス名が指定されていたが、サイドメニューの位置がおかしくなったためコメントアウト--}}
 			<div class="inner02 clearfix">
 				<div id="main">
 					<div class="blogDtWrap">
@@ -36,7 +35,7 @@
 							<div class="recommendList style2 blogDtList">
 								<div class="list sliderSP02">
 									<div class="item">
-										<a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
+										<a href="{{ route('product.show',$blog->product_id) }}" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
 											<img src="img/common/img_270x160.png" alt="">
 											<button class="favorite">お気に入り</button>
 										</a>
@@ -90,12 +89,28 @@
 									</dd>
 								</dl>
 								<div class="blogDtOtherBtn">
-									<a href="{{ route('blog.edit', $blog) }}" class="followA">編集する</a>
-									<form action="{{ route('blog.destroy', $blog) }}" method="POST">
-									  @csrf
-									  @method('DELETE')
-									  <button type="submit">削除する</button>
-									</form>
+									@if ($blog->user->id === Auth::user()->id)
+										<a href="{{ route('blog.edit', $blog) }}" class="followA">編集する</a>
+										<form id="delete-blog" class="report_btn" action="{{ route('blog.destroy', $blog) }}" method="post">
+											@csrf
+											@method('DELETE')
+											<button type="submit" class="delete js-alertModal">削除する</button> {{--todo:デザイン崩れ、アラートでない--}}
+										</form>
+									@else
+										@if(empty($dmrooms))
+											<a href="{{ route('dm.create',$blog->user->id) }}" class="followA">メッセージを送る</a>
+										@else
+											<a href="{{ route('dm.show',$dmrooms->id) }}" class="followA">メッセージを送る</a>
+										@endif
+										@if(App\Models\UserFollow::IsFollowing($blog->user->id))
+											<form id="follow-sub-form" action="{{ route('follow.sub', ['id' => $blog->user->id]) }}" method="get">
+												@csrf
+												<a type="button" class="followB js-alertModal" style="cursor: pointer">フォロー済み</a>
+											</form>
+										@else
+											<a href="{{ route('follow.add', ['id' => $blog->user->id]) }}" class="followA">フォローする</a> {{--デザイン修正--}}
+										@endif
+									@endif
 								</div>
 							</div>
 							<p class="blogAll"><a href="{{ route('blog.index') }}">一覧へ戻る</a></p>
@@ -107,4 +122,6 @@
 		</div><!--contents-->
 	</div><!--blog-->
 <x-hide-modal/>
+<x-parts.alert-modal phrase="フォローを解除してもよろしいですか？" value="フォロー解除" formId="follow-sub-form" />
+<x-parts.alert-modal phrase="このブログを削除しますか？" formId="delete-blog" />
 </x-layout>

@@ -63,6 +63,7 @@
 											</div>
 										</div>
 										<p class="mypageP02">最終ログイン：{{ $user->latest_login_datetime }}</p>
+										<p class="mypageP02">キャンセル完了数：{{ $cancel_count }}</p>
 										<p class="mypageP03">({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$user->userProfile->age}}/ {{$user->userProfile->prefecture->name}}) </p>
 										<p class="mypageP04 check">
                                             @if ($user->userProfile->is_identify)
