@@ -2,7 +2,7 @@
 <article>
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="index.html">ホーム</a>　>　<span>マッチングする秘訣</span>
+				<a href="index.html">ホーム</a>　>　<span>カリビトチャットのコツ</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 		<div class="btnFixed"><a href="#"><img src="/img/common/btn_fix.svg" alt="投稿"></a></div>
@@ -263,7 +263,7 @@
 				<div id="main">
 					<div class="secretWrap">
 						<div class="secretBox">
-							<p class="secretHd"><img src="/img/secret/hd_secret.svg" alt="上手にマッチングする秘訣"></p>
+							<p class="secretHd"><img src="/img/secret/hd_secret.svg" alt="カリビトチャットのコツ"></p>
 							<p class="secretImg"><img src="/img/secret/img_secret03.png" alt=""></p>
 							<p class="secretStep">STEP 3</p>
 							<p class="secretTitle"><span>納期・スケジュールを<br class="sp">「具体的に」記載する</span></p>

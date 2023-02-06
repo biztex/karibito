@@ -3,7 +3,7 @@
 	<article id="secret">
 		<div id="breadcrumb">
 			<div class="inner">
-				<a href="{{ route('home') }}">ホーム</a>　>　<span>マッチングする秘訣</span>
+				<a href="{{ route('home') }}">ホーム</a>　>　<span>カリビトチャットのコツ</span>
 			</div>
 		</div><!-- /.breadcrumb -->
 
@@ -15,7 +15,7 @@
 				<div id="main">
 					<div class="secretWrap">
 						<div class="secretBox">
-							<p class="secretHd"><img src="img/secret/hd_secret.svg" alt="上手にマッチングする秘訣"></p>
+							<p class="secretHd"><img src="img/secret/hd_secret.svg" alt="カリビトチャットのコツ"></p>
 							<p class="secretImg"><img src="img/secret/img_secret04.png" alt=""></p>
 							<p class="secretStep">STEP 4</p>
 							<p class="secretTitle"><span>お見積りを提出する際には必ず<br class="sp">「内訳」を記入する</span></p>

@@ -12,11 +12,13 @@ class TransferRequestService
 {
     private $profit_service;
     private $csv_service;
+    private $user_notification_service;
 
-    public function __construct(ProfitService $profit_service, CsvService $csv_service)
+    public function __construct(ProfitService $profit_service, CsvService $csv_service, UserNotificationService $user_notification_service)
     {
         $this->profit_service = $profit_service;
         $this->csv_service = $csv_service;
+        $this->user_notification_service = $user_notification_service;
     }
 
     /**
@@ -149,6 +151,8 @@ class TransferRequestService
             foreach($transfer_request->transferRequestDetails as $transfer_request_detail) {
                 $this->profit_service->changeStatusNone($transfer_request_detail->profit);
             }
+            // 失敗通知・メール送信
+            $this->user_notification_service->storeUserNotificationTransferFailure($transfer_request);
         }
     }
 
