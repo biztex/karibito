@@ -12,7 +12,7 @@
             </div>
 
             {{-- 招待コード --}}
-            <x-parts.invitation-code/>
+            <x-parts.invitation-code :product="$product"/>
           @else
             <p>このユーザーは退会しました。</p>
           @endif
