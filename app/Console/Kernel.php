@@ -21,12 +21,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
 //        $schedule->command('backup:clean --disable-notifications')->dailyAt('07:50');
-        $schedule->command('backup:clean')->dailyAt('07:50');
-        $schedule->command('backup:run --only-db')->dailyAt('17:00');
+        // $schedule->command('backup:clean')->dailyAt('07:50');
+        // $schedule->command('backup:run --only-db')->dailyAt('17:00');
 
-        $schedule->call(function () {
-            Log::debug('Schedulaerのテスト確認');
-        })->everyFiveMinutes();
+        // $schedule->call(function () {
+        //     Log::debug('Schedulaerのテスト確認');
+        // })->everyFiveMinutes();
     }
 
     /**
