@@ -1,7 +1,6 @@
 <!-- 提案メッセージ -->
 <!-- 未購入状態 -->
 @if($chatroom->status === App\Models\Chatroom::STATUS_PROPOSAL)
-{{-- @dd($message) --}}
     <!-- 提案者の時 -->
     @if($message->user_id === Auth::id())
         <li>
@@ -14,7 +13,7 @@
                         <p class="tit">{{$chatroom->reference->title}}<p>
                         <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                         <p class="buy">
-                            <span>提供通知を送信したことを伝えましょう。</span>
+                            <span style="font-weight: normal;">提供通知を送信したことを伝えましょう。</span>
                             <input type="submit" value="購入されていません" disabled>
                         </p>
                     </div>
@@ -29,12 +28,12 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">{{$message->text}}</p>
+                    <p class="message_text">「サービス提供」通知が届きました！</p>
                     <div class="proposeBuy">
                         <p class="tit">{{$chatroom->reference->title}}</p>
                         <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                         <p class="buy">
-                            <span>「購入する」を押すと決済画面に進みます。</span>
+                            <span style="font-weight: normal;">「購入する」を押すと決済画面に進みます。</span>
                             <a href="{{route('chatroom.purchase', $message->reference->id)}}">購入する</a>
                         </p>
                     </div>
@@ -55,11 +54,14 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">サービスを提供しました！</p>
                         <div class="proposeBuy">
                             <p class="tit">{{$chatroom->referencePurchased->title}}<p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
-                            <p class="buy"><input type="submit" value="購入されました" disabled></p>
+                            <p class="buy">
+                                <span style="font-weight: normal;">提供通知を送信したことを伝えましょう。</span>
+                                <input type="submit" value="購入されました" class="white">
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +75,7 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">「サービス提供」通知が届きました！</p>
                         <div class="proposeBuy">
                             <p class="tit">{{$chatroom->referencePurchased->title}}</p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
@@ -94,8 +96,9 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">サービスを提供しました！</p>
                         <div class="proposeBuy">
+                            <span style="font-weight: normal;">提供通知を送信したことを伝えましょう。</span>
                             <p class="tit">{{$chatroom->referencePurchased->title}}<p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                         </div>
@@ -111,8 +114,9 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">「サービス提供」通知が届きました！</p>
                         <div class="proposeBuy">
+                            <span style="font-weight: normal;">「購入する」を押すと決済画面に進みます。</span>
                             <p class="tit">{{$chatroom->referencePurchased->title}}</p>
                             <p>提供価格：¥{{ number_format($message->reference->price) }}</p>
                         </div>

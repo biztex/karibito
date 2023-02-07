@@ -41,7 +41,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => '「サービス提供」通知が届きました！',
+            'text' => 'サービスを提供しました！',
         ];
         $proposal->chatroomMessage()->create($message);
     }
@@ -85,7 +85,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => 'キャンセル申請をしました',
+            'text' => 'キャンセル申請しました！',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
     }
@@ -96,7 +96,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
             'user_id' => \Auth::id(),
-            'text' => 'キャンセル申請を承認しました',
+            'text' => 'キャンセル申請を承認しました！',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
     }
@@ -107,7 +107,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
             'user_id' => \Auth::id(),
-            'text' => '再交渉を希望しました',
+            'text' => '再交渉を通知しました！',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
     }
