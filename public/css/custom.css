@@ -2037,3 +2037,10 @@ a.after-none::after {
 		background-image: url(../img/common/ico_next.svg);
 	}
 }
+
+/* チャットルームの固定文章 */
+.message_text { 
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}

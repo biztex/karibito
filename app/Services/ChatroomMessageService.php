@@ -41,7 +41,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => '掲載内容の提案をしました',
+            'text' => 'サービスを提供しました！',
         ];
         $proposal->chatroomMessage()->create($message);
     }
@@ -52,7 +52,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => '商品を購入しました',
+            'text' => 'サービスを購入しました！',
         ];
         $purchase->chatroomMessage()->create($message);
     }
@@ -62,7 +62,7 @@ class ChatroomMessageService
     {
         $message = [
             'user_id' => \Auth::id(),
-            'text' => '納品が完了しました',
+            'text' => '納品が完了しました！',
             'is_complete_message' => 1,
         ];
         $chatroom->chatroomMessages()->create($message);
@@ -74,7 +74,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => '評価が完了しました'
+            'text' => '評価が入力されました！'
         ];
         $evaluation->chatroomMessage()->create($message);
     }
@@ -85,7 +85,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => 'キャンセル申請をしました',
+            'text' => 'キャンセル申請しました！',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
     }
@@ -96,7 +96,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
             'user_id' => \Auth::id(),
-            'text' => 'キャンセル申請を承認しました',
+            'text' => 'キャンセル申請を承認しました！',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
     }
@@ -107,7 +107,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
             'user_id' => \Auth::id(),
-            'text' => '再交渉を希望しました',
+            'text' => '再交渉を通知しました！',
         ];
         $purchased_cancel->chatroomMessage()->create($message);
     }

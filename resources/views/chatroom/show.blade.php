@@ -34,11 +34,7 @@
                                     <!-- メッセージ内容 -->
                                     @include('chatroom.parts.show.message')
                                 </ul>
-                                @if ($chatroom->status === 6)
-                                    <div class="finish_massage">
-                                        <p>取引終了となります。ありがとうございました。</p>
-                                    </div>
-                                @elseif(empty($partner->deleted_at)) <!-- 入力エリア -->
+                                @if ($chatroom->status !== 6 || null !== $partner->deleted_at)
                                         @include('chatroom.parts.show.form')
                                 @endif
                             </div>
