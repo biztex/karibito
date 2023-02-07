@@ -9,13 +9,16 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p>{{$message->text}}</p>
+                    <p class="message_text">{{$message->text}}</p>
                     <div class="proposeBuy">
-                        <p class="buy none"><input type="submit" value="お相手の評価をお待ちください" disabled></p>
+                        <p class="buy none">
+                            <span>お礼のメッセージと評価入力をしたことを報告しましょう。出品者からの評価入力をもって取引は完了となります。</span>
+                            <input type="submit" value="未評価" disabled>
+                        </p>
                     </div>
                 </div>
             </div>
-	        @include('chatroom.message.parts.time')
+            @include('chatroom.message.parts.time')
         </li>
 
     <!-- 出品者側の時 -->
@@ -25,13 +28,16 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p>{{$message->text}}</p>
+                    <p class="message_text">{{$message->text}}</p>
                     <div class="proposeBuy">
-                        <p class="buy"><a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">これまでのお取引の評価を入力する</a></p>
+                        <p class="buy">
+                            <span>引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。</span>
+                            <a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">評価を入力する</a>
+                        </p>
                     </div>
                 </div>
             </div>
-	        @include('chatroom.message.parts.time')
+            @include('chatroom.message.parts.time')
         </li>
     @endif
 

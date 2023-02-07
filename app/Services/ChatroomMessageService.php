@@ -41,7 +41,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => '掲載内容の提案をしました',
+            'text' => '「サービス提供」通知が届きました！',
         ];
         $proposal->chatroomMessage()->create($message);
     }
@@ -52,7 +52,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => '商品を購入しました',
+            'text' => 'サービスを購入しました！',
         ];
         $purchase->chatroomMessage()->create($message);
     }
@@ -62,7 +62,7 @@ class ChatroomMessageService
     {
         $message = [
             'user_id' => \Auth::id(),
-            'text' => '納品が完了しました',
+            'text' => '納品が完了しました！',
             'is_complete_message' => 1,
         ];
         $chatroom->chatroomMessages()->create($message);
@@ -74,7 +74,7 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
-            'text' => '評価が完了しました'
+            'text' => '評価が入力されました！'
         ];
         $evaluation->chatroomMessage()->create($message);
     }
