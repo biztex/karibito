@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <th>あなたの招待コード</th>
-            <td><input type="text" class="small" value="{{$product->user->userProfile->my_code}}"></td>
+            <td><input type="text" class="small" value="{{Auth::user()->userProfile->my_code}}"></td>
         </tr>
     </table>
 </form>
