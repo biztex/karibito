@@ -1,7 +1,8 @@
 @if(empty(Auth::user()->userProfile->identification_path))
-    <div class="unregisteredP js-unregisteredP">
-        <div> </div>
-        <div><img src="./img/common/ico_check.png" style="width:20px; vertical-align:text-top;">{{-- サービスの登録には --}}本人確認未完了<a href="#fancybox_register"  class="fancybox fancybox_register">【登録する】</a></div>
+    <div class="unregisteredP incomplete js-unregisteredP">
+        <div class="incompleteId">
+            <img src="./img/common/ico_id.png" class="incompleteIdIcon">{{-- サービスの登録には --}}本人確認未完了<a href="#fancybox_register" class="fancybox fancybox_register">登録する</a>
+        </div>
         <div class="pop_close">×</div>
     </div>
 @endif
