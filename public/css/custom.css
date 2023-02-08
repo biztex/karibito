@@ -2048,4 +2048,21 @@ a.after-none::after {
 /* カリビトチャットのコツ テキスト調整 */
 .secretTxt + .secretTxt {
 	margin-top: 1em;
+
+/**/
+.incompleteId {
+	display: flex;
+	align-items: center;
+}
+.incompleteIdIcon {
+	width: 28px;
+	margin-right: 6px
+}
+.unregisteredP.incomplete {
+	margin-top: 0;
+}
+@media screen and (min-width: 768px) {
+	.incompleteIdIcon {
+		width: 34px;
+	}
 }
