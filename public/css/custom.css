@@ -2054,6 +2054,7 @@ a.after-none::after {
 .incompleteId {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 .incompleteIdIcon {
 	width: 28px;
