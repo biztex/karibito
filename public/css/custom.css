@@ -2045,6 +2045,10 @@ a.after-none::after {
 	font-weight: bold;
 }
 
+/* カリビトチャットのコツ テキスト調整 */
+.secretTxt + .secretTxt {
+	margin-top: 1em;
+
 /**/
 .incompleteId {
 	display: flex;

@@ -17,19 +17,19 @@
 						<div class="secretBox">
 							<p class="secretHd"><img src="img/secret/hd_secret.svg" alt="カリビトチャットのコツ"></p>
 							<p class="secretImg"><img src="img/secret/img_secret03.png" alt=""></p>
-							<p class="secretStep">STEP 3</p>
-							<p class="secretTitle"><span>納期・スケジュールを<br class="sp">「具体的に」記載する</span></p>
-							<p class="secretTxt">依頼をする購入者にとって急ぎの場合、こちらの希望する納期に間に合うかどうか・どのようなスケジュールで進行するかは非常に重要なポイントです。納期・スケジュールが具体的に記載されていると、購入者は安心して提案を購入する事ができます。</p>
+							<p class="secretStep">point 3</p>
+							<p class="secretTitle"><span>相手に伝わる言い方を心がけましょう！</span></p>
+							<p class="secretTxt">自分のイメージや要望は、相手に正しく伝わるよう具体的な言葉を用いましょう。例えば「おしゃれなデザイン」といっても、シンプルで洗練されたデザインなのか、カラフルで華やかなデザインなのか、受け取り方は人それぞれです。お互いのイメージにズレが生じないよう、具体的な言葉や表現で伝えましょう。チャットは資料も添付できるので、画像などを使って伝えるのも効果的です。</p>
+							<p class="secretTxt">また、納期や金額などは曖昧な表現ではなく具体的な数字を使うようにしましょう。お互いが正確な数字を擦り合わせておくことで、トラブルやキャンセルの防止になります。</p>
 						</div>
 						<div class="secretPager">
 							<div class="secretPagerPrev"><a href="{{ route('secret02') }}">前へ</a></div>
 							<select onchange="document.location.href=this.options[this.selectedIndex].value;">
-								<option value="{{ route('secret01') }}">1/6</option>
-								<option value="{{ route('secret02') }}">2/6</option>
-								<option value="{{ route('secret03') }}" selected>3/6</option>
-								<option value="{{ route('secret04') }}">4/6</option>
-								<option value="{{ route('secret05') }}">5/6</option>
-								<option value="{{ route('secret06') }}">6/6</option>
+								<option value="{{ route('secret01') }}">1/5</option>
+								<option value="{{ route('secret02') }}">2/5</option>
+								<option value="{{ route('secret03') }}" selected>3/5</option>
+								<option value="{{ route('secret04') }}">4/5</option>
+								<option value="{{ route('secret05') }}">5/5</option>
 							</select>
 							<div class="secretPagerNext"><a href="{{ route('secret04') }}">次へ</a></div>
 						</div>
