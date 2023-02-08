@@ -2048,8 +2048,9 @@ a.after-none::after {
 /* カリビトチャットのコツ テキスト調整 */
 .secretTxt + .secretTxt {
 	margin-top: 1em;
+}
 
-/**/
+/* 本人確認未完了アイコン */
 .incompleteId {
 	display: flex;
 	align-items: center;
@@ -2064,5 +2065,111 @@ a.after-none::after {
 @media screen and (min-width: 768px) {
 	.incompleteIdIcon {
 		width: 34px;
+	}
+}
+
+/* confAlert */
+.confAlertInner {
+	padding: 20px;
+}
+.conf.confAlert {
+	background: #fff;
+	padding: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	max-width: 640px;
+	width: 100%;
+	border-radius: 3px;
+	padding: 0;
+}
+.confAlert input[type=submit].confAlertSubmit,
+.confAlert input[type=button].confAlertCancel {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 42px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	font-size: 16px;
+	margin-top: 20px;
+	border: none;
+	padding: 0;
+}
+.confAlertTitle {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #CCCCCC;
+}
+.confAlertPhrase {
+	font-size: 14px;
+	line-height: 1.5;
+	white-space: pre;
+}
+.confAlert input[type=button].confAlertCancel {
+	color: #666666;
+	border: 1px solid #CCCCCC;
+}
+.confAlert input[type=submit].confAlertSubmit {
+	color: #fff;
+	background-color: #EB6A1A;
+}
+@media screen and (max-width: 768px) {
+	.confAlertInner {
+		padding: 20px;
+	}
+	.conf.confAlert {
+		background: #fff;
+		padding: 20px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		max-width: calc(100% - 40px);
+		width: 100%;
+		border-radius: 3px;
+		padding: 0;
+	}
+	.confAlert input[type=submit].confAlertSubmit,
+	.confAlert input[type=button].confAlertCancel {
+		-webkit-appearance: none;
+		width: 100%;
+		height: 42px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 4px;
+		font-size: 16px;
+		margin-top: 20px;
+		border: none;
+		padding: 0;
+	}
+	.confAlertTitle {
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 1;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		border-bottom: 1px solid #CCCCCC;
+	}
+	.confAlertPhrase {
+		font-size: 14px;
+		line-height: 1.5;
+		white-space: pre;
+	}
+	.confAlert input[type=button].confAlertCancel {
+		color: #666666;
+		border: 1px solid #CCCCCC;
+	}
+	.confAlert input[type=submit].confAlertSubmit {
+		color: #fff;
+		background-color: #EB6A1A;
 	}
 }
