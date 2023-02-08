@@ -22,7 +22,7 @@
 											<div class="mypageEditList">
 												<p class="mypageEditHd">経歴名</p>
 												@error('career_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
-												<div class="mypageEditInput"><input type="text" name="career_name" value="{{ old('career_name') }}" placeholder="学校名、お勤め先企業名、事業経営、教育機関勤務、行政機関勤務、海外就労経験、ボランティア、他など" required></div>
+												<div class="mypageEditInput"><input type="text" name="career_name" value="{{ old('career_name') }}" placeholder="経歴名を入力してください" required></div>
 												<p class="taRResume">30</p>
 											</div>
 											<div class="mypageEditList">

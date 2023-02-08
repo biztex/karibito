@@ -21,7 +21,7 @@
 									<div class="mypageBox">
 										<div class="mypageEditBox">
 											<div class="mypageDuties mypageEditInput">
-												<textarea type="text" name="content" placeholder="経歴に対するより詳細な役職、職務内容、功績、勤務場所、経験値、他など">@if(Auth::user()->userJob){{ old('content', Auth::user()->userJob->content)}} @endif</textarea>
+												<textarea type="text" name="content" placeholder="〇スキル&#10;資格、特技、趣味、具体的スキル（WEBグラフィックデザイン制作、恋愛カウンセリング、他）など&#10;&#10;〇経歴&#10;学校名、お勤め先企業名、事業経営、教育機関勤務、行政機関勤務、海外就労経験、ボランティア、他など&#10;&#10;〇職務&#10;経歴に対するより詳細な役職、職務内容、功績、勤務場所、経験値、他など">@if(Auth::user()->userJob){{ old('content', Auth::user()->userJob->content)}} @endif</textarea>
 												<p class="taRResume">3000</p>
 											</div>
 											<div class="fancyPersonBtn">

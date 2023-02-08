@@ -22,7 +22,7 @@
                                             <div class="flexLine01">
                                                 <div class="mypageEditList flexLineLeft01">
                                                     <p class="mypageEditHd">スキル名</p>
-                                                    <div class="mypageEditInput"><input type="text" name="skill_name" value="{{ old('skill_name') }}" placeholder="資格、特技、趣味、具体的スキル（WEBグラフィックデザイン制作、恋愛カウンセリング、他）など" required></div>
+                                                    <div class="mypageEditInput"><input type="text" name="skill_name" value="{{ old('skill_name') }}" placeholder="スキル名を入力してください" required></div>
                                                     <p class="taRResume">30</p>
                                                     @error('skill_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                 </div>
