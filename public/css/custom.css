@@ -2049,7 +2049,7 @@ a.after-none::after {
 .secretTxt + .secretTxt {
 	margin-top: 1em;
 
-/* 本人確認未完了アイコン */
+/* */
 .incompleteId {
 	display: flex;
 	align-items: center;
