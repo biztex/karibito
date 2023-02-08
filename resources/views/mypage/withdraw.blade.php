@@ -60,6 +60,8 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!-- /#contents -->
-        <x-parts.alert-modal phrase="本当に退会してもよろしいですか？" value="退会する" formId="withdraw-form" />
+        <x-parts.alert-modal catch="退会手続き" phrase="本当に退会してもよろしいですか？
+退会後はログイン画面に切り替わります。
+再ログインできませんのでご注意ください。" value="OK" formId="withdraw-form" />
 	</article>
 </x-layout>

@@ -196,7 +196,7 @@
 													</div>
 												</div>
 											</li>
-											<x-parts.alert-modal-2 formId="delete-job_request" />
+											<x-parts.alert-modal formId="delete-job_request" />
 											@endforeach
 										@endif
 									</ul>

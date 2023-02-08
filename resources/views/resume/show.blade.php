@@ -76,7 +76,7 @@
 											<p class="specialtyBtn"><a href="{{route('career.create')}}"><img src="/img/mypage/icon_add.svg" alt="">経歴を追加</a></p>
 										@endif
 									</div>
-                                    <x-parts.alert-modal-2 formId="delete-carrer" />
+                                    <x-parts.alert-modal formId="delete-carrer" />
 									<p class="taRResume">＊経歴は10個まで追加できます。</p>
 								</div>
 	
