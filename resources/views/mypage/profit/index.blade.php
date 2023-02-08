@@ -39,11 +39,11 @@
 										<form id="bankTransfer-form" action="{{ route('transfer_request.store') }}" method="post">
 											@csrf
                                             <a type="button" class="bankTransferBtn js-alertModal-3">振り込み申請をする</a>
-                                            <x-parts.alert-modal-3 phrase="合計売上金残高の振込を申請しますか？" value="OK" formId="bankTransfer-form" />
+                                            <x-parts.alert-modal phrase="合計売上金残高の振込を申請しますか？" value="OK" formId="bankTransfer-form" />
 										</form>
 									@else
                                         <a type="button" class="bankTransferBtn js-alertModal-2">振り込み申請をする</a>
-                                        <x-parts.alert-modal-2 phrase="振込口座の登録が必要です" cancel_value="OK" />
+                                        <x-parts.alert-modal phrase="振込口座の登録が必要です" cancel_value="OK" />
 									@endif
 								</div>
 								<div class="bankTransferAttention">
