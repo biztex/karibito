@@ -45,7 +45,7 @@
 									<div class="configEditButton withdrawBox">
 										<!-- 退会理由 -->
 										<div class="withdraw_reason">
-											<label for="withdraw_reason"><span class="withdraw_reasonText">サービス改善のため、よろしければ退会理由を教えてください。</span><br>
+											<label for="withdraw_reason"><span class="withdraw_reasonText">サービス改善のため、よろしければ退会理由を教えてください。（必須）</span><br>
 												@error('withdraw_reason')<div class="alert alert-danger">{{ $message }}</div>@enderror
 												<textarea class="withdraw_form" id="withdraw_reason" name="withdraw_reason">{{ old('withdraw_reason') }}</textarea>
 											</label>
