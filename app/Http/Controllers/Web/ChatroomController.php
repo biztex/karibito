@@ -268,7 +268,7 @@ class ChatroomController extends Controller
             }
             
             // couponを消化する
-            $user_coupon = $this->coupon_service->usedCoupon($request->coupon_number);
+            $user_coupon = $this->coupon_service->usedCoupon($request->coupon_id);
             // pointを消化する
             $user_use_point = $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
             // 購入完了処理

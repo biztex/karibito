@@ -75,7 +75,7 @@
 										<td>合計</td>
 											<td>¥{!! number_format($amount['total']) !!}</td>
 										<input type="hidden" name="user_use_point" value="{{ $request->user_use_point }}">
-										<input type="hidden" name="coupon_number" value="{{ $request->coupon_number }}">
+										<input type="hidden" name="coupon_id" value="{{ $request->coupon_id }}">
 									</tr>
 								</tfoot>
 							</table>

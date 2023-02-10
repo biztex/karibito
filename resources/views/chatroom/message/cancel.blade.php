@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
         <!-- 申請者でない時 -->
         @else
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
         @endif
     @else
@@ -42,9 +42,13 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="buy"><input type="submit" value="お相手の承認をお待ちください" disabled></p>
+                            <p class="buy">
+                                <span>キャンセル申請に返信していただくようご連絡しましょう。<br>
+                                    キャンセル成立には双方の同意が必要です。</span>
+                                <input type="submit" value="未返信" disabled>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -57,9 +61,12 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">キャンセル申請が届きました！</p>
+                        <span>内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。</span>
                         <div class="proposeBuy">
-                            <p class="buy"><a href="{{ route('cancel.show', $message->reference_id) }}" class="red">キャンセル申請が届きました</a></p>
+                            <p class="buy">
+                                <a href="{{ route('cancel.show', $message->reference_id) }}" class="red">確認する</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +77,7 @@
 
 <!-- 成立 -->
 @elseif($message->reference->status === App\Models\PurchasedCancel::STATUS_CANCELED)
-    @if($message->text === 'キャンセル申請をしました')
+    @if($message->text === 'キャンセル申請しました！')
         <!-- 申請者の時 -->
         @if($message->user_id === Auth::id())
             <li>
@@ -78,13 +85,17 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">{{$message->text}}</p>
                         <div class="proposeBuy">
-                            <p class="buy"><input type="submit" value="承認されました" disabled></p>
+                            <p class="buy">
+                                <span>キャンセル申請に返信していただくようご連絡しましょう。<br>
+                                    キャンセル成立には双方の同意が必要です。</span>
+                                <input type="submit" value="返信されました" class="white">
+                            </p>
                         </div>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
         <!-- 申請者でない時 -->
         @else
@@ -93,13 +104,16 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">キャンセル申請が届きました！</p>
+                        <span>内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。</span>
                         <div class="proposeBuy">
-                            <p class="buy"><input type="submit" class="white" value="承認済み"></p>
+                            <p class="buy">
+                                <input type="submit" class="white" value="返信済み">
+                            </p>
                         </div>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
         @endif
     @else <!-- キャンセル申請を承認しました -->
@@ -110,13 +124,12 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
-                        <div class="proposeBuy">
-                            <p class="buy"><input type="submit" class="white" value="承認しました" disabled></p>
-                        </div>
+                        <p class="message_text">{{$message->text}}</p><br>
+                        <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
+                            今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
         <!-- 申請者でない時 -->
         @else
@@ -125,20 +138,19 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
-                        <div class="proposeBuy">
-                            <p class="buy"><input type="submit" class="white" value="承認されました"></p>
-                        </div>
+                        <p class="message_text">キャンセル申請が承諾されました！</p><br>
+                        <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
+                            今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
         @endif
     @endif
 
 <!-- 異議申し立て-->
 @else
-    @if($message->text === 'キャンセル申請をしました')
+    @if($message->text === 'キャンセル申請しました！')
         <!-- 申請者の時 -->
         @if($message->user_id === Auth::id())
             <li>
@@ -146,61 +158,62 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">キャンセル申請しました！</p>
+                        <span>キャンセル申請に返信していただくようご連絡しましょう。<br>
+                            キャンセル成立には双方の同意が必要です。</span>
                         <div class="proposeBuy">
-                            <p class="buy"><input type="submit" value="お相手の承認をお待ちください" disabled></p>
+                            <p class="buy">
+                                <input type="submit" class="white" value="返信されました">
+                            </p>
                         </div>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
-        <!-- 申請者でない時 -->
+        <!-- 申請者でない時 --> {{--同じ人（表示される場所一緒）--}}
         @else
             <li>
                 <div class="img">
                     @include('chatroom.message.parts.icon')
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
+                        <p class="message_text">キャンセル申請が届きました！</p>
+                        <span>内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。</span>
                         <div class="proposeBuy">
-                            <p class="buy"><input type="submit" value="キャンセル申請が届きました" disabled></p>
+                            <p class="buy"><input type="submit" class="white" value="返信済み"></p>
                         </div>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
         @endif
     @else <!-- 再交渉を希望しました -->
-        <!-- 異議申し立て者の時 -->
+        <!-- 再交渉を希望した人 --> {{--同じ人（表示される場所一緒）--}}
         @if($message->user_id === Auth::id())
-            <li>
-                <div class="img">
-                    @include('chatroom.message.parts.icon')
-                    <div class="info">
-                        <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
-                        <div class="proposeBuy">
-                            <p class="buy"><input type="submit" class="white" value="再交渉を希望しました"></p>
-                        </div>
+        <li>
+            <div class="img">
+                @include('chatroom.message.parts.icon')
+                <div class="info">
+                    <p class="name">{{$message->user->name}}</p>
+                    <p class="message_text">{{$message->text}}</p><br>
+                    <span>再交渉を通知しました。引き続き、お互いのすり合わせを行いましょう。</span>
                     </div>
                 </div>
-	            @include('chatroom.message.parts.time')
+                @include('chatroom.message.parts.time')
             </li>
-        <!-- 申請者でない時 -->
-        @else
-            <li>
-                <div class="img">
-                    @include('chatroom.message.parts.icon')
-                    <div class="info">
-                        <p class="name">{{$message->user->name}}</p>
-                        <p>{{$message->text}}</p>
-                        <div class="proposeBuy">
-                            <p class="buy"><input type="submit" class="white" value="再交渉を希望されています　再度やり取りをお願いします"></p>
+            <!-- キャンセルできなかった人 -->
+            @else
+                <li>
+                    <div class="img">
+                        @include('chatroom.message.parts.icon')
+                        <div class="info">
+                            <p class="name">{{$message->user->name}}</p>
+                            <p class="message_text">再交渉をお願いします！</p>
+                            <span>キャンセル申請は承認されませんでした。引き続き、お互いのすり合わせを行いましょう。</span>
                         </div>
                     </div>
-                </div>
-	            @include('chatroom.message.parts.time')
-            </li>
+                    @include('chatroom.message.parts.time')
+                </li>
         @endif
 
     @endif

@@ -39,7 +39,7 @@ class PaymentRequest extends FormRequest
 
             return [
                 'user_use_point' => "max:{$user_has_point} | nullable",
-                'coupon_number' => ['nullable', new UseCouponRule],
+                'coupon_id' => ['nullable', new UseCouponRule],
                 'card_id' => 'required | string'
             ];
         }

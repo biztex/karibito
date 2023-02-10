@@ -17,25 +17,22 @@
 						<div class="secretBox">
 							<p class="secretHd"><img src="img/secret/hd_secret.svg" alt="カリビトチャットのコツ"></p>
 							<p class="secretImg"><img src="img/secret/img_secret05.png" alt=""></p>
-							<p class="secretStep">STEP 5</p>
-							<p class="secretTitle"><span>相手にも伝わるよう<br class="sp">「分かりやすい言葉」を使う</span></p>
-							<p class="secretTxt">依頼する側が必ずしもその分野に詳しいとは限りません。言葉一つで認識の齟齬が生まれてしまうことがあります。やり取りにあたっては専門用語などの難しい言葉は避け、できるだけ噛み砕いて、相手にも伝わるような分かりやすい言葉を使うようにしましょう。</p>
-							<ul class="secretUl">
-								<li>専門用語は控えて分かりやすい言葉で</li>
-								<li>丁寧な言葉遣いを気にするといいよ</li>
-							</ul>
+							<p class="secretStep">point 5</p>
+							<p class="secretTitle"><span>やり取りは必ずカリビトチャット内で<br class="sp">行いましょう！</span></p>
+							<p class="secretTxt">お互いが安心・安全に取引を進めるために、やり取りはすべてカリビトチャット内で行うようしましょう。</p>
+							<p class="secretTxt">ZoomやLINEなどの外部ツールを使ったり、直接的にやり取りをされた場合、万が一トラブルが発生しても運営側のサポートが一切受けられなくなります。安全に取引を進めるために、やり取りは必ずカリビトチャットを通じて行いましょう。</p>
+							<p class="secretTxt">気持ちよくサービスをご利用いただくために、カリビトでは外部取引や、メールアドレスやURLを送るなどの外部誘導、またそれらに応じる行為を禁止しております。<br>もしそのような提案をされた場合は、運営側にご相談ください。</p>
 						</div>
 						<div class="secretPager">
 							<div class="secretPagerPrev"><a href="{{ route('secret04') }}">前へ</a></div>
 							<select onchange="document.location.href=this.options[this.selectedIndex].value;">
-								<option value="{{ route('secret01') }}">1/6</option>
-								<option value="{{ route('secret02') }}">2/6</option>
-								<option value="{{ route('secret03') }}">3/6</option>
-								<option value="{{ route('secret04') }}">4/6</option>
-								<option value="{{ route('secret05') }}" selected>5/6</option>
-								<option value="{{ route('secret06') }}">6/6</option>
+								<option value="{{ route('secret01') }}">1/5</option>
+								<option value="{{ route('secret02') }}">2/5</option>
+								<option value="{{ route('secret03') }}">3/5</option>
+								<option value="{{ route('secret04') }}">4/5</option>
+								<option value="{{ route('secret05') }}" selected>5/5</option>
 							</select>
-							<div class="secretPagerNext"><a href="{{ route('secret06') }}">次へ</a></div>
+							<div class="secretPagerNext"><a href="{{ route('secret01') }}">次へ</a></div>
 						</div>
 					</div>
 				</div><!-- /#main -->

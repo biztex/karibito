@@ -9,13 +9,16 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p>{{$message->text}}</p>
+                    <p class="message_text">評価を入力しました！</p>
                     <div class="proposeBuy">
-                        <p class="buy none"><input type="submit" value="お相手の評価をお待ちください" disabled></p>
+                        <p class="buy none">
+                            <span style="font-weight: normal;">お礼のメッセージと評価入力をしたことを報告しましょう。出品者からの評価入力をもって取引は完了となります。</span>
+                            <input type="submit" value="未評価" disabled>
+                        </p>
                     </div>
                 </div>
             </div>
-	        @include('chatroom.message.parts.time')
+            @include('chatroom.message.parts.time')
         </li>
 
     <!-- 出品者側の時 -->
@@ -25,43 +28,41 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p>{{$message->text}}</p>
+                    <p class="message_text">{{$message->text}}</p>
                     <div class="proposeBuy">
-                        <p class="buy"><a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">これまでのお取引の評価を入力する</a></p>
+                        <p class="buy">
+                            <span style="font-weight: normal;">引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。</span>
+                            <a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">評価を入力する</a>
+                        </p>
                     </div>
                 </div>
             </div>
-	        @include('chatroom.message.parts.time')
+            @include('chatroom.message.parts.time')
         </li>
     @endif
 
 <!-- 両者評価完了後 -->
 @elseif($chatroom->status === App\Models\Chatroom::STATUS_COMPLETE)
-    @if($message->user_id === $chatroom->seller_user_id)
+    @if($message->user_id === $chatroom->seller_user_id) {{--両者に表示される--}}
         <li>
-            <div class="img">
-                @include('chatroom.message.parts.icon')
-                <div class="info">
-                    <p class="name">{{$message->user->name}}</p>
-                    <p>{{$message->text}}</p>
-                </div>
-            </div>
-	        @include('chatroom.message.parts.time')
+            <p class="message_text">取引終了となります。ありがとうございました。</p>
         </li>
-
     @elseif($message->user_id === Auth::id() && $chatroom->buyer_user_id === Auth::id())
         <li>
             <div class="img">
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p>{{$message->text}}</p>
+                    <p class="message_text">評価を入力しました！</p>
                     <div class="proposeBuy">
-                        <p class="buy none"><input type="submit" value="お相手の評価をお待ちください" disabled></p>
+                        <p class="buy none">
+                            <span style="font-weight: normal;">お礼のメッセージと評価入力をしたことを報告しましょう。出品者からの評価入力をもって取引は完了となります。</span>
+                            <input type="submit" value="取引完了" class="white">
+                        </p>
                     </div>
                 </div>
             </div>
-	        @include('chatroom.message.parts.time')
+            @include('chatroom.message.parts.time')
         </li>
     @else
         <li>
@@ -69,13 +70,16 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p>{{$message->text}}</p>
+                    <p class="message_text">{{$message->text}}</p>
                     <div class="proposeBuy">
-                        <p class="buy none"><input type="submit" value="これまでのお取引の評価を入力する" disabled></p>
+                        <p class="buy none">
+                            <span style="font-weight: normal;">引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。</span>
+                            <input type="submit" value="取引完了" class="white">
+                        </p>
                     </div>
                 </div>
             </div>
-	        @include('chatroom.message.parts.time')
+            @include('chatroom.message.parts.time')
         </li>
     @endif
 @endif

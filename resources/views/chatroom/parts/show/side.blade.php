@@ -49,7 +49,7 @@
             <p>このユーザーは退会しています。</p>
         @endif
     </div>
-    <x-parts.alert-modal phrase="納品完了報告をしてもよろしいですか？" value="OK" formId="delivery-form" />
+    <x-parts.alert-modal catch="納品完了" phrase="送信前に要件がすべて満たされているか確認しましょう。" value="送信する" formId="delivery-form" />
 </aside>
 
 @if($chatroom->reference !== null)
