@@ -36,7 +36,13 @@
                                         <td class="px-2">{{ $child_category->mProductCategory->name }}</td>
                                         <td class="px-2">{{ $child_category->created_at }}</td>
                                         <td class="px-2">{{ $child_category->updated_at }}</td>
-                                        <td class="px-2"><a class="btn btn-sm btn-outline-primary" href="{{ route('admin.child_categories.edit', $child_category->id) }}">編集</a></td>
+                                        <td class="px-2">
+                                            @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
+                                                || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
+                                                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.child_categories.edit', $child_category->id) }}">編集</a></td>
+                                            @else
+                                            @endif
+                                        </td>
                                         <td class="px-2">
                                             <form action="{{ route('admin.child_categories.destroy', $child_category->id) }}" method="POST">
                                                 @csrf

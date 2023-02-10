@@ -25,14 +25,16 @@ class UpdateRequest extends FormRequest
     {
         return [
             'parent_category_id' => 'required|integer|exists:m_product_categories,id',
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'index_image_path' => 'nullable|mimes:jpg,jpeg,png'
         ];
     }
     public function attributes()
     {
         return [
             'parent_category_id' => '親カテゴリ名',
-            'name' => 'カテゴリー名'
+            'name' => 'カテゴリー名',
+            'index_image_path' => 'カテゴリアイコン'
         ];
     }
 
@@ -43,7 +45,8 @@ class UpdateRequest extends FormRequest
     {
         return $this->only([
             'parent_category_id',
-            'name'
+            'name',
+            'index_image_path'
         ]);
     }
 }

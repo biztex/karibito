@@ -10,7 +10,7 @@ class MProductCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $guarded = [ 'id' ];
 
     // MProductChildCategoriesモデルとのリレーション
     public function mProductChildCategory()

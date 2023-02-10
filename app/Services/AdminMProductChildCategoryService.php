@@ -8,6 +8,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminMProductChildCategoryService
 {
@@ -40,7 +41,15 @@ class AdminMProductChildCategoryService
     public function createMProductChildCategory(Request $request)
     {
         DB::transaction(function () use ($request) {
-            MProductChildCategory::create($request->substitutable());
+            // 画像取得
+            $index_image_path = $request->file('index_image_path');
+            // 画像アップロード・ファイルパス取得
+            $index_image_path = empty($index_image_path) ? $index_image_path : Storage::putFile('public/index_image_path', $index_image_path, 'public');
+            MProductChildCategory::create([
+                'parent_category_id' => $request->name('parent_category_id'),
+                'name' => $request->name('name'),
+                'index_image_path' => $index_image_path
+            ]);
         });
     }
 
@@ -54,7 +63,15 @@ class AdminMProductChildCategoryService
     public static function updateMProductChildCategory(Request $request, MProductChildCategory $category)
     {
         DB::transaction(function () use ($request, $category) {
-            $category->fill($request->substitutable())->save();
+            // 画像取得
+            $index_image_path = $request->file('index_image_path');
+            // 画像アップロード・ファイルパス取得
+            $index_image_path = empty($index_image_path) ? $index_image_path : Storage::putFile('public/index_image_path', $index_image_path, 'public');
+            $category->fill([
+                'parent_category_id' => $request->name('parent_category_id'),
+                'name' => $request->name('name'),
+                'index_image_path' => $index_image_path
+            ])->save();
         });
     }
 
