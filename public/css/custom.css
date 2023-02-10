@@ -2055,6 +2055,7 @@ a.after-none::after {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 }
 .incompleteIdIcon {
 	width: 28px;
@@ -2062,6 +2063,11 @@ a.after-none::after {
 }
 .unregisteredP.incomplete {
 	margin-top: 0;
+	position: relative;
+}
+.unregisteredP.incomplete .pop_close {
+	position: absolute;
+	right: 0;
 }
 @media screen and (min-width: 768px) {
 	.incompleteIdIcon {
