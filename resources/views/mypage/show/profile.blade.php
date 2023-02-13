@@ -24,20 +24,26 @@
         <dd>
             <div class="mypageP01 word-break">{{Auth::user()->name}} <span class="mypageP03">MYコード：{{ Auth::user()->userProfile->my_code }}</span> <a href="#fancybox_person" class="fancybox fancybox_profile"><img src="/img/mypage/btn_person.svg" alt="プロフィールを編集"></a></div>
             <p class="mypageP02">最終ログイン：{{Auth::user()->latest_login_datetime}}</p>
-            <p class="mypageP02">キャンセル完了数：{{ $cancel_count }}</p>
             <p class="mypageP03">({{App\Models\UserProfile::GENDER[Auth::user()->userProfile->gender]}} / {{Auth::user()->userProfile->age}} / {{Auth::user()->userProfile->prefecture->name}}) <!-- <span>所持ポイント：0000pt</span> --></p>
             <p class="mypageP04 check">
                 @if(Auth::user()->userProfile->is_identify == 1)
                     <a>本人確認済み</a>
                 @endif
-            <p class="mypageP05"><a href="{{ route('evaluation') }}" class="more">過去の評価を詳しく見る</a></p>
-            <div class="mypageP06">
-                <x-parts.evaluation-star :star='Auth::user()->avg_star'/>
-                @if(Auth::user()->avg_star === null)
-                    <p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">0.0</a>)</p>
-                @else
-                    <p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">{{ number_format(Auth::user()->avg_star,1) }}</a>)</p>
-                @endif
+            </p>
+            <div class="countBox">
+                <p class="countItem">販売実績数：100</p>
+                <p class="countItem">キャンセル完了数：{{ $cancel_count }}</p>
+            </div>
+            <div class="mypageP06 starBox">
+                <div class="starBoxIcon">
+                    <x-parts.evaluation-star :star='Auth::user()->avg_star'/>
+                    @if(Auth::user()->avg_star === null)
+                        <p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">0.0</a>)</p>
+                    @else
+                        <p style="font-size: 1.5rem;line-height: 1;color: #158ACC;">(<a href="{{ route('evaluation') }}">{{ number_format(Auth::user()->avg_star,1) }}</a>)</p>
+                    @endif
+                </div>
+                <p class="mypageP05 starBoxText"><a href="{{ route('evaluation') }}" class="more">過去の評価を詳しく見る</a></p>
             </div>
         </dd>
     </dl>
