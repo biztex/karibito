@@ -1,30 +1,8 @@
 <x-app>
-	<body>
+	<body class="companyPage">
 	<div id="wrapper" class="st3 bg03">
-		<header> <div id="header">
-				<div id="headerLinks">
-					<div class="inner">
-						<div class="item">
-							<h1 id="headerLogo"><a href="/"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
-							<p class="searchBtnSp sp"><!-- <img src="/img/common/ico_sea.svg" alt=""> --></p>
-						</div>
-
-						<div class="item">
-							<div class="btnMenu"><span></span><span></span><span></span></div>
-							<nav id="gNavi" style="">
-								<ul class="navLinks">
-									<li><a href="#company01" class="scroll">カリビト理念</a></li>
-									<li><a href="#company02" class="scroll">カリビトの歴史</a></li>
-									<li><a href="#company03" class="scroll">代表挨拶</a></li>
-									<!-- <li><a href="#company04" class="scroll">お問い合わせ</a></li> -->
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div><!-- /.headLinks -->
-			</div><!-- /#header -->
-		</header>
-		<article>
+	@include('components.header')
+		<article class="companyArticle">
 			<div id="contents">
 				<div class="companyTop">
 					<h2 class="title">街と人を繋げ隊！</h2>
@@ -37,13 +15,13 @@
 				</div>
 				<div class="companyStep">
 					<div class="inner">
-						<div class="part policy" id="company01">
+						<div class="part policy companyAnchorTarget" id="company01">
 							<h2 class="title"><span class="step">01</span><span class="eng">Company policy</span>〜カリビト理念〜</h2>
 							<p class="logo"><img src="/img/company/logo_policy.svg" alt="">「 カリビトで街と人を繋げ隊！ 」</p>
 							<p class="mb70">多種多様化する都市部から過疎化が進む地域社会まで、用途に合わせて街と人を<br class="sp">繋げることができるユニークな<br class="pc">プラットフォームを創造していくことが我々の企業価値となる。</p>
 							<div class="img"><img src="/img/company/img_company01.png" srcset="/img/company/img_company01.png 1x, /img/company/img_company01@2x.png 2x" alt=""></div>
 						</div>
-						<div class="part" id="company02">
+						<div class="part companyAnchorTarget" id="company02">
 							<h2 class="title"><span class="step">02</span><span class="eng">History</span>〜日本文化の継承から〜</h2>
 							<div class="img"><img src="/img/company/img_company02.png" srcset="/img/company/img_company02.png 1x, /img/company/img_company02@2x.png 2x" alt=""></div>
 							<div class="introdBox">
@@ -51,7 +29,7 @@
 								<p>しかし、今の日本の年齢別人口比率では高齢化がどんどん進んでゆき、お墓へ足を運ぶことすらも大変となり、日本の大事な風習が文化として後世に残していけない時代が来ようとしています。<br>私の両親も高齢となってからは、お墓参りに行くことが困難となり、私がお墓参りに行って掃除やしきびを立て、お供え物をして綺麗になったお墓の画像を携帯に送って、安心してもらっていました。<br>ですが画像は画像であり現地に出向いた時と同じような臨場感を自宅で感じることはできません。<br>そんな状況を見据えて、各業界では、さまざまなサービスが生まれており、実際に現地まで送迎してもらえるサービスや、お墓参りの動画を自宅にいる両親に配信できるシステムや、実際に自宅からお線香をあげてお経を唱えてもらえるものまで、さまざまなサービスを提供している業者があります。<br>ですが、そのような素晴らしいサービスやスキルを提供する業者が存在することは、まだまだ一般の人々までは認知されていない現実を知りました。<br>それなら、さまざまなサービス形態のスキルを皆さんがわかり易く利用することができれば、これからの高齢社会においても、お墓参りという日本伝統の文化はずっと受け継ぐことが可能です。<br>このお墓参り文化がきっかけとなり、提供側とユーザー側を繋げる掛橋になれるようなシェアリングスキルマーケットのプラットフォーム開設からカリビト事業が生まれました。そして、更に街と人を繋げる多くのカテゴリーを増やし、普及していくことが、カリビトの原点となります。</p>
 							</div>
 						</div>
-						<div class="part" id="company03">
+						<div class="part companyAnchorTarget" id="company03">
 							<h2 class="title"><span class="step">03</span><span class="eng">Message</span>〜代表挨拶〜</h2>
 							<div class="img"><img src="/img/company/img_company03.png" srcset="/img/company/img_company03.png 1x, /img/company/img_company03@2x.png 2x" alt=""></div>
 							<div class="introdBox">
