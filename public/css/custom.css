@@ -2132,3 +2132,55 @@ a.after-none::after {
 		max-width: calc(100% - 40px);
 	}
 }
+
+/* 販売実績数 キャンセル完了数 */
+.countBox {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 12px;
+}
+.countBox.countBoxSide {
+	display: flex;
+	flex-direction: column;
+}
+.mypageP03 + .countBox {
+	margin-top: 0;
+}
+.mypageP04 + .countBox {
+	margin-top: 7px;
+}
+.countItem {
+	border: 1px solid #DDDDDD;
+	line-height: 1;
+	padding: 4px 6px;
+	border-radius: 4px;
+	font-size: 1.3rem;
+}
+.countItem + .countItem {
+	margin-left: 8px;
+}
+.countBox.countBoxSide .countItem + .countItem {
+	margin-top: 12px;
+}
+.starBox,
+.starBoxIcon {
+	display: flex;
+	align-items: flex-end;
+}
+.starBox {
+	justify-content: space-between;
+}
+.mypageP05.starBoxText {
+	text-align: left;
+	margin-bottom: 0;
+	line-height: 1;
+}
+@media screen and (max-width: 768px) {
+	.starBox {
+		display: block;
+	}
+	.mypageP05.starBoxText {
+		margin-top: 12px;
+	}
+}
