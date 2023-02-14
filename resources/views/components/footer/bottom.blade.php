@@ -58,10 +58,10 @@
                     <li><span class="footerlist_text"><a href="#">ヘルプ</a><span></li>
                     <li><a href="#">カリビト攻略法</a></li>
                     <li><a href="#">カリビトガイド</a></li>
-                    <li><a href="#">ヨクアル質問</a></li>
+                    <li><a href="#">よくある質問</a></li>
                     <li><a href="#">運営会社について</a></li>
                     <li><a href="#">個人情報の取り扱いについて</a></li>
-                    <li><a href="#">特定商取引法ニ基づく表記</a></li>
+                    <li><a href="#">特定商取引法に基づく表記</a></li>
                     <li><a href="#">利用規定</a></li>
                     <li><a href="#">カテゴリ項目追加依頼</a></li>        
                     <li><a href="{{ route('contact') }}">お問い合わせ</a></li>

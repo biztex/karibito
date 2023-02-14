@@ -2275,6 +2275,23 @@ a.after-none::after {
 	}
 }
 
+/* footer */
+.footerlist_text {
+	font-weight: bold;
+}
+p#copyright {
+	margin: 40px 0 0;
+	padding: 20px 0;
+	background-color: #fff;
+}
+#footer .bottom {
+	padding-bottom: 0;
+}
+@media screen and (max-width: 769px) {
+	#footer .bottom {
+		padding-bottom: 50px;
+	}
+
 /* mypage */
 .mypageCoverText {
 	position: absolute;
