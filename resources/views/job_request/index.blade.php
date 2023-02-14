@@ -254,8 +254,8 @@
                                     <li><a href="{{route('product.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
                                 @else
                                     <li>
-                                        <a href="{{route('product.category.index', $category->id) }}">
-                                            <img src="{{ Illuminate\Support\Facades\Storage::url($category->other_image_path) }}" width="16.198" height="18">{{ $category->name }}
+                                        <a class="otherImage" href="{{route('product.category.index', $category->id) }}">
+                                            <img src="{{ Illuminate\Support\Facades\Storage::url($category->other_image_path) }}">{{ $category->name }}
                                         </a>
                                     </li>
                                 @endif

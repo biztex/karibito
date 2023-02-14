@@ -24,11 +24,12 @@ class BlogController extends Controller
         $blogs = Blog::publish()->whereHas('product', function ($product) use ($child_categories_id){
             $product->whereIn('category_id', $child_categories_id);
         })->paginate(10);
+        $m_product_categories = MProductCategory::all();
         $child_categories = $category->mProductChildCategory;
         $parent_category_flg = 1;
         $title = $category->name;
 
-        return view('blog.index', compact('category', 'child_categories', 'parent_category_flg', 'title', 'blogs'));
+        return view('blog.index', compact('category', 'child_categories', 'parent_category_flg', 'title', 'blogs', 'm_product_categories'));
     }
 
     /**
@@ -43,11 +44,13 @@ class BlogController extends Controller
         $blogs = Blog::publish()->whereHas('product', function ($product) use ($child_category){
             $product->where('category_id', $child_category->id);
         })->paginate(10);
+        $m_product_categories = MProductCategory::all();
         $all_child_categories = $child_category->mProductCategory->mProductChildCategory;
         $child_category_id = $child_category->id;
         $parent_category_flg = 0;
         $title = $child_category->mProductCategory->name;
+        $category = $child_category->mProductCategory;
 
-        return view('blog.index', compact('all_child_categories', 'child_category', 'child_category_id', 'parent_category_flg', 'title', 'blogs'));
+        return view('blog.index', compact('all_child_categories', 'child_category', 'child_category_id', 'parent_category_flg', 'title', 'blogs', 'm_product_categories'));
     }
 }

@@ -18,11 +18,19 @@
 	<x-parts.ban-msg/>
 
 	<article>
-		<div id="teaser">
-			<div class="inner">
-				<h2>{{$title}}</h2>
-			</div>
-		</div><!-- /.teaser -->
+		@if (empty($category->banner_image_path))
+            <div id="teaser">
+                <div class="inner">
+                    <h2>{{$title}}</h2>
+                </div>
+            </div><!-- /.teaser -->
+        @else
+            <div id="teaserBannerImage" style="background-image: url({{ Illuminate\Support\Facades\Storage::url($category->banner_image_path) }});">
+                <div class="inner">
+                    <h2>{{$title}}</h2>
+                </div>
+            </div>
+        @endif
 
 		<div id="contents">
 			<div class="inner clearfix">
@@ -35,7 +43,14 @@
                                     @foreach ($child_categories as $child_category)
                                     {{-- dbに画像と詳細の文言を記入 --}}
                                         <div class="item">
-                                            <a href="{{ route('blog.category.index.show', $child_category->id) }}"><img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$child_category['name']}}">{{$child_category['name']}}</a>
+											<a href="{{ route('blog.category.index.show', $child_category->id) }}">
+                                                @if (empty($child_category->index_image_path))
+                                                    <img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$child_category['name']}}">
+                                                @else
+                                                    <img src="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }}" srcset="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }} 1x, {{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }} 2x" alt="{{$child_category['name']}}">
+                                                @endif
+                                                {{$child_category['name']}}
+                                            </a>
                                         </div>
                                     @endforeach
                                 @elseif ($parent_category_flg === 0)
@@ -168,8 +183,16 @@
 					{{-- ▲▲▲ 検索機能上記ここまで ▲▲▲ --}}
 					<h2 class="cate cate05">その他サービスから探す</h2>
 					<ul class="other">
-						@foreach(App\Models\MProductCategory::all() as $category)
-							<li><a href="{{route('blog.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
+						@foreach($m_product_categories as $category)
+							@if (empty($category->other_image_path))
+								<li><a href="{{route('product.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
+							@else
+								<li>
+									<a class="otherImage" href="{{route('product.category.index', $category->id) }}">
+										<img src="{{ Illuminate\Support\Facades\Storage::url($category->other_image_path) }}">{{ $category->name }}
+									</a>
+								</li>
+							@endif
 						@endforeach
 					</ul>
 				</aside><!-- /#side -->
