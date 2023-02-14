@@ -185,10 +185,10 @@
 					<ul class="other">
 						@foreach($m_product_categories as $category)
 							@if (empty($category->other_image_path))
-								<li><a href="{{route('product.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
+								<li><a href="{{route('blog.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
 							@else
 								<li>
-									<a class="otherImage" href="{{route('product.category.index', $category->id) }}">
+									<a class="otherImage" href="{{route('blog.category.index', $category->id) }}">
 										<img src="{{ Illuminate\Support\Facades\Storage::url($category->other_image_path) }}">{{ $category->name }}
 									</a>
 								</li>
