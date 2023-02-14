@@ -2274,3 +2274,7 @@ a.after-none::after {
 		margin-top: 12px;
 	}
 }
+
+#mainVisual .slider .item img {
+	max-width: 353px;
+}
