@@ -21,11 +21,7 @@
                 <p class="price word-break" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
             </div>
             <div class="single">
-                @if($product->is_online == App\Models\Product::OFFLINE)
-                    <span>対面</span>
-                @else
-                    <span>非対面</span>
-                @endif
+                <span>{{App\Models\Product::IS_ONLINE[$product->is_online]}}</span>
             </div>
         </div>
         <div class="aboutUser">

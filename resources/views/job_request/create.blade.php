@@ -76,14 +76,15 @@
 							@error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<select name="is_online">
-								<option value=" ">選択してください</option>
-								<option value="0" @if(!is_null(old('is_online', $request->is_online)) && old('is_online', $request->is_onine) == 0) selected @endif>対面</option>
-								<option value="1" @if(old('is_online', $request->is_online) == 1) selected @endif>非対面</option>
+								<option value="">選択してください</option>
+								@foreach (App\Models\Product::IS_ONLINE as $k => $v)
+									<option value="{{ $k }}" @if(!is_null(old('is_online')) && old('is_online') == $k) selected @endif>{{ $v }}</option>
+								@endforeach
 							</select>
 						</div>
 
 
-						<p class="th">エリア（対面の場合のみ）</p>
+						<p class="th">エリア（対面・どちらでもの場合のみ）</p>
 							@error('prefecture_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<select name="prefecture_id">
