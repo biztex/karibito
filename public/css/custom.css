@@ -2275,6 +2275,7 @@ a.after-none::after {
 	}
 }
 
+/* トップバナー画像サイズ */
 #mainVisual .slider .item img {
 	max-width: 353px;
 }
