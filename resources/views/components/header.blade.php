@@ -100,6 +100,13 @@
                         </ul>
 
                         <div class="sp">
+                            @if(Request::routeIs('company'))
+                            <div class="navMypageUl">
+                                <a href="#company01" class="scroll">カリビト理念</a>
+                                <a href="#company02" class="scroll">カリビトの歴史</a>
+                                <a href="#company03" class="scroll">代表挨拶</a>
+                            </div>
+                            @endif
                             @auth
                                 <dl class="navMypageDl">
                                     @if(empty(Auth::user()->userProfile->icon))
@@ -370,6 +377,13 @@
                 </div>
             </div>
         @endauth
+        @if(Request::routeIs('support'))
+        @include('components.header-support')
+        @elseif(Request::routeIs('guide'))
+        @include('components.header-guide')
+        @elseif(Request::routeIs('company'))
+        @include('components.header-company')
+        @endif
     </div><!-- /#header -->
 	<x-hide-modal/>
 </header>

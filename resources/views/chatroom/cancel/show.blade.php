@@ -20,7 +20,6 @@
 
 					<div class="cancelTitle">
 						<h2>キャンセル申請が届いています！</h2>
-						<p>キャンセル理由</p>
 					</div>
                     <div class="cancelReason">
                         <p>キャンセル理由：</p>

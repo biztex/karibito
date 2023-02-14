@@ -9,6 +9,11 @@
   <p class="login">最終ログイン：{{ $user->latest_login_datetime }}</p>
   <p class="introd"><a href="{{ route('user.mypage', $user) }}" class="name">{{$user->name}}</a><br>({{App\Models\UserProfile::GENDER[$user->userProfile->gender]}} / {{$user->userProfile->age}}/ {{$user->userProfile->prefecture->name}})</p>
 
+  <div class="countBox countBoxSide">
+    <p class="countItem">販売実績数：10</p>
+    <p class="countItem">キャンセル完了数：32</p>
+  </div>
+
   <x-parts.evaluation-star :star='$user->avg_star'/>
 </div>
 @endif

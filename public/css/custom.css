@@ -2132,3 +2132,178 @@ a.after-none::after {
 		max-width: calc(100% - 40px);
 	}
 }
+
+#header.headerSupportLayout.showFixed {
+	top: 178px;
+}
+
+/* companyHeader */
+.companyPage #wrapper.bg03 {
+	background-position: center top 178px;
+}
+.companyArticle {
+	margin-top: 178px;
+}
+.companyPage .st3 #header {
+	background-color: #fff;
+}
+.companyHeader {
+	background: #EEEEEE;
+	box-shadow: 0 0 0;
+}
+.companyHeaderInner .item {
+	height: 80px;
+	display: flex;
+	align-items: center;
+}
+.btnMenuCompany {
+	display: none;
+	cursor: pointer;
+	position: absolute;
+	right: 20px;
+	width: 24px;
+	z-index: 992;
+}
+.btnMenuCompany span {
+	display: block;
+	margin: 5px auto;
+	background: #777777;
+	width: 100%;
+	height: 2px;
+	transition: all 0.4s;
+}
+@media screen and (max-width: 768px) {
+	.companyAnchorTarget {
+		padding-top: 80px;
+		margin-top: -80px;
+	}
+	.companyPage #wrapper.bg03 {
+		background-position: center top 0;
+	}
+	.companyArticle {
+		margin-top: 0;
+	}
+	.companyHeader {
+		display: none;
+	}
+	.companyHeaderLogo {
+		position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    transform: translate(-50%,-50%);
+	}
+	.companyHeaderLogo img {
+		width: 86px;
+	}
+	.btnMenuCompany {
+		display: block;
+    right: 15px;
+	}
+	#header .sp .navMypageUl + .navMypageDl {
+		border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 20px;
+	}
+	.companyPage.menuOpen #wrapper {
+		position: relative;
+	}
+	.companyPage.menuOpen {
+		position: fixed;
+	}
+	.st2 #headerLogo {
+		position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+		transform: translate(-50%, -50%);
+	}
+	.st2 .headerLogo img {
+		width: 86px;
+	}
+}
+
+/* 販売実績数 キャンセル完了数 */
+.countBox {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 12px;
+}
+.countBox.countBoxSide {
+	display: flex;
+	flex-direction: column;
+}
+.mypageP03 + .countBox {
+	margin-top: 0;
+}
+.mypageP04 + .countBox {
+	margin-top: 7px;
+}
+.countItem {
+	border: 1px solid #DDDDDD;
+	line-height: 1;
+	padding: 4px 6px;
+	border-radius: 4px;
+	font-size: 1.3rem;
+}
+.countItem + .countItem {
+	margin-left: 8px;
+}
+.countBox.countBoxSide .countItem + .countItem {
+	margin-top: 12px;
+}
+.starBox,
+.starBoxIcon {
+	display: flex;
+	align-items: flex-end;
+}
+.starBox {
+	justify-content: space-between;
+}
+.mypageP05.starBoxText {
+	text-align: left;
+	margin-bottom: 0;
+	line-height: 1;
+}
+@media screen and (max-width: 768px) {
+	.starBox {
+		display: block;
+	}
+	.mypageP05.starBoxText {
+		margin-top: 12px;
+	}
+}
+
+/* footer */
+.footerlist_text {
+	font-weight: bold;
+}
+p#copyright {
+	margin: 40px 0 0;
+	padding: 20px 0;
+	background-color: #fff;
+}
+#footer .bottom {
+	padding-bottom: 0;
+}
+@media screen and (max-width: 769px) {
+	#footer .bottom {
+		padding-bottom: 50px;
+	}
+
+/* mypage */
+.mypageCoverText {
+	position: absolute;
+	top: 60px;
+	right: 20px;
+	font-size: 12px;
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 2px 4px;
+}
+
+/* トップバナー画像サイズ */
+#mainVisual .slider .item img {
+	max-width: 353px;
+}

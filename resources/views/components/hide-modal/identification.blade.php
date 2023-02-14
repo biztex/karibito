@@ -1,7 +1,7 @@
 <div id="fancybox_register" class="fancyboxWrap">
     <div style="display:flex;justify-content:space-between">
         <a href="#" class="fancyPersonCancel" style="padding-left:10px; font-size:20px;">×</a>
-        <p class="fancyboxHd">身分証明証の登録</p>
+        <p class="fancyboxHd">本人確認</p>
         <div></div>
     </div>
             
@@ -12,23 +12,23 @@
                 @enderror
 
             <div class="fancyRegisterItem">
-                <p class="txt">「身分証明書を登録する」とは、<br>信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに身分証明書提出済マークが表示されます。</p>
+                <p class="txt">本人確認には、プロフィールの氏名/生年月日/ご住所のご登録が必要です。<br>登録するプロフィール情報と、提出する本人確認の書類の氏名/生年月日/ご住所が一致しているか必ずご確認ください。</p>
+                <p class="notice">＊1点でも一致しない場合、申請をお受け出来ませんのでご注意ください。</p>
+                <p class="txt">プロフィール編集は<a href="#fancybox_person" class="fancybox colorRed">こちら</a></p>
             </div>
             <div class="fancyRegisterItem">
-                <p class="notice">注意事項</p>
-                <p class="txt">カリビトアプリのプロフィールで、住所・氏名・生年月日はしっかり記載していますか?<br>身分証明書との一致が確認できないと本人確認はできないのでご注意ください!<br>登録いただいた３営業日以内にご返信します。<br>また、アップロードできる画像形式はJPEG/PNGのみです。</p>
+                <p class="txt"><strong>本人確認とは</strong><br>本人確認とは、お互いの信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに本人確認済みマークが表示されます。</p>
             </div>
             <div class="fancyRegisterItem">
-                <p class="txt">提出可能な本人確認書類は、下記となっております。</p>
-                <p class="txt">【個人の場合】<br>運転免許証・健康保険証 / 被保険者証・旅券 / <br>パスポート・住民票・住民基本台帳カード・外国人証明書</p>
-                <p class="txt">【法人の場合】<br>履歴事項全部証明書　(※3 ヵ月以内のものに限ります)</p>
+                <p class="txt"><strong>本人確認に利用できる書類</strong><br>ご本人であることを確認するため、下記の書類のうち一つをご提出ください。</p>
             </div>
             <div class="fancyRegisterItem">
-                {{-- <p class="txt">【カリビトアプリ登録情報】<br>都道府県:{{ Auth::user()->userProfile->prefecture->name }}<br>住所:{{ Auth::user()->userProfile->address }}<br>氏名:{{ Auth::user()->userProfile->first_name.Auth::user()->userProfile->last_name }} --}}
-                                                       <br>生年月日:@if(Auth::user()->userProfile->birthday !== null){{ date("Y年n月j日",strtotime(Auth::user()->userProfile->birthday)) }}@endif</p>
+                <p class="txt"><strong>【個人の場合】</strong><br>・運転免許所<br>・健康保険証/被保険者証<br>・旅券/パスポート<br>・住民票<br>・住人基本台帳カード<br>・外国人証明書<br>・マイナンバーカード</p>
+                <p class="notice">＊ご氏名、生年月日、ご住所が記載されているページ全てを添付ください。<br>＊有効期限内の書類をご提出ください。</p>
             </div>
             <div class="fancyRegisterItem">
-                <p class="txt">安心安全のため、本人確認承認後はご住所 / 本名/ 生年月日のご変更ができなくなっておりますので、本人確認承認後にご住所 / 本名 / 生年月日をご変更されたい場合は、カリビト事務局へ、お問い合わせください</p>
+                <p class="txt"><strong>【法人の場合】</strong><br>・履歴書事項全部証明書</p>
+                <p class="notice">＊3か月以内に取得したものをご提出ください。</p>
             </div>
         </div>
             <div style="margin:0 0 20px 20px;height:10px;"><p class="identification-file-name" style='color:#696969;'></p></div>
