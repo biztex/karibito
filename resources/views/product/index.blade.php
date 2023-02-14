@@ -54,7 +54,9 @@
                                                 @if (empty($child_category->index_image_path))
                                                     <img src="img/service/img_service01.png" srcset="/img/service/img_service01@2x.png" alt="{{$child_category['name']}}">
                                                 @else
-                                                    <img src="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }}" srcset="/img/service/img_service01@2x.png" alt="{{$child_category['name']}}">
+                                                    <img 
+                                                    src="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }}"
+                                                    alt="{{ $child_category['name'] }}">
                                                 @endif
                                                 {{$child_category['name']}}
                                             </a>
@@ -68,7 +70,10 @@
                                                 @if (empty($all_child_category->index_image_path))
                                                     <img src="img/service/img_service01.png" srcset="/img/service/img_service01@2x.png" alt="{{$all_child_category->name}}">
                                                 @else
-                                                    <img src="{{ Illuminate\Support\Facades\Storage::url($all_child_category->index_image_path) }}" srcset="/img/service/img_service01@2x.png" alt="{{$all_child_category->name}}">
+                                                    <img 
+                                                    src="{{ Illuminate\Support\Facades\Storage::url($all_child_category->index_image_path) }}"
+                                                    srcset="{{ Illuminate\Support\Facades\Storage::url($all_child_category->index_image_path) }} 2x"
+                                                    alt="{{ $all_child_category->name }}">
                                                 @endif
                                                 {{$all_child_category['name']}}
                                             </a>
@@ -254,8 +259,8 @@
                                     <li><a href="{{route('product.category.index', $category->id) }}" class="other{{$loop->iteration}}">{{ $category->name }}</a></li>
                                 @else
                                     <li>
-                                        <a href="{{route('product.category.index', $category->id) }}">
-                                            <img src="{{ Illuminate\Support\Facades\Storage::url($category->other_image_path) }}" width="16.198" height="18">{{ $category->name }}
+                                        <a class="otherImage" href="{{route('product.category.index', $category->id) }}">
+                                            <img src="{{ Illuminate\Support\Facades\Storage::url($category->other_image_path) }}">{{ $category->name }}
                                         </a>
                                     </li>
                                 @endif
