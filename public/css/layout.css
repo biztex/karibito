@@ -452,18 +452,25 @@
 	margin-top: 20px;
 }
 
+#teaserBannerImage {
+	background-size:cover;
+	margin-top: 20px;
+}
+
 @media screen and (max-width: 767px) {
 	#teaser {
 		margin-top: 0px;
 	}
 }
 
-#teaser .inner{
+#teaser .inner,
+#teaserBannerImage .inner{
 	display:flex;
 	align-items: center;
 	height:140px;
 }
-#teaser h2{
+#teaser h2,
+#teaserBannerImage h2{
 	text-shadow: 0 1px 26px rgba(0,0,0,0.9);
 	color:#fff;
 	font-size:3rem;
