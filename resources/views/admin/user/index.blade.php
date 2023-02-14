@@ -48,7 +48,7 @@
                         <a href="{{ route('admin.users.show',$user->user_id) }}"><th scope="row">{{ $user->user_id }}</th></a>
                         <td>{{ $user->user->name }}</td>
                         <td>{{ $user->first_name.' '.$user->last_name }}</td>
-                        <td>{{ App\Models\UserProfile::IDENTIFY[$user->is_identify] }}</td>
+                        <td @if ($user->is_identify == 2) style="color: red;" @endif>{{ App\Models\UserProfile::IDENTIFY[$user->is_identify] }}</td>
                         @if(is_null($user->identification_path))
                             <td><button type="button" class="btn btn-sm" disabled>-</button></td>
                         @elseif($user->is_identify == 0)
@@ -100,6 +100,8 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-light btn-sm">承認しない</button>
                                             </form>
+                                        @elseif ($user->is_identify == 2)
+                                            <span>承認を拒否しました。拒否した画像が表示されています。</span>
                                         @else
                                             <form action="{{ route('admin.revokeApproval', $user->user_id) }}" method="POST">
                                                 @csrf

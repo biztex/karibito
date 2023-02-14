@@ -80,7 +80,7 @@
 											<span class="status_span status_confirmed">承認</span>
 										@elseif(Auth::user()->userProfile->is_identify === 0 && Auth::user()->userProfile->identification_path != null)
 											<span class="status_span">申請中</span>
-										@else
+										@else {{--申請拒否時もここに入る--}}
 											<span class="status_span">未承認</span>
 											<a href="#fancybox_register"  class="fancybox fancybox_register">申請する</a>
 										@endif

@@ -24,15 +24,17 @@ class UserProfile extends Model
         self::GENDER_WOMAN => '女性',
     ];
 
+    const IS_REJECT_IDENTIFY = 2;
+
     const IS_IDENTIFY = 1;
 
     const NOT_IDENTIFY = 0;
-    
+
     const IDENTIFY = [
+        self::IS_REJECT_IDENTIFY =>'申請却下',
         self::IS_IDENTIFY =>'承認済',
         self::NOT_IDENTIFY =>'未',
     ];
-
 
     const CAN_CALL = 1;
 
