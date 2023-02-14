@@ -2291,4 +2291,19 @@ p#copyright {
 	#footer .bottom {
 		padding-bottom: 50px;
 	}
+
+/* mypage */
+.mypageCoverText {
+	position: absolute;
+	top: 60px;
+	right: 20px;
+	font-size: 12px;
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 2px 4px;
+}
+
+/* トップバナー画像サイズ */
+#mainVisual .slider .item img {
+	max-width: 353px;
 }

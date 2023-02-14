@@ -11,6 +11,7 @@
             @csrf @method('PUT')
                 <input type="file" name="cover" class="cover1" style="display:none;">
                 <label for="file" class="update_cover"><img class="add_cover" src="/img/mypage/icon_cover.svg" alt="カバー写真を追加"></label>
+                <p class="mypageCoverText">推奨サイズ width 1560px height 460px</p>
                 <input type="submit" name="submit_cover" style="display:none;">
         </form>
 
