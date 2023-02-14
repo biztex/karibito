@@ -2274,3 +2274,8 @@ a.after-none::after {
 		margin-top: 12px;
 	}
 }
+
+/* トップバナー画像サイズ */
+#mainVisual .slider .item img {
+	max-width: 353px;
+}
