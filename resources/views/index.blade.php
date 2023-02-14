@@ -11,13 +11,13 @@
 			<div class="slider">
 				<div class="item"><a href="#"><img src="/img/top/banner1.png" srcset="/img/top/banner1.png " alt="写真"></a></div>
 				<div class="item"><a href="#"><img src="/img/top/banner2.png" srcset="/img/top/banner2.png " alt="写真"></a></div>
-				<div class="item"><a href="#"><img src="/img/top/banner3.png" srcset="/img/top/banner3.png " alt="写真"></a></div>
-				<div class="item"><a href="#"><img src="/img/top/banner4.png" srcset="/img/top/banner4.png " alt="写真"></a></div>
+				<div class="item"><a href="#"><img src="/img/top/banner6.png" srcset="/img/top/banner6.png " alt="写真"></a></div>
+				<div class="item"><a href="#"><img src="/img/top/banner7.png" srcset="/img/top/banner7.png " alt="写真"></a></div>
 				<div class="item"><a href="#"><img src="/img/top/banner5.png" srcset="/img/top/banner5.png " alt="写真"></a></div>
 				<div class="item"><a href="#"><img src="/img/top/banner1.png" srcset="/img/top/banner1.png " alt="写真"></a></div>
 				<div class="item"><a href="#"><img src="/img/top/banner2.png" srcset="/img/top/banner2.png " alt="写真"></a></div>
-				<div class="item"><a href="#"><img src="/img/top/banner3.png" srcset="/img/top/banner3.png " alt="写真"></a></div>
-				<div class="item"><a href="#"><img src="/img/top/banner4.png" srcset="/img/top/banner4.png " alt="写真"></a></div>
+				<div class="item"><a href="#"><img src="/img/top/banner6.png" srcset="/img/top/banner6.png " alt="写真"></a></div>
+				<div class="item"><a href="#"><img src="/img/top/banner7.png" srcset="/img/top/banner7.png " alt="写真"></a></div>
 				<div class="item"><a href="#"><img src="/img/top/banner5.png" srcset="/img/top/banner5.png " alt="写真"></a></div>
 				
 				<!--<div class="item"><a href="#"><img src="/img/top/ico_slider02.png" srcset="/img/top/ico_slider02.png 1x, /img/top/ico_slider02@2x.png 2x" alt="写真"></a></div>
