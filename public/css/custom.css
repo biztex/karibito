@@ -2274,3 +2274,14 @@ a.after-none::after {
 		margin-top: 12px;
 	}
 }
+
+/* mypage */
+.mypageCoverText {
+	position: absolute;
+	top: 60px;
+	right: 20px;
+	font-size: 12px;
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 2px 4px;
+}
