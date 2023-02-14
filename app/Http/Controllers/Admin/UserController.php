@@ -130,7 +130,7 @@ class UserController extends Controller
      */
     public function revokeApproval(User $user)
     {
-        $user->userProfile->fill(['is_identify' => 0])->save();
+        $user->userProfile->fill(['is_identify' => 2])->save(); //申請却下
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認の承認を取り消しました！";
 
@@ -143,8 +143,6 @@ class UserController extends Controller
                 ->send(new RevokeApprovalMail($user));
         }
         
-        $user->userProfile->identification_path = null;
-        $user->userProfile->save();
         // キャンセル通知
         $this->user_notification_service->storeUserNotificationCancelIdentify($user->userProfile);
 
