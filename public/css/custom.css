@@ -2308,3 +2308,18 @@ p#copyright {
 #mainVisual .slider .item img {
 	max-width: 353px;
 }
+
+/* sold out */
+.itemSold {
+	position: relative;
+}
+.itemSold::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "";
+	width: 66px;
+	height: 57px;
+	background: url(../img/common/ico_sold.png) no-repeat left top / 100%;
+	z-index: 3;
+}

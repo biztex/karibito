@@ -1,6 +1,6 @@
 <div class="item">
 	<!-- <p class="level"></p> topのカテゴリー別のみ仕様 -->
-    <a href="{{ route('product.show',$product->id) }}" class="img imgBox">
+    <a href="{{ route('product.show',$product->id) }}" class="img imgBox itemSold">
         @if(isset($product->productImage[0]))
             <img src="{{ asset('/storage/'.$product->productImage[0]->path) }}" alt="" style="object-fit: contain;">
             <button class="favorite">お気に入り</button>
