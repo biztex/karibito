@@ -23,6 +23,7 @@ use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
+use App\Models\MPoint;
 
 class ChatroomController extends Controller
 {
@@ -274,7 +275,8 @@ class ChatroomController extends Controller
             // 購入完了処理
             $this->purchase_service->purchased($charge_id, $amount['total'], $proposal, $user_coupon, $user_use_point);
             // pointを与える
-            // $this->point_service->getPoint($proposal->chatroom, $amount['total']); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
+            $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $proposal->chatroom->seller_user_id, $proposal->chatroom); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
+            $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $proposal->chatroom->buyer_user_id, $proposal->chatroom); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
             // 購入物作成
             $this->purchase_service->savePurchasedProduct($proposal);
             $chatroom = $proposal->chatroom;
