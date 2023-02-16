@@ -38,18 +38,22 @@ class ProductController extends Controller
 
         $product_ranks = Product::publish()->whereIn('category_id', $child_categories_id)->paginate(10);
 
+        $m_product_categories = MProductCategory::all();
+
         $child_categories = $category->mProductChildCategory;
 
         $parent_category_flg = 1;
 
         $title = $category->name;
 
-        return view('product.index', compact('products', 'product_ranks', 'category', 'child_categories', 'parent_category_flg', 'title'));
+        return view('product.index', compact('products', 'product_ranks', 'category', 'child_categories', 'parent_category_flg', 'title', 'm_product_categories'));
     }
 
     public function show(MProductChildCategory $child_category)
     {
         $products = Product::publish()->where('category_id',$child_category->id)->orderBy('created_at','desc')->paginate(10);
+
+        $m_product_categories = MProductCategory::all();
 
         $all_child_categories = $child_category->mProductCategory->mProductChildCategory;
 
@@ -59,7 +63,9 @@ class ProductController extends Controller
 
         $title = $child_category->mProductCategory->name;
 
-        return view('product.index', compact('products', 'all_child_categories', 'child_category', 'child_category_id', 'parent_category_flg', 'title'));
+        $category = $child_category->mProductCategory;
+
+        return view('product.index', compact('products', 'all_child_categories', 'child_category', 'child_category_id', 'parent_category_flg', 'title', 'm_product_categories', 'category'));
     }
 
     public function search(Request $request)
@@ -76,6 +82,8 @@ class ProductController extends Controller
         $child_category_id = $request->child_category_id;
         $service_flg = $request->service_flg;
         $parent_category_flg = $request->parent_category_flg;
+        $m_product_categories = MProductCategory::all();
+        $category = MProductCategory::where('id', $parent_category_id)->first();
 
         if ($parent_category_id) {
             $title = MProductCategory::find($parent_category_id)->name;
@@ -87,10 +95,10 @@ class ProductController extends Controller
 
         if ($service_flg === '1') { //プロダクトの時
             $products = $this->product_service->searchProducts($request);
-            return view('product.index', compact('products', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale'));
+            return view('product.index', compact('products', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale', 'm_product_categories', 'category'));
         } elseif ($service_flg === '2') { //リクエストの時
             $job_requests = $this->job_request_service->searchJobRequests($request);
-            return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale'));
+            return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale', 'category'));
         }
     }
 }
