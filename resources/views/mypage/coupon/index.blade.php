@@ -33,7 +33,7 @@
 											<dt>
 												<p class="nameP">{{$user_coupon->name}}</p>
 												<p class="txtP">{{$user_coupon->content}}</p>
-												<p class="numberP"><font>クーポン番号</font><span class="couponNumber">{{$user_coupon->coupon_number}}</span></p>
+												<p class="numberP"><font>クーポン番号 :</font>{{$user_coupon->coupon_number}}</p>
 											</dt>
 											<dd>
 												<div class="couponTicket">
