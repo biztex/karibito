@@ -42,13 +42,17 @@
                                             @endif
                                         </td>
                                         <td class="px-2">
-                                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('本当に削除しますか？')"
-                                                >削除</button>
-                                            </form>
+                                            @if (App\Models\JobRequest::whereIn('category_id', array_column($category->mProductChildCategory->toArray(), 'id'))->get()->isEmpty()
+                                                || App\Models\Product::whereIn('category_id', array_column($category->mProductChildCategory->toArray(), 'id'))->get()->isEmpty())
+                                                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="return confirm('本当に削除しますか？')"
+                                                    >削除</button>
+                                                </form>
+                                            @else
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

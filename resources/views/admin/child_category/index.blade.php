@@ -44,13 +44,17 @@
                                             @endif
                                         </td>
                                         <td class="px-2">
-                                            <form action="{{ route('admin.child_categories.destroy', $child_category->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('本当に削除しますか？')"
-                                                >削除</button>
-                                            </form>
+                                            @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
+                                                || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
+                                                <form action="{{ route('admin.child_categories.destroy', $child_category->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        onclick="return confirm('本当に削除しますか？')"
+                                                    >削除</button>
+                                                </form>
+                                            @else
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
