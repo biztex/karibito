@@ -93,6 +93,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
     Route::view('support', 'support.support')->name('support');
     Route::view('support_detail', 'support.support_detail')->name('support_detail');
     Route::view('guide', 'support.guide')->name('guide');
+    Route::view('karibitoguide', 'karibitoguide.support')->name('karibitoguide');
 
 
     Route::get('/dashboard', function () {
