@@ -147,11 +147,11 @@
                 </div><!-- /#main -->
                 <aside id="side" class="pc">
                     <h2 class="cate cate02">
-                        @if (isset($parent_category_flg))
+                        @if (isset($parent_category_flg)) {{--大カテゴリに紐づく商品表示時--}}
                             @if ($parent_category_flg === 1)
-                                {{$category->name}}から探す</h2>
-                            @elseif ($parent_category_flg === 0)
-                                {{$child_category->mProductCategory->name}}から探す</h2>
+                                <a href="{{ route('product.category.index', $category->id) }}">{{$category->name}}から探す</a></h2>
+                            @elseif ($parent_category_flg === 0) {{--一つの子カテゴリを表示時--}}
+                                <a href="{{ route('product.category.index', $child_category->mProductCategory->id) }}">{{$child_category->mProductCategory->name}}から探す</a></h2>
                             @endif
                         @endif
                     <ul class="links">

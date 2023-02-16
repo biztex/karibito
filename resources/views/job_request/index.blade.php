@@ -150,9 +150,9 @@
 					<h2 class="cate cate02">
 						@if (isset($parent_category_flg))
                             @if ($parent_category_flg === 1)
-                                {{$category->name}}から探す</h2>
+                                <a href="{{ route('job_request.category.index', $category->id) }}">{{$category->name}}から探す</a></h2>
                             @elseif ($parent_category_flg === 0)
-                                {{$child_category->mProductCategory->name}}から探す</h2>
+                                <a href="{{ route('job_request.category.index', $child_category->mProductCategory->id) }}">{{$child_category->mProductCategory->name}}から探す</a></h2>
                             @endif
                         @endif
 					<ul class="links">
@@ -200,7 +200,7 @@
 										<select name="is_online">
 											<option value="">-</option>
 											@foreach (App\Models\Product::IS_ONLINE as $k => $v)
-												<option value="{{ $k }}" @if(!is_null(old('is_online', $request->is_online)) && old('is_online', $request->is_onine) == $k) selected @endif>{{ $v }}</option>
+												<option value="{{ $k }}"  @if(isset($is_online) && $is_online == $k) selected @endif>{{ $v }}</option>
 											@endforeach
 										</select>
 									</td>

@@ -98,7 +98,7 @@ class ProductController extends Controller
             return view('product.index', compact('products', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale', 'm_product_categories', 'category'));
         } elseif ($service_flg === '2') { //リクエストの時
             $job_requests = $this->job_request_service->searchJobRequests($request);
-            return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale', 'category'));
+            return view('job_request.index', compact('job_requests', 'prefecture_id', 'low_price', 'high_price', 'is_online', 'age_period', 'sort', 'keyword', 'parent_category_id', 'child_category_id', 'service_flg', 'parent_category_flg', 'title', 'is_sale', 'm_product_categories', 'category'));
         }
     }
 }
