@@ -19,7 +19,7 @@
 								<dl class="couponHd">
 									<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
 									<dd>こちらのクーポンが発行されています。お会計時に選択してご利用ください。<br>
-										<span style="color: red;">＊購入手続き後にクーポンは適用できません。<br>必ず「お支払い確認」画面でクーポンが適用されているかご確認ください</span>
+										<span style="color: red;">＊購入手続き後にクーポンは適用できません。<br>　必ず「お支払い確認」画面でクーポンが適用されているかご確認ください。</span>
 									</dd>
 								</dl>
 							@endif
