@@ -5,7 +5,7 @@
 				<a href="{{ route('home') }}">ホーム</a>　>　
                 <a href="{{ route('chatroom.index') }}">やりとり一覧</a>　>　
                 <a href="{{ route('chatroom.show', $proposal->chatroom->id) }}">{{ $proposal->chatroom->reference->title }}</a>　>　
-				<span>お支払い手続き</span>
+				<span>お支払い確認</span>
 			</div>
 		</div><!-- /.breadcrumb -->
         <x-parts.flash-msg />
@@ -15,7 +15,7 @@
 
 					<x-parts.chatroom-step :value="$proposal->chatroom"/>
 
-					<h2 class="subPagesHd">お支払い手続き</h2>
+					<h2 class="subPagesHd">お支払い確認</h2>
 					<form id="form" action="{{route('chatroom.purchased', $proposal->id)}}" method="post">
 					@csrf
 						<div class="payment">
