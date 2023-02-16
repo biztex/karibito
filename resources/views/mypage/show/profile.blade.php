@@ -29,6 +29,7 @@
             <p class="mypageP04 check">
                 @if(Auth::user()->userProfile->is_identify == 1)
                     <a>本人確認済み</a>
+                    <a>NDA可</a>
                 @endif
             </p>
             <div class="countBox">
