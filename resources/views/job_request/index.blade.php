@@ -199,8 +199,9 @@
 									<td>
 										<select name="is_online">
 											<option value="">-</option>
-											<option value="{{App\Models\Product::OFFLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::OFFLINE) selected @endif>対面</option>
-											<option value="{{App\Models\Product::ONLINE}}" @if(isset($is_online) && $is_online === (string)App\Models\Product::ONLINE) selected @endif>非対面</option>
+											@foreach (App\Models\Product::IS_ONLINE as $k => $v)
+												<option value="{{ $k }}" @if(!is_null(old('is_online', $request->is_online)) && old('is_online', $request->is_onine) == $k) selected @endif>{{ $v }}</option>
+											@endforeach
 										</select>
 									</td>
 								</tr>

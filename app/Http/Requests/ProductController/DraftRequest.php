@@ -29,7 +29,7 @@ class DraftRequest extends FormRequest
             'title' => 'nullable | string | max:30',
             'content' => 'nullable | string | min:30 | max:3000 ',
             'price' => 'nullable | integer | min:500 | max:9990000',
-            'is_online' => 'nullable | integer | boolean',
+            'is_online' => 'nullable | integer | in:0,1,2',
             'number_of_day' => 'nullable | integer',
             'time_unit' => 'nullable | integer',
             // 'is_call' => 'nullable | integer | boolean',

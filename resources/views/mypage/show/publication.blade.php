@@ -38,11 +38,7 @@
                                         </p>
                                     </div>
                                     <div class="single">
-                                        @if($product->is_online == App\Models\Product::OFFLINE)
-                                            <span>対面</span>
-                                        @else
-                                            <span>非対面</span>
-                                        @endif
+                                        <span>{{App\Models\Product::IS_ONLINE[$product->is_online]}}</span>
                                     </div>
                                 </a>
                                 <p class="link"><a href="{{ route('product.show',$product->id) }}">詳細見る</a></p>

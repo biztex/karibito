@@ -10373,6 +10373,23 @@ input.small {
 	opacity: 1;
 	visibility: visible;
 }
+.templateNDAPopup {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	display: none;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.templateNDAPopup.is-open {
+	display: block;
+	opacity: 1;
+	visibility: visible;
+}
 
 .templateOverlay {
 	position: absolute;

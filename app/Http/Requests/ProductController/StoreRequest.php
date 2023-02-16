@@ -26,11 +26,11 @@ class StoreRequest extends FormRequest
     {
         return [
             'category_id' => 'required | integer | exists:m_product_child_categories,id',
-            'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+            'prefecture_id' => 'required_if:is_online,0,2 | nullable | between:1,47',
             'title' => 'required | string | max:30',
             'content' => 'required | string | min:30 | max:3000 ',
             'price' => 'required | integer | min:500 | max:9990000',
-            'is_online' => 'required | boolean',
+            'is_online' => 'required | in:0,1,2',
             'number_of_day' => 'required | integer | between:1,730',
             'time_unit' => 'required | integer',
             // 'is_call' => 'required | boolean',　電話対応は仕様変更によって一旦非表示

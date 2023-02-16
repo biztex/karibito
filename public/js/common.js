@@ -457,6 +457,24 @@ $(function () {
 		$('.templateText').val(text);
 		$('.templatePopup').removeClass('is-open');
 	});
+
+	$('.templateNDAOpen').click(function () {
+		$('.templateNDAPopup').addClass('is-open');
+	});
+
+	$('.templateOverlay,.templateClose').click(function () {
+		$('.templateNDAPopup').removeClass('is-open');
+	});
+
+	$('.templateOverlay,.templateClose').click(function () {
+		$('.templateNDAPopup').removeClass('is-open');
+	});
+
+	$('.templateInput').click(function () {
+		var text = $('#templateNDA').find('textarea').val();
+		$('.templateText').val(text);
+		$('.templateNDAPopup').removeClass('is-open');
+	});
 });
 
 
