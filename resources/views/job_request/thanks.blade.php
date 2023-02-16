@@ -43,7 +43,9 @@
 						</div>
 						
 						{{-- 招待コード --}}
-						<x-parts.invitation-code/>
+						@auth
+							<x-parts.invitation-code/>
+						@endauth
 
 					</div>
 					<div class="serviceThanksLinks">
