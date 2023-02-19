@@ -2172,10 +2172,30 @@ a.after-none::after {
 	height: 2px;
 	transition: all 0.4s;
 }
+.companyTop,
+.part.policy.companyAnchorTarget,
+.companyStep .part.companyAnchorTarget02 {
+	margin-bottom: 0;
+}
+.companyTop {
+	padding-bottom: 50px;
+}
+.part.policy.companyAnchorTarget,
+.companyStep .part.companyAnchorTarget {
+	padding-top: 258px;
+}
 @media screen and (max-width: 768px) {
+	.companyTop {
+		padding-bottom: 0;
+	}
 	.companyAnchorTarget {
-		padding-top: 80px;
-		margin-top: -80px;
+		padding-top: 100px;
+		margin-top: -50px;
+	}
+	.part.policy.companyAnchorTarget,
+	.companyStep .part.companyAnchorTarget {
+		padding-top: 100px;
+		margin-top: -50px;
 	}
 	.companyPage #wrapper.bg03 {
 		background-position: center top 0;
