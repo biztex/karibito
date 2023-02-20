@@ -16,13 +16,13 @@
 				<div class="companyStep">
 					<div class="inner">
 						<div class="part policy companyAnchorTarget companyAnchorTarget01" id="company01">
-							<h2 class="title"><span class="step">01</span><span class="eng">COMPANY PROFILE</span>カリビト理念</h2>
+							<h2 class="title"><span class="step">01</span><span class="eng">Company policy</span>〜カリビト理念〜</h2>
 							<p class="logo"><img src="/img/company/logo_policy.svg" alt="">「 カリビトで街と人を繋げ隊！ 」</p>
 							<p class="mb70">多種多様化する都市部から過疎化が進む地域社会まで、用途に合わせて街と人を<br class="sp">繋げることができるユニークな<br class="pc">プラットフォームを創造していくことが我々の企業価値となる。</p>
 							<div class="img"><img src="/img/company/img_company01.png" srcset="/img/company/img_company01.png 1x, /img/company/img_company01@2x.png 2x" alt=""></div>
 						</div>
 						<div class="part companyAnchorTarget companyAnchorTarget02" id="company02">
-							<h2 class="title"><span class="step">02</span><span class="eng">HISTORY</span>カリビト歴史</h2>
+							<h2 class="title"><span class="step">02</span><span class="eng">History</span>〜日本文化の継承から〜</h2>
 							<div class="img"><img src="/img/company/img_company02.png" srcset="/img/company/img_company02.png 1x, /img/company/img_company02@2x.png 2x" alt=""></div>
 							<div class="introdBox">
 								<p>皆さんは年間行事でよくご先祖様やご親族の方々へのお参りに足を運び、ご自身が存在することへの感謝や想いの念を伝えたりするご経験は誰もがあるのでは無いのでしょうか。<br>代表の私自身も父より、そんな日本の風習を絶やさないようにと厳しく言われて育ちました。</p>
@@ -30,7 +30,7 @@
 							</div>
 						</div>
 						<div class="part companyAnchorTarget companyAnchorTarget03" id="company03">
-							<h2 class="title"><span class="step">03</span><span class="eng">MESSAGE</span>代表挨拶</h2>
+							<h2 class="title"><span class="step">03</span><span class="eng">Message</span>〜代表挨拶〜</h2>
 							<div class="img"><img src="/img/company/img_company03.png" srcset="/img/company/img_company03.png 1x, /img/company/img_company03@2x.png 2x" alt=""></div>
 							<div class="introdBox">
 								<p>カリビトは、日常における、あらゆるスキルを容易にシェアリングできるプラットフォームの構築ですが、そもそも事業開始する5年前に、私がお墓参りの代行業者をスキルシェアする事業を思い立ってからが始まりでした。その後開設に至るまでには、5年の構想期間を経てスタートした事業です。</p>

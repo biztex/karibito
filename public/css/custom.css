@@ -339,7 +339,10 @@
 	padding: 5px;
 	background-color: #FCAA00
 }
-
+#gNavi .navLinks li a {
+	display: block;
+	text-align: center;
+}
 @media screen and (max-width: 767px) {
 	#gNavi .navLinks {
 		flex-direction: column;
@@ -350,6 +353,9 @@
 		/* -ms-writing-mode     : tb-rl;
 		-webkit-writing-mode : vertical-rl;
 		writing-mode         : vertical-rl; */
+	}
+	.companyPage .navMypageUl a + a {
+		margin-top: 24px;	
 	}
 }
 
