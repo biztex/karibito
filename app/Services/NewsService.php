@@ -24,7 +24,7 @@ class NewsService
 
     public function updateNews(array $params, $news):News
     {
-        $columns = ['title', 'content'];
+        $columns = ['title', 'content', 'is_important'];
 
         foreach($columns as $column){
             $news->$column = $params[$column];
