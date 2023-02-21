@@ -10,7 +10,7 @@ class Profit extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    const COMMISSION = -390;
+    const COMMISSION = -200;
     const STATUS_NONE = 1;
     const STATUS_REQUESTING = 2;
     const STATUS_COMPLETE = 3;
