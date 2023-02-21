@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\JobRequestController;
 use App\Http\Controllers\Admin\MCommissionRateController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\KaribitoSurveyController as AdminKaribitoSurveyController;
+use App\Http\Controllers\Admin\MProductCategoryController;
+use App\Http\Controllers\Admin\MProductChildCategoryController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\TransferRequestController as AdminTransferRequestController;
 use App\Http\Controllers\Auth\FacebookLoginController;
@@ -91,6 +93,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
     Route::view('support', 'support.support')->name('support');
     Route::view('support_detail', 'support.support_detail')->name('support_detail');
     Route::view('guide', 'support.guide')->name('guide');
+    Route::view('karibitoguide', 'karibitoguide.support')->name('karibitoguide');
 
 
     Route::get('/dashboard', function () {
@@ -465,6 +468,8 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::post('/users/{user}/not_identify',[UserController::class, 'revokeApproval'])->name('revokeApproval');
             Route::post('/users/{user}/is_ban',[UserController::class, 'limitAccount'])->name('limit.account');
             Route::post('/users/{user}/not_ban',[UserController::class, 'cancelLimitAccount'])->name('cancel.limit.account');
+            Route::resource('/categories', MProductCategoryController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+            Route::resource('/child_categories', MProductChildCategoryController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
 
             //お知らせ機能
             Route::resource('/news', AdminNewsController::class);

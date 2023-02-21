@@ -27,13 +27,13 @@ class StoreRequest extends FormRequest
 
         return [
         'category_id' => 'required | integer | exists:m_product_child_categories,id',
-        'prefecture_id' => 'required_if:is_online,0 | nullable | between:1,47',
+        'prefecture_id' => 'required_if:is_online,0,2 | nullable | between:1,47',
         'title' => 'required | string | max:30',
         'content' => 'required | string | min:30 | max:3000 ',
         'price' => 'required | integer | min:500 | max:9990000',
         'application_deadline' => 'required | date | after_or_equal:tomorrow', //応募期限
         'required_date' => 'nullable | date | after_or_equal:application_deadline', // 納期希望日
-        'is_online' => 'required | boolean',
+        'is_online' => 'required | in:0,1,2',
         // 'is_call' => 'required | boolean',　電話対応は仕様変更によって一旦非表示
         ];
     }

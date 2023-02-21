@@ -20,8 +20,11 @@
 
         <x-parts.evaluation-star :star='$user->avg_star'/>
 
-        @if(Auth::user()->userProfile->is_identify == 1)
-            <a>本人確認済み</a>
+        @if($user->userProfile->is_identify == 1)
+            <p class="mypageP04 check">
+                <a>本人確認済み</a>
+                <a>NDA可</a>
+            </p>
         @endif
         @if (\Auth::id() !== $user->id)
             @if(empty($user->deleted_at))

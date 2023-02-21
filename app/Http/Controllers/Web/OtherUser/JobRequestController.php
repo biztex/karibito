@@ -36,18 +36,22 @@ class JobRequestController extends Controller
 
         $job_request_ranks = JobRequest::display()->whereIn('category_id', $child_categories_id)->paginate(10);
 
+        $m_product_categories = MProductCategory::all();
+
         $child_categories = $category->mProductChildCategory;
 
         $parent_category_flg = 1;
 
         $title = $category->name;
 
-        return view('job_request.index', compact('job_requests', 'job_request_ranks', 'category', 'child_categories', 'parent_category_flg', 'title'));
+        return view('job_request.index', compact('job_requests', 'job_request_ranks', 'category', 'child_categories', 'parent_category_flg', 'title', 'm_product_categories'));
     }
 
     public function show(MProductChildCategory $child_category)
     {
         $job_requests = JobRequest::display()->where('category_id',$child_category->id)->orderBy('created_at','desc')->paginate(10);
+
+        $m_product_categories = MProductCategory::all();
 
         $all_child_categories = $child_category->mProductCategory->mProductChildCategory; //親かて、コレクション
 
@@ -57,7 +61,9 @@ class JobRequestController extends Controller
 
         $title = $child_category->mProductCategory->name;
 
-        return view('job_request.index', compact('job_requests', 'all_child_categories', 'child_category', 'child_category_id', 'parent_category_flg', 'title'));
+        $category = $child_category->mProductCategory;
+
+        return view('job_request.index', compact('job_requests', 'all_child_categories', 'child_category', 'child_category_id', 'parent_category_flg', 'title', 'm_product_categories', 'category'));
     }
 
     // public function search(Request $request)

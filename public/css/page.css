@@ -130,39 +130,39 @@
 	font-size: 1.2rem;
 }
 
-.recommendCates .cate01 {
+.recommendCates .cate1 {
 	background-image: url(../img/top/ico_cate01_blue.png);
 }
 
-.recommendCates .cate02 {
+.recommendCates .cate2 {
 	background-image: url(../img/top/ico_cate02_blue.png);
 }
 
-.recommendCates .cate03 {
+.recommendCates .cate3 {
 	background-image: url(../img/top/ico_cate03_blue.png);
 }
 
-.recommendCates .cate04 {
+.recommendCates .cate4 {
 	background-image: url(../img/top/ico_cate04_blue.png);
 }
 
-.recommendCates .cate05 {
+.recommendCates .cate5 {
 	background-image: url(../img/top/ico_cate05_blue.png);
 }
 
-.recommendCates .cate06 {
+.recommendCates .cate6 {
 	background-image: url(../img/top/ico_cate06_blue.png);
 }
 
-.recommendCates .cate07 {
+.recommendCates .cate7 {
 	background-image: url(../img/top/ico_cate07_blue.png);
 }
 
-.recommendCates .cate08 {
+.recommendCates .cate8 {
 	background-image: url(../img/top/ico_cate08_blue.png);
 }
 
-.recommendCates .cate09 {
+.recommendCates .cate9 {
 	background-image: url(../img/top/ico_cate09_blue.png);
 }
 
@@ -1074,6 +1074,7 @@
 	display: block;
 	margin-bottom: 9px;
 	width: 100%;
+	height: auto;
 	border-radius: 4px;
 }
 
@@ -10368,6 +10369,23 @@ input.small {
 }
 
 .templatePopup.is-open {
+	display: block;
+	opacity: 1;
+	visibility: visible;
+}
+.templateNDAPopup {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	display: none;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.templateNDAPopup.is-open {
 	display: block;
 	opacity: 1;
 	visibility: visible;

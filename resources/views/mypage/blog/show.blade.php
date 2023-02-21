@@ -50,11 +50,7 @@
 												<p class="price"><font>{{ $blog->product->title }}</font><br>{{ number_format($blog->product->price) }}円</p>
 											</div>
 											<div class="single">
-												@if($blog->product->is_online == App\Models\Product::OFFLINE)
-													<span>対面</span>
-												@else
-													<span>非対面</span>
-												@endif
+												<span>{{App\Models\Product::IS_ONLINE[$blog->product->is_online]}}</span>
 											</div>
 											<div class="aboutUser">
 												<div class="user" style="margin-bottom:6px;">

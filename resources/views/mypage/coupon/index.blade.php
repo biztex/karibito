@@ -18,13 +18,13 @@
 							@if ($user_coupons->isNotEmpty())
 								<dl class="couponHd">
 									<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
-									<dd>ご利用いただけるクーポンが発行されました。</dd>
+									<dd>こちらのクーポンが発行されています。お会計時に選択してご利用ください。<br>
+										<span style="color: red;">＊購入手続き後にクーポンは適用できません。<br>　必ず「お支払い確認」画面でクーポンが適用されているかご確認ください。</span>
+									</dd>
 								</dl>
 							@endif
 							<div class="couponCont">
-								@if ($user_coupons->isNotEmpty())
-									<p class="couponNotice">会計時にクーポンを選択してください。</p>
-								@else
+								@if ($user_coupons->isEmpty())
 									<p class="">現在クーポンはまだありません。</p>
 								@endif
 								@foreach ($user_coupons as $user_coupon)
@@ -33,7 +33,7 @@
 											<dt>
 												<p class="nameP">{{$user_coupon->name}}</p>
 												<p class="txtP">{{$user_coupon->content}}</p>
-												<p class="numberP"><font>クーポン番号</font><span class="couponNumber">{{$user_coupon->coupon_number}}</span></p>
+												<p class="numberP"><font>クーポン番号 :</font>{{$user_coupon->coupon_number}}</p>
 											</dt>
 											<dd>
 												<div class="couponTicket">

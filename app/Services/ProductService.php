@@ -410,6 +410,8 @@ class ProductService
             $query->where('is_online', $is_online);
         } elseif ($is_online === '1') {
             $query->where('is_online', $is_online);
+        } elseif ($is_online === '2') {
+            $query->where('is_online', $is_online);
         }
 
         if ($is_sale === '1') {
