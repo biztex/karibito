@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('deadline_period')->nullable()->change();
         });
         Schema::table('user_get_points', function (Blueprint $table) {
-            $table->integer('deadline')->nullable()->change();
+            $table->date('deadline')->nullable()->change();
         });
     }
 
