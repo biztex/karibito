@@ -43,7 +43,7 @@
         <h2 class="templateTitle">定型文の挿入</h2>
         <div class="templateSelect">
             <select class="tabSelectLinks">
-                <option value="#template01">購入前の問い合わせ（購入者）</option>
+                <option value="#template01">購入前の問い合わせ（購入者）▼</option>
                 <option value="#template02">購入確認のあいさつ（購入者）</option>
                 <option value="#template03">購入確認のあいさつ（出品者）</option>
                 <option value="#template04">購入後のあいさつ（購入者）</option>
