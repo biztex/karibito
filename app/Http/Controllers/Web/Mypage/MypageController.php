@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Mypage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Libraries\Age;
+use App\Models\Chatroom;
 use App\Models\UserNotification;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,11 @@ class MypageController extends Controller
             $chatroom->where('seller_user_id', \Auth::id())
                 ->orWhere('buyer_user_id', \Auth::id());
         })->whereNotNull('cancel_date')->count();
+        $total_sales_count = Chatroom::where(function ($chatroom) {
+            $chatroom->where('seller_user_id', \Auth::id())
+                ->orWhere('buyer_user_id', \Auth::id());
+        })->where('status', Chatroom::STATUS_COMPLETE)->count();
 
-        return view('mypage.show', compact('user_notifications', 'products', 'cancel_count'));
+        return view('mypage.show', compact('user_notifications', 'products', 'cancel_count', 'total_sales_count'));
     }
 }

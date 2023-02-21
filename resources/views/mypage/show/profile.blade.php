@@ -33,7 +33,7 @@
                 @endif
             </p>
             <div class="countBox">
-                <p class="countItem">販売実績数：100</p>
+                <p class="countItem">販売実績数：{{ $total_sales_count }}</p>
                 <p class="countItem">キャンセル完了数：{{ $cancel_count }}</p>
             </div>
             <div class="mypageP06 starBox">

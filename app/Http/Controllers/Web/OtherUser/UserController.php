@@ -13,6 +13,7 @@ use App\Models\UserJob;
 use App\Models\Evaluation;
 use App\Libraries\Age;
 use App\Models\Blog;
+use App\Models\Chatroom;
 use App\Services\EvaluationService;
 use App\Services\PortfolioService;
 use App\Models\JobRequest;
@@ -64,8 +65,12 @@ class UserController extends Controller
             $chatroom->where('seller_user_id', $user->id)
                 ->orWhere('buyer_user_id', $user->id);
         })->whereNotNull('cancel_date')->count();
+        $total_sales_count = Chatroom::where(function ($chatroom) {
+            $chatroom->where('seller_user_id', \Auth::id())
+                ->orWhere('buyer_user_id', \Auth::id());
+        })->where('status', Chatroom::STATUS_COMPLETE)->count();
 
-        return view('other-user.mypage', compact('user','products', 'dmrooms', 'job_request', 'portfolio_list', 'evaluations', 'counts', 'cancel_count'));
+        return view('other-user.mypage', compact('user','products', 'dmrooms', 'job_request', 'portfolio_list', 'evaluations', 'counts', 'cancel_count', 'total_sales_count'));
     }
 
     public function skills(User $user, Dmroom $dmroom)
