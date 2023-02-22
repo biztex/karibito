@@ -9871,6 +9871,13 @@ input.small {
 	color: #666666;
 }
 
+.contactForm .warnNotes .flex {
+    display: flex;
+}
+.contactForm .warnNotes .flex .inlineBlock {
+    display: inline-block;
+}
+
 .mypagePortfolioUl03 {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
