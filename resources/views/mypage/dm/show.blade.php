@@ -128,14 +128,14 @@
                                                 <div class="templateSelect">
                                                     <select class="tabSelectLinks">
                                                         <option value="#template01">購入前の問い合わせ（購入者）▼</option>
-                                                        <option value="#template02">購入確認のあいさつ（購入者）</option>
-                                                        <option value="#template03">購入確認のあいさつ（出品者）</option>
-                                                        <option value="#template04">購入後のあいさつ（購入者）</option>
-                                                        <option value="#template05">購入後のあいさつ（出品者）</option>
-                                                        <option value="#template06">やりとりが滞ってしまったら</option>
-                                                        <option value="#template07">キャンセルについて（購入者）</option>
-                                                        <option value="#template08">納品完了メール（出品者）</option>
-                                                        <option value="#template09">サービス受取時（納品者）</option>
+                                                        <option value="#template02">購入確認のあいさつ（購入者）▼</option>
+                                                        <option value="#template03">購入確認のあいさつ（出品者）▼</option>
+                                                        <option value="#template04">購入後のあいさつ（購入者）▼</option>
+                                                        <option value="#template05">購入後のあいさつ（出品者）▼</option>
+                                                        <option value="#template06">やりとりが滞ってしまったら▼</option>
+                                                        <option value="#template07">キャンセルについて（購入者）▼</option>
+                                                        <option value="#template08">納品完了メール（出品者）▼</option>
+                                                        <option value="#template09">サービス受取時（納品者）▼</option>
                                                     </select>
                                                 </div>
                                                 <div class="templateBox tabSelectBox is-active" id="template01">
