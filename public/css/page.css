@@ -1096,7 +1096,7 @@
 .detailStyle .title .single a {
 	display: inline-block;
 	margin-right: 20px;
-	width: 56px;
+	min-width: 76px;
 	background: #158ACC;
 	border-radius: 3px;
 	text-align: center;
