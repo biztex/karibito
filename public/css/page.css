@@ -4676,6 +4676,10 @@ select.faqSelect {
 	text-align: left;
 }
 
+.secretTxt .red {
+    color: #E3000D;
+}
+
 .secretPager {
 	margin: 40px auto 0;
 	display: flex;
