@@ -95,10 +95,6 @@
 									</div>
 								</div>
 							</div>
-							<div class="warnNotes mt50">
-								<p class="danger">ご注意！</p>
-								<p>※他のクーポンと併用はできません。</p>
-							</div>
 							<div class="functeBtns">
 								<input type="submit" class="orange full loading-disabled" value="確定する">
 							</div>
