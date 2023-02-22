@@ -52,9 +52,11 @@
 
                         <div class="td">
                             <div class="warnNotes">
-                                <p>【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
-                                <br>
-                                【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。</p>
+                                <p>
+                                    【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
+                                    <br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。
+                                    <br>【どちらでも】：対面と非対面どちらの体系でもサービスを提供します。<span style="color:red;">どちらでもの場合、本人確認が必要になります。</span>
+                                </p>
                             </div>
                         </div>
                         <p class="th">仕事体系<span class="must">必須</span></p>
@@ -476,7 +478,7 @@ $(function(){
             }
         });
     }
-    
+
     // 打ち込んだ文字数の表示
     function ShowLengthProduct( str ) {
         document.getElementById("inputlengthProduct").innerHTML = str.length + "/30";
