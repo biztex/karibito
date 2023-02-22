@@ -8,7 +8,7 @@
                         <div class="item">
                             <h1 id="headerLogo"><a href="{{ route('home') }}"><img class="pc" src="/img/common/logo.svg" alt="LOGO"><img class="sp" src="/img/common/logo_sp.svg" alt="LOGO"></a></h1>
                         </div>
-                        <p class="custTit">CUSTOMER SUPPORT</p>
+                        <p class="custTit">カリビトからのお知らせ詳細</p>
                     </div>
                 </div><!-- /.headLinks -->
             </div><!-- /#header -->
@@ -24,7 +24,7 @@
                                 <p>{!!$news->content!!}</p>
                             </div>
                         </div>
-                        <div class="supportNewsBtn"><a href="{{ route('news.index') }}">一覧へ戻る</a></div>
+                        <div class="supportNewsBtn"><a href="{{ route('news.index') }}">CLOSE</a></div>
                     </div>
                 </div>
             </div><!-- /#contents -->
