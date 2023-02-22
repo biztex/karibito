@@ -8502,6 +8502,10 @@ select.searchSelect {
 	color: #D80000;
 }
 
+.colorBlue {
+    color: #158ACC;
+}
+
 
 /*** タブレット ***/
 @media screen and (max-width: 767px) {
