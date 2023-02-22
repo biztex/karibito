@@ -152,6 +152,8 @@
                             <input type="hidden" name="zip" value="{{ Auth::user()->userProfile->zip }}">
                             <input type="hidden" name="prefecture" value="{{ Auth::user()->userProfile->prefecture_id }}">
                             <input type="hidden" name="address" value="{{ Auth::user()->userProfile->address }}">
+                            <input type="hidden" name="address_number" value="{{ Auth::user()->userProfile->address_number }}">
+                            <input type="hidden" name="apartment" value="{{ Auth::user()->userProfile->apartment }}">
                         </dl>
                     @endif
 
