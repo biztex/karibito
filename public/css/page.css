@@ -10564,6 +10564,11 @@ input.small {
 	font-weight: bold;
 }
 
+.supportLink {
+    color: #26428b;
+    text-decoration: underline;
+}
+
 /*** タブレット ***/
 @media screen and (max-width: 767px) {
 	#wrapper.bg04 #contents {
