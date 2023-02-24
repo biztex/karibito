@@ -9,7 +9,7 @@
                         @else
                             @foreach($news_list as $news)
                                 <li>
-                                    <a href="{{route('news.show', $news->id)}}">
+                                    <a href="{{route('news.show', $news->id)}}" target="_blank">
                                         <dl>
                                             <dt><img src="img/mypage/img_notice01.png" alt=""></dt>
                                             <dd>
