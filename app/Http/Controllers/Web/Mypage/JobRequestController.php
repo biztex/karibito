@@ -14,6 +14,7 @@ use App\Services\JobRequestService;
 use App\Services\ChatroomService;
 use App\Http\Requests\JobRequestController\DraftRequest;
 use App\Http\Requests\JobRequestController\StoreRequest;
+use App\Models\PurchasedCancel;
 use App\Services\UserNotificationService;
 
 class JobRequestController extends Controller
@@ -128,7 +129,13 @@ class JobRequestController extends Controller
 
         $count_favorite = $job_request->favorites->count(); // いいねの数
 
-        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite', 'count_favorite'));
+        $purchased_cancel = new PurchasedCancel();
+        $cancel_count = $purchased_cancel->getCancelCount($job_request->user_id);
+
+        $chatroom = new Chatroom;
+        $total_sales_count = $chatroom->getSalesCount($job_request->user_id);
+
+        return view('job_request.show',compact('job_request','user', 'deadline', 'today', 'requested', 'url', 'is_favorite', 'count_favorite', 'cancel_count', 'total_sales_count'));
     }
 
     /**
