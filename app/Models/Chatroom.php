@@ -61,7 +61,7 @@ class Chatroom extends Model
      */
     public function isCancelable(): bool
     {
-        if($this->purchase === null || !in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION])) return false;
+        if($this->purchase === null || !in_array($this->status, [self::STATUS_WORK])) return false;
         
         return $this->purchase->isCancelable();
     }

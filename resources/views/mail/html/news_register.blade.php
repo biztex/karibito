@@ -3,7 +3,7 @@
 
 {{$user_notification->title}}
 
-{{ route('user_notification.show', $user_notification->id) }}
+{{ route('already_read.show', $user_notification) }}
 
 
 @include('mail.text.footer')

@@ -55,7 +55,7 @@
                                         <label for="text" class="col-md-4 col-form-label text-md-right"></label>
                                         <div class="col-md-6">
                                             <input type="hidden" name="is_important" value="0">
-                                            <label><input type="checkbox" class="form-check-input" name="is_important" value="1">重要なお知らせ</label>
+                                            <label><input type="checkbox" class="form-check-input" name="is_important" value="1" @if (old('is_important') == '1') checked @endif>重要なお知らせ</label>
                                         </div>
                                     </div>
 

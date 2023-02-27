@@ -383,6 +383,8 @@
         @include('components.header-guide')
         @elseif(Request::routeIs('company'))
         @include('components.header-company')
+        @elseif(Request::routeIs('news.index'))
+        @include('components.header-new')
         @endif
     </div><!-- /#header -->
 	<x-hide-modal/>

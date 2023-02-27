@@ -23,7 +23,6 @@ class PointService
         $m_point = MPoint::where('id', $point_id)->first();
         // $point_rate = MPointRate::where('effective_datetime', '<=', $today)->latest()->first(); 仕様が変わる可能性があるため一旦残す
         // $now_rate = $point_rate->rate;
-        
         $deadline = empty($m_point->deadline_period) ? null : date("Y-m-d",mktime(0, 0, 0, date("m") + $m_point->deadline_period, date("d"), date("Y")));
         $user_get_point = new UserGetPoint();
         $user_get_point->create([

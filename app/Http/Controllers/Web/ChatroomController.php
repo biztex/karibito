@@ -274,9 +274,6 @@ class ChatroomController extends Controller
             $user_use_point = $this->point_service->usedPoint($proposal->chatroom, $amount['use_point']);
             // 購入完了処理
             $this->purchase_service->purchased($charge_id, $amount['total'], $proposal, $user_coupon, $user_use_point);
-            // pointを与える
-            $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $proposal->chatroom->seller_user_id, $proposal->chatroom); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
-            $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $proposal->chatroom->buyer_user_id, $proposal->chatroom); // 仕様が変わる可能性があるため一旦非表示、取得ポイントは手数料含めるか確認
             // 購入物作成
             $this->purchase_service->savePurchasedProduct($proposal);
             $chatroom = $proposal->chatroom;
@@ -357,6 +354,9 @@ class ChatroomController extends Controller
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeComplete($chatroom, $this->purchase_service);
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
+            // 両者に取引完了pointを与える
+            $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $chatroom->seller_user_id, $chatroom);
+            $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $chatroom->buyer_user_id, $chatroom);
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);

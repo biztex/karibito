@@ -14,13 +14,13 @@
             <div class="fancyRegisterItem">
                 <p class="txt">本人確認には、プロフィールの氏名/生年月日/ご住所のご登録が必要です。<br>登録するプロフィール情報と、提出する本人確認の書類の氏名/生年月日/ご住所が一致しているか必ずご確認ください。</p>
                 <p class="notice">＊1点でも一致しない場合、申請をお受け出来ませんのでご注意ください。</p>
-                <p class="txt">プロフィール編集は<a href="#fancybox_person" class="fancybox colorRed">こちら</a></p>
+                <p class="txt">プロフィール編集は<a href="#fancybox_person" class="fancybox colorBlue">こちら</a></p>
             </div>
             <div class="fancyRegisterItem">
-                <p class="txt"><strong>本人確認とは</strong><br>本人確認とは、お互いの信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに本人確認済みマークが表示されます。</p>
+                <p class="txt"><strong>■本人確認とは</strong><br>本人確認とは、お互いの信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに本人確認済みマークが表示されます。</p>
             </div>
             <div class="fancyRegisterItem">
-                <p class="txt"><strong>本人確認に利用できる書類</strong><br>ご本人であることを確認するため、下記の書類のうち一つをご提出ください。</p>
+                <p class="txt"><strong>■本人確認に利用できる書類</strong><br>ご本人であることを確認するため、下記の書類のうち一つをご提出ください。</p>
             </div>
             <div class="fancyRegisterItem">
                 <p class="txt"><strong>【個人の場合】</strong><br>・運転免許所<br>・健康保険証/被保険者証<br>・旅券/パスポート<br>・住民票<br>・住人基本台帳カード<br>・外国人証明書<br>・マイナンバーカード</p>
@@ -32,7 +32,7 @@
             </div>
         </div>
             <div style="margin:0 0 20px 20px;height:10px;"><p class="identification-file-name" style='color:#696969;'></p></div>
-            <p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox">プロフィール編集はこちら</a></p>
+            <p class="fancyRegisterEdit"><a href="#fancybox_person" class="fancybox colorBlue">プロフィール編集はこちら</a></p>
         @if(!empty(Auth::user()->userProfile->zip) && !empty(Auth::user()->userProfile->address) && !empty(Auth::user()->userProfile->birthday))
             <form action="{{ route('identification') }}" method="POST" name="upload" enctype="multipart/form-data">
                 @csrf

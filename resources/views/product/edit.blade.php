@@ -57,7 +57,18 @@
 
                         <div class="td">
                             <div class="warnNotes">
-                                <p>【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span><br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。</p>
+                                <p>
+                                    【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
+                                    <br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。
+                                    <div class="flex">
+                                        <span>【どちらでも】：</span>
+                                        <div class="inlineBlock">
+                                            対面と非対面どちらの体系でもサービスを提供します。
+                                            <br>
+                                            <span style="color:red;">どちらでもの場合、本人確認が必要になります。</span>
+                                        </div>
+                                    </div>
+                                </p>
                             </div>
                         </div>
 
@@ -409,7 +420,7 @@
                             <div class="td">
                                 <div class="warnNotes">
                                     <p class="danger">写真を追加する<font class="colorRed">（１枚目は必須）</font></p>
-                                    <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はサービス詳細画面に、ポートフォリオとして表示されます。<br>※登録１枚目の画像がサムネイルとして表示されます。</p>
+                                    <p>カメラマークをタップして、写真をアップロードしてください。<br>複数の写真がアップロード可能です。<br>写真はサービス詳細画面に、ポートフォリオとして表示されます。<br>※登録１枚目の画像がサムネイルとして表示されます。<br>※画像推奨サイズはwidth 750px height 422pxです。</p>
                                 </div>
                                 @error('base64_text.0')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <ul class="mypagePortfolioUl03 mt40">

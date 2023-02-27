@@ -70,7 +70,18 @@
 						</div>
 
 							<div class="warnNotes" style="margin-bottom:5px;">
-								<p>【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span><br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。</p>
+								<p>
+                                    【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
+                                    <br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。
+                                    <div class="flex">
+                                        <span>【どちらでも】：</span>
+                                        <div class="inlineBlock">
+                                            対面と非対面どちらの体系でもサービスを提供します。
+                                            <br>
+                                            <span style="color:red;">どちらでもの場合、本人確認が必要になります。</span>
+                                        </div>
+                                    </div>
+								</p>
 							</div>
 						<p class="th">仕事体系<span class="must">必須</span></p>
 							@error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror

@@ -1096,7 +1096,7 @@
 .detailStyle .title .single a {
 	display: inline-block;
 	margin-right: 20px;
-	width: 56px;
+	min-width: 76px;
 	background: #158ACC;
 	border-radius: 3px;
 	text-align: center;
@@ -4674,6 +4674,10 @@ select.faqSelect {
 	max-width: 560px;
 	margin: 0 auto;
 	text-align: left;
+}
+
+.secretTxt .red {
+    color: #E3000D;
 }
 
 .secretPager {
@@ -8498,6 +8502,10 @@ select.searchSelect {
 	color: #D80000;
 }
 
+.colorBlue {
+    color: #158ACC;
+}
+
 
 /*** タブレット ***/
 @media screen and (max-width: 767px) {
@@ -9863,6 +9871,13 @@ input.small {
 	color: #666666;
 }
 
+.contactForm .warnNotes .flex {
+    display: flex;
+}
+.contactForm .warnNotes .flex .inlineBlock {
+    display: inline-block;
+}
+
 .mypagePortfolioUl03 {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -10554,6 +10569,11 @@ input.small {
 	align-items: center;
 	font-size: 15px;
 	font-weight: bold;
+}
+
+.supportLink {
+    color: #26428b;
+    text-decoration: underline;
 }
 
 /*** タブレット ***/

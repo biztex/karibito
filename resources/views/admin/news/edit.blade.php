@@ -45,6 +45,14 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row py-1">
+                                <label for="text" class="col-md-4 col-form-label text-md-right"></label>
+                                <div class="col-md-6">
+                                    <input type="hidden" name="is_important" value="0">
+                                    <label><input type="checkbox" class="form-check-input" name="is_important" value="1" @if (old('is_important', $news->is_important) == '1') checked @endif>重要なお知らせ</label>
+                                </div>
+                            </div>
+
                             <div class="form-group row mt-5 mb-0">
                                 <div class="col-md-6 offset-md-3 text-center">
                                     <button type="submit" class="btn btn-outline-info btn-block rounded-pill shadow-sm mb-4">
