@@ -52,6 +52,11 @@
         @endif
     </div>
 
-    <x-parts.box-seller :user='$product->user'/>
+    @php
+        $user = $product->user;
+        $cancelCount = $cancel_count;
+        $totalSalesCount = $total_sales_count;
+    @endphp
+    <x-parts.box-seller :user="$user" :cancelCount="$cancelCount" :totalSalesCount="$totalSalesCount"/>
 </aside>
 <x-parts.alert-modal formId="delete-product" />

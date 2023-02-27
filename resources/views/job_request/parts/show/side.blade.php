@@ -57,7 +57,12 @@
     </div>
 
     @if(isset($job_request->user))
-        <x-parts.box-seller :user='$user'/>
+        @php
+            $user = $job_request->user;
+            $cancelCount = $cancel_count;
+            $totalSalesCount = $total_sales_count;
+        @endphp
+        <x-parts.box-seller :user="$user" :cancelCount="$cancelCount" :totalSalesCount="$totalSalesCount"/>
     @endif
 
 </aside>

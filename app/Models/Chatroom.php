@@ -41,6 +41,40 @@ class Chatroom extends Model
         }
     }
 
+    /**
+     * 完了済み販売実績取得
+     * 
+     * @param int $user_id
+     * @return int
+     */
+    public function getSalesCount(int $user_id): int
+    {
+        return $this->where(function ($chatroom) use ($user_id) {
+            $chatroom->where('seller_user_id', $user_id)
+                ->orWhere('buyer_user_id', $user_id);
+        })->where('status', self::STATUS_COMPLETE)->count();
+    }
+
+    /**
+     * キャンセル申請可能判断
+     * @return bool
+     */
+    public function isCancelable(): bool
+    {
+        if($this->purchase === null || !in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION])) return false;
+        
+        return $this->purchase->isCancelable();
+    }
+
+    /**
+     * 電話対応
+     * @return bool
+     */
+    public function canCall(): bool
+    {
+        return in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION]) ? true : false;
+    }
+
     public function scopeNumberOfSold($query, $product_id): int
     {
         return $query->where('reference_type', 'App\Models\Product')
@@ -139,31 +173,11 @@ class Chatroom extends Model
         return $query->loginUser()->where('reference_type', 'App\Models\JobRequest');
     }
 
-    /**
-     * キャンセル申請可能判断
-     * @return bool
-     */
-    public function isCancelable(): bool
-    {
-        if($this->purchase === null || !in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION])) return false;
-        
-        return $this->purchase->isCancelable();
-    }
-
     // 対象のユーザーが出品者のチャットルーム
     // 入金一覧取得の際に使用
     public function scopeSellService($query, $user_id)
     {
         return $query->loginUser()->where('seller_user_id', $user_id);
-    }
-
-    /**
-     * 電話対応
-     * @return bool
-     */
-    public function canCall(): bool
-    {
-        return in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION]) ? true : false;
     }
 
     /**
