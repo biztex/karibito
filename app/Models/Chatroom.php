@@ -49,10 +49,7 @@ class Chatroom extends Model
      */
     public function getSalesCount(int $user_id): int
     {
-        return $this->where(function ($chatroom) use ($user_id) {
-            $chatroom->where('seller_user_id', $user_id)
-                ->orWhere('buyer_user_id', $user_id);
-        })->where('status', self::STATUS_COMPLETE)->count();
+        return $this->where('seller_user_id', $user_id)->where('status', self::STATUS_COMPLETE)->count();
     }
 
     /**
