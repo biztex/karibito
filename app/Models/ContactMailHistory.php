@@ -16,6 +16,7 @@ class ContactMailHistory extends Model
     public const TROUBLE = 4;
     public const REPORT = 5;
     public const OTHER = 6;
+    public const CATEGORY = 7;
 
     public const CONTACT_TYPES = [
         self::INFO => '【会員情報に関して】',
@@ -24,6 +25,7 @@ class ContactMailHistory extends Model
         self::CANCEL => '【キャンセル・返金に関して】',
         self::TROUBLE => '【トラブルに関して】',
         self::REPORT => '【ご通報】',
+        self::CATEGORY => '【カテゴリー項目追加依頼】',
         self::OTHER => '【その他】',
     ];
 
