@@ -18,6 +18,9 @@
                                 <br>
                                 解決できない場合は、下記のお問い合わせフォームに必要事項をご記入いただきお問い合わせください。
                             </p>
+                            <?php
+                                $type = $_GET['type']?? null;
+                            ?>
                             <form action="{{ route('contact') }}" method="post">
                                 @csrf
                                 <div class="labelName"><input type="text" name="name" placeholder="名前" @if(\Auth::User()) value="{{ \Auth::User()->name }}" @endif required></div>
@@ -25,7 +28,7 @@
                                 <div class="labelType">
                                     <select name="type" style="color:#000;">
                                         @foreach (App\Models\ContactMailHistory::CONTACT_TYPES as $i => $option)
-                                            <option value='{{ $i }}' @if ($i == App\Models\ContactMailHistory::REPORT) selected @endif>{{ $option }}</option>
+                                            <option value='{{ $i }}' @if (isset($type)? $type == $i: $i == App\Models\ContactMailHistory::REPORT) selected @endif>{{ $option }}</option>
                                         @endforeach
                                     </select>
                                 </div>
