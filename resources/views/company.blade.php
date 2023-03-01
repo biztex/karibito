@@ -19,7 +19,7 @@
 							<h2 class="title"><span class="step">01</span><span class="eng">COMPANY POLICY</span>〜カリビト理念〜</h2>
 							<p class="logo"><img src="/img/company/logo_policy.svg" alt="">「 カリビトで街と人を繋げ隊！ 」</p>
 							<p class="mb70">多種多様化する都市部から過疎化が進む地域社会まで、用途に合わせて街と人を<br class="sp">繋げることができるユニークな<br class="pc">プラットフォームを創造していくことが我々の企業価値となる。</p>
-							<div class="img"><img src="/img/company/img_company01.png" srcset="/img/company/img_company01.png 1x, /img/company/img_company01@2x.png 2x" alt=""></div>
+							<div class="img"><img src="/img/company/ideal_img.png" alt=""></div>
 						</div>
 						<div class="part companyAnchorTarget companyAnchorTarget02" id="company02">
 							<h2 class="title"><span class="step">02</span><span class="eng">HISTORY</span>〜日本文化の継承から〜</h2>
