@@ -1033,6 +1033,32 @@
 	text-decoration: underline;
 }
 
+.chatPages .btns {
+	flex-wrap: wrap;
+}
+
+.chatPages .btns > div {
+	width: calc(50% - 10px);
+	margin-bottom: 16px;
+}
+
+.chatPages .btns > div:last-child {
+	margin-bottom: 0;
+}
+
+.chatPages .btns > div > *,
+.chatPages .btns > div > p {
+	width: 100%;
+}
+
+.chatPages .btns > div > p {
+	transition: all 0.5s;
+}
+
+.chatPages .btns > div > p:hover {
+	opacity: 0.7;
+}
+
 .chatPages .btns p {
 	display: flex;
 	align-items: center;
@@ -1051,6 +1077,12 @@
 @media screen and (min-width: 767px) {
 	.chatPages .btns p {
 		width: calc(50% - 10px);
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.chatPages .btns > div {
+		width: 100%;
 	}
 }
 
@@ -2348,4 +2380,14 @@ p#copyright {
 	height: 57px;
 	background: url(../img/common/ico_sold.png) no-repeat left top / 100%;
 	z-index: 3;
+}
+
+/* chat text */
+.proposeBuy .buy span + input[type=submit],
+.proposeBuy .buy span + input:disabled {
+	margin-top: 16px;
+}
+.proposeBuy + span {
+	margin-top: 16px;
+	display: inline-block;
 }
