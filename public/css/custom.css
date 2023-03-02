@@ -2391,3 +2391,36 @@ p#copyright {
 	margin-top: 16px;
 	display: inline-block;
 }
+
+/* company */
+.companyStep .introdBox .issue.issueNumber li {
+	position: relative;
+	padding-left: 2em;
+	counter-increment: mycounter;
+}
+.companyStep .introdBox .issue.issueNumber li::before {
+	content: counter(mycounter);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2em;
+	text-align: center;
+}
+.introdBoxTitUnder {
+	padding-left: 1.5em;
+}
+.companyProfileMail {
+	color: #0c65fc;
+}
+.companyProfileLink {
+	color: #0c65fc;
+	border: 1px solid #0c65fc;
+	padding: 6px 15px 7.5px;
+	line-height: 1.5;
+	display: inline-block;
+}
+@media screen and (max-width: 769px) {
+	.introdBoxTitUnder {
+		padding-left: 1.3em;
+	}
+}
