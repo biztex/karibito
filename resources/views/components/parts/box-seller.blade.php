@@ -14,6 +14,13 @@
     <p class="countItem">キャンセル完了数：{{ $cancelCount }}</p>
   </div>
 
+    @if($user->userProfile->is_identify == 1)
+        <p class="mypageP04 check">
+            @if($user->userProfile->is_nda == 1)
+                <a>秘密保持契約（NDA) 可</a>
+            @endif
+        </p>
+    @endif
   <x-parts.evaluation-star :star='$user->avg_star'/>
 </div>
 @endif
