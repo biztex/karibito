@@ -91,6 +91,10 @@ class UserProfileService
             $birthday = $request['year'] . '-' . $request['month'] . '-' . $request['day'];
         }
 
+        $is_nda = null;
+        if (isset($request['is_nda'])) {
+            $is_nda = $request['is_nda']?? 0;
+        }
         $user_profile = \Auth::user()->userProfile;
 
         $user_profile->fill([
@@ -104,6 +108,7 @@ class UserProfileService
             'address_number' => $request['address_number'],
             'apartment' => $request['apartment'],
             'introduction' => $request['introduction'],
+            'is_nda' => $is_nda,
         ]);
         $user_profile->save();
     }

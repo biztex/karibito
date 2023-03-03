@@ -71,7 +71,9 @@
 										<p class="mypageP04 check">
                                             @if ($user->userProfile->is_identify)
                                                 <a>本人確認済み</a>
-												<a>NDA可</a>
+                                                @if($user->userProfile->is_nda == 1)
+                                                    <a>秘密保持契約（NDA) 可</a>
+                                                @endif
                                             @endif
                                         </p>
 										<p class="mypageP05"></p>

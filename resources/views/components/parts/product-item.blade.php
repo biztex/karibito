@@ -26,6 +26,14 @@
         </div>
         <div class="aboutUser">
             <div class="user" style="margin-bottom:6px;">
+                @if($product->user->userProfile->is_identify == 1)
+                    <p class="check" style="margin: 6px auto 8px;">
+                        <a>本人確認済み</a>
+                        @if($product->user->userProfile->is_nda == 1)
+                            <a style="margin-top: 5px;">秘密保持契約（NDA) 可</a>
+                        @endif
+                    </p>
+                @endif
                 @if(empty($product->user->userProfile->icon))
                     <a href="{{ route('user.mypage', $product->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @else
