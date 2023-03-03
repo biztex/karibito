@@ -6918,6 +6918,17 @@ select.searchSelect {
 	background-color: #fff;
 }
 
+.couponTicket .typeBackGround {
+    background-color: #fff;
+    color: #000000;
+    margin: auto;
+    padding: 2px 5px;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
 @media screen and (max-width: 767px) {
 	.couponHd {
 		padding: 10px;
