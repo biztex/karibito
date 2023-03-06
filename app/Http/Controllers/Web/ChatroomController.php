@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChatroomController\EditOrConclusionNdaRequest;
 use App\Models\Chatroom;
 use App\Models\Product;
 use App\Models\JobRequest;
@@ -23,7 +24,12 @@ use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
+use App\Http\Requests\ChatroomController\SendNdaRequest;
+use App\Models\ChatroomNdaMessage;
 use App\Models\MPoint;
+use App\Services\ChatroomNdaMessageService;
+use Dompdf\Adapter\PDFLib;
+use Illuminate\Http\RedirectResponse;
 
 class ChatroomController extends Controller
 {
@@ -35,10 +41,21 @@ class ChatroomController extends Controller
     private $point_service;
     private $coupon_service;
     private $user_notification_service;
+    private $chatroom_nda_message_service;
 
     private readonly StripeService $stripe_service;
 
-    public function __construct(ChatroomService $chatroom_service, ChatroomMessageService $chatroom_message_service, ProposalService $proposal_service, PurchaseService $purchase_service, EvaluationService $evaluation_service, PointService $point_service, CouponService $coupon_service, UserNotificationService $user_notification_service, StripeService $stripe_service)
+    public function __construct(
+        ChatroomService $chatroom_service,
+        ChatroomMessageService $chatroom_message_service,
+        ProposalService $proposal_service,
+        PurchaseService $purchase_service,
+        EvaluationService $evaluation_service,
+        PointService $point_service,
+        CouponService $coupon_service,
+        UserNotificationService $user_notification_service,
+        StripeService $stripe_service,
+        ChatroomNdaMessageService $chatroom_nda_message_service)
     {
         $this->chatroom_service = $chatroom_service;
         $this->chatroom_message_service = $chatroom_message_service;
@@ -49,6 +66,7 @@ class ChatroomController extends Controller
         $this->point_service = $point_service;
         $this->coupon_service = $coupon_service;
         $this->user_notification_service = $user_notification_service;
+        $this->chatroom_nda_message_service = $chatroom_nda_message_service;
     }
 
     /**
@@ -187,6 +205,61 @@ class ChatroomController extends Controller
 
         return back();
     }
+
+    /**
+     * NDA送信
+     * 
+     * @param SendNdaRequest $request
+     * @param Chatroom $chatroom
+     * @return RedirectResponse
+     */
+    public function sendNda(SendNdaRequest $request, Chatroom $chatroom): RedirectResponse
+    {
+        // NDAメッセージの作成
+        $nda_message = $this->chatroom_nda_message_service->storeNdaMessage($request->all(), $chatroom);
+        // NDAを送信した旨のメッセージ作成
+        $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
+        // 送信通知作成
+        $this->user_notification_service->storeUserNotificationMessage($chatroom);
+
+        return back();
+    }
+
+    /**
+     * NDA編集・締結
+     * 
+     * @param EditOrConclusionNdaRequest $request
+     * @param Chatroom $chatroom
+     * @return RedirectResponse
+     */
+    public function editOrConclusionNda(EditOrConclusionNdaRequest $request, Chatroom $chatroom): RedirectResponse
+    {
+        // NDAメッセージの編集・更新
+        $nda_message = $this->chatroom_nda_message_service->updateNdaMessage($request->all(), $chatroom);
+        // NDAが送信・締結された旨のメッセージ作成
+        if ((int)$request->input('status') === ChatroomNdaMessage::CONCLUSION) {
+            $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAが締結しました！');
+        } else {
+            $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
+        }
+        // 送信通知作成
+        $this->user_notification_service->storeUserNotificationMessage($chatroom);
+
+        return back();
+    }
+
+    /**
+     * NDAのPDFダウンロード
+     * 
+     * @param Chatroom $chatroom
+     */
+    public function downloadNda(Chatroom $chatroom)
+    {
+        $nda_text = nl2br($chatroom->chatroomNdaMessages()->latest()->first()->text);
+        $pdf = \PDF::loadView('chatroom/message/nda_pdf', compact('nda_text'));
+        return $pdf->download('nda.pdf');
+    }
+
 
     /**
      * 提案

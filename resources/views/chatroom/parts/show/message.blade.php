@@ -30,6 +30,11 @@
         
         @include('chatroom.message.normal')
 
+    <!-- NDA -->
+    @elseif($message->reference_type === 'App\Models\ChatroomNdaMessage')
+        
+        @include('chatroom.message.nda')
+
     @endif
 
 @endforeach
