@@ -4,13 +4,14 @@ namespace App\Services;
 
 use  App\Models\Chatroom;
 use  App\Models\ChatroomMessage;
+use App\Models\ChatroomNdaMessage;
 use  App\Models\Proposal;
 use  App\Models\Evaluation;
 use  App\Models\Purchase;
 use  App\Models\PurchasedCancel;
 use  App\Models\User;
 use  App\Models\UserNotification;
-
+use Illuminate\Support\Facades\DB;
 
 class ChatroomMessageService
 {
@@ -33,6 +34,24 @@ class ChatroomMessageService
 
         $chatroom_message = $chatroom->chatroomMessages()->create($message);
         return $chatroom_message;
+    }
+
+    /**
+     * NDAメッセージの作成
+     *
+     * @param ChatroomNdaMessage $nda_message
+     * @param string $text
+     * @return void
+     */
+    public function storeNdaMessage(ChatroomNdaMessage $nda_message, string $text)
+    {
+        DB::transaction(function () use ($nda_message, $text) {
+            $nda_message->chatroomMessage()->create([
+                'chatroom_id' => $nda_message->chatroom_id,
+                'user_id' => \Auth::id(),
+                'text' => $text,
+            ]);
+        });
     }
 
     // 提案 chatroom message テーブル

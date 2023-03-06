@@ -121,18 +121,16 @@
         <div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
     </div>
 </div>
+
 <div class="templateNDAPopup">
+<form id="form" action="{{ route('chatroom.send.nda', $chatroom->id) }}" method="POST" enctype="multipart/form-data">
+@csrf
     <div class="templateOverlay"></div>
     <div class="templateArea tabSelectArea">
         <div class="templateClose"></div>
         <h2 class="templateTitle">NDAの送付</h2>
-        <div class="templateSelect">
-            <select class="tabSelectLinks">
-                <option value="#templateNDA" selected>購入前の問い合わせ（購入者）</option>
-            </select>
-        </div>
         <div class="templateBox tabSelectBox is-active" id="templateNDA">
-            <textarea> {{--表示が崩れるためインデント無視--}}
+            <textarea name="text"> {{--表示が崩れるためインデント無視--}}
 ●●発注者（以下「甲」という。）と ●●受注者（以下「乙」という。）は、甲乙間において、カリビト上でやりとりするにあたり（以下「本目的」という。）、相互に開示又は提供する秘密情報の保持につき、次のとおり秘密保持契約（以下「本契約」という。）を締結する（以下、秘密情報を開示又は提供した当事者を「開示者」、秘密情報の開示又は提供を受けた当事者を「受領者」という。）。
 
 第1条（目的）
@@ -194,9 +192,10 @@
 　　●●●●●●●●（お名前
                 
             </textarea>
-        </div>ndaボタンを押したら、サービスを提供しましたみたいな感じで表示する。DBにも入れるかも、新しいテーブル作成、ステータスとかも考えないといけないかも、
-        <div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
+        </div>
+        <div class="templateButton"><button type="submit" class="templateInput">送信する</button></div>
     </div>
+</form>
 </div>
 
 <script>

@@ -10388,7 +10388,8 @@ input.small {
 	opacity: 1;
 	visibility: visible;
 }
-.templateNDAPopup {
+.templateNDAPopup,
+.editNDAPopup {
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -10400,7 +10401,8 @@ input.small {
 	visibility: hidden;
 }
 
-.templateNDAPopup.is-open {
+.templateNDAPopup.is-open,
+.editNDAPopup.is-open {
 	display: block;
 	opacity: 1;
 	visibility: visible;

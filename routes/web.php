@@ -314,6 +314,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::middleware('can:my.chatroom,chatroom')->group(function () {
                 Route::get('{chatroom}', 'show')->name('show');
                 Route::post('{chatroom}', 'message')->name('message')->middleware('is_ban'); //通常メッセージ
+                Route::post('{chatroom}/nda', 'sendNda')->name('send.nda')->middleware('is_ban'); //NDAメッセージ
+                Route::post('{chatroom}/nda/edit', 'editOrConclusionNda')->name('send.nda.edit')->middleware('is_ban'); //NDAメッセージ(編集)
+                Route::get('{chatroom}/nda/download', 'downloadNda')->name('download.nda.pdf')->middleware('is_ban'); //NDAメッセージpdfダウンロード
             });
 
             Route::middleware('can:proposal,chatroom')->group(function () {
