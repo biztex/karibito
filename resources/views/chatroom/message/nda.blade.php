@@ -102,7 +102,7 @@
                 <div class="proposeBuy">
                     <p class="buy">
                         <span style="font-weight: normal;">NDAが締結されました。作成したNDAをインストールできます。</span>
-                        <a href="{{ route('chatroom.download.nda.pdf', $chatroom->id) }}">NDAをインストールする</a>
+                        <a href="{{ route('chatroom.download.nda.pdf', $chatroom->id) }}">NDAをダウンロード</a>
                     </p>
                 </div>
             </div>
