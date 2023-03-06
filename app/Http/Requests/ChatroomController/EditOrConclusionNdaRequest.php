@@ -4,7 +4,7 @@ namespace App\Http\Requests\ChatroomController;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SendNdaRequest extends FormRequest
+class EditOrConclusionNdaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,7 @@ class SendNdaRequest extends FormRequest
     {
         return [
             'text' => 'required|string',
+            'status' => 'required|string',
         ];
     }
 
@@ -32,6 +33,7 @@ class SendNdaRequest extends FormRequest
     {
         return [
             'text' => 'NDAは必ず入力してください',
+            'status' => 'statusは必ず入力してください',
         ];
     }
 }

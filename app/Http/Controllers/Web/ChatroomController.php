@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChatroomController\EditOrConclusionNdaRequest;
 use App\Models\Chatroom;
 use App\Models\Product;
 use App\Models\JobRequest;
@@ -23,6 +24,7 @@ use App\Http\Requests\ChatroomController\ProposalRequest;
 use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
+use App\Http\Requests\ChatroomController\SendNdaRequest;
 use App\Models\ChatroomNdaMessage;
 use App\Models\MPoint;
 use App\Services\ChatroomNdaMessageService;
@@ -207,11 +209,11 @@ class ChatroomController extends Controller
     /**
      * NDA送信
      * 
-     * @param \Illuminate\Http\Request $request
+     * @param SendNdaRequest $request
      * @param Chatroom $chatroom
      * @return RedirectResponse
      */
-    public function sendNda(Request $request, Chatroom $chatroom): RedirectResponse
+    public function sendNda(SendNdaRequest $request, Chatroom $chatroom): RedirectResponse
     {
         // NDAメッセージの作成
         $nda_message = $this->chatroom_nda_message_service->storeNdaMessage($request->all(), $chatroom);
@@ -226,11 +228,11 @@ class ChatroomController extends Controller
     /**
      * NDA編集・締結
      * 
-     * @param \Illuminate\Http\Request $request
+     * @param EditOrConclusionNdaRequest $request
      * @param Chatroom $chatroom
      * @return RedirectResponse
      */
-    public function editOrConclusionNda(Request $request, Chatroom $chatroom): RedirectResponse
+    public function editOrConclusionNda(EditOrConclusionNdaRequest $request, Chatroom $chatroom): RedirectResponse
     {
         // NDAメッセージの編集・更新
         $nda_message = $this->chatroom_nda_message_service->updateNdaMessage($request->all(), $chatroom);
