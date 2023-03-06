@@ -65,13 +65,15 @@
 										<p class="mypageP02">最終ログイン：{{ $user->latest_login_datetime }}</p>
 										<p class="mypageP03">({{\App\Models\UserProfile::GENDER[$user->userProfile->gender]}}/ {{$user->userProfile->age}}/ {{$user->userProfile->prefecture->name}}) </p>
 										<div class="countBox">
-											<p class="countItem">販売実績数：100</p>
+											<p class="countItem">販売実績数：{{ $total_sales_count }}</p>
 											<p class="countItem">キャンセル完了数：{{ $cancel_count }}</p>
 										</div>
 										<p class="mypageP04 check">
                                             @if ($user->userProfile->is_identify)
                                                 <a>本人確認済み</a>
-												<a>NDA可</a>
+                                                @if($user->userProfile->is_nda == 1)
+                                                    <a>秘密保持契約（NDA) 可</a>
+                                                @endif
                                             @endif
                                         </p>
 										<p class="mypageP05"></p>

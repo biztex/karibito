@@ -70,6 +70,15 @@ class Product extends Model
     }
 
     /**
+     * 売り切れている商品のステータス
+     *
+     * @return boolean
+     */
+    public function getProductSoldStatus()
+    {
+        return $this->user_id !== \Auth::id() && $this->number_of_sale === $this::ONE_OF_SALE && Chatroom::numberOfSold($this->id) !== 0;
+    }
+    /**
      * 制限されているユーザーの商品以外を取得
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query

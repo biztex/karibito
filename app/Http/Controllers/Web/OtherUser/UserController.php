@@ -13,6 +13,7 @@ use App\Models\UserJob;
 use App\Models\Evaluation;
 use App\Libraries\Age;
 use App\Models\Blog;
+use App\Models\Chatroom;
 use App\Services\EvaluationService;
 use App\Services\PortfolioService;
 use App\Models\JobRequest;
@@ -60,12 +61,14 @@ class UserController extends Controller
         $dmrooms = Dmroom::where('to_user_id','=', $user->id)->where('from_user_id', '=', \Auth::id())->first();
         $evaluations = $this->evaluation_service->getEvaluations($user->id);
         $counts = $this->evaluation_service->countEvaluations($user->id);
-        $cancel_count = PurchasedCancel::whereHas('purchase.chatroom', function ($chatroom) use ($user){
-            $chatroom->where('seller_user_id', $user->id)
-                ->orWhere('buyer_user_id', $user->id);
-        })->whereNotNull('cancel_date')->count();
 
-        return view('other-user.mypage', compact('user','products', 'dmrooms', 'job_request', 'portfolio_list', 'evaluations', 'counts', 'cancel_count'));
+        $purchased_cancel = new PurchasedCancel();
+        $cancel_count = $purchased_cancel->getCancelCount($user->id);
+
+        $chatroom = new Chatroom;
+        $total_sales_count = $chatroom->getSalesCount($user->id);
+
+        return view('other-user.mypage', compact('user','products', 'dmrooms', 'job_request', 'portfolio_list', 'evaluations', 'counts', 'cancel_count', 'total_sales_count'));
     }
 
     public function skills(User $user, Dmroom $dmroom)

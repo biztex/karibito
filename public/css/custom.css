@@ -1033,6 +1033,32 @@
 	text-decoration: underline;
 }
 
+.chatPages .btns {
+	flex-wrap: wrap;
+}
+
+.chatPages .btns > div {
+	width: calc(50% - 10px);
+	margin-bottom: 16px;
+}
+
+.chatPages .btns > div:last-child {
+	margin-bottom: 0;
+}
+
+.chatPages .btns > div > *,
+.chatPages .btns > div > p {
+	width: 100%;
+}
+
+.chatPages .btns > div > p {
+	transition: all 0.5s;
+}
+
+.chatPages .btns > div > p:hover {
+	opacity: 0.7;
+}
+
 .chatPages .btns p {
 	display: flex;
 	align-items: center;
@@ -1051,6 +1077,12 @@
 @media screen and (min-width: 767px) {
 	.chatPages .btns p {
 		width: calc(50% - 10px);
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.chatPages .btns > div {
+		width: 100%;
 	}
 }
 
@@ -2348,4 +2380,47 @@ p#copyright {
 	height: 57px;
 	background: url(../img/common/ico_sold.png) no-repeat left top / 100%;
 	z-index: 3;
+}
+
+/* chat text */
+.proposeBuy .buy span + input[type=submit],
+.proposeBuy .buy span + input:disabled {
+	margin-top: 16px;
+}
+.proposeBuy + span {
+	margin-top: 16px;
+	display: inline-block;
+}
+
+/* company */
+.companyStep .introdBox .issue.issueNumber li {
+	position: relative;
+	padding-left: 2em;
+	counter-increment: mycounter;
+}
+.companyStep .introdBox .issue.issueNumber li::before {
+	content: counter(mycounter);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2em;
+	text-align: center;
+}
+.introdBoxTitUnder {
+	padding-left: 1.5em;
+}
+.companyProfileMail {
+	color: #0c65fc;
+}
+.companyProfileLink {
+	color: #0c65fc;
+	border: 1px solid #0c65fc;
+	padding: 6px 15px 7.5px;
+	line-height: 1.5;
+	display: inline-block;
+}
+@media screen and (max-width: 769px) {
+	.introdBoxTitUnder {
+		padding-left: 1.3em;
+	}
 }

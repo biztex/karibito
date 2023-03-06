@@ -30,11 +30,11 @@
                     <div class="fancyImgBtn">
                         <a href="{{route('cover.delete')}}">カバーを削除する</a>
                         <a href="{{route('icon.delete')}}">アイコンを削除する</a>
-                    </div> 
+                    </div>
                     @error('icon')<div class="alert alert-danger">{{ $message }}</div>@enderror
                     @error('cover')<div class="alert alert-danger">{{ $message }}</div>@enderror
 
-                <div class="fancyPersonTable">	
+                <div class="fancyPersonTable">
                     <dl class="">
 						<p style="font-size:12px;">※ニックネームは公開されます。</p>
                         <dt>ニックネーム</dt>
@@ -204,7 +204,17 @@
                             </div>
                         </div><p class="taRResume">＊得意分野は１０個まで追加できます。</p>
                     </div>
-                    
+                    @if(Auth::user()->userProfile->is_identify == 1)
+                        <dl>
+                            <dt>秘密保持契約（NDA)</dt>
+                            <dd class="labelNDABox">
+                                <div class="labelCategory">
+                                    <label><input type="radio" name="is_nda" value="1" @if(old('nda_flg', Auth::user()->userProfile->is_nda) === 1) checked @endif>可</label>
+                                    <label><input type="radio" name="is_nda" value="0" @if(old('nda_flg', Auth::user()->userProfile->is_nda) === 0) checked @endif >不可</label>
+                                </div>
+                            </dd>
+                        </dl>
+                    @endif
                     <dl>
                         @error('introduction')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <dt>自己紹介</dt>

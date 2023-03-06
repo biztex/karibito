@@ -10,6 +10,7 @@ use App\Models\JobRequest;
 use App\Models\AdditionalOption;
 use App\Models\Chatroom;
 use App\Models\Favorite;
+use App\Models\PurchasedCancel;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
@@ -114,7 +115,13 @@ class ProductController extends Controller
         
         $count_favorite = $product->favorites->count(); // いいねの数
 
-        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite', 'count_favorite'));
+        $purchased_cancel = new PurchasedCancel;
+        $cancel_count = $purchased_cancel->getCancelCount($product->user_id);
+
+        $chatroom = new Chatroom;
+        $total_sales_count = $chatroom->getSalesCount($product->user_id);
+
+        return view('product.show', compact('product', 'all_products', 'additional_options', 'evaluations', 'evaluation_counts', 'number_of_sold', 'url', 'is_favorite', 'count_favorite', 'cancel_count', 'total_sales_count'));
     }
 
     /**

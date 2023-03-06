@@ -3,7 +3,7 @@
         <div id="contents">
             <div class="mypageWrap supportWrap detailStyle">
                 <div class="inner inner03">
-                    <ul class="mypageUl02">
+                    <ul class="mypageUl02 mt-75px">
                         @if(empty($news_list[0]))
                             <div class="pl10">カリビトからのお知らせがありません。</div>
                         @else

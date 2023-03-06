@@ -10,10 +10,18 @@
   <p class="introd"><a href="{{ route('user.mypage', $user) }}" class="name">{{$user->name}}</a><br>({{App\Models\UserProfile::GENDER[$user->userProfile->gender]}} / {{$user->userProfile->age}}/ {{$user->userProfile->prefecture->name}})</p>
 
   <div class="countBox countBoxSide">
-    <p class="countItem">販売実績数：10</p>
-    <p class="countItem">キャンセル完了数：32</p>
+    <p class="countItem">販売実績数：{{ $totalSalesCount }}</p>
+    <p class="countItem">キャンセル完了数：{{ $cancelCount }}</p>
   </div>
 
+    @if($user->userProfile->is_identify == 1)
+        <p class="mypageP04 check">
+            <a>本人確認済み</a>
+            @if($user->userProfile->is_nda == 1)
+                <a>秘密保持契約（NDA) 可</a>
+            @endif
+        </p>
+    @endif
   <x-parts.evaluation-star :star='$user->avg_star'/>
 </div>
 @endif

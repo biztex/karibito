@@ -2,14 +2,21 @@
 
 namespace App\Console;
 
-use App\Console\Commands\PushMessages;
-use App\Console\Commands\UploadCustomerSeika;
+use App\Console\Commands\PaymentCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
+    /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        PaymentCommand::class
+    ];
+
     /**
      * Define the application's command schedule.
      *
@@ -19,10 +26,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('command:PaymentCommand')->hourly();
 
 //        $schedule->command('backup:clean --disable-notifications')->dailyAt('07:50');
         // $schedule->command('backup:clean')->dailyAt('07:50');
         // $schedule->command('backup:run --only-db')->dailyAt('17:00');
+
 
         // $schedule->call(function () {
         //     Log::debug('Schedulaerのテスト確認');

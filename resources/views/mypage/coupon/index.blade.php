@@ -28,24 +28,51 @@
 									<p class="">現在クーポンはまだありません。</p>
 								@endif
 								@foreach ($user_coupons as $user_coupon)
-									<div class="couponItem">
-										<dl class="couponDl">
-											<dt>
-												<p class="nameP">{{$user_coupon->name}}</p>
-												<p class="txtP">{{$user_coupon->content}}</p>
-												<p class="numberP"><font>クーポン番号 :</font>{{$user_coupon->coupon_number}}</p>
-											</dt>
-											<dd>
-												<div class="couponTicket">
-													<div class="borderP">
-														<p class="typeP">報酬につかえるクーポン</p>
-														<p class="moneyP"><span>{{$user_coupon->discount}}</span>円OFF</p>
-														<p class="dateP">有効期限：{{date('Y年m月d日', strtotime($user_coupon->deadline))}}</p>
-													</div>
-												</div>
-											</dd>
-										</dl>
-									</div>
+                                    @if(isset(App\Models\UserCoupon::Coupon_list[$user_coupon->name]))
+                                        <div class="couponItem">
+                                            <dl class="couponDl">
+                                                <dt>
+                                                    <p class="nameP">{{$user_coupon->name}}</p>
+                                                    <p class="txtP font-weight-bold" >
+                                                        【割引金額】：{{App\Models\UserCoupon::Coupon_list[$user_coupon->name]['price']}}円<br>
+                                                        @foreach(App\Models\UserCoupon::Coupon_list[$user_coupon->name]['contents'] as $content)
+                                                            {{$content}}<br>
+                                                        @endforeach
+                                                        【有効期限】：{{date('Y/m/d', strtotime($user_coupon->deadline))}}<br>
+                                                        【クーポン番号】：{{$user_coupon->coupon_number}}
+                                                    </p>
+                                                </dt>
+                                                <dd>
+                                                    <div class="couponTicket">
+                                                        <div class="borderP">
+                                                            <span class="typeP typeBackGround">{{$user_coupon->name}}</span>
+                                                            <p class="moneyP"><span>{{App\Models\UserCoupon::Coupon_list[$user_coupon->name]['price']}}</span>円OFF</p>
+                                                            <p class="dateP">有効期限：{{date('Y年m月d日', strtotime($user_coupon->deadline))}}</p>
+                                                        </div>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    @else
+                                        <div class="couponItem">
+                                            <dl class="couponDl">
+                                                <dt>
+                                                    <p class="nameP">{{$user_coupon->name}}</p>
+                                                    <p class="txtP">{{$user_coupon->content}}</p>
+                                                    <p class="numberP"><font>クーポン番号 :</font>{{$user_coupon->coupon_number}}</p>
+                                                </dt>
+                                                <dd>
+                                                    <div class="couponTicket">
+                                                        <div class="borderP">
+                                                            <p class="typeP">報酬につかえるクーポン</p>
+                                                            <p class="moneyP"><span>{{$user_coupon->discount}}</span>円OFF</p>
+                                                            <p class="dateP">有効期限：{{date('Y年m月d日', strtotime($user_coupon->deadline))}}</p>
+                                                        </div>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    @endif
 								@endforeach
 
 								{{-- <div class="couponItem">

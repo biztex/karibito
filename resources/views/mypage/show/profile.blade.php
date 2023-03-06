@@ -29,11 +29,13 @@
             <p class="mypageP04 check">
                 @if(Auth::user()->userProfile->is_identify == 1)
                     <a>本人確認済み</a>
-                    <a>NDA可</a>
+                    @if(Auth::user()->userProfile->is_nda == 1)
+                    <a>秘密保持契約（NDA) 可</a>
+                    @endif
                 @endif
             </p>
             <div class="countBox">
-                <p class="countItem">販売実績数：100</p>
+                <p class="countItem">販売実績数：{{ $total_sales_count }}</p>
                 <p class="countItem">キャンセル完了数：{{ $cancel_count }}</p>
             </div>
             <div class="mypageP06 starBox">

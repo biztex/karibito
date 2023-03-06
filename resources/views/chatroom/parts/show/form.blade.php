@@ -11,14 +11,23 @@
             @error('file_path')<div class="alert alert-danger">{{ $message }}</div>@enderror
             <p class="input-file-name" style='color:#696969;margin-top:10px;'></p>
             <div class="btns">
-
-                <p class="chatroom_file_input">資料を添付する</p>
-                <input type="file" name="file_path" id="file_path" style="display:none;">
-                <input type="hidden" name="file_name" value="">
-
-                <a href="javascript:;" class="templateOpen">定型文を使う</a>
-                <a href="javascript:;" class="templateNDAOpen">NDAを送付する</a>
-
+                <div>
+                    <p class="chatroom_file_input">資料を添付する</p>
+                    <input type="file" name="file_path" id="file_path" style="display:none;">
+                    <input type="hidden" name="file_name" value="">
+                </div>
+                <div>
+                    <a href="javascript:;" class="templateOpen">定型文を使う</a>
+                </div>
+                <div>
+                    <a href="javascript:;" class="templateProfileOpen">プロフィールを送付する</a>
+                </div>
+                <div>
+                    <a href="https://codeforfun.jp/tools/estimate/" target="_blank">見積書を作成する（外部リンク）</a>
+                </div>
+                <div>
+                    <a href="javascript:;" class="templateNDAOpen">NDAを送付する</a>
+                </div>
             </div>
             <x-parts.file-input/>
 

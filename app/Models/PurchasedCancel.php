@@ -30,6 +30,20 @@ class PurchasedCancel extends Model
     ]; 
 
     /**
+     * キャンセル数取得
+     *
+     * @param int $user_id
+     * @return int
+     */
+    public function getCancelCount(int $user_id): int
+    {
+        return $this->whereHas('purchase.chatroom', function ($chatroom) use ($user_id) {
+            $chatroom->where('seller_user_id', $user_id)
+                ->orWhere('buyer_user_id', $user_id);
+        })->whereNotNull('cancel_date')->count();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function chatroomMessage()

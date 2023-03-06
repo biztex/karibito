@@ -343,7 +343,7 @@
 
 .recommendList .list .single span {
 	display: inline-flex;
-	background: #9A814A;
+	background: #1E90FF;
 	border-radius: 0px;
 	text-align: center;
 	line-height: 23px;
@@ -2344,6 +2344,13 @@
 	padding: 30px 20px;
 	background-color: #EEEEEF;
 	margin-bottom: 20px;
+}
+
+.labelNDABox .labelCategory input[type='radio'] {
+    appearance: auto;
+    margin-right: 5px;
+    position: relative;
+    top: 1px;
 }
 
 .specialtyBtn span,
@@ -6911,6 +6918,17 @@ select.searchSelect {
 	background-color: #fff;
 }
 
+.couponTicket .typeBackGround {
+    background-color: #fff;
+    color: #000000;
+    margin: auto;
+    padding: 2px 5px;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
 @media screen and (max-width: 767px) {
 	.couponHd {
 		padding: 10px;
@@ -7407,6 +7425,10 @@ select.searchSelect {
 .supportTop {
 	margin: 0 auto 50px;
 	max-width: 1045px;
+}
+
+.mt-75px {
+    margin-top: 75px;
 }
 
 .supportTop .search {

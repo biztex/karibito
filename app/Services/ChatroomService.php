@@ -74,8 +74,7 @@ class ChatroomService
         $chatroom->fill(['status' => 6])->save();
         // 要確認
         if(empty($chatroom->profit)){
-            $commission = $purchase_service->getCommission($chatroom->purchase->proposal);
-            $this->profit_service->storeProfit($chatroom->seller_user_id, $chatroom->id, $chatroom->purchase->proposal->price, $commission);
+            $this->createProfit($chatroom, $purchase_service);
         }
     }
 
@@ -83,6 +82,13 @@ class ChatroomService
     public function statusChangeCanceled(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => 7])->save();
+    }
+
+    // 売上金レコードの作成
+    public function createProfit(Chatroom $chatroom, PurchaseService $purchase_service)
+    {
+        $commission = $purchase_service->getCommission($chatroom->purchase->proposal);
+        $this->profit_service->storeProfit($chatroom->seller_user_id, $chatroom->id, $chatroom->purchase->proposal->price, $commission);
     }
 
     // 商品が削除されたとき、チャットルームのステータスをキャンセルにし、
