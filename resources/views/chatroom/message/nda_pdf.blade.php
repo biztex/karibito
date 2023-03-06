@@ -16,10 +16,12 @@
         }
         body {
             font-family: ipaexg !important;
+            word-break:break-all;
+            word-wrap:break-word;
         } 
     </style>
 </head>
 <body>
-    {{ $nda_text }}
+    {!! $nda_text !!}
 </body>
 </html>

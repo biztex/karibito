@@ -2,9 +2,6 @@
 {{-- 受信者確認中 --}}
 
 @if (App\Models\ChatroomMessage::where(['chatroom_id' => $chatroom->id, 'reference_type' => 'App\Models\ChatroomNdaMessage'])->latest()->first()->id === $message->id)
-    {{-- 下記確認用，マージ前に削除する --}}
-    {{ App\Models\ChatroomMessage::where(['chatroom_id' => $chatroom->id, 'reference_type' => 'App\Models\ChatroomNdaMessage'])->latest()->first()->id }}
-    {{ $message->id }}
 @if ($chatroom->chatroomNdaMessages()->latest()->first()->status === App\Models\ChatroomNdaMessage::CONFIRMING_RECEIVED_USER)
     @php
         $status = App\Models\ChatroomNdaMessage::CONFIRMING_USER_SUBMITTED; // ステータスを送信者確認中に

@@ -255,7 +255,7 @@ class ChatroomController extends Controller
      */
     public function downloadNda(Chatroom $chatroom)
     {
-        $nda_text = $chatroom->chatroomNdaMessages()->latest()->first()->text;
+        $nda_text = nl2br($chatroom->chatroomNdaMessages()->latest()->first()->text);
         $pdf = \PDF::loadView('chatroom/message/nda_pdf', compact('nda_text'));
         return $pdf->download('nda.pdf');
     }
