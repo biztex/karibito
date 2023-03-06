@@ -1,6 +1,5 @@
 {{-- NDAメッセージ --}}
 {{-- 受信者確認中 --}}
-
 @if (App\Models\ChatroomMessage::where(['chatroom_id' => $chatroom->id, 'reference_type' => 'App\Models\ChatroomNdaMessage'])->latest()->first()->id === $message->id)
 @if ($chatroom->chatroomNdaMessages()->latest()->first()->status === App\Models\ChatroomNdaMessage::CONFIRMING_RECEIVED_USER)
     @php
