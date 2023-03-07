@@ -5,18 +5,21 @@ namespace App\Services;
 use App\Models\UserProfile;
 use App\Mail\User\IdentificationUploadMail;
 use App\Models\MCoupon;
+use App\Models\MPoint;
 use App\Services\ImageService;
 
 class UserProfileService
 {
     protected $image_service;
     protected $coupon_service;
+    protected $point_service;
     
     
-    public function __construct(ImageService $image_service, CouponService $coupon_service)
+    public function __construct(ImageService $image_service, CouponService $coupon_service, PointService $point_service)
     {
         $this->image_service = $image_service;
         $this->coupon_service = $coupon_service;
+        $this->point_service = $point_service;
     }
 
     /**
@@ -62,10 +65,11 @@ class UserProfileService
             
             // 新規会員登録時に登録者にクーポン付与、エラーになるため一旦非表示
             $this->coupon_service->createUserCoupon(MCoupon::NEW_REGISTRATION, $guest_profile->user_id);
-            // 招待コード入力で紹介者＆招待された人にクーポン付与
+            // 招待コード入力で紹介者＆招待された人にポイント付与
             if ($invitee_profile && $params['friend_code'] !== null) {
-                $this->coupon_service->createUserCoupon(MCoupon::INVITED_FRIEND, $guest_profile->user_id);
-                $this->coupon_service->createUserCoupon(MCoupon::INVITED_FRIEND, $invitee_profile->user_id);
+                // ポイント付与
+                $this->point_service->getPoint(MPoint::INVITED_FRIEND, $guest_profile->user_id, $invitee_profile);
+                $this->point_service->getPoint(MPoint::INVITED_FRIEND, $invitee_profile->user_id, $invitee_profile);
             };
             
             // 通知設定の作成

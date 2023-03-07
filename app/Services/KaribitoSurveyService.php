@@ -24,7 +24,7 @@ class KaribitoSurveyService
         $survey = $chatroom->reference->karibitoSurvey()->create($columns);
 
         $user_coupon = new UserCoupon();
-        $coupon = MCoupon::where('id', '1')->first();
+        $coupon = MCoupon::where('id', MCoupon::QUESTIONNAIRE_ANSWER)->first();
         $coupon_number = str_pad(random_int(0,99999999),9,0, STR_PAD_LEFT);
         $deadline_period = date("Y-m-d",mktime(0, 0, 0, date("m")+$coupon->deadline_period, date("d"), date("Y"))); //マスターで設定した数字ヶ月後になる
 

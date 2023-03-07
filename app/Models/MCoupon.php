@@ -10,9 +10,8 @@ class MCoupon extends Model
     use HasFactory;
 
     // クーポン種別
-    const QUESTIONNAIRE_ANSWER = 1;
-    const NEW_REGISTRATION = 2;
-    const INVITED_FRIEND = 3;
+    const NEW_REGISTRATION = 1;
+    const QUESTIONNAIRE_ANSWER = 2;
 
     protected $guarded = [ 'id' ];
 }

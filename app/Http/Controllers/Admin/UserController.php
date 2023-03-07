@@ -11,17 +11,21 @@ use App\Mail\Admin\NotifyBanMail;
 use App\Mail\Admin\CancelNotifyBanMail;
 use App\Mail\User\ApproveMail;
 use App\Mail\Admin\RevokeApprovalMail;
+use App\Models\MPoint;
+use App\Services\PointService;
 use App\Services\UserNotificationService;
 
 class UserController extends Controller
 {
     private $user_search;
     private $user_notification_service;
+    private $point_service;
 
-    public function __construct(AdminUserSearchService $user_search, UserNotificationService $user_notification_service)
+    public function __construct(AdminUserSearchService $user_search, UserNotificationService $user_notification_service, PointService $point_service)
     {
         $this->user_search = $user_search;
         $this->user_notification_service = $user_notification_service;
+        $this->point_service = $point_service;
     }
 
     /**
@@ -121,6 +125,8 @@ class UserController extends Controller
             \Mail::to($user->email)
                 ->send(new ApproveMail($user));
         }
+        // 認証時にポイントを付与する
+        $this->point_service->getPoint(MPoint::PERSONAL_AUTHENTICATION, $user->id, $user);
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認を承認しました！";
         return back()->with('flash_msg',$flash_msg);
     }
