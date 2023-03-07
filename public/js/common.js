@@ -458,22 +458,29 @@ $(function () {
 		$('.templatePopup').removeClass('is-open');
 	});
 
+	// NDA:デフォルト文
 	$('.templateNDAOpen').click(function () {
 		$('.templateNDAPopup').addClass('is-open');
 	});
 
 	$('.templateOverlay,.templateClose').click(function () {
 		$('.templateNDAPopup').removeClass('is-open');
+		$('.editNDAPopup').removeClass('is-open');
 	});
 
 	$('.templateOverlay,.templateClose').click(function () {
 		$('.templateNDAPopup').removeClass('is-open');
+		$('.editNDAPopup').removeClass('is-open');
 	});
 
 	$('.templateInput').click(function () {
-		var text = $('#templateNDA').find('textarea').val();
-		$('.templateText').val(text);
 		$('.templateNDAPopup').removeClass('is-open');
+		$('.editNDAPopup').removeClass('is-open');
+	});
+
+	// NDA:編集後
+	$('.editNDAOpen').click(function () {
+		$('.editNDAPopup').addClass('is-open');
 	});
 });
 

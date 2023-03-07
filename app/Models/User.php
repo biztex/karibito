@@ -221,4 +221,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(TransferRequest::class);
     }
+
+    /**
+     * NDAメッセージ
+     * 
+     * @return HasMany
+     */
+    public function chatroomNdaMessages(): HasMany
+    {
+        return $this->hasMany(ChatroomNdaMessage::class);
+    }
 }

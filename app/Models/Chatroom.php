@@ -220,6 +220,14 @@ class Chatroom extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function chatroomNdaMessages()
+    {
+        return $this->hasMany(ChatroomNdaMessage::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function proposals()
     {
         return $this->hasMany(Proposal::class);
