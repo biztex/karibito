@@ -126,7 +126,9 @@ class UserController extends Controller
                 ->send(new ApproveMail($user));
         }
         // 認証時にポイントを付与する
-        $this->point_service->getPoint(MPoint::PERSONAL_AUTHENTICATION, $user->id, $user);
+        \DB::transaction(function () use ($user) {
+            $this->point_service->getPoint(MPoint::PERSONAL_AUTHENTICATION, $user->id, $user);
+        });
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの本人確認を承認しました！";
         return back()->with('flash_msg',$flash_msg);
     }
