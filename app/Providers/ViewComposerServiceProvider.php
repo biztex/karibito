@@ -29,8 +29,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        \View::composer(['components.header'], function ($view) {
+        \View::composer(['components.header', 'components.footer.bottom'], function ($view) {
             $user_notifications = UserNotification::latest()->where([['is_view', 0], ['user_id', \Auth::id()], ['is_notification', 1]])->take(5)->get(); //通知をオンにしていて、かつ未読のものだけ取得
             $portfolio_user_id = [];
             foreach($user_notifications as $k => $user_notification) {
