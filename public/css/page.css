@@ -7158,6 +7158,12 @@ select.searchSelect {
 	width: 100%;
 }
 
+@media screen and (max-width: 1260px) {
+    .btnTeams a {
+        max-width: 320px;
+    }
+}
+
 /*** タブレット ***/
 @media screen and (max-width: 767px) {
 
