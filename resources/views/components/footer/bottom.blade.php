@@ -3,54 +3,22 @@
         <div class="serviceLinks">
             <div class=footer_list1>
                 <ul>
-                    <li><span class="footerlist_text"><a href="#">サービスを探す</a><span></li>
-                    <li><a href="#">家事</a></li>
-                    <li><a href="#">修理組み立て</a></li>
-                    <li><a href="#">ペット</a></li>
-                    <li><a href="#">高齢者向け</a></li>
-                    <li><a href="#">乗り物</a></li>
-                    <li><a href="#">引越し</a></li>
-                    <li><a href="#">趣味・習い事</a></li>
-                    <li><a href="#">美容・ファッション</a></li>        
-                    <li><a href="#">写真動画制作</a></li>
-                    <li><a href="#">その他</a></li>
-                    <li><a href="#">インテリア</a></li>
-                    <li><a href="#">デザイン</a></li>
-                    <li><a href="#">パソコン</a></li>
-                    <li><a href="#">ビジネスサポート</a></li>
-                    <li><a href="#">冠婚葬祭</a></li>
-                    <li><a href="#">料理</a></li>
-                    <li><a href="#">恋愛・結婚</a></li>        
-                    <li><a href="#">体験・アクティビティ</a></li>
-                    <li><a href="#">出張サービス</a></li>
-                    <li><a href="#">調べもの</a></li>
-                    <li><a href="#">レンタル</a></li>
+                    <li><span class="footerlist_text"><a href="{{ route('home') }}">サービスを探す</a><span></li>
+                    @foreach($categories as $category)
+                    <li>
+                        <a href="{{route('product.category.index', $category->id) }}">{{$category->name}}</a>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
             <div class=footer_list1>
                 <ul>
-                    <li><span class="footerlist_text"><a href="#">リクエストを探す</a><span></li>
-                    <li><a href="#">家事</a></li>
-                    <li><a href="#">修理組み立て</a></li>
-                    <li><a href="#">ペット</a></li>
-                    <li><a href="#">高齢者向け</a></li>
-                    <li><a href="#">乗り物</a></li>
-                    <li><a href="#">引越し</a></li>
-                    <li><a href="#">趣味・習い事</a></li>
-                    <li><a href="#">美容・ファッション</a></li>        
-                    <li><a href="#">写真動画制作</a></li>
-                    <li><a href="#">その他</a></li>
-                    <li><a href="#">インテリア</a></li>
-                    <li><a href="#">デザイン</a></li>
-                    <li><a href="#">パソコン</a></li>
-                    <li><a href="#">ビジネスサポート</a></li>
-                    <li><a href="#">冠婚葬祭</a></li>
-                    <li><a href="#">料理</a></li>
-                    <li><a href="#">恋愛・結婚</a></li>        
-                    <li><a href="#">体験・アクティビティ</a></li>
-                    <li><a href="#">出張サービス</a></li>
-                    <li><a href="#">調べもの</a></li>
-                    <li><a href="#">レンタル</a></li>
+                    <li><span class="footerlist_text"><a href="{{ route('home') }}">リクエストを探す</a><span></li>
+                    @foreach($categories as $category)
+                    <li>
+                        <a href="{{route('job_request.category.index', $category->id) }}">{{$category->name}}</a>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
             <div class=footer_list1>
