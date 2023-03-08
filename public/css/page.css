@@ -7113,7 +7113,7 @@ select.searchSelect {
 }
 
 .btnTeams {
-	margin-top: 80px;
+	margin-top: 58px;
 	text-align: center;
 }
 
@@ -7123,7 +7123,7 @@ select.searchSelect {
 	justify-content: center;
 	margin: 0 28px;
 	width: 100%;
-	max-width: 320px;
+	max-width: 522px;
 	height: 80px;
 	border-radius: 40px;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
@@ -7209,9 +7209,9 @@ select.searchSelect {
 /* guide */
 .guideTop {
 	margin-bottom: 95px;
-	background: url(../img/guide/bg_guide.png)no-repeat center top;
 	background-size: 100%;
 	text-align: center;
+	margin-top: 75px;
 }
 
 .guideTop p {
@@ -7220,20 +7220,28 @@ select.searchSelect {
 }
 
 .guideTop .logo {
-	margin-bottom: 80px;
+	margin-bottom: 50px;
 }
 
 .guideTop .title {
-	margin-bottom: 100px;
+	/*margin-bottom: 100px;*/
 	color: #158ACC;
-	font-size: 3rem;
+	font-size: 20px;
 	font-weight: bold;
 }
 
-.guideTop .title .eng {
-	display: block;
-	font-size: 2rem;
+.guideTop .logo-img {
+	margin-top: 50px;
 }
+.guideTop .title .title-span {
+	background: #ffffff;
+	padding: 2px 8px;
+	border-radius: 2px;
+}
+/*.guideTop .title .eng {*/
+/*	display: block;*/
+/*	font-size: 2rem;*/
+/*}*/
 
 .guideApp h2 {
 	margin-bottom: 80px;
@@ -7286,6 +7294,12 @@ select.searchSelect {
 	text-align: center;
 }
 
+.guideTitle {
+	text-align: center;
+	font-size: 60px;
+	font-weight: 400;
+	color: #f0941b;
+}
 .guideEtiquette ul {
 	display: flex;
 	justify-content: space-between;
@@ -7320,11 +7334,10 @@ select.searchSelect {
 .guideEtiquette .anchors .ico {
 	position: absolute;
 	top: 0;
-	transform: translateY(-50%);
+	transform: translateY(-15%);
 }
 
 .guideEtiquette .anchors .tit {
-	margin-bottom: 40px;
 	font-size: 2rem;
 	font-weight: bold;
 }
@@ -7386,19 +7399,33 @@ select.searchSelect {
 	background: #fff;
 }
 
+.guideEtiquette .area .status {
+	font-size: 17px;
+	font-weight: 400;
+	line-height: 25px;
+	padding: 0;
+	margin-bottom: 13px;
+}
+
 .guideEtiquette .area .img {
 	margin-bottom: 50px;
 	text-align: center;
+	padding: 0;
 }
 
 .guideEtiquette .area .tit {
-	margin-bottom: 24px;
+	margin-bottom: 50px;
 	font-size: 2rem;
 	font-weight: bold;
+	padding: 0 12px;
+}
+
+.guideEtiquette .area p {
+	padding: 0 10px;
 }
 
 .guideEtiquette .buyer {
-	padding: 240px 0 100px;
+	padding: 170px 0 100px;
 	background: #FFF2D6;
 }
 
@@ -7416,6 +7443,27 @@ select.searchSelect {
 	color: #28A8E2;
 }
 
+.guideEtiquette .kiribito {
+	background: rgba(156, 201, 72, 0.1);
+	padding: 68px 0 100px;
+}
+
+.guideEtiquette .kiribito h2,
+.guideEtiquette .kiribito .tit {
+	color: #9cc948;
+}
+
+.guideEtiquette .kiribito .img {
+	text-align: left;
+	position: relative;
+	margin-top: 34px;
+}
+
+.guideEtiquette .kiribito .img .sub-title {
+	position: absolute;
+	bottom: 0;
+	margin-left: 10px;
+}
 
 /* support */
 .supportWrap {
@@ -7774,11 +7822,16 @@ select.searchSelect {
 
 	/* guide */
 	.guideTop {
-		margin-bottom: 35px;
+		margin-bottom: 30px;
+		margin-top: 30px;
 	}
 
 	.guideTop .logo {
 		margin-bottom: 25px;
+	}
+
+	.guideTop .logo-img {
+		margin-top: 25px;
 	}
 
 	.guideTop .logo img {
@@ -7832,6 +7885,13 @@ select.searchSelect {
 		margin-bottom: 10px;
 	}
 
+	.guideTitle {
+		text-align: center;
+		font-size: 2rem;
+		font-weight: 400;
+		color: #f0941b;
+	}
+
 	.guideEtiquette ul {
 		display: block;
 	}
@@ -7844,7 +7904,7 @@ select.searchSelect {
 
 	.guideEtiquette .anchors {
 		display: flex;
-		margin-top: -100px;
+		margin-top: -10px;
 	}
 
 	.guideEtiquette .anchors li a {
@@ -7887,7 +7947,7 @@ select.searchSelect {
 	}
 
 	.guideEtiquette .buyer {
-		padding: 170px 0 35px;
+		padding: 70px 0 35px;
 	}
 
 	.guideEtiquette h2 {
@@ -7911,6 +7971,10 @@ select.searchSelect {
 
 	.guideEtiquette .area .img img {
 		height: 180px;
+	}
+
+	.guideEtiquette .area .img .kari-img {
+		height: 60px !important;
 	}
 
 	.guideEtiquette .area .tit {
