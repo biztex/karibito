@@ -25,9 +25,11 @@
                 <div>
                     <a href="https://codeforfun.jp/tools/estimate/" target="_blank">見積書を作成する（外部リンク）</a>
                 </div>
+                @if($chatroom->isDisplayableNda())
                 <div>
                     <a href="javascript:;" class="templateNDAOpen">NDAを送付する</a>
                 </div>
+                @endif
             </div>
             <x-parts.file-input/>
 
