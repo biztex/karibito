@@ -345,6 +345,19 @@ var common = (function () {
 		});
 	});
 
+	$('.tabChatRoomWrap').each(function () {
+		var $this = $(this),
+			$btn = $this.find('.tabChatRoomLink a'),
+			$box = $this.find('.tabChatRoomBox');
+		$btn.click(function () {
+			var _target = $(this).attr('href');
+			$btn.removeClass('is_active');
+			$(this).addClass('is_active');
+			$box.removeClass('is_active');
+			$(_target).addClass('is_active');
+			return false;
+		});
+	});
 
 	$(window).on('load resize', function () {
 		$('.toggleWrap').each(function () {
