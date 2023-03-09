@@ -1547,6 +1547,21 @@
 	pointer-events: auto;
 }
 
+.tabChatRoomBox {
+	position: fixed;
+	left: -1000%;
+	top: -1000%;
+	z-index: 1;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.tabChatRoomBox.is_active {
+	position: static;
+	opacity: 1;
+	pointer-events: auto;
+}
+
 .otherWrap {
 	display: none;
 	margin-top: 50px;
@@ -2834,6 +2849,41 @@
 	margin-bottom: 4px;
 }
 
+.subPagesTab .tabChatRoomLink {
+	border-bottom: 1px solid #eee;
+	display: flex;
+}
+
+.subPagesTab .tabChatRoomLink li {
+	display: inline-flex;
+}
+
+.subPagesTab .tabChatRoomLink li a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 30px;
+	min-width: 130px;
+	height: 53px;
+	border-bottom: 4px solid transparent;
+	background-color: #fff;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #666666;
+	padding-top: 5px;
+}
+
+.subPagesTab .tabChatRoomLink li a.is_active {
+	color: #FCAA00;
+	border-color: #FCAA00;
+}
+
+.subPagesTab .tabChatRoomLink li img {
+	width: 22px;
+	margin-right: 8px;
+	margin-bottom: 4px;
+}
+
 .evaluationUl01 {
 	padding: 30px 20px 2px;
 }
@@ -2970,6 +3020,16 @@
 	.evaluationUl01 .cont {
 		background-color: #F4F4F4;
 		padding: 8px 10px;
+	}
+
+	.subPagesTab .tabChatRoomLink li a {
+		font-size: smaller;
+		min-width: 30px;
+		padding: 0 10px;
+	}
+	
+	.subPagesTab .tabChatRoomLink li a.is_active {
+		font-size: small;
 	}
 }
 

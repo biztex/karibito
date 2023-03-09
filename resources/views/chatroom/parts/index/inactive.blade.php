@@ -5,11 +5,7 @@
         @else
             @foreach($inactive_chatrooms as $value)
                 <li>
-
                     @include('chatroom.parts.index.conts')
-                    
-                    @include('chatroom.parts.index.functeBtns')
-
                 </li>
             @endforeach
         @endif
