@@ -21,7 +21,11 @@
 									<p class="stepTxt">完了</p>
 								</li>
 							</ul>
+							@if (request()->has('introduced_user_id'))
+							<form method="POST" action="{{ route('register', ['introduced_user_id' => request()->input('introduced_user_id')]) }}">
+							@else
 							<form method="POST" action="{{ route('register') }}">
+							@endif
 								@csrf
 								@if (session('flash_alert'))
 									<div class="alert alert-danger mb05" style="z-index: 9999;">

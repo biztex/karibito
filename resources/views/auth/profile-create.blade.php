@@ -70,6 +70,9 @@
 											</div>
 									</div>
 									<p style="font-size:12px;">※ニックネームは公開されます。<br>　本人認証に利用されるものと同じ姓名でご記入ください。</p>
+									@if (request()->has('introduced_user_id'))
+									<input type="hidden" value="{{ request()->input('introduced_user_id') }}" name="introduced_user_id">
+									@endif
 									<ul class="loginFormBtn">
 										<li><input type="submit" class="submit loading-disabled" value="次へ"></li>
 									</ul>

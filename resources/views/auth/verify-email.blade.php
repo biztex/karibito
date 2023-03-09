@@ -15,7 +15,11 @@
                                         <div style="text-align: center;margin-bottom:10px;">{{ $send_msg }}</div>
                                     @endif
 							<p class="registerImg">次に進む前に、確認リンクのメールをチェックしてください。<br>メールが届かなかった場合、</p>
-                            <form action="{{ route('verification.send') }}" method="POST">
+							@if (request()->has('introduced_user_id')) 
+							<form method="POST" action="{{ route('verification.send', ['introduced_user_id' => request()->input('introduced_user_id')]) }}">
+							@else
+							<form method="POST" action="{{ route('verification.send') }}">
+							@endif
                                 @csrf
                                 <input class="input_a" type="submit" value="ここをクリックしてメールを再送信してください。">
                             </form>
