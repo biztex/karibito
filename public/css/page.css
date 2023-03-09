@@ -7115,6 +7115,8 @@ select.searchSelect {
 .btnTeams {
 	margin-top: 58px;
 	text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .btnTeams a {
@@ -7158,7 +7160,7 @@ select.searchSelect {
 	width: 100%;
 }
 
-@media screen and (max-width: 1260px) {
+@media screen and (max-width: 1275px) {
     .btnTeams a {
         max-width: 320px;
     }
@@ -7191,6 +7193,7 @@ select.searchSelect {
 
 	.btnTeams {
 		margin-top: 25px;
+        display: block;
 	}
 
 	.btnTeams a {
