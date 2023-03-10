@@ -122,11 +122,14 @@
             <li>
                 <div class="img">
                     @include('chatroom.message.parts.icon')
-                    <div class="info">
+                    <div class="info cancel">
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">{{$message->text}}</p><br>
-                        <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
+                        <p class="cancel_evaluation">
+                            <span>キャンセルが成立しました。代金は購入者の方に返金されます。123<br>
                             今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
+                            <a href="{{ route('chatroom.get.buyer.cancel.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                        </p>
                     </div>
                 </div>
                 @include('chatroom.message.parts.time')
@@ -139,7 +142,7 @@
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">キャンセル申請が承諾されました！</p><br>
-                        <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
+                        <span>キャンセルが成立しました。代金は購入者の方に返金されます。456<br>
                             今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
                     </div>
                 </div>

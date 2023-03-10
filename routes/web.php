@@ -336,6 +336,16 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('{chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //提供者評価
             });
 
+            Route::middleware('can:buyer.cancel.evaluation,chatroom')->group(function () {
+                Route::get('{chatroom}/buyer_cancel_evaluation','getBuyerEvaluation')->name('get.buyer.cancel.evaluation'); //購入者価画面
+                Route::post('{chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.cancel.evaluation'); //購入者評価
+            });
+
+            Route::middleware('can:seller.cancel.evaluation,chatroom')->group(function () {
+                Route::get('{chatroom}/seller_cancel_evaluation','getSellerEvaluation')->name('get.seller.cancel.evaluation'); //提供者価画面
+                Route::post('{chatroom}/seller_cancel_evaluation','sellerEvaluation')->name('seller.cancel.evaluation'); //提供者評価
+            });
+
             Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->middleware('can:chatroom.evaluation.complete,chatroom')->name('evaluation.complete'); // 評価完了
 
             // 支払い

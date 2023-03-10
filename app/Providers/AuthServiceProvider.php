@@ -140,6 +140,25 @@ class AuthServiceProvider extends ServiceProvider
                                             });
         });
 
+        // やりとり購入者キャンセル評価
+        Gate::define('buyer.cancel.evaluation', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->buyer_user_id
+                && $chatroom->status === Chatroom::STATUS_CANCELED
+                && !$chatroom->evaluations()->exists();
+        });
+
+        // やり取り提供者キャンセル評価
+        Gate::define('seller.cancel.evaluation', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->seller_user_id
+                && $chatroom->status === Chatroom::STATUS_CANCELED
+                && $chatroom->evaluations( function($query, $user, $chatroom){
+                    $query->where([
+                        ['chatroom_id', '=', $chatroom->id],
+                        ['user_id', '=', $user->id],
+                    ])->exists();
+                });
+        });
+
         // やり取り評価完了画面
         Gate::define('chatroom.evaluation.complete', function (User $user, Chatroom $chatroom) {
             return ( $user->id === $chatroom->buyer_user_id && ( $chatroom->status === Chatroom::STATUS_SELLER_EVALUATION || $chatroom->status === Chatroom::STATUS_COMPLETE )) 
