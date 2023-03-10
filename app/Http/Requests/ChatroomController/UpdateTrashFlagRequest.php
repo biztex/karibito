@@ -26,7 +26,7 @@ class UpdateTrashFlagRequest extends FormRequest
     public function rules()
     {
       return [
-        'trash_flag' => 'required | integer'
+        'trash_flg' => 'required | integer'
     ];
     }
 }

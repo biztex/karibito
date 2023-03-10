@@ -466,4 +466,20 @@ class ChatroomController extends Controller
         // return view('chatroom.evaluation.create', compact('chatroom'));
     }
 
+    /**
+     * やりとり一覧画面
+     * @param UpdateTrashFlagRequest $request
+     * @param int $chatroom_id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateTrashFlg(UpdateTrashFlagRequest $request, int $chatroom_id)
+    {
+        Log::error('updateTrash++++++++++++++++++++++++++');
+        var_dump(json_encode($request->trash_flg, $chatroom_id));
+        \DB::transaction(function () use ($request, $chatroom_id) {
+            $this->chatroom_service->updateTrashFlg($request->trash_flg, $chatroom_id);
+        });
+        return redirect()->route('chatroom.index');
+    }
 }

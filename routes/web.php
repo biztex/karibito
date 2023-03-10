@@ -300,7 +300,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::get('','index')->name('index');
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
-            Route::post('{chatroom}', 'updateTrashFlg')->name('updateTrashFlg');
+            Route::post('/update/{chatroom}/trash_flg/', 'updateTrashFlg')->name('update_trash_flg');
 
             Route::middleware(['product.start.chatroom', 'is_ban'])->group(function () {
                 Route::get('product/{product}','newProduct')->name('new.product'); // productからの交渉する
