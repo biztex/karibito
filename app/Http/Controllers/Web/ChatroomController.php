@@ -145,7 +145,15 @@ class ChatroomController extends Controller
     {
         $chatroom = \DB::transaction(function () use ($request, $product) {
             $chatroom = $this->chatroom_service->startChatroomProduct($product);
-            $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+            if (!$request->has('nda')) {
+                // 通常のメッセージ作成
+                $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+            } else {
+                // NDAメッセージの作成
+                $nda_message = $this->chatroom_nda_message_service->storeNdaMessage($request->input('text'), $chatroom);
+                // NDAを送信した旨のメッセージ作成
+                $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
+            }
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
             
             return $chatroom;
@@ -164,7 +172,15 @@ class ChatroomController extends Controller
     {
         $chatroom = \DB::transaction(function () use ($request, $job_request) {
             $chatroom = $this->chatroom_service->startChatroomJobRequest($job_request);
-            $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+            if (!$request->has('nda')) {
+                // 通常のメッセージ作成
+                $this->chatroom_message_service->storeNormalMessage($request->all(), $chatroom);
+            } else {
+                // NDAメッセージの作成
+                $nda_message = $this->chatroom_nda_message_service->storeNdaMessage($request->input('text'), $chatroom);
+                // NDAを送信した旨のメッセージ作成
+                $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
+            }
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
             
             return $chatroom;
@@ -216,7 +232,7 @@ class ChatroomController extends Controller
     public function sendNda(SendNdaRequest $request, Chatroom $chatroom): RedirectResponse
     {
         // NDAメッセージの作成
-        $nda_message = $this->chatroom_nda_message_service->storeNdaMessage($request->all(), $chatroom);
+        $nda_message = $this->chatroom_nda_message_service->storeNdaMessage($request->input('text'), $chatroom);
         // NDAを送信した旨のメッセージ作成
         $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
         // 送信通知作成
