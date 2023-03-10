@@ -11,17 +11,17 @@ class ChatroomNdaMessageService
     /**
      * NDAメッセージの作成
      *
-     * @param array $request
+     * @param string $text
      * @param Chatroom $chatroom
      * @param object
      */
-    public function storeNdaMessage(array $request, Chatroom $chatroom)
+    public function storeNdaMessage(string $text, Chatroom $chatroom)
     {
-        return DB::transaction(function () use ($request, $chatroom) {
+        return DB::transaction(function () use ($text, $chatroom) {
             return $chatroom->chatroomNdaMessages()->create([
                 'chatroom_id' => $chatroom->id,
                 'send_user_id' => \Auth::id(),
-                'text' => $request['text'],
+                'text' => $text,
             ]);
         });
     }

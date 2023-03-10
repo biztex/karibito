@@ -473,7 +473,7 @@ $(function () {
 		$('.editNDAPopup').removeClass('is-open');
 	});
 
-	$('.templateInput').click(function () {
+	$('.templateNDAInput').click(function () {
 		$('.templateNDAPopup').removeClass('is-open');
 		$('.editNDAPopup').removeClass('is-open');
 	});

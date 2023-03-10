@@ -10463,23 +10463,7 @@ input.small {
 
 /*add 20220715*/
 
-.templatePopup {
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 9999;
-	width: 100%;
-	height: 100%;
-	display: none;
-	opacity: 0;
-	visibility: hidden;
-}
-
-.templatePopup.is-open {
-	display: block;
-	opacity: 1;
-	visibility: visible;
-}
+.templatePopup,
 .templateNDAPopup,
 .editNDAPopup {
 	position: fixed;
@@ -10493,6 +10477,7 @@ input.small {
 	visibility: hidden;
 }
 
+.templatePopup.is-open,
 .templateNDAPopup.is-open,
 .editNDAPopup.is-open {
 	display: block;
