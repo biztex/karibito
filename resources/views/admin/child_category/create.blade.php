@@ -18,7 +18,7 @@
                             @csrf
                             {{-- カテゴリ名称 --}}
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">カテゴリ名<span class="badge badge-danger ml-1">必須</span></label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">子カテゴリ名<span class="badge badge-danger ml-1">必須</span></label>
                                 <div class="col-md-6">
                                     @include('components.form.text', ['name' => 'name', 'required' => true, 'value' => ''])
                                     @include('components.form.error', ['name' => 'name'])

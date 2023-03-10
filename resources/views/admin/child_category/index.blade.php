@@ -20,7 +20,7 @@
                             <thead class="text-secondary">
                             <tr>
                                 <th scope="col" class="text-nowrap">id</th>
-                                <th scope="col" class="text-nowrap">カテゴリー名</th>
+                                <th scope="col" class="text-nowrap">子カテゴリー名</th>
                                 <th scope="col" class="text-nowrap">親カテゴリー名</th>
                                 <th scope="col" class="text-nowrap">登録日</th>
                                 <th scope="col" class="text-nowrap">更新日</th>
