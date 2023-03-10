@@ -25,11 +25,13 @@ use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
 use App\Http\Requests\ChatroomController\SendNdaRequest;
+use App\Http\Requests\ChatroomController\UpdateTrashFlagRequest;
 use App\Models\ChatroomNdaMessage;
 use App\Models\MPoint;
 use App\Services\ChatroomNdaMessageService;
 use Dompdf\Adapter\PDFLib;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class ChatroomController extends Controller
 {
@@ -449,6 +451,19 @@ class ChatroomController extends Controller
         ])->get();
         
         return view('chatroom.evaluation.complete', compact('chatroom','survey'));
+    }
+
+    /**
+     * やりとり一覧画面
+     * @param \App\Models\Chatroom $chatroom
+     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function updateTrashFlag(UpdateTrashFlagRequest $request)
+    {
+        Log::error('updateTrash++++++++++++++++++++++++++');
+        Log::error($request);
+        // return view('chatroom.evaluation.create', compact('chatroom'));
     }
 
 }

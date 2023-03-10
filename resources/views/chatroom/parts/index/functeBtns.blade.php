@@ -20,4 +20,17 @@
     @else
         <a href="{{route('chatroom.show', $value->id)}}" class="green">チャットを開始</a>
     @endif
+    @if ($value->trash_flg === 1)
+        <form action="{{ route('chatroom.updateTrashFlg', $value->id)}} " method="POST">
+            @csrf
+            <input type="hidden" name="trash_flg" value="0">
+            <button type="submit" class="btn btn-primary btn-sm gray">元に戻す</button>
+        </form>
+    @elseif($value->trash_flg === null || $value->trash_flg === 0)
+        <form action="{{ route('chatroom.updateTrashFlg', $value->id)}} " method="POST">
+            @csrf
+            <input type="hidden" name="trash_flg" value="1">
+            <button type="submit" class="btn btn-primary btn-sm gray">ゴミ箱へ</button>
+        </form>
+    @endif
 </div>
