@@ -25,6 +25,7 @@ use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
 use App\Http\Requests\ChatroomController\SendNdaRequest;
+use App\Http\Requests\ChatroomController\UpdateTrashFlgRequest;
 use App\Models\ChatroomNdaMessage;
 use App\Models\MPoint;
 use App\Services\ChatroomNdaMessageService;
@@ -467,4 +468,18 @@ class ChatroomController extends Controller
         return view('chatroom.evaluation.complete', compact('chatroom','survey'));
     }
 
+    /**
+     * やりとりをゴミ箱へ
+     * @param UpdateTrashFlgRequest $request
+     * @param int $chatroom_id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateTrashFlg(UpdateTrashFlgRequest $request, int $chatroom_id)
+    {
+        \DB::transaction(function () use ($request, $chatroom_id) {
+            $this->chatroom_service->updateTrashFlg($request->trash_flg, $chatroom_id);
+        });
+        return redirect()->route('chatroom.index');
+    }
 }
