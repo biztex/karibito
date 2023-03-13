@@ -6,7 +6,7 @@ use App\Rules\EmailExclusion;
 use App\Rules\phoneNumExclusion;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTrashFlagRequest extends FormRequest
+class UpdateTrashFlgRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

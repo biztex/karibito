@@ -25,13 +25,12 @@ use App\Http\Requests\ChatroomController\EvaluationRequest;
 use App\Http\Requests\ChatroomController\PurchaseConfirmRequest;
 use App\Http\Requests\ChatroomController\PaymentRequest;
 use App\Http\Requests\ChatroomController\SendNdaRequest;
-use App\Http\Requests\ChatroomController\UpdateTrashFlagRequest;
+use App\Http\Requests\ChatroomController\UpdateTrashFlgRequest;
 use App\Models\ChatroomNdaMessage;
 use App\Models\MPoint;
 use App\Services\ChatroomNdaMessageService;
 use Dompdf\Adapter\PDFLib;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
 
 class ChatroomController extends Controller
 {
@@ -454,29 +453,14 @@ class ChatroomController extends Controller
     }
 
     /**
-     * やりとり一覧画面
-     * @param \App\Models\Chatroom $chatroom
-     * 
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function updateTrashFlag(UpdateTrashFlagRequest $request)
-    {
-        Log::error('updateTrash++++++++++++++++++++++++++');
-        Log::error($request);
-        // return view('chatroom.evaluation.create', compact('chatroom'));
-    }
-
-    /**
-     * やりとり一覧画面
-     * @param UpdateTrashFlagRequest $request
+     * やりとりをゴミ箱へ
+     * @param UpdateTrashFlgRequest $request
      * @param int $chatroom_id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateTrashFlg(UpdateTrashFlagRequest $request, int $chatroom_id)
+    public function updateTrashFlg(UpdateTrashFlgRequest $request, int $chatroom_id)
     {
-        Log::error('updateTrash++++++++++++++++++++++++++');
-        var_dump(json_encode($request->trash_flg, $chatroom_id));
         \DB::transaction(function () use ($request, $chatroom_id) {
             $this->chatroom_service->updateTrashFlg($request->trash_flg, $chatroom_id);
         });
