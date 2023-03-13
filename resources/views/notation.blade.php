@@ -22,32 +22,16 @@
 									<td>愛媛県松山市二番町5丁目7</td>
 								</tr>
 								<tr>
-									<th>電話番号</th>
-									<td>089-993-8781</td>
-								</tr>
-								<tr>
-									<th>FAX番号</th>
-									<td>089-993-8781</td>
-								</tr>
-								<tr>
 									<th>URL</th>
 									<td><a href="https://karibito.co.jp/">https://karibito.co.jp/</a></td>
 								</tr>
 								<tr>
-									<th>E-mail</th>
-									<td>info@karibito.co.jp</td>
+									<th>設立年月</th>
+									<td>2022年7月</td>
 								</tr>
 								<tr>
-									<th>設立年月日</th>
-									<td>2022年7月4日</td>
-								</tr>
-								<tr>
-									<th>代表者</th>
+									<th>代表</th>
 									<td>代表取締役　鎌田 哲至</td>
-								</tr>
-								<tr>
-									<th>主要取引先銀行</th>
-									<td>伊予銀行　みずほ銀行</td>
 								</tr>
 								<tr>
 									<th>事業内容</th>
