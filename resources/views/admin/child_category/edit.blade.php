@@ -19,7 +19,7 @@
                             @csrf
                             {{-- カテゴリ名称 --}}
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">カテゴリ名<span class="badge badge-danger ml-1">必須</span></label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">子カテゴリ名<span class="badge badge-danger ml-1">必須</span></label>
                                 <div class="col-md-6">
                                     @include('components.form.text', ['name' => 'name', 'required' => true, 'value' => $child_category->name ])
                                     @include('components.form.error', ['name' => 'name'])
@@ -27,7 +27,7 @@
                             </div>
                             {{-- 親カテゴリ --}}
                             <div class="form-group row">
-                                <label for="parent_category_id" class="col-md-4 col-form-label text-md-right">カテゴリ<span class="badge badge-danger ml-1">必須</span></label>
+                                <label for="parent_category_id" class="col-md-4 col-form-label text-md-right">親カテゴリ<span class="badge badge-danger ml-1">必須</span></label>
                                 <div class="col-md-6">
                                     @include('components.form.select_default_collection', ['name' => 'parent_category_id', 'data' => $categories, 'id' => 'id', 'str' => 'name', 'value' => $child_category->parent_category_id, 'defaultStr' => '選択してください'])
                                     @include('components.form.error', ['name' => 'parent_category_id'])

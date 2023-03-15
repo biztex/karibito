@@ -114,14 +114,14 @@
         <div class="templateArea tabSelectArea">
             <div class="templateClose"></div>
             <h2 class="templateTitle">NDAの送付</h2>
-            <div class="templateBox tabSelectBox is-active" id="editNDA">
+            <div class="templateBox" id="editNDA">
                 <textarea name="text">
                 {{ $chatroom->chatroomNdaMessages()->latest()->first()->text }}
                 </textarea>
             </div>
-            <div class="templateButton"><button type="submit" class="templateInput" name="status" value="{{ $status }}">送信する</button></div>
+            <div class="templateButton"><button type="submit" class="templateNDAInput" name="status" value="{{ $status }}">送信する</button></div>
             @if ($chatroom->chatroomNdaMessages()->latest()->first()->status === App\Models\ChatroomNdaMessage::CONFIRMING_USER_SUBMITTED)
-                <div class="templateButton"><button type="submit" class="templateInput" name="status" value={{ App\Models\ChatroomNdaMessage::CONCLUSION }}>締結する</button></div>
+                <div class="templateButton"><button type="submit" class="templateNDAInput" name="status" value={{ App\Models\ChatroomNdaMessage::CONCLUSION }}>締結する</button></div>
             @endif
         </div>
     </form>

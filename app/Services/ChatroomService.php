@@ -128,4 +128,10 @@ class ChatroomService
         return true;
     }
 
+    public function updateTrashFlg($trash_flg, $chatroom_id): void
+    {
+        $chatroom = Chatroom::findOrFail($chatroom_id);
+        $chatroom->fill(['trash_flg' => $trash_flg])->save();
+    }
+
 }

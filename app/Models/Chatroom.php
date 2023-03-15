@@ -72,6 +72,23 @@ class Chatroom extends Model
         return in_array($this->status, [self::STATUS_WORK, self::STATUS_BUYER_EVALUATION]) ? true : false;
     }
 
+    /**
+     * NDA送付表示可能判断
+     * 
+     * @return bool
+     */
+    public function isDisplayableNda(): bool
+    {
+        $is_displayable_nda = true;
+        // 身分証明がどちらかが認証されていない場合またはNDAの承認をしていない場合
+        if (empty($this->sellerUser->userProfile->is_identify) || empty($this->buyerUser->userProfile->is_identify)
+        || empty($this->sellerUser->userProfile->is_nda) || empty($this->buyerUser->userProfile->is_nda)) {
+            $is_displayable_nda = false;
+        }
+        return $is_displayable_nda;
+    }
+
+
     public function scopeNumberOfSold($query, $product_id): int
     {
         return $query->where('reference_type', 'App\Models\Product')

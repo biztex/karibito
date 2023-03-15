@@ -4,8 +4,13 @@
 			<div class="inner inner03">
 				<div class="guideTop">
 					<p class="logo"><img src="img/common/logo_title.svg" alt="LOGO"></p>
-					<h2 class="title">街と人を繋げ隊！<span class="eng">MACHI TO HITO WO TSUNAGE TAI</span></h2>
-					<p>知識・スキル・経験を商品化マッチングプラットフォーム！</p>
+                    <div class="title">
+                        <p><span class="title-span">知識・スキル・経験を商品化マッチングプラットフォーム！</span></p>
+                    </div>
+                    <div class="logo-img">
+                        <img src="/img/top/composite-layer.png" style="object-fit: cover;">
+                    </div>
+
 					<div class="btnTeams">
 						<a href="{{ route('home') }}" class="blue">サービスを探す</a>
 						{{-- @can('identify') --}}
@@ -47,73 +52,118 @@
 				</div>
 			</div>
 			<div class="guideEtiquette">
+                <div class="guideTitle">
+                    <div class="inner inner03">
+                        <p>カリビトエチケット</p>
+                    </div>
+                </div>
 				<div class="inner inner03">
 					<ul class="anchors">
 						<li>
 							<a href="#etiquette01" class="buy scroll">
-								<p class="ico"><img src="img/guide/ico_etiquette_point01.svg"</p>
-								<p class="tit">はじめまして<span class="cate"><big>購入者の方</big><br class="sp">（買いたい方）</span></p>
-								<p>サービスを買ってみたい方はこちらです。<br>様々な人の「スキル・経験」が簡単操作ですぐに購入できます。<br>多種多様なカテゴリの中から、あなたのお困りごとを解決するサービスを探してみませんか？</p>
+								<p class="ico"><img src="img/guide/ico_etiquette_point01.svg"></p>
+								<p class="tit">スキルを<span class="cate"><big>購入したい方</big><br class="sp"></span></p>
 							</a>
 						</li>
 						<li>
 							<a href="#etiquette02" class="provid scroll">
-								<p class="ico"><img src="img/guide/ico_etiquette_point02.svg"</p>
-								<p class="tit">はじめまして<span class="cate"><big>出品者の方</big><br class="sp">（売りたい方）</span></p>
-								<p>サービスを買ってみたい方はこちらです。<br>様々な人の「スキル・経験」が簡単操作ですぐに購入できます。<br>多種多様なカテゴリの中から、あなたのお困りごとを解決するサービスを探してみませんか？</p>
+								<p class="ico"><img src="img/guide/ico_etiquette_point02.svg"></p>
+								<p class="tit">はじめまして<span class="cate"><big>出品したい方</big><br class="sp"></span></p>
 							</a>
 						</li>
 					</ul>
 				</div>
 				<div class="buyer area" id="etiquette01">
 					<div class="inner inner03">
-						<h2>サービス購入者のマナー <img src="img/guide/ico_etiquette_point02.svg" alt="サービス購入者のマナー"></h2>
+						<h2>サービス購入者のエチケット<img src="img/guide/ico_etiquette_point01.svg" alt="サービス購入者のマナー"></h2>
 						<ul>
 							<li>
 								<p class="img"><img src="img/guide/img_buyer01.svg" alt=""></p>
-								<p class="tit">1. サービスページの内容は購入前に必ずすべて読みましょう。また、不明点は点は、相談中にメッセージで確認しておきましょう。</p>
-								<p>サービス内容で想定されていない過度なお願いにならないように気をつけましょう。</p>
+                                <p class="status">【購入前】</p>
+								<p class="tit">★サービスの詳細をしっかりと確認し、疑問や不安点を無くしてから購入しましょう！</p>
+								<p>購入の意思を伝える前に、提供されているサービス内容があなたの求めているものとマッチしているか、まずはサービスページをしっかりと見ましょう。その上で、疑問や要望は購入前にきちんと確認することで、購入後のキャンセルやトラブルの防止になります。</p>
 							</li>
 							<li>
 								<p class="img"><img src="img/guide/img_buyer02.svg" alt=""></p>
-								<p class="tit">2. 要望は無理のない範囲でお願いしましょう</p>
-								<p>追加の作業、質問や修正などの要望がある場合は、出品者に対応可能かどうか、追加代金が必要かなどを確認しましょう。<br>要望は出品者が同意できる内容になるようにしましょう。</p>
+                                <p class="status">【購入後】</p>
+								<p class="tit">★スピーディーな返信を心がけましょう！</p>
+								<p>確認事項に返信がもらえないと、出品者の方は作業を進めることができません。チャットが届いたら、返信はスピーディーにしましょう。もしすぐ返信ができない場合は「ご連絡ありがとうございます。何日までにご連絡します。」と一報を入れることで、お互いに気持ちよく取引を進めることができます。</p>
 							</li>
 							<li>
 								<p class="img"><img src="img/guide/img_buyer03.svg" alt=""></p>
-								<p class="tit">3. サービスの感想・評価の入力を行いましょう</p>
-								<p>コメント・評価は出品 の方のこれからのやりがいやサービス改善につながる大切なものです。<br>コメントと5段階評価の一部（総合評価）は公開され、他のユーザーも見ることができます。<br>なお、誹謗中傷や個人情報などを記載することがないようご注意ください。（カリビトのルールに反する内容の場合は運営で削除し、記載した方のご利用を制限いたします。） </p>
+                                <p class="status">【購入後】</p>
+								<p class="tit">★要望やイメージは分かりやすく伝えましょう！</p>
+								<p>例えば「かわいい感じ」といっても、思い描くイメージは人それぞれです。要望やイメージを伝えるときは、客観的に伝わるかどうかを意識しましょう。</p>
 							</li>
+                            <li>
+                                <p class="img"><img src="img/guide/img_buyer04.svg" alt=""></p>
+                                <p class="status">【評価】</p>
+                                <p class="tit">★納品完了後は速やかに評価の入力をしましょう！</p>
+                                <p>カリビトのお取引は、双方の評価が入力された時点で完了となります。せっかく期日内に納品されても、あなたの評価が未入力であれば出品者の方は報酬が受け取れません。納品完了通知に承諾後は、すぐ評価入力を行いましょう。<br>コメントと5段階評価の一部（総合評価）は公開され、他のユーザーも見ることができます。<br>また、あなたの評価は他の方が購入をされる際の判断材料の一つとなります。公正公平で丁寧な入力をしましょう。</p>
+                            </li>
 						</ul>
 					</div>
 				</div>
 				<div class="provider area"  id="etiquette02">
 					<div class="inner inner03">
-						<h2>サービス提供者のマナー <img src="img/guide/ico_etiquette_point01.svg" alt="サービス提供者のマナー"></h2>
+						<h2>サービス提供者のエチケット<img src="img/guide/ico_etiquette_point02.svg" alt="サービス提供者のエチケット"></h2>
 						<ul>
 							<li>
 								<p class="img"><img src="img/guide/img_provider01.svg" alt=""></p>
-								<p class="tit">1. サービス内容を明確にしましょう</p>
-								<p>下記情報を明確に記載し、購入者の方が期待する内容と提供されるサービス内容にズレが生じないように心がけましょう。<br>・できること、できないこと　・必要な情報<br>・やり取りの流れ　・期間、納期<br>・料金</p>
+                                <p class="status">【出品時】</p>
+								<p class="tit">★分かりやすい出品ページを作成しましょう！</p>
+								<p>購入者の方の目線で、分かりやすく丁寧な出品ページを心がけましょう。よくある質問は、出品ページに表示させておくことで、お問い合わせのチャットを軽減させることができます。</p>
 							</li>
 							<li>
 								<p class="img"><img src="img/guide/img_provider02.svg" alt=""></p>
-								<p class="tit">2. 納品日を過ぎないよう対応しましょう</p>
-								<p>購入者はのサービス終了日を目安にサービスを購入します。<br>終了日を過ぎてしまうと購入者は不安になってしまいます。<br>万が一、終了日を超えてしまいそうな場合は、早めに購入者の方へ連絡し相談をしてください。</p>
+                                <p class="status">【出品時】</p>
+								<p class="tit">★購入者の方のお問い合わせには、迅速かつ丁寧に返信しましょう。</p>
+								<p>購入者の方は、あなたからの「サービス提供」通知がなければ購入に進めません。購入の意思の連絡にはすぐ返信するよう心がけ、確認事項に時間を要する場合はきちんとその旨を伝えるなど礼儀正しい対応をしましょう。</p>
 							</li>
 							<li>
 								<p class="img"><img src="img/guide/img_provider03.svg" alt=""></p>
-								<p class="tit">3. キャンセル時は相手に理由を伝えましょう</p>
-								<p>やり取りの中で止むを得ずキャンセルをしたい場合は、相手にその理由を丁寧に伝えてからキャンセルを実行しましょう。<br>理由なくキャンセルを実行し、相手が不快な思いをしないよう注意してください。</p>
+                                <p class="status">【出品後】</p>
+								<p class="tit">★納期をしっかりと守りましょう！</p>
+								<p>決められた納期はきちんと守りましょう。決められた納期に間に合わないことは、購入者の方に迷惑をかけるだけでなく、頑張って進めていた作業がキャンセルされる恐れもあります。まずは契約前に必ず納期を確認し、無理のない作業計画を立てましょう。また、進捗などを中間報告をすることで、購入者の方も安心して取引することができます。</p>
 							</li>
 							<li>
 								<p class="img"><img src="img/guide/img_provider04.svg" alt=""></p>
-								<p class="tit">4. 購入者への評価の入力を行いましょう</p>
-								<p>購入者の「良かった点」を伝えることは、出品者と購入者の良い関係を作るための大切なものです。<br>良かった点は公開され、全ユーザーが見ることができる状態になります。</p>
+                                <p class="status">【出品後】</p>
+								<p class="tit">★「納品完了」通知は双方合意の上で送りましょう！</p>
+								<p>特に非対面のサービス提供の場合、チャットだけのやり取りとなりますので、提供するサービス内容に関してお互いが合意しているかを確認することは非常に大切です。一方的な「納品完了」の通知は、購入者の不信感に繋がりますので、気を付けましょう。</p>
 							</li>
+                            <li>
+                                <p class="img"><img src="img/guide/img_provider05.svg" alt=""></p>
+                                <p class="status">【評価】</p>
+                                <p class="tit">★忘れずに購入者の評価入力をしましょう！</p>
+                                <p>カリビトのお取引は、双方の評価が入力された時点で終了となります。あなたが購入者の方の評価を入力しないと、取引完了とならず報酬を受け取れません。「評価入力」通知が届きましたら、すぐ入力を行いましょう。<br>評価入力は、公正公平で丁寧な入力を心がけましょう。</p>
+                            </li>
 						</ul>
 					</div>
 				</div>
+                <div class="kiribito area"  id="etiquette03">
+                    <div class="inner inner03">
+                        <h2>カリビトマナー</h2>
+                        <ul>
+                            <li>
+                                <p class="img"><img src="img/guide/img_karibito01.svg" alt="" class="kari-img"><span class="sub-title">感じの良いメッセージを送りましょう！</span></p>
+                                <p>チャットでのやり取りは、「言葉遣い」や「書き方」によって相手に伝わる印象が左右されます。丁寧なメッセージは安心して取引を開始できます。</p>
+                            </li>
+                            <li>
+                                <p class="img"><img src="img/guide/img_karibito02.svg" alt="" class="kari-img"><span class="sub-title">倫理的なやり取りをしましょう！</span></p>
+                                <p>言葉から感じる印象は個人差があるため、気を付けていてもお互いの受け取り方にズレが生じることがあります。お互いの感情にズレが生じてしまった場合は、一度今までのやり取りを振り返り、冷静に対応できるよう心がけましょう。</p>
+                            </li>
+                            <li>
+                                <p class="img"><img src="img/guide/img_karibito03.svg" alt="" class="kari-img"><span class="sub-title">敏活に返信しましょう！</span></p>
+                                <p>返信や連絡がない状態は、相手に不安や不信感を生じさせやすくなります。円滑な取引のために返信は速やかに行い、すぐに対応できない場合でも一言断りを入れるなどのリアクションを心がけましょう。</p>
+                            </li>
+                            <li>
+                                <p class="img"><img src="img/guide/img_karibito04.svg" alt="" class="kari-img"><span class="sub-title">取引はきちんと完了しましょう！</span></p>
+                                <p>カリビトの取引はお互いの評価入力を持って完了となります。お互いが気持ちよく取引を終えるために、評価入力まで責任を持って行いましょう。</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 			</div>
 		</div><!-- /#contents -->
 	</article>
