@@ -18,4 +18,11 @@ class MPoint extends Model
     const PRODUCT_REGISTRATION = 2;
     const INVITED_FRIEND = 3;
     const PERSONAL_AUTHENTICATION = 4;
+
+    const POINT_NAME = [
+        self::TRANSACTION_COMPLETED => '取引完了時付与ポイント',
+        self::PRODUCT_REGISTRATION => '出品登録時付与ポイント',
+        self::INVITED_FRIEND => '友達招待時(新規登録コード入力時)付与ポイント',
+        self::PERSONAL_AUTHENTICATION => '本人認証時付与ポイント'
+    ];
 }
