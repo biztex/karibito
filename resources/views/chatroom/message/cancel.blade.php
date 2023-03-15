@@ -126,9 +126,16 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">{{$message->text}}</p><br>
                         <p class="cancel_evaluation">
-                            <span>キャンセルが成立しました。代金は購入者の方に返金されます。123<br>
+                            <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
                             今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
-                            <a href="{{ route('chatroom.get.buyer.cancel.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                            @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
+                                <!-- キャンセルされた側評価 -->
+                                <a href="{{ route('chatroom.get.cancel.receiver.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                            @else
+                                <!-- キャンセルした側評価 -->
+                                <a href="{{ route('chatroom.get.cancel.sender.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                            @endif
+
                         </p>
                     </div>
                 </div>
@@ -139,11 +146,21 @@
             <li>
                 <div class="img">
                     @include('chatroom.message.parts.icon')
-                    <div class="info">
+                    <div class="info cancel">
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">キャンセル申請が承諾されました！</p><br>
-                        <span>キャンセルが成立しました。代金は購入者の方に返金されます。456<br>
-                            今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
+                        <p class="cancel_evaluation">
+                            <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
+                                今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
+                            @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
+                                <!-- キャンセルされた側評価 -->
+                                <a href="{{ route('chatroom.get.cancel.receiver.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                            @else
+                                <!-- キャンセルした側評価 -->
+                                <a href="{{ route('chatroom.get.cancel.sender.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                            @endif
+{{--                            <a href="{{ route('chatroom.get.buyer.cancel.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>--}}
+                        </p>
                     </div>
                 </div>
                 @include('chatroom.message.parts.time')

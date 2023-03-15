@@ -84,6 +84,18 @@ class ChatroomService
         $chatroom->fill(['status' => 7])->save();
     }
 
+    // ステータスを 8:キャンセルした側評価に変更
+    public function statusChangeCancelSender(Chatroom $chatroom)
+    {
+        $chatroom->fill(['status' => 8])->save();
+    }
+
+    // ステータスを 8:キャンセルした側評価に変更
+    public function statusChangeCancelReceiver(Chatroom $chatroom)
+    {
+        $chatroom->fill(['status' => 9])->save();
+    }
+
     // 売上金レコードの作成
     public function createProfit(Chatroom $chatroom, PurchaseService $purchase_service)
     {

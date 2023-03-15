@@ -140,29 +140,40 @@ class AuthServiceProvider extends ServiceProvider
                                             });
         });
 
-        // やりとり購入者キャンセル評価
-        Gate::define('buyer.cancel.evaluation', function (User $user, Chatroom $chatroom) {
-            return $user->id === $chatroom->buyer_user_id
+        // キャンセルした側評価
+        Gate::define('cancel.sender.evaluation', function (User $user, Chatroom $chatroom) {
+            return $chatroom->purchase->exists()
+                && !$chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty()
                 && $chatroom->status === Chatroom::STATUS_CANCELED
                 && !$chatroom->evaluations()->exists();
         });
 
-        // やり取り提供者キャンセル評価
-        Gate::define('seller.cancel.evaluation', function (User $user, Chatroom $chatroom) {
-            return $user->id === $chatroom->seller_user_id
-                && $chatroom->status === Chatroom::STATUS_CANCELED
-                && $chatroom->evaluations( function($query, $user, $chatroom){
-                    $query->where([
-                        ['chatroom_id', '=', $chatroom->id],
-                        ['user_id', '=', $user->id],
-                    ])->exists();
-                });
+//        // キャンセルされた側評価
+        Gate::define('cancel.receiver.evaluation', function (User $user, Chatroom $chatroom) {
+            return $chatroom->purchase->exists()
+                && $chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty()
+                && $chatroom->status === Chatroom::STATUS_CANCEL_SENDER_EVALUATION
+                && $chatroom->evaluations()->exists();
         });
 
         // やり取り評価完了画面
         Gate::define('chatroom.evaluation.complete', function (User $user, Chatroom $chatroom) {
             return ( $user->id === $chatroom->buyer_user_id && ( $chatroom->status === Chatroom::STATUS_SELLER_EVALUATION || $chatroom->status === Chatroom::STATUS_COMPLETE )) 
                 || ( $user->id === $chatroom->seller_user_id && $chatroom->status === Chatroom::STATUS_COMPLETE );
+        });
+
+        // やり取りキャンセルした評価完了画面
+        Gate::define('chatroom.evaluation.cancel.sender.complete', function (User $user, Chatroom $chatroom) {
+            return $chatroom->status === Chatroom::STATUS_CANCEL_SENDER_EVALUATION
+                && $chatroom->purchase->exists()
+                && !$chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty();
+        });
+
+        // やり取りキャンセルされた評価完了画面
+        Gate::define('chatroom.evaluation.cancel.receiver.complete', function (User $user, Chatroom $chatroom) {
+            return $chatroom->status === Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION
+                && $chatroom->purchase->exists()
+                && $chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty();
         });
 
         // やり取りキャンセル可能ステータス

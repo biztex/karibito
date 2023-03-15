@@ -8853,6 +8853,10 @@ select.searchSelect {
 	text-align: center;
 }
 
+.cancelWrap .cancelRea .rateTitle {
+    margin-bottom: 24px;
+}
+
 .cancelWrap .cancelRea .rate label {
 	padding-top: 38px;
 	width: 30%;
