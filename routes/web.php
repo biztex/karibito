@@ -359,6 +359,10 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             });
 
             Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->middleware('can:chatroom.evaluation.complete,chatroom')->name('evaluation.complete'); // 評価完了
+            // キャンセルした側評価完了
+            Route::get('{chatroom}/evaluation/cancel/sender/complete', 'evaluationCancelSenderComplete')->middleware('can:chatroom.evaluation.cancel.sender.complete,chatroom')->name('evaluation.cancel.sender.complete');
+            // キャンセルされた側評価完了
+            Route::get('{chatroom}/evaluation/cancel/receiver/complete', 'evaluationCancelReceiverComplete')->middleware('can:chatroom.evaluation.cancel.receiver.complete,chatroom')->name('evaluation.cancel.receiver.complete');
 
             // 支払い
             Route::middleware('deleted_service','can:purchase,proposal')->group(function () {
