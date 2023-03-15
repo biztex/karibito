@@ -12,7 +12,7 @@ class UserGetPoint extends Model
     protected $guarded = [ 'id' ];
 
     /**
-     * 対象のクーポンが付与されているかを確認
+     * 対象のポイントが付与されているかを確認
      *
      * @param int $user_id
      * @param string $coupon_name
