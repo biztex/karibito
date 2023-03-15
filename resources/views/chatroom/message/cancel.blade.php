@@ -128,12 +128,15 @@
                         <p class="cancel_evaluation">
                             <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
                             今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
-                            @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
-                                <!-- キャンセルされた側評価 -->
-                                <a href="{{ route('chatroom.get.cancel.receiver.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
-                            @else
+                            @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
                                 <!-- キャンセルした側評価 -->
-                                <a href="{{ route('chatroom.get.cancel.sender.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                                @if($chatroom->status == \App\Models\Chatroom::STATUS_CANCELED)
+                                    <a href="{{ route('chatroom.get.cancel.sender.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                                @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
+                                    <a class="cancelEnd">取引完了</a>
+                                @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_SENDER_EVALUATION)
+                                    <a class="cancelStart">未評価</a>
+                                @endif
                             @endif
 
                         </p>
@@ -154,10 +157,13 @@
                                 今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
                             @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
                                 <!-- キャンセルされた側評価 -->
-                                <a href="{{ route('chatroom.get.cancel.receiver.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
-                            @else
-                                <!-- キャンセルした側評価 -->
-                                <a href="{{ route('chatroom.get.cancel.sender.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                                @if($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_SENDER_EVALUATION)
+                                    <a href="{{ route('chatroom.get.cancel.receiver.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                                @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
+                                    <a class="cancelEnd">取引完了</a>
+                                @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCELED)
+                                    <a class="cancelStart">未評価</a>
+                                @endif
                             @endif
 {{--                            <a href="{{ route('chatroom.get.buyer.cancel.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>--}}
                         </p>

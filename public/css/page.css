@@ -8492,6 +8492,18 @@ select.searchSelect {
     font-size: 1.5rem;
 }
 
+.cancel .cancel_evaluation .cancelStart {
+    border: 1px solid #CDCDCD;
+    background: #EDEDED;
+    color: #111;
+}
+
+.cancel .cancel_evaluation .cancelEnd {
+    border: 1px solid #D80000;
+    background: #fff;
+    color: #EB6A1E;
+}
+
 /*side*/
 .publicate {
 	padding: 10px;

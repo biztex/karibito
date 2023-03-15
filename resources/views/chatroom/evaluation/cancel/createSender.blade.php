@@ -28,6 +28,7 @@
 							<p class="reason checkChoice"><label><input type="checkbox" name="checkbox" required>キャンセルを完了します</label></p>
 
 							@error('star')<div class="alert alert-danger" style="text-align:center">{{ $message }}</div>@enderror
+                            <div class="radioChoice rateTitle">総合評価　＊必須</div>
 							<div class="radioChoice rate">
 								<label class="good">良かった<input type="radio" name="star" @if(old('star') == App\Models\Evaluation::GOOD || old('star') === null) checked @endif value="{{App\Models\Evaluation::GOOD}}"></label>
 								<label class="usually">普通<input type="radio" name="star" @if(old('star') == App\Models\Evaluation::USUALLY) checked @endif value="{{App\Models\Evaluation::USUALLY}}"></label>
@@ -36,7 +37,7 @@
 						</div>
 						<div class="evaluation">
 							@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
-							<p>評価のコメントを記入しましょう</p>
+							<p>評価コメント　＊必須</p>
 							<textarea name="text" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
 							<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/255</p>
 						</div>
