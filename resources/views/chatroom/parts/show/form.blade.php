@@ -140,7 +140,7 @@
     <div class="templateArea tabSelectArea">
         <div class="templateClose"></div>
         <h2 class="templateTitle">NDAの送付</h2>
-        <div class="templateBox tabSelectBox is-active" id="templateNDA">
+        <div class="templateBox" id="templateNDA">
             <textarea name="text"> {{--表示が崩れるためインデント無視--}}
 ●●発注者（以下「甲」という。）と ●●受注者（以下「乙」という。）は、甲乙間において、カリビト上でやりとりするにあたり（以下「本目的」という。）、相互に開示又は提供する秘密情報の保持につき、次のとおり秘密保持契約（以下「本契約」という。）を締結する（以下、秘密情報を開示又は提供した当事者を「開示者」、秘密情報の開示又は提供を受けた当事者を「受領者」という。）。
 
@@ -204,7 +204,7 @@
                 
             </textarea>
         </div>
-        <div class="templateButton"><button type="submit" class="templateInput">送信する</button></div>
+        <div class="templateButton"><button type="submit" class="templateNDAInput">送信する</button></div>
     </div>
 </form>
 </div>

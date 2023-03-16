@@ -131,4 +131,5 @@
             <x-parts.evaluation-star :star='$value->buyerUser->avg_star'/>
         @endif
     </div>
+    @include('chatroom.parts.index.functeBtns')
 </div>

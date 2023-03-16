@@ -84,12 +84,9 @@ class Chatroom extends Model
     public function isDisplayableNda(): bool
     {
         $is_displayable_nda = true;
-        // 身分証明がどちらかが認証されていない場合
-        if (empty($this->sellerUser->userProfile->is_identify) || empty($this->buyerUser->userProfile->is_identify)) {
-            $is_displayable_nda = false;
-        }
-        // 身分証明が完了していてもNDAの承認をしていない場合
-        if (empty($this->sellerUser->userProfile->is_nda) || empty($this->buyerUser->userProfile->is_nda)) {
+        // 身分証明がどちらかが認証されていない場合またはNDAの承認をしていない場合
+        if (empty($this->sellerUser->userProfile->is_identify) || empty($this->buyerUser->userProfile->is_identify)
+        || empty($this->sellerUser->userProfile->is_nda) || empty($this->buyerUser->userProfile->is_nda)) {
             $is_displayable_nda = false;
         }
         return $is_displayable_nda;
