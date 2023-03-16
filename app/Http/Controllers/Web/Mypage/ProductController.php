@@ -10,7 +10,9 @@ use App\Models\JobRequest;
 use App\Models\AdditionalOption;
 use App\Models\Chatroom;
 use App\Models\Favorite;
+use App\Models\MPoint;
 use App\Models\PurchasedCancel;
+use App\Models\UserGetPoint;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Services\EvaluationService;
@@ -79,6 +81,10 @@ class ProductController extends Controller
             $this->product_service->storeProductQuestion($request->all(), $product->id);
             $this->product_service->storeProductLink($request->all(), $product->id);
             $this->product_service->storeImage($request, $product->id);
+            // 初回出品登録時に出品者にポイントを付与する
+            if (!UserGetPoint::grantCoupon(\Auth::id(), MPoint::POINT_NAME[MPoint::PRODUCT_REGISTRATION])) {
+                $this->point_service->getPoint(MPoint::PRODUCT_REGISTRATION, \Auth::id(), $product);
+            }
         });
 
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();

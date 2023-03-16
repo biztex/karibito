@@ -10,4 +10,19 @@ class UserGetPoint extends Model
     use HasFactory;
 
     protected $guarded = [ 'id' ];
+
+    /**
+     * 対象のポイントが付与されているかを確認
+     *
+     * @param int $user_id
+     * @param string $coupon_name
+     * @return UserGetPoint|null
+     */
+    public static function grantCoupon(int $user_id, string $coupon_name): UserGetPoint|null
+    {
+        return UserGetPoint::where([
+            'user_id' => $user_id,
+            'name' => $coupon_name
+        ])->first();
+    }
 }
