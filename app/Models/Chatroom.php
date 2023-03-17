@@ -19,6 +19,8 @@ class Chatroom extends Model
     const STATUS_SELLER_EVALUATION = 5;
     const STATUS_COMPLETE = 6;
     const STATUS_CANCELED = 7;
+    const STATUS_CANCEL_SENDER_EVALUATION = 8;
+    const STATUS_CANCEL_RECEIVE_EVALUATION = 9;
 
     const STATUS = [
         self::STATUS_START => 'チャット開始',
@@ -27,7 +29,9 @@ class Chatroom extends Model
         self::STATUS_BUYER_EVALUATION => '購入者評価',
         self::STATUS_SELLER_EVALUATION => '出品者評価',
         self::STATUS_COMPLETE => '完了',
-        self::STATUS_CANCELED => 'キャンセル'
+        self::STATUS_CANCELED => 'キャンセル',
+        self::STATUS_CANCEL_SENDER_EVALUATION => 'キャンセルした側評価',
+        self::STATUS_CANCEL_RECEIVE_EVALUATION => 'キャンセルされた側評価'
     ];
 
 

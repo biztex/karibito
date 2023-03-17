@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChatroomController\CancelEvaluationRequest;
 use App\Http\Requests\ChatroomController\EditOrConclusionNdaRequest;
 use App\Models\Chatroom;
 use App\Models\Product;
@@ -449,6 +450,102 @@ class ChatroomController extends Controller
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);
+    }
+
+    /**
+     * キャンセルした側評価画面
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function getCancelSenderEvaluation(Chatroom $chatroom)
+    {
+        return view('chatroom.evaluation.cancel.createSender', compact('chatroom'));
+    }
+
+    /**
+     * キャンセルした側評価画面
+     * @param  CancelEvaluationRequest $request
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function cancelSenderEvaluation(CancelEvaluationRequest $request, Chatroom $chatroom)
+    {
+        \DB::transaction(function () use ($request, $chatroom) {
+            $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
+            $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
+            $this->chatroom_service->statusChangeCancelSender($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+        });
+
+        return redirect()->route('chatroom.evaluation.cancel.sender.complete', $chatroom->id);
+    }
+
+
+    /**
+     * キャンセル時、キャンセルした側評価完了画面
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function evaluationCancelSenderComplete(Chatroom $chatroom)
+    {
+        $survey = KaribitoSurvey::where([
+            ['user_id',\Auth::id()],
+            ['chatroom_id', $chatroom->id],
+        ])->get();
+
+        return view('chatroom.evaluation.cancel.completeSender', compact('chatroom','survey'));
+    }
+
+
+    /**
+     * キャンセルされた側評価画面
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function getCancelReceiverEvaluation(Chatroom $chatroom)
+    {
+        return view('chatroom.evaluation.cancel.createReceiver', compact('chatroom'));
+    }
+
+
+    /**
+     * キャンセルされた側評価画面
+     * @param  CancelEvaluationRequest $request
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function cancelReceiverEvaluation(CancelEvaluationRequest $request, Chatroom $chatroom)
+    {
+        \DB::transaction(function () use ($request, $chatroom) {
+            $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
+            $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
+            $this->chatroom_service->statusChangeCancelReceiver($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+        });
+
+        return redirect()->route('chatroom.evaluation.cancel.receiver.complete', $chatroom->id);
+    }
+
+
+    /**
+     * キャンセル時、キャンセルされた側評価完了画面
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function evaluationCancelReceiverComplete(Chatroom $chatroom)
+    {
+        $survey = KaribitoSurvey::where([
+            ['user_id',\Auth::id()],
+            ['chatroom_id', $chatroom->id],
+        ])->get();
+
+        return view('chatroom.evaluation.cancel.completeReceiver', compact('chatroom','survey'));
     }
 
     /**

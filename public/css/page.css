@@ -8551,6 +8551,32 @@ select.searchSelect {
 	color: #959595;
 }
 
+.cancel .cancel_evaluation a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 45px;
+    background: #D80000;
+    border: 1px solid #D80000;
+    border-radius: 3px;
+    text-align: center;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.cancel .cancel_evaluation .cancelStart {
+    border: 1px solid #CDCDCD;
+    background: #EDEDED;
+    color: #111;
+}
+
+.cancel .cancel_evaluation .cancelEnd {
+    border: 1px solid #D80000;
+    background: #fff;
+    color: #EB6A1E;
+}
+
 /*side*/
 .publicate {
 	padding: 10px;
@@ -8910,6 +8936,10 @@ select.searchSelect {
 	display: flex;
 	justify-content: center;
 	text-align: center;
+}
+
+.cancelWrap .cancelRea .rateTitle {
+    margin-bottom: 24px;
 }
 
 .cancelWrap .cancelRea .rate label {

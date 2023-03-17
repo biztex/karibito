@@ -337,7 +337,33 @@ Route::middleware('update_latest_login_datetime')->group(function () {
                 Route::post('{chatroom}/seller_evaluation','sellerEvaluation')->name('seller.evaluation'); //提供者評価
             });
 
+            Route::middleware('can:buyer.cancel.evaluation,chatroom')->group(function () {
+                Route::get('{chatroom}/buyer_cancel_evaluation','getBuyerCancelEvaluation')->name('get.buyer.cancel.evaluation'); //購入者価画面
+                Route::post('{chatroom}/buyer_cancel_evaluation','buyerCancelEvaluation')->name('buyer.cancel.evaluation'); //購入者評価
+            });
+
+            Route::middleware('can:seller.cancel.evaluation,chatroom')->group(function () {
+                Route::get('{chatroom}/seller_cancel_evaluation','getSellerCancelEvaluation')->name('get.seller.cancel.evaluation'); //提供者価画面
+                Route::post('{chatroom}/seller_cancel_evaluation','sellerCancelEvaluation')->name('seller.cancel.evaluation'); //提供者評価
+            });
+
+            // キャンセルした側評価
+            Route::middleware('can:cancel.sender.evaluation,chatroom')->group(function () {
+                Route::get('{chatroom}/cancel_sender_evaluation','getCancelSenderEvaluation')->name('get.cancel.sender.evaluation'); //購入者価画面
+                Route::post('{chatroom}/cancel_sender_evaluation','cancelSenderEvaluation')->name('cancel.sender.evaluation'); //購入者評価
+            });
+
+            // キャンセルされた側評価
+            Route::middleware('can:cancel.receiver.evaluation,chatroom')->group(function () {
+                Route::get('{chatroom}/cancel_receiver_evaluation','getCancelReceiverEvaluation')->name('get.cancel.receiver.evaluation'); //購入者価画面
+                Route::post('{chatroom}/cancel_receiver_evaluation','cancelReceiverEvaluation')->name('cancel.receiver.evaluation'); //購入者評価
+            });
+
             Route::get('{chatroom}/evaluation/complete', 'evaluationComplete')->middleware('can:chatroom.evaluation.complete,chatroom')->name('evaluation.complete'); // 評価完了
+            // キャンセルした側評価完了
+            Route::get('{chatroom}/evaluation/cancel/sender/complete', 'evaluationCancelSenderComplete')->middleware('can:chatroom.evaluation.cancel.sender.complete,chatroom')->name('evaluation.cancel.sender.complete');
+            // キャンセルされた側評価完了
+            Route::get('{chatroom}/evaluation/cancel/receiver/complete', 'evaluationCancelReceiverComplete')->middleware('can:chatroom.evaluation.cancel.receiver.complete,chatroom')->name('evaluation.cancel.receiver.complete');
 
             // 支払い
             Route::middleware('deleted_service','can:purchase,proposal')->group(function () {
