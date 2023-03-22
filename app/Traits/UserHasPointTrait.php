@@ -18,10 +18,9 @@ trait UserHasPointTrait
     {
         $today = date('Y-m-d');
         
-        // 有効期限内、かつ、有効期限が昇順の取得ポイントのコレクション
+        // 有効期限が昇順の取得ポイントのコレクション
         $safe_points = UserGetPoint::where([
                             ['user_id', '=', \Auth::id()],
-                            ['deadline', '>=', $today],
                         ])
                         ->orderBy('deadline', 'asc')
                         ->select('point')

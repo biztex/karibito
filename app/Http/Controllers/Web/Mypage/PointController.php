@@ -28,7 +28,6 @@ class PointController extends Controller
         $today = date('Y-m-d');
         $user_get_points = UserGetPoint::where([
             ['user_id', '=', \Auth::id()],
-            ['deadline', '>=', $today],
         ])
             ->get();
         $user_use_points = UserUsePoint::where([
