@@ -40,7 +40,9 @@ class EmailVerificationNotificationController extends Controller
             \Session::put('send_msg','メールを送信しました。'); 
             // 最終送信日時を更新して認証メール送信
             $user->fill([ 'verifyemail_send_at' => Carbon::now() ])->save();
-            $request->user()->sendEmailVerificationNotification();
+            // シェアされたurlであればクエリパラメータに紹介者のidが含まれる
+            $introduced_user_id = $request->input('introduced_user_id');
+            $request->user()->sendEmailVerificationNotification($introduced_user_id);
 
         return back()->with('status', 'verification-link-sent');
 

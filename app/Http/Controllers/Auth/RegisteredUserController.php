@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Registered;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -49,13 +49,18 @@ class RegisteredUserController extends Controller
             'verifyemail_send_at' => Carbon::now()
         ]);
 
-        event(new Registered($user));
+        // シェアされたurlであればクエリパラメータに紹介者のidが含まれる
+        $introduced_user_id = $request->input('introduced_user_id');
+
+        event(new Registered($user, $introduced_user_id));
 
         Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
         \Session::put('send_msg','メールを送信しました。'); 
         
-        return redirect()->route('verification.notice');
+        return $request->has('introduced_user_id')
+            ? redirect()->route('verification.notice', ['introduced_user_id' => $introduced_user_id])
+            : redirect()->route('verification.notice');
     }
 }

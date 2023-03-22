@@ -20,7 +20,9 @@ class VerifyEmailController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
             // return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
-            return redirect()->route('user_profile.create');
+            return $request->has('introduced_user_id') 
+                ? redirect()->route('user_profile.create', ['introduced_user_id' => $request->input('introduced_user_id')]) 
+                : redirect()->route('user_profile.create');
 
         }
 
@@ -28,6 +30,8 @@ class VerifyEmailController extends Controller
             event(new Verified($request->user()));
         }
 
-        return redirect()->route('user_profile.create');
+        return $request->has('introduced_user_id') 
+                ? redirect()->route('user_profile.create', ['introduced_user_id' => $request->input('introduced_user_id')]) 
+                : redirect()->route('user_profile.create');
     }
 }

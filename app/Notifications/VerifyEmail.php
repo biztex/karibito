@@ -18,10 +18,11 @@ class VerifyEmail extends Notification
      * @return void
      */
     public static $toMailCallback;
+    protected $introduced_user_id;
 
-    public function __construct()
+    public function __construct(?int $introduced_user_id)
     {
-        //
+        $this->introduced_user_id = $introduced_user_id;
     }
 
     /**
@@ -69,13 +70,20 @@ class VerifyEmail extends Notification
      */
     protected function verificationUrl($notifiable)
     {
+        $query_param = !empty($this->introduced_user_id)
+        ? [
+            'id' => $notifiable->getKey(),
+            'hash' => sha1($notifiable->getEmailForVerification()),
+            'introduced_user_id' => $this->introduced_user_id
+        ] 
+        : [
+            'id' => $notifiable->getKey(),
+            'hash' => sha1($notifiable->getEmailForVerification()),
+        ];
         return \URL::temporarySignedRoute(
             'verification.verify',
             Carbon::now()->addMinutes(\Config::get('auth.verification.expire', 60)),
-            [
-                'id' => $notifiable->getKey(),
-                'hash' => sha1($notifiable->getEmailForVerification()),
-            ]
+            $query_param
         );
     }
 

@@ -211,4 +211,13 @@ class UserProfileService
     {
         \Auth::user()->userProfile->fill(['can_call' => $can_call ])->save();
     }
+
+    /**
+     * ユーザープロフィールの取得
+     * @param int $user_id
+     */
+    public function getUserProfile(int $user_id)
+    {
+        return UserProfile::where('user_id', $user_id)->first();
+    }
 }

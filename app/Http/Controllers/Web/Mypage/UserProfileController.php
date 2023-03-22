@@ -47,8 +47,13 @@ class UserProfileController extends Controller
         $last_name = $request->last_name;
         $gender = $request->gender;
         $prefecture_id = $request->prefecture_id;
+        $introduced_user_code = '';
+        if ($request->has('introduced_user_id')) {
+            $introduced_user_profile = $this->user_profile_service->getUserProfile($request->input('introduced_user_id'));
+            $introduced_user_code = $introduced_user_profile->my_code;
+        };
 
-        return view('auth.friend_code', compact('name','first_name', 'last_name', 'gender', 'prefecture_id'));
+        return view('auth.friend_code', compact('name','first_name', 'last_name', 'gender', 'prefecture_id', 'introduced_user_code'));
     }
 
     /**
