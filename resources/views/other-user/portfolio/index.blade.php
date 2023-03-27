@@ -8,7 +8,7 @@
 					<li><a href="{{ route('user.skills', $user->id) }}">スキル・経歴</a></li>
 					<li><a href="" class="is_active">ポートフォリオ</a></li>
 					<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
-					<li><a href="#">ブログ</a></li>
+					<li><a href="{{ route('user.publication', $user->id) }}">出品サービス</a></li>
 				</ul>
 			</div>
 		</div>
