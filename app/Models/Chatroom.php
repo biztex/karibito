@@ -15,20 +15,24 @@ class Chatroom extends Model
     const STATUS_START = 1;
     const STATUS_PROPOSAL = 2;
     const STATUS_WORK = 3;
-    const STATUS_BUYER_EVALUATION = 4;
-    const STATUS_SELLER_EVALUATION = 5;
-    const STATUS_COMPLETE = 6;
-    const STATUS_CANCELED = 7;
-    const STATUS_CANCEL_SENDER_EVALUATION = 8;
-    const STATUS_CANCEL_RECEIVE_EVALUATION = 9;
+    const STATUS_WORK_REPORT = 4;
+    const STATUS_BUYER_EVALUATION = 5;
+    const STATUS_SELLER_EVALUATION = 6;
+    const STATUS_COMPLETE = 7;
+    const STATUS_CANCELED_REPORT = 8;
+    const STATUS_CANCELED = 9;
+    const STATUS_CANCEL_SENDER_EVALUATION = 10;
+    const STATUS_CANCEL_RECEIVE_EVALUATION = 11;
 
     const STATUS = [
         self::STATUS_START => 'チャット開始',
         self::STATUS_PROPOSAL => '契約',
         self::STATUS_WORK => '作業',
+        self::STATUS_WORK_REPORT=> '完了報告',
         self::STATUS_BUYER_EVALUATION => '購入者評価',
         self::STATUS_SELLER_EVALUATION => '出品者評価',
         self::STATUS_COMPLETE => '完了',
+        self::STATUS_CANCELED_REPORT => 'キャンセル報告',
         self::STATUS_CANCELED => 'キャンセル',
         self::STATUS_CANCEL_SENDER_EVALUATION => 'キャンセルした側評価',
         self::STATUS_CANCEL_RECEIVE_EVALUATION => 'キャンセルされた側評価'
@@ -47,7 +51,7 @@ class Chatroom extends Model
 
     /**
      * 完了済み販売実績取得
-     * 
+     *
      * @param int $user_id
      * @return int
      */
@@ -63,7 +67,7 @@ class Chatroom extends Model
     public function isCancelable(): bool
     {
         if($this->purchase === null || !in_array($this->status, [self::STATUS_WORK])) return false;
-        
+
         return $this->purchase->isCancelable();
     }
 
@@ -78,7 +82,7 @@ class Chatroom extends Model
 
     /**
      * NDA送付表示可能判断
-     * 
+     *
      * @return bool
      */
     public function isDisplayableNda(): bool
@@ -147,7 +151,7 @@ class Chatroom extends Model
 
     /**
      * referenceがProduct かつ
-     * seller / buyer がログインユーザーである 
+     * seller / buyer がログインユーザーである
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -159,7 +163,7 @@ class Chatroom extends Model
 
     /**
      * product_idより対象のチャットルームを取得
-     * 
+     *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -170,7 +174,7 @@ class Chatroom extends Model
 
      /**
      * job_request_idより対象のチャットルームを取得
-     * 
+     *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -181,7 +185,7 @@ class Chatroom extends Model
 
     /**
      * referenceがJobRequest かつ
-     * seller / buyer がログインユーザーである 
+     * seller / buyer がログインユーザーである
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -252,7 +256,7 @@ class Chatroom extends Model
     public function proposals()
     {
         return $this->hasMany(Proposal::class);
-    } 
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -260,7 +264,7 @@ class Chatroom extends Model
     public function purchase()
     {
         return $this->hasOne(Purchase::class);
-    }    
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -268,7 +272,7 @@ class Chatroom extends Model
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
-    }   
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
