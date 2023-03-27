@@ -11,9 +11,9 @@
 								<p>よくあるご質問</p>
 							</li>
 							<li class="biggerlink">
-								<p class="tit">初めての方へ</p>
+								<p class="tit">カリビト攻略法</p>
 								<a href="{{ route('guide') }}" class="ico_support02" rel="noopener noreferrer"></a>
-								<p>初心者ガイド</p>
+								<p>初めての方へ</p>
 							</li>
 							<li class="biggerlink">
 								<p class="tit">お問い合わせ</p>
@@ -193,7 +193,7 @@
                             <li>
                                 <p class="quest toggleBtn"><span>売上金を受け取るには？</span><span class="more">回答を見る</span></p>
                                 <p class="answer toggleBox">
-                                    取引完了後、売上金が計上されますので、マイページより振込申請を行ってください。振込申請期間は120日間となりますので、期日内に申請をお願いします。<span>期日を過ぎますと、自動的にご登録の銀行口座に売上金が振り込まれます。</span>銀行口座は【マイページ】＞【会員情報】よりご登録いただけます。
+                                    取引完了後に売上金が計上されますので、マイページより振込申請を行ってください。振込申請期間は120日間です。期日内に申請をお願いします。振込先銀行口座は【マイページ ＞ 会員情報】よりご登録いただけます。万が一、振込申請期間を過ぎてしまった場合は、<a href="{{ route('contact') }}" class="supportLink" target="_blank">お問い合わせフォーム</a>から運営までご連絡をお願いします。
                                 </p>
                             </li>
                             <li>
