@@ -68,7 +68,9 @@ class BlogController extends Controller
     public function show(Blog $blog): View
     {
         $dmrooms = Dmroom::where('to_user_id','=', $blog->user->id)->where('from_user_id', '=', \Auth::id())->first();
-        return view('mypage.blog.show', compact('blog', 'dmrooms'));
+        $base_url = config('app.url');
+        $url = "$base_url/blog/$blog->id";
+        return view('mypage.blog.show', compact('blog', 'dmrooms', 'url'));
     }
 
     /**

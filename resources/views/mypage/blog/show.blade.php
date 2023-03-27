@@ -71,11 +71,11 @@
 								</div>
 							</div>
 							<ul class="detailSns">
-								<li><a href="#"><img src="img/mypage/ico_facebook.svg" alt=""></a></li>
-								<li><a href="#"><img src="img/mypage/ico_line.svg" alt=""></a></li>
-								<li><a href="#"><img src="img/mypage/ico_twitter.svg" alt=""></a></li>
-								<li><a href="#"><img src="img/mypage/ico_mail.svg" alt=""></a></li>
-							</ul>
+                                <li><a href="http://www.facebook.com/share.php?u={{ $url }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a></li>
+                                <li><a href="https://social-plugins.line.me/lineit/share?url={{ $url }}"><img src="/img/mypage/ico_line.svg" alt=""></a></li>
+                                <li><a href="https://twitter.com/share?url={{ $url }}&text={{ $blog->title }} %20%7C%20 {{ $blog->user->name }} %20%7C%20ブログ %20%7C%20 カリビト&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a></li>
+                                <li><a href="mailto:?subject=カリビトのブログをシェア&body={{ $blog->title }} %20%7C%20 {{ $blog->user->name }} %20%7C%20ブログ %20%7C%20 カリビト {{ $url }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a></li>
+                            </ul>
 							<div class="blogDtOther">
 								<dl class="blogItemPerson">
 									<dt><img src="img/blog/head_detail01_01.png" alt=""></dt>
