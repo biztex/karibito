@@ -8,7 +8,7 @@
         <div class="item">
             @error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
             <div class="evaluation">
-                <textarea name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);"></textarea>
+                <textarea id="templateText" name="text" placeholder="本文を入力してください" class="templateText" onkeyup="ShowLength(value);"></textarea>
 				<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/3000</p>
             </div>
 
@@ -24,7 +24,7 @@
                     <a href="javascript:;" class="templateOpen">定型文を使う</a>
                 </div>
                 <div>
-                    <a href="javascript:;" class="templateProfileOpen">プロフィールを送付する</a>
+                    <a href="#" onclick="insertProfile()">プロフィールを送付する</a>
                 </div>
                 <div>
                     <a href="https://codeforfun.jp/tools/estimate/" target="_blank">見積書を作成する（外部リンク）</a>
@@ -229,5 +229,13 @@
     // フィールドをクリックしたら文字数の表示
     function ClickShowLength( str ) {
         document.getElementById("inputlength").innerHTML = str.length + "/3000";
+    }
+
+    // マイページURLを送付
+    function insertProfile() {
+        var templateText = document.getElementById("templateText");
+        var mypageUrl = '◎プロフィールURL ' + '{{ config('app.url') }}' + '/user/' + '{{ Auth::user()->id }}' + '/mypage';
+        templateText.value += mypageUrl;
+        return false;
     }
 </script>
