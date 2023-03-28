@@ -1,10 +1,14 @@
-<div class="subPagesTab st2">   
-    <ul class="tabChatRoomLink" style="display:flex;justify-content:space-around;">
-        <li><a href="#chatroom_box01" class="is_active">すべて</a></li>
-        <li><a href="#chatroom_box02" class="">交渉中</a></li>
-        <li><a href="#chatroom_box03" class="">契約</a></li>
-        <li><a href="#chatroom_box04" class="">完了</a></li>
-        <li><a href="#chatroom_box05" class="">キャンセル</a></li>
-        <li><a href="#chatroom_box06" class="">ゴミ箱</a></li>
-    </ul>
-</div>
+<ul id="chatroomStepUl" class="stepUl">
+    <li class="is_active">
+        <p class="stepDot"></p>
+        <p class="stepTxt">交渉中</p>
+    </li>
+    <li @if($value->status > App\Models\Chatroom::STATUS_PROPOSAL) class="is_active" @endif>
+        <p class="stepDot"></p>
+        <p class="stepTxt">契約</p>
+    </li>
+    <li @if($value->status >= App\Models\Chatroom::STATUS_BUYER_EVALUATION) class="is_active" @endif>
+        <p class="stepDot"></p>
+        <p class="stepTxt">評価</p>
+    </li>
+</ul>
