@@ -12,9 +12,9 @@
 				</div>
 
 				{{-- 招待コード --}}
-				@if (Auth::user()->userProfile)
+				@isset(Auth::user()->userProfile)
 					<x-parts.invitation-code/>
-				@endif
+				@endisset
 			@else
 				<p>このユーザーは退会しました。</p>
 			@endif

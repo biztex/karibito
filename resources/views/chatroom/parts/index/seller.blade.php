@@ -1,18 +1,8 @@
 <div class="tabBox is_active" id="seller_tab_box01">
     <div class="tabChatRoomWrap">
         <x-parts.seller-chatroom-step />
-        <ul id="seller_chatroom_box01" class="tabChatRoomBox favoriteUl01 exchangeChat is_active">
-            @if($seller_chatrooms->isEmpty())
-                <p style="margin:20px;">出品に関するやりとりはありません。</p>
-            @else
-                @foreach($seller_chatrooms as $value)
-                    <li>
-                        @include('chatroom.parts.index.conts')
-                    </li>
-                @endforeach
-            @endif
-        </ul>
         <?php
+            $seller_chatrooms_0 = [];
             $seller_chatrooms_1 = [];
             $seller_chatrooms_2 = [];
             $seller_chatrooms_3 = [];
@@ -22,6 +12,7 @@
                 if (isset($value->trash_flg) && $value->trash_flg === 1) {
                     array_push($seller_chatrooms_5, $value);
                 } else {
+                    array_push($seller_chatrooms_0, $value);
                     if($value->status == 1 || $value->status == 2) {
                         array_push($seller_chatrooms_1, $value);
                     } elseif ($value->status == 3 || $value->status == 4 || $value->status == 5){
@@ -35,8 +26,18 @@
 
             }
         ?>
-        {{-- {{info($seller_chatrooms_1[0]);}} エラーになるので、非表示--}}
 
+        <ul id="seller_chatroom_box01" class="tabChatRoomBox favoriteUl01 exchangeChat is_active">
+            @if(count($seller_chatrooms_0) === 0)
+                <p style="margin:20px;">出品に関するやりとりはありません。</p>
+            @else
+                @foreach($seller_chatrooms_0 as $value)
+                    <li>
+                        @include('chatroom.parts.index.conts')
+                    </li>
+                @endforeach
+            @endif
+        </ul>
         <ul id="seller_chatroom_box02" class="tabChatRoomBox favoriteUl01 exchangeChat">
             @if(count($seller_chatrooms_1) === 0)
                 <p style="margin:20px;">出品に関するやりとりはありません。</p>
