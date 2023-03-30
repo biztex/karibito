@@ -20,12 +20,12 @@
                             </div>
                         </td>
                     </tr>
-                    @if (Auth::user()->userProfile)
+                    @isset(Auth::user()->userProfile)
                         <tr>
                             <th>あなたの招待コード</th>
                             <td><input type="text" class="small" value="{{ Auth::user()->userProfile->my_code }}"></td>
                         </tr>
-                    @endif
+                    @endisset
                 </table>
             </form>
         </div>
