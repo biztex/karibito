@@ -35,7 +35,7 @@
 
             }
         ?>
-        {{info($seller_chatrooms_1[0]);}}
+        {{-- {{info($seller_chatrooms_1[0]);}} エラーになるので、非表示--}}
 
         <ul id="seller_chatroom_box02" class="tabChatRoomBox favoriteUl01 exchangeChat">
             @if(count($seller_chatrooms_1) === 0)
