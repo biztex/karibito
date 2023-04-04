@@ -3,7 +3,7 @@
         <div class="serviceLinks">
             <div class=footer_list1>
                 <ul>
-                    <li><span class="footerlist_text"><a href="{{ route('home') }}">サービスを探す</a><span></li>
+                    <li><span class="footerlist_text"><a href="/product/index/keyword/search?service_flg=1&keyword=&search_flg=1">サービスを探す</a><span></li>
                     @foreach($categories as $category)
                     <li>
                         <a href="{{route('product.category.index', $category->id) }}">{{$category->name}}</a>

@@ -77,10 +77,10 @@ class ChatroomController extends Controller
      */
     public function index()
     {
-        $active_chatrooms = Chatroom::active()->orderBy('updated_at','desc')->paginate(10);
-        $inactive_chatrooms = Chatroom::inActive()->orderBy('updated_at','desc')->paginate(10);
+        $buyer_chatrooms = Chatroom::buyerChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerChatroom()->orderBy('updated_at','desc')->paginate(10);
 
-        return view('chatroom.index', compact('active_chatrooms','inactive_chatrooms'));
+        return view('chatroom.index', compact('buyer_chatrooms','seller_chatrooms'));
     }
 
     /**

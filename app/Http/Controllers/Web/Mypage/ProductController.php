@@ -253,12 +253,18 @@ class ProductController extends Controller
 
         $user = \Auth::user();
 
+        $purchased_cancel = new PurchasedCancel;
+        $cancel_count = $purchased_cancel->getCancelCount($user->id);
+
+        $chatroom = new Chatroom;
+        $total_sales_count = $chatroom->getSalesCount($user->id);
+
         if(!is_null($request->youtube_link[0]) ){ //YouTubeリンクがある場合のみ枠を表示するためにこのコードを書いた
             $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
-            return view('product.preview',compact('request','user', 'iframe_urls'));
+            return view('product.preview',compact('request','user', 'iframe_urls', 'total_sales_count', 'cancel_count'));
         }
 
-        return view('product.preview',compact('request','user'));
+        return view('product.preview',compact('request','user', 'total_sales_count', 'cancel_count'));
     }
 
     public function postCreate(Request $request)
@@ -291,7 +297,13 @@ class ProductController extends Controller
 
         $iframe_urls = $this->product_service->changeYoutubeLink($request->youtube_link);
 
-        return view('product.update_preview',compact('request','user', 'product', 'iframe_urls'));
+        $purchased_cancel = new PurchasedCancel;
+        $cancel_count = $purchased_cancel->getCancelCount($user->id);
+
+        $chatroom = new Chatroom;
+        $total_sales_count = $chatroom->getSalesCount($user->id);
+
+        return view('product.update_preview',compact('request','user', 'product', 'iframe_urls', 'total_sales_count', 'cancel_count'));
     }
 
     /**

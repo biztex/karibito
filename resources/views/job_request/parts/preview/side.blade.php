@@ -26,7 +26,6 @@
         </div>
         <p class="specialtyBtn"><span>この情報をシェアする</span></p>
     </div>
-    
-    <x-parts.box-seller :user='$user'/>
 
+    <x-parts.box-seller :user="$user" :cancel_count="$cancel_count" :total_sales_count="$total_sales_count"/>
 </aside>

@@ -2424,3 +2424,10 @@ p#copyright {
 		padding-left: 1.3em;
 	}
 }
+.starFlex {
+    display: flex;
+}
+.starFlex span {
+    margin-left: 0;
+    color: #F0941B !important;
+}

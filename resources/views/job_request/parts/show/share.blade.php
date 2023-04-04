@@ -12,10 +12,9 @@
             </div>
 
             {{-- 招待コード --}}
-            @auth
-				<x-parts.invitation-code/>
-			@endauth
-
+            @isset(Auth::user()->userProfile)
+                <x-parts.invitation-code/>
+            @endisset
         </div>
     </div>
 </div>

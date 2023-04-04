@@ -21,34 +21,40 @@
 				<div id="main">
 					<div class="blogWrap">
 						<p class="mypageHd02"><span>ブログ</span></p>
-						@foreach ($blogs as $blog)
-							<div class="blogItem">
-								<p class="blogItemImg">
-									<a href="{{ route('user.blog.show', [$user, $blog]) }}"><img src="{{ $blog->path }}" alt=""></a>
-								</p>
-								<p class="blogItemHd">{{ $blog->title }}</p>
-								<p class="blogItemBread">
-									<a href="{{ route('product.category.index', $blog->product->mProductChildCategory->mProductCategory->id) }}"> {{--todo:ルート先修正--}}
-										{{ $blog->product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;
-									<a href="{{ route('product.category.index.show', $blog->product->mProductChildCategory->id)}}">
-										{{ $blog->product->mProductChildCategory->name }}</a>
-								</p>
-								<div class="blogItemCont">
-									<p>{{ $blog->content }}</p>
+						@if ($blogs->isEmpty())
+							<p>ブログはありません。</p>
+						@else
+							@foreach ($blogs as $blog)
+								<div class="blogItem">
+									<p class="blogItemImg">
+										<a href="{{ route('user.blog.show', [$user, $blog]) }}"><img src="{{ $blog->path }}" alt=""></a>
+									</p>
+									<p class="blogItemHd">{{ $blog->title }}</p>
+									<p class="blogItemBread">
+										<a href="{{ route('product.category.index', $blog->product->mProductChildCategory->mProductCategory->id) }}">
+											{{ $blog->product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;
+										<a href="{{ route('product.category.index.show', $blog->product->mProductChildCategory->id)}}">
+											{{ $blog->product->mProductChildCategory->name }}</a>
+									</p>
+									<a href="{{ route('user.blog.show', [$user, $blog]) }}">
+										<div class="blogItemCont">
+											<p>{{ $blog->content }}</p>
+										</div>
+										<dl class="blogItemPerson">
+											@if(empty($blog->user->userProfile->icon))
+												<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+											@else
+												<dt><img src="{{asset('/storage/' . $blog->user->userProfile->icon) }}" alt=""></dt>
+											@endif
+											<dd>
+												<p class="nameP">{{ $blog->user->name }}</p>
+												<p class="dateP">{{ $blog->updated_at }}</p>
+											</dd>
+										</dl>
+									</a>
 								</div>
-								<dl class="blogItemPerson">
-									@if(empty($blog->user->userProfile->icon))
-										<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
-									@else
-										<dt><img src="{{asset('/storage/' . $blog->user->userProfile->icon) }}" alt=""></dt>
-									@endif
-									<dd>
-										<p class="nameP">{{ $blog->user->name }}</p>
-										<p class="dateP">{{ $blog->updated_at }}</p>
-									</dd>
-								</dl>
-							</div>
-						@endforeach
+							@endforeach
+						@endif
 					</div>
 				</div><!-- /#main -->
 				@include('other-user.parts.side')

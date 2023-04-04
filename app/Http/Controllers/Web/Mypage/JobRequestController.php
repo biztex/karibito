@@ -246,8 +246,13 @@ class JobRequestController extends Controller
         $date = new Carbon($request->application_deadline);
         $diff_time = $date->addDay()->diffForHumans(Carbon::now());
 
+        $purchased_cancel = new PurchasedCancel;
+        $cancel_count = $purchased_cancel->getCancelCount($user->id);
 
-        return view('job_request.preview',compact('request','user','diff_time'));
+        $chatroom = new Chatroom;
+        $total_sales_count = $chatroom->getSalesCount($user->id);
+
+        return view('job_request.preview',compact('request','user','diff_time', 'cancel_count', 'total_sales_count'));
     }
 
     /**
@@ -288,7 +293,13 @@ class JobRequestController extends Controller
         $date = new Carbon($request->application_deadline);
         $diff_time = $date->addDay()->diffForHumans(Carbon::now());
 
-        return view('job_request.preview',compact('request','user','job_request','diff_time'));
+        $purchased_cancel = new PurchasedCancel;
+        $cancel_count = $purchased_cancel->getCancelCount($user->id);
+
+        $chatroom = new Chatroom;
+        $total_sales_count = $chatroom->getSalesCount($user->id);
+
+        return view('job_request.preview',compact('request','user','job_request','diff_time', 'cancel_count', 'total_sales_count'));
     }
 
     /**

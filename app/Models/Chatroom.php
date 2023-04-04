@@ -114,6 +114,28 @@ class Chatroom extends Model
     }
 
     /**
+     * 購入に関するやりとり
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBuyerChatroom($query)
+    {
+        return $query->where('buyer_user_id', \Auth::id());
+    }
+
+    /**
+     * 出品に関するやりとり
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSellerChatroom($query)
+    {
+        return $query->where('seller_user_id', \Auth::id());
+    }
+
+    /**
      * 進行中のやりとり
      * status キャンセル・完了以外
      *
