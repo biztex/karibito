@@ -29,7 +29,7 @@ class ChatroomService
             'buyer_user_id' => \Auth::id(),
         ];
         $chatroom = $product->chatrooms()->create($users);
-        
+
         return $chatroom;
     }
     // 新規チャット(リクエスト)
@@ -40,38 +40,44 @@ class ChatroomService
             'buyer_user_id' => $job_request->user_id,
         ];
         $chatroom = $job_request->chatrooms()->create($users);
-        
+
         return $chatroom;
     }
 
     // ステータスを 2:契約 に変更
     public function statusChangeContract(Chatroom $chatroom)
     {
-        $chatroom->fill(['status' => 2])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_PROPOSAL])->save();
     }
 
     // ステータスを 3:作業 に変更
     public function statusChangeWork(Chatroom $chatroom)
     {
-        $chatroom->fill(['status' => 3])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_WORK])->save();
+    }
+
+    // ステータスを 4:購入者評価 に変更
+    public function statusChangeWorkReport(Chatroom $chatroom)
+    {
+        $chatroom->fill(['status' => Chatroom::STATUS_WORK_REPORT])->save();
     }
 
     // ステータスを 4:購入者評価 に変更
     public function statusChangeBuyerEvaluation(Chatroom $chatroom)
     {
-        $chatroom->fill(['status' => 4])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_BUYER_EVALUATION])->save();
     }
 
     // ステータスを 5:出品者評価 に変更
     public function statusChangeSellerEvaluation(Chatroom $chatroom)
     {
-        $chatroom->fill(['status' => 5])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_SELLER_EVALUATION])->save();
     }
 
     // ステータスを 6:完了 に変更 & 売上金レコード作成
     public function statusChangeComplete(Chatroom $chatroom, PurchaseService $purchase_service)
     {
-        $chatroom->fill(['status' => 6])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_COMPLETE])->save();
         // 要確認
         if(empty($chatroom->profit)){
             $this->createProfit($chatroom, $purchase_service);
@@ -81,19 +87,19 @@ class ChatroomService
     // ステータスを 7:キャンセル に変更
     public function statusChangeCanceled(Chatroom $chatroom)
     {
-        $chatroom->fill(['status' => 7])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_CANCELED])->save();
     }
 
     // ステータスを 8:キャンセルした側評価に変更
     public function statusChangeCancelSender(Chatroom $chatroom)
     {
-        $chatroom->fill(['status' => 8])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_CANCEL_SENDER_EVALUATION])->save();
     }
 
     // ステータスを 8:キャンセルした側評価に変更
     public function statusChangeCancelReceiver(Chatroom $chatroom)
     {
-        $chatroom->fill(['status' => 9])->save();
+        $chatroom->fill(['status' => Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION])->save();
     }
 
     // 売上金レコードの作成
@@ -114,7 +120,7 @@ class ChatroomService
             }
         }
     }
-    
+
     public function deleteJobRequest(JobRequest $job_request)
     {
         foreach($job_request->chatrooms as $chatroom) {
@@ -124,7 +130,7 @@ class ChatroomService
             }
         }
     }
-    
+
     // ユーザーが退会ボタンを押したとき、取引中のやりとりがあれば、
     // 退会できない旨のメッセージを表示
     public function canIWithdraw($user)
@@ -132,7 +138,7 @@ class ChatroomService
         $chatrooms = Chatroom::where('seller_user_id',$user->id)
                     ->orWhere('buyer_user_id',$user->id)
                     ->get();
-        $can_i_withdraw = $chatrooms->whereBetween('status',[3,5])->isEmpty();
+        $can_i_withdraw = $chatrooms->whereBetween('status',[Chatroom::STATUS_WORK, Chatroom::STATUS_COMPLETE])->isEmpty();
 
         if(!$can_i_withdraw){
             return redirect()->route('showWithdrawForm')->with('flash_msg','現在取引中のため退会することができません')->throwResponse();
