@@ -56,6 +56,12 @@ class ChatroomService
         $chatroom->fill(['status' => Chatroom::STATUS_WORK])->save();
     }
 
+    // ステータスを 3:作業 に変更
+    public function statusChangeWorkWithRetry(Chatroom $chatroom)
+    {
+        $chatroom->fill(['status' => Chatroom::STATUS_WORK, 'retry_flg' => 1])->save();
+    }
+
     // ステータスを 4:購入者評価 に変更
     public function statusChangeWorkReport(Chatroom $chatroom)
     {

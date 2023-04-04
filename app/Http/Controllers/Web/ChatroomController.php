@@ -383,7 +383,39 @@ class ChatroomController extends Controller
     {
         \DB::transaction(function () use ($chatroom) {
             $this->chatroom_message_service->storeCompleteMessage($chatroom);
+            $this->chatroom_service->statusChangeWorkReport($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+        });
+        return back();
+    }
+
+    /**
+     * 作業完了通知
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getWorkConfirm(Chatroom $chatroom)
+    {
+        \DB::transaction(function () use ($chatroom) {
+            $this->chatroom_message_service->storeConfirmMessage($chatroom);
             $this->chatroom_service->statusChangeBuyerEvaluation($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+        });
+        return back();
+    }
+
+    /**
+     * 作業完了 リトライ
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getRetry(Chatroom $chatroom)
+    {
+        \DB::transaction(function () use ($chatroom) {
+            $this->chatroom_message_service->storeRetryMessage($chatroom);
+            $this->chatroom_service->statusChangeWorkWithRetry($chatroom);
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
         return back();

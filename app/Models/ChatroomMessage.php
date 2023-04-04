@@ -65,4 +65,13 @@ class ChatroomMessage extends Model
             return $textFormat->generateLinkFromSentence($value);
         }
     }
+
+    public function oldMessage($chatroom_id, $message_text, $message_id): bool
+    {
+        $message_ids = ChatroomMessage::where('chatroom_id', $chatroom_id)->where('text', $message_text)->pluck('id')->toArray();
+        if (count($message_ids) === 2) {
+            if ($message_ids[0] === $message_id) return true;
+        }
+        return false;
+    }
 }

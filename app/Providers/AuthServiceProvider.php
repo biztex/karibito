@@ -116,6 +116,21 @@ class AuthServiceProvider extends ServiceProvider
                 && $proposal->purchase()->exists();
         });
 
+        // やり取りでの納品完了 通知画面
+        Gate::define('confirm', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->buyer_user_id
+                && $chatroom->status === Chatroom::STATUS_WORK_REPORT
+                && !$chatroom->evaluations()->exists();
+        });
+
+        // やり取りでの購入完了画面
+        Gate::define('retry', function (User $user, Chatroom $chatroom) {
+            return $user->id === $chatroom->buyer_user_id
+                && $chatroom->status === Chatroom::STATUS_WORK_REPORT
+                && $chatroom->retry_flg !== 1
+                && !$chatroom->evaluations()->exists();
+        });
+
         // やり取りでの作業完了
         Gate::define('worked', function (User $user, Chatroom $chatroom) {
             return $user->id === $chatroom->seller_user_id && $chatroom->status === Chatroom::STATUS_WORK ;
