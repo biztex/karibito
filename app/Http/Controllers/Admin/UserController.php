@@ -71,7 +71,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = UserProfile::with(['user', 'prefecture'])->firstWhere('user_id', $id);
+        $user = UserProfile::with(['user', 'prefecture'])->withTrashed()->firstWhere('user_id', $id);
 
         return view('admin.user.show',compact('user'));
     }
