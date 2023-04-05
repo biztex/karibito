@@ -47,7 +47,12 @@
                                     <tr>
                                         <td class="px-2">{!! $value->id !!}</td>
                                         <td class="px-2"><a href="{{ route('admin.users.show',$value->user_id) }}">{!! $value->user_id !!}</a></td>
-                                        <td class="px-2"><a href="{{ route('admin.users.show',$value->user_id) }}">{!! $value->user->name !!}</a></td>
+                                        <td class="px-2">
+                                            <a href="{{ route('admin.users.show',$value->user_id) }}">{!! $value->user->name !!}</a>
+                                            {{-- @if ($value->user->deleted_at !== null)
+                                                <span class="badge badge-pill badge-danger">退会済</span>
+                                            @endif --}}
+                                        </td>
                                         <td class="px-2">¥{!! number_format($value->amount) !!}</p></td>
                                         <td class="px-2" style="max-width:35px">{!! $value->created_at !!}</td>
                                         <td class="px-2" style="color:red;">@if($value->amount_refunded !== null)¥{!! number_format($value->amount_refunded) !!}@endif</td>

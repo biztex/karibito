@@ -14,6 +14,9 @@
                     <h6 class="mb-0">ユーザー名</h6>
                     <h3><a href="{{ route('user.mypage', $user->id) }}">{{ $user->user->name }}</a></h3>
                     <span><i class="bi bi-envelope"> Email</i>：{{ $user->user->email }}</span>
+                    @if ($user->deleted_at !== null)
+                        <span class="badge badge-pill badge-danger">退会済</span>
+                    @endif
                     @if ($user->is_ban === 0)
                         <form action="{{ route('admin.limit.account', $user->user_id) }}" method="post">
                         <input type="submit" id="js-limit_alert" name="is_ban" value="利用を制限する">
