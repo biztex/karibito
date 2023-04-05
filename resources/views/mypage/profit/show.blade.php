@@ -38,7 +38,8 @@
 							<div class="memberConfigItem">
 								<ul class="bankTransferList">
 									@foreach($transfer_request->transferRequestDetails as $value)
-										@if($value->profit->chatroom_id === null && $value->profit->amount === -390)
+										{{-- 手数料を200円に変更 --}}
+										@if($value->profit->chatroom_id === null && $value->profit->amount === -200)
 										<a href="" class="bankTransferItem">
 											<div class="bankTransferHalf">
 												<p class="bankTransferType">手数料</p>
