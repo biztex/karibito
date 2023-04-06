@@ -36,7 +36,6 @@
                 </div>
                 @endif
             </div>
-            <x-parts.file-input/>
             <div class="cancelTitle">
                 <p>送信されたチャットを必要に応じてカリビトが確認・削除することに同意します。</p>
             </div>
