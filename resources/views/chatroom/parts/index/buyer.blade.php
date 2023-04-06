@@ -1,4 +1,4 @@
-<div class="tabBox" id="buyer_tab_box02">
+<div class="tabBox is_active" id="buyer_tab_box02">
     <div class="tabChatRoomWrap">
         <x-parts.buyer-chatroom-step />
         <?php

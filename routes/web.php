@@ -298,6 +298,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         // やり取り（提供・リクエスト共用版）
         Route::prefix('chatroom')->controller(ChatroomController::class)->middleware('null.user.profile')->name('chatroom.')->group(function () {
             Route::get('','index')->name('index');
+            Route::get('buyer','buyer')->name('buyer');
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
             Route::post('/update/{chatroom}/trash_flg/', 'updateTrashFlg')->name('update_trash_flg');

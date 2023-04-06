@@ -15,13 +15,13 @@
 						<div class="indexTab tabWrap">
 							<div class="inner">
 								<ul class="tabLink">
-                                    <li><a href="{{ route('chatroom.index') }}" class="is_active">出品に関するやりとり</a></li>
-                                    <li><a href="{{ route('chatroom.buyer') }}">購入に関するやりとり</a></li>
+									<li><a href="{{ route('chatroom.index') }}">出品に関するやりとり</a></li>
+									<li><a href="{{ route('chatroom.buyer') }}" id="buyer_chatroom" class="is_active">購入に関するやりとり</a></li>
 								</ul>
 							</div>
 						</div>
-						@include('chatroom.parts.index.seller')
-{{--                        @include('chatroom.parts.index.buyer')--}}
+{{--						@include('chatroom.parts.index.seller')--}}
+                        @include('chatroom.parts.index.buyer')
 					</div>
 				</div><!--inner-->
 			</div>
