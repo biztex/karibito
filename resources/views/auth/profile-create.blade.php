@@ -69,7 +69,12 @@
 												</select>
 											</div>
 									</div>
-									<p style="font-size:12px;">※ニックネームは公開されます。<br>　本人認証に利用されるものと同じ姓名でご記入ください。</p>
+									<p style="font-size:12px;">
+                                        ＊ニックネームとお住まいの都道府県は公開されます。<br>
+                                        ＊姓名は非公開です。<br>
+                                        ＊ご登録の姓名が本人確認で申請される書類と異なる場合、本人確認できませんのでご注意ください<br>
+                                        <br>
+                                    </p>
 									@if (request()->has('introduced_user_id'))
 									<input type="hidden" value="{{ request()->input('introduced_user_id') }}" name="introduced_user_id">
 									@endif
