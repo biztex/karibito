@@ -328,6 +328,14 @@ Route::middleware('update_latest_login_datetime')->group(function () {
 
             Route::get('{chatroom}/complete','complete')->middleware('can:worked,chatroom')->name('complete')->middleware('is_ban'); //作業完了
 
+            Route::middleware('can:confirm,chatroom')->group(function () {
+                Route::get('{chatroom}/confirm','getWorkConfirm')->name('get.work.confirm'); //「納品完了」通知
+            });
+
+            Route::middleware('can:retry,chatroom')->group(function () {
+                Route::get('{chatroom}/retry','getRetry')->name('get.work.retry'); //「納品完了」通知
+            });
+
             Route::middleware('can:buyer.evaluation,chatroom')->group(function () {
                 Route::get('{chatroom}/buyer_evaluation','getBuyerEvaluation')->name('get.buyer.evaluation'); //購入者価画面
                 Route::post('{chatroom}/buyer_evaluation','buyerEvaluation')->name('buyer.evaluation'); //購入者評価

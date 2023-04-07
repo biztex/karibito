@@ -87,6 +87,29 @@ class ChatroomMessageService
         $chatroom->chatroomMessages()->create($message);
     }
 
+
+    // 作業完了通知
+    public function storeConfirmMessage(Chatroom $chatroom)
+    {
+        $message = [
+            'user_id' => \Auth::id(),
+            'text' => '「納品完了」通知を承認しました！',
+            'is_complete_message' => 1,
+        ];
+        $chatroom->chatroomMessages()->create($message);
+    }
+
+    // storeRetryMessage
+    public function storeRetryMessage(Chatroom $chatroom)
+    {
+        $message = [
+            'user_id' => \Auth::id(),
+            'text' => 'リトライを通知しました！',
+            'is_complete_message' => 1,
+        ];
+        $chatroom->chatroomMessages()->create($message);
+    }
+
     // 評価
     public function storeEvaluationMessage(Evaluation $evaluation, Chatroom $chatroom)
     {

@@ -34,7 +34,7 @@
                                     <!-- メッセージ内容 -->
                                     @include('chatroom.parts.show.message')
                                 </ul>
-                                @if ($chatroom->status !== 6 || null !== $partner->deleted_at)
+                                @if ($chatroom->status !== \App\Models\Chatroom::STATUS_COMPLETE || null !== $partner->deleted_at)
                                         @include('chatroom.parts.show.form')
                                 @endif
                             </div>
