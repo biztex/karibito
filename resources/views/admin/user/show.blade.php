@@ -51,6 +51,7 @@
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">生年月日</span>：{{ $user->birthday }}</p><p class="mb-0 mr-4"><span class="font-weight-bold">年齢</span>：@if(isset($user->birthday)){{ $user->now_age }}歳@else未設定@endif</p><span class="font-weight-bold">年代</span>：{{ $user->age }}</p></li>
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">郵便番号</span>：〒{{ substr($user->zip, 0, 3).'-'.substr($user->zip, 3, 7) }}</p><p class="mb-0 mr-4"><span class="font-weight-bold">都道府県</span>：{{ $user->prefecture?->name }}</p></li>
             <li class="list-group-item"><span class="font-weight-bold">住所</span>：{{ $user->address }}</li>
+            <li class="list-group-item"><span class="font-weight-bold">電話番号</span>：{{ $user->user->tel }}</li>
             <li class="list-group-item"><span class="font-weight-bold">自己紹介</span><br>{!! nl2br(e($user->introduction)) !!}</li>
             <li class="list-group-item"><span class="font-weight-bold">メモ</span>
                 <button type="button" class="btn btn-info btn-sm" id="js-memo_btn" data-toggle="modal" data-target="#memoModalCenter{{ $user->user_id }}">
