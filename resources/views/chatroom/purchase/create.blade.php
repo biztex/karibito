@@ -13,8 +13,6 @@
 			<div class="cancelWrap">
 				<div class="inner inner05">
 
-					<x-parts.chatroom-step :value="$proposal->chatroom"/>
-
 					<h2 class="subPagesHd">お支払い手続き</h2>
 					<form id="paymentform" action="{{ route('chatroom.purchase.confirm', $proposal->id) }}" method="post">
 						@csrf
