@@ -34,6 +34,10 @@
                                             </div>
                                         </div>
                                         <div class="mypageEditList">
+                                            <p class="mypageEditHd">画像のプレビュー</p>
+                                            <img id="updatedSrc" alt="" style="width: 25%;">
+                                        </div>
+                                        <div class="mypageEditList">
                                             <p class="mypageEditHd">カテゴリ</p>
                                             @error('category_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="mypageEditInput">
@@ -121,9 +125,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="fancyPersonBtn">
-                                            <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
-                                            <button class="fancyPersonSign loading-disabled">登録する</button>
+                                        <div class="portfolioFooter">
+                                            <div class="portfolioFooterTitle">登録したポートフォリオは詳細画面からシェアできます。</div>
+                                            <div class="fancyPersonBtn">
+                                                <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
+                                                <button class="fancyPersonSign loading-disabled">登録する</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
