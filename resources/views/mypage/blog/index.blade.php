@@ -14,6 +14,7 @@
 				<div id="main">
 					<div class="blogWrap">
 						<p class="mypageHd02"><span>ブログ</span></p>
+                        <div style="margin-bottom: 10px;">登録したブログは詳細画面からシェアできます。</div>
 						<div class="blogAdd">
 							<a href="{{ route('blog.create') }}"><img src="img/mypage/edit_blog.svg" alt="ブログを追加"></a>
 						</div>
@@ -34,7 +35,7 @@
 								</div>
 								<dl class="blogItemPerson">
 									@if(empty($blog->user->userProfile->icon))
-										<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+										<dt><img src="/img/mypage/no_image.jpg" alt=""></dt>
 									@else
 										<dt><img src="{{asset('/storage/' . $blog->user->userProfile->icon) }}" alt=""></dt>
 									@endif
