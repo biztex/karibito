@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="mypageEditList">
                                             <p class="mypageEditHd">登録中の画像</p>
-                                            <img src="{{ asset('/storage/'.$portfolio->path)}}" alt="" style="width: 25%;">
+                                            <img id="updatedSrc" src="{{ asset('/storage/'.$portfolio->path)}}" alt="" style="width: 25%;">
                                         </div>
                                         <div class="mypageEditList">
                                             <p class="mypageEditHd">カテゴリ</p>
@@ -142,9 +142,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="fancyPersonBtn">
-                                            <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
-                                            <button class="fancyPersonSign">変更する</button>
+                                        <div class="portfolioFooter">
+                                            <div class="portfolioFooterTitle">登録したポートフォリオは詳細画面からシェアできます。</div>
+                                            <div class="fancyPersonBtn">
+                                                <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
+                                                <button class="fancyPersonSign">変更する</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>

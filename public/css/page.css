@@ -6183,6 +6183,16 @@ select.searchSelect {
 	margin-bottom: 40px;
 }
 
+.portfolioFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.portfolioFooter .portfolioFooterTitle {
+    padding-top: 10px;
+    margin: auto 0;
+}
+
 .detailSns {
 	margin: 50px auto 30px;
 	display: flex;
@@ -6213,6 +6223,10 @@ select.searchSelect {
 		display: flex;
 		justify-content: center;
 	}
+
+    .portfolioFooter {
+        flex-direction: column;
+    }
 }
 
 /*blog*/
