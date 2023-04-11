@@ -15,8 +15,8 @@
                     <p class="message_text">NDAが届きました！</p>
                     <div class="proposeBuy">
                         <p class="buy">
-                            <span style="font-weight: normal;">NDAを受信しました。締結に向けて内容を編集してください。</span>
-                            <a href="javascript:;" class="editNDAOpen">NDAを編集する</a>
+                            <span style="font-weight: normal;">締結に向けて必要事項を記載・修正し、返信しましょう。</span>
+                            <a href="javascript:;" class="editNDAOpen">編集する</a>
                         </p>
                     </div>
                 </div>
@@ -33,7 +33,10 @@
                     <p class="message_text">{{$message->text}}</p>
                     <div class="proposeBuy">
                         <p class="buy">
-                            <input type="submit" value="編集待ち" disabled>
+                            <span>
+                                内容を確認してもらい、必要事項を記載の上返信してもらいましょう。
+                            </span>
+                            <input type="submit" value="返信待ち" disabled>
                         </p>
                     </div>
                 </div>
@@ -57,7 +60,7 @@
                     <p class="message_text">{{$message->text}}</p>
                     <div class="proposeBuy">
                         <p class="buy">
-                            <input type="submit" value="締結待ち" disabled>
+                            <input type="submit" value="返信待ち" disabled>
                         </p>
                     </div>
                 </div>
@@ -74,8 +77,8 @@
                     <p class="message_text">NDAが編集されました！</p>
                     <div class="proposeBuy">
                         <p class="buy">
-                            <span style="font-weight: normal;">内容に問題がなければ締結をしてください。再編集した場合は再度送信してください。</span>
-                            <a href="javascript:;" class="editNDAOpen">NDAを編集する</a>
+                            <span style="font-weight: normal;">内容に問題がなければ締結してください。再編集した場合はもう一度送信しましょう。</span>
+                            <a href="javascript:;" class="editNDAOpen">編集する</a>
                         </p>
                     </div>
                 </div>
@@ -97,8 +100,8 @@
                 <p class="message_text">{{$message->text}}</p>
                 <div class="proposeBuy">
                     <p class="buy">
-                        <span style="font-weight: normal;">NDAが締結されました。作成したNDAをインストールできます。</span>
-                        <a href="{{ route('chatroom.download.nda.pdf', $chatroom->id) }}">NDAをダウンロード</a>
+                        <span style="font-weight: normal;">当事者間でのNDAが締結されました。<br/>締結したNDAはダウンロードして保存をしてください。</span>
+                        <a href="{{ route('chatroom.download.nda.pdf', $chatroom->id) }}">ダウンロードする</a>
                     </p>
                 </div>
             </div>
