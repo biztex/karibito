@@ -42,7 +42,7 @@
 							<p class="max-string" id="inputlengthProduct">{{ (mb_strlen(old('title', $job_request->title))) }}/30</p>
 						</div>
 
-						<p class="th">サービスの詳細<span class="must">必須</span></p>
+						<p class="th">サービスの詳細（30文字以上）<span class="must">必須</span></p>
 							@error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<textarea type="text" name="content" onkeyup="ShowLengthProductShow(value);">{{ old('content', $job_request->content) }}</textarea>
@@ -70,22 +70,22 @@
 							<input type="date" name="required_date" value="{{ old('required_date', $job_request->required_date ) }}" style="color:#333">
 						</div>
 
-							<div class="warnNotes" style="margin-bottom:5px;">
-								<p>
-                                    【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
-                                    <br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。
-                                    <div class="flex">
-                                        <span>【どちらでも】：</span>
-                                        <div class="inlineBlock">
-                                            対面と非対面どちらの体系でもサービスを提供します。
-                                            <br>
-                                            <span style="color:red;">どちらでもの場合、本人確認が必要になります。</span>
-                                        </div>
-                                    </div>
-								</p>
-							</div>
 						<p class="th">仕事体系<span class="must">必須</span></p>
-							@error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
+						<div class="warnNotes" style="margin-bottom:5px; margin-top: 0;">
+							<p>
+								【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
+								<br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。
+								<div class="flex">
+									<span>【どちらでも】：</span>
+									<div class="inlineBlock">
+										対面と非対面どちらの体系でもサービスを提供します。
+										<br>
+										<span style="color:red;">どちらでもの場合、本人確認が必要になります。</span>
+									</div>
+								</div>
+							</p>
+						</div>
+						@error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
 							<select name="is_online">
 								<option value="">選択してください</option>
