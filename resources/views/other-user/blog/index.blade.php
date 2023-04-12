@@ -38,11 +38,11 @@
 									</p>
 									<a href="{{ route('user.blog.show', [$user, $blog]) }}">
 										<div class="blogItemCont">
-											<p>{{ $blog->content }}</p>
+											<p>{!! $blog->content !!}</p>
 										</div>
 										<dl class="blogItemPerson">
 											@if(empty($blog->user->userProfile->icon))
-												<dt><img src="/img/mypage/pic_head.png" alt=""></dt>
+												<dt><img src="/img/mypage/no_image.jpg" alt=""></dt>
 											@else
 												<dt><img src="{{asset('/storage/' . $blog->user->userProfile->icon) }}" alt=""></dt>
 											@endif
