@@ -37,7 +37,7 @@
                             <p class="max-string" id="inputlengthProduct">{{ mb_strlen(old('title')) }}/30</p>
                         </div>
 
-                        <p class="th">サービスの詳細<span class="must">必須</span></p>
+                        <p class="th">サービスの詳細（30文字以上）<span class="must">必須</span></p>
                             @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <textarea type="text" name="content" onkeyup="ShowLengthProductShow(value);">{{ old('content', $request->content) }}</textarea>
@@ -50,8 +50,9 @@
                             <p class="budget price"><input type="text" placeholder="0" name="price" value="{{ old('price', $request->price) }}"></p>
                         </div>
 
+                        <p class="th">仕事体系<span class="must">必須</span></p>
                         <div class="td">
-                            <div class="warnNotes">
+                            <div class="warnNotes" style="margin-top: 0;">
                                 <p>
                                     【対面】：お互いが直接会ってサービスを提供します。<span style="color:red;">対面の場合、本人確認が必要になります。</span>
                                     <br>【非対面】：お互いが直接会わずに、オンライン上などで、サービスを提供します。
@@ -66,7 +67,6 @@
                                 </p>
                             </div>
                         </div>
-                        <p class="th">仕事体系<span class="must">必須</span></p>
                             @error('is_online')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
                             <select name="is_online">
