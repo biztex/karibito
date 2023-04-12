@@ -6309,6 +6309,16 @@ select.searchSelect {
 	font-weight: bold;
 }
 
+.blogFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.blogFooter .blogFooterTitle {
+    padding-top: 10px;
+    margin: auto 0;
+}
+
 @media screen and (max-width: 767px) {
 	.blogAdd a {
 		height: 150px;
@@ -6334,6 +6344,10 @@ select.searchSelect {
 		font-size: 1.6rem;
 		margin-bottom: 10px;
 	}
+
+    .blogFooter {
+        flex-direction: column;
+    }
 }
 
 .postFunction {

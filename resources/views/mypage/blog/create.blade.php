@@ -47,10 +47,13 @@
 										</select>
 									</div>
 								</div>
-								<div class="fancyPersonBtn">
-									<a href="{{ route('blog.index') }}" class="fancyPersonCancel">キャンセル</a>
-									<button class="fancyPersonSign loading-disabled">登録する</button>
-								</div>
+                                <div class="blogFooter">
+                                    <div class="blogFooterTitle">登録したブログは詳細画面からシェアできます。</div>
+                                    <div class="fancyPersonBtn">
+                                        <a href="{{ route('blog.index') }}" class="fancyPersonCancel">キャンセル</a>
+                                        <button class="fancyPersonSign loading-disabled">登録する</button>
+                                    </div>
+                                </div>
 							</div>
 						</form>
 					</div>
@@ -58,6 +61,7 @@
 				<x-side-menu/>
 			</div><!--inner-->
 		</div><!--contents-->
+    </div>
 	<x-hide-modal/>
 </x-layout>
 <script type='text/javascript'>

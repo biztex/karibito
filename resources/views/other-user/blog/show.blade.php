@@ -37,13 +37,13 @@
 								</dd>
 							</dl>
 							<div class="blogItemCont">
-								{{ $blog->content }}
+                                {!! $blog->content !!}
 							</div>
 							<div class="recommendList style2 blogDtList">
 								<div class="list sliderSP02">
 									<div class="item">
 										<a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
-											<img src="img/common/img_270x160.png" alt="">
+                                            <img src="{{ asset('/storage/'.$blog->product->productImage[0]->path) }}" alt="" style="object-fit: contain;">
 											<button class="favorite">お気に入り</button>
 										</a>
 										<div class="info">
