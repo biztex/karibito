@@ -19,10 +19,10 @@
                     @endif
                     @if ($user->is_ban === 0)
                         <form action="{{ route('admin.limit.account', $user->user_id) }}" method="post">
-                        <input type="submit" id="js-limit_alert" name="is_ban" value="利用を制限する">
+                        <input type="submit" id="js-limit_alert" name="is_ban" value="利用を制限する" class="full btn btn-secondary mr-3">
                     @elseif ($user->is_ban === 1)
                         <form action="{{ route('admin.cancel.limit.account', $user->user_id) }}" method="post">
-                        <input type="submit" name="is_ban" value="利用制限を解除する">
+                        <button onclick='return confirm("利用制限を解除しますか？");' type="submit" class="full btn btn-secondary mr-3">利用制限を解除する</button>
                     @endif
                         @csrf
                         </form>

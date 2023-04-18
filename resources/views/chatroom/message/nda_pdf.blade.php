@@ -22,6 +22,7 @@
     </style>
 </head>
 <body>
+    <h2 style="text-align:center">秘密保持契約書（NDA）</h2>
     {!! $nda_text !!}
 </body>
 </html>
