@@ -9,5 +9,10 @@
 {{ $request->message }}
 
 
-
-@include('mail.text.footer')
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+カリビト事務局
+──────────────────────────────
+Email: info@karibito.co.jp
+TEL: 089-993-8781
+URL: https://karibito.co.jp/
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
