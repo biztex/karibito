@@ -3498,15 +3498,15 @@
 }
 
 .pointUl01 a:before {
-	content: "";
-	position: absolute;
-	right: 0px;
-	top: 50%;
-	transform: translateY(-50%) rotate(45deg);
-	width: 10px;
-	height: 10px;
-	border: #333 solid;
-	border-width: 2px 2px 0 0
+	/*content: "";*/
+	/*position: absolute;*/
+	/*right: 0px;*/
+	/*top: 50%;*/
+	/*transform: translateY(-50%) rotate(45deg);*/
+	/*width: 10px;*/
+	/*height: 10px;*/
+	/*border: #333 solid;*/
+	/*border-width: 2px 2px 0 0*/
 }
 
 .pointUl01 dl {
@@ -3586,15 +3586,15 @@
 	}
 
 	.pointUl01 a:before {
-		content: "";
-		position: absolute;
-		right: 0px;
-		top: 50%;
-		transform: translateY(-50%) rotate(45deg);
-		width: 7px;
-		height: 7px;
-		border: #333 solid;
-		border-width: 1px 1px 0 0
+		/*content: "";*/
+		/*position: absolute;*/
+		/*right: 0px;*/
+		/*top: 50%;*/
+		/*transform: translateY(-50%) rotate(45deg);*/
+		/*width: 7px;*/
+		/*height: 7px;*/
+		/*border: #333 solid;*/
+		/*border-width: 1px 1px 0 0*/
 	}
 
 	.pointUl01 dl {
