@@ -9336,6 +9336,10 @@ select.searchSelect {
 	border: 1px solid #CCCCCC;
 }
 
+.cancelWrap .coupons .flex{
+    display: flex;
+}
+
 .cancelWrap .coupons .detail {
 	margin-top: 22px;
 	padding: 3px 10px;
@@ -9376,6 +9380,10 @@ select.searchSelect {
 
 .cancelWrap .method {
 	margin-top: 45px;
+}
+
+.cancelWrap .method .flex {
+    display: flex;
 }
 
 .cancelWrap .method .radioChoice {

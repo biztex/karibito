@@ -92,8 +92,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="functeBtns">
-								<input type="submit" class="orange full loading-disabled" value="確定する">
+							<div class="functeBtns flex">
+                                <input type="button" class="gray" value="戻る" onclick="history.go(-1);"><input type="submit" class="orange loading-disabled" value="確定する">
 							</div>
 						</div>
 					</form>
