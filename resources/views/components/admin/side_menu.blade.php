@@ -1,6 +1,7 @@
 <div class="d-xl-block d-none mr-2">
     <ul class="list-group">
         <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.users.index') }}" class="text-secondary">ユーザー</a></p></li>
+        <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.news.index') }}" class="text-secondary">お知らせ</a></p></li>
         <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.products.index') }}" class="text-secondary">提供</a></p></li>
         <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.job_requests.index') }}" class="text-secondary">リクエスト</a></p></li>
         <li class="list-group-item"><p class="m-0"><a href="{{ route('admin.m_commission_rates.index') }}" class="text-secondary">手数料</a></p></li>
