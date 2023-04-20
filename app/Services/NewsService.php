@@ -7,7 +7,7 @@ use App\Models\News;
 class NewsService
 {
     /**
-     * ニュースを登録
+     * お知らせを登録
      */
     public function storeNews(array $params): News
     {

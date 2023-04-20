@@ -55,7 +55,7 @@ class NewsController extends Controller
         $news = $this->news_service->storeNews($request->all());
         $this->user_notification_service->storeUserNotificationNews($news);
 
-        return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを投稿しました');
+        return redirect()->route('admin.news.index')->with('flash_msg', 'お知らせを投稿しました');
     }
 
     /**
@@ -91,7 +91,7 @@ class NewsController extends Controller
     {
         $this->news_service->updateNews($request->all(), $news);
 
-        return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを編集しました');
+        return redirect()->route('admin.news.index')->with('flash_msg', 'お知らせを編集しました');
     }
 
     /**
@@ -104,6 +104,6 @@ class NewsController extends Controller
     {
         $news->delete(); // データ論理削除
 
-        return redirect()->route('admin.news.index')->with('flash_msg', 'ニュースを削除しました');
+        return redirect()->route('admin.news.index')->with('flash_msg', 'お知らせを削除しました');
     }
 }

@@ -8,7 +8,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
-                        <li class="breadcrumb-item active" aria-current="page">job_request一覧
+                        <li class="breadcrumb-item active" aria-current="page">リクエスト一覧
                             <form action="{{ route('admin.job_request.search') }}" class="mt-2 d-flex" method="GET">
                                 @csrf
                                 <input class="form-control" type="text" name="search" value="{{ $request->search ?? "" }}">
@@ -21,7 +21,7 @@
                 <div class="card shadow-sm mb-5">
                     <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
                         <h5 class="text-white mb-0">
-                            job_request一覧
+                            リクエスト一覧
                         </h5>
                     </div>
 
