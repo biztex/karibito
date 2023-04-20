@@ -29,11 +29,13 @@ class PointController extends Controller
         $user_get_points = UserGetPoint::where([
             ['user_id', '=', \Auth::id()],
         ])
+            ->orderBy('created_at', 'desc')
             ->get();
         $user_use_points = UserUsePoint::where([
             ['user_id', '=', \Auth::id()],
             ['deleted_at', '=', null],
         ])
+            ->orderBy('created_at', 'desc')
             ->get();
         $user_has_point = $this->point_service->showPoint();
 
