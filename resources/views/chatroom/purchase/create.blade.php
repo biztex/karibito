@@ -75,7 +75,7 @@
                                 <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1" @if(old('coupon_use') == 1) checked @endif>クーポンを利用する</label></p>
                                 <div class="pointInput mt12">
                                     <p class="mr18">
-                                        <select name="coupon_id" style="padding: 10px;" class="js-coupon">
+                                        <select name="coupon_id" style="padding: 10px; width: 100%;" class="js-coupon">
                                             <option value="">選択してください</option>
                                             @foreach ($user_has_coupons as $coupon)
                                                 <option value="{{$coupon->id}}" @if(old('coupon_id') == $coupon->id) selected @endif>{{$coupon->name}}:{{$coupon->content}}</option>
@@ -187,9 +187,10 @@
 							</div>{{-- /. --}}
 							<p class="click"><a href="">登録できない場合はこちら</a></p>
 						</div>{{-- /.method --}}
-						<div class="functeBtns">
+						<div class="functeBtns flex">
 							<input type="hidden" class="" name="chatroom_id" value="{{$proposal->chatroom->id}}">
-							<input type="submit" class="orange full loading-disabled" value="確認する">
+                            <input type="button" class="gray" value="戻る" onclick="history.go(-1);">
+							<input type="submit" class="orange loading-disabled" value="確認する">
 						</div>
 					</form>
 				</div>{{-- /.inner --}}
