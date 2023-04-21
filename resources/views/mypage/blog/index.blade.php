@@ -14,7 +14,7 @@
 				<div id="main">
 					<div class="blogWrap">
 						<p class="mypageHd02"><span>ブログ</span></p>
-                        <div style="margin-bottom: 10px;">登録したブログは詳細画面からシェアできます。</div>
+                        <div style="margin-bottom: 10px;">登録したブログは詳細画面からシェアできます。詳細画面は画像をクリックすると表示されます。</div>
 						<div class="blogAdd">
 							<a href="{{ route('blog.create') }}"><img src="img/mypage/edit_blog.svg" alt="ブログを追加"></a>
 						</div>
