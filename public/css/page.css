@@ -2407,6 +2407,7 @@
 	display: flex;
 	justify-content: flex-end;
 	padding: 15px 20px;
+    min-width: 220px;
 }
 
 .fancyPersonBtn a,
