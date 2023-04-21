@@ -143,7 +143,7 @@
                                             </div>
                                         </div>
                                         <div class="portfolioFooter">
-                                            <div class="portfolioFooterTitle">登録したポートフォリオは詳細画面からシェアできます。</div>
+                                            <div class="portfolioFooterTitle">登録したポートフォリオは詳細画面からシェアできます。詳細画面は画像をクリックすると表示されます。</div>
                                             <div class="fancyPersonBtn">
                                                 <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
                                                 <button class="fancyPersonSign">変更する</button>
