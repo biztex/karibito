@@ -1851,6 +1851,7 @@
 	font-size: 1.4rem;
 	font-weight: bold;
 	margin-left: 7px;
+    margin-right: 7px;
 }
 
 .otherPage {
@@ -2453,6 +2454,7 @@
 		font-size: 1.2rem;
 		font-weight: bold;
 		margin-left: 3px;
+        margin-right: 3px;
 	}
 
 	.mypageSec01 {
