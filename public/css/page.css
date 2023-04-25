@@ -1218,6 +1218,14 @@
 	color: #fff;
 }
 
+.karibitoGuideList .optional .quest {
+    padding: 0px;
+}
+
+.karibitoGuideList .optional .quest:before {
+    content: none;
+}
+
 .detailStyle .optional .answer:before {
 	content: "A";
 	color: #B2B2B2;
@@ -1431,6 +1439,14 @@
 	.detailStyle .optional .more {
 		font-size: 1rem;
 	}
+
+    .karibitoGuideList .optional .quest {
+        padding: 0px;
+    }
+
+    .karibitoGuideList .optional .quest:before {
+        content: none;
+    }
 
 	.detailStyle .clientEvaluate .box {
 		padding: 15px;
@@ -7178,6 +7194,27 @@ select.searchSelect {
 	font-size: 2.8rem;
 }
 
+#header .guideLogo {
+    height: 24px;
+    vertical-align: baseline;
+}
+
+.karibitoGuideList {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.karibitoGuideList > div {
+    width: calc(50% - 30px);
+}
+
+.guideTopDesc {
+    text-align: center;
+    font-size: large;
+}
+
 #gNavi .navLinks {
 	display: flex;
 }
@@ -7277,7 +7314,26 @@ select.searchSelect {
 		font-size: 1.4rem;
 	}
 
-	#wrapper.bg02 #contents,
+    #header .guideLogo {
+        height: 16px;
+        vertical-align: middle;
+    }
+
+    .karibitoGuideList {
+        margin-top: 30px;
+        gap: 0px;
+    }
+
+    .karibitoGuideList > div {
+        width: 100%;
+    }
+
+    .guideTopDesc {
+        text-align: center;
+        font-size: unset;
+    }
+
+    #wrapper.bg02 #contents,
 	#wrapper.bg03 #contents {
 		padding-top: 35px;
 	}
