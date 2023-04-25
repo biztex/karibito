@@ -15,10 +15,7 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-
-					<x-parts.chatroom-step :value="$purchase->chatroom"/>
-
-					<div class="cancelTitle">
+                    <div class="cancelTitle">
 						<h2>このお取引を本当にキャンセルしますか？</h2>
 					</div>
 
