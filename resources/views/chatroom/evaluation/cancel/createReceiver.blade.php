@@ -11,9 +11,6 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-
-					<x-parts.chatroom-step :value="$chatroom"/>
-
 					<div class="cancelTitle">
 						<h2>評価を入力しましょう！</h2>
 					</div>

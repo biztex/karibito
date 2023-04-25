@@ -15,22 +15,6 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-
-					<ul id="chatroomStepUl" class="stepUl">
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">チャット開始</p>
-						</li>
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">契約</p>
-						</li>
-						<li @if($purchase->chatroom->chatroomMessages()->worked()) class="is_active" @endif>
-							<p class="stepDot"></p>
-							<p class="stepTxt">評価</p>
-						</li>
-					</ul>
-
 					<div class="cancelTitle">
 						<h2>このお取引きを本当にキャンセルしますか？</h2>
 					</div>

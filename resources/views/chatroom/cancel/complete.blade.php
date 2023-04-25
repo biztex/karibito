@@ -15,22 +15,6 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-					{{-- 修正必要 --}}
-					<ul id="chatroomStepUl" class="stepUl">
-						<li class="is_active">
-							<p class="stepDot"></p>
-							<p class="stepTxt">チャット開始</p>
-						</li>
-						<li @if($purchased_cancel->purchase->chatroom->status >= App\Models\Chatroom::STATUS_PROPOSAL) class="is_active" @endif>
-							<p class="stepDot"></p>
-							<p class="stepTxt">契約</p>
-						</li>
-						<li @if($purchased_cancel->purchase->chatroom->status >= App\Models\Chatroom::STATUS_BUYER_EVALUATION) class="is_active" @endif>
-							<p class="stepDot"></p>
-							<p class="stepTxt">評価</p>
-						</li>
-					</ul>
-
 					<div class="cancelTitle">
 						<h2>キャンセル申請を承認しました！</h2>
 					</div>
