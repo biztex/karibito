@@ -3,168 +3,91 @@
 		<div id="contents">
 			<div class="mypageWrap supportWrap detailStyle">
 				<div class="inner inner03">
-					<div class="supportTop">
-						<div class="search">
-							<input type="text" placeholder="Search"><input type="submit" class="btn" value="">
-						</div>
-						<ul class="anchors">
-							<li class="biggerlink">
-								<p class="tit">FAQ</p>
-								<a href="#support01" class="scroll ico_support01"></a>
-								<p>よくあるご質問</p>
-							</li>
-							<li class="biggerlink">
-								<p class="tit">初めての方へ</p>
-								<a href="{{ route('guide') }}" class="ico_support02" target="_blank" rel="noopener noreferrer"></a>
-								<p>初心者ガイド</p>
-							</li>
-							<li class="biggerlink">
-								<p class="tit">お問い合わせ</p>
-								<a href="{{ route('contact') }}" class="ico_support03"></a>
-								<p>直接問い合わせる</p>
-							</li>
-                            <li class="biggerlink">
-                                <p class="tit">運営会社</p>
-                                <a href="{{ route('company') }}" class="ico_support04" target="_blank" rel="noopener noreferrer"></a>
-                                <p>カリビトについて</p>
-                            </li>
-							<li class="biggerlink">
-								<p class="tit">カリビトガイド</p>
-								<a class="ico_support05" target="_blank" rel="noopener noreferrer"></a>
-								<p>カリビトのご利用方法 </p>
-							</li>
-						</ul>
-					</div>
-					<div class="mypageSec02">
-						<h2 class="mypageHd02">お問い合わせの多い質問<a href="support_detail.html" class="more">もっと見る</a></h2>
-						<ul class="mypageUl02">
-							<li>
-								<a href="support_detail.html">
-									<dl>
-										<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
-										<dd>
-											<p class="txt">事務局から個別メッセージ「ログイン通知」</p>
-											<p class="time">0時間前</p>
-										</dd>
-									</dl>
-								</a>
-							</li>
-							<li>
-								<a href="support_detail.html">
-									<dl>
-										<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
-										<dd>
-											<p class="txt">お知らせ内容が入りますお知らせ内容が入ります</p>
-											<p class="time">0時間前</p>
-										</dd>
-									</dl>
-								</a>
-							</li>
-							<li>
-								<a href="support_detail.html">
-									<dl>
-										<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
-										<dd>
-											<p class="txt">お知らせ内容が入りますお知らせ内容が入ります</p>
-											<p class="time">0時間前</p>
-										</dd>
-									</dl>
-								</a>
-							</li>
-							<li>
-								<a href="support_detail.html">
-									<dl>
-										<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
-										<dd>
-											<p class="txt">お知らせ内容が入りますお知らせ内容が入ります</p>
-											<p class="time">0時間前</p>
-										</dd>
-									</dl>
-								</a>
-							</li>
-							<li>
-								<a href="support_detail.html">
-									<dl>
-										<dt><img src="img/mypage/img_notice01.png" alt=""></dt>
-										<dd>
-											<p class="txt">お知らせ内容が入りますお知らせ内容が入ります</p>
-											<p class="time">0時間前</p>
-										</dd>
-									</dl>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="optional" id="support01">
-						<h2 class="mypageHd02"><span><img class="ico" src="img/support/ico_quest_circle.svg">よくあるご質問（FAQ）</span><a href="{{ route('support_detail') }}" class="more">もっと見る</a></h2>
-						<p class="hdM">お問い合わせの多い質問</p>
-						<ul class="">
-							<li>
-								<p class="quest"><span>仕事にエントリーするには？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>領収書の発行方法は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>本契約後の金額変更方法は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>報酬の受け取り方は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>決済方法は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-						</ul>
-						<p class="hdM">最新の質問</p>
-						<ul class="toggleWrapPC">
-							<li>
-								<p class="quest"><span>仕事にエントリーするには？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>領収書の発行方法は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>本契約後の金額変更方法は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>報酬の受け取り方は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-							<li>
-								<p class="quest"><span>決済方法は？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-							</li>
-						</ul>
-					</div>
-					<div class="optional" id="support02">
-						<h2 class="mypageHd02"><span><img class="ico" src="img/support/ico_shield.svg">初めての方へ</span></h2>
-						<ul class="toggleWrapPC">
-							<li>
-								<p class="quest"><span>カリビトとは？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-								<p class="answer toggleBox">カリビトとはカリビトとはカリビトとはカリビトとはカリビトとはカリビトとはカリビトとはカリビトとはカリビトとはカリビトとはカリビトとはカリビトとは</p>
-							</li>
-							<li>
-								<p class="quest"><span>新規会員登録（無料）するには？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-								<p class="answer toggleBox">新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには新規会員登録（無料）するには</p>
-							</li>
-							<li>
-								<p class="quest"><span>プロフィール編集をするには？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-								<p class="answer toggleBox">プロフィール編集をするにはプロフィール編集をするにはプロフィール編集をするにはプロフィール編集をするには</p>
-							</li>
-							<li>
-								<p class="quest"><span>取引の流れは？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-								<p class="answer toggleBox">取引の流れは取引の流れは取引の流れは取引の流れは取引の流れは取引の流れは</p>
-							</li>
-							<li>
-								<p class="quest"><span>利用料はかかる？</span><a href="{{ route('support_detail') }}" class="more">回答を見る</a></p>
-								<p class="answer toggleBox">利用料はかかる利用料はかかる利用料はかかる利用料はかかる利用料はかかる利用料はかかる利用料はかかる</p>
-							</li>
-						</ul>
-					</div>
-					<div class="beginGuide">
-						<ul>
-							<li><a href="{{ route('guide') }}"><img src="img/support/img_guide01.svg" alt=""></a></li>
-							<li><a href="#"><img src="img/support/img_guide03.svg" alt=""></a></li>
-						</ul>
-					</div>
+                    <br>
+                    <div class="guideTopDesc" id="topDesc">
+                        <p>知識・スキル・経験を商品化！スキルマッチングプラットフォーム</p>
+                        <p>カリビトの基本的なご利用方法はこちらからご確認ください。</p>
+                    </div>
+                    <div class="karibitoGuideList">
+                        <div class="optional" id="guide01">
+                            <p class="hdM">アカウント</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>プロフィールのご登録</span><a href="{{ route('karibitoguide_profile_register') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>本人確認</span><a href="{{ route('karibitoguide_identification') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>カリビト攻略法</span><a href="{{ route('guide') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="optional" id="guide02">
+                            <p class="hdM">購入者の方へ</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>サービス購入までのプロセス</span><a href="{{ route('karibitoguide_buy_process') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>サービスを購入してからのプロセス</span><a href="{{ route('karibitoguide_buyer_contract_process') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="optional" id="guide03">
+                            <p class="hdM">出品者の方へ</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>サービス出品までのプロセス</span><a href="{{ route('karibitoguide_sell_process') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>サービスが購入されてからのプロセス</span><a href="{{ route('karibitoguide_seller_contract_process') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="optional" id="guide04">
+                            <p class="hdM">キャンセル</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>キャンセル申請を送る時のプロセス</span><a href="{{ route('karibitoguide_cancel_send') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>キャンセル申請が届いた時のプロセス</span><a href="{{ route('karibitoguide_cancel_receive') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="optional" id="guide05">
+                            <p class="hdM">リクエスト</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>依頼をリクエストするプロセス</span><a href="{{ route('karibitoguide_request_send') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>リクエストに提案するプロセス</span><a href="{{ route('karibitoguide_request_receive') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="optional" id="guide06">
+                            <p class="hdM">ルールと禁止行為</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>ルールと禁止行為</span><a href="{{ route('karibitoguide_rule') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="optional" id="guide07">
+                            <p class="hdM">他にお困りごとがある方へ</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>カリビトFAQ</span><a href="{{ route('support') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>お問合せ</span><a href="{{ route('contact') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div><!-- /#contents -->

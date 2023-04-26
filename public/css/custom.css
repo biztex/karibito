@@ -2431,6 +2431,12 @@ p#copyright {
     margin-left: 0;
     color: #F0941B !important;
 }
+.arrowFlex {
+    display: flex;
+}
+.arrowFlex span {
+    margin-left: 0;
+}
 
 .productItem {
     width: 100%;
