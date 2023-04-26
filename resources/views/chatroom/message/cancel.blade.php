@@ -68,7 +68,6 @@
                         <div class="proposeBuy">
                             <p class="buy">
                                 <a href="{{ route('cancel.show', $message->reference_id) }}" class="red">確認する</a>
-                                <a href="{{ route('cancel.objection',$message->reference_id) }}" class="white">再交渉</a>
                             </p>
                         </div>
                     </div>
