@@ -268,7 +268,7 @@ class ChatroomController extends Controller
         $nda_message = $this->chatroom_nda_message_service->updateNdaMessage($request->all(), $chatroom);
         // NDAが送信・締結された旨のメッセージ作成
         if ((int)$request->input('status') === ChatroomNdaMessage::CONCLUSION) {
-            $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAが締結しました！');
+            $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを締結しました！');
         } else {
             $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
         }

@@ -97,7 +97,7 @@
             @include('chatroom.message.parts.icon')
             <div class="info">
                 <p class="name">{{$message->user->name}}</p>
-                <p class="message_text">{{$message->text}}</p>
+                <p class="message_text">NDAを締結しました！</p>
                 <div class="proposeBuy">
                     <p class="buy">
                         <span style="font-weight: normal;">当事者間でのNDAが締結されました。<br/>締結したNDAはダウンロードして保存をしてください。</span>
