@@ -6473,7 +6473,7 @@ select.searchSelect {
 
 @media screen and (min-width: 768px) {
 	.blogDtList .list.sliderSP02 {
-		justify-content: center;
+		justify-content: left;
 	}
 }
 

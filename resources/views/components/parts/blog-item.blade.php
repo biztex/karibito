@@ -1,6 +1,6 @@
 <div class="item">
 	<!-- <p class="level"></p> topのカテゴリー別のみ仕様 -->
-    <a href="{{ route('blog.show', $blog->id) }}" class="img imgBox">
+    <a href="{{ route('user.blog.show', [$blog->user, $blog]) }}" class="img imgBox">
         @if(isset($blog->blogImage[0]))
             <img src="{{ asset($blog->blogImage[0]->url) }}" alt="" style="object-fit: contain;">
         @else
@@ -22,9 +22,9 @@
         <div class="aboutUser">
             <div class="user" style="margin-bottom:6px;">
                 @if(empty($blog->user->userProfile->icon))
-                    <a href="{{ route('user.mypage', $blog->user_id) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
+                    <a href="{{ route('user.blog.show', [$blog->user, $blog]) }}" class="ico"><img src="/img/mypage/no_image.jpg" alt=""></a>
                 @else
-                    <a href="{{ route('user.mypage', $blog->user_id) }}" class="ico"><img src="{{asset('/storage/'.$blog->user->userProfile->icon) }}" alt=""></a>
+                    <a href="{{ route('user.blog.show', [$blog->user, $blog]) }}" class="ico"><img src="{{asset('/storage/'.$blog->user->userProfile->icon) }}" alt=""></a>
                 @endif
                 <div class="introd">
                     <p class="name word-break">{{ $blog->user->name }}</p>
