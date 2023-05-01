@@ -43,36 +43,42 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($child_categories as $child_category)
+                                @if ($child_categories->isEmpty())
                                     <tr>
-                                        <td class="px-2">{{ $child_category->id }}</td>
-                                        <td class="px-2">{{ $child_category->name }}</td>
-                                        <td class="px-2">{{ $child_category->mProductCategory->name }}</td>
-                                        <td class="px-2">{{ $child_category->created_at }}</td>
-                                        <td class="px-2">{{ $child_category->updated_at }}</td>
-                                        <td class="px-2">
-                                            @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
-                                                || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
-                                                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.child_categories.edit', $child_category->id) }}">編集</a></td>
-                                            @else
-                                            @endif
-                                        </td>
-                                        <td class="px-2">
-                                            @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
-                                                || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
-                                                <form action="{{ route('admin.child_categories.destroy', $child_category->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-sm btn-outline-danger"
-                                                        onclick="return confirm('本当に削除しますか？')"
-                                                    >削除</button>
-                                                </form>
-                                            @else
-                                            @endif
-                                        </td>
+                                        <td colspan="7" class="text-center">一致するカテゴリーがありません</td>
                                     </tr>
-                                @endforeach
-                                {{ $child_categories->links() }}
+                                @else
+                                    @foreach($child_categories as $child_category)
+                                        <tr>
+                                            <td class="px-2">{{ $child_category->id }}</td>
+                                            <td class="px-2">{{ $child_category->name }}</td>
+                                            <td class="px-2">{{ $child_category->mProductCategory->name }}</td>
+                                            <td class="px-2">{{ $child_category->created_at }}</td>
+                                            <td class="px-2">{{ $child_category->updated_at }}</td>
+                                            <td class="px-2">
+                                                @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
+                                                    || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
+                                                    <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.child_categories.edit', $child_category->id) }}">編集</a></td>
+                                                @else
+                                                @endif
+                                            </td>
+                                            <td class="px-2">
+                                                @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
+                                                    || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
+                                                    <form action="{{ route('admin.child_categories.destroy', $child_category->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-sm btn-outline-danger"
+                                                            onclick="return confirm('本当に削除しますか？')"
+                                                        >削除</button>
+                                                    </form>
+                                                @else
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    {{ $child_categories->links() }}
+                                @endif
                             </tbody>
                         </table>
                     </div>

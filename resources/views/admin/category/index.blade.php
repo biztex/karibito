@@ -44,7 +44,7 @@
                             <tbody>
                                 @if ($categories->isEmpty())
                                     <tr>
-                                        <td colspan="6" class="text-center">カテゴリーがありません</td>
+                                        <td colspan="6" class="text-center">一致するカテゴリーがありません</td>
                                     </tr>
                                 @else
                                     @foreach($categories as $category)
