@@ -87,4 +87,12 @@ class AdminMProductChildCategoryService
             $category->delete();
         });
     }
+
+    public function search($request)
+    {
+        $sql = MProductChildCategory::orderBy('id', 'asc');
+        $sql->where('name', 'LIKE', "%$request->search%");
+
+        return $sql->paginate(50)->appends($request->query());
+    }
 }
