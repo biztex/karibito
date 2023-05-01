@@ -5,6 +5,20 @@
         <div class="row justify-content-center">
             <x-admin.side_menu/>
             <div class="col-md-10">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb border bg-white shadow-sm">
+                        <li class="breadcrumb-item active" aria-current="page">子カテゴリー一覧
+                            <form action="{{ route('admin.child_category.search') }}" class="mt-2" method="get">
+                                @csrf
+                                <div class="d-flex mb-3">
+                                    <input class="form-control col-4" type="text" name="search" value="{{ $request->search ?? "" }}">
+                                    <button class="btn btn-secondary btn-block col-4 ml-2 content-end" type="submit">検索</button>
+                                </div>
+                            </form>
+                            <div>※子カテゴリー名に部分一致で検索</div>
+                        </li>
+                    </ol>
+                </nav>
                 <div class="card shadow-sm mb-5">
                     <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
                         <h5 class="text-white mb-0">

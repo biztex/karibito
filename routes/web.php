@@ -518,7 +518,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::post('/users/{user}/is_ban',[UserController::class, 'limitAccount'])->name('limit.account');
             Route::post('/users/{user}/not_ban',[UserController::class, 'cancelLimitAccount'])->name('cancel.limit.account');
             Route::resource('/categories', MProductCategoryController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+            Route::get('/categories/search',[MProductCategoryController::class, 'search'])->name('category.search');
             Route::resource('/child_categories', MProductChildCategoryController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+            Route::get('/child_categories/search',[MProductChildCategoryController::class, 'search'])->name('child_category.search');
 
             //お知らせ機能
             Route::resource('/news', AdminNewsController::class);
