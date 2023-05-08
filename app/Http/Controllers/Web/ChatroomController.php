@@ -621,6 +621,6 @@ class ChatroomController extends Controller
         \DB::transaction(function () use ($request, $chatroom_id) {
             $this->chatroom_service->updateTrashFlg($request->trash_flg, $chatroom_id);
         });
-        return redirect()->route('chatroom.index');
+        return redirect()->back();
     }
 }
