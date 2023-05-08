@@ -23,6 +23,9 @@
                             </ul>
                         </div>
                     </div>
+
+                    @include('karibitoguide.parts.to_list_btn')
+
                 </div>
             </div>
         </div>

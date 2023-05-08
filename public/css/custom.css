@@ -2453,3 +2453,15 @@ p#copyright {
     -webkit-line-clamp: 1;
     overflow: hidden;
 }
+
+.to-list-btn {
+    max-width: 300px;
+    margin: auto;
+}
+@media screen and (max-width: 769px) {
+    .to-list-btn {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
