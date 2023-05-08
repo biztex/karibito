@@ -11,9 +11,6 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-
-					<x-parts.chatroom-step :value="$proposal->chatroom"/>
-
 					<div class="cancelTitle">
 						<h2>お支払いが完了しました！</h2>
 					</div>
