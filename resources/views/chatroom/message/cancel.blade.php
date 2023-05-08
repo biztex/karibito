@@ -170,7 +170,7 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info cancel">
                         <p class="name">{{$message->user->name}}</p>
-                        <p class="message_text">キャンセル申請が承諾されました！</p><br>
+                        <p class="message_text">キャンセル申請が承認されました！</p><br>
                         <p class="cancel_evaluation">
                             <span>
                                 キャンセルが成立しました。引き続き評価が入力されるのを待ちましょう。<br>
