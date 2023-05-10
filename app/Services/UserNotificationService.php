@@ -48,7 +48,7 @@ class UserNotificationService
         foreach ($follow_users as $follow_user) {
             $user_notification_contents = [
                 'user_id' => $follow_user->id,
-                'title' => 'あなたがフォローしている ' . $followed_user->name . 'さんが新しい投稿をしました。確認してみましょう。',
+                'title' => 'あなたがフォローしている ' . $followed_user->name . 'さんが新しいサービスを出品しました。',
             ];
 
             if(empty($follow_user->userNotificationSetting->is_posting)) {
@@ -72,7 +72,7 @@ class UserNotificationService
         foreach ($favorite_users as $favorite_user) {
             $user_notification_contents = [
                 'user_id' => $favorite_user->user_id,
-                'title' => 'あなたがいいねした ' . $product->title . 'が更新されました。確認してみましょう。',
+                'title' => 'あなたがお気に入りに登録した「' . $product->title . '」のサービス内容が更新されました。',
             ];
 
             if(empty($favorite_user->user->userNotificationSetting->is_fav)) {
@@ -110,7 +110,7 @@ class UserNotificationService
 
         $user_notification = [
             'user_id' => $product_user->id,
-            'title' => $login_user->name . 'さんからいいねが来ました。',
+            'title' => $login_user->name . 'さんがあなたのサービスをお気に入りに登録しました。',
             'reference_type' => $reference_type,
             'reference_id' => $product->id,
         ];
@@ -143,6 +143,7 @@ class UserNotificationService
         $send_user = User::find($send_user_id);
         
         // やりとりの進捗に合わせてメッセージタイトルを分ける
+        // todo:後で修正する
         if($chatroom->status === 5) {
             $title = $send_user->name . 'さんがあなたを評価しました。';
         } elseif ($chatroom->status === 6) {
@@ -184,7 +185,6 @@ class UserNotificationService
         }
         
         $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
-        
         SendNewDmNotificationMail::dispatch($receive_user,$user_notification);
     }
 

@@ -30,6 +30,6 @@ class FavoriteRegisterMail extends Mailable
     public function build()
     {
         return $this->subject('[カリビト]　あなたがお気に入りした商品が更新されました！') //メールタイトル
-        ->text('mail.html.favorite_register');
+        ->view('mail.html.favorite_register');
     }
 }

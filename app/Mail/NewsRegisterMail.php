@@ -30,6 +30,6 @@ class NewsRegisterMail extends Mailable
     public function build()
     {
         return $this->subject('[カリビト]　お知らせが届きました！') //メールタイトル
-        ->text('mail.html.news_register');
+        ->view('mail.html.news_register');
     }
 }

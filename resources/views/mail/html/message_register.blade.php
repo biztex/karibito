@@ -1,13 +1,13 @@
+<p>{{$user_notification->user->name}}様</p>
 
-{{$user_notification->user->name}}様
+<p>日頃よりカリビトをご利用いただきありがとうございます。</p>
 
-日頃よりカリビトをご利用いただきありがとうございます。
+<span>{{$user_notification->title}}</span><br>
+<span>早速確認してみましょう！</span><br>
+
+<p><a href="{{ route('chatroom.show', $user_notification->reference_id) }}">{{ route('chatroom.show', $user_notification->reference_id) }}</a></p>
 
 
-{{$user_notification->title}}
-早速確認してみましょう！
-
-{{ route('chatroom.show', $user_notification->reference_id) }}
-
+<p>ご不明点・ご質問などは「<a href="{{ route('contact') }}">お問合せ</a>」よりご連絡ください。</p>
 
 @include('mail.text.footer')

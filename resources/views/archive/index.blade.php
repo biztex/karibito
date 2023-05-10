@@ -3267,7 +3267,7 @@
 									<li><a href="#">ご利用ガイド</a></li>
 									<li><a href="#">よくある質問</a></li>
 									<li><a href="#">プライバシーポリシー</a></li>
-									<li><a href="{{ route('contact') }}">お問い合わせ</a></li>
+									<li><a href="{{ route('contact') }}">お問合せ</a></li>
 								</ul>
 							</aside><!-- /#side -->
 						</div>

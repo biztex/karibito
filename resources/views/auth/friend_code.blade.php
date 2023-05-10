@@ -28,7 +28,7 @@
 											@error('friend_code')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-										<p><input type="text" name="friend_code" placeholder="" class="@error('friend_code') is-invalid @enderror"
+										<p><input type="text" name="friend_code" class="@error('friend_code') is-invalid @enderror"
 											value="@if (empty('introduced_user_code')) {{ old('friend_code') }} @else {{ $introduced_user_code }} @endif">
 										</p>
 									</div>

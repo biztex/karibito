@@ -31,7 +31,7 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->text('mail.text.user.contact_mail')
+        return $this->view('mail.text.user.contact_mail')
                     ->subject(\Lang::get('【カリビト】お問い合わせ完了'));
     }
 }

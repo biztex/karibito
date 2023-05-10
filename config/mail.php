@@ -114,4 +114,5 @@ return [
         ],
     ],
 
+    'info_karibito' => 'info@karibito.co.jp',
 ];
