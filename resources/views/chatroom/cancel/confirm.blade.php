@@ -42,13 +42,18 @@
 
 						<div class="warnNotes mt50">
 							<p class="danger">！キャンセルについて</p>
-                            <p>キャンセルは原則として双方の合意が必要です。トラブル防止のため、必ず明確な理由をお伝えください。相手の方がキャンセル申請に「承認」も「再交渉」も選択しないまま72時間が経過した場合は、自動的に「承認」となります。その後、双方の評価入力をもってキャンセルは完了します。</p>
+                            <p>
+                                キャンセルは原則として双方の合意が必要です。<br />
+                                トラブル防止のため、必ず明確な理由をお伝えください。<br />
+                                相手の方がキャンセル申請に「承認」も「再交渉」も選択しないまま72時間が経過した場合は、自動的に「承認」となります。<br />
+                                その後、双方の評価入力をもってキャンセルは完了します。
+                            </p>
 {{--							<p>カリビトではキャンセルについて罰則はありません。</p>--}}
 {{--							<p class="danger02">しかし、相手の方はあなたを信頼して契約しています。<br>よほどの理由がない限りは安易にキャンセルしないようにしましょう。</p>--}}
 {{--							<p class="note">※キャンセル申請をするとマイページにキャンセル申請の数が表示されます</p>--}}
 						</div>
 						<div class="functeBtns">
-							<input type="submit" formaction="{{ route('cancel.store' ,$purchase->id) }}" class="blue loading-disabled" value="上記内容でキャンセルを申請する">
+							<input type="submit" formaction="{{ route('cancel.store' ,$purchase->id) }}" class="blue loading-disabled" value="キャンセル申請をする">
 							<input type="submit" formaction="{{ route('cancel.back' ,$purchase->id) }}" class="loading-disabled" value="内容を修正する">
 						</div>
 					</form>
