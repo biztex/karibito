@@ -66,7 +66,7 @@ class AdminMProductChildCategoryService
             // 画像取得
             $index_image_path = $request->file('index_image_path');
             // 画像アップロード・ファイルパス取得
-            $index_image_path = empty($index_image_path) ? $index_image_path : Storage::putFile('public/index_image_path', $index_image_path, 'public');
+            $index_image_path = empty($index_image_path) ? $category->index_image_path : Storage::putFile('public/index_image_path', $index_image_path, 'public');
             $category->fill([
                 'parent_category_id' => $request->input('parent_category_id'),
                 'name' => $request->input('name'),

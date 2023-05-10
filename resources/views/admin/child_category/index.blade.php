@@ -57,14 +57,13 @@
                                             <td class="px-2">{{ $child_category->updated_at }}</td>
                                             <td class="px-2">
                                                 @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
-                                                    || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
-                                                    <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.child_categories.edit', $child_category->id) }}">編集</a></td>
-                                                @else
+                                                    && App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
+                                                    <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.child_categories.edit', $child_category->id) }}">編集</a>
                                                 @endif
                                             </td>
                                             <td class="px-2">
                                                 @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
-                                                    || App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
+                                                    && App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
                                                     <form action="{{ route('admin.child_categories.destroy', $child_category->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -72,7 +71,6 @@
                                                             onclick="return confirm('本当に削除しますか？')"
                                                         >削除</button>
                                                     </form>
-                                                @else
                                                 @endif
                                             </td>
                                         </tr>
