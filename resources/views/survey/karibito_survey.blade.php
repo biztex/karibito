@@ -17,7 +17,7 @@
                     <form id="form" action="{{ route('survey.store', $chatroom) }}" method="POST" enctype="multipart/form-data">
 					@csrf
                         <div class="evaluation">
-                            <p class="scroe"><span>アンケートを送信いただけますと<br>もれなくカリビトポイント<big>50PT</big>プレゼント！</span></p>
+                            <p class="scroe"><span>アンケートを送信いただけますと<br>もれなくカリビト<big>100円</big>OFFクーポンプレゼント！！</span></p>
                             <p class="stars">カリビトを５つ星で評価ください</p>
                             @error('star')<div class="alert alert-danger" style="text-align:center">{{ $message }}</div>@enderror
                             <div class="rate-form">

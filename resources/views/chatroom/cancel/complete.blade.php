@@ -19,7 +19,10 @@
 						<h2>キャンセル申請を承認しました！</h2>
 					</div>
 					<div class="cancelRea">
-						<p>キャンセルは双方の評価入力をもって完了します。<br>チャット画面からお相手の方の評価を入力してください。</p>
+						<p>
+                            キャンセルは双方の評価入力をもって完了します。<br />
+                            チャット画面からお相手の方の評価を入力してください。
+                        </p>
 					</div>
 					<div class="functeBtns">
 						<a href="{{ route('chatroom.show', $purchased_cancel->purchase->chatroom_id) }}">チャット画面に戻る</a>

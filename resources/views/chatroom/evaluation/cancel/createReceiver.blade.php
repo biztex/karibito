@@ -38,17 +38,17 @@
 							<textarea name="text" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
 							<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/255</p>
 						</div>
+                        <!-- 一旦コメントアウト -->
+                        <div class="warnNotes">
+                            <p>こちらの評価は、取引完了後に評価一覧で公開されます。</p>
+                            <p>他の方の契約時の判断材料にもなりますので、丁寧に記入しましょう。</p>
+                            <p>過度な批判や誹謗中傷などは、ガイドライン違反として利用制限やアカウント停止の対象となりますのでご注意ください。</p>
+                            <p class="colorRed">注意！ 評価後は変更や削除は出来ません。</p>
+                        </div>
 						<div class="functeBtns">
                             <input type="submit" class="red loading-disabled" value="評価を送信する" formaction="{{route('chatroom.cancel.receiver.evaluation', $chatroom->id)}}">
 						</div>
 					</form>
-					<!-- 一旦コメントアウト -->
-					<div class="warnNotes">
-						<p>こちらの評価は、取引完了後に評価一覧で公開されます。</p>
-                        <p>他の方の購入時の判断材料にもなりますので、丁寧に記入しましょう。</p>
-                        <p>過度な批判や誹謗中傷などは、ガイドライン違反として利用制限やアカウント停止の対象となりますのでご注意ください。</p>
-                        <p class="colorRed">注意！ 評価後は変更や削除は出来ません。</p>
-					</div>
 				</div>
 			</div>
 		</div>
