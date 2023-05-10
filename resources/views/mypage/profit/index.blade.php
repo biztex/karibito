@@ -43,7 +43,7 @@
 										</form>
 									@else
                                         <a type="button" class="bankTransferBtn js-alertModal-2">振り込み申請をする</a>
-                                        <x-parts.alert-modal-2 phrase="振込口座の登録が必要です" cancel_value="OK" />
+                                        <x-parts.alert-modal-bank-account cancel_value="OK" />
 									@endif
 								</div>
 								<div class="bankTransferAttention">
