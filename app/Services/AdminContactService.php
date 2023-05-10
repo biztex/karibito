@@ -31,7 +31,7 @@ class AdminContactService
             'type'    => $request->type,
             'message' => $request->message
         ]);
-        Mail::to('adminContact@test.com')
+        Mail::to(config('mail.info_karibito'))
             ->send(new ContactMail($request));
     }
 }

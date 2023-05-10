@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -38,4 +40,17 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+{
+    if ($exception instanceof TokenMismatchException) {
+        abort(403, 'CSRF トークンの有効期限が切れました。');
+    }
+
+    if ($exception instanceof HttpException && $exception->getStatusCode() === 419) {
+        abort(403, '認証トークンの有効期限が切れました。');
+    }
+
+    return parent::render($request, $exception);
+}
 }

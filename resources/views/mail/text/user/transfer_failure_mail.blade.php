@@ -1,11 +1,12 @@
 
-{{ $user_notification->user->name }}様
+<p>{{ $user_notification->user->name }} 様</p>
 
-日頃よりカリビトをご利用いただきありがとうございます。
+<span>日頃よりカリビトをご利用いただきありがとうございます。</span><br>
+<span>お客様に申請いただきましたお振込みですが、以下の理由により完了いたしませんでしたので、お知らせいたします。</span><br>
+<span><a href="{{ route('profit.index') }}">{{ route('profit.index') }}</a></span><br>
 
-{{ $user_notification->title }}詳細は下記から確認できます
-{{ route('transfer_request.show', $user_notification->reference_id) }}
-
-お手数ではございますが、再度振り込み申請をお願いいたします。
+<span>ご確認の上、お手数ではございますが再度振込申請をお願いいたします。</span><br>
+<span>＊振込手数料¥200はお客様にご負担いただいております。</span><br>
+<p>ご不明な点・ご質問などは「<a href="{{ route('contact') }}">お問合せ</a>」よりご連絡ください。</p>
 
 @include('mail.text.footer')

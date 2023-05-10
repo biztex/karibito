@@ -31,6 +31,6 @@ class TransferFailureMail extends Mailable
     public function build()
     {
         return $this->subject(\Lang::get('【カリビト】お振り込みに失敗しました。'))
-            ->text('mail.text.user.transfer_failure_mail');
+            ->view('mail.text.user.transfer_failure_mail');
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class IdentificationUploadMail extends Mailable
+class GetCouponMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,9 @@ class IdentificationUploadMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user_profile)
     {
-
+        $this->user_profile = $user_profile;
     }
 
     /**
@@ -28,7 +28,8 @@ class IdentificationUploadMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('【カリビト】身分証明証提出完了のお知らせ')
-                    ->view('mail.text.user.identification_send');
+        return $this->subject('【カリビト】お得なクーポンが付与されました！')
+            ->view('mail.text.user.get_coupon_mail')
+            ->with(['user_profile' => $this->user_profile]);
     }
 }
