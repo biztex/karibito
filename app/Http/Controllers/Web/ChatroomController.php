@@ -458,7 +458,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeSellerEvaluation($chatroom);
-            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+            $this->user_notification_service->storeEvaluationUserNotificationMessage($chatroom);
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);
@@ -488,7 +488,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeComplete($chatroom, $this->purchase_service);
-            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+            $this->user_notification_service->storeEvaluationUserNotificationMessage($chatroom);
             // 両者に取引完了pointを与える
             $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $chatroom->seller_user_id, $chatroom);
             $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $chatroom->buyer_user_id, $chatroom);
