@@ -68,19 +68,19 @@ class ChatroomService
         $chatroom->fill(['status' => Chatroom::STATUS_WORK_REPORT])->save();
     }
 
-    // ステータスを 4:購入者評価 に変更
+    // ステータスを 5:購入者評価 に変更
     public function statusChangeBuyerEvaluation(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => Chatroom::STATUS_BUYER_EVALUATION])->save();
     }
 
-    // ステータスを 5:出品者評価 に変更
+    // ステータスを 6:出品者評価 に変更
     public function statusChangeSellerEvaluation(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => Chatroom::STATUS_SELLER_EVALUATION])->save();
     }
 
-    // ステータスを 6:完了 に変更 & 売上金レコード作成
+    // ステータスを 7:完了 に変更 & 売上金レコード作成
     public function statusChangeComplete(Chatroom $chatroom, PurchaseService $purchase_service)
     {
         $chatroom->fill(['status' => Chatroom::STATUS_COMPLETE])->save();
@@ -90,19 +90,19 @@ class ChatroomService
         }
     }
 
-    // ステータスを 7:キャンセル に変更
+    // ステータスを 9:キャンセル に変更
     public function statusChangeCanceled(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => Chatroom::STATUS_CANCELED])->save();
     }
 
-    // ステータスを 8:キャンセルした側評価に変更
+    // ステータスを 10:キャンセルした側評価に変更
     public function statusChangeCancelSender(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => Chatroom::STATUS_CANCEL_SENDER_EVALUATION])->save();
     }
 
-    // ステータスを 8:キャンセルした側評価に変更
+    // ステータスを 11:キャンセルした側評価に変更
     public function statusChangeCancelReceiver(Chatroom $chatroom)
     {
         $chatroom->fill(['status' => Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION])->save();
