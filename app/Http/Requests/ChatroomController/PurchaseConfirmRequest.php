@@ -69,7 +69,7 @@ class PurchaseConfirmRequest extends FormRequest
             'coupon_id' => ['required_if:coupon_use,1', 'nullable', new UseCouponRule, new UseCouponMinPriceRule],
             'coupon_discount' => "integer | nullable ",
             'point_use' => 'required |  boolean',
-            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable | lt:{$use_point_price}"
+            'user_use_point' => "required_if:point_use,1 | integer | max:{$user_has_point} | nullable | lte:{$use_point_price}"
         ];
     }
 
