@@ -54,7 +54,7 @@ class PointService
 
         $mail_content = UserNotification::create($user_notification);
 
-        SendNewPointNotificationMail::dispatch($user, $mail_content);
+        SendNewPointNotificationMail::dispatch($mail_content);
     }
 
     public function usedPoint(Chatroom $chatroom, int|null $point)

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\PointRegisterMail;
+use App\Mail\User\GetPointMail;
 use App\Models\UserNotification;
 
 class SendNewPointNotificationMail implements ShouldQueue
@@ -36,10 +36,10 @@ class SendNewPointNotificationMail implements ShouldQueue
         if ($this->user_notification->user->sub_email) {
             \Mail::to($this->user_notification->user->email)
                 ->cc($this->user_notification->user->sub_email)
-                ->send(new PointRegisterMail($this->user_notification));
+                ->send(new GetPointMail($this->user_notification->user->userProfile));
         } else {
             \Mail::to($this->user_notification->user->email)
-                ->send(new PointRegisterMail($this->user_notification));
+                ->send(new GetPointMail($this->user_notification->user->userProfile));
         }
     }
 }

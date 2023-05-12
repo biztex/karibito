@@ -107,6 +107,6 @@ class CouponService
         }
 
         $mail_content = UserNotification::create($user_notification);
-        SendNewCouponNotificationMail::dispatch($user, $mail_content);
+        SendNewCouponNotificationMail::dispatch($mail_content);
     }
 }

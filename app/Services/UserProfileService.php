@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Mail\User\GetCouponMail;
-use App\Mail\User\GetPointMail;
 use App\Models\UserProfile;
 use App\Mail\User\IdentificationUploadMail;
 use App\Models\MCoupon;
@@ -67,17 +66,11 @@ class UserProfileService
 
             // 新規会員登録時に登録者にクーポン付与
             $this->coupon_service->createUserCoupon(MCoupon::NEW_REGISTRATION, $guest_profile->user_id);
-            \Mail::to(\Auth::user()->email)
-                    ->send(new GetCouponMail($guest_profile));
             // 招待コード入力で紹介者＆招待された人にポイント付与
             if ($invitee_profile && $params['friend_code'] !== null) {
                 // ポイント付与
                 $this->point_service->getPoint(MPoint::INVITED_FRIEND, $guest_profile->user_id, $invitee_profile);
                 $this->point_service->getPoint(MPoint::INVITED_FRIEND, $invitee_profile->user_id, $invitee_profile);
-                \Mail::to(\Auth::user()->email)
-                    ->send(new GetPointMail($guest_profile));
-                \Mail::to($invitee_profile->user->email)
-                    ->send(new GetPointMail($invitee_profile));
             };
 
             // 通知設定の作成
