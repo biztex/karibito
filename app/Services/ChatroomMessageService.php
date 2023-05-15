@@ -121,6 +121,17 @@ class ChatroomMessageService
         $evaluation->chatroomMessage()->create($message);
     }
 
+    // 評価
+    public function storeEvaluationMessageByCommand(Evaluation $evaluation, Chatroom $chatroom)
+    {
+        $message = [
+            'chatroom_id' => $chatroom->id,
+            'user_id' => $evaluation->user_id,
+            'text' => '評価が入力されました！'
+        ];
+        $evaluation->chatroomMessage()->create($message);
+    }
+
     // キャンセル申請
     public function storePurchasedCancelMessage(PurchasedCancel $purchased_cancel, Chatroom $chatroom)
     {
