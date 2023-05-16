@@ -69,7 +69,7 @@
 						@if($user_has_coupons->isEmpty())
 						<p style="margin-top:5%;">現在ご利用いただけるクーポンはありません。</p>
 						@else
-						<div class="coupons">
+						<div class="coupons" id="coupon_group">
 							<div class="checkbox">
 								@error('coupon_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1" @if(old('coupon_use') == 1) checked @endif>クーポンを利用する</label></p>
@@ -92,7 +92,7 @@
 						</div>{{-- /.coupons --}}
 						@endif
 
-						<div class="radio">
+						<div class="radio" id="point_group">
 							<p class="tit">ポイントの利用@error('user_use_point')<span>{{ $message }}</span>@enderror</p>
 							<ul class="radioChoice">
 								@error('point_use')<span>{{ $message }}</span>@enderror
