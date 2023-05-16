@@ -203,4 +203,31 @@ $(function () {
     $('.js-alertCancel-3').on('click', function() {
         $("#overflow3").hide();
     });
+    // クーポンとポイントが併用で使用できないです。
+    var couponIsSelected = $("input[name='coupon_use']")[0].checked;
+    if (couponIsSelected) {
+        $("#point_group").hide();
+    } else {
+        $("#point_group").show();
+        var pointIsSelected = !$("input[name='point_use']")[0].checked;
+        if (pointIsSelected) {
+            $("#coupon_group").hide();
+        } else {
+            $("#coupon_group").show();
+        }
+    }
+    $("input[name='coupon_use']").on('click', function(e) {
+        if (e.target.checked) {
+            $("#point_group").hide();
+        } else {
+            $("#point_group").show();
+        }
+    });
+    $("input[name='point_use']").on('click', function(e) {
+        if (e.target.value === "1") {
+            $("#coupon_group").hide();
+        } else {
+            $("#coupon_group").show();
+        }
+    });
 });
