@@ -4,6 +4,8 @@ namespace App\Console;
 
 use App\Console\Commands\PaymentCommand;
 use App\Console\Commands\ChatroomCancelCompleteCommand;
+use App\Console\Commands\ChatroomDeliveryCompleteCommand;
+use App\Console\Commands\ChatroomWorkReportCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,7 +18,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         PaymentCommand::class,
-        ChatroomCancelCompleteCommand::class
+        ChatroomCancelCompleteCommand::class,
+        ChatroomDeliveryCompleteCommand::class,
+        ChatroomWorkReportCommand::class
     ];
 
     /**
@@ -30,6 +34,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('command:PaymentCommand')->hourly();
         $schedule->command('command:ChatroomCancelCompleteCommand')->everyMinute();
+        $schedule->command('command:ChatroomDeliveryCompleteCommand')->everyMinute();
+        $schedule->command('command:ChatroomWorkReportCommand')->everyMinute();
 
 //        $schedule->command('backup:clean --disable-notifications')->dailyAt('07:50');
         // $schedule->command('backup:clean')->dailyAt('07:50');
