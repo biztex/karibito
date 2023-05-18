@@ -67,15 +67,16 @@
 							<div class="memberConfigBox bankTransferBox bankTransferHistoryBox">
 								<ul class="bankTransferList">
 									@foreach($transfer_request as $value)
-										<a href="{{ route('transfer_request.show', $value->id) }}" class="bankTransferItem">
-											<div class="bankTransferHalf">
-												<p class="bankTransferDate">{{ date('Y年n月j日 H:i', strtotime($value->requested_at)) }}</p>
-												<p class="bankTransferText">{{ \App\Models\TransferRequest::STATUS[$value->status] }}</p>
-											</div>
-											<div class="bankTransferHalf">
-												<span class="bankTransferPrice">{{ number_format($value->amount) }}円</span>
-											</div>
-										</a>
+                                        <div class="bankTransferItem">
+                                            <div class="bankTransferHalf">
+                                                <p class="bankTransferDate">{{ date('Y年n月j日 H:i', strtotime($value->requested_at)) }}</p>
+                                                <p class="bankTransferText">{{ \App\Models\TransferRequest::STATUS[$value->status] }}</p>
+                                            </div>
+                                            <div class="bankTransferHalf">
+                                                <span class="bankTransferPrice">{{ number_format($value->amount) }}円</span>
+                                                <a href="{{ route('transfer_request.show', $value->id) }}" class="bankTransferItemBtn">内訳の確認</a>
+                                            </div>
+                                        </div>
 									@endforeach
 								</ul>
 							</div>

@@ -10911,6 +10911,14 @@ input.small {
 	font-size: 18px;
 }
 
+.bankTransferItemBtn {
+    border: 1px solid #DDDDDD;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+}
+
 .bankTransferBox .memberConfigHd {
 	margin-bottom: 0;
 }
