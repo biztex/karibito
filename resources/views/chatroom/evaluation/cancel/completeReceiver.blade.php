@@ -24,8 +24,13 @@
 					<div class="cancelRea"></div>
                     <div class="cancelRea st2">
                         <p class="reason">アンケートに答えてクーポンゲット！！</p>
-                        <p>カリビトをご利用いただきありがとうございます。</p><br>
-                        <p>今後より良いサービスにするために、カリビトを利用してのご感想やご要望をお聞かせください。ご協力いただくと100円OFFクーポンプレゼント！</p>
+                        <p>カリビトをご利用いただきありがとうございます。</p>
+                        <p>今後より良いサービスにするために、カリビトを利用してのご感想やご要望をお聞かせください。</p>
+                        <p>ご協力いただくと100円OFFクーポンプレゼント！</p><br>
+                        <p class="logo"><img src="/img/cart_buy/logo.svg" alt=""></p>
+                        <div class="functeBtns">
+                            <a href="{{ route('survey.create',$chatroom) }}" class="red">アンケートに答える</a>
+                        </div>
                     </div>
 				</div>
 			</div>
