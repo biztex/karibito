@@ -27,10 +27,10 @@ class EvaluationService
     }
 
     // 評価 evaluationsテーブル
-    public function storeSenderEvaluationByCommand(array $request, $chatroom, $cancel_sender_user_id)
+    public function storeSenderEvaluationByCommand(array $request, $chatroom, $sender_user_id)
     {
         $user_id = null;
-        if($chatroom->buyer_user_id === $cancel_sender_user_id){
+        if($chatroom->buyer_user_id === $sender_user_id){
             $user_id = $chatroom->seller_user_id;
         }else{
             $user_id = $chatroom->buyer_user_id;
@@ -38,7 +38,7 @@ class EvaluationService
 
         $evaluation = [
             'user_id' => $user_id,
-            'target_user_id' => $cancel_sender_user_id,
+            'target_user_id' => $sender_user_id,
             'star' => $request['star'],
             'text' => $request['text']
         ];
@@ -47,17 +47,17 @@ class EvaluationService
     }
 
     // 評価 evaluationsテーブル
-    public function storeReceiverEvaluationByCommand(array $request, $chatroom, $cancel_sender_user_id)
+    public function storeReceiverEvaluationByCommand(array $request, $chatroom, $sender_user_id)
     {
         $target_user_id = null;
-        if($chatroom->buyer_user_id === $cancel_sender_user_id){
+        if($chatroom->buyer_user_id === $sender_user_id){
             $target_user_id = $chatroom->seller_user_id;
         }else{
             $target_user_id = $chatroom->buyer_user_id;
         }
 
         $evaluation = [
-            'user_id' => $cancel_sender_user_id,
+            'user_id' => $sender_user_id,
             'target_user_id' => $target_user_id,
             'star' => $request['star'],
             'text' => $request['text']

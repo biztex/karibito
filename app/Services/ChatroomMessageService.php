@@ -99,6 +99,17 @@ class ChatroomMessageService
         $chatroom->chatroomMessages()->create($message);
     }
 
+    // 自動的に作業完了通知
+    public function storeConfirmMessageByCommand(Chatroom $chatroom)
+    {
+        $message = [
+            'user_id' => $chatroom->buyer_user_id,
+            'text' => '「納品完了」通知を承認しました！',
+            'is_complete_message' => 1,
+        ];
+        $chatroom->chatroomMessages()->create($message);
+    }
+
     // storeRetryMessage
     public function storeRetryMessage(Chatroom $chatroom)
     {
