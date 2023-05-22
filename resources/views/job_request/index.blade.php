@@ -50,9 +50,11 @@
                                         <div class="item">
 											<a href="{{ route('job_request.category.index.show', $child_category->id) }}">
                                                 @if (empty($child_category->index_image_path))
-                                                    <img src="img/service/img_service01.png" srcset="img/service/img_service01.png 1x, img/service/img_service01@2x.png 2x" alt="{{$child_category['name']}}">
+                                                    <img src="img/service/img_service01.png" srcset="/img/service/img_service01@2x.png" alt="{{$child_category['name']}}">
                                                 @else
-                                                    <img src="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }}" srcset="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }} 1x, {{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }} 2x" alt="{{$child_category['name']}}">
+                                                    <img
+                                                    src="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }}"
+                                                    alt="{{ $child_category['name'] }}">
                                                 @endif
                                                 {{$child_category['name']}}
                                             </a>
