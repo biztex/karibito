@@ -56,10 +56,10 @@
                                             <td class="px-2">{{ $child_category->created_at }}</td>
                                             <td class="px-2">{{ $child_category->updated_at }}</td>
                                             <td class="px-2">
-                                                @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()
-                                                    && App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty())
+                                                {{-- @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty() todo:確認環境ではすべてのサービスを編集できるようにする。本番でもどす
+                                                    && App\Models\Product::where('category_id', $child_category->id)->get()->isEmpty()) --}}
                                                     <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.child_categories.edit', $child_category->id) }}">編集</a>
-                                                @endif
+                                                {{-- @endif --}}
                                             </td>
                                             <td class="px-2">
                                                 @if (App\Models\JobRequest::where('category_id', $child_category->id)->get()->isEmpty()

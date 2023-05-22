@@ -54,10 +54,10 @@
                                             <td class="px-2">{{ $category->created_at }}</td>
                                             <td class="px-2">{{ $category->updated_at }}</td>
                                             <td class="px-2">
-                                                @if (App\Models\JobRequest::whereIn('category_id', array_column($category->mProductChildCategory->toArray(), 'id'))->get()->isEmpty()
-                                                    && App\Models\Product::whereIn('category_id', array_column($category->mProductChildCategory->toArray(), 'id'))->get()->isEmpty())
+                                                {{-- @if (App\Models\JobRequest::whereIn('category_id', array_column($category->mProductChildCategory->toArray(), 'id'))->get()->isEmpty()　todo:確認環境ではすべてのサービスを編集できるようにする。本番でもどす
+                                                    && App\Models\Product::whereIn('category_id', array_column($category->mProductChildCategory->toArray(), 'id'))->get()->isEmpty()) --}}
                                                     <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.categories.edit', $category->id) }}">編集</a>
-                                                @endif
+                                                {{-- @endif --}}
                                             </td>
                                             <td class="px-2">
                                                 @if (App\Models\JobRequest::whereIn('category_id', array_column($category->mProductChildCategory->toArray(), 'id'))->get()->isEmpty()
