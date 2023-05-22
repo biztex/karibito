@@ -21,6 +21,7 @@ use App\Models\DmroomMessage;
 use App\Models\Product;
 use App\Models\JobRequest;
 use App\Jobs\SendNewMessageNotificationMail;
+use App\Jobs\SendNewEvaluatedMessageNotificationMail;
 use App\Jobs\SendTransferFailureMail;
 use App\Mail\Admin\TransferFailureMail;
 use App\Models\Favorite;
@@ -186,7 +187,7 @@ class UserNotificationService
 
         $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
 
-        SendNewMessageNotificationMail::dispatch($receive_user,$user_notification);
+        SendNewEvaluatedMessageNotificationMail::dispatch($receive_user,$user_notification);
     }
 
     //DMが来たら通知する

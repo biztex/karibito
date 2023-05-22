@@ -28,7 +28,7 @@ class ApproveMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('【カリビト】本人確認完了のお知らせ')
+        return $this->subject('【カリビト】【重要】本人確認登録完了のお知らせ')
                     ->view('mail.text.user.approve')
                     ->with(['user' => $this->user]);
     }

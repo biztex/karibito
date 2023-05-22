@@ -37,11 +37,11 @@ class WithdrawController extends Controller
         if ((\Auth::user()->sub_email)) {
             \Mail::to($user->email)
                 ->cc(\Auth::user()->sub_email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new WithdrawMail($user));
         } else {
             \Mail::to($user->email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new WithdrawMail($user));
         }
 
