@@ -50,7 +50,7 @@ class KaribitoSurveyService
             'reference_id' => $u_coupon->id,
         ];
 
-        if(empty($user->userNotificationSetting->is_like)) {
+        if(empty($user->userNotificationSetting->is_news)) {
             $user_notification['is_notification'] = 0;
         } else {
             $user_notification['is_notification'] = 1;
