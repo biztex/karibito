@@ -130,11 +130,11 @@ class UserProfileService
         if (\Auth::user()->sub_email) {
             \Mail::to(\Auth::user()->email)
                 ->cc(\Auth::user()->sub_email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new IdentificationUploadMail());
         } else {
             \Mail::to(\Auth::user()->email)
-                ->bcc(config('mail.info_karibito'))
+                ->bcc(config('mail.info_bcc'))
                 ->send(new IdentificationUploadMail());
         }
     }

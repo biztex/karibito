@@ -29,7 +29,7 @@ class PostRegisterMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('[カリビト]　あなたがフォローしているユーザーが新しい投稿をしました！') //メールタイトル
+        return $this->subject('【カリビト】フォローしているユーザーが新しいサービスを出品しました！') //メールタイトル
         ->view('mail.html.post_register');
     }
 }

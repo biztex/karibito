@@ -29,7 +29,7 @@ class LikeRegisterMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('[カリビト]　あなたの商品がお気に入りに登録されました！') //メールタイトル
+        return $this->subject('【カリビト】あなたのサービスがお気に入りに登録されました！') //メールタイトル
         ->view('mail.html.like_register');
     }
 }

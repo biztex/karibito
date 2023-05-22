@@ -29,7 +29,7 @@ class MessageRegisterMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('[カリビト]　ユーザーからメッセージが届きました！') //メールタイトル
+        return $this->subject('【カリビト】チャットにメッセージが届きました！') //メールタイトル
         ->view('mail.html.message_register');
     }
 }

@@ -37,11 +37,11 @@ class SendTransferFailureMail implements ShouldQueue
         if ($this->user_notification->user->sub_email) {
             \Mail::to($this->user_notification->user->email)
                 ->cc($this->user_notification->user->sub_email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new TransferFailureMail($this->user_notification));
         } else {
             \Mail::to($this->user_notification->user->email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new TransferFailureMail($this->user_notification));
         }
     }
