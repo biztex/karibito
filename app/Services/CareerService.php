@@ -30,7 +30,6 @@ class CareerService
     {
         $user_career->delete();
         \Session::put('flash_msg','経歴を削除しました');
-
     }
 
 }

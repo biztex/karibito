@@ -64,11 +64,12 @@
 															<dt>在籍期間</dt>
 															<dd>{{$career->first}} ~ @if($career->last_year == null)現在@else{{ $career->last }}@endif</dd>
 														</dl>
-														<form id="delete-carrer" method="post" action="{{route('career.destroy',$career->id)}}" enctype="multipart/form-data">
+														<form id="delete-career-{{ $career->id }}" method="post" action="{{route('career.destroy',$career->id)}}" enctype="multipart/form-data">
 															@csrf
-                                                            <div class="mypageCtrl"><button type="button" class="js-alertModal-2">削除</button></div>
+															<div class="mypageCtrl"><button type="button" class="js-alertModal-skill" data-form-id="delete-career-{{ $career->id }}">削除</button></div>
 														</form>
 													</li>
+													<x-parts.alert-modal-skill formId="delete-career-{{ $career->id }}" />
 												@endforeach
 											</ul>
 										@endif
@@ -76,7 +77,6 @@
 											<p class="specialtyBtn"><a href="{{route('career.create')}}"><img src="/img/mypage/icon_add.svg" alt="">経歴を追加</a></p>
 										@endif
 									</div>
-                                    <x-parts.alert-modal formId="delete-carrer" />
 									<p class="taRResume">＊経歴は10個まで追加できます。</p>
 								</div>
 	

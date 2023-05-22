@@ -203,6 +203,15 @@ $(function () {
     $('.js-alertCancel-3').on('click', function() {
         $("#overflow3").hide();
     });
+	// スキル削除の際のモーダル
+	$('.js-alertModal-skill').on('click', function() {
+		var formId = $(this).attr('data-form-id');
+		$(`#overflow-skill-${formId}`).show();
+	});
+	$('[class^="js-alertCancel-skill-"]').on('click', function() {
+		var formId = $(this).attr('data-form-id');
+		$(`#overflow-skill-${formId}`).hide();
+	});
     // クーポンとポイントが併用で使用できないです。
     var couponIsSelected = $("input[name='coupon_use']")[0].checked;
     if (couponIsSelected) {
