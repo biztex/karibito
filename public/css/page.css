@@ -7756,6 +7756,23 @@ select.searchSelect {
 	font-weight: bold;
 }
 
+.supportDetail .hd03 {
+    margin: 16px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.supportDetail .arrow-sub-title {
+    font-weight: bold;
+}
+
+.supportDetail .arrow-sub-title:before {
+    content: "▸";
+    position: absolute;
+    left: 1.2em;
+    top: 0;
+}
+
 .supportDetail .example {
 	padding-bottom: 20px;
 }
@@ -7766,13 +7783,6 @@ select.searchSelect {
 	padding-left: 2em;
 	line-height: 1.7333;
 	font-size: 1.5rem;
-}
-
-.supportDetail .example li:before {
-	content: "・";
-	position: absolute;
-	left: 0.5em;
-	top: 0;
 }
 
 .supportDetail .example li p {
@@ -8212,7 +8222,20 @@ select.searchSelect {
 		font-size: 1.4rem;
 	}
 
-	.supportDetail .example li {
+    .supportDetail .hd03 {
+        margin: 12px;
+        font-size: 1.3rem;
+        font-weight: bolder;
+    }
+
+    .supportDetail .arrow-sub-title:before {
+        content: "▸";
+        position: absolute;
+        left: 1.2em;
+        top: 0;
+    }
+
+    .supportDetail .example li {
 		margin-bottom: 10px;
 		font-size: 1.2rem;
 	}

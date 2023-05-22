@@ -96,14 +96,19 @@ Route::middleware('update_latest_login_datetime')->group(function () {
     Route::view('karibitoguide', 'karibitoguide.support')->name('karibitoguide');
     Route::view('karibitoguide/profile_register', 'karibitoguide.profile_register')->name('karibitoguide_profile_register');
     Route::view('karibitoguide/identification', 'karibitoguide.identification')->name('karibitoguide_identification');
+    Route::view('karibitoguide/nda_mark_show', 'karibitoguide.nda_mark_show')->name('karibitoguide_nda_mark_show');
+    Route::view('karibitoguide/friend_introduction_point', 'karibitoguide.friend_introduction_point')->name('karibitoguide_friend_introduction_point');
     Route::view('karibitoguide/sell_process', 'karibitoguide.sell_process')->name('karibitoguide_sell_process');
     Route::view('karibitoguide/seller_contract_process', 'karibitoguide.seller_contract_process')->name('karibitoguide_seller_contract_process');
     Route::view('karibitoguide/buy_process', 'karibitoguide.buy_process')->name('karibitoguide_buy_process');
     Route::view('karibitoguide/buyer_contract_process', 'karibitoguide.buyer_contract_process')->name('karibitoguide_buyer_contract_process');
+    Route::view('karibitoguide/karibito_qoupon', 'karibitoguide.karibito_qoupon')->name('karibitoguide_karibito_qoupon');
+    Route::view('karibitoguide/karibito_point', 'karibitoguide.karibito_point')->name('karibitoguide_karibito_point');
     Route::view('karibitoguide/cancel_send', 'karibitoguide.cancel_send')->name('karibitoguide_cancel_send');
     Route::view('karibitoguide/cancel_receive', 'karibitoguide.cancel_receive')->name('karibitoguide_cancel_receive');
     Route::view('karibitoguide/request_send', 'karibitoguide.request_send')->name('karibitoguide_request_send');
     Route::view('karibitoguide/request_receive', 'karibitoguide.request_receive')->name('karibitoguide_request_receive');
+    Route::view('karibitoguide/nda_sign', 'karibitoguide.nda_sign')->name('karibitoguide_nda_sign');
     Route::view('karibitoguide/rule', 'karibitoguide.rule')->name('karibitoguide_rule');
 
     Route::get('/dashboard', function () {

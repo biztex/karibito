@@ -52,7 +52,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="guideEtiquette">
+			<div class="guideEtiquette" id="etiquette">
                 <div class="guideTitle">
                     <div class="inner inner03">
                         <p>カリビトエチケット</p>
