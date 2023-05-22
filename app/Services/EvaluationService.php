@@ -26,6 +26,46 @@ class EvaluationService
         return $evaluation;
     }
 
+    // 評価 evaluationsテーブル
+    public function storeSenderEvaluationByCommand(array $request, $chatroom, $sender_user_id)
+    {
+        $user_id = null;
+        if($chatroom->buyer_user_id === $sender_user_id){
+            $user_id = $chatroom->seller_user_id;
+        }else{
+            $user_id = $chatroom->buyer_user_id;
+        }
+
+        $evaluation = [
+            'user_id' => $user_id,
+            'target_user_id' => $sender_user_id,
+            'star' => $request['star'],
+            'text' => $request['text']
+        ];
+        $evaluation = $chatroom->evaluations()->create($evaluation);
+        return $evaluation;
+    }
+
+    // 評価 evaluationsテーブル
+    public function storeReceiverEvaluationByCommand(array $request, $chatroom, $sender_user_id)
+    {
+        $target_user_id = null;
+        if($chatroom->buyer_user_id === $sender_user_id){
+            $target_user_id = $chatroom->seller_user_id;
+        }else{
+            $target_user_id = $chatroom->buyer_user_id;
+        }
+
+        $evaluation = [
+            'user_id' => $sender_user_id,
+            'target_user_id' => $target_user_id,
+            'star' => $request['star'],
+            'text' => $request['text']
+        ];
+        $evaluation = $chatroom->evaluations()->create($evaluation);
+        return $evaluation;
+    }
+
     public function getEvaluations($user_id)
     {
         $evaluations['good'] = Evaluation::goodStar($user_id)->orderBy('created_at','desc')->paginate(10);

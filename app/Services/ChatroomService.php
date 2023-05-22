@@ -158,4 +158,14 @@ class ChatroomService
         $chatroom->fill(['trash_flg' => $trash_flg])->save();
     }
 
+    public function getSenderUserId($chatroom)
+    {
+        $cancel_sender_user_id = $chatroom->buyer_user_id;
+        if ($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', $cancel_sender_user_id)->isNotEmpty()) {
+            $cancel_sender_user_id = $chatroom->seller_user_id;
+        }
+
+        return $cancel_sender_user_id;
+    }
+
 }

@@ -99,6 +99,17 @@ class ChatroomMessageService
         $chatroom->chatroomMessages()->create($message);
     }
 
+    // 自動的に作業完了通知
+    public function storeConfirmMessageByCommand(Chatroom $chatroom)
+    {
+        $message = [
+            'user_id' => $chatroom->buyer_user_id,
+            'text' => '「納品完了」通知を承認しました！',
+            'is_complete_message' => 1,
+        ];
+        $chatroom->chatroomMessages()->create($message);
+    }
+
     // storeRetryMessage
     public function storeRetryMessage(Chatroom $chatroom)
     {
@@ -116,6 +127,17 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => \Auth::id(),
+            'text' => '評価が入力されました！'
+        ];
+        $evaluation->chatroomMessage()->create($message);
+    }
+
+    // 評価
+    public function storeEvaluationMessageByCommand(Evaluation $evaluation, Chatroom $chatroom)
+    {
+        $message = [
+            'chatroom_id' => $chatroom->id,
+            'user_id' => $evaluation->user_id,
             'text' => '評価が入力されました！'
         ];
         $evaluation->chatroomMessage()->create($message);
