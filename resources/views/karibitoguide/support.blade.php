@@ -19,6 +19,12 @@
                                     <p class="quest"><span>本人確認</span><a href="{{ route('karibitoguide_identification') }}" class="more">詳細を見る</a></p>
                                 </li>
                                 <li>
+                                    <p class="quest"><span>【秘密保持契約（NDA)締結可】マークを表示するプロセス</span><a href="{{ route('karibitoguide_nda_mark_show') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>お友達紹介でポイントをもらうプロセス</span><a href="{{ route('karibitoguide_friend_introduction_point') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
                                     <p class="quest"><span>カリビト攻略法</span><a href="{{ route('guide') }}" class="more">詳細を見る</a></p>
                                 </li>
                             </ul>
@@ -31,6 +37,12 @@
                                 </li>
                                 <li>
                                     <p class="quest"><span>サービスを購入してからのプロセス</span><a href="{{ route('karibitoguide_buyer_contract_process') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>カリビトクーポンを使用するプロセス</span><a href="{{ route('karibitoguide_karibito_qoupon') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>カリビトポイントを使用するプロセス</span><a href="{{ route('karibitoguide_karibito_point') }}" class="more">詳細を見る</a></p>
                                 </li>
                             </ul>
                         </div>
@@ -67,12 +79,23 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="optional" id="guide05">
+                            <p class="hdM">各種機能</p>
+                            <ul class="">
+                                <li>
+                                    <p class="quest"><span>秘密保持契約（NDA）を締結するプロセス</span><a href="{{ route('karibitoguide_nda_sign') }}" class="more">詳細を見る</a></p>
+                                </li>
+                            </ul>
+                        </div>
 
                         <div class="optional" id="guide06">
-                            <p class="hdM">ルールと禁止行為</p>
+                            <p class="hdM">カリビトルール</p>
                             <ul class="">
                                 <li>
                                     <p class="quest"><span>ルールと禁止行為</span><a href="{{ route('karibitoguide_rule') }}" class="more">詳細を見る</a></p>
+                                </li>
+                                <li>
+                                    <p class="quest"><span>カリビトエチケット</span><a href="{{ route('guide') }}/#etiquette" class="more">詳細を見る</a></p>
                                 </li>
                             </ul>
                         </div>
