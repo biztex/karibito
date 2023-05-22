@@ -37,13 +37,13 @@
 								</dd>
 							</dl>
 							<div class="blogItemCont">
-								{{ $blog->content }}
+                                {!! $blog->content !!}
 							</div>
 							<div class="recommendList style2 blogDtList">
 								<div class="list sliderSP02">
 									<div class="item">
 										<a href="#" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
-											<img src="img/common/img_270x160.png" alt="">
+                                            <img src="{{ asset('/storage/'.$blog->product->productImage[0]->path) }}" alt="" style="object-fit: contain;">
 											<button class="favorite">お気に入り</button>
 										</a>
 										<div class="info">
@@ -77,12 +77,12 @@
 									</div>
 								</div>
 							</div>
-							<ul class="detailSns">
-								<li><a href="#"><img src="img/mypage/ico_facebook.svg" alt=""></a></li>
-								<li><a href="#"><img src="img/mypage/ico_line.svg" alt=""></a></li>
-								<li><a href="#"><img src="img/mypage/ico_twitter.svg" alt=""></a></li>
-								<li><a href="#"><img src="img/mypage/ico_mail.svg" alt=""></a></li>
-							</ul>
+                            <ul class="detailSns">
+                                <li><a href="http://www.facebook.com/share.php?u={{ $url }}"><img src="/img/mypage/ico_facebook.svg" alt=""></a></li>
+                                <li><a href="https://social-plugins.line.me/lineit/share?url={{ $url }}"><img src="/img/mypage/ico_line.svg" alt=""></a></li>
+                                <li><a href="https://twitter.com/share?url={{ $url }}&text={{ $blog->title }} %20%7C%20 {{ $blog->user->name }} %20%7C%20ブログ %20%7C%20 カリビト&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a></li>
+                                <li><a href="mailto:?subject=カリビトのブログをシェア&body={{ $blog->title }} %20%7C%20 {{ $blog->user->name }} %20%7C%20ブログ %20%7C%20 カリビト {{ $url }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a></li>
+                            </ul>
 							<div class="blogDtOther">
 								<dl class="blogItemPerson">
 									<dt><img src="img/blog/head_detail01_01.png" alt=""></dt>

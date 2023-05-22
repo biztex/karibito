@@ -12,9 +12,6 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-
-					<x-parts.chatroom-step :value="$proposal->chatroom"/>
-
 					<h2 class="subPagesHd">お支払い確認</h2>
 					<form id="form" action="{{route('chatroom.purchased', $proposal->id)}}" method="post">
 					@csrf
@@ -95,8 +92,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="functeBtns">
-								<input type="submit" class="orange full loading-disabled" value="確定する">
+							<div class="functeBtns flex">
+                                <input type="button" class="gray" value="戻る" onclick="history.go(-1);"><input type="submit" class="orange loading-disabled" value="確定する">
 							</div>
 						</div>
 					</form>

@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\ChildCategory\UpdateRequest;
 use App\Models\MProductChildCategory;
 use App\Services\AdminMProductChildCategoryService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class MProductChildCategoryController extends Controller
@@ -88,5 +89,15 @@ class MProductChildCategoryController extends Controller
     {
         $this->child_category_service->destroyMProductChildCategory($child_category);
         return redirect()->route('admin.child_categories.index')->with('flash_msg', 'カテゴリを削除しました');
+    }
+
+    /**
+     * カテゴリー検索
+     */
+    public function search(Request $request)
+    {
+        $child_categories = $this->child_category_service->search($request);
+
+        return  view('admin.child_category.index', compact('child_categories', 'request'));
     }
 }

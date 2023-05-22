@@ -40,6 +40,7 @@
 				<a class="nav-item nav-link active" href="{{ route('admin.survey.index') }}">アンケート</a>
 				<a class="nav-item nav-link active" href="{{ route('admin.payment.index') }}">決済</a>
 				<a class="nav-item nav-link active" href="{{ route('admin.transfer_request.index') }}">振込申請</a>
+				<a class="nav-item nav-link active" href="{{ route('admin.categories.index') }}">カテゴリ作成</a>
 				<a class="nav-item nav-link" href="{{ route('admin.logout') }}">LOGOUT</a>
 				</div>
 			</div>

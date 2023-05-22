@@ -84,6 +84,19 @@ class ChatroomController extends Controller
     }
 
     /**
+     * やりとり一覧画面
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function buyer()
+    {
+        $buyer_chatrooms = Chatroom::buyerChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerChatroom()->orderBy('updated_at','desc')->paginate(10);
+
+        return view('chatroom.buyer', compact('buyer_chatrooms','seller_chatrooms'));
+    }
+
+    /**
      * やりとり進行中一覧画面
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
@@ -255,7 +268,7 @@ class ChatroomController extends Controller
         $nda_message = $this->chatroom_nda_message_service->updateNdaMessage($request->all(), $chatroom);
         // NDAが送信・締結された旨のメッセージ作成
         if ((int)$request->input('status') === ChatroomNdaMessage::CONCLUSION) {
-            $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAが締結しました！');
+            $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを締結しました！');
         } else {
             $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
         }
@@ -383,7 +396,39 @@ class ChatroomController extends Controller
     {
         \DB::transaction(function () use ($chatroom) {
             $this->chatroom_message_service->storeCompleteMessage($chatroom);
+            $this->chatroom_service->statusChangeWorkReport($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+        });
+        return back();
+    }
+
+    /**
+     * 作業完了通知
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getWorkConfirm(Chatroom $chatroom)
+    {
+        \DB::transaction(function () use ($chatroom) {
+            $this->chatroom_message_service->storeConfirmMessage($chatroom);
             $this->chatroom_service->statusChangeBuyerEvaluation($chatroom);
+            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+        });
+        return back();
+    }
+
+    /**
+     * 作業完了 リトライ
+     * @param \App\Models\Chatroom $chatroom
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getRetry(Chatroom $chatroom)
+    {
+        \DB::transaction(function () use ($chatroom) {
+            $this->chatroom_message_service->storeRetryMessage($chatroom);
+            $this->chatroom_service->statusChangeWorkWithRetry($chatroom);
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
         return back();
@@ -413,7 +458,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeSellerEvaluation($chatroom);
-            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+            $this->user_notification_service->storeEvaluationUserNotificationMessage($chatroom);
         });
 
         return redirect()->route('chatroom.evaluation.complete', $chatroom->id);
@@ -443,7 +488,7 @@ class ChatroomController extends Controller
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
             $this->chatroom_service->statusChangeComplete($chatroom, $this->purchase_service);
-            $this->user_notification_service->storeUserNotificationMessage($chatroom);
+            $this->user_notification_service->storeEvaluationUserNotificationMessage($chatroom);
             // 両者に取引完了pointを与える
             $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $chatroom->seller_user_id, $chatroom);
             $this->point_service->getPoint(MPoint::TRANSACTION_COMPLETED, $chatroom->buyer_user_id, $chatroom);
@@ -576,6 +621,6 @@ class ChatroomController extends Controller
         \DB::transaction(function () use ($request, $chatroom_id) {
             $this->chatroom_service->updateTrashFlg($request->trash_flg, $chatroom_id);
         });
-        return redirect()->route('chatroom.index');
+        return redirect()->back();
     }
 }

@@ -87,6 +87,7 @@
 									</dd>
 								</dl>
 							</div>
+                            @include('components.hide-modal.identification-upload')
 							<div class="memberConfigItem">
 								<h3 class="memberConfigHd">お支払い方法</h3>
 								<dl class="memberConfigDl">

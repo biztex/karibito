@@ -2,14 +2,17 @@
 
 namespace App\Services;
 
+use App\Jobs\SendNewCouponNotificationMail;
 use App\Models\Chatroom;
 use App\Models\JobRequest;
 use App\Models\MCoupon;
+use App\Models\User;
 use App\Models\UserGetPoint;
 use App\Models\UserCoupon;
 use App\Models\MPointRate;
 use App\Models\Product;
 use App\Models\Proposal;
+use App\Models\UserNotification;
 use Carbon\Carbon;
 
 
@@ -87,5 +90,23 @@ class CouponService
             'discount' => $m_coupon->discount,
             'min_price' => $m_coupon->min_price
         ]);
+
+        $user = User::findOrFail($user_id);
+
+        $user_notification = [
+            'user_id' => $user_id,
+            'title' => 'クーポンを取得しました。',
+            'reference_type' => get_class($user),
+            'reference_id' => $user->id,
+        ];
+
+        if(empty($user->userNotificationSetting->is_like)) {
+            $user_notification['is_notification'] = 0;
+        } else {
+            $user_notification['is_notification'] = 1;
+        }
+
+        $mail_content = UserNotification::create($user_notification);
+        SendNewCouponNotificationMail::dispatch($mail_content);
     }
 }

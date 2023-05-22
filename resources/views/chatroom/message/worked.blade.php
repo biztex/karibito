@@ -1,90 +1,128 @@
 <!-- 作業報告メッセージ -->
-<!-- 購入者 評価前 -->
-@if($chatroom->status === App\Models\Chatroom::STATUS_BUYER_EVALUATION)
-    <!-- 購入者側の時 相手を評価するボタン-->
-    @if($message->user_id !== Auth::id()) 
-        <li>
-            <div class="img">
-                @include('chatroom.message.parts.icon')
-                <div class="info">
-                    <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">「納品完了」通知が届きました！</p>
-                    <div class="proposeBuy">
-                        <p class="tit">{{$chatroom->referencePurchased->title}}</p>
-                        <p>提供価格：¥{{ number_format($chatroom->purchase->proposal->price) }}</p>
-                        <p class="buy">
-                            <span style="font-weight: normal;">サービス内容を確認し、評価を入力してください。<br>
-                                ＊修正箇所がある場合、未入力のまま72時間が経過すると自動的に評価入力済みとなりますのでご注意ください。</span>
-                            <a href="{{ route('chatroom.get.buyer.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            @include('chatroom.message.parts.time')
-        </li>
+@if($message->text === '納品が完了しました！')
+    <?php
+        $message_title = '納品が完了しました！';
+        if ($message->user_id !== Auth::id()) {
+            $message_title = '「納品完了」通知が届きました！';
+        }
+    ?>
+    <li>
+        <div class="img">
+            @include('chatroom.message.parts.icon')
+            <div class="info">
+                <p class="name">{{$message->user->name}}</p>
+                <p class="message_text">
+                    {{$message_title}}
+                </p>
+                <div class="proposeBuy">
+                    <p class="tit">{{$chatroom->referencePurchased->title}}</p>
+                    <p>提供価格：¥{{ number_format($chatroom->purchase->proposal->price) }}</p>
+                    <p class="buy">
+                        @if($message->user_id !== Auth::id())
+                            <span style="font-weight: normal;">
+                                サービス内容を確認し、「承認」か「リトライ」か選択しましょう。リトライは一度のみ選択出来ます。<br>
+                                ＊修正箇所がある場合、未入力のまま72時間が経過すると自動的に承認となりますのでご注意ください
+                                @if($chatroom->status === \App\Models\Chatroom::STATUS_WORK_REPORT)
+                                    @if($message->oldMessage($chatroom->id, $message->text, $message->id))
+                                        <input type="submit" value="返信済み" class="white">
+                                    @else
+                                        <a href="{{ route('chatroom.get.work.confirm',$chatroom->id) }}" class="red">承認する</a>
+                                        @if($chatroom->retry_flg !== 1)
+                                            <a href="{{ route('chatroom.get.work.retry',$chatroom->id) }}" class="white">リトライ</a>
+                                        @endif
+                                    @endif
+                                @else
+                                    <input type="submit" value="返信済み" class="white">
+                                @endif
+                            </span>
+                        @else
+                            <span style="font-weight: normal;">
+                                納品完了通知を送信したことを伝え、購入者からの返信を待ちましょう。
+                                @if($chatroom->status === \App\Models\Chatroom::STATUS_WORK_REPORT)
 
-    <!-- 提供者側の時 相手の評価待ち -->
-    @else
-        <li>
-            <div class="img">
-                @include('chatroom.message.parts.icon')
-                <div class="info">
-                    <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">{{$message->text}}</p>
-                    <div class="proposeBuy">
-                        <p class="tit">{{$chatroom->referencePurchased->title}}</p>
-                        <p>提供価格：¥{{ number_format($chatroom->purchase->proposal->price) }}</p>
-                        <p class="buy">
-                            <span style="font-weight: normal;">納品完了のご連絡をし、購入者の方に評価を入力してもらいましょう。</span>
-                            <input type="submit" value="未評価" disabled>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            @include('chatroom.message.parts.time')
-        </li>
-    @endif
+                                    @if($message->oldMessage($chatroom->id, $message->text, $message->id))
+                                        <input type="submit" value="返信されました" class="white">
+                                    @else
+                                        <input type="submit" value="未返信" disabled>
+                                    @endif
+                                @else
+                                    <input type="submit" value="返信されました" class="white">
+                                @endif
+                            </span>
+                        @endif
+                    </p>
 
-<!-- 作業完了報告 購入者評価後-->
-@else
-    @if($message->user_id !== Auth::id()) 
-        <li>
-            <div class="img">
-                @include('chatroom.message.parts.icon')
-                <div class="info">
-                    <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">「納品完了」通知が届きました！</p>
-                    <div class="proposeBuy">
-                        <p class="tit">{{$chatroom->referencePurchased->title}}</p>
-                        <p>提供価格：¥{{ number_format($chatroom->purchase->proposal->price) }}</p>
-                        <p class="buy">
-                        <span style="font-weight: normal;">サービス内容を確認し、評価を入力してください。<br>
-                            ＊修正箇所がある場合、未入力のまま72時間が経過すると自動的に評価入力済みとなりますのでご注意ください。</span>
-                            <input type="submit" value="評価入力済み" class="white">
-                        </p>
-                    </div>
                 </div>
             </div>
-            @include('chatroom.message.parts.time')
-        </li>
-    @else
-        <li>
-            <div class="img">
-                @include('chatroom.message.parts.icon')
-                <div class="info">
-                    <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">{{$message->text}}</p>
-                    <div class="proposeBuy">
-                        <p class="tit">{{$chatroom->referencePurchased->title}}</p>
-                        <p>提供価格：¥{{ number_format($chatroom->purchase->proposal->price) }}</p>
-                        <p class="buy">
-                            <span style="font-weight: normal;">納品完了のご連絡をし、購入者の方に評価を入力してもらいましょう。</span>
-                            <input type="submit" value="評価されました" class="white">
-                        </p>
-                    </div>
+        </div>
+        @include('chatroom.message.parts.time')
+    </li>
+
+@elseif($message->text === 'リトライを通知しました！')
+    <?php
+        $message_title = 'リトライを通知しました！';
+        if ($message->user_id !== Auth::id()) {
+            $message_title = 'リトライをお願いします！';
+        }
+    ?>
+    <li>
+        <div class="img">
+            @include('chatroom.message.parts.icon')
+            <div class="info">
+                <p class="name">{{$message->user->name}}</p>
+                <p class="message_text">
+                    {{$message_title}}
+                </p>
+                <div class="proposeBuy">
+                    <p class="buy">
+                        <span style="font-weight: normal;">
+                        @if($message->user_id !== Auth::id())
+                            納品完了通知はリトライとなりました。修正箇所を確認し、再度「納品完了」通知を送りましょう。
+                        @else
+                            リトライを通知しました。修正箇所を丁寧に伝え、再度「納品完了」通知を送ってもらいましょう。
+                        @endif
+                        </span>
+                    </p>
+
                 </div>
             </div>
-            @include('chatroom.message.parts.time')
-        </li>
-    @endif
+        </div>
+        @include('chatroom.message.parts.time')
+    </li>
+@elseif($message->text === '「納品完了」通知を承認しました！')
+    <?php
+        $message_title = $message->text;
+        if ($message->user_id !== Auth::id()) {
+            $message_title = '「納品完了」通知が承認されました！';
+        }
+    ?>
+    <li>
+        <div class="img">
+            @include('chatroom.message.parts.icon')
+            <div class="info">
+                <p class="name">{{$message->user->name}}</p>
+                <p class="message_text">
+                    {{$message_title}}
+                </p>
+                <div class="proposeBuy">
+                    <p class="buy">
+                        <span style="font-weight: normal;">
+                            @if($message->user_id !== Auth::id())
+                                納品完了通知が承認されました。引き続き評価が入力されるのを待ちましょう。
+                            @else
+                                引き続き評価を入力しましょう。<br>
+                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。
+                                @if($chatroom->status === \App\Models\Chatroom::STATUS_BUYER_EVALUATION)
+                                    <a href="{{ route('chatroom.get.buyer.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                                @else
+                                    <input type="submit" value="評価済み" class="white">
+                                @endif
+                            @endif
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        @include('chatroom.message.parts.time')
+    </li>
 @endif

@@ -13,8 +13,6 @@
 			<div class="cancelWrap">
 				<div class="inner inner05">
 
-					<x-parts.chatroom-step :value="$proposal->chatroom"/>
-
 					<h2 class="subPagesHd">お支払い手続き</h2>
 					<form id="paymentform" action="{{ route('chatroom.purchase.confirm', $proposal->id) }}" method="post">
 						@csrf
@@ -71,13 +69,13 @@
 						@if($user_has_coupons->isEmpty())
 						<p style="margin-top:5%;">現在ご利用いただけるクーポンはありません。</p>
 						@else
-						<div class="coupons">
+						<div class="coupons" id="coupon_group">
 							<div class="checkbox">
 								@error('coupon_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                 <p class="checkChoice"><label><input type="checkbox" name="coupon_use" value="1" @if(old('coupon_use') == 1) checked @endif>クーポンを利用する</label></p>
                                 <div class="pointInput mt12">
                                     <p class="mr18">
-                                        <select name="coupon_id" style="padding: 10px;" class="js-coupon">
+                                        <select name="coupon_id" style="padding: 10px; width: 100%;" class="js-coupon">
                                             <option value="">選択してください</option>
                                             @foreach ($user_has_coupons as $coupon)
                                                 <option value="{{$coupon->id}}" @if(old('coupon_id') == $coupon->id) selected @endif>{{$coupon->name}}:{{$coupon->content}}</option>
@@ -94,7 +92,7 @@
 						</div>{{-- /.coupons --}}
 						@endif
 
-						<div class="radio">
+						<div class="radio" id="point_group">
 							<p class="tit">ポイントの利用@error('user_use_point')<span>{{ $message }}</span>@enderror</p>
 							<ul class="radioChoice">
 								@error('point_use')<span>{{ $message }}</span>@enderror
@@ -189,9 +187,10 @@
 							</div>{{-- /. --}}
 							<p class="click"><a href="">登録できない場合はこちら</a></p>
 						</div>{{-- /.method --}}
-						<div class="functeBtns">
+						<div class="functeBtns flex">
 							<input type="hidden" class="" name="chatroom_id" value="{{$proposal->chatroom->id}}">
-							<input type="submit" class="orange full loading-disabled" value="確認する">
+                            <input type="button" class="gray" value="戻る" onclick="history.go(-1);">
+							<input type="submit" class="orange loading-disabled" value="確認する">
 						</div>
 					</form>
 				</div>{{-- /.inner --}}

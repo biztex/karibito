@@ -37,6 +37,7 @@
                             <div class="form-group row">
                                 <label for="index_image_path" class="col-md-4 col-form-label text-md-right">カテゴリアイコン</label>
                                 <div class="col-md-6">
+                                    <img src="{{ Illuminate\Support\Facades\Storage::url($child_category->index_image_path) }}" width="300">
                                     @include('components.form.file', ['name' => 'index_image_path', 'required' => false])
                                     @include('components.form.error', ['name' => 'index_image_path'])
                                 </div>

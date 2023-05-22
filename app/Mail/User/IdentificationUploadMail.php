@@ -29,6 +29,6 @@ class IdentificationUploadMail extends Mailable
     public function build()
     {
         return $this->subject('【カリビト】身分証明証提出完了のお知らせ')
-                    ->text('mail.text.user.identification_send');
+                    ->view('mail.text.user.identification_send');
     }
 }

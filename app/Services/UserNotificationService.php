@@ -48,7 +48,7 @@ class UserNotificationService
         foreach ($follow_users as $follow_user) {
             $user_notification_contents = [
                 'user_id' => $follow_user->id,
-                'title' => 'あなたがフォローしている ' . $followed_user->name . 'さんが新しい投稿をしました。確認してみましょう。',
+                'title' => 'あなたがフォローしている ' . $followed_user->name . 'さんが新しいサービスを出品しました。',
             ];
 
             if(empty($follow_user->userNotificationSetting->is_posting)) {
@@ -72,7 +72,7 @@ class UserNotificationService
         foreach ($favorite_users as $favorite_user) {
             $user_notification_contents = [
                 'user_id' => $favorite_user->user_id,
-                'title' => 'あなたがいいねした ' . $product->title . 'が更新されました。確認してみましょう。',
+                'title' => 'あなたがお気に入りに登録した「' . $product->title . '」のサービス内容が更新されました。',
             ];
 
             if(empty($favorite_user->user->userNotificationSetting->is_fav)) {
@@ -110,7 +110,7 @@ class UserNotificationService
 
         $user_notification = [
             'user_id' => $product_user->id,
-            'title' => $login_user->name . 'さんからいいねが来ました。',
+            'title' => $login_user->name . 'さんがあなたのサービスをお気に入りに登録しました。',
             'reference_type' => $reference_type,
             'reference_id' => $product->id,
         ];
@@ -141,16 +141,9 @@ class UserNotificationService
             $send_user_id = $chatroom->sellerUser->id; //メッセージを送ったユーザーid
         }
         $send_user = User::find($send_user_id);
-        
-        // やりとりの進捗に合わせてメッセージタイトルを分ける
-        if($chatroom->status === 5) {
-            $title = $send_user->name . 'さんがあなたを評価しました。';
-        } elseif ($chatroom->status === 6) {
-            $title = $send_user->name . 'さんがあなたを評価しました。これで取引完了です。';
-        } else {
-            $title = $send_user->name . 'さんからメッセージが届きました。';
-        }
-        
+
+        $title = $send_user->name . 'さんからメッセージが届きました。';
+
         $user_notification_contents = [
             'user_id' => $receive_user->id,
             'title' => $title,
@@ -165,7 +158,37 @@ class UserNotificationService
 
         SendNewMessageNotificationMail::dispatch($receive_user,$user_notification); 
     }
-    
+
+    // 評価のメッセージだけ、このメソッドで通知する。タイトルだけを変える
+    public function storeEvaluationUserNotificationMessage(Chatroom $chatroom)
+    {
+        $receive_user = User::find($chatroom->to_user_id); //メッセージを受け取ったユーザー
+
+        if($receive_user->id == $chatroom->sellerUser->id)
+        {
+            $send_user_id = $chatroom->buyerUser->id; //メッセージを送ったユーザーid
+        } else {
+            $send_user_id = $chatroom->sellerUser->id; //メッセージを送ったユーザーid
+        }
+        $send_user = User::find($send_user_id);
+
+        $title = $send_user->name . 'さんがあなたを評価しました。';
+
+        $user_notification_contents = [
+            'user_id' => $receive_user->id,
+            'title' => $title,
+        ];
+        if(empty($receive_user->userNotificationSetting->is_message)) {
+            $user_notification_contents['is_notification'] = 0;
+        } else {
+            $user_notification_contents['is_notification'] = 1;
+        }
+
+        $user_notification = $chatroom->userNotifications()->create($user_notification_contents);
+
+        SendNewMessageNotificationMail::dispatch($receive_user,$user_notification);
+    }
+
     //DMが来たら通知する
     public function storeUserNotificationDm($dmroom_message)
     {    
@@ -184,7 +207,6 @@ class UserNotificationService
         }
         
         $user_notification = $dmroom->userNotifications()->create($user_notification_contents);
-        
         SendNewDmNotificationMail::dispatch($receive_user,$user_notification);
     }
 

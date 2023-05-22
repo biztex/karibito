@@ -28,7 +28,7 @@
                                             <p class="mypageEditHd">画像</p>
                                             @error('path')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             <div class="mypageEditInput">
-                                                <input id='showSrc' type='text' />
+                                                <img id="updatedSrc" alt="" class="portfolioPreviewImg">
                                                 <input id="showButton" type='button' value=''  OnClick='javascript:$("#hiddenFile").click();'/>
                                                 <input name="path" id='hiddenFile' type='file' accept="image/*" OnChange='ophiddenFile();' />
                                             </div>
@@ -121,9 +121,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="fancyPersonBtn">
-                                            <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
-                                            <button class="fancyPersonSign loading-disabled">登録する</button>
+                                        <div class="portfolioFooter">
+                                            <div class="portfolioFooterTitle">登録したポートフォリオは詳細画面からシェアできます。詳細画面は画像をクリックすると表示されます。</div>
+                                            <div class="fancyPersonBtn">
+                                                <a href="{{ route('portfolio.index') }}" class="fancyPersonCancel">キャンセル</a>
+                                                <button class="fancyPersonSign loading-disabled">登録する</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>

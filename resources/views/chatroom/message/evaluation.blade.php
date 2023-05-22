@@ -45,7 +45,8 @@
 @elseif($chatroom->status === App\Models\Chatroom::STATUS_COMPLETE)
     @if($message->user_id === $chatroom->seller_user_id) {{--両者に表示される--}}
         <li>
-            <p class="message_text">取引終了となります。ありがとうございました。</p>
+            <p class="message_text">この取引は完了しました！</p>
+            <p style="text-align: center; margin-top: 10px;">今後のやりとりはDMにてお願いします。</p>
         </li>
     @elseif($message->user_id === Auth::id() && $chatroom->buyer_user_id === Auth::id())
         <li>

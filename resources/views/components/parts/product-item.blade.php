@@ -11,14 +11,14 @@
     </a>
     <div class="infoTop">
         <div>
-            <div class="breadcrumb">
+            <div class="breadcrumb categoryItem">
                 <a href="{{ route('product.category.index',$product->mProductChildCategory->mProductCategory->id) }}">
-                    {{ $product->mProductChildCategory->mProductCategory->name}}</a>&emsp;＞&emsp;
+                    {{ $product->mProductChildCategory->mProductCategory->name}}</a> ＞
                 <a href="{{ route('product.category.index.show',$product->mProductChildCategory->id)}}">
                     {{ $product->mProductChildCategory->name }}</a>
             </div>
             <div class="draw">
-                <p class="price word-break" style="width:100%"><font>{{ $product->title }}</font><br>{{ number_format($product->price) }}円</p>
+                <p class="price word-break" style="width:100%"><font class="productItem">{{ $product->title }}<br><br></font>{{ number_format($product->price) }}円</p>
             </div>
             <div class="single">
                 <span>{{App\Models\Product::IS_ONLINE[$product->is_online]}}</span>

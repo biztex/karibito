@@ -17,6 +17,7 @@
                     <div class="mypageWrap">
                         <div class="mypageSec05">
                             <p class="mypageHd02"><span>ポートフォリオ</span></p>
+                            <div style="margin-bottom: 10px;">登録したポートフォリオは詳細画面からシェアできます。詳細画面は画像をクリックすると表示されます。</div>
                             <ul class="mypagePortfolioUl02">
                                 <li class="editLi">
                                     <a href="{{ route('portfolio.create') }}" class="editLiLink">

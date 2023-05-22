@@ -32,6 +32,6 @@ class RevokeApprovalMail extends Mailable
     public function build()
     {
         return $this->subject(\Lang::get('【カリビト】身分証明証が承認されませんでした'))
-                    ->text('mail.text.user.revoke_approval_mail');
+                    ->view('mail.text.user.revoke_approval_mail');
     }
 }

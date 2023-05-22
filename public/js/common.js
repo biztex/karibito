@@ -430,7 +430,20 @@ var common = (function () {
 
 function ophiddenFile() {
 	var dd = $('#hiddenFile').val().split('\\');
-	$('#showSrc').val(dd[dd.length - 1]);
+    const uploadedFile = $('#hiddenFile').prop('files')[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#updatedSrc").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(uploadedFile);
+    const img = new Image();
+    var _URL = window.URL || window.webkitURL;
+    var objectUrl = _URL.createObjectURL(uploadedFile);
+    img.onload = function () {
+        $('#showSrc').val(`サイズ width ${this.width}px height ${this.height}px ${dd[dd.length - 1]}`);
+    };
+    img.src = objectUrl;
+
 	if (dd == '') {
 		$('#showButton').removeClass('active');
 	} else {

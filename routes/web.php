@@ -94,7 +94,17 @@ Route::middleware('update_latest_login_datetime')->group(function () {
     Route::view('support_detail', 'support.support_detail')->name('support_detail');
     Route::view('guide', 'support.guide')->name('guide');
     Route::view('karibitoguide', 'karibitoguide.support')->name('karibitoguide');
-
+    Route::view('karibitoguide/profile_register', 'karibitoguide.profile_register')->name('karibitoguide_profile_register');
+    Route::view('karibitoguide/identification', 'karibitoguide.identification')->name('karibitoguide_identification');
+    Route::view('karibitoguide/sell_process', 'karibitoguide.sell_process')->name('karibitoguide_sell_process');
+    Route::view('karibitoguide/seller_contract_process', 'karibitoguide.seller_contract_process')->name('karibitoguide_seller_contract_process');
+    Route::view('karibitoguide/buy_process', 'karibitoguide.buy_process')->name('karibitoguide_buy_process');
+    Route::view('karibitoguide/buyer_contract_process', 'karibitoguide.buyer_contract_process')->name('karibitoguide_buyer_contract_process');
+    Route::view('karibitoguide/cancel_send', 'karibitoguide.cancel_send')->name('karibitoguide_cancel_send');
+    Route::view('karibitoguide/cancel_receive', 'karibitoguide.cancel_receive')->name('karibitoguide_cancel_receive');
+    Route::view('karibitoguide/request_send', 'karibitoguide.request_send')->name('karibitoguide_request_send');
+    Route::view('karibitoguide/request_receive', 'karibitoguide.request_receive')->name('karibitoguide_request_receive');
+    Route::view('karibitoguide/rule', 'karibitoguide.rule')->name('karibitoguide_rule');
 
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -298,6 +308,7 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         // やり取り（提供・リクエスト共用版）
         Route::prefix('chatroom')->controller(ChatroomController::class)->middleware('null.user.profile')->name('chatroom.')->group(function () {
             Route::get('','index')->name('index');
+            Route::get('buyer','buyer')->name('buyer');
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
             Route::post('/update/{chatroom}/trash_flg/', 'updateTrashFlg')->name('update_trash_flg');
@@ -326,6 +337,14 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             });
 
             Route::get('{chatroom}/complete','complete')->middleware('can:worked,chatroom')->name('complete')->middleware('is_ban'); //作業完了
+
+            Route::middleware('can:confirm,chatroom')->group(function () {
+                Route::get('{chatroom}/confirm','getWorkConfirm')->name('get.work.confirm'); //「納品完了」通知
+            });
+
+            Route::middleware('can:retry,chatroom')->group(function () {
+                Route::get('{chatroom}/retry','getRetry')->name('get.work.retry'); //「納品完了」通知
+            });
 
             Route::middleware('can:buyer.evaluation,chatroom')->group(function () {
                 Route::get('{chatroom}/buyer_evaluation','getBuyerEvaluation')->name('get.buyer.evaluation'); //購入者価画面
@@ -499,7 +518,9 @@ Route::middleware('update_latest_login_datetime')->group(function () {
             Route::post('/users/{user}/is_ban',[UserController::class, 'limitAccount'])->name('limit.account');
             Route::post('/users/{user}/not_ban',[UserController::class, 'cancelLimitAccount'])->name('cancel.limit.account');
             Route::resource('/categories', MProductCategoryController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+            Route::get('/categories/search',[MProductCategoryController::class, 'search'])->name('category.search');
             Route::resource('/child_categories', MProductChildCategoryController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+            Route::get('/child_categories/search',[MProductChildCategoryController::class, 'search'])->name('child_category.search');
 
             //お知らせ機能
             Route::resource('/news', AdminNewsController::class);

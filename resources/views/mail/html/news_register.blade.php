@@ -1,9 +1,9 @@
+<p>{{$user_notification->user->name}}様</p>
 
-{{$user_notification->user->name}}様
+<span>{{$user_notification->title}}</span><br>
 
-{{$user_notification->title}}
+<p><a href="{{ route('already_read.show', $user_notification) }}">{{ route('already_read.show', $user_notification) }}</a></p>
 
-{{ route('already_read.show', $user_notification) }}
-
+<p>ご不明点・ご質問などは「<a href="{{ route('contact') }}">お問合せ</a>」よりご連絡ください。</p>
 
 @include('mail.text.footer')

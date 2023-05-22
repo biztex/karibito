@@ -14,12 +14,15 @@
                     <h6 class="mb-0">ユーザー名</h6>
                     <h3><a href="{{ route('user.mypage', $user->id) }}">{{ $user->user->name }}</a></h3>
                     <span><i class="bi bi-envelope"> Email</i>：{{ $user->user->email }}</span>
+                    @if ($user->deleted_at !== null)
+                        <span class="badge badge-pill badge-danger">退会済</span>
+                    @endif
                     @if ($user->is_ban === 0)
                         <form action="{{ route('admin.limit.account', $user->user_id) }}" method="post">
-                        <input type="submit" id="js-limit_alert" name="is_ban" value="利用を制限する">
+                        <input type="submit" id="js-limit_alert" name="is_ban" value="利用を制限する" class="full btn btn-secondary mr-3">
                     @elseif ($user->is_ban === 1)
                         <form action="{{ route('admin.cancel.limit.account', $user->user_id) }}" method="post">
-                        <input type="submit" name="is_ban" value="利用制限を解除する">
+                        <button onclick='return confirm("利用制限を解除しますか？");' type="submit" class="full btn btn-secondary mr-3">利用制限を解除する</button>
                     @endif
                         @csrf
                         </form>
@@ -48,6 +51,7 @@
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">生年月日</span>：{{ $user->birthday }}</p><p class="mb-0 mr-4"><span class="font-weight-bold">年齢</span>：@if(isset($user->birthday)){{ $user->now_age }}歳@else未設定@endif</p><span class="font-weight-bold">年代</span>：{{ $user->age }}</p></li>
             <li class="list-group-item d-flex"><p class="mb-0 mr-4"><span class="font-weight-bold">郵便番号</span>：〒{{ substr($user->zip, 0, 3).'-'.substr($user->zip, 3, 7) }}</p><p class="mb-0 mr-4"><span class="font-weight-bold">都道府県</span>：{{ $user->prefecture?->name }}</p></li>
             <li class="list-group-item"><span class="font-weight-bold">住所</span>：{{ $user->address }}</li>
+            <li class="list-group-item"><span class="font-weight-bold">電話番号</span>：{{ $user->user->tel }}</li>
             <li class="list-group-item"><span class="font-weight-bold">自己紹介</span><br>{!! nl2br(e($user->introduction)) !!}</li>
             <li class="list-group-item"><span class="font-weight-bold">メモ</span>
                 <button type="button" class="btn btn-info btn-sm" id="js-memo_btn" data-toggle="modal" data-target="#memoModalCenter{{ $user->user_id }}">

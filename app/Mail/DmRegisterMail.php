@@ -30,6 +30,6 @@ class DmRegisterMail extends Mailable
     public function build()
     {
         return $this->subject('[カリビト]　ユーザーからメッセージが届きました！') //メールタイトル
-        ->text('mail.html.dm_register');
+        ->view('mail.html.dm_register');
     }
 }

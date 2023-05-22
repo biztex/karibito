@@ -1,11 +1,14 @@
+<p>{{$user_notification->user->name}}様</p>
 
-{{$user_notification->user->name}}様
+<p>日頃よりカリビトをご利用いただきありがとうございます。</p>
 
-日頃よりカリビトをご利用いただきありがとうございます。
+<span>{{$user_notification->title}}</span><br>
+<span>早速確認してみましょう！</span><br>
+
+<p><a href="{{ route('user_notification.index') }}">{{ route('user_notification.index') }}</a></p>
 
 
-{{$user_notification->title}}
-{{ route('user_notification.index') }}
+<p>ご不明点・ご質問などは「<a href="{{ route('contact') }}">お問合せ</a>」よりご連絡ください。</p>
 
 
 @include('mail.text.footer')

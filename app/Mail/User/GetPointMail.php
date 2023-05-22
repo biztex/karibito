@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Mail\User;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class GetPointMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($user_profile)
+    {
+        $this->user_profile = $user_profile;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->subject('【カリビト】カリビトポイントが付与されました！')
+            ->view('mail.text.user.get_point_mail')
+            ->with(['user_profile' => $this->user_profile]);
+    }
+}

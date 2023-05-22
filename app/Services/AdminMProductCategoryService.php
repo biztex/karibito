@@ -62,9 +62,10 @@ class AdminMProductCategoryService
             $top_image = $request->file('top_image_path');
             $other_image = $request->file('other_image_path');
             // 画像アップロード・ファイルパス取得
-            $banner_image_path = empty($banner_image) ? $banner_image : Storage::putFile('public/banner_image_path', $banner_image, 'public');
-            $top_image_path = empty($top_image) ? $top_image : Storage::putFile('public/top_image_path', $top_image, 'public');
-            $other_image_path = empty($other_image) ? $other_image : Storage::putFile('public/other_image_path', $other_image, 'public');
+            $banner_image_path = empty($banner_image) ? $category->banner_image_path : Storage::putFile('public/banner_image_path', $banner_image, 'public');
+            $top_image_path = empty($top_image) ? $category->top_image_path : Storage::putFile('public/top_image_path', $top_image, 'public');
+            $other_image_path = empty($other_image) ? $category->other_image_path : Storage::putFile('public/other_image_path', $other_image, 'public');
+
             $category->fill([
                 'name' => $request->input('name'),
                 'content' => $request->input('content'),
@@ -86,5 +87,13 @@ class AdminMProductCategoryService
         DB::transaction(function () use ($category) {
             $category->delete();
         });
+    }
+
+    public function search($request)
+    {
+        $sql = MProductCategory::orderBy('id', 'asc');
+        $sql->where('name', 'LIKE', "%$request->search%");
+
+        return $sql->paginate(50)->appends($request->query());
     }
 }

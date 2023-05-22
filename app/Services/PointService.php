@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Jobs\SendNewPointNotificationMail;
 use App\Models\Chatroom;
 use App\Models\MPoint;
+use App\Models\User;
 use App\Models\UserGetPoint;
+use App\Models\UserNotification;
 use App\Models\UserUsePoint;
 use App\Traits\UserHasPointTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +36,25 @@ class PointService
             'reference_type' => get_class($instance),
             'reference_id' => $instance->id,
         ]);
+
+        $user_notification = [
+            'user_id' => $user_id,
+            'title' => 'ポイントを取得しました。',
+            'reference_type' => get_class($instance),
+            'reference_id' => $instance->id,
+        ];
+
+        $user = User::findOrFail($user_id);
+
+        if(empty($user->userNotificationSetting->is_like)) {
+            $user_notification['is_notification'] = 0;
+        } else {
+            $user_notification['is_notification'] = 1;
+        }
+
+        $mail_content = UserNotification::create($user_notification);
+
+        SendNewPointNotificationMail::dispatch($mail_content);
     }
 
     public function usedPoint(Chatroom $chatroom, int|null $point)

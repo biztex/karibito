@@ -10,13 +10,13 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb border bg-white shadow-sm">
 {{--                                <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
-                                <li class="breadcrumb-item"><a href="{{ route('admin.news.index') }}">ニュース一覧</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">ニュース登録</li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.news.index') }}">お知らせ一覧</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">お知らせ登録</li>
                             </ol>
                         </nav>
                         <div class="card shadow-sm mb-5">
                             <div class="card-header border-0 bg-dark text-center py-4">
-                                <h5 class="text-white mb-0">ニュース登録</h5>
+                                <h5 class="text-white mb-0">お知らせ登録</h5>
                             </div>
                             <div class="card-body pt-5 pb-3 px-5">
                                 <form method="POST" action="{{ route('admin.news.store') }}" id="form" enctype="multipart/form-data">
@@ -33,7 +33,7 @@
                                     @endif
 
                                     <div class="form-group row py-1">
-                                        <p>ニュースとはユーザー全員に送ることができるメッセージです。</p>
+                                        <p>お知らせとはユーザー全員に送ることができるメッセージです。</p>
                                         <p>重要なお知らせにチェックすると、トップページの上部に重要なお知らせとして表示することができます。</p>
                                     </div>
 

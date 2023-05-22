@@ -23,7 +23,13 @@
 									{{ $blog->product->mProductChildCategory->name }}</a>
 							</p>
 							<dl class="blogItemPerson">
-								<dt><img src="img/blog/head_detail01_01.png" alt=""></dt>
+								<dt>
+                                    @if(empty($blog->user->userProfile->icon))
+                                        <img src="/img/mypage/no_image.jpg" alt="">
+                                    @else
+                                        <img src="{{asset('/storage/'.$blog->product->user->userProfile->icon) }}" alt="">
+                                    @endif
+                                </dt>
 								<dd>
 									<p class="nameP">{{ $blog->user->name }}</p>
 									<p class="dateP">{{ $blog->updated_at }}</p>
@@ -36,7 +42,7 @@
 								<div class="list sliderSP02">
 									<div class="item">
 										<a href="{{ route('product.show',$blog->product_id) }}" class="img imgBox" data-img="img/common/img_work01@2x.jpg">
-											<img src="img/common/img_270x160.png" alt="">
+                                            <img src="{{ asset('/storage/'.$blog->product->productImage[0]->path) }}" alt="" style="object-fit: contain;">
 											<button class="favorite">お気に入り</button>
 										</a>
 										<div class="info">
@@ -78,7 +84,13 @@
                             </ul>
 							<div class="blogDtOther">
 								<dl class="blogItemPerson">
-									<dt><img src="img/blog/head_detail01_01.png" alt=""></dt>
+									<dt>
+                                        @if(empty($blog->user->userProfile->icon))
+                                            <img src="/img/mypage/no_image.jpg" alt="">
+                                        @else
+                                            <img src="{{asset('/storage/'.$blog->product->user->userProfile->icon) }}" alt="">
+                                        @endif
+                                    </dt>
 									<dd>
 										<p class="nameP">{{ $blog->user->name }}</p>
 										<p class="dateP">({{ App\Models\UserProfile::GENDER[$blog->product->user->userProfile->gender] }}/ {{ $blog->product->user->userProfile->age }}/ {{ $blog->product->user->userProfile->prefecture->name }})</p>

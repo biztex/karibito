@@ -45,8 +45,10 @@
                         <p class="message_text">{{$message->text}}</p>
                         <div class="proposeBuy">
                             <p class="buy">
-                                <span>キャンセル申請に返信していただくようご連絡しましょう。<br>
-                                    キャンセル成立には双方の同意が必要です。</span>
+                                <span style="font-weight: normal;">
+                                    キャンセル申請に返信していただくようご連絡しましょう。<br>
+                                    キャンセル成立には双方の同意が必要です。
+                                </span>
                                 <input type="submit" value="未返信" disabled>
                             </p>
                         </div>
@@ -126,14 +128,17 @@
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">{{$message->text}}</p><br>
                         <p class="cancel_evaluation">
-                            <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
-                            今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
+                            <span>
+                                キャンセルが成立しました。引き続き評価を入力しましょう。<br>
+                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
+                                双方の評価が入力された時点でキャンセル完了となり、代金が購入者の方に返金されます。<br><br>
+                            </span>
                             @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
                                 <!-- キャンセルした側評価 -->
                                 @if($chatroom->status == \App\Models\Chatroom::STATUS_CANCELED)
                                     <a href="{{ route('chatroom.get.cancel.sender.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
                                 @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
-                                    <a class="cancelEnd">取引完了</a>
+                                    <a class="cancelEnd">キャンセル完了</a>
                                 @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_SENDER_EVALUATION)
                                     <a class="cancelStart">未評価</a>
                                 @endif
@@ -144,6 +149,20 @@
                 </div>
                 @include('chatroom.message.parts.time')
             </li>
+            @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
+                @if ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
+                    <li>
+                        <div class="img">
+                            <div style="text-align: center; width: 100%;">
+                                <p class="message_text">この取引はキャンセルになりました</p><br>
+                                <p class="cancel_evaluation">
+                                    今後のやりとりはDMにてお願いします。
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                @endif
+            @endif
         <!-- 申請者でない時 -->
         @else
             <li>
@@ -151,16 +170,19 @@
                     @include('chatroom.message.parts.icon')
                     <div class="info cancel">
                         <p class="name">{{$message->user->name}}</p>
-                        <p class="message_text">キャンセル申請が承諾されました！</p><br>
+                        <p class="message_text">キャンセル申請が承認されました！</p><br>
                         <p class="cancel_evaluation">
-                            <span>キャンセルが成立しました。代金は購入者の方に返金されます。<br>
-                                今後こちらのやり取りは、過去の取引履歴よりご確認いただけます。</span>
+                            <span>
+                                キャンセルが成立しました。引き続き評価が入力されるのを待ちましょう。<br>
+                                評価が入力されたら、あなたからも評価を入力してください。双方の評価が入力された時点でキャンセル完了となります。<br>
+                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br><br>
+                            </span>
                             @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
                                 <!-- キャンセルされた側評価 -->
                                 @if($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_SENDER_EVALUATION)
                                     <a href="{{ route('chatroom.get.cancel.receiver.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
                                 @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
-                                    <a class="cancelEnd">取引完了</a>
+                                    <a class="cancelEnd">キャンセル完了</a>
                                 @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCELED)
                                     <a class="cancelStart">未評価</a>
                                 @endif
@@ -171,6 +193,20 @@
                 </div>
                 @include('chatroom.message.parts.time')
             </li>
+            @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
+                @if ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
+                    <li>
+                        <div class="img">
+                            <div style="text-align: center; width: 100%;">
+                                <p class="message_text">この取引はキャンセルになりました</p><br>
+                                <p class="cancel_evaluation">
+                                    今後のやりとりはDMにてお願いします。
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                @endif
+            @endif
         @endif
     @endif
 

@@ -6,13 +6,13 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb border bg-white shadow-sm">
 {{--                        <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}">Home</a></li>--}}
-                        <li class="breadcrumb-item"><a href="{{ route('admin.news.index') }}">ニュース一覧</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">ニュース詳細</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.news.index') }}">お知らせ一覧</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">お知らせ詳細</li>
                     </ol>
                 </nav>
                 <div class="card shadow-sm mb-5">
                     <div class="card-header border-0 bg-dark">
-                        <h5 class="text-white mb-0">ニュース詳細</h5>
+                        <h5 class="text-white mb-0">お知らせ詳細</h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-responsive-md mt-4">

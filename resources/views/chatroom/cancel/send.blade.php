@@ -15,9 +15,6 @@
 		<div id="contents" style="margin-bottom:35px;">
 			<div class="cancelWrap">
 				<div class="inner inner05">
-
-					<x-parts.chatroom-step :value="$purchased_cancel->purchase->chatroom"/>
-
 					<div class="cancelTitle">
 						<h2>キャンセル申請が完了しました！</h2>
 					</div>

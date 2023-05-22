@@ -43,13 +43,13 @@
 										</form>
 									@else
                                         <a type="button" class="bankTransferBtn js-alertModal-2">振り込み申請をする</a>
-                                        <x-parts.alert-modal-2 phrase="振込口座の登録が必要です" cancel_value="OK" />
+                                        <x-parts.alert-modal-bank-account cancel_value="OK" />
 									@endif
 								</div>
 								<div class="bankTransferAttention">
 									<p>※終了した取引のみ売り上げに反映されます。</p>
 									<p>※売上金額は金額から15%のサイトの手数料が引かれた金額が表示されています。</p>
-									<p>振込日は「10日締め当月20日払い」「20日締め当月30日払い」「末日締め翌月10日払い」の月3回です。（土日祝の場合は翌営業日中）</p>
+									<p>振込日は「10日締め当月20日払い」「20日締め当月末払い」「末日締め翌月10日払い」の月3回です。（土日祝の場合は翌営業日中）</p>
 									<p>※1回の振込に振込手数料200円がかかります。</p>
 									<p>※振込申請期限内（報酬確定後から120日以内）に必ず振込申請してください。</p>
 									<p>それまでに申請できなかった場合は運営側までお問い合わせください。</p>
@@ -67,15 +67,16 @@
 							<div class="memberConfigBox bankTransferBox bankTransferHistoryBox">
 								<ul class="bankTransferList">
 									@foreach($transfer_request as $value)
-										<a href="{{ route('transfer_request.show', $value->id) }}" class="bankTransferItem">
-											<div class="bankTransferHalf">
-												<p class="bankTransferDate">{{ date('Y年n月j日 H:i', strtotime($value->requested_at)) }}</p>
-												<p class="bankTransferText">{{ \App\Models\TransferRequest::STATUS[$value->status] }}</p>
-											</div>
-											<div class="bankTransferHalf">
-												<span class="bankTransferPrice">{{ number_format($value->amount) }}円</span>
-											</div>
-										</a>
+                                        <div class="bankTransferItem">
+                                            <div class="bankTransferHalf">
+                                                <p class="bankTransferDate">{{ date('Y年n月j日 H:i', strtotime($value->requested_at)) }}</p>
+                                                <p class="bankTransferText">{{ \App\Models\TransferRequest::STATUS[$value->status] }}</p>
+                                            </div>
+                                            <div class="bankTransferHalf">
+                                                <span class="bankTransferPrice">{{ number_format($value->amount) }}円</span>
+                                                <a href="{{ route('transfer_request.show', $value->id) }}" class="bankTransferItemBtn">内訳の確認</a>
+                                            </div>
+                                        </div>
 									@endforeach
 								</ul>
 							</div>

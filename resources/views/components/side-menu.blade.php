@@ -22,8 +22,7 @@
             <ul class="sideUl01">
                 <li><a href="{{ route('mypage') }}" class="">マイページ</a></li>
                 <li><a href="{{ route('favorite.index') }}" class="">お気に入り</a></li>
-                <li><a href="{{ route('chatroom.active') }}" class="">進行中の取引</a></li>
-                <li><a href="{{ route('chatroom.inactive') }}" class="">過去の取引</a></li>
+                <li><a href="{{ route('chatroom.buyer') }}" class="">購入に関するやりとり</a></li>
                 <li><a href="{{ route('evaluation') }}" class="">評価一覧</a></li>
                 <li><a href="{{ route('payment.index') }}" class="">支払い履歴</a></li>
                 <li><a href="{{ route('point.index') }}" class="">ポイント取得・利用履歴</a></li>
@@ -44,6 +43,7 @@
                     <li><a href="{{ route('resume.show') }}" class="">スキル / 経歴</a></li>
                     <li><a href="{{ route('portfolio.index') }}" class="">ポートフォリオ</a></li>
                     <li><a href="{{ route('blog.index') }}">ブログ</a></li>
+                    <li><a href="{{ route('chatroom.index') }}">出品に関するやりとり</a></li>
                     <li><a href="{{ route('publication') }}" class="">掲載内容一覧</a></li>
                     <li><a href="{{ route('draft') }}">掲載内容の下書き</a></li>
                     <li><a href="{{ route('profit.index') }}" class="">売上管理・振込申請</a></li>

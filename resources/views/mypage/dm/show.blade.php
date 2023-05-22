@@ -134,8 +134,9 @@
                                                         <option value="#template05">購入後のあいさつ（出品者）▼</option>
                                                         <option value="#template06">やりとりが滞ってしまったら▼</option>
                                                         <option value="#template07">キャンセルについて（購入者）▼</option>
+                                                        <option value="#template10">キャンセルについて（出品者）▼</option>
                                                         <option value="#template08">納品完了メール（出品者）▼</option>
-                                                        <option value="#template09">サービス受取時（納品者）▼</option>
+                                                        <option value="#template09">サービス受取時（購入者）▼</option>
                                                     </select>
                                                 </div>
                                                 <div class="templateBox tabSelectBox is-active" id="template01">
@@ -187,9 +188,11 @@
                                                 </div>
                                                 <div class="templateBox tabSelectBox" id="template07">
 <textarea readonly>
-大変申し上げにくいのですが、今回のご依頼の件はキャンセルをお願いしたく存じます。
-キャンセル申請にも記述しておりますが、理由としましては（＊必ず理由を明記する）でございます。
+大変申し訳ございませんが、今回のご依頼の件はキャンセルさせていただきたいと思います。
+キャンセル申請にも記述しておりますが、理由としましては（＊必ず理由を明記します）でございます。
 申請のご確認をお願いします。
+お役に立てず誠に残念ですが、また機会がございましたら、どうぞよろしくお願い致します。
+なお、承認をいただきましたら、代金は支払方法に応じて後日返金されると存じております。よろしくお願い致します。　　
 </textarea>
                                                 </div>
                                                 <div class="templateBox tabSelectBox" id="template08">
@@ -205,7 +208,15 @@
 サービスの確認をさせていただきました。
 こちらで問題ございませんので、「承認」とさせて頂きます。
 どうもありがとうございます。
+この後評価をさせていただきますので、取引終了までよろしくお願い致します。
 </textarea>
+                                                </div>
+                                                <div class="templateBox tabSelectBox" id="template10">
+            <textarea readonly>
+大変申し上げにくいのですが、今回のご依頼の件はキャンセルをお願いしたく存じます。
+キャンセル申請にも記述しておりますが、理由としましては（＊必ず理由を明記する）でございます。申請のご確認をお願いします。
+こちらから依頼したにもかかわらず大変恐縮ですが、ご了承いただけますようお願い致します。
+            </textarea>
                                                 </div>
                                                 <div class="templateButton"><button type="button" class="templateInput">挿入する</button></div>
                                             </div>

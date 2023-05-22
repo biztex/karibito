@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Mail\User\GetCouponMail;
 use App\Models\UserProfile;
 use App\Mail\User\IdentificationUploadMail;
 use App\Models\MCoupon;
@@ -60,10 +61,10 @@ class UserProfileService
                     'where_know' => $params['where_know']
                 ],
             );
-            
+
             $invitee_profile = UserProfile::where('my_code', $params['friend_code'])->first();
-            
-            // 新規会員登録時に登録者にクーポン付与、エラーになるため一旦非表示
+
+            // 新規会員登録時に登録者にクーポン付与
             $this->coupon_service->createUserCoupon(MCoupon::NEW_REGISTRATION, $guest_profile->user_id);
             // 招待コード入力で紹介者＆招待された人にポイント付与
             if ($invitee_profile && $params['friend_code'] !== null) {
@@ -71,16 +72,15 @@ class UserProfileService
                 $this->point_service->getPoint(MPoint::INVITED_FRIEND, $guest_profile->user_id, $invitee_profile);
                 $this->point_service->getPoint(MPoint::INVITED_FRIEND, $invitee_profile->user_id, $invitee_profile);
             };
-            
+
             // 通知設定の作成
             \Auth::user()->userNotificationSetting()->create();
-            
+
             \DB::commit();
         } catch(\Exception $e){
             \DB::rollBack();
             return;
         };
-
     }
 
     /**
@@ -130,13 +130,14 @@ class UserProfileService
         if (\Auth::user()->sub_email) {
             \Mail::to(\Auth::user()->email)
                 ->cc(\Auth::user()->sub_email)
+                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new IdentificationUploadMail());
         } else {
             \Mail::to(\Auth::user()->email)
+                ->bcc(config('mail.info_karibito'))
                 ->send(new IdentificationUploadMail());
         }
     }
-
 
     /**
      * カバー・アイコン画像変更・登録

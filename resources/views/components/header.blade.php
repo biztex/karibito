@@ -377,8 +377,10 @@
                 </div>
             </div>
         @endauth
-        @if(Request::routeIs('support') || Request::routeIs('karibitoguide'))
+        @if(Request::routeIs('support'))
         @include('components.header-support')
+        @elseif(Request::routeIs('karibitoguide'))
+        @include('components.header-karibito-guide')
         @elseif(Request::routeIs('guide'))
         @include('components.header-guide')
         @elseif(Request::routeIs('company'))
