@@ -38,7 +38,9 @@
                                         </p>
                                     </div>
                                     <div class="single">
-                                        <span>{{App\Models\Product::IS_ONLINE[$product->is_online]}}</span>
+                                        @if ($product->is_draft == App\Models\Product::NOT_DRAFT || $product->is_online !== null)
+                                            <span>{{App\Models\Product::IS_ONLINE[$product->is_online]}}</span>
+                                        @endif
                                     </div>
                                 </a>
                                 <p class="link"><a href="{{ route('product.show',$product->id) }}">詳細見る</a></p>
