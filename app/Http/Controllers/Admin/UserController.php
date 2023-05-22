@@ -120,11 +120,11 @@ class UserController extends Controller
         if ($user->sub_email) {
             \Mail::to($user->email)
                 ->cc($user->sub_email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new ApproveMail($user));
         } else {
             \Mail::to($user->email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new ApproveMail($user));
         }
         // 認証時にポイントを付与する
@@ -147,11 +147,11 @@ class UserController extends Controller
         if ($user->sub_email) {
             \Mail::to($user->email)
                 ->cc($user->sub_email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new RevokeApprovalMail($user));
         } else {
             \Mail::to($user->email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new RevokeApprovalMail($user));
         }
         
@@ -175,11 +175,11 @@ class UserController extends Controller
         if ($user->sub_email) {
             \Mail::to($user->email)
                 ->cc($user->sub_email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new NotifyBanMail($user->userProfile));
         } else {
             \Mail::to($user->email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new NotifyBanMail($user->userProfile));
         }
 
@@ -197,11 +197,11 @@ class UserController extends Controller
         if ($user->sub_email) {
             \Mail::to($user->email)
                 ->cc($user->sub_email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new CancelNotifyBanMail($user->userProfile));
             } else {
             \Mail::to($user->email)
-                ->bcc(config('mail.info_karibito')) //todo:メールトラップでは確認できないため、本番で確認する
+                ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
                 ->send(new CancelNotifyBanMail($user->userProfile));
         }
 

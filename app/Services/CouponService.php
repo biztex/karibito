@@ -96,11 +96,11 @@ class CouponService
         $user_notification = [
             'user_id' => $user_id,
             'title' => 'クーポンを取得しました。',
-            'reference_type' => get_class($user),
+            'reference_type' => 'App\Models\MCoupon',
             'reference_id' => $user->id,
         ];
 
-        if(empty($user->userNotificationSetting->is_like)) {
+        if(empty($user->userNotificationSetting->is_news)) {
             $user_notification['is_notification'] = 0;
         } else {
             $user_notification['is_notification'] = 1;

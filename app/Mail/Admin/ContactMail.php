@@ -32,6 +32,7 @@ class ContactMail extends Mailable
     public function build()
     {
         return $this->text('mail.text.admin.contact_mail')
-                    ->subject(\Lang::get('【カリビト】お問い合わせ完了'));
+                ->bcc(config('mail.info_bcc'))
+                    ->subject(\Lang::get('【カリビト】【お知らせ】お問合せを受け付けました'));
     }
 }

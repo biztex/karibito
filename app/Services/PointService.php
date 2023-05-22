@@ -40,13 +40,13 @@ class PointService
         $user_notification = [
             'user_id' => $user_id,
             'title' => 'ポイントを取得しました。',
-            'reference_type' => get_class($instance),
+            'reference_type' => 'App\Models\UserGetPoint',
             'reference_id' => $instance->id,
         ];
 
         $user = User::findOrFail($user_id);
 
-        if(empty($user->userNotificationSetting->is_like)) {
+        if(empty($user->userNotificationSetting->is_news)) {
             $user_notification['is_notification'] = 0;
         } else {
             $user_notification['is_notification'] = 1;

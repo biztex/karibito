@@ -31,7 +31,7 @@ class CancelNotifyBanMail extends Mailable
      */
     public function build()
     {
-        return $this->subject(\Lang::get('【カリビト】アカウントの制限が解除されました。'))
+        return $this->subject(\Lang::get('【カリビト】【重要】アカウント利用制限解除のお知らせ'))
                     ->view('mail.text.user.cancel_ban_mail');
     }
 }

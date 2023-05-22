@@ -114,5 +114,6 @@ return [
         ],
     ],
 
-    'info_karibito' => 'info@karibito.co.jp',
+    'info_karibito' => env('MAIL_FROM_ADDRESS'),
+    'info_bcc' => env('MAIL_BCC_ADDRESS'),
 ];
