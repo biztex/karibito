@@ -31,8 +31,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('command:PaymentCommand')->hourly();
-        $schedule->command('command:ChatroomDeliveryCompleteCommand')->everyMinute();
-        $schedule->command('command:ChatroomCancelCompleteCommand')->everyMinute();
+        // $schedule->command('command:ChatroomDeliveryCompleteCommand')->everyMinute();
+        // $schedule->command('command:ChatroomCancelCompleteCommand')->everyMinute();
 
 //        $schedule->command('backup:clean --disable-notifications')->dailyAt('07:50');
         // $schedule->command('backup:clean')->dailyAt('07:50');
