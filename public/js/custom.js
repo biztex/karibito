@@ -240,12 +240,3 @@ $(function () {
         }
     });
 });
-
-// $('.js-alertModal-skill').on('click', function() {
-// 	var formId = $(this).attr('data-form-id');
-// 	$(`#overflow-skill-${formId}`).show();
-// });
-// $('.js-alertCancel-skill').on('click', function() {
-// 	var formId = $(this).attr('data-form-id');
-// 	$(this).closest(`#overflow-skill-${formId}`).hide();
-// });
