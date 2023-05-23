@@ -95,7 +95,7 @@
                                     <p class="quest"><span>ルールと禁止行為</span><a href="{{ route('karibitoguide_rule') }}" class="more">詳細を見る</a></p>
                                 </li>
                                 <li>
-                                    <p class="quest"><span>カリビトエチケット</span><a href="{{ route('guide') }}/#etiquette" class="more">詳細を見る</a></p>
+                                    <p class="quest"><span>カリビトエチケット</span><a href="{{ route('guide')."#etiquette" }}" class="more">詳細を見る</a></p>
                                 </li>
                             </ul>
                         </div>
