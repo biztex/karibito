@@ -22,6 +22,12 @@ class AlreadyReadController extends Controller
             $portfolio_user_id = $user_notification->reference->user_id;
         }
 
+        if ($user_notification->title === 'ポイントを取得しました。') {
+            return redirect()->route('point.index');
+        } elseif ($user_notification->title === 'クーポンを取得しました。') {
+            return redirect()->route('coupon.index');
+        }
+
         if ($user_notification->reference_type === 'App\Models\Product') {
             return redirect()->route('product.show', ['product' => $object]);
         } elseif($user_notification->reference_type === 'App\Models\JobRequest') {

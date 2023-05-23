@@ -28,7 +28,7 @@ class PointService
         // $now_rate = $point_rate->rate;
         $deadline = empty($m_point->deadline_period) ? null : date("Y-m-d",mktime(0, 0, 0, date("m") + $m_point->deadline_period, date("d"), date("Y")));
         $user_get_point = new UserGetPoint();
-        $user_get_point->create([
+        $user_get_point = $user_get_point->create([
             'user_id' => $user_id,
             'name' => $m_point->name,
             'point' => $m_point->point,
@@ -41,7 +41,7 @@ class PointService
             'user_id' => $user_id,
             'title' => 'ポイントを取得しました。',
             'reference_type' => 'App\Models\UserGetPoint',
-            'reference_id' => $instance->id,
+            'reference_id' => $user_get_point->id,
         ];
 
         $user = User::findOrFail($user_id);
