@@ -35,8 +35,7 @@ class UserController extends Controller
      */
     public function index()
     {
-
-        $users = UserProfile::orderBy('id', 'desc')->paginate(50);
+        $users = UserProfile::withTrashed()->orderBy('id', 'desc')->paginate(50);
 
         return view('admin.user.index',compact('users'));
     }

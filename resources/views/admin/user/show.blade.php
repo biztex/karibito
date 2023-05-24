@@ -53,6 +53,9 @@
             <li class="list-group-item"><span class="font-weight-bold">住所</span>：{{ $user->address }}</li>
             <li class="list-group-item"><span class="font-weight-bold">電話番号</span>：{{ $user->user->tel }}</li>
             <li class="list-group-item"><span class="font-weight-bold">自己紹介</span><br>{!! nl2br(e($user->introduction)) !!}</li>
+            @if($user->deleted_at)
+                <li class="list-group-item"><span class="font-weight-bold">退会理由</span><br>{!! nl2br(e($user->user->withdraw_reason)) !!}</li>
+            @endif
             <li class="list-group-item"><span class="font-weight-bold">メモ</span>
                 <button type="button" class="btn btn-info btn-sm" id="js-memo_btn" data-toggle="modal" data-target="#memoModalCenter{{ $user->user_id }}">
                     編集
