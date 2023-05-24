@@ -176,11 +176,11 @@ class UserController extends Controller
             \Mail::to($user->email)
                 ->cc($user->sub_email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new NotifyBanMail($user->userProfile));
+                ->send(new NotifyBanMail($user));
         } else {
             \Mail::to($user->email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new NotifyBanMail($user->userProfile));
+                ->send(new NotifyBanMail($user));
         }
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの利用を制限しました！";
@@ -198,11 +198,11 @@ class UserController extends Controller
             \Mail::to($user->email)
                 ->cc($user->sub_email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new CancelNotifyBanMail($user->userProfile));
+                ->send(new CancelNotifyBanMail($user));
             } else {
             \Mail::to($user->email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new CancelNotifyBanMail($user->userProfile));
+                ->send(new CancelNotifyBanMail($user));
         }
 
         $flash_msg = "id:" . $user->id . " " . $user->userProfile->full_name . "さんの利用制限を解除しました！";

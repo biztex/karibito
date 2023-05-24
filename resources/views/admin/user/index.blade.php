@@ -105,7 +105,7 @@
                                         @else
                                             <form action="{{ route('admin.revokeApproval', $user->user_id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="btn btn-light btn-sm">承認取消</button>
+                                                <button onclick='return confirm("本人確認の承認を取り消しますか？");' type="submit" class="btn btn-light btn-sm">承認取消</button>
                                             </form>
                                         @endif
                                     </div>

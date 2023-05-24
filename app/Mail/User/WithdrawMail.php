@@ -16,9 +16,9 @@ class WithdrawMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -29,6 +29,7 @@ class WithdrawMail extends Mailable
     public function build()
     {
         return $this->subject('【カリビト】【重要】退会完了のお知らせ')
-            ->view('mail.text.user.withdraw_mail');
+            ->view('mail.text.user.withdraw_mail')
+            ->with(['user' => $this->user]);
     }
 }

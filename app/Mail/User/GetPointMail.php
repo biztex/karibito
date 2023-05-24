@@ -16,9 +16,9 @@ class GetPointMail extends Mailable
      *
      * @return void
      */
-    public function __construct($user_profile)
+    public function __construct($user)
     {
-        $this->user_profile = $user_profile;
+        $this->user = $user;
     }
 
     /**
@@ -30,6 +30,6 @@ class GetPointMail extends Mailable
     {
         return $this->subject('【カリビト】カリビトポイントが付与されました！')
             ->view('mail.text.user.get_point_mail')
-            ->with(['user_profile' => $this->user_profile]);
+            ->with(['user' => $this->user]);
     }
 }

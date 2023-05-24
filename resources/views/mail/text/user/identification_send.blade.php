@@ -1,4 +1,4 @@
-<p>{{Auth::user()->userProfile->full_name}}様</p>
+<p>{{Auth::user()->name}}様</p>
 
 <span>このたびは本人確認のための資料を提出いただきありがとうございます。</span><br>
 <span>事務局で確認後、審査結果をお知らせと通知にてご連絡いたしますので、今しばらくお待ちください。</span><br>

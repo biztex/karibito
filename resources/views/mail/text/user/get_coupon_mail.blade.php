@@ -1,4 +1,4 @@
-<p>{{ $user_profile->full_name }} 様</p>
+<p>{{ $user->name }} 様</p>
 
 <span>日頃よりカリビトをご利用いただきありがとうございます。</span><br>
 <span>クーポンが付与されましたのでご確認ください！</span><br>
