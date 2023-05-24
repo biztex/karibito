@@ -21,14 +21,14 @@
 
     <article>
         @if (empty($category->banner_image_path))
-            <div id="teaser">
+            <div id="teaser" class="innerImg">
                 <div class="inner">
                     <h2>{{$title}}</h2>
                 </div>
             </div>
         @else
-            <div id="teaserBannerImage" style="background-image: url({{ Illuminate\Support\Facades\Storage::url($category->banner_image_path) }});">
-                <div class="inner">
+            <div id="teaserBannerImage" class="innerImg" style="background-image: url({{ Illuminate\Support\Facades\Storage::url($category->banner_image_path) }});">
+                <div>
                     <h2>{{$title}}</h2>
                 </div>
             </div>
