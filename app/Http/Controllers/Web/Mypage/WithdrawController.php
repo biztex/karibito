@@ -8,7 +8,8 @@ use App\Models\UserFollow;
 use App\Services\ChatroomService;
 use App\Services\FavoriteService;
 use App\Http\Requests\WithdrawController\StoreRequest;
-use App\Mail\User\WithdrawMail;
+use App\Mail\User\WithdrawMail as UserWithdrawMail;
+use App\Mail\admin\WithdrawMail as AdminWithdrawMail;
 
 class WithdrawController extends Controller
 {
@@ -33,24 +34,27 @@ class WithdrawController extends Controller
         $user = \Auth::user();
         $this->chatroom_service->canIWithdraw($user);
         $str_delete = 'delete-'.$user->id.'-';
+        $user->withdraw_reason = $request->withdraw_reason;
+
 
         if ((\Auth::user()->sub_email)) {
             \Mail::to($user->email)
                 ->cc(\Auth::user()->sub_email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new WithdrawMail($user));
+                ->send(new UserWithdrawMail($user));
         } else {
             \Mail::to($user->email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new WithdrawMail($user));
+                ->send(new UserWithdrawMail($user));
         }
 
+        \Mail::to(config('mail.info_karibito'))
+                ->send(new AdminWithdrawMail($user));
         \DB::transaction(function () use ($user, $str_delete, $request) {
 
             \Auth::logout();// ログアウト
             UserFollow::where('following_user_id',$user->id)->orWhere('followed_user_id',$user->id)->delete();
             $this->favorite_service->deleteFavorites($user);
-            $user->withdraw_reason = $request->withdraw_reason;
             $user->delete(); // データ論理削除
             $user->email = $str_delete.$user->email;
             if ($user->google_id) {

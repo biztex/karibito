@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'agree_not_cancel' => ['required'],
             'agree_not_in_the_middle' => [ 'required'],
-            'withdraw_reason' => [ 'required', 'string', 'max:3000' ]
+            'withdraw_reason' => [ 'required', 'string', 'max:255' ]
         ];
     }
 
