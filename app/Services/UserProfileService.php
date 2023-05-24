@@ -62,6 +62,9 @@ class UserProfileService
                 ],
             );
 
+            // 通知設定の作成
+            \Auth::user()->userNotificationSetting()->create();
+
             $invitee_profile = UserProfile::where('my_code', $params['friend_code'])->first();
 
             // 新規会員登録時に登録者にクーポン付与
@@ -72,9 +75,6 @@ class UserProfileService
                 $this->point_service->getPoint(MPoint::INVITED_FRIEND, $guest_profile->user_id, $invitee_profile);
                 $this->point_service->getPoint(MPoint::INVITED_FRIEND, $invitee_profile->user_id, $invitee_profile);
             };
-
-            // 通知設定の作成
-            \Auth::user()->userNotificationSetting()->create();
 
             \DB::commit();
         } catch(\Exception $e){

@@ -1,4 +1,4 @@
-<p>{{ Auth::user()->userProfile->full_name }} 様</p>
+<p>{{ $user->name }} 様</p>
 
 <span>この度はカリビトをご利用頂き、誠にありがとうございました。</span><br>
 <span>カリビトの退会手続きが完了しましたので、お知らせいたします。</span><br>

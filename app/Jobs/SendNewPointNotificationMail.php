@@ -36,10 +36,10 @@ class SendNewPointNotificationMail implements ShouldQueue
         if ($this->user_notification->user->sub_email) {
             \Mail::to($this->user_notification->user->email)
                 ->cc($this->user_notification->user->sub_email)
-                ->send(new GetPointMail($this->user_notification->user->userProfile));
+                ->send(new GetPointMail($this->user_notification->user));
         } else {
             \Mail::to($this->user_notification->user->email)
-                ->send(new GetPointMail($this->user_notification->user->userProfile));
+                ->send(new GetPointMail($this->user_notification->user));
         }
     }
 }

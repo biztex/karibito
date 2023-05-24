@@ -12,16 +12,16 @@ class NotifyBanMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public $request;
+    public $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($request)
+    public function __construct($user)
     {
-        $this->request = $request;
+        $this->user = $user;
     }
 
     /**
