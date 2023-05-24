@@ -46,7 +46,7 @@ class KaribitoSurveyService
         $user_notification = [
             'user_id' => $user->id,
             'title' => 'クーポンを取得しました。',
-            'reference_type' => get_class($user_coupon),
+            'reference_type' => 'App\Models\MCoupon',
             'reference_id' => $u_coupon->id,
         ];
 
