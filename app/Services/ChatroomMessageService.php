@@ -155,11 +155,15 @@ class ChatroomMessageService
     }
 
     // キャンセル承認
-    public function storePurchasedCancelApprovalMessage(PurchasedCancel $purchased_cancel)
+    public function storePurchasedCancelApprovalMessage(PurchasedCancel $purchased_cancel, int $target_user_id = null)
     {
+        $user_id = $target_user_id;
+        if ($target_user_id === null) {
+            $user_id = \Auth::id();
+        }
         $message = [
             'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
-            'user_id' => \Auth::id(),
+            'user_id' => $user_id,
             'text' => 'キャンセル申請を承認しました！',
         ];
         $purchased_cancel->chatroomMessage()->create($message);

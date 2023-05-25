@@ -22,15 +22,15 @@ class PurchasedCancelService
         $this->payment_service = $payment_service;
     }
 
-    public function purchasedCancelComplete(PurchasedCancel $purchased_cancel, Payment $payment)
+    public function purchasedCancelComplete(PurchasedCancel $purchased_cancel, Payment $payment, int $target_user_id = null)
     {
-        \DB::transaction(function () use ($purchased_cancel, $payment) {
+        \DB::transaction(function () use ($purchased_cancel, $payment, $target_user_id) {
             // キャンセルテーブルのステータスを成立に
             $this->changeStatusComplete($purchased_cancel);
             // 購入テーブルをキャンセル済に
             $this->isCancel($purchased_cancel->purchase);
             // キャンセル成立メッセージ送信
-            $this->chatroom_message_service->storePurchasedCancelApprovalMessage($purchased_cancel);
+            $this->chatroom_message_service->storePurchasedCancelApprovalMessage($purchased_cancel, $target_user_id);
             // チャットルームのっステータスをキャンセルに
             $this->chatroom_service->statusChangeCanceled($purchased_cancel->purchase->chatroom);
 
@@ -78,5 +78,10 @@ class PurchasedCancelService
             'is_cancel' => Purchase::IS_CANCEL,
             'cancel_date' => \Carbon\Carbon::now()    
             ])->save();
+    }
+
+    public function getPurchasedCancelByPurchaseId(int $purchase_id)
+    {
+        return PurchasedCancel::where('purchase_id', $purchase_id)->first();
     }
 }
