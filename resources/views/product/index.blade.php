@@ -28,7 +28,7 @@
             </div>
         @else
             <div id="teaserBannerImage" class="innerImg" style="background-image: url({{ Illuminate\Support\Facades\Storage::url($category->banner_image_path) }});">
-                <div>
+                <div class="inner">
                     <h2>{{$title}}</h2>
                 </div>
             </div>
