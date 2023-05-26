@@ -5,7 +5,7 @@
                 <div class="inner inner04">
                     <div class="title">
                         <h2 class="hdM">サービスをリクエストする３ステップ</h2>
-                        <p class="sub arrowFlex"><span>▶</span><span>トップ画面右上の【出品する/リクエストする】＞【サービスをリクエストする】からリクエスト登録画面に進みます。</span></p>
+                        <p class="sub arrowFlex"><span>▶</span><span>トップ画面右上の【出品する/リクエストする＞サービスをリクエストする】からリクエスト登録画面に進みます。</span></p>
                         <div class="example">
                             <p class="hd02">step１　リクエストのカテゴリを選択し、タイトルを入力します。</p>
                             <ul>
@@ -18,11 +18,11 @@
                             <p class="hd02">step２　リクエストの詳細等、必須項目を入力して登録します。</p>
                             <ul>
                                 <li>
-                                    <p>リクエストの詳細</p>
+                                    <p class="arrow-sub-title">リクエストの詳細</p>
                                     <p>あなたの求めているサービス内容が分かりやすいよう、詳しく丁寧に入力します。懸念点や希望するクオリティ等も具体的に記載します。</p>
                                 </li>
                                 <li>
-                                    <p>仕事体系</p>
+                                    <p class="arrow-sub-title">仕事体系</p>
                                     <p>【対面】【どちらでも】を選択する場合は、必ず先に本人確認を行ってください。また、対象エリアも選択してください。</p>
                                 </li>
                             </ul>
