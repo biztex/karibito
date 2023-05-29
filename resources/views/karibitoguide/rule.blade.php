@@ -10,31 +10,31 @@
                             <p class="hd02">【禁止行為】</p>
                             <ul>
                                 <li>
-                                    <p>複数のアカウントを登録・使用する行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>複数のアカウントを登録・使用する行為</span></p>
                                 </li>
                                 <li>
-                                    <p>カリビトを通さず直接の取引を促す行為、それに応じる行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>カリビトを通さず直接の取引を促す行為、それに応じる行為</span></p>
                                 </li>
                                 <li>
-                                    <p>カリビトで定められた方法以外での決済を促す行為、それに応じる行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>カリビトで定められた方法以外での決済を促す行為、それに応じる行為</span></p>
                                 </li>
                                 <li>
-                                    <p>カリビトを利用中に外部サービスに誘導する行為、それに応じる行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>カリビトを利用中に外部サービスに誘導する行為、それに応じる行為</span></p>
                                 </li>
                                 <li>
-                                    <p>契約成立後、キャンセルが成立していない状態で、一方的に契約を破棄する行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>契約成立後、キャンセルが成立していない状態で、一方的に契約を破棄する行為</span></p>
                                 </li>
                                 <li>
-                                    <p>カリビトの取引で取得した第三者の個人情報や契約内容を、取引の履行以外の目的で利用したり、第三者に提供する行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>カリビトの取引で取得した第三者の個人情報や契約内容を、取引の履行以外の目的で利用したり、第三者に提供する行為</span></p>
                                 </li>
                                 <li>
-                                    <p>誹謗中傷やわいせつな投稿等、他人に不快感を与えたり、他人に不利益損害を与える行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>誹謗中傷やわいせつな投稿等、他人に不快感を与えたり、他人に不利益・損害を与える行為</span></p>
                                 </li>
                                 <li>
-                                    <p>公序良俗に反する行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>公序良俗に反する行為</span></p>
                                 </li>
                                 <li>
-                                    <p>その他、運営が重大な規約違反と判断する行為</p>
+                                    <p class="arrowFlex"><span>・</span><span>その他、運営が重大な規約違反と判断する行為</span></p>
                                 </li>
                             </ul>
                         </div>
@@ -42,40 +42,40 @@
                             <p class="hd02">【禁止出品サービス】</p>
                             <ul>
                                 <li>
-                                    <p>本人確認を行っていない対面でのサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>本人確認を行っていない対面でのサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>資格の所持を記載しない状態での資格を要するサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>資格の所持を記載しない状態での資格を要するサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>カリビト外での取引を促しているサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>カリビト外での取引を促しているサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>公序良俗に反するサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>公序良俗に反するサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>知的財産権、著作権等を侵害するサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>知的財産権、著作権等を侵害するサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>金融商品取引法に違反する恐れのあるサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>金融商品取引法に違反する恐れのあるサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>その他法律、法令、条例に違反する、または違反する恐れのあるサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>その他法律、法令、条例に違反する、または違反する恐れのあるサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>返金保証を行うと判断されるサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>返金保証を行うと判断されるサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>無期限でのサポートやサービスの提供を行うと判断されるサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>無期限でのサポートやサービスの提供を行うと判断されるサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>第三者の出品を代行して行うサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>第三者の出品を代行して行うサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>利用者に誤解を生じさせる虚偽の記載がされたサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>利用者に誤解を生じさせる虚偽の記載がされたサービス</span></p>
                                 </li>
                                 <li>
-                                    <p>その他、カリビトの利用規約に違反するサービスや運営が不適当と判断するサービス</p>
+                                    <p class="arrowFlex"><span>・</span><span>その他、カリビトの利用規約に違反するサービスや運営が不適当と判断するサービス</span></p>
                                 </li>
                             </ul>
                         </div>
