@@ -29,7 +29,7 @@
                             <div class="form-group row">
                                 <label for="content" class="col-md-4 col-form-label text-md-right">説明</label>
                                 <div class="col-md-6">
-                                    @include('components.form.text', ['name' => 'content', 'required' => false, 'value' => $category->content])
+                                    @include('components.form.textarea', ['name' => 'content', 'required' => false, 'value' => $category->content])
                                     @include('components.form.error', ['name' => 'content'])
                                 </div>
                             </div>
