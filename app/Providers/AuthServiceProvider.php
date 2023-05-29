@@ -158,7 +158,7 @@ class AuthServiceProvider extends ServiceProvider
         // キャンセルした側評価
         Gate::define('cancel.sender.evaluation', function (User $user, Chatroom $chatroom) {
             return $chatroom->purchase->exists()
-                && !$chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty()
+                && !$chatroom->purchase->purchasedCancels->where('user_id', $user->id)->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty()
                 && $chatroom->status === Chatroom::STATUS_CANCELED
                 && !$chatroom->evaluations()->exists();
         });
@@ -166,7 +166,7 @@ class AuthServiceProvider extends ServiceProvider
 //        // キャンセルされた側評価
         Gate::define('cancel.receiver.evaluation', function (User $user, Chatroom $chatroom) {
             return $chatroom->purchase->exists()
-                && $chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty()
+                && $chatroom->purchase->purchasedCancels->where('user_id', $user->id)->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty()
                 && $chatroom->status === Chatroom::STATUS_CANCEL_SENDER_EVALUATION
                 && $chatroom->evaluations()->exists();
         });
@@ -181,14 +181,14 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('chatroom.evaluation.cancel.sender.complete', function (User $user, Chatroom $chatroom) {
             return $chatroom->status === Chatroom::STATUS_CANCEL_SENDER_EVALUATION
                 && $chatroom->purchase->exists()
-                && !$chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty();
+                && !$chatroom->purchase->purchasedCancels->where('user_id', $user->id)->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty();
         });
 
         // やり取りキャンセルされた評価完了画面
         Gate::define('chatroom.evaluation.cancel.receiver.complete', function (User $user, Chatroom $chatroom) {
             return $chatroom->status === Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION
                 && $chatroom->purchase->exists()
-                && $chatroom->purchase->purchasedCancels->where('user_id', $user->id)->isNotEmpty();
+                && $chatroom->purchase->purchasedCancels->where('user_id', $user->id)->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty();
         });
 
         // やり取りキャンセル可能ステータス
