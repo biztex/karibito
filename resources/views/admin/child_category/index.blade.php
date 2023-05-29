@@ -11,8 +11,8 @@
                             <form action="{{ route('admin.child_category.search') }}" class="mt-2" method="get">
                                 @csrf
                                 <div class="d-flex mb-3">
-                                    <input class="form-control col-4" type="text" name="search" value="{{ $request->search ?? "" }}">
-                                    <button class="btn btn-secondary btn-block col-4 ml-2 content-end" type="submit">検索</button>
+                                    <input class="form-control col-12" type="text" name="search" value="{{ $request->search ?? "" }}">
+                                    <button class="btn btn-secondary col-4 ml-2" type="submit">検索</button>
                                 </div>
                             </form>
                             <div>※子カテゴリー名に部分一致で検索</div>

@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
             'banner_image_path' => 'nullable|mimes:jpg,jpeg,png',
             'top_image_path' => 'nullable|mimes:jpg,jpeg,png',
             'other_image_path' => 'nullable|mimes:jpg,jpeg,png',
-            'content' => 'nullable|string'
+            'content' => 'nullable|string|max:255'
         ];
     }
     public function attributes()
