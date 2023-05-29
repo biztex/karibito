@@ -21,6 +21,8 @@ class ChatroomMessage extends Model
         self::IS_COMPLETE => '購入完了',
     ];
 
+    const IS_AUTO_MESSAGE = 1;
+
 
     public function scopeWorked($query)
     {

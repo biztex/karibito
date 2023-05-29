@@ -106,6 +106,7 @@ class ChatroomMessageService
             'user_id' => $chatroom->buyer_user_id,
             'text' => '「納品完了」通知を承認しました！',
             'is_complete_message' => 1,
+            'is_auto_message' => 1,
         ];
         $chatroom->chatroomMessages()->create($message);
     }
@@ -138,7 +139,8 @@ class ChatroomMessageService
         $message = [
             'chatroom_id' => $chatroom->id,
             'user_id' => $evaluation->user_id,
-            'text' => '評価が入力されました！'
+            'text' => '評価が入力されました！',
+            'is_auto_message' => 1,
         ];
         $evaluation->chatroomMessage()->create($message);
     }
