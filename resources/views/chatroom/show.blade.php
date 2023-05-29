@@ -22,7 +22,7 @@
                     <!-- 取引相手の情報 -->
                     @include('chatroom.parts.show.partner')
 
-                    <h2 class="hdM">チャット<a href="{{ route('support') }}" class="more st2">契約後のキャンセルについて</a></h2>
+                    <h2 class="hdM">チャット<a href="{{ route('karibitoguide_cancel_send') }}" class="more st2" target="_blank">契約後のキャンセルについて</a></h2>
                     <div class="subPagesTab">
                         <div class="chatPages">
                             <div class="item">
