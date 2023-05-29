@@ -28,6 +28,7 @@
                 @if($chatroom->isDisplayableNda())
                 <div>
                     <a href="javascript:;" class="templateNDAOpen">NDAを送付する</a>
+                    <a href="{{route('karibitoguide_nda_sign')}}" target="_blank" class="ndaWrapper">NDA締結前に必ずご確認ください</a>
                 </div>
                 @endif
             </div>

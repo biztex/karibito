@@ -2385,6 +2385,12 @@
     top: 1px;
 }
 
+.ndaWrapper {
+    color: #158ACC;
+    background: none !important;
+    border: none !important;
+}
+
 .specialtyBtn span,
 .specialtyBtn a {
 	cursor: pointer;
