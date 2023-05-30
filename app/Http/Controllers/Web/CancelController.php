@@ -85,6 +85,7 @@ class CancelController extends Controller
     {
         $purchased_cancel = \DB::transaction(function () use ($request, $purchase) {
             $purchased_cancel = $this->purchased_cancel_service->storePurchasedCancel($request->all(), $purchase);
+            $this->chatroom_service->statusChangeCancelReport($purchase->chatroom);
             $this->chatroom_message_service->storePurchasedCancelMessage($purchased_cancel, $purchase->chatroom);
             $this->userNotificationService->storeUserNotificationMessage($purchase->chatroom);
             return $purchased_cancel;

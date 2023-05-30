@@ -76,7 +76,6 @@ class ChatroomDeliveryCompleteCommand extends Command
         foreach ($chatrooms as $chatroom) {
             if ($chatroom->status === Chatroom::STATUS_BUYER_EVALUATION) {
                 $this->processBuyerEvaluation($chatroom);
-                $this->processSellerEvaluation($chatroom);
             } else if ($chatroom->status === Chatroom::STATUS_SELLER_EVALUATION) {
                 $this->processSellerEvaluation($chatroom);
             }
