@@ -16,6 +16,7 @@ class HomeService
         $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
             // ->otherUsers()  今後自分以外のユーザーの商品のみ表示するときに使用
             ->publish()
+            ->orderBy('view_count', 'desc') // 閲覧回数が多い順
             ->orderBy('created_at', 'desc')
             ->paginate($i);
 
@@ -57,6 +58,7 @@ class HomeService
     {
         $job_requests = JobRequest::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
             ->display()
+            ->orderBy('view_count', 'desc') // 閲覧回数が多い順
             ->orderBy('created_at','desc')
             ->paginate($i);
 
