@@ -13,14 +13,17 @@ class TransferFailureMail extends Mailable
 
     public $user_notification;
 
+    public $transfer_request;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user_notification)
+    public function __construct($user_notification, $transfer_request)
     {
         $this->user_notification = $user_notification;
+        $this->transfer_request = $transfer_request;
     }
 
     /**
