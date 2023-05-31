@@ -123,6 +123,9 @@ class ProductController extends Controller
         
         $count_favorite = $product->favorites->count(); // いいねの数
 
+        $product->view_count += 1; //表示回数をカウント
+        $product->save();
+
         $purchased_cancel = new PurchasedCancel;
         $cancel_count = $purchased_cancel->getCancelCount($product->user_id);
 

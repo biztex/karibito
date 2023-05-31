@@ -129,6 +129,9 @@ class JobRequestController extends Controller
 
         $count_favorite = $job_request->favorites->count(); // いいねの数
 
+        $job_request->view_count += 1; //表示回数をカウント
+        $job_request->save();
+
         $purchased_cancel = new PurchasedCancel();
         $cancel_count = $purchased_cancel->getCancelCount($job_request->user_id);
 
