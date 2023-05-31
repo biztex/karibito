@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Mail\Admin\TransferFailureMail;
 use App\Models\UserNotification;
+use App\Models\TransferRequest;
 
 class SendTransferFailureMail implements ShouldQueue
 {
@@ -17,14 +18,17 @@ class SendTransferFailureMail implements ShouldQueue
 
     public $user_notification;
 
+    public $transfer_request;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(UserNotification $user_notification)
+    public function __construct(UserNotification $user_notification, TransferRequest $transfer_request)
     {
         $this->user_notification = $user_notification;
+        $this->transfer_request = $transfer_request;
     }
 
     /**
@@ -38,11 +42,11 @@ class SendTransferFailureMail implements ShouldQueue
             \Mail::to($this->user_notification->user->email)
                 ->cc($this->user_notification->user->sub_email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new TransferFailureMail($this->user_notification));
+                ->send(new TransferFailureMail($this->user_notification, $this->transfer_request));
         } else {
             \Mail::to($this->user_notification->user->email)
                 ->bcc(config('mail.info_bcc')) //todo:メールトラップでは確認できないため、本番で確認する
-                ->send(new TransferFailureMail($this->user_notification));
+                ->send(new TransferFailureMail($this->user_notification, $this->transfer_request));
         }
     }
 }

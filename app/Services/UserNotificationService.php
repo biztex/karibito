@@ -49,7 +49,7 @@ class UserNotificationService
         foreach ($follow_users as $follow_user) {
             $user_notification_contents = [
                 'user_id' => $follow_user->id,
-                'title' => 'あなたがフォローしている ' . $followed_user->name . 'さんが新しいサービスを出品しました。',
+                'title' => 'フォローしている ' . $followed_user->name . 'さんが新しいサービスを出品しました。',
             ];
 
             if(empty($follow_user->userNotificationSetting->is_posting)) {
@@ -73,7 +73,7 @@ class UserNotificationService
         foreach ($favorite_users as $favorite_user) {
             $user_notification_contents = [
                 'user_id' => $favorite_user->user_id,
-                'title' => 'あなたがお気に入りに登録した「' . $product->title . '」のサービス内容が更新されました。',
+                'title' => 'お気に入りに登録した「' . $product->title . '」のサービス内容が更新されました。',
             ];
 
             if(empty($favorite_user->user->userNotificationSetting->is_fav)) {
@@ -165,8 +165,7 @@ class UserNotificationService
     {
         $receive_user = User::find($chatroom->to_user_id); //メッセージを受け取ったユーザー
 
-        if($receive_user->id == $chatroom->sellerUser->id)
-        {
+        if($receive_user->id == $chatroom->sellerUser->id) {
             $send_user_id = $chatroom->buyerUser->id; //メッセージを送ったユーザーid
         } else {
             $send_user_id = $chatroom->sellerUser->id; //メッセージを送ったユーザーid
@@ -219,7 +218,7 @@ class UserNotificationService
         foreach($users_id as $user_id){
             $user_notification_contents = [
                 'user_id' => $user_id->id,
-                'title' => $news->title,
+                'title' => '【事務局からのお知らせ】' . $news->title,
                 'content' => $news->content,
             ];
 
@@ -241,8 +240,8 @@ class UserNotificationService
             'user_id' => $user_profile->user_id,
             'reference_type' => 'App\Models\UserProfile',
             'reference_id' => $user_profile->id,
-            'title' => '本人確認申請が承認されませんでした。',
-            'is_notification' => 0
+            'title' => '【重要】本人確認申請が承認されませんでした。',
+            'is_notification' => 1
         ];
 
         UserNotification::create($user_notification);
@@ -255,11 +254,11 @@ class UserNotificationService
             'user_id' => $transfer_request->user_id,
             'reference_type' => 'App\Models\TransferRequest',
             'reference_id' => $transfer_request->id,
-            'title' => '振り込みに失敗しました。',
-            'is_notification' => 0
+            'title' => '【重要】振り込み申請エラーのお知らせ。',
+            'is_notification' => 1
         ];
 
         $user_notification = UserNotification::create($user_notification_contents);
-        SendTransferFailureMail::dispatch($user_notification);
+        SendTransferFailureMail::dispatch($user_notification, $transfer_request);
     }
 }
