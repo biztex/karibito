@@ -1,6 +1,6 @@
 
 <p>{{ $user_notification->user->name }} 様</p>
-@dd($transfer_request)
+
 <span>日頃よりカリビトをご利用いただきありがとうございます。</span><br>
 <span>お客様に申請いただきましたお振込みですが、エラーとなりましたのでお知らせいたします。下記よりご確認お願いします。</span><br>
 {{-- <span><a href="{{ route('profit.index') }}">{{ route('profit.index') }}</a></span><br> どちらかわからないため一応残しておく--}}
