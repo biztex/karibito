@@ -27,7 +27,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string',
             'banner_image_path' => 'nullable|mimes:jpg,jpeg,png',
             'top_image_path' => 'nullable|mimes:jpg,jpeg,png',
-            'other_image_path' => 'nullable|mimes:jpg,jpeg,png',
+            'other_image_path' => 'nullable|mimes:jpg,jpeg,png,svg',
             'content' => 'nullable|string'
         ];
     }
