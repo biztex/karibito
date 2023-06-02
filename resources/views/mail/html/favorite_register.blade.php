@@ -2,13 +2,13 @@
 
 <p>日頃よりカリビトをご利用いただきありがとうございます。</p>
 
-<span>{{$user_notification->title}}</span><br>
+<span>あなたが{{$user_notification->title}}</span><br>
 <span>早速確認してみましょう！</span><br>
 
 <p><a href="{{ route('user_notification.index') }}">{{ route('user_notification.index') }}</a></p>
 
 
-<p>ご不明点・ご質問などは「<a href="{{ route('contact') }}">お問合せ</a>」よりご連絡ください。</p>
+<p>ご不明な点・ご質問などは「<a href="{{ route('contact') }}">お問合せ</a>」よりご連絡ください。</p>
 
 
 @include('mail.text.footer')
