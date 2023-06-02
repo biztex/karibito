@@ -20,8 +20,8 @@
                 <p class="txt"><strong>■本人確認とは</strong><br>本人確認とは、お互いの信頼性を高めるため、本人であることを証明する書類を提出する手続きです。<br>身分証明書が承認されると、プロフィールに本人確認済みマークが表示されます。</p><br>
                 <p>また、本人確認が承認されると、プロフィールに「秘密保持契約（NDA)締結可」マークを表示させることができます。このマークを表示させている方同士のチャット画面には、カリビトチャット内で秘密保持契約（NDA)を締結するための「NDAを送付する」ボタンが表示されます。</p><br>
 {{--                TODO: 別のガイドページが作成された後、変更する--}}
-                <p>「秘密保持契約（NDA）締結可」マークの表示は<a href="#" class="fancybox colorBlue">こちら</a></p>
-                <p>秘密保持契約（NDA)の締結は<a href="#" class="fancybox colorBlue">こちら</a></p>
+                <p>「秘密保持契約（NDA）締結可」マークの表示は<a href="{{ route('karibitoguide_nda_mark_show') }}" class="fancybox colorBlue" target="_blank">こちら</a></p>
+                <p>秘密保持契約（NDA)の締結は<a href="{{ route('karibitoguide_nda_sign') }}" class="fancybox colorBlue" target="_blank">こちら</a></p>
             </div>
             <div class="fancyRegisterItem">
                 <p class="txt"><strong>■本人確認に利用できる書類</strong><br>ご本人であることを確認するため、下記の書類のうち一つをご提出ください。</p>
