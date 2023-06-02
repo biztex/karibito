@@ -254,7 +254,7 @@ class UserNotificationService
             'user_id' => $transfer_request->user_id,
             'reference_type' => 'App\Models\TransferRequest',
             'reference_id' => $transfer_request->id,
-            'title' => '【重要】振り込み申請エラーのお知らせ。',
+            'title' => '【重要】振り込み申請エラーのお知らせ',
             'is_notification' => 1
         ];
 

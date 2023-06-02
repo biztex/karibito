@@ -6,7 +6,7 @@
 {{-- <span><a href="{{ route('profit.index') }}">{{ route('profit.index') }}</a></span><br> どちらかわからないため一応残しておく--}}
 <span><a href="{{ route('transfer_request.show', $transfer_request) }}">{{ route('transfer_request.show', $transfer_request) }}</a></span><br>
 
-<span>ご確認の上、お手数ではございますが再度振込申請をお願いいたします。</span><br>
+<span>お手数ではございますが、再度振込申請をお願いいたします。</span><br>
 <span>＊振込手数料¥200はお客様にご負担いただいております。</span><br>
 <p>ご不明な点・ご質問などは「<a href="{{ route('contact') }}">お問合せ</a>」よりご連絡ください。</p>
 
