@@ -34,7 +34,7 @@ class JobRequestController extends Controller
 
         $job_requests = JobRequest::display()->whereIn('category_id', $child_categories_id)->paginate(10); //親カテゴリのidが商品と一致するもののみ取得
 
-        $job_request_ranks = JobRequest::display()->whereIn('category_id', $child_categories_id)->orderBy('view_count', 'desc')->paginate(10);
+        $job_request_ranks = JobRequest::display()->whereIn('category_id', $child_categories_id)->orderBy('view_count', 'desc')->latest()->paginate(10);
 
         $m_product_categories = MProductCategory::all();
 

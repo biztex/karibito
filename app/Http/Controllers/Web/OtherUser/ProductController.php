@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         $products = Product::publish()->whereIn('category_id', $child_categories_id)->paginate(10); //親カテゴリのidが商品と一致するもののみ取得
 
-        $product_ranks = Product::publish()->whereIn('category_id', $child_categories_id)->orderBy('view_count', 'desc')->paginate(10);
+        $product_ranks = Product::publish()->whereIn('category_id', $child_categories_id)->orderBy('view_count', 'desc')->latest()->paginate(10);
 
         $m_product_categories = MProductCategory::all();
 
