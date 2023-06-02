@@ -149,15 +149,14 @@ class JobRequestService
 
         if (!empty($sort)) {
             if ($sort == 1) { //ランキングの高い順
-                $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
+                $query->orderBy('view_count', 'desc');
             } elseif ($sort == 2) { //お気に入りの多い順
-                $query->orderBy('created_at','desc'); //とりあえず新着で入れています。
+                $query->withCount('favorites')->orderBy('favorites_count', 'desc');
             } elseif ($sort == 3) { //新着順
-                $query->orderBy('created_at','desc');
+                $query->latest();
             }
-        } else {
-            $query->latest();
         }
+        $query->latest();
 
         return $query->paginate(40);
     }

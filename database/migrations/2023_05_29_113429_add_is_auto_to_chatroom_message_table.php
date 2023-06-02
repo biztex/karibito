@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('user_profiles', function (Blueprint $table) {
-            $table->boolean('is_nda')->after('is_identify')->nullable()->comment('秘密保持契約の承認フラグ');
+        Schema::table('chatroom_messages', function (Blueprint $table) {
+            $table->boolean('is_auto_message')->nullable()->comment('自動メッセージのフラッグ');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('user_profiles', function (Blueprint $table) {
-            $table->dropColumn('is_nda');
+        Schema::table('chatroom_messages', function (Blueprint $table) {
+            $table->dropColumn('is_auto_message');
         });
     }
 };

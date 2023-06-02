@@ -9,7 +9,11 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">評価を入力しました！</p>
+                    @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                        <p class="message_text">通知から72時間が経過したため自動的に評価されました！</p>
+                    @else
+                        <p class="message_text">評価を入力しました！</p>
+                    @endif
                     <div class="proposeBuy">
                         <p class="buy none">
                             <span style="font-weight: normal;">お礼のメッセージと評価入力をしたことを報告しましょう。出品者からの評価入力をもって取引は完了となります。</span>
@@ -54,7 +58,11 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">評価を入力しました！</p>
+                    @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                        <p class="message_text">通知から72時間が経過したため自動的に評価しました！</p>
+                    @else
+                        <p class="message_text">評価を入力しました！</p>
+                    @endif
                     <div class="proposeBuy">
                         <p class="buy none">
                             <span style="font-weight: normal;">お礼のメッセージと評価入力をしたことを報告しましょう。出品者からの評価入力をもって取引は完了となります。</span>
@@ -71,7 +79,11 @@
                 @include('chatroom.message.parts.icon')
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
-                    <p class="message_text">{{$message->text}}</p>
+                    @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                        <p class="message_text">通知から72時間が経過したため自動的に評価されました！</p>
+                    @else
+                        <p class="message_text">{{$message->text}}</p>
+                    @endif
                     <div class="proposeBuy">
                         <p class="buy none">
                             <span style="font-weight: normal;">引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。</span>

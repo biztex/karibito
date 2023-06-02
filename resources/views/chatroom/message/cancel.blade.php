@@ -133,7 +133,7 @@
                                 ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
                                 双方の評価が入力された時点でキャンセル完了となり、代金が購入者の方に返金されます。<br><br>
                             </span>
-                            @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
+                            @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty())
                                 <!-- キャンセルした側評価 -->
                                 @if($chatroom->status == \App\Models\Chatroom::STATUS_CANCELED)
                                     <a href="{{ route('chatroom.get.cancel.sender.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
@@ -149,7 +149,7 @@
                 </div>
                 @include('chatroom.message.parts.time')
             </li>
-            @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
+            @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty())
                 @if ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
                     <li>
                         <div class="img">

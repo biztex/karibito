@@ -90,6 +90,12 @@ class ChatroomService
         }
     }
 
+    // ステータスを 8:キャンセル報告 に変更
+    public function statusChangeCancelReport(Chatroom $chatroom)
+    {
+        $chatroom->fill(['status' => Chatroom::STATUS_CANCELED_REPORT])->save();
+    }
+
     // ステータスを 9:キャンセル に変更
     public function statusChangeCanceled(Chatroom $chatroom)
     {
