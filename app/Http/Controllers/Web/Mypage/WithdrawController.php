@@ -9,7 +9,7 @@ use App\Services\ChatroomService;
 use App\Services\FavoriteService;
 use App\Http\Requests\WithdrawController\StoreRequest;
 use App\Mail\User\WithdrawMail as UserWithdrawMail;
-use App\Mail\admin\WithdrawMail as AdminWithdrawMail;
+use App\Mail\Admin\WithdrawMail as AdminWithdrawMail;
 
 class WithdrawController extends Controller
 {
