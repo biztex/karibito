@@ -1,6 +1,7 @@
 <p>{{ $request->name }} 様</p>
 
-<p>日頃よりカリビトをご利用いただきありがとうございます。</p>
+<span>日頃よりカリビトをご利用いただきありがとうございます。</span><br>
+<span>お客様からのお問合せメールを受け付けました。</span><br>
 
 <span>名前：{{ $request->name }}</span><br>
 <span>メールアドレス：{{ $request->mail }}</span><br>
