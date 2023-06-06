@@ -130,6 +130,15 @@
 	font-size: 1.2rem;
 }
 
+.maxRow2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 .recommendCates .cate1 {
 	background-image: url(../img/top/ico_cate01_blue.png);
 }
