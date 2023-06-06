@@ -10,6 +10,7 @@ use App\Services\EvaluationService;
 use App\Services\PointService;
 use App\Services\PurchasedCancelService;
 use App\Services\UserNotificationService;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -70,9 +71,10 @@ class ChatroomCancelCompleteCommand extends Command
         $chatrooms = Chatroom::where(function ($query) {
             $query->where('status', Chatroom::STATUS_WORK)
                 ->orwhere('status', Chatroom::STATUS_CANCELED_REPORT);
-        })->where('updated_at', '<=', Carbon::now()->subHours(72))
+        // })->where('updated_at', '<=', Carbon::now()->subHours(72)) テストのため5分後に変更
+        })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
-
+        Log::info('テスト:キャンセル');
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
             $this->processApproveCancelReport($chatroom);
@@ -82,7 +84,8 @@ class ChatroomCancelCompleteCommand extends Command
         $chatrooms = Chatroom::where(function ($query) {
             $query->where('status', Chatroom::STATUS_CANCELED)
                 ->orwhere('status', Chatroom::STATUS_CANCEL_SENDER_EVALUATION);
-        })->where('updated_at', '<=', Carbon::now()->subHours(72))
+        // })->where('updated_at', '<=', Carbon::now()->subHours(72)) テストのため5分後に変更
+        })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
 
         // 処理の実行
