@@ -118,7 +118,7 @@
 }
 
 .recommendCates li:nth-of-type(n + 19) {
-	margin-bottom: 0;
+	/*margin-bottom: 0;*/
 }
 
 .recommendCates li a {
