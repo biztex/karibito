@@ -61,7 +61,7 @@ class ChatroomDeliveryCompleteCommand extends Command
         // 修正箇所がある場合、72時間が経過すると自動的に承認となります
         // $chatrooms = Chatroom::where('status', Chatroom::STATUS_WORK_REPORT)->where('updated_at', '<=', Carbon::now()->subHours(72))->get(); テストのため5分後に変更
         $chatrooms = Chatroom::where('status', Chatroom::STATUS_WORK_REPORT)->where('updated_at', '<=', Carbon::now()->subMinutes(5))->get();
-        Log::info('テスト:キャンセル');
+        Log::alert('テスト:承認');
 
         // 処理の実行
         foreach ($chatrooms as $chatroom) {

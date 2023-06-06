@@ -74,7 +74,9 @@ class ChatroomCancelCompleteCommand extends Command
         // })->where('updated_at', '<=', Carbon::now()->subHours(72)) テストのため5分後に変更
         })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
-        Log::info('テスト:キャンセル');
+        Log::alert('テスト:キャンセル');
+        \Log::info("対象の契約：");
+
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
             $this->processApproveCancelReport($chatroom);
