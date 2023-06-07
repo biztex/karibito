@@ -67,7 +67,7 @@ class ChatroomCancelCompleteCommand extends Command
      */
     public function handle()
     {
-        // Log::alert('ChatroomCancelCompleteCommand実行');
+        Log::info('ChatroomCancelCompleteCommand実行');
         // キャンセル報告がある場合、72時間が経過すると自動的に承認となります
         $chatrooms = Chatroom::where(function ($query) {
             $query->where('status', Chatroom::STATUS_WORK)
