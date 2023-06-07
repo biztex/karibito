@@ -39,13 +39,13 @@ class PaymentService
      */
     public function refundPayment(Payment $payment)
     {
-        // $stripe_refund_id = $this->refundStripe($payment);
+        $stripe_refund_id = $this->refundStripe($payment);
 
-        // $payment->fill([
-        //     'stripe_refund_id' => \Crypt::encryptString($stripe_refund_id),
-        //     'amount_refunded' => $payment->amount,過去のアカウント作成時のトークンがあるため、一旦非表示にする
-        //     'refunded_at' => \Carbon\Carbon::now()
-        // ])->save();
+        $payment->fill([
+            'stripe_refund_id' => \Crypt::encryptString($stripe_refund_id),
+            'amount_refunded' => $payment->amount,
+            'refunded_at' => \Carbon\Carbon::now()
+        ])->save();
     }
 
     /**

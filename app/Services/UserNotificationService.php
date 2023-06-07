@@ -134,7 +134,7 @@ class UserNotificationService
     public function storeUserNotificationMessage(Chatroom $chatroom)
     {
         $receive_user = User::find($chatroom->to_user_id); //メッセージを受け取ったユーザー
-
+        \Log::info('メッセージを受け取ったユーザー' . $receive_user->id);
         if($receive_user->id == $chatroom->sellerUser->id)
         {
             $send_user_id = $chatroom->buyerUser->id; //メッセージを送ったユーザーid
@@ -142,6 +142,7 @@ class UserNotificationService
             $send_user_id = $chatroom->sellerUser->id; //メッセージを送ったユーザーid
         }
         $send_user = User::find($send_user_id);
+        \Log::info('メッセージを送るユーザー' . $send_user->id);
 
         $title = $send_user->name . 'さんからメッセージが届きました。';
 
