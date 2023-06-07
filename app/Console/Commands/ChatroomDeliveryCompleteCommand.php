@@ -71,7 +71,8 @@ class ChatroomDeliveryCompleteCommand extends Command
         $chatrooms = Chatroom::where(function ($query) {
             $query->where('status', Chatroom::STATUS_BUYER_EVALUATION)
                 ->orwhere('status', Chatroom::STATUS_SELLER_EVALUATION);
-        })->where('updated_at', '<=', Carbon::now()->subHours(72))
+        // })->where('updated_at', '<=', Carbon::now()->subHours(72))
+        })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
 
         // 処理の実行

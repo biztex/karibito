@@ -52,7 +52,8 @@ class PaymentCommand extends Command
     {
         // 72時間以内に購入者側からの評価メッセージがないChatroomのレコードを取得
         $chatrooms = Chatroom::where('status', Chatroom::STATUS_BUYER_EVALUATION)
-            ->where('updated_at', '<=', Carbon::now()->subHours(72))
+            // ->where('updated_at', '<=', Carbon::now()->subHours(72))
+            ->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
 
         // 決済処理の実行
