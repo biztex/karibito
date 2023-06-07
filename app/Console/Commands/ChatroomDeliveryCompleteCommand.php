@@ -63,10 +63,10 @@ class ChatroomDeliveryCompleteCommand extends Command
         // $chatrooms = Chatroom::where('status', Chatroom::STATUS_WORK_REPORT)->where('updated_at', '<=', Carbon::now()->subHours(72))->get(); テストのため5分後に変更
         $chatrooms = Chatroom::where('status', Chatroom::STATUS_WORK_REPORT)->where('updated_at', '<=', Carbon::now()->subMinutes(5))->get();
 
-        Log::info($chatrooms . "ChatroomDeliveryCompleteCommand実行");
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
             $this->processApproveWorkReport($chatroom);
+            Log::info("processApproveWorkReport実行｜チャットルームID" . $chatroom->id);
         }
 
         // 納品完了された後、72時間以内に評価の未入力のChatroomのレコードを取得
@@ -77,14 +77,14 @@ class ChatroomDeliveryCompleteCommand extends Command
         })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
 
-        Log::info($chatrooms . "評価未入力のChatroomのレコードを取得");
-
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
             if ($chatroom->status === Chatroom::STATUS_BUYER_EVALUATION) {
                 $this->processBuyerEvaluation($chatroom);
+                Log::info("processBuyerEvaluation実行｜チャットルームID" . $chatroom->id);
             } else if ($chatroom->status === Chatroom::STATUS_SELLER_EVALUATION) {
                 $this->processSellerEvaluation($chatroom);
+                Log::info("processSellerEvaluation実行｜チャットルームID" . $chatroom->id);
             }
             Log::info('コマンドによって評価処理が実行されました。');
         }
@@ -98,13 +98,11 @@ class ChatroomDeliveryCompleteCommand extends Command
      */
     private function processApproveWorkReport(Chatroom $chatroom)
     {
-        Log::info($chatroom . "processApproveWorkReport実行前");
         DB::transaction(function () use ($chatroom) {
             $this->chatroom_message_service->storeConfirmMessageByCommand($chatroom);
             $this->chatroom_service->statusChangeBuyerEvaluation($chatroom);
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
         });
-        Log::info($chatroom . "processApproveWorkReport実行");
     }
 
     /**

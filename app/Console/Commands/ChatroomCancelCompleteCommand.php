@@ -76,12 +76,10 @@ class ChatroomCancelCompleteCommand extends Command
         })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
 
-        Log::info($chatrooms . "ChatroomCancelCompleteCommand実行");
-
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
             $this->processApproveCancelReport($chatroom);
-            Log::info($chatrooms . "processApproveCancelReport実行");
+            Log::info("processApproveCancelReport実行｜チャットルームID" . $chatroom->id);
         }
 
         // キャンセルが成立された後、72時間以内に評価の未入力のChatroomのレコードを取得
@@ -98,8 +96,10 @@ class ChatroomCancelCompleteCommand extends Command
         foreach ($chatrooms as $chatroom) {
             if ($chatroom->status === Chatroom::STATUS_CANCELED) {
                 $this->processSenderEvaluation($chatroom);
+                Log::info("processSenderEvaluation実行｜チャットルームID" . $chatroom->id);
             } else if ($chatroom->status === Chatroom::STATUS_CANCEL_SENDER_EVALUATION) {
                 $this->processReceiverEvaluation($chatroom);
+                Log::info("processReceiverEvaluation実行｜チャットルームID" . $chatroom->id);
             }
             Log::info('コマンドによってキャンセルが成立されました');
         }
@@ -126,7 +126,7 @@ class ChatroomCancelCompleteCommand extends Command
                         $target_user_id = $chatroom->seller_user_id;
                     }
                     $this->purchased_cancel_service->purchasedCancelComplete($purchased_cancel, $payment, $target_user_id);
-                    $this->user_notification_service->storeUserNotificationMessage($purchased_cancel->purchase->chatroom);
+                    // $this->user_notification_service->storeUserNotificationMessage($purchased_cancel->purchase->chatroom); todo:複数メール送信でメールトラップではエラーになるため、本番環境にて確認
                 });
             }
         }
