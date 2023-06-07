@@ -368,7 +368,7 @@ class ChatroomController extends Controller
             $charge_id = $this->stripe_service->createCheckout($request->all(), $amount['total']);
             if(gettype($charge_id) === 'array') {
                 \DB::rollBack();
-                return to_route('chatroom.purchase', $proposal)->with('flash_msg', 'カードエラーが起きました。');
+                return to_route('chatroom.purchase', $proposal)->with('flash_alert', 'カードエラーが起きました。');
             }
             
             // couponを消化する

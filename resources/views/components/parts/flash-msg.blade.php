@@ -5,3 +5,10 @@
         <div class="flash_close">×</div>
     </div>
 @endif
+@if(Session::has('flash_alert'))
+    <div class="flash_alert">
+        <div> </div>
+        <div>{{ \Session::get('flash_alert') }}</div>
+        <div class="flash_close">×</div>
+    </div>
+@endif
