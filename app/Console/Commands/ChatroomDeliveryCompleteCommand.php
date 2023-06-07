@@ -65,6 +65,7 @@ class ChatroomDeliveryCompleteCommand extends Command
 
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
+            Log::info("processApproveWorkReport実行前｜チャットルームID" . $chatroom->id);
             $this->processApproveWorkReport($chatroom);
             Log::info("processApproveWorkReport実行｜チャットルームID" . $chatroom->id);
         }
@@ -79,6 +80,7 @@ class ChatroomDeliveryCompleteCommand extends Command
 
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
+            Log::info("受け取り評価処理の実行前｜チャットルームID" . $chatroom->id);
             if ($chatroom->status === Chatroom::STATUS_BUYER_EVALUATION) {
                 $this->processBuyerEvaluation($chatroom);
                 Log::info("processBuyerEvaluation実行｜チャットルームID" . $chatroom->id);

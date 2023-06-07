@@ -78,6 +78,7 @@ class ChatroomCancelCompleteCommand extends Command
 
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
+            Log::info("processApproveCancelReport実行前｜チャットルームID" . $chatroom->id);
             $this->processApproveCancelReport($chatroom);
             Log::info("processApproveCancelReport実行｜チャットルームID" . $chatroom->id);
         }
@@ -92,6 +93,7 @@ class ChatroomCancelCompleteCommand extends Command
 
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
+            Log::info("キャンセル評価処理の実行前｜チャットルームID" . $chatroom->id);
             if ($chatroom->status === Chatroom::STATUS_CANCELED) {
                 $this->processSenderEvaluation($chatroom);
                 Log::info("processSenderEvaluation実行｜チャットルームID" . $chatroom->id);
