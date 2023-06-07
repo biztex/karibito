@@ -76,9 +76,12 @@ class ChatroomCancelCompleteCommand extends Command
         })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
 
+        Log::info($chatrooms . "ChatroomCancelCompleteCommand実行");
+
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
             $this->processApproveCancelReport($chatroom);
+            Log::info($chatrooms . "processApproveCancelReport実行");
         }
 
         // キャンセルが成立された後、72時間以内に評価の未入力のChatroomのレコードを取得
@@ -88,6 +91,8 @@ class ChatroomCancelCompleteCommand extends Command
         // })->where('updated_at', '<=', Carbon::now()->subHours(72)) テストのため5分後に変更
         })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
+
+        Log::info($chatrooms . "キャンセル時の評価未入力のChatroomのレコードを取得");
 
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
