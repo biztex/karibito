@@ -126,7 +126,7 @@ class ChatroomCancelCompleteCommand extends Command
                         $target_user_id = $chatroom->seller_user_id;
                     }
                     $this->purchased_cancel_service->purchasedCancelComplete($purchased_cancel, $payment, $target_user_id);
-                    // $this->user_notification_service->storeUserNotificationMessage($purchased_cancel->purchase->chatroom); todo:複数メール送信でメールトラップではエラーになるため、本番環境にて確認
+                    $this->user_notification_service->storeUserNotificationMessage($purchased_cancel->purchase->chatroom);
                 });
             }
         }
