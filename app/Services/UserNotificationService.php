@@ -144,7 +144,7 @@ class UserNotificationService
         $send_user = User::find($send_user_id);
 
         // 退会しているユーザーの場合は通知しない
-        if ($receive_user === null || $send_user_id === null) {
+        if ($receive_user === null || $send_user === null) {
             \Log::info("退会しているユーザーのためメッセージは送信しない。ユーザーID:" .  $chatroom->to_user_id . "メッセージ送信者ID:" . $send_user_id);
             return;
         }
