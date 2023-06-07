@@ -90,8 +90,6 @@ class ChatroomCancelCompleteCommand extends Command
         })->where('updated_at', '<=', Carbon::now()->subMinutes(5))
             ->get();
 
-        Log::info($chatrooms . "キャンセル時の評価未入力のChatroomのレコードを取得");
-
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
             if ($chatroom->status === Chatroom::STATUS_CANCELED) {
@@ -101,8 +99,8 @@ class ChatroomCancelCompleteCommand extends Command
                 $this->processReceiverEvaluation($chatroom);
                 Log::info("processReceiverEvaluation実行｜チャットルームID" . $chatroom->id);
             }
-            Log::info('コマンドによってキャンセルが成立されました');
         }
+        Log::info('コマンドによってキャンセルが成立されました');
     }
 
     /**
