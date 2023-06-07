@@ -3,9 +3,9 @@
     <ul>
         @foreach (App\Models\MProductCategory::all() as $category)
             @if (empty($category->top_image_path))
-                <li><a href="{{route('product.category.index', $category->id) }}" class="cate{{ $category->id }}">{{ $category->name }}</a></li>
+                <li><a href="{{route('product.category.index', $category->id) }}" class="cate{{ $category->id }} maxRow2">{{ $category->name }}</a></li>
             @else
-                <li><a href="{{route('product.category.index', $category->id) }}" style="background-image: url({{ Illuminate\Support\Facades\Storage::url($category->top_image_path) }}); height: 72px;">{{ $category->name }}</a></li>
+                <li><a href="{{route('product.category.index', $category->id) }}" class="maxRow2" style="background-image: url({{ Illuminate\Support\Facades\Storage::url($category->top_image_path) }}); height: 72px;">{{ $category->name }}</a></li>
             @endif
         @endforeach
     </ul>
