@@ -82,6 +82,7 @@ class ChatroomDeliveryCompleteCommand extends Command
             } else if ($chatroom->status === Chatroom::STATUS_SELLER_EVALUATION) {
                 $this->processSellerEvaluation($chatroom);
             }
+            Log::alert('コマンドによって評価処理が実行されました。');
         }
     }
 

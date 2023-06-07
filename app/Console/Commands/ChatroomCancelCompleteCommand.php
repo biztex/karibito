@@ -95,6 +95,7 @@ class ChatroomCancelCompleteCommand extends Command
             } else if ($chatroom->status === Chatroom::STATUS_CANCEL_SENDER_EVALUATION) {
                 $this->processReceiverEvaluation($chatroom);
             }
+            Log::alert('コマンドによってキャンセルが成立されました');
         }
     }
 
