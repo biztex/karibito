@@ -29,7 +29,8 @@ class HomeService
         $products = Product::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'productImage', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
             // ->otherUsers() 今後自分以外のユーザーの商品のみ表示するときに使用
             ->publish()
-            ->orderBy('created_at','desc')
+            ->orderBy('view_count','desc')
+            ->latest()
             ->get(); // 公開&&下書きでない
 
         return $products;
@@ -70,7 +71,8 @@ class HomeService
     {
         $job_requests = JobRequest::with(['mProductChildCategory', 'mProductChildCategory.mProductCategory', 'user', 'user.userProfile', 'user.userProfile.prefecture', 'user.evaluations'])
             ->display()
-            ->orderBy('created_at','desc')
+            ->orderBy('view_count','desc')
+            ->latest()
             ->get();
 
         return $job_requests;
