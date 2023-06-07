@@ -683,6 +683,17 @@
 	border: solid 1px #fff;
 }
 
+.flash_alert {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 50px;
+	font-size: 20px;
+	color: #222;
+	background-color: #f8d7da;
+	border: solid 1px #fff;
+}
+
 .flash_close {
 	color: #664d03;
 	font-weight: 100;
