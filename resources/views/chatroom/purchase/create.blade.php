@@ -1,4 +1,5 @@
 <x-layout>
+	<x-parts.flash-msg/>
 	<script src="https://js.stripe.com/v3"></script>
     <article>
 		<div id="breadcrumb">
