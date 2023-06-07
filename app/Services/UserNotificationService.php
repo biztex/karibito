@@ -135,11 +135,6 @@ class UserNotificationService
     {
         $receive_user = User::find($chatroom->to_user_id); //メッセージを受け取ったユーザー
 
-        // 退会しているユーザーの場合は通知しない
-        if ($receive_user === null) {
-            \Log::info("退会しているユーザーのためメッセージは送信しない。ユーザーID:" .  $chatroom->to_user_id);
-            return;
-        }
         if($receive_user->id == $chatroom->sellerUser->id)
         {
             $send_user_id = $chatroom->buyerUser->id; //メッセージを送ったユーザーid
@@ -147,6 +142,12 @@ class UserNotificationService
             $send_user_id = $chatroom->sellerUser->id; //メッセージを送ったユーザーid
         }
         $send_user = User::find($send_user_id);
+
+        // 退会しているユーザーの場合は通知しない
+        if ($receive_user === null || $send_user_id === null) {
+            \Log::info("退会しているユーザーのためメッセージは送信しない。ユーザーID:" .  $chatroom->to_user_id . "メッセージ送信者ID:" . $send_user_id);
+            return;
+        }
 
         $title = $send_user->name . 'さんからメッセージが届きました。';
 
