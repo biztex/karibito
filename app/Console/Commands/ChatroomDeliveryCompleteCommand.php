@@ -86,8 +86,8 @@ class ChatroomDeliveryCompleteCommand extends Command
                 $this->processSellerEvaluation($chatroom);
                 Log::info("processSellerEvaluation実行｜チャットルームID" . $chatroom->id);
             }
-            Log::info('コマンドによって評価処理が実行されました。');
         }
+        Log::info('コマンドによって評価処理が実行されました。');
     }
 
     /**
