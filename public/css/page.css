@@ -8594,11 +8594,6 @@ select.searchSelect {
 	height: auto;
 }
 
-.creditCode .link:hover+.creditCodeBox {
-	display: block;
-}
-
-
 .otherPage2 {
 	margin: 30px 0 0;
 }

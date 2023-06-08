@@ -71,6 +71,13 @@ $(function () {
 			reader.readAsDataURL(e.target.files[0]);
 		});
 	});
+    $(".creditCode .link").mouseenter(function (e) {
+        $(".creditCodeBox").css({ 'display': 'block' });
+    })
+
+    $(".creditCodeBox").mouseleave(function (e) {
+        $(".creditCodeBox").css({ 'display': 'none' });
+    })
 
 	// 住所自動入力
 	$('#zip').jpostal({
