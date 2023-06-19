@@ -186,7 +186,7 @@
                                     <label><input type="checkbox" name="is_credit_save" value="1">カードの情報を登録する</label>
                                 </div>
 							</div>{{-- /. --}}
-							<p class="click"><a href="">登録できない場合はこちら</a></p>
+							<p class="click"><a href="{{ route('setting.card.create') }}" target="_blank">登録できない場合はこちら</a></p>
 						</div>{{-- /.method --}}
 						<div class="functeBtns flex">
 							<input type="hidden" class="" name="chatroom_id" value="{{$proposal->chatroom->id}}">
