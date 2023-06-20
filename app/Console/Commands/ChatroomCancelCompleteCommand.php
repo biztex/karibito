@@ -125,6 +125,9 @@ class ChatroomCancelCompleteCommand extends Command
                     if ($sender_user_id == $chatroom->buyer_user_id) {
                         $target_user_id = $chatroom->seller_user_id;
                     }
+                    if ($sender_user_id == $chatroom->seller_user_id) {
+                        $target_user_id = $chatroom->buyer_user_id;
+                    }
                     $this->purchased_cancel_service->purchasedCancelComplete($purchased_cancel, $payment, $target_user_id);
                     $this->user_notification_service->storeUserNotificationMessage($purchased_cancel->purchase->chatroom);
                 });
