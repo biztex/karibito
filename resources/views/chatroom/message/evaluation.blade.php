@@ -10,13 +10,20 @@
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
                     @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                        <p class="message_text">自動的に評価が入力されました！</p>
+                        <p class="message_text">自動的に評価が入力されました</p>
                     @else
                         <p class="message_text">評価を入力しました！</p>
                     @endif
                     <div class="proposeBuy">
                         <p class="buy none">
-                            <span style="font-weight: normal;">お礼のメッセージと評価入力をしたことを報告しましょう。出品者からの評価入力をもって取引は完了となります。</span>
+                            <span style="font-weight: normal;">
+                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                                    未評価のまま72時間が経過したため自動的に評価しました。
+                                @else
+                                    お礼のメッセージと評価入力をしたことを報告しましょう。
+                                @endif
+                                出品者からの評価入力をもって取引は完了となります。
+                            </span>
                             <input type="submit" value="未評価" disabled>
                         </p>
                     </div>
@@ -33,7 +40,7 @@
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
                     @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                        <p class="message_text">自動的に評価が入力されました！</p>
+                        <p class="message_text">自動的に評価が入力されました</p>
                     @else
                         <p class="message_text">{{$message->text}}</p>
                     @endif
@@ -69,7 +76,7 @@
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
                     @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                        <p class="message_text">自動的に評価を入力しました！</p>
+                        <p class="message_text">自動的に評価を入力しました</p>
                     @else
                         <p class="message_text">評価を入力しました！</p>
                     @endif
@@ -101,7 +108,7 @@
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
                     @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                        <p class="message_text">自動的に評価が入力されました！</p>
+                        <p class="message_text">自動的に評価が入力されました</p>
                     @else
                         <p class="message_text">{{$message->text}}</p>
                     @endif
@@ -140,7 +147,13 @@
                         document.getElementById('cancel_receive_evaluation_btn').innerText = "自動的に評価されました。お相手の評価を入力しましょう。";
                     }
                 } else if (status === STATUS_CANCEL_RECEIVE_EVALUATION) {
-                    document.getElementById('cancel_end').innerText = "自動的に評価されました【キャンセル完了】";
+                    if (document.getElementById('cancel_end')) {
+                        document.getElementById('cancel_end').innerText = "自動的に評価されました【キャンセル完了】";
+                    }
+                    if (document.getElementById('cancel_end_1')) {
+                        document.getElementById('cancel_end_1').innerText = "自動的に評価しました【キャンセル完了】";
+                    }
+
                 }
             }
         </script>

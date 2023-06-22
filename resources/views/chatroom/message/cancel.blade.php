@@ -206,7 +206,7 @@
                                         評価する
                                     </a>
                                 @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCEL_RECEIVE_EVALUATION)
-                                    <a class="cancelEnd" id="cancel_end">
+                                    <a class="cancelEnd" id="cancel_end_1">
                                         キャンセル完了
                                     </a>
                                 @elseif ($chatroom->status == \App\Models\Chatroom::STATUS_CANCELED)
