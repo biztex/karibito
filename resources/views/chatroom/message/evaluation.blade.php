@@ -10,7 +10,7 @@
                 <div class="info">
                     <p class="name">{{$message->user->name}}</p>
                     @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                        <p class="message_text">自動的に評価が入力されました</p>
+                        <p class="message_text">自動的に評価を入力しました</p>
                     @else
                         <p class="message_text">評価を入力しました！</p>
                     @endif
