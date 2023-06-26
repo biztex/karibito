@@ -162,12 +162,19 @@ class ChatroomMessageService
         $user_id = $target_user_id;
         if ($target_user_id === null) {
             $user_id = \Auth::id();
+            $message = [
+                'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
+                'user_id' => $user_id,
+                'text' => 'キャンセル申請を承認しました！',
+            ];
+        } else {
+            $message = [
+                'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
+                'user_id' => $user_id,
+                'text' => 'キャンセル申請を承認しました！',
+                'is_auto_message' => 1,
+            ];
         }
-        $message = [
-            'chatroom_id' => $purchased_cancel->purchase->chatroom_id,
-            'user_id' => $user_id,
-            'text' => 'キャンセル申請を承認しました！',
-        ];
         $purchased_cancel->chatroomMessage()->create($message);
     }
 

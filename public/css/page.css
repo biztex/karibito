@@ -114,7 +114,7 @@
 .recommendCates li {
 	width: calc(100% / 9);
 	text-align: center;
-	margin-bottom: 20px;
+	margin-bottom: 35px;
 }
 
 .recommendCates li:nth-of-type(n + 19) {
@@ -8593,11 +8593,6 @@ select.searchSelect {
 	width: 100%;
 	height: auto;
 }
-
-.creditCode .link:hover+.creditCodeBox {
-	display: block;
-}
-
 
 .otherPage2 {
 	margin: 30px 0 0;

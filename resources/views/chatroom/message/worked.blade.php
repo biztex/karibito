@@ -21,7 +21,7 @@
                         @if($message->user_id !== Auth::id())
                             <span style="font-weight: normal;">
                                 サービス内容を確認し、「承認」か「リトライ」か選択しましょう。リトライは一度のみ選択出来ます。<br>
-                                ＊修正箇所がある場合、未入力のまま72時間が経過すると自動的に承認となりますのでご注意ください
+                                ＊修正箇所がある場合、未入力のまま72時間が経過すると自動的に承認となりますのでご注意ください。
                                 @if($chatroom->status === \App\Models\Chatroom::STATUS_WORK_REPORT)
                                     @if($message->oldMessage($chatroom->id, $message->text, $message->id))
                                         <input type="submit" value="返信済み" class="white">
@@ -92,8 +92,14 @@
 @elseif($message->text === '「納品完了」通知を承認しました！')
     <?php
         $message_title = $message->text;
+        if (isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE) {
+            $message_title = "「納品完了」通知を自動承認しました";
+        }
         if ($message->user_id !== Auth::id()) {
             $message_title = '「納品完了」通知が承認されました！';
+            if (isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE) {
+                $message_title = "「納品完了」通知が自動承認されました";
+            }
         }
     ?>
     <li>
@@ -108,12 +114,22 @@
                     <p class="buy">
                         <span style="font-weight: normal;">
                             @if($message->user_id !== Auth::id())
-                                納品完了通知が承認されました。引き続き評価が入力されるのを待ちましょう。
+                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                                    通知後72時間が経過したため自動的に承認されました。
+                                @else
+                                    納品完了通知が承認されました。
+                                @endif
+                                    引き続き評価が入力されるのを待ちましょう。
                             @else
-                                引き続き評価を入力しましょう。<br>
+                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                                    通知が届いてから72時間が経過したため自動的に承認しました。引き続き評価を入力しましょう。
+                                @else
+                                    引き続き評価を入力しましょう。
+                                @endif
+                                <br>
                                 ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。
                                 @if($chatroom->status === \App\Models\Chatroom::STATUS_BUYER_EVALUATION)
-                                    <a href="{{ route('chatroom.get.buyer.evaluation',$chatroom->id) }}" class="red">評価を入力する</a>
+                                    <a href="{{ route('chatroom.get.buyer.evaluation',$chatroom->id) }}" class="red">評価する</a>
                                 @else
                                     <input type="submit" value="評価済み" class="white">
                                 @endif
