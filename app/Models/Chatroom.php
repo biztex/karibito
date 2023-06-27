@@ -121,7 +121,81 @@ class Chatroom extends Model
      */
     public function scopeBuyerChatroom($query)
     {
-        return $query->where('buyer_user_id', \Auth::id());
+        return $query->where('buyer_user_id', \Auth::id())
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 購入に関するやりとり（交渉中）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBuyerProposalChatroom($query)
+    {
+        return $query->where('buyer_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_START, self::STATUS_PROPOSAL])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 購入に関するやりとり（契約）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBuyerWorkChatroom($query)
+    {
+        return $query->where('buyer_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_WORK, self::STATUS_WORK_REPORT, self::STATUS_BUYER_EVALUATION, self::STATUS_SELLER_EVALUATION, self::STATUS_CANCELED_REPORT, self::STATUS_CANCELED, self::STATUS_CANCEL_SENDER_EVALUATION])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 購入に関するやりとり（完了）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBuyerCompleteChatroom($query)
+    {
+        return $query->where('buyer_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_COMPLETE])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 購入に関するやりとり（キャンセル）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBuyerCancelChatroom($query)
+    {
+        return $query->where('buyer_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_CANCEL_RECEIVE_EVALUATION])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 購入に関するやりとり（ゴミ箱）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBuyerTrashChatroom($query)
+    {
+        return $query->where('buyer_user_id', \Auth::id())->where('trash_flg', 1);
     }
 
     /**
@@ -132,7 +206,80 @@ class Chatroom extends Model
      */
     public function scopeSellerChatroom($query)
     {
-        return $query->where('seller_user_id', \Auth::id());
+        return $query->where('seller_user_id', \Auth::id())->where(function ($query) {
+            $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+        });
+    }
+
+    /**
+     * 出品に関するやりとり（交渉中）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSellerProposalChatroom($query)
+    {
+        return $query->where('seller_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_START, self::STATUS_PROPOSAL])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 出品に関するやりとり（契約）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSellerWorkChatroom($query)
+    {
+        return $query->where('seller_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_WORK, self::STATUS_WORK_REPORT, self::STATUS_BUYER_EVALUATION, self::STATUS_SELLER_EVALUATION, self::STATUS_CANCELED_REPORT, self::STATUS_CANCELED, self::STATUS_CANCEL_SENDER_EVALUATION])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 出品に関するやりとり（完了）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSellerCompleteChatroom($query)
+    {
+        return $query->where('seller_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_COMPLETE])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 出品に関するやりとり（キャンセル）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSellerCancelChatroom($query)
+    {
+        return $query->where('seller_user_id', \Auth::id())
+            ->whereIn('status', [self::STATUS_CANCEL_RECEIVE_EVALUATION])
+            ->where(function ($query) {
+                $query->whereNull('trash_flg')->orWhere('trash_flg', '<>', 1);
+            });
+    }
+
+    /**
+     * 出品に関するやりとり（ゴミ箱）
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSellerTrashChatroom($query)
+    {
+        return $query->where('seller_user_id', \Auth::id())->where('trash_flg', 1);
     }
 
     /**

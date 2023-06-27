@@ -20,8 +20,7 @@
 								</ul>
 							</div>
 						</div>
-						@include('chatroom.parts.index.seller')
-{{--                        @include('chatroom.parts.index.buyer')--}}
+						@include('chatroom.parts.index.seller.index')
 					</div>
 				</div><!--inner-->
 			</div>
