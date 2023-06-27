@@ -313,7 +313,18 @@ Route::middleware('update_latest_login_datetime')->group(function () {
         // やり取り（提供・リクエスト共用版）
         Route::prefix('chatroom')->controller(ChatroomController::class)->middleware('null.user.profile')->name('chatroom.')->group(function () {
             Route::get('','index')->name('index');
+            Route::get('seller/proposal','sellerProposal')->name('seller.proposal');
+            Route::get('seller/work','sellerWork')->name('seller.work');
+            Route::get('seller/complete','sellerComplete')->name('seller.complete');
+            Route::get('seller/cancel','sellerCancel')->name('seller.cancel');
+            Route::get('seller/trash','sellerTrash')->name('seller.trash');
             Route::get('buyer','buyer')->name('buyer');
+            Route::get('buyer/proposal','buyerProposal')->name('buyer.proposal');
+            Route::get('buyer/work','buyerWork')->name('buyer.work');
+            Route::get('buyer/complete','buyerComplete')->name('buyer.complete');
+            Route::get('buyer/cancel','buyerCancel')->name('buyer.cancel');
+            Route::get('buyer/trash','buyerTrash')->name('buyer.trash');
+
             Route::get('active','active')->name('active');
             Route::get('inactive','inactive')->name('inactive');
             Route::post('/update/{chatroom}/trash_flg/', 'updateTrashFlg')->name('update_trash_flg');
