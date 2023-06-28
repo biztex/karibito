@@ -64,7 +64,11 @@
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">キャンセル申請が届きました！</p>
-                        <span>内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。</span>
+                        <span>
+                            内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。
+                            <br>
+                            ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
+                        </span>
                         <div class="proposeBuy">
                             <p class="buy">
                                 <a href="{{ route('cancel.show', $message->reference_id) }}" class="red">確認する</a>
@@ -107,7 +111,11 @@
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">キャンセル申請が届きました！</p>
-                        <span>内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。</span>
+                        <span>
+                            内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。
+                            <br>
+                            ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
+                        </span>
                         <div class="proposeBuy">
                             <p class="buy">
                                 <input type="submit" class="white" value="返信済み">
@@ -142,6 +150,9 @@
                                 @endif
                                 引き続き評価を入力しましょう。<br>
                                 ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
+                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                                    ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。<br>
+                                @endif
                                 双方の評価が入力された時点でキャンセル完了となり、代金が購入者の方に返金されます。<br><br>
                             </span>
                             @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty())
@@ -197,7 +208,11 @@
                                 @endif
                                 キャンセルが成立しました。引き続き評価が入力されるのを待ちましょう。<br>
                                 評価が入力されたら、あなたからも評価を入力してください。双方の評価が入力された時点でキャンセル完了となります。<br>
-                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br><br>
+                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
+                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
+                                    ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。<br>
+                                @endif
+                                <br>
                             </span>
                             @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
                                 <!-- キャンセルされた側評価 -->
@@ -266,7 +281,11 @@
                     <div class="info">
                         <p class="name">{{$message->user->name}}</p>
                         <p class="message_text">キャンセル申請が届きました！</p>
-                        <span>内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。</span>
+                        <span>
+                            内容を確認し、「承認」か「再交渉」を選択ください。未送信のまま72時間が経過しますと自動的に「承認」となります。
+                            <br>
+                            ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
+                        </span>
                         <div class="proposeBuy">
                             <p class="buy"><input type="submit" class="white" value="返信済み"></p>
                         </div>
