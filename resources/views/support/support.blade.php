@@ -260,7 +260,7 @@
                             </li>
                             <li>
                                 <p class="quest toggleBtn"><span>利用料金はかかりますか？</span><span class="more">回答を見る</span></p>
-                                <p class="answer toggleBox">会員登録やサービスの検索・購入、またサービスのリクエストに関して利用料金はかかりません。無料でお使いいただけます。</p>
+                                <p class="answer toggleBox">会員登録やサービスの検索・またサービスのリクエストに関して利用料金はかかりません。購入代金にのみ発生します。</p>
                             </li>
                             <li>
                                 <p class="quest toggleBtn"><span>お気に入り機能とは？</span><span class="more">回答を見る</span></p>
@@ -316,7 +316,7 @@
                             <li>
                                 <p class="quest toggleBtn"><span>お支払方法は？</span><span class="more">回答を見る</span></p>
                                 <p class="answer toggleBox">
-                                    クレジットカードでのお支払いとなります。
+                                    クレジットカード、ポイント及びクーポンでのお支払いとなります。
                                 </p>
                             </li>
                             <li>
