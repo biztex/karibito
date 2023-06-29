@@ -34,7 +34,7 @@
 
 <div class="content">
     <h2 class="hdM">サービス内容</h2>
-    <p style="overflow-wrap: break-word;">{{$product->content}}</p>
+    <p style="overflow-wrap: break-word;">{!! nl2br($product->content) !!}</p>
 </div>
 
 @if(isset($additional_options))
