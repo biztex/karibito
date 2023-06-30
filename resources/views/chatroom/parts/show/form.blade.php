@@ -55,8 +55,8 @@
                 <option value="#template04">購入後のあいさつ（購入者）▼</option>
                 <option value="#template05">購入後のあいさつ（出品者）▼</option>
                 <option value="#template06">やりとりが滞ってしまったら▼</option>
-                <option value="#template07">キャンセルについて（購入者）▼</option>
-                <option value="#template10">キャンセルについて（出品者）▼</option>
+                <option value="#template10">キャンセルについて（購入者）▼</option>
+                <option value="#template07">キャンセルについて（出品者）▼</option>
                 <option value="#template08">納品完了メール（出品者）▼</option>
                 <option value="#template09">サービス受取時（購入者）▼</option>
             </select>
