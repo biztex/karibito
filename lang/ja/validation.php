@@ -143,6 +143,9 @@ return [
         'terms' => [
             'required' => ':attributeに同意してください。'
         ],
+        'over_15' => [
+            'required' => ':attribute同意してください。'
+        ],
         'email' => [
             'unique'   => 'この:attributeは既に登録されています。',
         ],
@@ -212,6 +215,7 @@ return [
     'attributes' => [
         'name' => 'ニックネーム',
         'email' => 'メールアドレス',
+        'mail' => 'メールアドレス',
         'sub_email' => 'サブメールアドレス',
         'password' => 'パスワード',
         'tel' => '電話番号',
@@ -230,6 +234,7 @@ return [
         'apartment' => 'アパートメント',
         'introduction' => '自己紹介',
         'terms' => '利用規約とプライバシーポリシー',
+        'over_15' => '15歳以下の方はご利用できません。',
         'identification_path' => '身分証明証',
         'category_id' => 'カテゴリ',
         'prefecture_id' => 'エリア',
