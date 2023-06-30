@@ -143,6 +143,9 @@ return [
         'terms' => [
             'required' => ':attributeに同意してください。'
         ],
+        'over_15' => [
+            'required' => ':attribute同意してください。'
+        ],
         'email' => [
             'unique'   => 'この:attributeは既に登録されています。',
         ],

@@ -54,6 +54,22 @@ class ContactController extends Controller
 
     public function sendSupportMail(Request $request)
     {
+        $rule = [
+            'name' => ['required', 'string', 'max:255'],
+            'mail' => ['required', 'string', 'email', 'max:128'],
+            'message' => ['required', 'string'],
+        ];
+        if(\Auth::User() == null) {
+            $rule = [
+                'name' => ['required', 'string', 'max:255'],
+                'mail' => ['required', 'string', 'email', 'max:128'],
+                'terms' => 'required',
+                'over_15' => 'required',
+                'message' => ['required', 'string'],
+            ];
+        }
+        $request->validate($rule);
+
         $this->admin_mail->sendMail($request);
         $this->user_mail->sendMail($request);
         return redirect()->route("contact")->with('flash_msg', 'お問い合わせありがとうございます。内容確認の上、ご連絡させていただきます。');
