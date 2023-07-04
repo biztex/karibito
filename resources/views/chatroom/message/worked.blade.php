@@ -128,11 +128,8 @@
                                     引き続き評価を入力しましょう。
                                 @endif
                                 <br>
-                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。
-                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                                    <br>
-                                    ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
-                                @endif
+                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
+                                ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
                                 @if($chatroom->status === \App\Models\Chatroom::STATUS_BUYER_EVALUATION)
                                     <a href="{{ route('chatroom.get.buyer.evaluation',$chatroom->id) }}" class="red">評価する</a>
                                 @else

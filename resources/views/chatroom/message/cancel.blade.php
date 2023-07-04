@@ -150,9 +150,7 @@
                                 @endif
                                 引き続き評価を入力しましょう。<br>
                                 ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
-                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                                    ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。<br>
-                                @endif
+                                ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。<br>
                                 双方の評価が入力された時点でキャンセル完了となり、代金が購入者の方に返金されます。<br><br>
                             </span>
                             @if($chatroom->purchase->exists() && !$chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->where('status', '<>', \App\Models\PurchasedCancel::STATUS_OBJECTION)->isNotEmpty())
@@ -209,9 +207,7 @@
                                 キャンセルが成立しました。引き続き評価が入力されるのを待ちましょう。<br>
                                 評価が入力されたら、あなたからも評価を入力してください。双方の評価が入力された時点でキャンセル完了となります。<br>
                                 ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
-                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                                    ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。<br>
-                                @endif
+                                ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。<br>
                                 <br>
                             </span>
                             @if($chatroom->purchase->exists() && $chatroom->purchase->purchasedCancels->where('user_id', Auth::id())->isNotEmpty())
