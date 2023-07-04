@@ -51,11 +51,9 @@
                                 @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
                                     未評価のまま72時間が経過したため自動的に評価されました。
                                 @endif
-                                引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。
-                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                                    <br>
-                                    ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
-                                @endif
+                                引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。<br>
+                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
+                                ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
                             </span>
                             <a href="{{route('chatroom.get.seller.evaluation',$chatroom->id)}}" class="red">評価を入力する</a>
                         </p>
@@ -122,11 +120,9 @@
                                 @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
                                     未評価のまま72時間が経過したため自動的に評価されました。
                                 @endif
-                                引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。
-                                @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
-                                    <br>
-                                    ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
-                                @endif
+                                引き続き、購入者の方の評価を入力しましょう。購入者の方の評価が完了した時点で取引は完了となります。<br>
+                                ＊未入力のまま72時間が経過すると自動的に評価済みとなりますのでご注意ください。<br>
+                                ＊チャット内でやりとりをしていても、この通知の入力を行わない場合72時間はカウントされます。
                             </span>
                             @if(isset($message->is_auto_message) && $message->is_auto_message === \App\Models\ChatroomMessage::IS_AUTO_MESSAGE)
                                 <input type="submit" value="自動的に評価しました【取引完了】" class="white">
