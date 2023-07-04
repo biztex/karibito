@@ -12,7 +12,7 @@ class UserProfile extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $guarded = [ 'id' ];
 
     const GENDER_MAN = 1;
@@ -39,7 +39,7 @@ class UserProfile extends Model
     const CAN_CALL = 1;
 
     const CANNOT_CALL = 0;
-    
+
     const CALL_STATUS = [
         self::CAN_CALL => '待機中',
         self::CANNOT_CALL => '対応不可'
@@ -52,6 +52,26 @@ class UserProfile extends Model
     const BAN = [
         self::IS_BAN => '制限あり',
         self::NOT_BAN => '制限なし',
+    ];
+
+    const WHERE_YAHOO   = 1;
+    const WHERE_SNS     = 2;
+    const WHERE_DIRECT  = 3;
+    const WHERE_INTRO   = 4;
+    const WHERE_SITE    = 5;
+    const WHERE_WEB_AD  = 6;
+    const WHERE_LEAFLET = 7;
+    const WHERE_OTHER   = 8;
+
+    const WHERE = [
+        self::WHERE_YAHOO   => 'Yahoo!、Googleなどで検索した',
+        self::WHERE_SNS     => '知人が紹介してくれた（ブログ、SNS、メールなどウェブで）',
+        self::WHERE_DIRECT  => '知人が紹介してくれた（直接口コミで）',
+        self::WHERE_INTRO   => '他のサイトで紹介されていた',
+        self::WHERE_SITE    => 'ウェブ上で広告をみた',
+        self::WHERE_WEB_AD  => '新聞・雑誌で見た',
+        self::WHERE_LEAFLET => 'ビラを受け取ったs',
+        self::WHERE_OTHER   => 'その他',
     ];
 
     const RESIZE_WIDTH_ICON = 350;
