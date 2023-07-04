@@ -150,7 +150,7 @@ class ChatroomService
         $chatrooms = Chatroom::where('seller_user_id',$user->id)
                     ->orWhere('buyer_user_id',$user->id)
                     ->get();
-        $can_i_withdraw = $chatrooms->whereBetween('status',[Chatroom::STATUS_WORK, Chatroom::STATUS_COMPLETE])->isEmpty();
+        $can_i_withdraw = $chatrooms->whereBetween('status',[Chatroom::STATUS_WORK, Chatroom::STATUS_SELLER_EVALUATION])->isEmpty();
 
         if(!$can_i_withdraw){
             return redirect()->route('showWithdrawForm')->with('flash_msg','現在取引中のため退会することができません')->throwResponse();
