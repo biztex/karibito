@@ -58,20 +58,21 @@
                     <li><a href="{{ route('draft') }}">掲載内容の下書き</a></li>
                     <li><a href="{{ route('profit.index') }}">売上管理・振込申請</a></li>
                 </ul>
-                <a href="#" target="_blank" ><img src="/img/common/footer_twitter_icon.png" alt="Twitter" class="footer_twitter"></a>
+                <a href="https://twitter.com/karibito_Inc" target="_blank" ><img src="/img/common/footer_twitter_icon.png" alt="Twitter" class="footer_twitter"></a>
             </div>
-            <!--<a href="#">約款特定</a> 
+            <!--<a href="#">約款特定</a>
             <a href="{{ route('notation') }}">商取引法に基づく表示</a>
             <a href="#">よくある質問</a>
             <a href="{{ route('contact') }}">お問い合わせ</a>-->
         </div>
         <div class="sns sp">
-            <a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a>
-            <a href="#" target="_blank"><img src="/img/common/ico_twitter.png" alt="Twitter"></a>
-            <a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a>
-            <a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a>
+            {{-- <a href="#" target="_blank"><img src="/img/common/ico_facebook.png" alt="Facebook"></a> --}}
+            <a href="https://twitter.com/karibito_Inc" target="_blank"><img src="/img/common/ico_twitter.png" alt="Twitter"></a>
+
+            {{-- <a href="#" target="_blank"><img src="/img/common/ico_instragram.png" alt="Instragram"></a> --}}
+            {{-- <a href="#" target="_blank"><img src="/img/common/ico_line.png" alt="LINE"></a> --}}
         </div>
-       
+
     </div>
     <p id="copyright">©{{ now()->year }} karibito, Inc.</p>
 </div>
