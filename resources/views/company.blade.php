@@ -83,7 +83,7 @@
 							</div>
 						</div>
 						<div class="part">
-							<h2 class="title"><span class="step">06</span><span class="eng">ARES EXCHANGE</span>〜地域交流〜</h2>
+							<h2 class="title"><span class="step">06</span><span class="eng">AREA EXCHANGE</span>〜地域交流〜</h2>
 							<div class="img"><img src="/img/company/img_company06.png" srcset="/img/company/img_company06.png 1x, /img/company/img_company06@2x.png 2x" alt=""></div>
 							<div class="introdBox">
 								<p>社会問題の解決策の一つの手段として注目されているスキルシェアは、自治体課題の解決や地域経済活性化の手段としても有効であり、積極的に地域社会に普及・活用をさせていく必要があります。</p>
