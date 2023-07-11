@@ -72,8 +72,7 @@ class ChatroomCancelCompleteCommand extends Command
         $chatrooms = Chatroom::where(function ($query) {
             $query->where('status', Chatroom::STATUS_WORK)
                 ->orwhere('status', Chatroom::STATUS_CANCELED_REPORT);
-        // })->where('updated_at', '<=', Carbon::now()->subHours(72)) テストのため10分後に変更
-        })->where('updated_at', '<=', Carbon::now()->subMinutes(10))
+        })->where('updated_at', '<=', Carbon::now()->subHours(72))
             ->get();
 
         // 処理の実行
@@ -87,8 +86,7 @@ class ChatroomCancelCompleteCommand extends Command
         $chatrooms = Chatroom::where(function ($query) {
             $query->where('status', Chatroom::STATUS_CANCELED)
                 ->orwhere('status', Chatroom::STATUS_CANCEL_SENDER_EVALUATION);
-        // })->where('updated_at', '<=', Carbon::now()->subHours(72)) テストのため10分後に変更
-        })->where('updated_at', '<=', Carbon::now()->subMinutes(10))
+        })->where('updated_at', '<=', Carbon::now()->subHours(72))
             ->get();
 
         // 処理の実行
