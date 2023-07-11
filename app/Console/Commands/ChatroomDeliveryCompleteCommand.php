@@ -60,8 +60,7 @@ class ChatroomDeliveryCompleteCommand extends Command
     {
         Log::info('ChatroomDeliveryCompleteCommand実行');
         // 修正箇所がある場合、72時間が経過すると自動的に承認となります
-        // $chatrooms = Chatroom::where('status', Chatroom::STATUS_WORK_REPORT)->where('updated_at', '<=', Carbon::now()->subHours(72))->get(); テストのため10分後に変更
-        $chatrooms = Chatroom::where('status', Chatroom::STATUS_WORK_REPORT)->where('updated_at', '<=', Carbon::now()->subMinutes(10))->get();
+        $chatrooms = Chatroom::where('status', Chatroom::STATUS_WORK_REPORT)->where('updated_at', '<=', Carbon::now()->subHours(72))->get();
 
         // 処理の実行
         foreach ($chatrooms as $chatroom) {
@@ -74,8 +73,7 @@ class ChatroomDeliveryCompleteCommand extends Command
         $chatrooms = Chatroom::where(function ($query) {
             $query->where('status', Chatroom::STATUS_BUYER_EVALUATION)
                 ->orwhere('status', Chatroom::STATUS_SELLER_EVALUATION);
-        // })->where('updated_at', '<=', Carbon::now()->subHours(72)) テストのため10分後に変更
-        })->where('updated_at', '<=', Carbon::now()->subMinutes(10))
+        })->where('updated_at', '<=', Carbon::now()->subHours(72))
             ->get();
 
         // 処理の実行
