@@ -4,10 +4,10 @@
         <div class="shareSnsEmail">
             <h3>SNSやメールで{{-- チケットを --}}シェアする</h3>
             <div class="sns">
-                <a href="#" target="_blank"><img src="/img/mypage/ico_facebook.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="/img/mypage/ico_line.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a>
-                <a href="#" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a>
+                <a href="http://www.facebook.com/share.php?u={{ urlencode($url) }}" target="_blank"><img src="/img/mypage/ico_facebook.svg" alt=""></a>
+                <a href="https://social-plugins.line.me/lineit/share?url={{ urlencode($url) }}" target="_blank"><img src="/img/mypage/ico_line.svg" alt=""></a>
+                <a href="https://twitter.com/share?url={{ urlencode($url) }}&text&hashtags=karibito" target="_blank"><img src="/img/mypage/ico_twitter.svg" alt=""></a>
+                <a href="mailto:?subject=カリビトの会員登録をしよう！&body={{ $url }}" target="_blank"><img src="/img/mypage/ico_mail.svg" alt=""></a>
             </div>
             <form>
                 <table>

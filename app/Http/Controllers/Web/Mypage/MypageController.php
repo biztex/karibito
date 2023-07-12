@@ -33,6 +33,8 @@ class MypageController extends Controller
         $chatroom = new Chatroom;
         $total_sales_count = $chatroom->getSalesCount(\Auth::id());
 
-        return view('mypage.show', compact('user_notifications', 'products', 'cancel_count', 'total_sales_count'));
+        $url = url('register') . '?introduced_user_id=' . Auth::user()->id;
+
+        return view('mypage.show', compact('user_notifications', 'products', 'cancel_count', 'total_sales_count', 'url'));
     }
 }

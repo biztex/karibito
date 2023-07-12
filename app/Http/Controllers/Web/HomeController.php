@@ -41,6 +41,12 @@ class HomeController extends Controller
 
         $important_news_list = $this->home_service->paginateImportantNewsList(3);
 
-        return view('index', compact('products', 'recommend_products','job_requests', 'recommend_job_requests', 'product_category_ranks','job_category_ranks','news_list','important_news_list'));
+        if (\Auth::check()) {
+            $url = url('register') . '?introduced_user_id=' . \Auth::user()->id;
+        }else{
+            $url = url('register');
+        }
+
+        return view('index', compact('products', 'recommend_products','job_requests', 'recommend_job_requests', 'product_category_ranks','job_category_ranks','news_list','important_news_list', 'url'));
     }
 }
