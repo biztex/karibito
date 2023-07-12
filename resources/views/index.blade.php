@@ -39,7 +39,7 @@
 				<div class="item"><a href="#"><img src="/img/top/ico_slider03.png" srcset="/img/top/ico_slider03.png 1x, /img/top/ico_slider03@2x.png 2x" alt="写真"></a></div>-->
 			</div>
 			@auth
-			@include('index.parts.share')
+				@include('index.parts.share')
 			@endauth
 		</div><!-- /.mainVisual -->
 
