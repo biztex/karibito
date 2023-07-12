@@ -22,16 +22,37 @@ class TransferRequestController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index()
+    public function index(Request $request)
     {
         $today = today()->year . sprintf('%02d', today()->month) . today()->day; // yyyymmdd
         $now_season = $this->transfer_request_service->getNowSeason($today);
-        $transfer_requests = TransferRequest::requestSeason($now_season['num'])->orderBy('status', 'asc')->orderBy('id', 'desc')->get();
 
-        $next_season = $this->transfer_request_service->getNextSeason($now_season['num']);
-        $prev_season = $this->transfer_request_service->getPrevSeason($now_season['num']);
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
-        return view('admin.transfer_request.index', compact('transfer_requests', 'now_season', 'next_season', 'prev_season'));
+        if ($start_date && $end_date) {
+            if ($start_date > $end_date) {
+                return redirect()->back()->with('flash_msg', '開始日は終了日より前の日付を選択してください');
+            }
+        }
+
+        if($start_date === null) {
+            $start_date = date('Y-m-01');
+        }
+        if($end_date === null) {
+            $end_date = date('Y-m-d');
+        }
+
+        $transfer_requests = TransferRequest::orderBy('status', 'asc')
+            ->orderBy('id', 'desc');
+
+        if ($start_date && $end_date) {
+            $transfer_requests = $transfer_requests->whereBetween('created_at', [$start_date, $end_date]);
+        }
+
+        $transfer_requests = $transfer_requests->get();
+
+        return view('admin.transfer_request.index', compact('transfer_requests', 'start_date', 'end_date', 'now_season'));
     }
     /**
      * 振込csvダウンロード

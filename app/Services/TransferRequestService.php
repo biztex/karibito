@@ -93,6 +93,7 @@ class TransferRequestService
             $data = [];
 
             foreach ($dl_transfer_requests as $transfer_request) {
+                if($transfer_request->user === null) continue;
                 $bank_account = $transfer_request->user->bankAccount;
 
                 $array_data = [
@@ -107,6 +108,8 @@ class TransferRequestService
                 ];
                 array_push($data, $array_data);
             }
+
+            if($data == null) return back()->with('flash_msg', '対象の振込申請がありません。');
 
             $file_name = 'GMOあおぞら用振込申請 (' . str_replace('-', '', $request['date_from']). '-' . str_replace('-', '', $request['date_to']) . ')';
             $csv_data = $this->csv_service->createCsv($data, null, $file_name);
