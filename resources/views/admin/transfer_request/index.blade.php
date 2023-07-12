@@ -1,25 +1,33 @@
 <x-admin.app>
     <div class="container my-5">
-    <x-admin.flash_msg/>
-    <div class="container">
-        <div class="row justify-content-center">
-            <x-admin.side_menu/>
-            <div class="col-md-10">
+        <x-admin.flash_msg/>
+        <div class="container">
+            <div class="row justify-content-center">
+                <x-admin.side_menu/>
+                <div class="col-md-10">
 
-                {{-- GMOあおぞら用のCSVダウンロード --}}
-                @include('admin.transfer_request.parts.download_csv')
-                
+                    {{-- GMOあおぞら用のCSVダウンロード --}}
+                    @include('admin.transfer_request.parts.download_csv')
 
-                <div class="card shadow-sm mb-5">
-                    <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
-                        <h5 class="text-white mb-0">
-                            <i class="fas fa-info mr-2">振込申請情報：全{{ $transfer_requests->count() }}件</i>
-                            <i class="fas fa-info mr-2 count"></i>
-                        </h5>
-                        <a href="{{ route('admin.transfer_request.season', $prev_season['num']) }}" class="btn btn-outline-secondary"><< {{$prev_season['string']}}</a>
-                        <a href="{{ route('admin.transfer_request.season', $next_season['num']) }}" class="btn btn-outline-secondary">{{$next_season['string']}} >></a>
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-header border-0 bg-dark d-flex justify-content-between align-items-center">
+                            <h5 class="text-white mb-0">
+                                <i class="fas fa-info mr-2">振込申請情報：全{{ $transfer_requests->count() }}件</i>
+                                <i class="fas fa-info mr-2 count"></i>
+                            </h5>
+                            <form action="{{ route('admin.transfer_request.index') }}" method="get" class="d-flex">
+                                <div class="form-group">
+                                    @include('components.form.date', ['name' => 'start_date', 'required' => true, 'value' => $start_date])
+                                </div>
+                                <div class="form-group mx-2">
+                                    @include('components.form.date', ['name' => 'end_date', 'required' => true, 'value' => $end_date])
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="絞り込む" class="btn btn-primary">
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
                     <form method="POST">
                         @csrf
                         <div class="card-body">
@@ -39,7 +47,7 @@
                                         </th>
                                         <th scope="col" class="text-nowrap">id</th>
                                         <th scope="col" class="text-nowrap">user_id</th>
-                                        <th scope="col" class="text-nowrap">ユーザー名</th>
+                                        <th scope="col" class="text-nowrap">銀行口座登録名</th>
                                         <th scope="col" class="text-nowrap">振込金額</th>
                                         <th scope="col" class="text-nowrap">振込申請日</th>
                                         <th scope="col" class="text-nowrap">振込状況</th>
@@ -47,26 +55,34 @@
                                     </tr>
                                 </thead>
                                 <tbody id="check_requests">
-                                    @foreach($transfer_requests as $value)
+                                    @if ($transfer_requests->isEmpty())
                                         <tr>
-                                            <td class="px-2">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" name="transfer_request[]" type="checkbox" id="CheckAllValue" value="{{ $value->id }}">
-                                                </div>
+                                            <td colspan="8" class="text-center py-5">
+                                                <p class="mb-0">振込申請はありません。</p>
                                             </td>
-                                            <td class="px-2">{!! $value->id !!}</td>
-                                            <td class="px-2"><a href="{{ route('admin.users.show',$value->user_id) }}">{!! $value->user_id !!}</a></td>
-                                            <td class="px-2"><a href="{{ route('admin.users.show',$value->user_id) }}">{!! $value->user->name !!}</a></td>
-                                            <td class="px-2">¥{!! number_format($value->amount) !!}</p></td>
-                                            <td class="px-2" style="max-width:35px">{!! $value->requested_at !!}</td>
-                                            <td class="px-2" style="max-width:35px">{!! App\Models\TransferRequest::STATUS[$value->status] !!}</td>
-                                            @if($value->completed_at !== null)
-                                                <td class="px-2" style="max-width:35px">{!! $value->completed_at !!}</td>
-                                            @else
-                                                <td class="px-2" style="max-width:35px">{!! $value->failed_at !!}</td>
-                                            @endif
                                         </tr>
-                                    @endforeach
+                                    @else
+                                        @foreach($transfer_requests as $value)
+                                            <tr>
+                                                <td class="px-2">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" name="transfer_request[]" type="checkbox" id="CheckAllValue" value="{{ $value->id }}">
+                                                    </div>
+                                                </td>
+                                                <td class="px-2">{!! $value->id !!}</td>
+                                                <td class="px-2"><a href="{{ route('admin.users.show', $value->user_id) }}">{!! $value->user_id !!}</a></td>
+                                                <td class="px-2"><a href="{{ route('admin.users.show', $value->user_id) }}">{!! $value->user && $value->user->bankAccount ? Crypt::decryptString($value->user->bankAccount->name) : '退会済みユーザー' !!}</a></td>
+                                                <td class="px-2">¥{!! number_format($value->amount) !!}</p></td>
+                                                <td class="px-2" style="max-width:35px">{!! $value->requested_at !!}</td>
+                                                <td class="px-2" style="max-width:35px">{!! App\Models\TransferRequest::STATUS[$value->status] !!}</td>
+                                                @if($value->completed_at !== null)
+                                                    <td class="px-2" style="max-width:35px">{!! $value->completed_at !!}</td>
+                                                @else
+                                                    <td class="px-2" style="max-width:35px">{!! $value->failed_at !!}</td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -74,7 +90,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </x-admin.app>
 <script>
