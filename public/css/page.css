@@ -3061,7 +3061,7 @@
 		min-width: 30px;
 		padding: 0 10px;
 	}
-	
+
 	.subPagesTab .tabChatRoomLink li a.is_active {
 		font-size: small;
 	}
@@ -4505,7 +4505,25 @@ select.faqSelect {
 	border: 1px solid #DDDDDD;
 	padding: 20px;
 }
-
+.privacyItem ul.privacyItemGroup{
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.privacyItem ul.privacyItemGroup ul{
+    border: none;
+    list-style: nu;
+    padding-top: 0;
+    padding-left: 40px;
+}
+.privacyItemSubttl{
+    padding-bottom: 20px;
+}
+.privacyItem ul.privacyItemGroup ul li ul{
+    list-style: disc;
+    padding-left: 20px;
+    padding-bottom: 0;
+}
 .privacyItem .textIndent li {
 	padding-left: 1em;
 	text-indent: -1em;
