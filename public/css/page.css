@@ -4520,7 +4520,7 @@ select.faqSelect {
     padding-bottom: 20px;
 }
 .privacyItem ul.privacyItemGroup ul li ul{
-    list-style: disc;
+    list-style: nu;
     padding-left: 20px;
     padding-bottom: 0;
 }
