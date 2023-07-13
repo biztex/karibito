@@ -725,7 +725,7 @@
 
                         </div>
                         <div class="privacyItem">
-                            2023年●月●日制定
+                            2023年7月10日制定
                         </div>
                     </div>
                 </div><!-- /#main -->
