@@ -12,6 +12,7 @@ class MCoupon extends Model
     // クーポン種別
     const NEW_REGISTRATION = 1;
     const QUESTIONNAIRE_ANSWER = 2;
+    const ALREADY_REGISTRATION = 3;
 
     protected $guarded = [ 'id' ];
 }
