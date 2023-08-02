@@ -4,6 +4,8 @@ namespace App\Http\Requests\Mypage\ChangePasswordController;
 
 use App\Rules\MatchPasswordRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules;
+use App\Rules\AlphaRule;
 
 class UpdateRequest extends FormRequest
 {
@@ -25,13 +27,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'current_password'      => [
-                'required',
-                'string',
-                new MatchPasswordRule($this->password),
-            ],
-            'password'              => 'required|string|min:8|max:255|confirmed',
-            'password_confirmation' => 'required|string|min:8|max:255',
+            'current_password' => ['required', 'string', new MatchPasswordRule($this->password)],
+            'password' => ['required', 'confirmed','between:8,100', Rules\Password::defaults()->mixedCase()->numbers(), new AlphaRule],
+            'password_confirmation' => ['required', 'string', 'min:8', 'max:255'],
         ];
     }
 
