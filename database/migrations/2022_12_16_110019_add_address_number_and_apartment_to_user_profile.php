@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('user_profiles', function (Blueprint $table) {
-            $table->string('address_number')->after('address')->nullable();
-            $table->string('apartment')->after('address_number')->nullable();
-        });
+        if (!Schema::hasColumn('user_profiles', 'address_number')) {
+            Schema::table('user_profiles', function (Blueprint $table) {
+                $table->string('address_number')->after('address')->nullable();
+                $table->string('apartment')->after('address_number')->nullable();
+            });
+        }
     }
 
     /**
