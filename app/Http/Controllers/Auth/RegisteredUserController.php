@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'email' => ['required', 'confirmed', 'string', 'email', 'max:128', 'unique:users'],
-            'password' => ['required', 'confirmed', 'between:8,100', Rules\Password::defaults(), new AlphaRule()],
+            'password' => ['required', 'confirmed','between:8,100', Rules\Password::defaults()->mixedCase()->numbers(), new AlphaRule],
             'terms' => 'required',
             'over_15' => 'required',
         ]);

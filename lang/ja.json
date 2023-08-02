@@ -1,8 +1,8 @@
 {
     "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.",
-    "The :attribute must contain at least one number.": "The :attribute must contain at least one number.",
+    "The :attribute must contain at least one number.": ":attributeには半角数字を最低1文字含む必要があります。",
     "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.",
-    "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.",
+    "The :attribute must contain at least one uppercase and one lowercase letter.": ":attributeには英大文字・英小文字それぞれを最低1文字ずつ含む必要があります。",
     "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute.",
     "Please click the button below to verify your email address.": "メールアドレス認証を完了するには以下のボタンをクリックしてください。",
     "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "\":actionText\" ボタンが機能しない場合は, 次のURLをコピーしてWebブラウザに貼り付けてください。[:displayableActionUrl](:actionURL)",

@@ -54,7 +54,7 @@
 										<p><input type="email" name="email_confirmation" placeholder="例） email@karibito.jp"value="{{old('email_confirmation')}}" required></p>
 									</div>
 									<div class="labelCategory">
-										<p>パスワード（半角英数字 8文字 〜 100文字）</p>
+										<p>パスワード（8文字 〜 100文字以内で英大文字・英小文字・数字それぞれを最低1文字必須）</p>
 										@error('password')
 										<div class="alert alert-danger">{{ $message }}</div>
 										@enderror

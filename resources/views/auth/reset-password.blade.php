@@ -14,15 +14,13 @@
 								<input type="hidden" name="token" value="{{ $request->route('token') }}">
 
 								<div class="labelCategory">
-									
 									<p>メールアドレス</p>
 									@error('email')
 										<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 									<p><input type="email" name="email" value="{{old('email', $request->email)}}" required readonly></p>
 
-									
-									<p class="add_mt20">パスワード（半角英数字 8文字 〜 100文字）</p>
+									<p class="add_mt20">パスワード（8文字 〜 100文字以内で英大文字・英小文字・数字それぞれを最低1文字必須）</p>
 									@error('password')
 										<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
