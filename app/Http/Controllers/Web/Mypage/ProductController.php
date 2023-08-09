@@ -167,6 +167,7 @@ class ProductController extends Controller
             $this->product_service->updateProductQuestion($request->all(), $product);
             $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
+            $this->point_service->getPoint(MPoint::PRODUCT_REGISTRATION, \Auth::id(), $product);
             $this->user_notification_service->storeUserNotificationFavorite($product);
         });
 
@@ -344,6 +345,7 @@ class ProductController extends Controller
             $this->product_service->updateProductQuestion($request->all(), $product);
             $this->product_service->updateProductLink($request->all(), $product);
             $this->product_service->updateImage($request,$product->id);
+            $this->point_service->getPoint(MPoint::PRODUCT_REGISTRATION, \Auth::id(), $product);
         });
 
         $product = Product::orderBy('created_at', 'desc')->where('user_id', \Auth::id())->first();
