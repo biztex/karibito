@@ -24,6 +24,19 @@ class PointService
     public function getPoint(int $point_id, int $user_id, Model $instance)
     {
         $m_point = MPoint::where('id', $point_id)->first();
+        if(empty($m_point)) {
+            \Log::error('ポイントマスタが存在しません。');
+            return;
+        }
+        $user_has_point = UserGetPoint::where([
+            'reference_type' => 'App\Models\Product',
+            'reference_id' => $instance->id,
+        ])->first();
+
+        if ($user_has_point) { // 既にポイントを取得している場合はポイントを付与しない
+            return;
+        }
+
         // $point_rate = MPointRate::where('effective_datetime', '<=', $today)->latest()->first(); 仕様が変わる可能性があるため一旦残す
         // $now_rate = $point_rate->rate;
         $deadline = empty($m_point->deadline_period) ? null : date("Y-m-d",mktime(0, 0, 0, date("m") + $m_point->deadline_period, date("d"), date("Y")));
