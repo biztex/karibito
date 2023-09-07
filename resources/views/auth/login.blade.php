@@ -39,7 +39,7 @@
 								<div class="labelCategory">
 									<p>パスワード（半角英数字 8文字 〜 100文字）</p>
 									@error('password')
-										<div class="alert alert-danger">{{ $message }}</div>
+										<div class="alert alert-danger">{{ 'aaaaaaaa' }}</div>
                             		@enderror
 									<p><input type="password" name="password" placeholder="" required></p>
 								</div>

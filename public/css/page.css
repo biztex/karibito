@@ -945,7 +945,7 @@
 	.aboutFeatures .item {
 		padding: 8px 5px;
 		margin: 0 7px;
-		max-width: ;
+		/* max-width: ; */
 		font-size: 0.8rem;
 	}
 
@@ -9873,7 +9873,7 @@ input.small {
 }
 
 .exchangeChat li .stepUl {
-	margin-bottom: 28px:
+	margin-bottom: 28px;
 }
 
 .exchangeChat .conts {
