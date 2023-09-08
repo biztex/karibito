@@ -221,7 +221,7 @@ class ProductController extends Controller
         \DB::transaction(function () use ($request, $product) {
             $product->fill([
                 'category_id' => $request->category_id,
-                'prefecture_id' => $request->prefecture,
+                'prefecture_id' => $request->prefecture_id,
                 'title' => $request->title,
                 'content' => $request->input('content'),
                 'price' => $request->price,
