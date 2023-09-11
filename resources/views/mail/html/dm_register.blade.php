@@ -2,8 +2,8 @@
 
 <p>日頃よりカリビトをご利用いただきありがとうございます。</p>
 
-<span>{{$user_notification->title}}</span><br>
-<span>早速確認してみましょう！</span><br>
+<p>{{$user_notification->title}}</p><br>
+<p>早速確認してみましょう！</p><br>
 
 <p><a href="{{ route('dm.show', $user_notification->reference_id) }}">{{ route('dm.show', $user_notification->reference_id) }}</a></p>
 
