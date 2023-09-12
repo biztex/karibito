@@ -10722,7 +10722,7 @@ input.small {
 	left: 0;
 	top: 0;
 	z-index: 9999;
-	width: 100%;
+	width: 100% !important;
 	height: 100%;
 	display: none;
 	opacity: 0;
