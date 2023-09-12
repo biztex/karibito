@@ -44,7 +44,7 @@
                                             <p class="navMessageHd">お知らせ</p>
                                             <div class="navMessageUl">
                                                 @if(isset($not_view_user_notifications[0]))
-                                                    @foreach ($not_view_user_notifications as $k => $not_view_user_notification)
+                                                    @foreach ($not_view_user_notifications->slice(0, 5) as $k => $not_view_user_notification)
                                                         @if ($not_view_user_notification->is_view === 0)
                                                             <a href="{{route('already_read.show', $not_view_user_notification->id)}}">
                                                                 <dl>

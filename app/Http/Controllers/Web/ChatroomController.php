@@ -584,7 +584,6 @@ class ChatroomController extends Controller
      */
     public function buyerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
-        dd("aa");
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
@@ -615,7 +614,6 @@ class ChatroomController extends Controller
      */
     public function sellerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
-        dd("bbb");
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
