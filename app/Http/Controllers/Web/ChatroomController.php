@@ -299,7 +299,7 @@ class ChatroomController extends Controller
                 $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
             }
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
-            
+
             return $chatroom;
         });
         return redirect()->route('chatroom.show', $chatroom->id);
@@ -309,7 +309,7 @@ class ChatroomController extends Controller
      * リクエストから交渉メッセージ送信でチャットルーム作成
      * @param MessageRequest $request
      * @param \App\Models\JobRequest $job_request
-     * 
+     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function createJobRequest(MessageRequest $request, JobRequest $job_request)
@@ -326,7 +326,7 @@ class ChatroomController extends Controller
                 $this->chatroom_message_service->storeNdaMessage($nda_message, 'NDAを送信しました！');
             }
             $this->user_notification_service->storeUserNotificationMessage($chatroom);
-            
+
             return $chatroom;
         });
         return redirect()->route('chatroom.show', $chatroom->id);
@@ -335,7 +335,7 @@ class ChatroomController extends Controller
     /**
      * チャットルーム画面
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function show(Chatroom $chatroom)
@@ -355,7 +355,7 @@ class ChatroomController extends Controller
      * 通常メッセージ送信
      * @param MessageRequest $request
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function message(MessageRequest $request, Chatroom $chatroom)
@@ -368,7 +368,7 @@ class ChatroomController extends Controller
 
     /**
      * NDA送信
-     * 
+     *
      * @param SendNdaRequest $request
      * @param Chatroom $chatroom
      * @return RedirectResponse
@@ -387,7 +387,7 @@ class ChatroomController extends Controller
 
     /**
      * NDA編集・締結
-     * 
+     *
      * @param EditOrConclusionNdaRequest $request
      * @param Chatroom $chatroom
      * @return RedirectResponse
@@ -410,7 +410,7 @@ class ChatroomController extends Controller
 
     /**
      * NDAのPDFダウンロード
-     * 
+     *
      * @param Chatroom $chatroom
      */
     public function downloadNda(Chatroom $chatroom)
@@ -425,7 +425,7 @@ class ChatroomController extends Controller
      * 提案
      * @param  ProposalRequest $request
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function proposal(ProposalRequest $request, Chatroom $chatroom)
@@ -445,7 +445,7 @@ class ChatroomController extends Controller
     /**
      * 購入画面
      * @param \App\Models\Proposal $proposal
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function purchase(Proposal $proposal)
@@ -462,7 +462,7 @@ class ChatroomController extends Controller
      * 購入確認画面
      * @param PurchaseConfirmRequest $request
      * @param \App\Models\Proposal $proposal
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function purchaseConfirm(PurchaseConfirmRequest $request, Proposal $proposal)
@@ -474,7 +474,7 @@ class ChatroomController extends Controller
             $this->stripe_service->createCard($stripe_token);
             \Session::put('flash_msg', 'クレジットカードの情報を保存しました。');
         }
-        
+
         $card = $this->stripe_service->getCard($request->all());
         $amount = $this->purchase_service->getConfirmAmount($proposal, $request->all());
 
@@ -500,7 +500,7 @@ class ChatroomController extends Controller
                 \DB::rollBack();
                 return to_route('chatroom.purchase', $proposal)->with('flash_alert', 'カードエラーが起きました。');
             }
-            
+
             // couponを消化する
             $user_coupon = $this->coupon_service->usedCoupon($request->coupon_id);
             // pointを消化する
@@ -519,7 +519,7 @@ class ChatroomController extends Controller
     /**
      * 作業完了
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function complete(Chatroom $chatroom)
@@ -567,7 +567,7 @@ class ChatroomController extends Controller
     /**
      * 評価画面
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function getBuyerEvaluation(Chatroom $chatroom)
@@ -579,11 +579,12 @@ class ChatroomController extends Controller
      * 購入者評価
      * @param  EvaluationRequest $request
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function buyerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
+        dd("aa");
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
@@ -597,7 +598,7 @@ class ChatroomController extends Controller
     /**
      * 評価画面
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function getSellerEvaluation(Chatroom $chatroom)
@@ -609,11 +610,12 @@ class ChatroomController extends Controller
      * 出品者評価
      * @param  EvaluationRequest $request
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function sellerEvaluation(EvaluationRequest $request, Chatroom $chatroom)
     {
+        dd("bbb");
         \DB::transaction(function () use ($request, $chatroom) {
             $evaluation = $this->evaluation_service->storeEvaluation($request->all(), $chatroom);
             $this->chatroom_message_service->storeEvaluationMessage($evaluation, $chatroom);
@@ -726,7 +728,7 @@ class ChatroomController extends Controller
     /**
      * 評価完了画面
      * @param \App\Models\Chatroom $chatroom
-     * 
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function evaluationComplete(Chatroom $chatroom)
@@ -735,7 +737,7 @@ class ChatroomController extends Controller
             ['user_id',\Auth::id()],
             ['chatroom_id', $chatroom->id],
         ])->get();
-        
+
         return view('chatroom.evaluation.complete', compact('chatroom','survey'));
     }
 
