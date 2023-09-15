@@ -58,7 +58,12 @@ class UserController extends Controller
         $job_request = JobRequest::where('user_id', $user->id)->publish()->notDraft()->orderBy('created_at','desc')->paginate(10);
         $portfolio_list = Portfolio::where('user_id', $user->id)->get();
         $id = $user->id;
-        $dmrooms = Dmroom::where('to_user_id','=', $user->id)->where('from_user_id', '=', \Auth::id())->first();
+
+        $dmrooms = Dmroom::where('from_user_id','=', $id)->where('to_user_id','=', \Auth::id() )->first();
+        if(is_null($dmrooms)){
+            $dmrooms = Dmroom::where('to_user_id','=', $user->id)->where('from_user_id', '=', \Auth::id())->first();
+        }
+
         $evaluations = $this->evaluation_service->getEvaluations($user->id);
         $counts = $this->evaluation_service->countEvaluations($user->id);
 

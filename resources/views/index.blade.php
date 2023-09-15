@@ -10,7 +10,7 @@
 			</div>
 			<div class="slider">
 				<div class="item"><a href="/register"><img src="/img/top/banner1.png" srcset="/img/top/banner1.png" alt="写真"></a></div>
-				<div class="item"><a href="https://karibito.co.jp/" target="_blank"><img src="/img/top/banner2.png" srcset="/img/top/banner2.png" alt="写真"></a></div>
+				<div class="item"><a href="https://karibito.co.jp/lp" target="_blank"><img src="/img/top/banner2.png" srcset="/img/top/banner2.png" alt="写真"></a></div>
 				<div class="item"><a href="/karibitoguide"><img src="/img/top/banner6.png" srcset="/img/top/banner6.png" alt="写真"></a></div>
 				<div class="item"><a href="/guide"><img src="/img/top/banner7.png" srcset="/img/top/banner7.png" alt="写真"></a></div>
 				<div class="item">
@@ -96,6 +96,6 @@
 		closeModal();
 	});
 
-	
+
 	});
 </script>

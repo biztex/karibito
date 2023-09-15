@@ -86,6 +86,7 @@
                         <p class="th">エリア（対面・どちらでもの場合のみ）</p>
                             @error('prefecture_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         <div class="td">
+                            aaa{{  old('prefecture_id', $product->prefecture_id) }}
                             <select name="prefecture_id" class="">
                                 <option value="">選択してください</option>
                                 @foreach ( App\Models\Prefecture::all() as $prefecture )

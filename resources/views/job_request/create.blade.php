@@ -36,8 +36,8 @@
 						<p class="th">リクエスト名<span class="must">必須</span></p>
 							@error('title')<div class="alert alert-danger">{{ $message }}</div>@enderror
 						<div class="td">
-								<input type="text" name="title" value="{{ old('title') }}" onkeyup="ShowLengthProduct(value);">
-                <p class="max-string" id="inputlengthProduct">{{ mb_strlen(old('title')) }}/30</p>
+								<input type="text" name="title" value="{{ old('title', $request->title) }}" onkeyup="ShowLengthProduct(value);">
+                <p class="max-string" id="inputlengthProduct">{{ mb_strlen(old('title', $request->title)) }}/30</p>
 						</div>
 
 
@@ -89,7 +89,7 @@
 							<select name="is_online">
 								<option value="">選択してください</option>
 								@foreach (App\Models\Product::IS_ONLINE as $k => $v)
-									<option value="{{ $k }}" @if(!is_null(old('is_online')) && old('is_online') == $k) selected @endif>{{ $v }}</option>
+									<option value="{{ $k }}" @if(!is_null(old('is_online', $request->is_online)) && old('is_online', $request->is_online) == $k) selected @endif>{{ $v }}</option>
 								@endforeach
 							</select>
 						</div>
