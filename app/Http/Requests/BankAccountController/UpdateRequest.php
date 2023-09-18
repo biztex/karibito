@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
             'branch_name' => 'required | string | max:30',
             'branch_code' => 'required | numeric | digits:3',
             'type' => 'required | integer | in:1,2',
-            'bank_account_name' => 'required | string | max:30 | regex:/\A[ァ-ヴー]+\z/u', // 全角カタカナ
+            'bank_account_name' => 'required | string | max:30 | regex:/^[ｦ-ﾟ]+$/u', // 半角カタカナ
             'bank_account_number' => ['required' ,'regex:/^[1-9][0-9]{1,6}$/u']
         ];
     }
@@ -50,7 +50,7 @@ class UpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'bank_account_name.*' => '口座名義は全角カタカナ(スペースなし)でご入力ください'
+            'bank_account_name.*' => '口座名義は半角カタカナ(スペースなし)でご入力ください'
         ];
     }
 }
