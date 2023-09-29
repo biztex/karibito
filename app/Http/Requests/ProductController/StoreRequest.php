@@ -38,7 +38,7 @@ class StoreRequest extends FormRequest
             'status' => 'required | integer',
             'option_name.*' => 'nullable | string | max:400',
             'option_price.*' => 'nullable | integer',
-            'option_is_public.*' => 'integer',
+            'option_is_public.*' => 'nullable | integer',
             'question_title.*' => 'required_unless:answer.*,null| max:400',
             'answer.*' => 'required_unless:question_title.*,null| max:400',
             'youtube_link.*' => 'nullable | string | max:255 | url',

@@ -91,11 +91,11 @@
                         <p class="th">所要期間<span class="must">必須</span></p>
                             @error('time_unit')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             @error('number_of_day')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                        <select name="time_unit">
-                            <option value="">選択してください</option>
-                            <option value="1" {{ old('time_unit') == 1 ? 'selected' : ''}}>日にち</option>
-                            <option value="2" {{ old('time_unit') == 2 ? 'selected' : ''}}>時間</option>
-                        </select>
+                            <select name="time_unit">
+                                <option value="">選択してください</option>
+                                <option value="1" {{ old('time_unit', $request->time_unit) == 1 ? 'selected' : ''}}>日にち</option>
+                                <option value="2" {{ old('time_unit', $request->time_unit) == 2 ? 'selected' : ''}}>時間</option>
+                            </select>
                         <div class="td">
                             <p class="time"><input type="number" name="number_of_day" value="{{ old('number_of_day', $request->number_of_day) }}" placeholder="入力してください"></p>
                         </div>

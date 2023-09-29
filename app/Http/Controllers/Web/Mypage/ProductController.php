@@ -293,6 +293,7 @@ class ProductController extends Controller
     {
         // バリデーションかかれば入力画面に戻す
         $validator = $request->getValidator();
+
         if ($validator->fails()) {
             return redirect()->route("product.edit", $request->id)->withErrors($validator)->withInput();
         }
