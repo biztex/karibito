@@ -26,7 +26,7 @@ class CancelEvaluationRequest extends FormRequest
         return [
             'checkbox' => 'required',
             'star' => 'required',
-            'text' => 'nullable | max:255 | string'
+            'text' => 'required | max:255 | string'
         ];
     }
 

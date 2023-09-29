@@ -35,7 +35,7 @@
 						<div class="evaluation">
 							@error('text')<div class="alert alert-danger">{{ $message }}</div>@enderror
 							<p>評価コメント　＊必須</p>
-							<textarea name="text" onkeyup="ShowLength(value);">{{ old('text') }}</textarea>
+							<textarea name="text" onkeyup="ShowLength(value);" required>{{ old('text') }}</textarea>
 							<p class="max-string" id="inputlength">{{ mb_strlen(old('text')) }}/255</p>
 						</div>
                         <!-- 一旦コメントアウト -->
