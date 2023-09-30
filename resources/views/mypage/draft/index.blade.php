@@ -59,10 +59,11 @@
 														@if ($val->isPost())
 														<form method="post">
 															@csrf
+
 															<input type="hidden" name="id" value={{ $val->id }}>
 															<input type="hidden" name="category_id" value={{ $val->category_id }}>
 															<input type="hidden" name="title" value={{ $val->title }}>
-															<input type="hidden" name="content" value={{ $val->content }}>
+															<input type="hidden" name="content" value='{{ $val->content }}'>
 															<input type="hidden" name="price" value={{ $val->price }}>
 															<input type="hidden" name="is_online" value={{ $val->is_online }}>
 															<input type="hidden" name="prefecture_id" value={{ $val->prefecture_id }}>
