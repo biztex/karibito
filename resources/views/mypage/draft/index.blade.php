@@ -171,7 +171,7 @@
 															<input type="hidden" name="id" value={{ $val->id }}>
 															<input type="hidden" name="category_id" value={{ $val->category_id }}>
 															<input type="hidden" name="title" value={{ $val->title }}>
-															<input type="hidden" name="content" value={{ $val->content }}>
+															<input type="hidden" name="content" value='{{ $val->content }}'>
 															<input type="hidden" name="price" value={{ $val->price }}>
 															<input type="hidden" name="application_deadline" value={{ $val->application_deadline }}>
 															<input type="hidden" name="required_date" value={{ $val->required_date }}>
