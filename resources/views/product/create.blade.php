@@ -72,7 +72,7 @@
                             <select name="is_online">
                                 <option value="">選択してください</option>
                                 @foreach (App\Models\Product::IS_ONLINE as $k => $v)
-                                    <option value="{{ $k }}" @if(!is_null(old('is_online', $request->is_online)) && old('is_online', $request->is_onine) == $k) selected @endif>{{ $v }}</option>
+                                    <option value="{{ $k }}" @if(!is_null(old('is_online', $request->is_online)) && old('is_online', $request->is_online) == $k) selected @endif>{{ $v }}</option>
                                 @endforeach
                             </select>
                         </div>
