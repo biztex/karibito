@@ -1,6 +1,6 @@
 <p>{{$user_notification->user->name}}様</p>
 
-<span>{{$user_notification->title}}</span><br>
+<p>{{$user_notification->title}}</p><br>
 
 <p><a href="{{ route('already_read.show', $user_notification) }}">{{ route('already_read.show', $user_notification) }}</a></p>
 
