@@ -201,7 +201,16 @@
 </x-layout>
 
 <script>
-let user_has_coupons = @json($user_has_coupons);
+	$(document).ready(function() {
+		$(window).keydown(function(event){
+			if(event.keyCode == 13) {
+			event.preventDefault();
+			return false;
+			}
+		});
+	});
+	
+	let user_has_coupons = @json($user_has_coupons);
 
 	if('{{ config('stripe.stripe_public_key') }}') {
 
