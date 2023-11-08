@@ -77,7 +77,7 @@ class ChatroomController extends Controller
      */
     public function index()
     {
-        $seller_chatrooms = Chatroom::sellerChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'all';
 
         return view('chatroom.seller.index', compact('seller_chatrooms','step'));
@@ -90,7 +90,7 @@ class ChatroomController extends Controller
      */
     public function sellerProposal()
     {
-        $seller_chatrooms = Chatroom::sellerProposalChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerProposalChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'proposal';
 
         return view('chatroom.seller.index', compact('seller_chatrooms', 'step'));
@@ -103,7 +103,7 @@ class ChatroomController extends Controller
      */
     public function sellerComplete()
     {
-        $seller_chatrooms = Chatroom::sellerCompleteChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerCompleteChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'complete';
 
         return view('chatroom.seller.index', compact('seller_chatrooms', 'step'));
@@ -116,7 +116,7 @@ class ChatroomController extends Controller
      */
     public function sellerWork()
     {
-        $seller_chatrooms = Chatroom::sellerWorkChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerWorkChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'work';
 
         return view('chatroom.seller.index', compact('seller_chatrooms', 'step'));
@@ -129,7 +129,7 @@ class ChatroomController extends Controller
      */
     public function sellerCancel()
     {
-        $seller_chatrooms = Chatroom::sellerCancelChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerCancelChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'cancel';
 
         return view('chatroom.seller.index', compact('seller_chatrooms', 'step'));
@@ -142,7 +142,7 @@ class ChatroomController extends Controller
      */
     public function sellerTrash()
     {
-        $seller_chatrooms = Chatroom::sellerTrashChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $seller_chatrooms = Chatroom::sellerTrashChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'trash';
 
         return view('chatroom.seller.index', compact('seller_chatrooms', 'step'));
@@ -155,7 +155,7 @@ class ChatroomController extends Controller
      */
     public function buyer()
     {
-        $buyer_chatrooms = Chatroom::buyerChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $buyer_chatrooms = Chatroom::buyerChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'all';
 
         return view('chatroom.buyer.index', compact('buyer_chatrooms','step'));
@@ -168,7 +168,7 @@ class ChatroomController extends Controller
      */
     public function buyerProposal()
     {
-        $buyer_chatrooms = Chatroom::buyerProposalChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $buyer_chatrooms = Chatroom::buyerProposalChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'proposal';
 
         return view('chatroom.buyer.index', compact('buyer_chatrooms', 'step'));
@@ -181,7 +181,7 @@ class ChatroomController extends Controller
      */
     public function buyerComplete()
     {
-        $buyer_chatrooms = Chatroom::buyerCompleteChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $buyer_chatrooms = Chatroom::buyerCompleteChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'complete';
 
         return view('chatroom.buyer.index', compact('buyer_chatrooms', 'step'));
@@ -194,7 +194,7 @@ class ChatroomController extends Controller
      */
     public function buyerWork()
     {
-        $buyer_chatrooms = Chatroom::buyerWorkChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $buyer_chatrooms = Chatroom::buyerWorkChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'work';
 
         return view('chatroom.buyer.index', compact('buyer_chatrooms', 'step'));
@@ -207,7 +207,7 @@ class ChatroomController extends Controller
      */
     public function buyerCancel()
     {
-        $buyer_chatrooms = Chatroom::buyerCancelChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $buyer_chatrooms = Chatroom::buyerCancelChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'cancel';
 
         return view('chatroom.buyer.index', compact('buyer_chatrooms', 'step'));
@@ -220,7 +220,7 @@ class ChatroomController extends Controller
      */
     public function buyerTrash()
     {
-        $buyer_chatrooms = Chatroom::buyerTrashChatroom()->orderBy('updated_at','desc')->paginate(10);
+        $buyer_chatrooms = Chatroom::buyerTrashChatroom()->orderBy('order_updated_at','desc')->orderBy('updated_at','desc')->paginate(10);
         $step = 'trash';
 
         return view('chatroom.buyer.index', compact('buyer_chatrooms', 'step'));

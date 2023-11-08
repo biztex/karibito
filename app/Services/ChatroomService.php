@@ -47,6 +47,9 @@ class ChatroomService
     // ステータスを 2:契約 に変更
     public function statusChangeContract(Chatroom $chatroom)
     {
+        if($chatroom->status == 1) {
+            $chatroom->fill(['order_updated_at' => now()])->save();
+        }
         $chatroom->fill(['status' => Chatroom::STATUS_PROPOSAL])->save();
     }
 
