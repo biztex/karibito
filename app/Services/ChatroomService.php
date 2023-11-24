@@ -29,6 +29,7 @@ class ChatroomService
             'buyer_user_id' => \Auth::id(),
         ];
         $chatroom = $product->chatrooms()->create($users);
+        $chatroom->fill(['order_updated_at' => now()])->save();
 
         return $chatroom;
     }
@@ -40,6 +41,7 @@ class ChatroomService
             'buyer_user_id' => $job_request->user_id,
         ];
         $chatroom = $job_request->chatrooms()->create($users);
+        $chatroom->fill(['order_updated_at' => now()])->save();
 
         return $chatroom;
     }
