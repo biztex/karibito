@@ -118,6 +118,7 @@
 											<input type="hidden" name="is_message" value="0">
 											<input type="hidden" name="is_posting" value="0">
 											<input type="hidden" name="is_fav" value="0">
+											@if (Auth::user()->userNotificationSetting)
 											<div class="labelBox">
 												<label><input type="checkbox" name="is_like" value="1" @if(Auth::user()->userNotificationSetting->is_like === 1)checked @endif>いいね！</label>
 												<label><input type="checkbox" name="is_news" value="1" @if (Auth::user()->userNotificationSetting->is_news === 1)checked @endif>お知らせ・ニュース</label>
@@ -125,6 +126,7 @@
 												<label><input type="checkbox" name="is_posting" value="1" @if (Auth::user()->userNotificationSetting->is_posting === 1)checked @endif>フォロー中の方の掲載</label>
 												<label><input type="checkbox" name="is_fav" value="1" @if (Auth::user()->userNotificationSetting->is_fav === 1)checked @endif>お気に入りの更新</label>
 											</div>
+											@endif
 										</dd>
 										<input class="blue-button mt20" type="submit" value="変更する">
 									</form>

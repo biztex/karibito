@@ -51,7 +51,7 @@
                     </dl>
                     <dl style="margin:0;"><p style="font-size:12px;">※本人認証に利用されるものと同じ姓名でご記入ください。</p></dl>
 
-                    @if(Auth::user()->userProfile->is_identify == 0)
+                    @if(Auth::user()->userProfile->is_identify == 0 || Auth::user()->userProfile->is_identify == 2)
                         <dl class=" inlineFlex">
                             <dt class="hideModalName">姓<span>(本名は非公開です)</span></dt>
                             <dd><input type="text" name="first_name" value="{{old('first_name',Auth::user()->userProfile->first_name)}}"></dd>
