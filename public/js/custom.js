@@ -111,49 +111,92 @@ $(function () {
 		$('#box03').trigger('click');
 	}
 
+    function initializeIndexedDB() {
+        return new Promise((resolve, reject) => {
+            const request = window.indexedDB.open('image_database', 2);
 
-	// 提供登録画像プレビュー / localStorageに画像一時保存
+            request.onupgradeneeded = function (event) {
+                const db = event.target.result;
+                db.createObjectStore('images', { keyPath: 'id', autoIncrement: false });
+                db.createObjectStore('statuses', { keyPath: 'id', autoIncrement: false });
+            };
+
+            request.onsuccess = function () {
+                resolve(request.result);
+            };
+
+            request.onerror = function () {
+                reject(request.error);
+            };
+        });
+    };
+
+
+    function addImageToDB(db, id, base64) {
+        const transaction = db.transaction(["images", "statuses"], 'readwrite');
+        const imageStore = transaction.objectStore('images');
+        const statusStore = transaction.objectStore('statuses');
+        const imageData = { id: id, base64: base64 };
+        const statusData = { id: id, status: 'insert'};
+
+        imageStore.put(imageData);
+        statusStore.put(statusData);
+    }
+
+    function deleteImageFromDB(db, index) {
+        const transaction = db.transaction(["images", "statuses"], 'readwrite');
+        const imageStore = transaction.objectStore('images');
+        const statusStore = transaction.objectStore('statuses');
+        const imageId = index;
+        const statusData = { id: imageId, status: 'delete'};
+
+        if (imageId) {
+            imageStore.delete(imageId);
+            statusStore.put(statusData);
+        }
+    }
+	// 提供登録画像プレビュー / indexedDBに画像一時保存
 	// 画像に変更あれば'delete'/'insert'のいずれかを配列の番号とともに格納していく
-	for (let i = 0; i < 10; i++) {
-		$("#product_pic"+i).on('click', function () {
-			$("input[name='paths["+i+"]']").on('click', function (e) {
-				e.stopPropagation();
-			});
-			$("input[name='paths["+i+"]']").click();
-			$("input[name='paths["+i+"]']").on('change', function (e) {
-				var reader = new FileReader();
-				reader.onload = function (e) {
-					$("#preview_product"+i).attr('src', e.target.result);
-					localStorage.setItem("pic"+i, reader.result);
-					$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
-				}
-				reader.readAsDataURL(e.target.files[0]);
-				$("input[name='image_status"+i+"']").val('insert');
-				localStorage.setItem('status'+i,"insert");
-			});
-		});
+    initializeIndexedDB().then(db => {
+        for (let i = 0; i < 10; i++) {
+        $("#product_pic" + i).on('click', function () {
+            $("input[name='paths[" + i + "]']").on('click', function (e) {
+                e.stopPropagation();
+            });
+            $("input[name='paths[" + i + "]']").click();
+            $("input[name='paths[" + i + "]']").on('change', function (e) {
+                const fileInput = e.target;
+                const file = fileInput.files[0];
 
-		// 削除ボタンでクリア
-		$("#storage_delete"+i).on('click', function () {
-			$("input[name='paths["+i+"]']").val('');
-			$("input[name='base64_text["+i+"]']").attr('value', null);
+                if (file) {
+                    const reader = new FileReader();
 
-			$("input[name='image_status"+i+"']").val('delete');
-			localStorage.setItem('status'+i,"delete");
+                    reader.onload = function (e) {
+                        const base64 = e.target.result;
+                        $("#preview_product" + i).attr('src', base64);
+                        $("input[name='base64_text[" + i + "]']").val(base64);
 
-			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
-			localStorage.removeItem('pic'+i);
-		});
+                        addImageToDB(db, i + 1, base64 );
+                    };
 
-		$(function () {
-			if ($("input[name='image_status"+i+"']").val() === "delete") {
-				$("input[name='base64_text["+i+"]']").attr('value', null);
-			} else if ($("input[name='image_status"+i+"']").val() === "insert") {
-				$("#preview_product"+i).attr('src', localStorage.getItem("pic"+i));
-			}
-		})
+                    reader.readAsDataURL(file);
+                    $("input[name='image_status" + i + "']").val('insert');
+                }
+            });
+        });
 
-	};
+        $("#storage_delete" + i).on('click', function () {
+            $("input[name='paths[" + i + "]']").val('');
+            $("input[name='base64_text[" + i + "]']").attr('value', null);
+
+            $("input[name='image_status" + i + "']").val('delete');
+            deleteImageFromDB(db, i + 1);
+
+            $("#preview_product" + i).attr('src', '/img/service/img_provide.jpg');
+        });
+        }
+    });
+
 	// 得意分野追加ボタン
 	$('.specialtyBtnCustom').click(function () {
 		let number_js_specialtyForm = $(".cloneCustomArea").children(".specialtyForm").length;

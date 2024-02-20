@@ -399,19 +399,40 @@
     </article>
 </x-layout>
 <script>
-$(function(){
+    $(function(){
+        const dbName = "image_database";
+        const request = indexedDB.open(dbName, 2);
 
-    for (let i = 0; i < 10; i++) {
-		if (localStorage.getItem('status'+i) === "delete") {
-			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'delete')}}");
-			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
-		} else if (localStorage.getItem('status'+i) === "insert") {
-			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'insert')}}");
-			$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
-			$("#preview_product"+i).attr('src',  localStorage.getItem("pic"+i));
-		}
-	}
+        request.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction(["images", "statuses"], 'readonly');
+            const statusStore = transaction.objectStore('statuses');
+            const imageStore = transaction.objectStore('images');
 
+            for (let i = 0; i < 10; i++) {
+                const statusRequest = statusStore.get(i + 1);
+                statusRequest.onsuccess = function(event) {
+                    const item = event.target.result;
+                    if (item) {
+                        if (item.status === "delete") {
+                            $("input[name='image_status" + i + "']").attr('value', "{{ old('image_status'.$i,'delete')}}");
+                            $("#preview_product" + i).attr('src', '/img/service/img_provide.jpg');
+                        } else if (item.status === "insert") {
+                            const imagesRequest = imageStore.get(i + 1);
+                            imagesRequest.onsuccess = function(event) {
+                                const imageData = event.target.result;
+                                if (imageData) {
+                                    $("input[name='image_status" + i + "']").attr('value', "{{ old('image_status'.$i,'insert')}}");
+                                    const base64Text = imageData.base64;
+                                    $("input[name='base64_text[" + i + "]']").val(base64Text);
+                                    $("#preview_product" + i).attr('src', base64Text);
+                                }
+                            };
+                        }
+                    }
+                };
+            }
+        };
         delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
         delQuestion();
         delYoutube();

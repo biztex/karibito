@@ -86,11 +86,5 @@ function copy() {
   /* Alert the copied text */
   alert('コピーしました。');
 }
-	// product画像 localStrageリセット
-	$(function(){
-		for (let i = 0; i < 10; i++){
-			localStorage.removeItem("pic"+i);
-            localStorage.removeItem("status" + i);
-		}
-	});
 </script>
+<script type="text/javascript" src="/js/clearIndexedDB.js"></script>
