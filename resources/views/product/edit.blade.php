@@ -484,24 +484,45 @@
     </article>
 </x-layout>
 <script>
+    $(function(){
+        const dbName = "image_database";
+        const request = indexedDB.open(dbName, 2);
 
-$(function(){
+        request.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction(["images", "statuses"], 'readonly');
+            const statusStore = transaction.objectStore('statuses');
+            const imageStore = transaction.objectStore('images');
 
-	for (let i = 0; i < 10; i++) {
-		if (localStorage.getItem('status'+i) === "delete") {
-			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'delete')}}");
-			$("#preview_product"+i).attr('src', '/img/service/img_provide.jpg');
-		} else if (localStorage.getItem('status'+i) === "insert") {
-			$("input[name='image_status"+i+"']").attr('value',"{{ old('image_status'.$i,'insert')}}");
-			$("input[name='base64_text["+i+"]']").val(localStorage.getItem("pic"+i));
-			$("#preview_product"+i).attr('src',  localStorage.getItem("pic"+i));
-		}
-	}
+            for (let i = 0; i < 10; i++) {
+                const statusRequest = statusStore.get(i + 1);
+                statusRequest.onsuccess = function(event) {
+                    const item = event.target.result;
+                    if (item) {
+                        if (item.status === "delete") {
+                            $("input[name='image_status" + i + "']").attr('value', "{{ old('image_status'.$i,'delete')}}");
+                            $("#preview_product" + i).attr('src', '/img/service/img_provide.jpg');
+                        } else if (item.status === "insert") {
+                            const imagesRequest = imageStore.get(i + 1);
+                            imagesRequest.onsuccess = function(event) {
+                                const imageData = event.target.result;
+                                if (imageData) {
+                                    $("input[name='image_status" + i + "']").attr('value', "{{ old('image_status'.$i,'insert')}}");
+                                    const base64Text = imageData.base64;
+                                    $("input[name='base64_text[" + i + "]']").val(base64Text);
+                                    $("#preview_product" + i).attr('src', base64Text);
+                                }
+                            };
+                        }
+                    }
+                };
+            }
+        };
 
-    delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
-	delQuestion();
-	delYoutube();
-})
+        delOption(); // 追加されたボタンのイベントが発火されないためここで呼び出す
+        delQuestion();
+        delYoutube();
+    })
     function addOption(){
         let str = '<div class="js-optionForm"><p class="th">有料オプション%NUM%</p>@error('option_name.'.'%NUM%')<div class="alert alert-danger">{{ $message }}</div>@enderror<div class="td"> <div class="paid"> <div class="enter"><textarea type="text" name="option_name[]" placeholder="入力してください">{{ old('option_name.'.'%NUM%') }}</textarea> </div> <div class="selects"><select name="option_price[]">@foreach(App\Models\AdditionalOption::OPTION_PRICE as $key => $value)<option value="{{ $key }}" @if(old('option_price.'.'%NUM%') == $key) selected @endif>{{ $value }}円</option>@endforeach</select><select name="option_is_public[]"><option value="{{App\Models\AdditionalOption::STATUS_PUBLISH}}" @if(old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PUBLISH) selected @endif>公開</option><option value="{{App\Models\AdditionalOption::STATUS_PRIVATE}}" @if(!is_null(old('option_is_public'.'%NUM%')) && old('option_is_public.'.'%NUM%') == App\Models\AdditionalOption::STATUS_PRIVATE) selected @endif>非公開</option></select></div><div><a href="javascript:;" class="fs25 ml05 js-deleteOption">×</a></div></div></div></div></div>'
         let number_js_optionForm = $(".formOptionsArea").children(".js-optionForm").length;
