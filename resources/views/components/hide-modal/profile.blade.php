@@ -81,7 +81,7 @@
                     </dl>
                     <dl>
                         <dt>生年月日<span>(年代のみ公開されます)</span></dt>
-                        @if(Auth::user()->userProfile->is_identify == 0)
+                        @if(Auth::user()->userProfile->is_identify == 0 || Auth::user()->userProfile->is_identify == 2)
                             @error('birthday')<div class="alert alert-danger">{{ $message }}</div>@enderror
                             <dd>
                                 <select class="year" name="year">
@@ -114,7 +114,7 @@
                         @endif
                     </dl>
 
-                    @if(Auth::user()->userProfile->is_identify == 0)
+                    @if(Auth::user()->userProfile->is_identify == 0 || Auth::user()->userProfile->is_identify == 2)
                         <dl>
                             <dt>住所<span>(都道府県のみ表示されます)</span></dt>
                                 @error('zip')<div class="alert alert-danger">{{ $message }}</div>@enderror
